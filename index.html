@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼字比賽額外練習平台</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 登入頁面 -->
+    <div id="loginPage" class="login-page">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <div class="logo-container">
+                        <i class="fas fa-trophy logo-icon"></i>
+                    </div>
+                    <h1>拼字比賽額外練習平台</h1>
+                </div>
+
+                <div class="login-form">
+                    <h2><i class="fas fa-lock"></i> 系統登入</h2>
+                    <p class="login-subtitle">請輸入您的帳號密碼以進入系統</p>
+
+                    <div class="form-group">
+                        <div class="input-container">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="loginUsername" placeholder="請輸入帳號" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-container">
+                            <i class="fas fa-key input-icon"></i>
+                            <input type="password" id="loginPassword" placeholder="請輸入密碼">
+                        </div>
+                    </div>
+
+                    <div id="loginPageError" class="login-error" style="display: none;">
+                        <i class="fas fa-exclamation-triangle"></i> 帳號或密碼錯誤，請重新輸入
+                    </div>
+
+                    <button onclick="loginToSystem()" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> 登入系統
+                    </button>
+
+                    <div class="login-footer">
+                        <p><i class="fas fa-info-circle"></i> 如有登入問題，請聯繫管理員</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要內容頁面 -->
+    <div id="mainContent" class="main-content" style="display: none;">
+        <div class="container">
+            <!-- 標題 -->
+            <div class="header">
+                <h1><i class="fas fa-trophy"></i> 拼字比賽額外練習平台</h1>
+                <p>Nothing is difficult on this earth, if your mind is set</p>
+                <p>天下無難事，只怕有心人</p>
+                <button onclick="logoutFromSystem()" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> 登出
+                </button>
+            </div>
+
+            <!-- 倒數計時器 -->
+            <div class="podium">
+                <h2><i class="fas fa-clock"></i> 距離2025年12月7日全國區賽還剩</h2>
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">天</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">小時</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">分鐘</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">秒</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分頁導航 -->
+            <div class="tabs">
+                <button class="tab active" data-tab="overview">
+                    <i class="fas fa-book"></i> 課程總覽
+                </button>
+                <button class="tab" data-tab="practice">
+                    <i class="fas fa-pencil-alt"></i> 學生練習
+                </button>
+            </div>
+
+            <!-- 內容區域 -->
+            <div class="content">
+                <!-- 課程總覽 -->
+                <div id="overview" class="content-section active">
+                    <h2><i class="fas fa-book"></i> 課程總覽</h2>
+                    <p>選擇日期查看課程資料：</p>
+                    <div class="date-grid">
+                        <div class="date-item" onclick="openPDF('7/26', 'overview')">7/26</div>
+                        <div class="date-item" onclick="openPDF('8/2', 'overview')">8/2</div>
+                        <div class="date-item" onclick="openPDF('8/23', 'overview')">8/23</div>
+                        <div class="date-item" onclick="openPDF('9/13', 'overview')">9/13</div>
+                        <div class="date-item" onclick="openPDF('9/27', 'overview')">9/27</div>
+                        <div class="date-item" onclick="openPDF('10/18', 'overview')">10/18</div>
+                        <div class="date-item" onclick="openPDF('11/1', 'overview')">11/1</div>
+                        <div class="date-item" onclick="openPDF('11/15', 'overview')">11/15</div>
+                        <div class="date-item" onclick="openPDF('11/22', 'overview')">11/22</div>
+                        <div class="date-item" onclick="openPDF('11/29', 'overview')">11/29</div>
+                    </div>
+                </div>
+
+                <!-- 學生練習 -->
+                <div id="practice" class="content-section">
+                    <h2><i class="fas fa-user-graduate"></i> 學生登入</h2>
+                    <p>請選擇您的組別和姓名，並輸入密碼：</p>
+
+                    <div class="student-login-container">
+                        <div class="login-form-card">
+                            <div class="form-header">
+                                <i class="fas fa-user-graduate header-icon"></i>
+                                <h3>學生身份驗證</h3>
+                                <p>請選擇您的組別和姓名進行登入</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="studentGroup">
+                                    <i class="fas fa-users"></i> 組別：
+                                </label>
+                                <select id="studentGroup" onchange="updateStudentNames()" class="form-select">
+                                    <option value="">請選擇組別</option>
+                                    <option value="B組">B組</option>
+                                    <option value="C組">C組</option>
+                                    <option value="D組">D組</option>
+                                    <option value="E組">E組</option>
+                                    <option value="F組">F組</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="studentName">
+                                    <i class="fas fa-user"></i> 姓名：
+                                </label>
+                                <select id="studentName" class="form-select" disabled>
+                                    <option value="">請先選擇組別</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="studentPassword">
+                                    <i class="fas fa-key"></i> 密碼：
+                                </label>
+                                <div class="password-container">
+                                    <input type="password" id="studentPassword" placeholder="請輸入您的英文名字"
+                                        class="form-input">
+                                    <button type="button" class="password-toggle" onclick="togglePassword()">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="studentLoginError" class="login-error" style="display: none;">
+                                <i class="fas fa-exclamation-triangle"></i> 密碼錯誤，請重新輸入
+                            </div>
+
+                            <button onclick="studentLogin()" class="login-submit-btn">
+                                <i class="fas fa-sign-in-alt"></i> 登入學習
+                            </button>
+
+                            <div class="login-help">
+                                <p><i class="fas fa-info-circle"></i> 密碼為您的英文名字（例如：Yuni、Emily、Vito）</p>
+                            </div>
+                        </div>
+
+                        <!-- 學生列表 -->
+                        <div class="student-list-card">
+                            <h3><i class="fas fa-list"></i> 學生名單</h3>
+                            <div class="student-groups">
+                                <div class="group-section">
+                                    <h4><span class="group-badge">B組</span></h4>
+                                    <ul>
+                                        <li>C2 Yuni</li>
+                                        <li>C2 Emily</li>
+                                        <li>A8 Vito</li>
+                                    </ul>
+                                </div>
+                                <div class="group-section">
+                                    <h4><span class="group-badge">C組</span></h4>
+                                    <ul>
+                                        <li>A4 Eudora</li>
+                                        <li>A5 Zoe</li>
+                                    </ul>
+                                </div>
+                                <div class="group-section">
+                                    <h4><span class="group-badge">D組</span></h4>
+                                    <ul>
+                                        <li>N6 Bruce</li>
+                                        <li>N7 Laura</li>
+                                    </ul>
+                                </div>
+                                <div class="group-section">
+                                    <h4><span class="group-badge">E組</span></h4>
+                                    <ul>
+                                        <li>K9 Lilian</li>
+                                        <li>K9 Jill</li>
+                                    </ul>
+                                </div>
+                                <div class="group-section">
+                                    <h4><span class="group-badge">F組</span></h4>
+                                    <ul>
+                                        <li>I2 Candy</li>
+                                        <li>N3 Avery</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF 查看模態框 -->
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('pdfModal')">&times;</span>
+            <h2 id="pdfTitle">PDF 查看</h2>
+            <div id="pdfContent">
+                <p>PDF 內容將在這裡顯示...</p>
+                <p>您可以上傳對應的 PDF 文件到伺服器，然後在這裡嵌入顯示。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登入模態框 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <div class="modal-login-container">
+                <div class="modal-login-header">
+                    <i class="fas fa-lock modal-lock-icon"></i>
+                    <h2>學生練習登入</h2>
+                    <p>請輸入帳號密碼以進入學生練習</p>
+                </div>
+
+                <div class="modal-form-group">
+                    <div class="modal-input-container">
+                        <i class="fas fa-user modal-input-icon"></i>
+                        <input type="text" id="username" placeholder="請輸入帳號" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="modal-form-group">
+                    <div class="modal-input-container">
+                        <i class="fas fa-key modal-input-icon"></i>
+                        <input type="password" id="password" placeholder="請輸入密碼">
+                    </div>
+                </div>
+
+                <div id="loginError" class="modal-login-error" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i> 帳號或密碼錯誤，請重新輸入
+                </div>
+
+                <button onclick="login()" class="modal-login-btn">
+                    <i class="fas fa-sign-in-alt"></i> 登入
+                </button>
+
+                <div class="modal-login-footer">
+                    <p><i class="fas fa-info-circle"></i> 如有登入問題，請聯繫管理員</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 練習模態框 -->
+    <div id="practiceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('practiceModal')">&times;</span>
+            <h2 id="practiceTitle">學生練習</h2>
+
+            <!-- 練習內容 -->
+            <div class="practice-section">
+                <div class="practice-title">
+                    <i class="fas fa-book"></i> 1. 雜誌單字
+                </div>
+                <div class="practice-content">
+                    <p>雜誌單字練習內容將在這裡顯示...</p>
+                    <textarea placeholder="在此輸入答案..." rows="4"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <div class="practice-title">
+                    <i class="fas fa-language"></i> 2. 各級別單字
+                </div>
+                <div class="practice-content">
+                    <p>各級別單字練習內容將在這裡顯示...</p>
+                    <textarea placeholder="在此輸入答案..." rows="4"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <div class="practice-title">
+                    <i class="fas fa-paragraph"></i> 3. 段落單字
+                </div>
+                <div class="practice-content">
+                    <p>段落單字練習內容將在這裡顯示...</p>
+                    <textarea placeholder="在此輸入答案..." rows="4"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <div class="practice-title">
+                    <i class="fas fa-random"></i> 4. 混合題型
+                </div>
+                <div class="practice-content">
+                    <p>混合題型練習內容將在這裡顯示...</p>
+                    <textarea placeholder="在此輸入答案..." rows="4"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <div class="practice-title">
+                    <i class="fas fa-tasks"></i> 5. 大批次題目 (200題)
+                </div>
+                <div class="practice-content">
+                    <p>大批次題目練習內容將在這裡顯示...</p>
+                    <textarea placeholder="在此輸入答案..." rows="6"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                </div>
+            </div>
+
+            <!-- 分數輸入區域 -->
+            <div class="score-input">
+                <h3><i class="fas fa-chart-line"></i> 成績記錄</h3>
+                <div class="score-field">
+                    <label>雜誌單字分數:</label>
+                    <input type="number" id="score1" min="0" max="100" placeholder="0-100">
+                </div>
+                <div class="score-field">
+                    <label>各級別單字分數:</label>
+                    <input type="number" id="score2" min="0" max="100" placeholder="0-100">
+                </div>
+                <div class="score-field">
+                    <label>段落單字分數:</label>
+                    <input type="number" id="score3" min="0" max="100" placeholder="0-100">
+                </div>
+                <div class="score-field">
+                    <label>混合題型分數:</label>
+                    <input type="number" id="score4" min="0" max="100" placeholder="0-100">
+                </div>
+                <div class="score-field">
+                    <label>大批次題目分數:</label>
+                    <input type="number" id="score5" min="0" max="100" placeholder="0-100">
+                </div>
+                <button class="save-score" onclick="saveScores()">
+                    <i class="fas fa-save"></i> 儲存分數
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 雜誌練習模態框 -->
+    <div id="magazinePracticeModal" class="modal">
+        <div class="modal-content magazine-practice-content">
+            <span class="close" onclick="closeModal('magazinePracticeModal')">&times;</span>
+
+            <!-- 練習標題和計時器 -->
+            <div class="practice-header">
+                <h2><i class="fas fa-book"></i> 雜誌單字練習</h2>
+                <div class="timer-container">
+                    <i class="fas fa-clock"></i>
+                    <span id="practiceTimer">00:00</span>
+                </div>
+            </div>
+
+            <!-- 題目導航 -->
+            <div class="question-navigation">
+                <div class="question-selector">
+                    <label for="questionSelect">題目選擇：</label>
+                    <select id="questionSelect" onchange="goToQuestion()">
+                        <option value="1">第 1 題</option>
+                    </select>
+                    <span class="total-questions">/ 100 題</span>
+                </div>
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">1 / 100</span>
+                </div>
+            </div>
+
+            <!-- 題目內容 -->
+            <div class="question-container">
+                <div class="question-content" id="questionContent">
+                    <!-- 題目內容將在這裡動態載入 -->
+                </div>
+
+                <div class="answer-section">
+                    <label for="answerInput">請填入缺少的字母：</label>
+                    <div class="answer-input-container">
+                        <input type="text" id="answerInput" placeholder="請輸入答案..." maxlength="1" autocomplete="off">
+                        <button class="submit-answer" onclick="submitAnswer()">
+                            <i class="fas fa-check"></i> 確認
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 導航按鈕 -->
+            <div class="navigation-buttons">
+                <button class="nav-btn prev-btn" onclick="previousQuestion()" disabled>
+                    <i class="fas fa-chevron-left"></i> 上一題
+                </button>
+                <button class="nav-btn next-btn" onclick="nextQuestion()">
+                    下一題 <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- 練習統計 -->
+            <div class="practice-stats">
+                <div class="stat-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>正確：<span id="correctCount">0</span></span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-times-circle"></i>
+                    <span>錯誤：<span id="incorrectCount">0</span></span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-percentage"></i>
+                    <span>正確率：<span id="accuracyRate">0%</span></span>
+                </div>
+            </div>
+
+            <!-- 完成按鈕 -->
+            <div class="completion-section">
+                <button class="complete-practice" onclick="completePractice()" style="display: none;">
+                    <i class="fas fa-flag-checkered"></i> 完成練習
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
