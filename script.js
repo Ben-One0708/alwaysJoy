@@ -7,17 +7,21 @@ let practiceData = {};
 
 // 學生資料
 const students = {
-    'C2 Yuni': { group: 'B組', level: 'C2', password: 'Yuni' },
-    'C2 Emily': { group: 'B組', level: 'C2', password: 'Emily' },
-    'A8 Vito': { group: 'B組', level: 'A8', password: 'Vito' },
-    'A4 Eudora': { group: 'C組', level: 'A4', password: 'Eudora' },
-    'A5 Zoe': { group: 'C組', level: 'A5', password: 'Zoe' },
-    'N6 Bruce': { group: 'D組', level: 'N6', password: 'Bruce' },
-    'N7 Laura': { group: 'D組', level: 'N7', password: 'Laura' },
-    'K9 Lilian': { group: 'E組', level: 'K9', password: 'Lilian' },
-    'K9 Jill': { group: 'E組', level: 'K9', password: 'Jill' },
-    'I2 Candy': { group: 'F組', level: 'I2', password: 'Candy' },
-    'N3 Avery': { group: 'F組', level: 'N3', password: 'Avery' }
+    'C2 Yuni': { group: 'B組', level: 'C2', password: 'Yuni', isAdmin: false },
+    'C2 Emily': { group: 'B組', level: 'C2', password: 'Emily', isAdmin: false },
+    'A8 Vito': { group: 'B組', level: 'A8', password: 'Vito', isAdmin: false },
+    'A4 Eudora': { group: 'C組', level: 'A4', password: 'Eudora', isAdmin: false },
+    'A5 Zoe': { group: 'C組', level: 'A5', password: 'Zoe', isAdmin: false },
+    'N6 Bruce': { group: 'D組', level: 'N6', password: 'Bruce', isAdmin: false },
+    'N7 Laura': { group: 'D組', level: 'N7', password: 'Laura', isAdmin: false },
+    'K9 Lilian': { group: 'E組', level: 'K9', password: 'Lilian', isAdmin: false },
+    'K9 Jill': { group: 'E組', level: 'K9', password: 'Jill', isAdmin: false },
+    'I2 Candy': { group: 'F組', level: 'I2', password: 'Candy', isAdmin: false },
+    'N3 Avery': { group: 'F組', level: 'N3', password: 'Avery', isAdmin: false },
+    '教務組 Annie': { group: '教務組', level: 'Admin', password: 'Annie', isAdmin: false },
+    '教務組 Celina': { group: '教務組', level: 'Admin', password: 'Celina', isAdmin: false },
+    '教務組 Nina': { group: '教務組', level: 'Admin', password: 'Nina', isAdmin: false },
+    'Ben': { group: '管理員', level: 'Admin', password: 'BenBenBen', isAdmin: true }
 };
 
 // 組別對應的學生
@@ -26,7 +30,9 @@ const groupStudents = {
     'C組': ['A4 Eudora', 'A5 Zoe'],
     'D組': ['N6 Bruce', 'N7 Laura'],
     'E組': ['K9 Lilian', 'K9 Jill'],
-    'F組': ['I2 Candy', 'N3 Avery']
+    'F組': ['I2 Candy', 'N3 Avery'],
+    '教務組': ['教務組 Annie', '教務組 Celina', '教務組 Nina'],
+    '管理員': ['Ben']
 };
 
 // 練習題目範例（實際使用時可從資料庫載入）
@@ -536,6 +542,10 @@ function studentLogin() {
         document.getElementById('studentPassword').value = '';
         document.getElementById('studentName').disabled = true;
 
+        // 清除可能保存的選擇
+        localStorage.removeItem('lastSelectedGroup');
+        localStorage.removeItem('lastSelectedStudent');
+
         // 隱藏錯誤訊息
         errorDiv.style.display = 'none';
 
@@ -569,20 +579,37 @@ function getCurrentStudent() {
 
 // 學生登出
 function studentLogout() {
+    // 清除所有登入相關的數據
     localStorage.removeItem('studentLoggedIn');
     localStorage.removeItem('currentStudent');
     localStorage.removeItem('studentLoginTime');
+
+    // 清除可能保存的組別和姓名選擇
+    localStorage.removeItem('lastSelectedGroup');
+    localStorage.removeItem('lastSelectedStudent');
+
+    // 清除其他可能的登入狀態
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('loginTime');
+
+    // 清除練習相關的配置（避免影響下次登入）
+    localStorage.removeItem('magazinePracticeConfig');
+    localStorage.removeItem('practiceTimerId');
+
     showSuccessMessage('已登出');
     showStudentLogin();
 }
 
 // 顯示學習地圖
 function showLearningMap() {
+    const currentStudent = getCurrentStudent();
+    const isAdmin = students[currentStudent] && students[currentStudent].isAdmin;
+
     const practiceSection = document.getElementById('practice');
     practiceSection.innerHTML = `
         <h2><i class="fas fa-map"></i> 學習地圖</h2>
         <div class="welcome-message">
-            <h1>歡迎 ${getCurrentStudent()}！</h1>
+            <h1>歡迎 ${currentStudent}！</h1>
             <p>選擇您想要練習的學習項目：</p>
         </div>
         
@@ -638,6 +665,62 @@ function showLearningMap() {
                         <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
+
+                <!-- 連接線 -->
+                <div class="connection-line"></div>
+
+                <!-- 個人練習成績登記區 -->
+                <div class="learning-area score-area" onclick="openLearningArea('score')">
+                    <div class="area-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="成績登記" class="area-image">
+                    </div>
+                    <div class="area-content">
+                        <h3>個人練習成績登記</h3>
+                        <p>記錄您的練習成績和學習進度</p>
+                        <div class="area-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>已登記: 0 次</span>
+                            </span>
+                            <span class="stat-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span>平均分: 0 分</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="area-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                ${isAdmin ? `
+                <!-- 連接線 -->
+                <div class="connection-line"></div>
+
+                <!-- 成績管理區 (僅管理員可見) -->
+                <div class="learning-area admin-area" onclick="openLearningArea('admin')">
+                    <div class="area-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png" alt="成績管理" class="area-image">
+                    </div>
+                    <div class="area-content">
+                        <h3>成績管理</h3>
+                        <p>查看所有學生的練習成績和學習狀況</p>
+                        <div class="area-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-users"></i>
+                                <span>總學生: 0 人</span>
+                            </span>
+                            <span class="stat-item">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>總記錄: 0 筆</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="area-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+                ` : ''}
             </div>
 
             <!-- 學習進度總覽 -->
@@ -673,10 +756,22 @@ function showLearningMap() {
             </div>
         </div>
     `;
+
+    // 更新成績統計
+    updateLearningMapStats();
+
+    // 如果是管理員，更新管理員區域的統計數據
+    if (isAdmin) {
+        updateAdminAreaStats();
+    }
 }
 
 // 顯示學生登入介面
 function showStudentLogin() {
+    // 確保清除所有可能保存的選擇
+    localStorage.removeItem('lastSelectedGroup');
+    localStorage.removeItem('lastSelectedStudent');
+
     const practiceSection = document.getElementById('practice');
     practiceSection.innerHTML = `
         <h2><i class="fas fa-user-graduate"></i> 學生登入</h2>
@@ -694,13 +789,15 @@ function showStudentLogin() {
                     <label for="studentGroup">
                         <i class="fas fa-users"></i> 組別：
                     </label>
-                    <select id="studentGroup" onchange="updateStudentNames()" class="form-select">
+                    <select id="studentGroup" onchange="updateStudentNames()" class="form-select" autocomplete="off">
                         <option value="">請選擇組別</option>
                         <option value="B組">B組</option>
                         <option value="C組">C組</option>
                         <option value="D組">D組</option>
                         <option value="E組">E組</option>
                         <option value="F組">F組</option>
+                        <option value="教務組">教務組</option>
+                        <option value="管理員">管理員</option>
                     </select>
                 </div>
 
@@ -708,7 +805,7 @@ function showStudentLogin() {
                     <label for="studentName">
                         <i class="fas fa-user"></i> 姓名：
                     </label>
-                    <select id="studentName" class="form-select" disabled>
+                    <select id="studentName" class="form-select" disabled autocomplete="off">
                         <option value="">請先選擇組別</option>
                     </select>
                 </div>
@@ -718,7 +815,7 @@ function showStudentLogin() {
                         <i class="fas fa-key"></i> 密碼：
                     </label>
                     <div class="password-container">
-                        <input type="password" id="studentPassword" placeholder="請輸入密碼" class="form-input">
+                        <input type="password" id="studentPassword" placeholder="請輸入密碼" class="form-input" autocomplete="new-password">
                         <button type="button" class="password-toggle" onclick="togglePassword()">
                             <i class="fas fa-eye"></i>
                         </button>
@@ -778,6 +875,14 @@ function showStudentLogin() {
                             <li>N3 Avery</li>
                         </ul>
                     </div>
+                    <div class="group-section">
+                        <h4><span class="group-badge">教務組</span></h4>
+                        <ul>
+                            <li>教務組 Annie</li>
+                            <li>教務組 Celina</li>
+                            <li>教務組 Nina</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -792,8 +897,23 @@ function openLearningArea(areaType) {
         return;
     }
 
-    // 已登入，直接打開練習
-    openPracticeModal(areaType);
+    // 根據學習區域類型決定下一步
+    if (areaType === 'magazine') {
+        // 雜誌單字練習：打開選擇頁面
+        openMagazineSelectionModal();
+    } else if (areaType === 'score') {
+        // 成績登記：打開成績登記頁面
+        openScoreRegistrationModal();
+    } else if (areaType === 'level') {
+        // 各級別單字：顯示提示訊息
+        showLevelPracticeNotice();
+    } else if (areaType === 'admin') {
+        // 管理員成績管理：顯示學生成績列表
+        showAdminStudentsList();
+    } else {
+        // 其他練習：直接打開練習
+        openPracticeModal(areaType);
+    }
 }
 
 // 顯示登入模態框
@@ -905,9 +1025,9 @@ function updatePracticeSections(areaType) {
                 </div>
                 <div class="practice-content">
                     <h4>練習說明：</h4>
-                    <p>100題雜誌單字測驗</p>
-                    <button onclick="startMagazinePractice()" class="start-practice-btn" style="background: var(--primary-gradient); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 15px; display: flex; align-items: center; gap: 8px;">
-                        <i class="fas fa-play"></i> 開始練習
+                    <p>選擇您想要練習的題數：1~36題、1~72題或1~108題</p>
+                    <button onclick="openMagazineSelectionModal()" class="start-practice-btn" style="background: var(--primary-gradient); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 15px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-play"></i> 選擇練習題數
                     </button>
                 </div>
             </div>
@@ -965,6 +1085,360 @@ function loadScores(areaType) {
             scoreInput.value = scores[category].score;
         }
     });
+}
+
+// 打開雜誌單字練習選擇模態框
+function openMagazineSelectionModal() {
+    const modal = document.getElementById('magazineSelectionModal');
+    modal.style.display = 'block';
+}
+
+// 開始雜誌單字練習
+function startMagazinePractice(questionCount) {
+    // 關閉選擇模態框
+    closeModal('magazineSelectionModal');
+
+    // 設置練習參數
+    const practiceConfig = {
+        totalQuestions: questionCount,
+        currentQuestion: 1,
+        correctAnswers: 0,
+        incorrectAnswers: 0,
+        startTime: new Date(),
+        answers: []
+    };
+
+    // 儲存練習配置
+    localStorage.setItem('magazinePracticeConfig', JSON.stringify(practiceConfig));
+
+    // 打開練習模態框
+    openMagazinePracticeModal(questionCount);
+}
+
+// 打開雜誌單字練習模態框
+function openMagazinePracticeModal(questionCount) {
+    const modal = document.getElementById('magazinePracticeModal');
+    const config = JSON.parse(localStorage.getItem('magazinePracticeConfig') || '{}');
+
+    // 更新題目選擇器
+    updateQuestionSelector(questionCount);
+
+    // 載入第一題
+    loadQuestion(1);
+
+    // 開始計時器
+    startPracticeTimer();
+
+    modal.style.display = 'block';
+}
+
+// 更新題目選擇器
+function updateQuestionSelector(totalQuestions) {
+    const questionSelect = document.getElementById('questionSelect');
+    const totalQuestionsSpan = document.querySelector('.total-questions');
+
+    // 清空現有選項
+    questionSelect.innerHTML = '';
+
+    // 添加新選項
+    for (let i = 1; i <= totalQuestions; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = `第 ${i} 題`;
+        questionSelect.appendChild(option);
+    }
+
+    // 更新總題數顯示
+    totalQuestionsSpan.textContent = `/ ${totalQuestions} 題`;
+}
+
+// 載入題目
+function loadQuestion(questionNumber) {
+    const config = JSON.parse(localStorage.getItem('magazinePracticeConfig') || '{}');
+    const questionContent = document.getElementById('questionContent');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+
+    // 這裡可以從資料庫載入實際題目
+    // 目前使用範例題目
+    const sampleQuestions = generateSampleQuestions(config.totalQuestions);
+    const currentQuestion = sampleQuestions[questionNumber - 1];
+
+    // 更新題目內容
+    questionContent.innerHTML = `
+        <div class="question-text">
+            <h3>第 ${questionNumber} 題</h3>
+            <p class="question-prompt">${currentQuestion.prompt}</p>
+            <div class="question-example">
+                <p><strong>範例：</strong> ${currentQuestion.example}</p>
+            </div>
+        </div>
+    `;
+
+    // 更新進度條
+    const progress = (questionNumber / config.totalQuestions) * 100;
+    progressFill.style.width = `${progress}%`;
+    progressText.textContent = `${questionNumber} / ${config.totalQuestions}`;
+
+    // 更新導航按鈕狀態
+    updateNavigationButtons(questionNumber, config.totalQuestions);
+
+    // 清空答案輸入框
+    document.getElementById('answerInput').value = '';
+    document.getElementById('answerInput').focus();
+}
+
+// 生成範例題目
+function generateSampleQuestions(count) {
+    const questions = [];
+    const samplePrompts = [
+        '請填入缺少的字母：app_e (apple)',
+        '請填入缺少的字母：b_ok (book)',
+        '請填入缺少的字母：c_t (cat)',
+        '請填入缺少的字母：d_g (dog)',
+        '請填入缺少的字母：h_se (house)',
+        '請填入缺少的字母：c_r (car)',
+        '請填入缺少的字母：tr_e (tree)',
+        '請填入缺少的字母：fl_wer (flower)',
+        '請填入缺少的字母：s_n (sun)',
+        '請填入缺少的字母：m_n (moon)'
+    ];
+
+    for (let i = 0; i < count; i++) {
+        const promptIndex = i % samplePrompts.length;
+        questions.push({
+            prompt: samplePrompts[promptIndex],
+            example: 'apple → 填入 "l"',
+            answer: 'l'
+        });
+    }
+
+    return questions;
+}
+
+// 更新導航按鈕狀態
+function updateNavigationButtons(currentQuestion, totalQuestions) {
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const completeBtn = document.querySelector('.complete-practice');
+
+    // 上一題按鈕
+    prevBtn.disabled = currentQuestion <= 1;
+
+    // 下一題按鈕
+    if (currentQuestion >= totalQuestions) {
+        nextBtn.style.display = 'none';
+        completeBtn.style.display = 'block';
+    } else {
+        nextBtn.style.display = 'block';
+        completeBtn.style.display = 'none';
+    }
+}
+
+// 開始練習計時器
+function startPracticeTimer() {
+    const timerElement = document.getElementById('practiceTimer');
+    const startTime = new Date();
+
+    const timer = setInterval(() => {
+        const now = new Date();
+        const elapsed = now - startTime;
+        const minutes = Math.floor(elapsed / 60000);
+        const seconds = Math.floor((elapsed % 60000) / 1000);
+
+        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }, 1000);
+
+    // 儲存計時器ID以便停止
+    localStorage.setItem('practiceTimerId', timer);
+}
+
+// 停止練習計時器
+function stopPracticeTimer() {
+    const timerId = localStorage.getItem('practiceTimerId');
+    if (timerId) {
+        clearInterval(parseInt(timerId));
+        localStorage.removeItem('practiceTimerId');
+    }
+}
+
+// 提交答案
+function submitAnswer() {
+    const answerInput = document.getElementById('answerInput');
+    const answer = answerInput.value.trim().toLowerCase();
+
+    if (!answer) {
+        alert('請輸入答案！');
+        return;
+    }
+
+    const config = JSON.parse(localStorage.getItem('magazinePracticeConfig') || '{}');
+    const currentQuestion = config.currentQuestion;
+
+    // 這裡可以檢查答案正確性
+    // 目前使用簡單的範例檢查
+    const isCorrect = checkAnswer(currentQuestion, answer);
+
+    // 更新統計
+    if (isCorrect) {
+        config.correctAnswers++;
+        showAnswerFeedback(true);
+    } else {
+        config.incorrectAnswers++;
+        showAnswerFeedback(false);
+    }
+
+    // 儲存答案
+    config.answers[currentQuestion - 1] = {
+        question: currentQuestion,
+        answer: answer,
+        correct: isCorrect
+    };
+
+    // 更新配置
+    localStorage.setItem('magazinePracticeConfig', JSON.stringify(config));
+
+    // 更新統計顯示
+    updatePracticeStats();
+
+    // 清空輸入框
+    answerInput.value = '';
+
+    // 自動進入下一題
+    setTimeout(() => {
+        if (currentQuestion < config.totalQuestions) {
+            nextQuestion();
+        } else {
+            completePractice();
+        }
+    }, 1500);
+}
+
+// 檢查答案
+function checkAnswer(questionNumber, answer) {
+    // 這裡可以實現實際的答案檢查邏輯
+    // 目前使用簡單的範例
+    const sampleAnswers = ['l', 'o', 'a', 'o', 'u', 'a', 'e', 'o', 'u', 'o'];
+    const answerIndex = (questionNumber - 1) % sampleAnswers.length;
+    return answer === sampleAnswers[answerIndex];
+}
+
+// 顯示答案反饋
+function showAnswerFeedback(isCorrect) {
+    const feedback = document.createElement('div');
+    feedback.className = `answer-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+    feedback.innerHTML = `
+        <i class="fas fa-${isCorrect ? 'check' : 'times'}"></i>
+        ${isCorrect ? '正確！' : '錯誤，請再試一次'}
+    `;
+
+    document.body.appendChild(feedback);
+
+    setTimeout(() => {
+        feedback.remove();
+    }, 1500);
+}
+
+// 更新練習統計
+function updatePracticeStats() {
+    const config = JSON.parse(localStorage.getItem('magazinePracticeConfig') || '{}');
+    const correctCount = document.getElementById('correctCount');
+    const incorrectCount = document.getElementById('incorrectCount');
+    const accuracyRate = document.getElementById('accuracyRate');
+
+    correctCount.textContent = config.correctAnswers || 0;
+    incorrectCount.textContent = config.incorrectAnswers || 0;
+
+    const total = (config.correctAnswers || 0) + (config.incorrectAnswers || 0);
+    const accuracy = total > 0 ? Math.round(((config.correctAnswers || 0) / total) * 100) : 0;
+    accuracyRate.textContent = `${accuracy}%`;
+}
+
+// 前往指定題目
+function goToQuestion() {
+    const questionSelect = document.getElementById('questionSelect');
+    const questionNumber = parseInt(questionSelect.value);
+
+    const config = JSON.parse(localStorage.getItem('magazinePracticeConfig') || '{}');
+    config.currentQuestion = questionNumber;
+    localStorage.setItem('magazinePracticeConfig', JSON.stringify(config));
+
+    loadQuestion(questionNumber);
+}
+
+// 上一題
+function previousQuestion() {
+    const config = JSON.parse(localStorage.getItem('magazinePracticeConfig') || '{}');
+    if (config.currentQuestion > 1) {
+        config.currentQuestion--;
+        localStorage.setItem('magazinePracticeConfig', JSON.stringify(config));
+        loadQuestion(config.currentQuestion);
+
+        // 更新選擇器
+        document.getElementById('questionSelect').value = config.currentQuestion;
+    }
+}
+
+// 下一題
+function nextQuestion() {
+    const config = JSON.parse(localStorage.getItem('magazinePracticeConfig') || '{}');
+    if (config.currentQuestion < config.totalQuestions) {
+        config.currentQuestion++;
+        localStorage.setItem('magazinePracticeConfig', JSON.stringify(config));
+        loadQuestion(config.currentQuestion);
+
+        // 更新選擇器
+        document.getElementById('questionSelect').value = config.currentQuestion;
+    }
+}
+
+// 完成練習
+function completePractice() {
+    stopPracticeTimer();
+
+    const config = JSON.parse(localStorage.getItem('magazinePracticeConfig') || '{}');
+    const total = config.correctAnswers + config.incorrectAnswers;
+    const accuracy = total > 0 ? Math.round((config.correctAnswers / total) * 100) : 0;
+
+    // 顯示完成結果
+    const resultHTML = `
+        <div class="practice-result">
+            <h2><i class="fas fa-flag-checkered"></i> 練習完成！</h2>
+            <div class="result-stats">
+                <div class="result-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>正確：${config.correctAnswers}</span>
+                </div>
+                <div class="result-item">
+                    <i class="fas fa-times-circle"></i>
+                    <span>錯誤：${config.incorrectAnswers}</span>
+                </div>
+                <div class="result-item">
+                    <i class="fas fa-percentage"></i>
+                    <span>正確率：${accuracy}%</span>
+                </div>
+            </div>
+            <div class="result-actions">
+                <button onclick="closeModal('magazinePracticeModal')" class="result-btn">
+                    <i class="fas fa-home"></i> 返回首頁
+                </button>
+                <button onclick="restartPractice()" class="result-btn">
+                    <i class="fas fa-redo"></i> 重新練習
+                </button>
+            </div>
+        </div>
+    `;
+
+    const modal = document.getElementById('magazinePracticeModal');
+    const content = modal.querySelector('.modal-content');
+    content.innerHTML = resultHTML;
+}
+
+// 重新開始練習
+function restartPractice() {
+    const config = JSON.parse(localStorage.getItem('magazinePracticeConfig') || '{}');
+    closeModal('magazinePracticeModal');
+    startMagazinePractice(config.totalQuestions);
 }
 
 // 儲存分數
@@ -1194,48 +1668,11 @@ const magazineQuestions = [
     // ... 繼續添加剩餘95題
 ];
 
-// 載入 Word 檔案題目的函數
-function loadMagazineQuestionsFromFile() {
-    // 這裡可以實現從 Word 檔案載入題目的邏輯
-    // 可以使用 FileReader API 或其他方法
-    console.log('載入雜誌練習題目...');
-    return magazineQuestions;
-}
 
-// 開始雜誌練習
-function startMagazinePractice() {
-    // 關閉原來的模態框
-    closeModal('practiceModal');
 
-    // 載入題目
-    const questions = loadMagazineQuestionsFromFile();
 
-    // 初始化練習資料
-    window.currentQuestions = [...questions];
-    currentQuestionIndex = 0;
-    userAnswers = new Array(questions.length).fill('');
-    correctAnswers = 0;
-    incorrectAnswers = 0;
 
-    // 開始計時
-    startPracticeTimer();
 
-    // 顯示練習模態框
-    document.getElementById('magazinePracticeModal').style.display = 'block';
-
-    // 載入第一題
-    loadQuestion(0);
-
-    // 更新題目選單
-    updateQuestionSelector();
-}
-
-// 開始練習計時器
-function startPracticeTimer() {
-    practiceStartTime = new Date();
-    updateTimer();
-    practiceTimer = setInterval(updateTimer, 1000);
-}
 
 // 更新計時器
 function updateTimer() {
@@ -1653,3 +2090,602 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// 打開成績登記模態框
+function openScoreRegistrationModal() {
+    const modal = document.getElementById('scoreRegistrationModal');
+
+    // 設置當前日期為預設值
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('practiceDate').value = today;
+
+    // 顯示學生資訊
+    const currentStudent = getCurrentStudent();
+    const studentInfo = students[currentStudent];
+
+    document.getElementById('studentNameDisplay').textContent = currentStudent;
+    document.getElementById('studentGroupDisplay').textContent = studentInfo ? studentInfo.group : '';
+
+    // 載入歷史成績記錄
+    loadScoreHistory();
+
+    modal.style.display = 'block';
+}
+
+// 提交成績登記
+function submitScoreRegistration() {
+    const currentStudent = getCurrentStudent();
+    const practiceDate = document.getElementById('practiceDate').value;
+    const magazineScore = document.getElementById('magazineScore').value;
+    const spellingScore = document.getElementById('spellingScore').value;
+    const practiceNotes = document.getElementById('practiceNotes').value;
+
+    // 驗證必填欄位
+    if (!practiceDate) {
+        alert('請選擇練習日期！');
+        return;
+    }
+
+    // 檢查是否有至少一個分數
+    const scores = [magazineScore, spellingScore];
+    const hasScore = scores.some(score => score && score > 0);
+
+    if (!hasScore) {
+        alert('請至少輸入一個練習分數！');
+        return;
+    }
+
+    // 創建成績記錄
+    const scoreRecord = {
+        id: Date.now(),
+        studentName: currentStudent,
+        date: practiceDate,
+        scores: {
+            magazine: parseInt(magazineScore) || 0,
+            spelling: parseInt(spellingScore) || 0
+        },
+        notes: practiceNotes,
+        timestamp: new Date().toISOString()
+    };
+
+    // 儲存成績記錄
+    saveScoreRecord(scoreRecord);
+
+    // 調試：檢查儲存結果
+    console.log('儲存的成績記錄:', scoreRecord);
+    console.log('當前學生:', currentStudent);
+    console.log('儲存後的數據:', localStorage.getItem(`studentScores_${currentStudent}`));
+
+    // 清空表單
+    clearScoreForm();
+
+    // 重新載入歷史記錄
+    loadScoreHistory();
+
+    // 更新學習地圖統計
+    updateLearningMapStats();
+
+    // 顯示成功訊息
+    showSuccessMessage('成績登記成功！');
+}
+
+// 儲存成績記錄
+function saveScoreRecord(scoreRecord) {
+    const studentScores = JSON.parse(localStorage.getItem(`studentScores_${scoreRecord.studentName}`) || '[]');
+    studentScores.push(scoreRecord);
+    localStorage.setItem(`studentScores_${scoreRecord.studentName}`, JSON.stringify(studentScores));
+}
+
+// 載入成績歷史記錄
+function loadScoreHistory() {
+    const currentStudent = getCurrentStudent();
+    const studentScores = JSON.parse(localStorage.getItem(`studentScores_${currentStudent}`) || '[]');
+    const historyContainer = document.getElementById('scoreHistory');
+
+    if (studentScores.length === 0) {
+        historyContainer.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: #666;">
+                <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                <p>尚無成績記錄</p>
+                <p style="font-size: 0.9rem;">開始登記您的練習成績吧！</p>
+            </div>
+        `;
+        return;
+    }
+
+    // 按日期排序（最新的在前）
+    studentScores.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    const historyHTML = studentScores.map(record => {
+        const totalScore = Object.values(record.scores).reduce((sum, score) => sum + score, 0);
+        const averageScore = Math.round(totalScore / Object.keys(record.scores).filter(key => record.scores[key] > 0).length);
+
+        return `
+            <div class="history-item">
+                <div class="history-header">
+                    <div class="history-date">
+                        <i class="fas fa-calendar"></i>
+                        ${formatDate(record.date)}
+                    </div>
+                    <div style="color: #667eea; font-weight: 600;">
+                        平均分：${averageScore} 分
+                    </div>
+                </div>
+                <div class="history-scores">
+                    <div class="score-item">
+                        <div class="score-label">雜誌單字</div>
+                        <div class="score-value">${record.scores.magazine}</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">拼字模擬100題</div>
+                        <div class="score-value">${record.scores.spelling}</div>
+                    </div>
+                </div>
+                ${record.notes ? `
+                    <div class="history-notes">
+                        <i class="fas fa-comment"></i>
+                        ${record.notes}
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    }).join('');
+
+    historyContainer.innerHTML = historyHTML;
+}
+
+// 格式化日期
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}/${month}/${day}`;
+}
+
+// 清空成績表單
+function clearScoreForm() {
+    document.getElementById('magazineScore').value = '';
+    document.getElementById('spellingScore').value = '';
+    document.getElementById('practiceNotes').value = '';
+}
+
+// 更新學習地圖中的成績統計
+function updateLearningMapStats() {
+    const currentStudent = getCurrentStudent();
+    if (!currentStudent) return;
+
+    const studentScores = JSON.parse(localStorage.getItem(`studentScores_${currentStudent}`) || '[]');
+
+    // 計算統計數據
+    const totalRecords = studentScores.length;
+    const totalScore = studentScores.reduce((sum, record) => {
+        const recordTotal = Object.values(record.scores).reduce((s, score) => s + score, 0);
+        const recordCount = Object.keys(record.scores).filter(key => record.scores[key] > 0).length;
+        return sum + (recordCount > 0 ? recordTotal / recordCount : 0);
+    }, 0);
+    const averageScore = totalRecords > 0 ? Math.round(totalScore / totalRecords) : 0;
+
+    // 更新成績登記區域顯示
+    const scoreArea = document.querySelector('.score-area .area-stats');
+    if (scoreArea) {
+        const statItems = scoreArea.querySelectorAll('.stat-item span');
+        if (statItems.length >= 2) {
+            statItems[0].textContent = `已登記: ${totalRecords} 次`;
+            statItems[1].textContent = `平均分: ${averageScore} 分`;
+        }
+    }
+
+    // 更新學習進度總覽
+    updateProgressOverview(totalRecords, averageScore, studentScores);
+}
+
+// 更新學習進度總覽
+function updateProgressOverview(totalRecords, averageScore, studentScores) {
+    // 計算學習天數（從2025年7月26日開始計算）
+    const startDate = new Date('2025-07-26');
+    const today = new Date();
+    const timeDiff = today.getTime() - startDate.getTime();
+    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    const learningDays = Math.max(0, daysDiff); // 確保不會是負數
+
+    // 更新進度總覽的數字
+    const progressNumbers = document.querySelectorAll('.progress-number');
+    if (progressNumbers.length >= 3) {
+        progressNumbers[0].textContent = totalRecords; // 總練習次數
+        progressNumbers[1].textContent = averageScore; // 平均分數
+        progressNumbers[2].textContent = learningDays; // 學習天數
+    }
+}
+
+// 更新管理員區域統計數據
+function updateAdminAreaStats() {
+    // 計算所有學生的統計數據
+    const allStudents = Object.keys(students).filter(name => !students[name].isAdmin);
+    const totalStudents = allStudents.length;
+
+    // 計算總成績記錄
+    let totalRecords = 0;
+    allStudents.forEach(studentName => {
+        const studentScores = JSON.parse(localStorage.getItem(`studentScores_${studentName}`) || '[]');
+        totalRecords += studentScores.length;
+    });
+
+    // 調試：檢查Annie的數據
+    console.log('=== 更新管理員區域統計 ===');
+    console.log('Annie的成績數據:', localStorage.getItem('studentScores_教務組 Annie'));
+
+    // 測試：如果Annie沒有數據，手動添加一些測試數據
+    const annieScores = localStorage.getItem('studentScores_教務組 Annie');
+    if (!annieScores || annieScores === '[]') {
+        console.log('Annie沒有成績數據，添加測試數據...');
+        const testScores = [
+            {
+                id: Date.now(),
+                studentName: '教務組 Annie',
+                date: '2025-01-20',
+                scores: {
+                    magazine: 85,
+                    spelling: 90
+                },
+                notes: '測試成績',
+                timestamp: new Date().toISOString()
+            }
+        ];
+        localStorage.setItem('studentScores_教務組 Annie', JSON.stringify(testScores));
+        console.log('已添加Annie的測試數據');
+    }
+
+    // 更新管理員區域的統計顯示
+    const adminStats = document.querySelectorAll('.admin-area .area-stats .stat-item span');
+    if (adminStats.length >= 2) {
+        adminStats[0].textContent = `總學生: ${totalStudents} 人`;
+        adminStats[1].textContent = `總記錄: ${totalRecords} 筆`;
+    }
+}
+
+// 顯示各級別單字練習提示
+function showLevelPracticeNotice() {
+    // 創建提示模態框
+    const noticeHTML = `
+        <div id="levelNoticeModal" class="modal">
+            <div class="modal-content notice-content">
+                <span class="close" onclick="closeModal('levelNoticeModal')">&times;</span>
+                
+                <!-- 提示標題 -->
+                <div class="notice-header">
+                    <div class="logo-section">
+                        <div class="logo-text">
+                            <div class="logo-main">課外練習</div>
+                        </div>
+                    </div>
+                    <h1 class="notice-title">各級別單字練習</h1>
+                </div>
+
+                <!-- 提示內容 -->
+                <div class="notice-body">
+                    <div class="notice-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="notice-message">
+                        <h3>請至佳音雲端學院官網練習</h3>
+                        <p>額外的單字還在準備中，敬請期待！</p>
+                        <p class="notice-subtitle">我們正在為您準備更豐富的練習內容</p>
+                    </div>
+                </div>
+
+                <!-- 按鈕區域 -->
+                <div class="notice-actions">
+                    <button onclick="closeModal('levelNoticeModal')" class="notice-btn">
+                        <i class="fas fa-check"></i> 我知道了
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 如果模態框已存在，先移除
+    const existingModal = document.getElementById('levelNoticeModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // 添加新的模態框到頁面
+    document.body.insertAdjacentHTML('beforeend', noticeHTML);
+
+    // 顯示模態框
+    document.getElementById('levelNoticeModal').style.display = 'block';
+}
+
+// 顯示管理員學生成績列表
+function showAdminStudentsList() {
+    const practiceSection = document.getElementById('practice');
+    practiceSection.innerHTML = `
+        <h2><i class="fas fa-chart-bar"></i> 學生成績管理</h2>
+        <div class="admin-welcome">
+            <h1>歡迎 ${getCurrentStudent()}！</h1>
+            <p>查看所有學生的練習成績和學習狀況</p>
+        </div>
+        
+        <div class="admin-dashboard">
+            <!-- 統計概覽 -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="totalStudents">0</div>
+                        <div class="stat-label">總學生數</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="totalRecords">0</div>
+                        <div class="stat-label">總成績記錄</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="activeStudents">0</div>
+                        <div class="stat-label">活躍學生</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 學生列表 -->
+            <div class="admin-students-section">
+                <h3><i class="fas fa-list"></i> 學生列表</h3>
+                <div class="students-filter">
+                    <select id="groupFilter" onchange="filterStudents()">
+                        <option value="">所有組別</option>
+                        <option value="B組">B組</option>
+                        <option value="C組">C組</option>
+                        <option value="D組">D組</option>
+                        <option value="E組">E組</option>
+                        <option value="F組">F組</option>
+                        <option value="教務組">教務組</option>
+                    </select>
+                </div>
+                <div id="studentsList" class="students-list">
+                    <!-- 學生列表將在這裡動態載入 -->
+                </div>
+            </div>
+
+            <!-- 返回學習地圖按鈕 -->
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="showLearningMap()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> 返回學習地圖
+                </button>
+            </div>
+        </div>
+    `;
+
+    // 載入管理員數據
+    loadAdminData();
+}
+
+// 載入管理員數據
+function loadAdminData() {
+    // 計算統計數據
+    const allStudents = Object.keys(students).filter(name => !students[name].isAdmin);
+    const totalStudents = allStudents.length;
+
+    // 計算總成績記錄
+    let totalRecords = 0;
+    let activeStudents = 0;
+    allStudents.forEach(studentName => {
+        const studentScores = JSON.parse(localStorage.getItem(`studentScores_${studentName}`) || '[]');
+        totalRecords += studentScores.length;
+        if (studentScores.length > 0) {
+            activeStudents++;
+        }
+    });
+
+    // 更新統計顯示
+    document.getElementById('totalStudents').textContent = totalStudents;
+    document.getElementById('totalRecords').textContent = totalRecords;
+    document.getElementById('activeStudents').textContent = activeStudents;
+
+    // 載入學生列表
+    loadStudentsList();
+}
+
+// 載入學生列表
+function loadStudentsList(filterGroup = '') {
+    const studentsListContainer = document.getElementById('studentsList');
+    const allStudents = Object.keys(students).filter(name => !students[name].isAdmin);
+
+    // 調試：檢查Annie的數據
+    console.log('=== 管理員載入學生列表 ===');
+    console.log('所有學生:', allStudents);
+    console.log('Annie是否在列表中:', allStudents.includes('教務組 Annie'));
+    console.log('Annie的成績數據:', localStorage.getItem('studentScores_教務組 Annie'));
+
+    // 檢查所有localStorage中的成績數據
+    console.log('所有localStorage成績數據:');
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('studentScores_')) {
+            console.log(key, ':', localStorage.getItem(key));
+        }
+    }
+
+    let filteredStudents = allStudents;
+    if (filterGroup) {
+        filteredStudents = allStudents.filter(name => students[name].group === filterGroup);
+    }
+
+    if (filteredStudents.length === 0) {
+        studentsListContainer.innerHTML = `
+            <div class="no-students">
+                <i class="fas fa-users-slash"></i>
+                <p>沒有找到學生</p>
+            </div>
+        `;
+        return;
+    }
+
+    const studentsHTML = filteredStudents.map(studentName => {
+        const studentInfo = students[studentName];
+        const studentScores = JSON.parse(localStorage.getItem(`studentScores_${studentName}`) || '[]');
+        const recordCount = studentScores.length;
+
+        // 計算平均分數
+        let averageScore = 0;
+        if (studentScores.length > 0) {
+            const totalScore = studentScores.reduce((sum, record) => {
+                const recordTotal = Object.values(record.scores).reduce((s, score) => s + score, 0);
+                const recordCount = Object.keys(record.scores).filter(key => record.scores[key] > 0).length;
+                return sum + (recordCount > 0 ? recordTotal / recordCount : 0);
+            }, 0);
+            averageScore = Math.round(totalScore / studentScores.length);
+        }
+
+        return `
+            <div class="student-card" onclick="viewStudentDetails('${studentName}')">
+                <div class="student-info">
+                    <div class="student-name">${studentName}</div>
+                    <div class="student-group">${studentInfo.group} - ${studentInfo.level}</div>
+                </div>
+                <div class="student-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">記錄數</span>
+                        <span class="stat-value">${recordCount}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">平均分</span>
+                        <span class="stat-value">${averageScore}</span>
+                    </div>
+                </div>
+                <div class="student-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    studentsListContainer.innerHTML = studentsHTML;
+}
+
+// 篩選學生
+function filterStudents() {
+    const filterGroup = document.getElementById('groupFilter').value;
+    loadStudentsList(filterGroup);
+}
+
+// 查看學生詳細資料
+function viewStudentDetails(studentName) {
+    const studentInfo = students[studentName];
+    const studentScores = JSON.parse(localStorage.getItem(`studentScores_${studentName}`) || '[]');
+
+    // 創建學生詳細資料模態框
+    const detailsHTML = `
+        <div id="studentDetailsModal" class="modal">
+            <div class="modal-content student-details-content">
+                <span class="close" onclick="closeModal('studentDetailsModal')">&times;</span>
+                
+                <!-- 學生資訊標題 -->
+                <div class="student-details-header">
+                    <div class="logo-section">
+                        <div class="logo-text">
+                            <div class="logo-main">課外練習</div>
+                        </div>
+                    </div>
+                    <h1 class="details-title">學生詳細資料</h1>
+                </div>
+
+                <!-- 學生基本資訊 -->
+                <div class="student-details-info">
+                    <div class="info-section">
+                        <h3><i class="fas fa-user"></i> 基本資訊</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>姓名：</label>
+                                <span>${studentName}</span>
+                            </div>
+                            <div class="info-item">
+                                <label>組別：</label>
+                                <span>${studentInfo.group}</span>
+                            </div>
+                            <div class="info-item">
+                                <label>級別：</label>
+                                <span>${studentInfo.level}</span>
+                            </div>
+                            <div class="info-item">
+                                <label>成績記錄數：</label>
+                                <span>${studentScores.length} 筆</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 成績記錄 -->
+                    <div class="scores-section">
+                        <h3><i class="fas fa-chart-line"></i> 成績記錄</h3>
+                        <div id="studentScoresList" class="scores-list">
+                            ${studentScores.length === 0 ? `
+                                <div class="no-scores">
+                                    <i class="fas fa-inbox"></i>
+                                    <p>尚無成績記錄</p>
+                                </div>
+                            ` : studentScores.map(record => `
+                                <div class="score-record">
+                                    <div class="record-header">
+                                        <div class="record-date">
+                                            <i class="fas fa-calendar"></i>
+                                            ${formatDate(record.date)}
+                                        </div>
+                                        <div class="record-scores">
+                                            <span class="score-item">
+                                                <span class="score-label">雜誌單字</span>
+                                                <span class="score-value">${record.scores.magazine}</span>
+                                            </span>
+                                            <span class="score-item">
+                                                <span class="score-label">拼字模擬</span>
+                                                <span class="score-value">${record.scores.spelling}</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    ${record.notes ? `
+                                        <div class="record-notes">
+                                            <i class="fas fa-comment"></i>
+                                            ${record.notes}
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 關閉按鈕 -->
+                <div class="details-actions">
+                    <button onclick="closeModal('studentDetailsModal')" class="close-btn">
+                        <i class="fas fa-times"></i> 關閉
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 如果模態框已存在，先移除
+    const existingModal = document.getElementById('studentDetailsModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // 添加新的模態框到頁面
+    document.body.insertAdjacentHTML('beforeend', detailsHTML);
+
+    // 顯示模態框
+    document.getElementById('studentDetailsModal').style.display = 'block';
+}
+
+
+
