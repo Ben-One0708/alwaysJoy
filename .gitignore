@@ -1,15 +1,3 @@
-# 依賴包
-node_modules/
-
-# 環境變數文件
-.env
-.env.local
-.env.production
-
-# 日誌文件
-*.log
-logs/
-
 # 系統文件
 .DS_Store
 Thumbs.db
@@ -24,14 +12,10 @@ Thumbs.db
 *.tmp
 *.temp
 
-# 構建文件
-dist/
-build/
-
-# 數據庫文件
-*.sqlite
-*.db
-
 # 備份文件
 *.bak
 *.backup
+
+# 文檔文件
+*.docx
+*.pdf
