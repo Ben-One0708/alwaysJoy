@@ -526,6 +526,117 @@
         </div>
     </div>
 
+    <!-- 雜誌單字練習題模態框 -->
+    <div id="magazinePracticeModal" class="modal">
+        <div class="modal-content magazine-practice-content">
+            <span class="close" onclick="closeMagazinePractice()">&times;</span>
+
+            <!-- 練習頁面標題 -->
+            <div class="practice-header">
+                <div class="practice-title">
+                    <h2><i class="fas fa-book-open"></i> 雜誌單字練習</h2>
+                    <div class="practice-info">
+                        <span class="question-counter" id="magazineQuestionCounter">第 1 題 / 共 36 題</span>
+                        <span class="timer" id="magazineTimer">時間：00:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 題目導航 -->
+            <div class="magazine-question-navigation">
+                <div class="question-selector">
+                    <label for="magazineQuestionSelect">題目選擇：</label>
+                    <select id="magazineQuestionSelect" onchange="goToMagazineQuestion()">
+                        <option value="1">第 1 題</option>
+                    </select>
+                    <span class="total-questions" id="magazineTotalQuestions">/ 36 題</span>
+                </div>
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="magazineProgressFill"></div>
+                    </div>
+                    <span class="progress-text" id="magazineProgressText">1 / 36</span>
+                </div>
+            </div>
+
+            <!-- 題目內容區域 -->
+            <div class="magazine-question-container">
+                <!-- 題目圖片區域 -->
+                <div class="question-image-section">
+                    <div class="image-container" id="magazineImageContainer">
+                        <img id="magazineQuestionImage" src="" alt="題目圖片" class="question-image">
+                        <div class="image-overlay">
+                            <div class="image-placeholder">
+                                <i class="fas fa-image"></i>
+                                <p>題目圖片</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 題目文字區域 -->
+                <div class="question-text-section">
+                    <div class="question-header">
+                        <span class="question-number" id="magazineQuestionNumber">1.</span>
+                        <span class="question-type">字義填空</span>
+                    </div>
+
+                    <div class="question-content" id="magazineQuestionContent">
+                        <!-- 題目內容將在這裡動態載入 -->
+                    </div>
+
+                    <div class="answer-section">
+                        <label for="magazineAnswerInput">請填入缺少的字母：</label>
+                        <div class="answer-input-container">
+                            <input type="text" id="magazineAnswerInput" placeholder="請輸入答案..." autocomplete="off">
+                            <button class="submit-answer" onclick="submitMagazineAnswer()">
+                                <i class="fas fa-check"></i> 確認
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 答案反饋 -->
+                    <div class="answer-feedback" id="magazineAnswerFeedback">
+                        <!-- 答案反饋將在這裡顯示 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 導航按鈕 -->
+            <div class="magazine-navigation-buttons">
+                <button class="nav-btn prev-btn" onclick="previousMagazineQuestion()" disabled>
+                    <i class="fas fa-chevron-left"></i> 上一題
+                </button>
+                <button class="nav-btn next-btn" onclick="nextMagazineQuestion()">
+                    下一題 <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- 練習統計 -->
+            <div class="magazine-practice-stats">
+                <div class="stat-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>正確：<span id="magazineCorrectCount">0</span></span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-times-circle"></i>
+                    <span>錯誤：<span id="magazineIncorrectCount">0</span></span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-percentage"></i>
+                    <span>正確率：<span id="magazineAccuracyRate">0%</span></span>
+                </div>
+            </div>
+
+            <!-- 完成按鈕 -->
+            <div class="magazine-completion-section">
+                <button class="complete-practice" onclick="completeMagazinePractice()" style="display: none;">
+                    <i class="fas fa-flag-checkered"></i> 完成練習
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- 個人練習成績登記模態框 -->
     <div id="scoreRegistrationModal" class="modal">
         <div class="modal-content score-registration-content">

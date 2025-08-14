@@ -1087,6 +1087,11 @@ function loadScores(areaType) {
     });
 }
 
+// 雜誌練習相關變數
+let magazinePracticeConfig = null;
+let magazineQuestions = [];
+let magazineTimerId = null;
+
 // 打開雜誌單字練習選擇模態框
 function openMagazineSelectionModal() {
     const modal = document.getElementById('magazineSelectionModal');
@@ -1098,95 +1103,377 @@ function startMagazinePractice(questionCount) {
     // 關閉選擇模態框
     closeModal('magazineSelectionModal');
 
-    // 設置練習參數
-    const practiceConfig = {
+    // 初始化練習
+    magazinePracticeConfig = {
         totalQuestions: questionCount,
         currentQuestion: 1,
         correctAnswers: 0,
         incorrectAnswers: 0,
         startTime: new Date(),
-        answers: []
+        userAnswers: []
     };
 
-    // 儲存練習配置
-    localStorage.setItem('magazinePracticeConfig', JSON.stringify(practiceConfig));
+    // 生成題目
+    generateMagazineQuestions(questionCount);
 
-    // 打開練習模態框
-    openMagazinePracticeModal(questionCount);
-}
-
-// 打開雜誌單字練習模態框
-function openMagazinePracticeModal(questionCount) {
-    const modal = document.getElementById('magazinePracticeModal');
-    const config = JSON.parse(localStorage.getItem('magazinePracticeConfig') || '{}');
-
-    // 更新題目選擇器
-    updateQuestionSelector(questionCount);
+    // 顯示練習模態框
+    openMagazinePracticeModal();
 
     // 載入第一題
-    loadQuestion(1);
+    loadMagazineQuestion(1);
 
-    // 開始計時器
-    startPracticeTimer();
-
-    modal.style.display = 'block';
+    // 開始計時
+    startMagazineTimer();
 }
 
-// 更新題目選擇器
-function updateQuestionSelector(totalQuestions) {
-    const questionSelect = document.getElementById('questionSelect');
-    const totalQuestionsSpan = document.querySelector('.total-questions');
+function openMagazinePracticeModal() {
+    document.getElementById('magazinePracticeModal').style.display = 'block';
 
+    // 更新題目選擇器
+    updateMagazineQuestionSelector();
+
+    // 更新進度條
+    updateMagazineProgress();
+}
+
+function closeMagazinePractice() {
+    document.getElementById('magazinePracticeModal').style.display = 'none';
+    stopMagazineTimer();
+
+    // 重置練習狀態
+    magazinePracticeConfig = null;
+}
+
+function generateMagazineQuestions(count) {
+    // 從MJ3.html的題目中選擇指定數量
+    const allQuestions = [
+        { clue: "He always r___s books before bed.", answer: "reads", image: "images/reading.jpg" },
+        { clue: "My mom likes to go for a walk at the p_____.", answer: "park", image: "images/park.jpg" },
+        { clue: "I usually walk my dog at the p______ in the evening.", answer: "park", image: "images/park2.jpg" },
+        { clue: "Tom enjoys playing with his friends at the p__________.", answer: "playground", image: "images/playground.jpg" },
+        { clue: "My favorite activity is playing seesaw at the p__________.", answer: "playground", image: "images/seesaw.jpg" },
+        { clue: "He is working at the o_______ this afternoon.", answer: "office", image: "images/office.jpg" },
+        { clue: "You should go to the teacher's o _______.", answer: "office", image: "images/teacher-office.jpg" },
+        { clue: "There are so many animals in the z ______.", answer: "zoo", image: "images/zoo.jpg" },
+        { clue: "You can see a lion in the z ______.", answer: "zoo", image: "images/lion.jpg" },
+        { clue: "She's angry because her brother broke her d______.", answer: "doll", image: "images/doll.jpg" },
+        { clue: "My sister likes to play with her d______ at her free time.", answer: "doll", image: "images/doll2.jpg" },
+        { clue: "Sam's hobby is collecting c______.", answer: "cards", image: "images/cards.jpg" },
+        { clue: "The magician is showing his tricks with a pair of c______s.", answer: "cards", image: "images/magic-cards.jpg" },
+        { clue: "Hank needs someone to fix his r_________.", answer: "robot", image: "images/robot.jpg" },
+        { clue: "The movie \"Transformers\" is a story about _________.", answer: "robots", image: "images/transformers.jpg" },
+        { clue: "Now I can play v_______ g_______ at home.", answer: "video games", image: "images/video-games.jpg" },
+        { clue: "Bobby can not play v_______ g_______ before homework.", answer: "video games", image: "images/gaming.jpg" },
+        { clue: "Matt likes to fly a k_______ at the park.", answer: "kite", image: "images/kite.jpg" },
+        { clue: "My favorite activity is flying a k_______.", answer: "kite", image: "images/kite2.jpg" },
+        { clue: "There are s___________ people in the classroom.", answer: "sixteen", image: "images/classroom.jpg" },
+        { clue: "Ten plus seven is s____________.", answer: "seventeen", image: "images/math.jpg" },
+        { clue: "There are t_________ p_________ on the stage.", answer: "twenty people", image: "images/stage.jpg" },
+        { clue: "Stinky tofu is a famous food from T__________.", answer: "Taiwan", image: "images/taiwan.jpg" },
+        { clue: "You have to go to t______ U______.", answer: "the USA", image: "images/usa.jpg" },
+        { clue: "London is a city in E__________.", answer: "England", image: "images/london.jpg" },
+        { clue: "The Great Wall is a famous place in C________.", answer: "China", image: "images/great-wall.jpg" },
+        { clue: "Paris is a city in F_________.", answer: "France", image: "images/paris.jpg" },
+        { clue: "How is the w__________ today?", answer: "weather", image: "images/weather.jpg" },
+        { clue: "It's s________ outside.", answer: "snowy", image: "images/snow.jpg" },
+        { clue: "Tomorrow will be r________.", answer: "rainy", image: "images/rain.jpg" },
+        { clue: "It's s________ and it's very hot outside.", answer: "sunny", image: "images/sunny.jpg" },
+        { clue: "It's w________ outside.", answer: "windy", image: "images/windy.jpg" },
+        { clue: "We can build a s__________ at the yard.", answer: "snowman", image: "images/snowman.jpg" },
+        { clue: "Betty has a pretty f______.", answer: "face", image: "images/face.jpg" },
+        { clue: "People listen to others with their e______.", answer: "ears", image: "images/ears.jpg" },
+        { clue: "People see everything with their e______.", answer: "eyes", image: "images/eyes.jpg" },
+        { clue: "There's something wrong with my n_______.", answer: "nose", image: "images/nose.jpg" },
+        { clue: "Don't talk with food in your m_______.", answer: "mouth", image: "images/mouth.jpg" },
+        { clue: "Monkeys have l_______ arms and s______ legs.", answer: "long, short", image: "images/monkey.jpg" },
+        { clue: "It is important to wash our h_______ before we eat.", answer: "hands", image: "images/hands.jpg" },
+        { clue: "Henry just hurt his l_____.", answer: "leg", image: "images/leg.jpg" },
+        { clue: "I usually go to school on f______.", answer: "foot", image: "images/foot.jpg" },
+        { clue: "Three times ten is t_________.", answer: "thirty", image: "images/math2.jpg" },
+        { clue: "The m__________ just made the bird disappear.", answer: "magician", image: "images/magician.jpg" },
+        { clue: "The s_________ is singing my favorite song!", answer: "singer", image: "images/singer.jpg" },
+        { clue: "Her dream is to become a s________.", answer: "singer", image: "images/singer2.jpg" },
+        { clue: "My grandfather is a f_______, he works under the sun.", answer: "farmer", image: "images/farmer.jpg" },
+        { clue: "When I am sick, I go to see a d_________.", answer: "doctor", image: "images/doctor.jpg" },
+        { clue: "I want to be a n_________ to help the doctor.", answer: "nurse", image: "images/nurse.jpg" },
+        { clue: "There are many f__________ in the yard.", answer: "flowers", image: "images/flowers.jpg" },
+        { clue: "Don't let the b______ come inside.", answer: "bugs", image: "images/bugs.jpg" },
+        { clue: "Ally is scared of b_______.", answer: "bugs", image: "images/bugs2.jpg" },
+        { clue: "There are f_______ around the garbage.", answer: "flies", image: "images/flies.jpg" },
+        { clue: "Be careful when you see a b______.", answer: "bee", image: "images/bee.jpg" },
+        { clue: "You can see beautiful b___________ near flowers.", answer: "butterflies", image: "images/butterflies.jpg" },
+        { clue: "Our school took us to the m__________.", answer: "museum", image: "images/museum.jpg" },
+        { clue: "Is there any m______ on the table?", answer: "mugs", image: "images/mugs.jpg" },
+        { clue: "I need a m_____ to help me find it.", answer: "map", image: "images/map.jpg" },
+        { clue: "m _______ is a useful thing to find direction.", answer: "map", image: "images/map2.jpg" },
+        { clue: "I want to write a c_______ to my mom.", answer: "card", image: "images/card.jpg" },
+        { clue: "My uncle sent me a p__________ from Japan.", answer: "postcard", image: "images/postcard.jpg" },
+        { clue: "I used a b___________ to mark my page.", answer: "bookmark", image: "images/bookmark.jpg" },
+        { clue: "Bella put some s_________ on her pencil case.", answer: "stickers", image: "images/stickers.jpg" },
+        { clue: "I need a n_____________ to take notes.", answer: "notebook", image: "images/notebook.jpg" },
+        { clue: "Let me get a r________ to check the length.", answer: "ruler", image: "images/ruler.jpg" },
+        { clue: "I need a red c________ to color it.", answer: "crayon", image: "images/crayon.jpg" },
+        { clue: "Get a p_________ c_______ to store your pens.", answer: "pencil case", image: "images/pencil-case.jpg" },
+        { clue: "David is good at art. He can d_______ almost everything.", answer: "draw", image: "images/draw.jpg" },
+        { clue: "The homework is to d________ an apple.", answer: "draw", image: "images/draw2.jpg" },
+        { clue: "Maybe we can get some markers to p________ it.", answer: "paint", image: "images/paint.jpg" },
+        { clue: "John s_______ hard to get good grades on the exam.", answer: "studies", image: "images/study.jpg" },
+        { clue: "I just s_________ history for two hours.", answer: "studied", image: "images/study2.jpg" },
+        { clue: "My dad w_________ every day.", answer: "works", image: "images/work.jpg" },
+        { clue: "After Mom finish her w_______, she can take us out.", answer: "work", image: "images/work2.jpg" },
+        { clue: "You have to d ________ more warm water.", answer: "drink", image: "images/drink.jpg" },
+        { clue: "I want to d________ some ice water.", answer: "drink", image: "images/drink2.jpg" },
+        { clue: "The baby is c_________. He might be hungry.", answer: "crying", image: "images/crying.jpg" },
+        { clue: "Eddy c ________ because he doesn't do well on the test.", answer: "cries", image: "images/cry.jpg" },
+        { clue: "Be polite when you t______ to your teacher.", answer: "talk", image: "images/talk.jpg" },
+        { clue: "We should not t______ to each other in class.", answer: "talk", image: "images/talk2.jpg" },
+        { clue: "May I w________ T______ after I finish my homework?", answer: "watch TV", image: "images/tv.jpg" },
+        { clue: "My dad likes to w______ T___ when he goes home.", answer: "watch TV", image: "images/tv2.jpg" },
+        { clue: "Who c_______ this chicken? It tasted very yummy.", answer: "cooked", image: "images/cook.jpg" },
+        { clue: "My mom always c_______ a lot of food for me.", answer: "cooks", image: "images/cook2.jpg" },
+        { clue: "Everybody please l____ ____ and wait for the teacher.", answer: "line up", image: "images/line-up.jpg" },
+        { clue: "There are many people ______ ____ in front of the restaurant.", answer: "line up", image: "images/line-up2.jpg" },
+        { clue: "I want to t_______ p__________ with him.", answer: "take pictures", image: "images/camera.jpg" },
+        { clue: "We use a camera to t_______ p__________.", answer: "take pictures", image: "images/camera2.jpg" },
+        { clue: "I r_____ ___ b______ to school.", answer: "ride a bike", image: "images/bike.jpg" },
+        { clue: "I w______ ___ n_____ when I was in class.", answer: "write a note", image: "images/note.jpg" },
+        { clue: "I like to r____.", answer: "run", image: "images/run.jpg" },
+        { clue: "Don't r_____ in the classroom.", answer: "run", image: "images/run2.jpg" },
+        { clue: "Before PE class, teacher tells us to j____.", answer: "jog", image: "images/jog.jpg" },
+        { clue: "It likes to s______ in the pool.", answer: "swim", image: "images/swim.jpg" },
+        { clue: "On Mother's Day, I h____ my mom to thank her.", answer: "hug", image: "images/hug.jpg" },
+        { clue: "At the end of the magic show, we c______ for the magician.", answer: "clap", image: "images/clap.jpg" },
+        { clue: "What a beautiful song! Please c______ for the singer.", answer: "clap", image: "images/clap2.jpg" }
+    ];
+
+    // 隨機選擇指定數量的題目
+    const shuffled = allQuestions.sort(() => 0.5 - Math.random());
+    magazineQuestions = shuffled.slice(0, count);
+}
+
+function loadMagazineQuestion(questionNumber) {
+    if (!magazineQuestions || questionNumber < 1 || questionNumber > magazineQuestions.length) {
+        return;
+    }
+
+    const question = magazineQuestions[questionNumber - 1];
+    const questionIndex = questionNumber - 1;
+
+    // 更新題目編號
+    document.getElementById('magazineQuestionNumber').textContent = questionNumber + '.';
+
+    // 更新題目內容
+    document.getElementById('magazineQuestionContent').textContent = question.clue;
+
+    // 更新題目圖片
+    const imageElement = document.getElementById('magazineQuestionImage');
+    const imageOverlay = document.querySelector('.image-overlay');
+
+    if (question.image && question.image !== '') {
+        imageElement.src = question.image;
+        imageElement.style.display = 'block';
+        imageOverlay.style.display = 'none';
+    } else {
+        imageElement.style.display = 'none';
+        imageOverlay.style.display = 'flex';
+    }
+
+    // 清空答案輸入框
+    document.getElementById('magazineAnswerInput').value = '';
+
+    // 隱藏答案反饋
+    document.getElementById('magazineAnswerFeedback').style.display = 'none';
+
+    // 更新導航按鈕狀態
+    updateMagazineNavigationButtons(questionNumber);
+
+         // 更新進度
+     updateMagazineProgress();
+ }
+
+function submitMagazineAnswer() {
+    const userAnswer = document.getElementById('magazineAnswerInput').value.trim().toLowerCase();
+    const currentQuestion = magazinePracticeConfig.currentQuestion;
+    const question = magazineQuestions[currentQuestion - 1];
+    
+    if (!userAnswer) {
+        alert('請輸入答案！');
+        return;
+    }
+    
+    const isCorrect = userAnswer === question.answer.toLowerCase();
+    const feedbackElement = document.getElementById('magazineAnswerFeedback');
+    
+    // 儲存用戶答案
+    magazinePracticeConfig.userAnswers[currentQuestion - 1] = userAnswer;
+    
+    // 更新統計
+    if (isCorrect) {
+        magazinePracticeConfig.correctAnswers++;
+        feedbackElement.className = 'answer-feedback correct';
+        feedbackElement.innerHTML = `<i class="fas fa-check-circle"></i> 正確！答案：${question.answer}`;
+    } else {
+        magazinePracticeConfig.incorrectAnswers++;
+        feedbackElement.className = 'answer-feedback incorrect';
+        feedbackElement.innerHTML = `<i class="fas fa-times-circle"></i> 錯誤！正確答案：${question.answer}`;
+    }
+    
+    feedbackElement.style.display = 'block';
+    
+    // 更新統計顯示
+    updateMagazineStats();
+    
+    // 檢查是否完成所有題目
+    if (currentQuestion === magazinePracticeConfig.totalQuestions) {
+        setTimeout(() => {
+            completeMagazinePractice();
+        }, 2000);
+    }
+}
+
+function updateMagazineNavigationButtons(currentQuestion) {
+    const prevBtn = document.querySelector('.magazine-navigation-buttons .prev-btn');
+    const nextBtn = document.querySelector('.magazine-navigation-buttons .next-btn');
+    
+    prevBtn.disabled = currentQuestion === 1;
+    nextBtn.disabled = currentQuestion === magazinePracticeConfig.totalQuestions;
+}
+
+function previousMagazineQuestion() {
+    if (magazinePracticeConfig.currentQuestion > 1) {
+        magazinePracticeConfig.currentQuestion--;
+        loadMagazineQuestion(magazinePracticeConfig.currentQuestion);
+    }
+}
+
+function nextMagazineQuestion() {
+    if (magazinePracticeConfig.currentQuestion < magazinePracticeConfig.totalQuestions) {
+        magazinePracticeConfig.currentQuestion++;
+        loadMagazineQuestion(magazinePracticeConfig.currentQuestion);
+    }
+}
+
+function goToMagazineQuestion() {
+    const questionNumber = parseInt(document.getElementById('magazineQuestionSelect').value);
+    magazinePracticeConfig.currentQuestion = questionNumber;
+    loadMagazineQuestion(questionNumber);
+}
+
+function updateMagazineQuestionSelector() {
+    const select = document.getElementById('magazineQuestionSelect');
+    const totalQuestions = document.getElementById('magazineTotalQuestions');
+    
     // 清空現有選項
-    questionSelect.innerHTML = '';
-
+    select.innerHTML = '';
+    
     // 添加新選項
-    for (let i = 1; i <= totalQuestions; i++) {
+    for (let i = 1; i <= magazinePracticeConfig.totalQuestions; i++) {
         const option = document.createElement('option');
         option.value = i;
         option.textContent = `第 ${i} 題`;
-        questionSelect.appendChild(option);
+        select.appendChild(option);
     }
-
+    
     // 更新總題數顯示
-    totalQuestionsSpan.textContent = `/ ${totalQuestions} 題`;
+    totalQuestions.textContent = `/ ${magazinePracticeConfig.totalQuestions} 題`;
 }
 
-// 載入題目
-function loadQuestion(questionNumber) {
-    const config = JSON.parse(localStorage.getItem('magazinePracticeConfig') || '{}');
-    const questionContent = document.getElementById('questionContent');
-    const progressFill = document.getElementById('progressFill');
-    const progressText = document.getElementById('progressText');
+function updateMagazineProgress() {
+    const currentQuestion = magazinePracticeConfig.currentQuestion;
+    const totalQuestions = magazinePracticeConfig.totalQuestions;
+    const progressPercentage = (currentQuestion / totalQuestions) * 100;
+    
+    // 更新進度條
+    document.getElementById('magazineProgressFill').style.width = progressPercentage + '%';
+    
+    // 更新進度文字
+    document.getElementById('magazineProgressText').textContent = `${currentQuestion} / ${totalQuestions}`;
+    
+    // 更新題目計數器
+    document.getElementById('magazineQuestionCounter').textContent = `第 ${currentQuestion} 題 / 共 ${totalQuestions} 題`;
+}
 
-    // 這裡可以從資料庫載入實際題目
-    // 目前使用範例題目
-    const sampleQuestions = generateSampleQuestions(config.totalQuestions);
-    const currentQuestion = sampleQuestions[questionNumber - 1];
+function updateMagazineStats() {
+    const correct = magazinePracticeConfig.correctAnswers;
+    const incorrect = magazinePracticeConfig.incorrectAnswers;
+    const total = correct + incorrect;
+    const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
+    
+    document.getElementById('magazineCorrectCount').textContent = correct;
+    document.getElementById('magazineIncorrectCount').textContent = incorrect;
+    document.getElementById('magazineAccuracyRate').textContent = accuracy + '%';
+}
 
-    // 更新題目內容
-    questionContent.innerHTML = `
-        <div class="question-text">
-            <h3>第 ${questionNumber} 題</h3>
-            <p class="question-prompt">${currentQuestion.prompt}</p>
-            <div class="question-example">
-                <p><strong>範例：</strong> ${currentQuestion.example}</p>
+function startMagazineTimer() {
+    magazineTimerId = setInterval(() => {
+        const now = new Date();
+        const elapsed = Math.floor((now - magazinePracticeConfig.startTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        
+        document.getElementById('magazineTimer').textContent = 
+            `時間：${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }, 1000);
+}
+
+function stopMagazineTimer() {
+    if (magazineTimerId) {
+        clearInterval(magazineTimerId);
+        magazineTimerId = null;
+    }
+}
+
+function completeMagazinePractice() {
+    stopMagazineTimer();
+    
+    // 計算總分
+    const totalQuestions = magazinePracticeConfig.totalQuestions;
+    const correctAnswers = magazinePracticeConfig.correctAnswers;
+    const score = Math.round((correctAnswers / totalQuestions) * 100);
+    
+    // 顯示完成訊息
+    const completionMessage = `
+        <div style="text-align: center; padding: 30px;">
+            <h2 style="color: #4CAF50; margin-bottom: 20px;">
+                <i class="fas fa-trophy"></i> 練習完成！
+            </h2>
+            <div style="background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                <p style="font-size: 18px; margin-bottom: 10px;">總分：<strong style="color: #4CAF50;">${score} 分</strong></p>
+                <p style="font-size: 16px; margin-bottom: 5px;">正確：${correctAnswers} 題</p>
+                <p style="font-size: 16px; margin-bottom: 5px;">錯誤：${totalQuestions - correctAnswers} 題</p>
+                <p style="font-size: 16px;">總題數：${totalQuestions} 題</p>
             </div>
+            <button onclick="closeMagazinePractice()" style="
+                background: #4CAF50; 
+                color: white; 
+                border: none; 
+                padding: 12px 25px; 
+                border-radius: 8px; 
+                font-size: 16px; 
+                cursor: pointer;
+                margin-top: 20px;
+            ">
+                <i class="fas fa-check"></i> 完成
+            </button>
         </div>
     `;
-
-    // 更新進度條
-    const progress = (questionNumber / config.totalQuestions) * 100;
-    progressFill.style.width = `${progress}%`;
-    progressText.textContent = `${questionNumber} / ${config.totalQuestions}`;
-
-    // 更新導航按鈕狀態
-    updateNavigationButtons(questionNumber, config.totalQuestions);
-
-    // 清空答案輸入框
-    document.getElementById('answerInput').value = '';
-    document.getElementById('answerInput').focus();
+    
+    // 替換題目內容區域
+    document.getElementById('magazineQuestionContainer').innerHTML = completionMessage;
+    
+    // 隱藏導航和統計
+    document.querySelector('.magazine-question-navigation').style.display = 'none';
+    document.querySelector('.magazine-navigation-buttons').style.display = 'none';
+    document.querySelector('.magazine-practice-stats').style.display = 'none';
 }
+
+// 添加鍵盤事件監聽
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' && document.getElementById('magazinePracticeModal').style.display === 'block') {
+        event.preventDefault();
+        submitMagazineAnswer();
+    }
+});
 
 // 生成範例題目
 function generateSampleQuestions(count) {
@@ -1625,48 +1912,6 @@ let practiceTimer = null;
 let userAnswers = [];
 let correctAnswers = 0;
 let incorrectAnswers = 0;
-
-// 雜誌練習題目（100題）
-const magazineQuestions = [
-    // 這裡將包含從 magazine practice.docx 匯入的100題
-    // 格式範例：
-    {
-        id: 1,
-        text: "The beautiful i___d is surrounded by crystal clear water.",
-        answer: "s",
-        fullWord: "island",
-        explanation: "island - 島嶼"
-    },
-    {
-        id: 2,
-        text: "She loves to r___d books in her free time.",
-        answer: "e",
-        fullWord: "read",
-        explanation: "read - 閱讀"
-    },
-    {
-        id: 3,
-        text: "The weather is w___m today, perfect for a picnic.",
-        answer: "a",
-        fullWord: "warm",
-        explanation: "warm - 溫暖的"
-    },
-    {
-        id: 4,
-        text: "He works as a t___r at the local school.",
-        answer: "e",
-        fullWord: "teacher",
-        explanation: "teacher - 老師"
-    },
-    {
-        id: 5,
-        text: "The movie was very e___y to understand.",
-        answer: "a",
-        fullWord: "easy",
-        explanation: "easy - 容易的"
-    }
-    // ... 繼續添加剩餘95題
-];
 
 
 

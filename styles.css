@@ -3560,3 +3560,406 @@ body {
         margin: 0 15px 15px 15px;
     }
 }
+
+/* 雜誌單字練習題頁面樣式 */
+.magazine-practice-content {
+    max-width: 1200px;
+    max-height: 95vh;
+    overflow-y: auto;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 0;
+    position: relative;
+}
+
+.practice-header {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px 30px;
+    border-radius: 20px 20px 0 0;
+}
+
+.practice-title h2 {
+    margin: 0 0 15px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+}
+
+.practice-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.question-counter, .timer {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* 題目導航樣式 */
+.magazine-question-navigation {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.question-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.question-selector label {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.question-selector select {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.question-selector select option {
+    background: #667eea;
+    color: white;
+}
+
+.total-questions {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.progress-indicator {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.progress-text {
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 60px;
+}
+
+/* 題目內容區域樣式 */
+.magazine-question-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 30px;
+    min-height: 400px;
+}
+
+.question-image-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.question-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.image-placeholder {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.image-placeholder i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.image-placeholder p {
+    font-size: 16px;
+    margin: 0;
+}
+
+/* 題目文字區域樣式 */
+.question-text-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.question-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.question-number {
+    background: #4CAF50;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.question-type {
+    font-size: 16px;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.question-content {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    border-left: 4px solid #4CAF50;
+}
+
+.answer-section {
+    margin-bottom: 20px;
+}
+
+.answer-section label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.answer-input-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.answer-input-container input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.answer-input-container input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.answer-input-container input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.submit-answer {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.submit-answer:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+/* 答案反饋樣式 */
+.answer-feedback {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-weight: 500;
+    display: none;
+}
+
+.answer-feedback.correct {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    color: #4CAF50;
+}
+
+.answer-feedback.incorrect {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.4);
+    color: #f44336;
+}
+
+/* 導航按鈕樣式 */
+.magazine-navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 練習統計樣式 */
+.magazine-practice-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.stat-item i {
+    font-size: 18px;
+}
+
+.stat-item:first-child i {
+    color: #4CAF50;
+}
+
+.stat-item:nth-child(2) i {
+    color: #f44336;
+}
+
+.stat-item:last-child i {
+    color: #2196F3;
+}
+
+/* 完成按鈕樣式 */
+.magazine-completion-section {
+    padding: 20px 30px 30px;
+    text-align: center;
+}
+
+.complete-practice {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.complete-practice:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* 雜誌練習題響應式設計 */
+@media (max-width: 768px) {
+    .magazine-question-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .image-container {
+        height: 200px;
+    }
+    
+    .practice-info {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .magazine-navigation-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .magazine-practice-stats {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+}
