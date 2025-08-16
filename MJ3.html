@@ -38,6 +38,22 @@
             font-size: 24px;
         }
 
+        .question-image {
+            margin: 20px auto;
+            width: 400px;
+            height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            font-size: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
         input[type="text"] {
             padding: 10px;
             width: 250px;
@@ -111,6 +127,7 @@
     <div class="quiz-box">
         <div class="question-header" id="question-number"></div>
         <div class="question-content" id="question-text"></div>
+        <div id="question-image" class="question-image"></div>
         <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
         <br />
         <button id="submitBtn" onclick="manualSubmit()">Submit</button>
@@ -261,6 +278,18 @@
         function loadQuestion() {
             document.getElementById("question-number").textContent = `${current + 1}. 字義填空`;
             document.getElementById("question-text").textContent = questions[current].clue;
+
+            // 顯示相關圖片
+            const imageElement = document.getElementById("question-image");
+            const imageData = getImagePath(questions[current].clue);
+            if (imageData) {
+                imageElement.textContent = imageData.emoji;
+                imageElement.style.background = imageData.bg;
+                imageElement.style.display = "flex";
+            } else {
+                imageElement.style.display = "none";
+            }
+
             document.getElementById("answer").value = userAnswers[current] || "";
             document.getElementById("feedback").textContent = "";
             document.getElementById("scoreboard").textContent = "";
@@ -268,6 +297,43 @@
             document.getElementById("questionSelect").value = current;
             document.getElementById("answer").style.display = "inline-block";
             document.getElementById("submitBtn").style.display = "inline-block";
+        }
+
+        function getImagePath(clue) {
+            // 根據題目內容匹配圖片和emoji
+            const imageMap = {
+                'park': { emoji: '🏞️', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'playground': { emoji: '🎠', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'office': { emoji: '🏢', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'zoo': { emoji: '🦁', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'doll': { emoji: '🎎', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'cards': { emoji: '🃏', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'robot': { emoji: '🤖', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'video games': { emoji: '🎮', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'kite': { emoji: '🪁', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'taiwan': { emoji: '🇹🇼', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'weather': { emoji: '🌤️', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'face': { emoji: '😊', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'hands': { emoji: '👐', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'magician': { emoji: '🎩', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'doctor': { emoji: '👨‍⚕️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'flowers': { emoji: '🌸', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'museum': { emoji: '🏛️', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'camera': { emoji: '📷', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'bike': { emoji: '🚴', bg: 'linear-gradient(45deg, #3F51B5, #303F9F)' },
+                'run': { emoji: '🏃', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'swim': { emoji: '🏊', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'hug': { emoji: '🤗', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'clap': { emoji: '👏', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' }
+            };
+
+            const clueLower = clue.toLowerCase();
+            for (const [keyword, data] of Object.entries(imageMap)) {
+                if (clueLower.includes(keyword)) {
+                    return data;
+                }
+            }
+            return null;
         }
 
         function saveAnswer() {

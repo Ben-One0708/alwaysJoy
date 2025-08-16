@@ -57,9 +57,20 @@ class SupabaseClientService {
     // 儲存成績
     async saveScore(scoreData) {
         try {
+            // 確保scoreData包含必要欄位
+            const scoreRecord = {
+                studentName: scoreData.studentName || 'Anonymous',
+                quizType: scoreData.quizType || 'unknown',
+                score: scoreData.score || 0,
+                totalQuestions: scoreData.totalQuestions || 0,
+                percentage: scoreData.percentage || 0,
+                date: scoreData.date || new Date().toISOString(),
+                details: scoreData.details || {}
+            };
+
             const { data, error } = await this.supabase
                 .from('scores')
-                .insert([scoreData])
+                .insert([scoreRecord])
                 .select()
                 .single();
 

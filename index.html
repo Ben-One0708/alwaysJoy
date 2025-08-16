@@ -484,7 +484,7 @@
             <!-- 練習選項網格 -->
             <div class="magazine-options-grid">
                 <!-- 1~36題選項 -->
-                <div class="magazine-option-card" onclick="startMagazinePractice(36)">
+                <div class="magazine-option-card" onclick="openVocabularyQuiz('part1')">
                     <div class="option-content">
                         <div class="option-main-text">1~36題</div>
                         <div class="option-sub-text">基礎練習</div>
@@ -494,10 +494,10 @@
                     </div>
                 </div>
 
-                <!-- 1~72題選項 -->
-                <div class="magazine-option-card" onclick="startMagazinePractice(72)">
+                <!-- 37~72題選項 -->
+                <div class="magazine-option-card" onclick="openVocabularyQuiz('part2')">
                     <div class="option-content">
-                        <div class="option-main-text">1~72題</div>
+                        <div class="option-main-text">37~72題</div>
                         <div class="option-sub-text">進階練習</div>
                     </div>
                     <div class="option-button">
@@ -505,8 +505,19 @@
                     </div>
                 </div>
 
-                <!-- 1~108題選項 -->
-                <div class="magazine-option-card" onclick="startMagazinePractice(108)">
+                <!-- 73~108題選項 -->
+                <div class="magazine-option-card" onclick="openVocabularyQuiz('part3')">
+                    <div class="option-content">
+                        <div class="option-main-text">73~108題</div>
+                        <div class="option-sub-text">高級練習</div>
+                    </div>
+                    <div class="option-button">
+                        <span class="button-text">開始練習</span>
+                    </div>
+                </div>
+
+                <!-- 1~108題完整選項 -->
+                <div class="magazine-option-card" onclick="openVocabularyQuiz('full')">
                     <div class="option-content">
                         <div class="option-main-text">1~108題</div>
                         <div class="option-sub-text">完整練習</div>

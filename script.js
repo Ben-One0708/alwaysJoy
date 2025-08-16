@@ -1126,6 +1126,41 @@ function startMagazinePractice(questionCount) {
     startMagazineTimer();
 }
 
+// 開啟詞彙填空遊戲
+function openVocabularyQuiz(part) {
+    // 關閉選擇模態框
+    closeModal('magazineSelectionModal');
+
+    // 獲取當前學生資訊
+    const currentStudent = getCurrentStudent() || 'Anonymous';
+
+    // 根據部分選擇對應的文件
+    let quizFile = '';
+    switch (part) {
+        case 'part1':
+            quizFile = 'vocabulary_quiz_part1.html';
+            break;
+        case 'part2':
+            quizFile = 'vocabulary_quiz_part2.html';
+            break;
+        case 'part3':
+            quizFile = 'vocabulary_quiz_part3.html';
+            break;
+        case 'full':
+            quizFile = 'vocabulary_quiz_full.html';
+            break;
+        default:
+            console.error('Invalid part:', part);
+            return;
+    }
+
+    // 添加學生資訊到URL參數
+    const urlWithParams = `${quizFile}?student=${encodeURIComponent(currentStudent)}`;
+
+    // 在當前頁面開啟
+    window.location.href = urlWithParams;
+}
+
 function openMagazinePracticeModal() {
     document.getElementById('magazinePracticeModal').style.display = 'block';
 
@@ -1287,26 +1322,26 @@ function loadMagazineQuestion(questionNumber) {
     // 更新導航按鈕狀態
     updateMagazineNavigationButtons(questionNumber);
 
-         // 更新進度
-     updateMagazineProgress();
- }
+    // 更新進度
+    updateMagazineProgress();
+}
 
 function submitMagazineAnswer() {
     const userAnswer = document.getElementById('magazineAnswerInput').value.trim().toLowerCase();
     const currentQuestion = magazinePracticeConfig.currentQuestion;
     const question = magazineQuestions[currentQuestion - 1];
-    
+
     if (!userAnswer) {
         alert('請輸入答案！');
         return;
     }
-    
+
     const isCorrect = userAnswer === question.answer.toLowerCase();
     const feedbackElement = document.getElementById('magazineAnswerFeedback');
-    
+
     // 儲存用戶答案
     magazinePracticeConfig.userAnswers[currentQuestion - 1] = userAnswer;
-    
+
     // 更新統計
     if (isCorrect) {
         magazinePracticeConfig.correctAnswers++;
@@ -1317,12 +1352,12 @@ function submitMagazineAnswer() {
         feedbackElement.className = 'answer-feedback incorrect';
         feedbackElement.innerHTML = `<i class="fas fa-times-circle"></i> 錯誤！正確答案：${question.answer}`;
     }
-    
+
     feedbackElement.style.display = 'block';
-    
+
     // 更新統計顯示
     updateMagazineStats();
-    
+
     // 檢查是否完成所有題目
     if (currentQuestion === magazinePracticeConfig.totalQuestions) {
         setTimeout(() => {
@@ -1334,7 +1369,7 @@ function submitMagazineAnswer() {
 function updateMagazineNavigationButtons(currentQuestion) {
     const prevBtn = document.querySelector('.magazine-navigation-buttons .prev-btn');
     const nextBtn = document.querySelector('.magazine-navigation-buttons .next-btn');
-    
+
     prevBtn.disabled = currentQuestion === 1;
     nextBtn.disabled = currentQuestion === magazinePracticeConfig.totalQuestions;
 }
@@ -1362,10 +1397,10 @@ function goToMagazineQuestion() {
 function updateMagazineQuestionSelector() {
     const select = document.getElementById('magazineQuestionSelect');
     const totalQuestions = document.getElementById('magazineTotalQuestions');
-    
+
     // 清空現有選項
     select.innerHTML = '';
-    
+
     // 添加新選項
     for (let i = 1; i <= magazinePracticeConfig.totalQuestions; i++) {
         const option = document.createElement('option');
@@ -1373,7 +1408,7 @@ function updateMagazineQuestionSelector() {
         option.textContent = `第 ${i} 題`;
         select.appendChild(option);
     }
-    
+
     // 更新總題數顯示
     totalQuestions.textContent = `/ ${magazinePracticeConfig.totalQuestions} 題`;
 }
@@ -1382,13 +1417,13 @@ function updateMagazineProgress() {
     const currentQuestion = magazinePracticeConfig.currentQuestion;
     const totalQuestions = magazinePracticeConfig.totalQuestions;
     const progressPercentage = (currentQuestion / totalQuestions) * 100;
-    
+
     // 更新進度條
     document.getElementById('magazineProgressFill').style.width = progressPercentage + '%';
-    
+
     // 更新進度文字
     document.getElementById('magazineProgressText').textContent = `${currentQuestion} / ${totalQuestions}`;
-    
+
     // 更新題目計數器
     document.getElementById('magazineQuestionCounter').textContent = `第 ${currentQuestion} 題 / 共 ${totalQuestions} 題`;
 }
@@ -1398,7 +1433,7 @@ function updateMagazineStats() {
     const incorrect = magazinePracticeConfig.incorrectAnswers;
     const total = correct + incorrect;
     const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
-    
+
     document.getElementById('magazineCorrectCount').textContent = correct;
     document.getElementById('magazineIncorrectCount').textContent = incorrect;
     document.getElementById('magazineAccuracyRate').textContent = accuracy + '%';
@@ -1410,8 +1445,8 @@ function startMagazineTimer() {
         const elapsed = Math.floor((now - magazinePracticeConfig.startTime) / 1000);
         const minutes = Math.floor(elapsed / 60);
         const seconds = elapsed % 60;
-        
-        document.getElementById('magazineTimer').textContent = 
+
+        document.getElementById('magazineTimer').textContent =
             `時間：${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }, 1000);
 }
@@ -1425,12 +1460,12 @@ function stopMagazineTimer() {
 
 function completeMagazinePractice() {
     stopMagazineTimer();
-    
+
     // 計算總分
     const totalQuestions = magazinePracticeConfig.totalQuestions;
     const correctAnswers = magazinePracticeConfig.correctAnswers;
     const score = Math.round((correctAnswers / totalQuestions) * 100);
-    
+
     // 顯示完成訊息
     const completionMessage = `
         <div style="text-align: center; padding: 30px;">
@@ -1457,10 +1492,10 @@ function completeMagazinePractice() {
             </button>
         </div>
     `;
-    
+
     // 替換題目內容區域
     document.getElementById('magazineQuestionContainer').innerHTML = completionMessage;
-    
+
     // 隱藏導航和統計
     document.querySelector('.magazine-question-navigation').style.display = 'none';
     document.querySelector('.magazine-navigation-buttons').style.display = 'none';
@@ -1468,7 +1503,7 @@ function completeMagazinePractice() {
 }
 
 // 添加鍵盤事件監聽
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
     if (event.key === 'Enter' && document.getElementById('magazinePracticeModal').style.display === 'block') {
         event.preventDefault();
         submitMagazineAnswer();
