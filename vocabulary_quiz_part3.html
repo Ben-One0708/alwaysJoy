@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>詞彙填空遊戲 - 第三部分 (73-108題)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 30px;
+            text-align: center;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .quiz-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            width: 700px;
+            height: 600px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .question-header {
+            text-align: left;
+            font-size: 22px;
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question-number-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-image {
+            margin: 20px auto;
+            width: 450px;
+            height: 350px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: block;
+            object-fit: contain;
+            background-color: #f8f9fa;
+        }
+
+        .question-content {
+            margin-top: 20px;
+            font-size: 28px;
+            line-height: 1.4;
+        }
+
+        .answer-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            width: 280px;
+            font-size: 22px;
+            text-align: center;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .scoreboard {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .answers {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .nav-panel {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 5px 10px;
+            border: 2px solid #ff6b81;
+            border-radius: 4px;
+            background-color: white;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .word-definition {
+            margin-top: 15px;
+            font-size: 20px;
+            color: #666;
+            font-style: italic;
+            line-height: 1.3;
+        }
+
+        .return-button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .return-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 動畫效果 */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="goToPage('index.html')" class="back-button">← 回上一頁</button>
+
+    <div class="quiz-box">
+        <div class="question-header">
+            <div class="question-number-badge" id="question-number-badge">Q</div>
+            <span id="question-number"></span>
+        </div>
+        <img id="question-image" class="question-image" alt="Question Image" />
+        <div class="question-content" id="question-text"></div>
+        <div class="answer-container">
+            <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+            <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+        <div class="scoreboard" id="scoreboard"></div>
+        <div class="answers" id="answers" style="display: none;"></div>
+        <div class="nav-panel">
+            <label for="questionSelect">跳題：</label>
+            <select id="questionSelect" onchange="jumpToQuestion()"></select>
+        </div>
+        <button id="returnBtn" class="return-button" onclick="goToPage('index.html')"
+            style="display: none;">返回雜誌練習</button>
+    </div>
+
+    <script>
+        const questions = [
+            { clue: "This a_____a of the city is very busy.", definition: "area (n.) 區域", answer: "area", image: "image/73.png" },
+            { clue: "Camels can walk for days in the d_____t without water.", definition: "desert (n.) 沙漠", answer: "desert", image: "image/74.png" },
+            { clue: "The a_____t castle is over a thousand years old.", definition: "ancient (adj.) 古代的", answer: "ancient", image: "image/75.png" },
+            { clue: "People climb lots of s_____s to reach the palace.", definition: "stair (n.) 階梯", answer: "stairs", image: "image/76.png" },
+            { clue: "They b_____e the story about the lost treasure.", definition: "believe (v.) 相信", answer: "believe", image: "image/77.png" },
+            { clue: "The dates are f_____h and sweet.", definition: "fresh (adj.) 新鮮的", answer: "fresh", image: "image/78.png" },
+            { clue: "The man uses a net to c_____h fish.", definition: "catch (v.) 抓住", answer: "catch", image: "image/79.png" },
+            { clue: "Billy has a great i_____a for the school party.", definition: "idea (n.) 點子 ; 想法", answer: "idea", image: "image/80.png" },
+            { clue: "Every winter, the birds r_____n to the warm south.", definition: "return (v.) 返回", answer: "return", image: "image/81.png" },
+            { clue: "Mom can't f_____d her cellphone. Do you see it anywhere?", definition: "find (v.) 找到", answer: "find", image: "image/82.png" },
+            { clue: "I can't h_____r you. Can you speak up, please?", definition: "hear (v.) 聽見", answer: "hear", image: "image/83.png" },
+            { clue: "The sand is s_____t.", definition: "soft (adj.) 柔軟的", answer: "soft", image: "image/84.png" },
+            { clue: "There are many w_____d animals in the forest.", definition: "wild (adj.) 野生的", answer: "wild", image: "image/85.png" },
+            { clue: "We enjoy walking on the p_____s in the garden.", definition: "path (n.) 小徑", answer: "paths", image: "image/86.png" },
+            { clue: "You can r_____h the station by bike in ten minutes.", definition: "reach (v.) 到達", answer: "reach", image: "image/87.png" },
+            { clue: "The road is very w_____e, so cars can drive fast.", definition: "wide (adj.) 寬的", answer: "wide", image: "image/88.png" },
+            { clue: "A monkey is sitting on the b_____h.", definition: "branch (n.) 樹枝", answer: "branch", image: "image/89.png" },
+            { clue: "The old m_____r teaches the young boy to paint.", definition: "master (n.) 大師", answer: "master", image: "image/90.png" },
+            { clue: "This ring is very p_____s to my grandmother.", definition: "precious (adj.) 珍貴的", answer: "precious", image: "image/91.png" },
+            { clue: "Typing 20 words in a minute is s_____w.", definition: "slow (adj.) 慢的", answer: "slow", image: "image/92.png" },
+            { clue: "The fish soup t_____s good.", definition: "taste (v.) 品嚐", answer: "tastes", image: "image/93.png" },
+            { clue: "The class is English. The n_____t class is math.", definition: "next (adj.) 下一個的", answer: "next", image: "image/94.png" },
+            { clue: "The soldiers are a_____g the castle.", definition: "attach (v.) 攻擊", answer: "attacking", image: "image/95.png" },
+            { clue: "I sometimes have a d_____m about flying.", definition: "dream (n.) 夢境", answer: "dream", image: "image/96.png" },
+            { clue: "Please don't s_____p on the grass.", definition: "step (v.) 踏", answer: "step", image: "image/97.png" },
+            { clue: "We plan to camp in the v_____y and watch the sunrise.", definition: "valley (n.) 山谷", answer: "valley", image: "image/98.png" },
+            { clue: "The w_____e is the largest animal in the world.", definition: "whale (n.) 鯨魚", answer: "whale", image: "image/99.png" },
+            { clue: "The heart is a s_____l of love.", definition: "symbol (n.) 象徵", answer: "symbol", image: "image/100.png" },
+            { clue: "The w_____s today are too strong for swimming.", definition: "wave (n.) 波浪", answer: "waves", image: "image/101.png" },
+            { clue: "We need a h_____r to hit the nail into the wall.", definition: "hammer (n.) 槌子", answer: "hammer", image: "image/102.png" },
+            { clue: "Let's s_____l across the lake on my boat.", definition: "sail (v.) 航行", answer: "sail", image: "image/103.png" },
+            { clue: "Today is a s_____l day because it's my twentieth birthday.", definition: "special (adj.) 特別的", answer: "special", image: "image/104.png" },
+            { clue: "Marujo m_____s 'sailor' in Portuguese.", definition: "mean (v.) 意思是", answer: "means", image: "image/105.png" },
+            { clue: "Mary could be a great a_____t because she paints very well.", definition: "artist (n.) 藝術家", answer: "artist", image: "image/106.png" },
+            { clue: "We must take care of the e_____h.", definition: "earth (n.) 地球", answer: "earth", image: "image/107.png" },
+            { clue: "I t_____k about my grandpa when I feel sad.", definition: "think (v.) 想", answer: "think", image: "image/108.png" }
+        ];
+
+        let current = 0;
+        let userAnswers = Array(questions.length).fill("");
+
+        window.onload = () => {
+            const select = document.getElementById("questionSelect");
+            questions.forEach((_, i) => {
+                const option = document.createElement("option");
+                option.value = i;
+                option.text = `題目 ${i + 73}`;
+                select.appendChild(option);
+            });
+            loadQuestion();
+        };
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                saveAnswer();
+                nextQuestion();
+            }
+        });
+
+        function goToPage(url) {
+            if (url === 'index.html') {
+                // 返回主頁面
+                window.history.back();
+            } else {
+                window.location.href = url;
+            }
+        }
+
+        function manualSubmit() {
+            saveAnswer();
+            nextQuestion();
+        }
+
+        function loadQuestion() {
+            document.getElementById("question-number-badge").textContent = current + 73;
+            document.getElementById("question-number").textContent = "";
+            document.getElementById("question-text").textContent = questions[current].clue;
+            document.getElementById("question-image").src = questions[current].image;
+            document.getElementById("answer").value = userAnswers[current] || "";
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("scoreboard").textContent = "";
+            document.getElementById("answers").style.display = "none";
+            document.getElementById("questionSelect").value = current;
+            document.getElementById("answer").style.display = "inline-block";
+            document.getElementById("submitBtn").style.display = "inline-block";
+            document.getElementById("returnBtn").style.display = "none";
+        }
+
+        function saveAnswer() {
+            const input = document.getElementById("answer").value.trim().toLowerCase();
+            userAnswers[current] = input;
+        }
+
+        function nextQuestion() {
+            if (current < questions.length - 1) {
+                current++;
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function jumpToQuestion() {
+            saveAnswer();
+            current = parseInt(document.getElementById("questionSelect").value);
+            loadQuestion();
+        }
+
+        function showFinalResult() {
+            document.getElementById("question-number-badge").textContent = "🎉";
+            document.getElementById("question-number").textContent = "";
+            document.getElementById("question-text").textContent = "";
+            document.getElementById("question-image").style.display = "none";
+            document.getElementById("answer").style.display = "none";
+            document.getElementById("submitBtn").style.display = "none";
+            document.getElementById("feedback").textContent = "";
+
+            const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+            document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}`;
+
+            const answerBox = document.getElementById("answers");
+            answerBox.style.display = "block";
+            answerBox.innerHTML = "<h3>🧠 正確答案：</h3><ol>" +
+                questions.map((q, i) => {
+                    const ua = userAnswers[i] || "(未作答)";
+                    const ok = ua === q.answer;
+                    return `<li><strong>${q.clue}</strong><br>
+                      ${q.definition}<br>
+                      你的答案：<strong>${ua}</strong> ${ok ? '✅' : '❌'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                }).join("") + "</ol>";
+
+            document.getElementById("returnBtn").style.display = "inline-block";
+        }
+
+        function getGrade(score) {
+            const pct = (score / questions.length) * 100;
+            if (pct === 100) return "🎓 Perfect! Great job!";
+            if (pct >= 90) return "🌟 Excellent!";
+            if (pct >= 80) return "👍 Very Good!";
+            if (pct >= 70) return "👍 Good work!";
+            if (pct >= 60) return "📝 Keep practicing!";
+            return "📚 Need more practice!";
+        }
+    </script>
+
+    <!-- Supabase整合 -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="api-supabase-client.js"></script>
+    <script>
+        // 詞彙練習完成後儲存分數到Supabase
+        async function saveVocabularyScore(score, totalQuestions, quizType) {
+            try {
+                // 獲取當前學生資訊（從URL參數或localStorage）
+                const urlParams = new URLSearchParams(window.location.search);
+                const studentName = urlParams.get('student') || localStorage.getItem('currentStudent') || 'Anonymous';
+
+                const scoreData = {
+                    studentName: studentName,
+                    quizType: quizType, // 'vocabulary_part1', 'vocabulary_part2', etc.
+                    score: score,
+                    totalQuestions: totalQuestions,
+                    percentage: Math.round((score / totalQuestions) * 100),
+                    date: new Date().toISOString(),
+                    details: {
+                        correctAnswers: score,
+                        totalQuestions: totalQuestions,
+                        userAnswers: userAnswers,
+                        questions: questions.map(q => ({
+                            clue: q.clue,
+                            answer: q.answer,
+                            image: q.image
+                        }))
+                    }
+                };
+
+                // 儲存到Supabase
+                if (window.apiService) {
+                    const result = await window.apiService.saveScore(scoreData);
+                    console.log('分數已儲存到Supabase:', result);
+
+                    // 顯示成功訊息
+                    showScoreSavedMessage();
+                } else {
+                    console.warn('Supabase API服務未載入，儲存到本地儲存');
+                    // 備用：儲存到本地儲存
+                    const existingScores = JSON.parse(localStorage.getItem('vocabularyScores') || '[]');
+                    existingScores.push(scoreData);
+                    localStorage.setItem('vocabularyScores', JSON.stringify(existingScores));
+                }
+            } catch (error) {
+                console.error('儲存分數時發生錯誤:', error);
+                // 備用：儲存到本地儲存
+                const scoreData = {
+                    studentName: 'Anonymous',
+                    quizType: quizType,
+                    score: score,
+                    totalQuestions: totalQuestions,
+                    percentage: Math.round((score / totalQuestions) * 100),
+                    date: new Date().toISOString()
+                };
+                const existingScores = JSON.parse(localStorage.getItem('vocabularyScores') || '[]');
+                existingScores.push(scoreData);
+                localStorage.setItem('vocabularyScores', JSON.stringify(existingScores));
+            }
+        }
+
+        // 顯示分數已儲存訊息
+        function showScoreSavedMessage() {
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideInRight 0.3s ease-out;
+                font-weight: 600;
+            `;
+            messageDiv.innerHTML = '<i class="fas fa-check"></i> 分數已自動儲存到資料庫！';
+            document.body.appendChild(messageDiv);
+
+            setTimeout(() => {
+                messageDiv.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.parentNode.removeChild(messageDiv);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // 修改showFinalResult函數以包含分數儲存
+        const originalShowFinalResult = showFinalResult;
+        showFinalResult = function () {
+            originalShowFinalResult();
+
+            // 計算分數並儲存
+            const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+            saveVocabularyScore(score, questions.length, 'vocabulary_part3');
+        };
+    </script>
+</body>
+
+</html>
