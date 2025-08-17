@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annie成績調試工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .debug-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .debug-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .debug-btn:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .score-form {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        .form-group label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Annie成績調試工具</h1>
+    
+    <div class="debug-container">
+        <h2>📊 檢查Annie的成績記錄</h2>
+        <button class="debug-btn" onclick="checkAnnieScores()">檢查Annie的所有成績</button>
+        <button class="debug-btn" onclick="checkAllScores()">檢查所有成績記錄</button>
+        <button class="debug-btn" onclick="checkAnnieLogin()">測試Annie登入</button>
+        <div id="debugResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="debug-container">
+        <h2>📝 手動為Annie添加成績</h2>
+        <div class="score-form">
+            <div class="form-group">
+                <label>學生姓名：</label>
+                <input type="text" id="annieName" value="教務組 Annie" readonly>
+            </div>
+            <div class="form-group">
+                <label>練習類型：</label>
+                <select id="annieQuizType">
+                    <option value="vocabulary_part1">雜誌單字練習 (1-36題)</option>
+                    <option value="vocabulary_part2">雜誌單字練習 (37-72題)</option>
+                    <option value="vocabulary_part3">雜誌單字練習 (73-108題)</option>
+                    <option value="vocabulary_full">雜誌單字練習 (完整版)</option>
+                    <option value="spelling_practice">拼字練習</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>分數：</label>
+                <input type="number" id="annieScore" value="85" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label>總題數：</label>
+                <input type="number" id="annieTotalQuestions" value="36">
+            </div>
+            <button class="debug-btn" onclick="addAnnieScore()">為Annie添加成績</button>
+        </div>
+        <div id="addScoreResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="debug-container">
+        <h2>🔧 資料庫連接測試</h2>
+        <button class="debug-btn" onclick="testConnection()">測試資料庫連接</button>
+        <button class="debug-btn" onclick="checkTableStructure()">檢查表結構</button>
+        <div id="dbResult" class="result" style="display: none;"></div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="api-supabase-client.js"></script>
+    <script>
+        // 檢查Annie的成績記錄
+        async function checkAnnieScores() {
+            const resultDiv = document.getElementById('debugResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在檢查Annie的成績記錄...';
+
+            try {
+                const scores = await window.apiService.getStudentScores('教務組 Annie');
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ Annie的成績記錄：\n\n總共 ${scores.length} 筆記錄\n\n${scores.map(s => 
+                    `ID: ${s.id}\n練習類型: ${s.quiztype}\n分數: ${s.score}/${s.totalquestions} (${s.percentage}%)\n時間: ${new Date(s.date).toLocaleString()}\n---`
+                ).join('\n')}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 檢查Annie成績失敗：${error.message}`;
+            }
+        }
+
+        // 檢查所有成績記錄
+        async function checkAllScores() {
+            const resultDiv = document.getElementById('debugResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在檢查所有成績記錄...';
+
+            try {
+                const scores = await window.apiService.getAllScores();
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 所有成績記錄：\n\n總共 ${scores.length} 筆記錄\n\n${scores.slice(0, 10).map(s => 
+                    `學生: ${s.studentname}\n練習類型: ${s.quiztype}\n分數: ${s.score}/${s.totalquestions} (${s.percentage}%)\n時間: ${new Date(s.date).toLocaleString()}\n---`
+                ).join('\n')}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 檢查所有成績失敗：${error.message}`;
+            }
+        }
+
+        // 測試Annie登入
+        async function checkAnnieLogin() {
+            const resultDiv = document.getElementById('debugResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在測試Annie登入...';
+
+            try {
+                const result = await window.apiService.login('教務組 Annie', 'Annie');
+                if (result.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ Annie登入成功！\n\n學生資訊：\n姓名: ${result.student.name}\n組別: ${result.student.group}\n等級: ${result.student.level}\n管理員: ${result.student.isAdmin}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `❌ Annie登入失敗：${result.error}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ Annie登入錯誤：${error.message}`;
+            }
+        }
+
+        // 為Annie添加成績
+        async function addAnnieScore() {
+            const resultDiv = document.getElementById('addScoreResult');
+            const studentName = document.getElementById('annieName').value;
+            const quizType = document.getElementById('annieQuizType').value;
+            const score = parseInt(document.getElementById('annieScore').value);
+            const totalQuestions = parseInt(document.getElementById('annieTotalQuestions').value);
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在為Annie添加成績...';
+
+            try {
+                const scoreData = {
+                    studentName: studentName,
+                    quizType: quizType,
+                    score: score,
+                    totalQuestions: totalQuestions,
+                    percentage: Math.round((score / totalQuestions) * 100),
+                    date: new Date().toISOString(),
+                    details: { debug_test: true }
+                };
+
+                const result = await window.apiService.saveScore(scoreData);
+                if (result.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ Annie成績添加成功！\n\n成績詳情：\nID: ${result.score.id}\n學生: ${result.score.studentname}\n練習類型: ${result.score.quiztype}\n分數: ${result.score.score}/${result.score.totalquestions} (${result.score.percentage}%)\n時間: ${new Date(result.score.date).toLocaleString()}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = '❌ Annie成績添加失敗';
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 添加成績錯誤：${error.message}`;
+            }
+        }
+
+        // 測試資料庫連接
+        async function testConnection() {
+            const resultDiv = document.getElementById('dbResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在測試資料庫連接...';
+
+            try {
+                const result = await window.apiService.testConnection();
+                if (result) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = '✅ 資料庫連接正常！';
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = '❌ 資料庫連接失敗';
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 連接錯誤：${error.message}`;
+            }
+        }
+
+        // 檢查表結構
+        async function checkTableStructure() {
+            const resultDiv = document.getElementById('dbResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在檢查表結構...';
+
+            try {
+                // 嘗試查詢表結構
+                const { data: students, error: studentsError } = await window.apiService.supabase
+                    .from('students')
+                    .select('*')
+                    .limit(1);
+
+                const { data: scores, error: scoresError } = await window.apiService.supabase
+                    .from('scores')
+                    .select('*')
+                    .limit(1);
+
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 表結構檢查完成！\n\nstudents表: ${studentsError ? '錯誤' : '正常'}\nscores表: ${scoresError ? '錯誤' : '正常'}\n\nstudents欄位: ${students && students.length > 0 ? Object.keys(students[0]).join(', ') : '無資料'}\nscores欄位: ${scores && scores.length > 0 ? Object.keys(scores[0]).join(', ') : '無資料'}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 表結構檢查錯誤：${error.message}`;
+            }
+        }
+
+        // 頁面載入時檢查API服務
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.apiService) {
+                console.log('✅ 調試工具API服務已載入');
+            } else {
+                console.error('❌ 調試工具API服務載入失敗');
+            }
+        });
+    </script>
+</body>
+</html>

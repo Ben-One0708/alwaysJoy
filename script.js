@@ -2721,7 +2721,12 @@ function showAdminStudentsList() {
 
             <!-- 學生列表 -->
             <div class="admin-students-section">
-                <h3><i class="fas fa-list"></i> 學生列表</h3>
+                <div class="section-header">
+                    <h3><i class="fas fa-list"></i> 學生列表</h3>
+                    <button onclick="loadAdminData()" class="refresh-btn" title="刷新數據">
+                        <i class="fas fa-sync-alt"></i> 刷新
+                    </button>
+                </div>
                 <div class="students-filter">
                     <select id="groupFilter" onchange="filterStudents()">
                         <option value="">所有組別</option>
@@ -2752,32 +2757,118 @@ function showAdminStudentsList() {
 }
 
 // 載入管理員數據
-function loadAdminData() {
-    // 計算統計數據
-    const allStudents = Object.keys(students).filter(name => !students[name].isAdmin);
-    const totalStudents = allStudents.length;
+async function loadAdminData() {
+    try {
+        // 顯示載入狀態
+        document.getElementById('totalStudents').textContent = '載入中...';
+        document.getElementById('totalRecords').textContent = '載入中...';
+        document.getElementById('activeStudents').textContent = '載入中...';
 
-    // 計算總成績記錄
-    let totalRecords = 0;
-    let activeStudents = 0;
-    allStudents.forEach(studentName => {
-        const studentScores = JSON.parse(localStorage.getItem(`studentScores_${studentName}`) || '[]');
-        totalRecords += studentScores.length;
-        if (studentScores.length > 0) {
-            activeStudents++;
-        }
-    });
+        // 從Supabase獲取所有成績數據
+        const allScores = await window.apiService.getAllScores();
+        
+        // 獲取所有學生
+        const allStudents = Object.keys(students).filter(name => !students[name].isAdmin);
+        const totalStudents = allStudents.length;
 
-    // 更新統計顯示
-    document.getElementById('totalStudents').textContent = totalStudents;
-    document.getElementById('totalRecords').textContent = totalRecords;
-    document.getElementById('activeStudents').textContent = activeStudents;
+        // 計算統計數據
+        const totalRecords = allScores.length;
+        
+        // 計算活躍學生（有成績記錄的學生）
+        const studentsWithScores = new Set(allScores.map(score => score.studentname));
+        const activeStudents = studentsWithScores.size;
 
-    // 載入學生列表
-    loadStudentsList();
+        // 更新統計顯示
+        document.getElementById('totalStudents').textContent = totalStudents;
+        document.getElementById('totalRecords').textContent = totalRecords;
+        document.getElementById('activeStudents').textContent = activeStudents;
+
+        // 載入學生列表
+        await loadStudentsListWithScores(allScores);
+        
+    } catch (error) {
+        console.error('載入管理員數據失敗:', error);
+        // 顯示錯誤訊息
+        document.getElementById('totalStudents').textContent = '錯誤';
+        document.getElementById('totalRecords').textContent = '錯誤';
+        document.getElementById('activeStudents').textContent = '錯誤';
+    }
 }
 
-// 載入學生列表
+// 載入學生列表（使用Supabase數據）
+async function loadStudentsListWithScores(allScores, filterGroup = '') {
+    const studentsListContainer = document.getElementById('studentsList');
+    const allStudents = Object.keys(students).filter(name => !students[name].isAdmin);
+
+    // 調試：檢查數據
+    console.log('=== 管理員載入學生列表（Supabase） ===');
+    console.log('所有學生:', allStudents);
+    console.log('所有成績記錄:', allScores);
+
+    let filteredStudents = allStudents;
+    if (filterGroup) {
+        filteredStudents = allStudents.filter(name => students[name].group === filterGroup);
+    }
+
+    if (filteredStudents.length === 0) {
+        studentsListContainer.innerHTML = `
+            <div class="no-students">
+                <i class="fas fa-users-slash"></i>
+                <p>沒有找到學生</p>
+            </div>
+        `;
+        return;
+    }
+
+    const studentsHTML = filteredStudents.map(studentName => {
+        const studentInfo = students[studentName];
+        
+        // 從Supabase數據中獲取該學生的成績記錄
+        const studentScores = allScores.filter(score => score.studentname === studentName);
+        const recordCount = studentScores.length;
+
+        // 計算平均分數
+        let averageScore = 0;
+        if (studentScores.length > 0) {
+            const totalScore = studentScores.reduce((sum, record) => sum + record.percentage, 0);
+            averageScore = Math.round(totalScore / studentScores.length);
+        }
+
+        // 獲取最新成績記錄
+        const latestScore = studentScores.length > 0 ? studentScores[0] : null;
+        const latestDate = latestScore ? new Date(latestScore.date).toLocaleDateString() : '無記錄';
+
+        return `
+            <div class="student-card" onclick="viewStudentDetailsFromSupabase('${studentName}')">
+                <div class="student-info">
+                    <div class="student-name">${studentName}</div>
+                    <div class="student-group">${studentInfo.group} - ${studentInfo.level}</div>
+                </div>
+                <div class="student-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">記錄數</span>
+                        <span class="stat-value">${recordCount}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">平均分</span>
+                        <span class="stat-value">${averageScore}%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">最新記錄</span>
+                        <span class="stat-value">${latestDate}</span>
+                    </div>
+                </div>
+                <div class="student-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    studentsListContainer.innerHTML = studentsHTML;
+}
+
+// 載入學生列表（舊版本，保留作為備用）
 function loadStudentsList(filterGroup = '') {
     const studentsListContainer = document.getElementById('studentsList');
     const allStudents = Object.keys(students).filter(name => !students[name].isAdmin);
@@ -2857,7 +2948,66 @@ function loadStudentsList(filterGroup = '') {
 // 篩選學生
 function filterStudents() {
     const filterGroup = document.getElementById('groupFilter').value;
-    loadStudentsList(filterGroup);
+    // 重新載入數據並篩選
+    loadAdminData().then(() => {
+        if (filterGroup) {
+            const allStudents = Object.keys(students).filter(name => !students[name].isAdmin);
+            const filteredStudents = allStudents.filter(name => students[name].group === filterGroup);
+            // 這裡可以添加篩選邏輯
+        }
+    });
+}
+
+// 查看學生詳細資料（使用Supabase數據）
+async function viewStudentDetailsFromSupabase(studentName) {
+    try {
+        const studentInfo = students[studentName];
+        const studentScores = await window.apiService.getStudentScores(studentName);
+        
+        // 顯示學生詳細資料
+        const practiceSection = document.getElementById('practice');
+        practiceSection.innerHTML = `
+            <div class="student-details-header">
+                <button onclick="showAdminStudentsList()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> 返回學生列表
+                </button>
+                <h2><i class="fas fa-user"></i> ${studentName} 的詳細資料</h2>
+            </div>
+            
+            <div class="student-info-card">
+                <div class="student-basic-info">
+                    <h3>基本資訊</h3>
+                    <p><strong>姓名：</strong>${studentName}</p>
+                    <p><strong>組別：</strong>${studentInfo.group}</p>
+                    <p><strong>等級：</strong>${studentInfo.level}</p>
+                    <p><strong>總記錄數：</strong>${studentScores.length}</p>
+                </div>
+                
+                <div class="student-scores-section">
+                    <h3>成績記錄</h3>
+                    ${studentScores.length > 0 ? `
+                        <div class="scores-list">
+                            ${studentScores.map(score => `
+                                <div class="score-record">
+                                    <div class="score-header">
+                                        <span class="quiz-type">${score.quiztype}</span>
+                                        <span class="score-date">${new Date(score.date).toLocaleString()}</span>
+                                    </div>
+                                    <div class="score-details">
+                                        <span class="score-value">${score.score}/${score.totalquestions} (${score.percentage}%)</span>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : '<p class="no-scores">暫無成績記錄</p>'}
+                </div>
+            </div>
+        `;
+        
+    } catch (error) {
+        console.error('載入學生詳細資料失敗:', error);
+        alert('載入學生詳細資料失敗，請重試');
+    }
 }
 
 // 查看學生詳細資料
