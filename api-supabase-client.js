@@ -1,12 +1,43 @@
 // Supabase客戶端API服務
 class SupabaseClientService {
     constructor() {
-        // 這些值需要從您的Supabase項目設置中獲取
-        this.supabaseUrl = 'https://your-project-ref.supabase.co'; // 請替換
-        this.supabaseKey = 'your-anon-key'; // 請替換
+        // 從配置文件或環境變數獲取Supabase設置
+        this.supabaseUrl = this.getSupabaseUrl();
+        this.supabaseKey = this.getSupabaseKey();
+
+        // 檢查配置是否正確
+        if (!this.supabaseUrl || !this.supabaseKey ||
+            this.supabaseUrl.includes('your-project-ref') ||
+            this.supabaseKey.includes('your-anon-key')) {
+            console.error('❌ Supabase配置未設置！請檢查 supabase-config.js 文件');
+            throw new Error('Supabase配置未正確設置');
+        }
 
         // 初始化Supabase客戶端
         this.supabase = window.supabase.createClient(this.supabaseUrl, this.supabaseKey);
+        console.log('✅ Supabase客戶端已初始化');
+    }
+
+    // 獲取Supabase URL
+    getSupabaseUrl() {
+        // 優先使用配置文件
+        if (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.PROJECT_URL) {
+            return window.SUPABASE_CONFIG.PROJECT_URL;
+        }
+
+        // 備用：環境變數或默認值
+        return process.env.SUPABASE_URL || 'https://your-project-ref.supabase.co';
+    }
+
+    // 獲取Supabase Key
+    getSupabaseKey() {
+        // 優先使用配置文件
+        if (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.ANON_KEY) {
+            return window.SUPABASE_CONFIG.ANON_KEY;
+        }
+
+        // 備用：環境變數或默認值
+        return process.env.SUPABASE_ANON_KEY || 'your-anon-key';
     }
 
     // 學生登入
@@ -14,7 +45,7 @@ class SupabaseClientService {
         try {
             const { data, error } = await this.supabase
                 .from('students')
-                .select('name, group, level, isAdmin')
+                .select('*')
                 .eq('name', name)
                 .eq('password', password)
                 .single();
@@ -24,7 +55,16 @@ class SupabaseClientService {
             }
 
             if (data) {
-                return { success: true, student: data };
+                // 將 group_name 映射為 group 以保持向後兼容
+                return {
+                    success: true,
+                    student: {
+                        name: data.name,
+                        group: data.group_name || data.group,
+                        level: data.level,
+                        isAdmin: data.isadmin || data.isAdmin || false
+                    }
+                };
             } else {
                 return { success: false, error: '帳號或密碼錯誤' };
             }
@@ -40,7 +80,7 @@ class SupabaseClientService {
             const { data, error } = await this.supabase
                 .from('scores')
                 .select('*')
-                .eq('studentName', studentName)
+                .eq('studentname', studentName)
                 .order('date', { ascending: false });
 
             if (error) {
@@ -59,10 +99,10 @@ class SupabaseClientService {
         try {
             // 確保scoreData包含必要欄位
             const scoreRecord = {
-                studentName: scoreData.studentName || 'Anonymous',
-                quizType: scoreData.quizType || 'unknown',
+                studentname: scoreData.studentName || 'Anonymous',
+                quiztype: scoreData.quizType || 'unknown',
                 score: scoreData.score || 0,
-                totalQuestions: scoreData.totalQuestions || 0,
+                totalquestions: scoreData.totalQuestions || 0,
                 percentage: scoreData.percentage || 0,
                 date: scoreData.date || new Date().toISOString(),
                 details: scoreData.details || {}
@@ -109,14 +149,20 @@ class SupabaseClientService {
         try {
             const { data, error } = await this.supabase
                 .from('students')
-                .select('name, group, level, isAdmin')
+                .select('*')
                 .order('name');
 
             if (error) {
                 throw new Error(error.message);
             }
 
-            return data || [];
+            // 將 group_name 映射為 group 以保持向後兼容
+            return (data || []).map(student => ({
+                name: student.name,
+                group: student.group_name || student.group,
+                level: student.level,
+                isAdmin: student.isadmin || student.isAdmin || false
+            }));
         } catch (error) {
             console.error('獲取學生列表錯誤:', error);
             throw error;

@@ -111,6 +111,7 @@
     </div>
 
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script src="api-supabase-client.js"></script>
     <script>
         // 測試資料庫連接
@@ -285,10 +286,20 @@
 
         // 頁面載入時檢查API服務
         document.addEventListener('DOMContentLoaded', function () {
+            console.log('🔍 檢查API服務載入狀態...');
+
+            if (window.SUPABASE_CONFIG) {
+                console.log('✅ Supabase配置已載入:', window.SUPABASE_CONFIG);
+            } else {
+                console.error('❌ Supabase配置未載入');
+            }
+
             if (window.apiService) {
                 console.log('✅ API服務已載入');
+                console.log('API服務實例:', window.apiService);
             } else {
                 console.error('❌ API服務載入失敗');
+                console.error('請檢查 supabase-config.js 和 api-supabase-client.js 是否正確載入');
             }
         });
     </script>

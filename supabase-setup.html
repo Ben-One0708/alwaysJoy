@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase 設置助手</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .setup-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .step {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #f0f0f0;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .step-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .step-content {
+            margin-left: 45px;
+        }
+
+        .config-form {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .sql-code {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .copy-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #5a6268;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .result.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .result.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .result.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .instructions h4 {
+            margin: 0 0 10px 0;
+            color: #667eea;
+        }
+
+        .instructions ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="setup-container">
+        <div class="header">
+            <h1>🚀 Supabase 設置助手</h1>
+            <p>快速設置您的拼字練習平台資料庫</p>
+        </div>
+
+        <div class="content">
+            <!-- 進度條 -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- 步驟1：項目創建 -->
+            <div class="step" id="step1">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title">創建 Supabase 項目</div>
+                </div>
+                <div class="step-content">
+                    <div class="instructions">
+                        <h4>📋 操作步驟：</h4>
+                        <ol>
+                            <li>前往 <a href="https://supabase.com" target="_blank">Supabase官網</a></li>
+                            <li>點擊 "Start your project"</li>
+                            <li>使用GitHub或Google帳號登入</li>
+                            <li>創建新項目，名稱為 "alwaysjoy-education"</li>
+                            <li>選擇最近的區域（如 Singapore 或 Tokyo）</li>
+                            <li>設置強密碼並記住它</li>
+                        </ol>
+                    </div>
+                    <button class="btn" onclick="nextStep(2)">項目創建完成，下一步</button>
+                </div>
+            </div>
+
+            <!-- 步驟2：獲取API密鑰 -->
+            <div class="step hidden" id="step2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title">獲取 API 密鑰</div>
+                </div>
+                <div class="step-content">
+                    <div class="instructions">
+                        <h4>📋 操作步驟：</h4>
+                        <ol>
+                            <li>在項目Dashboard中點擊左側選單的 "Settings"</li>
+                            <li>點擊 "API" 標籤</li>
+                            <li>複製 "Project URL" 和 "anon public key"</li>
+                        </ol>
+                    </div>
+
+                    <div class="config-form">
+                        <div class="form-group">
+                            <label for="projectUrl">Project URL:</label>
+                            <input type="text" id="projectUrl" placeholder="https://your-project-ref.supabase.co">
+                        </div>
+                        <div class="form-group">
+                            <label for="anonKey">Anon Public Key:</label>
+                            <input type="text" id="anonKey" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+                        </div>
+                    </div>
+
+                    <button class="btn" onclick="testConnection()">測試連接</button>
+                    <button class="btn btn-success" onclick="nextStep(3)">連接成功，下一步</button>
+                    <div id="connectionResult" class="result hidden"></div>
+                </div>
+            </div>
+
+            <!-- 步驟3：設置資料庫表 -->
+            <div class="step hidden" id="step3">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-title">設置資料庫表</div>
+                </div>
+                <div class="step-content">
+                    <div class="instructions">
+                        <h4>📋 操作步驟：</h4>
+                        <ol>
+                            <li>在Supabase Dashboard中點擊 "SQL Editor"</li>
+                            <li>點擊 "New query" 創建新查詢</li>
+                            <li>依次執行以下三個SQL腳本</li>
+                        </ol>
+                    </div>
+
+                    <h4>腳本1：創建學生表</h4>
+                    <div class="sql-code">
+                        <button class="copy-btn" onclick="copyToClipboard('studentsSQL')">複製</button>
+                        <pre id="studentsSQL">-- 創建學生表
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    group_name VARCHAR(50) NOT NULL,
+    level VARCHAR(20) NOT NULL,
+    isAdmin BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 插入預設學生資料
+INSERT INTO students (name, password, group_name, level, isAdmin) VALUES
+('C2 Yuni', 'Yuni', 'B組', 'C2', FALSE),
+('C2 Emily', 'Emily', 'B組', 'C2', FALSE),
+('A8 Vito', 'Vito', 'B組', 'A8', FALSE),
+('A4 Eudora', 'Eudora', 'C組', 'A4', FALSE),
+('A5 Zoe', 'Zoe', 'C組', 'A5', FALSE),
+('N6 Bruce', 'Bruce', 'D組', 'N6', FALSE),
+('N7 Laura', 'Laura', 'D組', 'N7', FALSE),
+('K9 Lilian', 'Lilian', 'E組', 'K9', FALSE),
+('K9 Jill', 'Jill', 'E組', 'K9', FALSE),
+('I2 Candy', 'Candy', 'F組', 'I2', FALSE),
+('N3 Avery', 'Avery', 'F組', 'N3', FALSE),
+('教務組 Annie', 'Annie', '教務組', 'Admin', FALSE),
+('教務組 Celina', 'Celina', '教務組', 'Admin', FALSE),
+('教務組 Nina', 'Nina', '教務組', 'Admin', FALSE),
+('Ben', 'BenBenBen', '管理員', 'Admin', TRUE);</pre>
+                    </div>
+
+                    <h4>腳本2：創建成績表</h4>
+                    <div class="sql-code">
+                        <button class="copy-btn" onclick="copyToClipboard('scoresSQL')">複製</button>
+                        <pre id="scoresSQL">-- 創建成績表
+CREATE TABLE scores (
+    id SERIAL PRIMARY KEY,
+    studentName VARCHAR(100) NOT NULL,
+    quizType VARCHAR(50) NOT NULL,
+    score INTEGER NOT NULL,
+    totalQuestions INTEGER NOT NULL,
+    percentage INTEGER NOT NULL,
+    date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    details JSONB DEFAULT '{}',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 創建索引
+CREATE INDEX idx_scores_student_name ON scores(studentName);
+CREATE INDEX idx_scores_quiz_type ON scores(quizType);
+CREATE INDEX idx_scores_date ON scores(date);
+CREATE INDEX idx_scores_student_date ON scores(studentName, date);</pre>
+                    </div>
+
+                    <h4>腳本3：設置安全策略</h4>
+                    <div class="sql-code">
+                        <button class="copy-btn" onclick="copyToClipboard('securitySQL')">複製</button>
+                        <pre id="securitySQL">-- 啟用RLS
+ALTER TABLE students ENABLE ROW LEVEL SECURITY;
+ALTER TABLE scores ENABLE ROW LEVEL SECURITY;
+
+-- 學生表策略
+CREATE POLICY "Students can view their own data" ON students
+    FOR SELECT USING (name = current_user);
+
+-- 成績表策略
+CREATE POLICY "Students can view their own scores" ON scores
+    FOR SELECT USING (studentName = current_user);
+
+CREATE POLICY "Students can insert their own scores" ON scores
+    FOR INSERT WITH CHECK (studentName = current_user);</pre>
+                    </div>
+
+                    <button class="btn" onclick="nextStep(4)">SQL腳本執行完成，下一步</button>
+                </div>
+            </div>
+
+            <!-- 步驟4：設置CORS -->
+            <div class="step hidden" id="step4">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div class="step-title">設置 CORS</div>
+                </div>
+                <div class="step-content">
+                    <div class="instructions">
+                        <h4>📋 操作步驟：</h4>
+                        <ol>
+                            <li>在Supabase Dashboard中點擊 "Settings" > "API"</li>
+                            <li>找到 "CORS" 部分</li>
+                            <li>添加以下域名：</li>
+                        </ol>
+                    </div>
+
+                    <div class="sql-code">
+                        <pre>https://your-username.github.io
+http://localhost:3000
+http://localhost:5500</pre>
+                    </div>
+
+                    <p><strong>注意：</strong>請將 <code>your-username</code> 替換為您的GitHub用戶名</p>
+
+                    <button class="btn" onclick="nextStep(5)">CORS設置完成，下一步</button>
+                </div>
+            </div>
+
+            <!-- 步驟5：生成配置文件 -->
+            <div class="step hidden" id="step5">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <div class="step-title">生成配置文件</div>
+                </div>
+                <div class="step-content">
+                    <p>點擊下方按鈕生成您的 <code>supabase-config.js</code> 文件：</p>
+
+                    <button class="btn btn-success" onclick="generateConfig()">生成配置文件</button>
+
+                    <div id="configOutput" class="sql-code hidden">
+                        <button class="copy-btn" onclick="copyToClipboard('configOutput')">複製配置</button>
+                        <pre id="configContent"></pre>
+                    </div>
+
+                    <div class="instructions">
+                        <h4>📋 完成步驟：</h4>
+                        <ol>
+                            <li>將生成的配置複製到 <code>supabase-config.js</code> 文件中</li>
+                            <li>使用 <a href="test-database.html" target="_blank">test-database.html</a> 測試連接</li>
+                            <li>如果測試成功，您的設置就完成了！</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+
+        // 更新進度條
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        // 切換步驟
+        function nextStep(step) {
+            // 隱藏當前步驟
+            document.getElementById('step' + currentStep).classList.add('hidden');
+
+            // 顯示新步驟
+            document.getElementById('step' + step).classList.remove('hidden');
+
+            currentStep = step;
+            updateProgress();
+        }
+
+        // 測試連接
+        async function testConnection() {
+            const projectUrl = document.getElementById('projectUrl').value;
+            const anonKey = document.getElementById('anonKey').value;
+            const resultDiv = document.getElementById('connectionResult');
+
+            if (!projectUrl || !anonKey) {
+                showResult('error', '請填寫Project URL和Anon Key');
+                return;
+            }
+
+            showResult('info', '正在測試連接...');
+
+            try {
+                const supabase = window.supabase.createClient(projectUrl, anonKey);
+                const { data, error } = await supabase
+                    .from('students')
+                    .select('count')
+                    .limit(1);
+
+                if (error) {
+                    throw error;
+                }
+
+                showResult('success', '✅ 連接測試成功！您的Supabase配置正確。');
+            } catch (error) {
+                showResult('error', `❌ 連接測試失敗：${error.message}`);
+            }
+        }
+
+        // 顯示結果
+        function showResult(type, message) {
+            const resultDiv = document.getElementById('connectionResult');
+            resultDiv.className = `result ${type}`;
+            resultDiv.innerHTML = message;
+            resultDiv.classList.remove('hidden');
+        }
+
+        // 複製到剪貼板
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                // 顯示複製成功提示
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '已複製！';
+                btn.style.background = '#28a745';
+
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#6c757d';
+                }, 2000);
+            }).catch(err => {
+                console.error('複製失敗：', err);
+                alert('複製失敗，請手動複製');
+            });
+        }
+
+        // 生成配置文件
+        function generateConfig() {
+            const projectUrl = document.getElementById('projectUrl').value;
+            const anonKey = document.getElementById('anonKey').value;
+
+            if (!projectUrl || !anonKey) {
+                alert('請先填寫Project URL和Anon Key');
+                return;
+            }
+
+            const config = `// Supabase 配置
+const SUPABASE_CONFIG = {
+    PROJECT_URL: '${projectUrl}',
+    ANON_KEY: '${anonKey}',
+    REGION: 'ap-southeast-1',
+    PROJECT_NAME: 'alwaysjoy-education'
+};
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = SUPABASE_CONFIG;
+} else {
+    window.SUPABASE_CONFIG = SUPABASE_CONFIG;
+}`;
+
+            document.getElementById('configContent').textContent = config;
+            document.getElementById('configOutput').classList.remove('hidden');
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            updateProgress();
+        });
+    </script>
+</body>
+
+</html>
