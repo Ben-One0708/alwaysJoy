@@ -99,7 +99,7 @@ class SupabaseClientService {
         try {
             const score = parseInt(scoreData.score) || 0;
             const totalQuestions = parseInt(scoreData.totalQuestions) || 0;
-            
+
             // 正確計算百分比，確保不超過100%
             let percentage = 0;
             if (totalQuestions > 0) {
@@ -285,13 +285,18 @@ class SupabaseClientService {
         try {
             const { data, error } = await this.supabase
                 .from('students')
-                .select('count')
+                .select('*')
                 .limit(1);
 
-            return !error;
+            if (error) {
+                console.error('連接測試錯誤:', error);
+                return { success: false, error: error.message };
+            }
+
+            return { success: true, message: '資料庫連接正常' };
         } catch (error) {
             console.error('連接測試失敗:', error);
-            return false;
+            return { success: false, error: error.message };
         }
     }
 }

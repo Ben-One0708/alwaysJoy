@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>調試登入問題</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .debug-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .debug-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .debug-btn:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .student-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background: #f8f9fa;
+        }
+        .student-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-badge {
+            background: #dc3545;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 調試登入問題</h1>
+    
+    <div class="debug-container">
+        <h2>🔧 基本檢查</h2>
+        <button class="debug-btn" onclick="checkConfig()">檢查配置</button>
+        <button class="debug-btn" onclick="checkConnection()">檢查連接</button>
+        <button class="debug-btn" onclick="checkAllStudents()">檢查所有學生</button>
+        <div id="basicResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="debug-container">
+        <h2>👥 學生登入測試</h2>
+        <button class="debug-btn" onclick="testAnnieLogin()">測試Annie登入</button>
+        <button class="debug-btn" onclick="testAdminLogin()">測試管理員登入</button>
+        <button class="debug-btn" onclick="testAllLogins()">測試所有登入</button>
+        <div id="loginResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="debug-container">
+        <h2>📊 資料庫內容</h2>
+        <div id="studentsList" class="student-list">
+            <p>點擊"檢查所有學生"來查看資料庫內容</p>
+        </div>
+    </div>
+
+    <div class="debug-container">
+        <h2>🔧 修復工具</h2>
+        <button class="debug-btn" onclick="addTestStudents()">添加測試學生</button>
+        <button class="debug-btn" onclick="addAdminUser()">添加管理員</button>
+        <button class="debug-btn" onclick="fixAllUsers()">修復所有用戶</button>
+        <div id="fixResult" class="result" style="display: none;"></div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="api-supabase-client.js"></script>
+    <script>
+        // 檢查配置
+        async function checkConfig() {
+            const resultDiv = document.getElementById('basicResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在檢查配置...';
+
+            try {
+                if (!window.SUPABASE_CONFIG) {
+                    throw new Error('Supabase配置未載入');
+                }
+                if (!window.SUPABASE_CONFIG.PROJECT_URL) {
+                    throw new Error('PROJECT_URL未設置');
+                }
+                if (!window.SUPABASE_CONFIG.ANON_KEY) {
+                    throw new Error('ANON_KEY未設置');
+                }
+                if (!window.apiService) {
+                    throw new Error('API服務未初始化');
+                }
+
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 配置檢查通過！\n\nPROJECT_URL: ${window.SUPABASE_CONFIG.PROJECT_URL}\nANON_KEY: ${window.SUPABASE_CONFIG.ANON_KEY.substring(0, 20)}...\nAPI服務: 已載入`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 配置檢查失敗：${error.message}`;
+            }
+        }
+
+        // 檢查連接
+        async function checkConnection() {
+            const resultDiv = document.getElementById('basicResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在檢查資料庫連接...';
+
+            try {
+                const result = await window.apiService.testConnection();
+                if (result.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ 資料庫連接成功！\n\n${result.message}`;
+                } else {
+                    throw new Error(result.error || '連接失敗');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 資料庫連接失敗：${error.message}`;
+            }
+        }
+
+        // 檢查所有學生
+        async function checkAllStudents() {
+            const resultDiv = document.getElementById('basicResult');
+            const studentsListDiv = document.getElementById('studentsList');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在檢查所有學生...';
+
+            try {
+                const students = await window.apiService.getAllStudents();
+                
+                if (students && students.length > 0) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ 找到 ${students.length} 名學生\n\n管理員：${students.filter(s => s.isAdmin).length} 人\n普通學生：${students.filter(s => !s.isAdmin).length} 人`;
+
+                    // 顯示學生列表
+                    const studentsHTML = students.map(student => `
+                        <div class="student-item">
+                            <div>
+                                <strong>${student.name}</strong>
+                                <span class="admin-badge" style="display: ${student.isAdmin ? 'inline' : 'none'}">管理員</span>
+                            </div>
+                            <div>
+                                <small>組別：${student.group}</small>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    studentsListDiv.innerHTML = studentsHTML;
+                } else {
+                    resultDiv.className = 'result warning';
+                    resultDiv.innerHTML = '⚠️ 沒有找到學生記錄，需要添加測試數據';
+                    studentsListDiv.innerHTML = '<p>沒有學生記錄</p>';
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 檢查學生失敗：${error.message}`;
+                studentsListDiv.innerHTML = `<p style="color: red;">載入失敗：${error.message}</p>`;
+            }
+        }
+
+        // 測試Annie登入
+        async function testAnnieLogin() {
+            const resultDiv = document.getElementById('loginResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在測試Annie登入...';
+
+            try {
+                const student = await window.apiService.login('Annie', '1234');
+                
+                if (student) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ Annie登入成功！\n\n姓名：${student.name}\n組別：${student.group}\n管理員：${student.isAdmin ? '是' : '否'}`;
+                } else {
+                    throw new Error('登入失敗，返回null');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ Annie登入失敗：${error.message}`;
+            }
+        }
+
+        // 測試管理員登入
+        async function testAdminLogin() {
+            const resultDiv = document.getElementById('loginResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在測試管理員登入...';
+
+            try {
+                const admin = await window.apiService.login('admin', 'admin123');
+                
+                if (admin) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ 管理員登入成功！\n\n姓名：${admin.name}\n組別：${admin.group}\n管理員：${admin.isAdmin ? '是' : '否'}`;
+                } else {
+                    throw new Error('登入失敗，返回null');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 管理員登入失敗：${error.message}`;
+            }
+        }
+
+        // 測試所有登入
+        async function testAllLogins() {
+            const resultDiv = document.getElementById('loginResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在測試所有登入...';
+
+            try {
+                const testUsers = [
+                    { name: 'Annie', password: '1234', type: '學生' },
+                    { name: 'admin', password: 'admin123', type: '管理員' },
+                    { name: 'Ben', password: '1234', type: '學生' }
+                ];
+
+                let successCount = 0;
+                let totalCount = testUsers.length;
+                let results = [];
+
+                for (const user of testUsers) {
+                    try {
+                        const result = await window.apiService.login(user.name, user.password);
+                        if (result) {
+                            successCount++;
+                            results.push(`✅ ${user.name} (${user.type}): 成功`);
+                        } else {
+                            results.push(`❌ ${user.name} (${user.type}): 失敗 - 返回null`);
+                        }
+                    } catch (error) {
+                        results.push(`❌ ${user.name} (${user.type}): 失敗 - ${error.message}`);
+                    }
+                }
+
+                resultDiv.className = successCount === totalCount ? 'result success' : 'result warning';
+                resultDiv.innerHTML = `測試完成！\n\n成功：${successCount}/${totalCount}\n\n詳細結果：\n${results.join('\n')}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 測試失敗：${error.message}`;
+            }
+        }
+
+        // 添加測試學生
+        async function addTestStudents() {
+            const resultDiv = document.getElementById('fixResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在添加測試學生...';
+
+            try {
+                const testStudents = [
+                    { name: 'Annie', password: '1234', group_name: '教務組', isadmin: false },
+                    { name: 'Ben', password: '1234', group_name: 'A組', isadmin: false },
+                    { name: 'Celina', password: '1234', group_name: '教務組', isadmin: false },
+                    { name: 'Nina', password: '1234', group_name: '教務組', isadmin: false }
+                ];
+
+                let successCount = 0;
+                for (const student of testStudents) {
+                    try {
+                        const { data, error } = await window.apiService.supabase
+                            .from('students')
+                            .upsert(student)
+                            .select()
+                            .single();
+
+                        if (error) {
+                            console.error(`添加 ${student.name} 失敗:`, error);
+                        } else {
+                            successCount++;
+                        }
+                    } catch (error) {
+                        console.error(`添加 ${student.name} 失敗:`, error);
+                    }
+                }
+
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 添加測試學生完成！\n\n成功添加：${successCount}/${testStudents.length} 名學生`;
+
+                // 重新檢查學生列表
+                setTimeout(() => {
+                    checkAllStudents();
+                }, 1000);
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 添加測試學生失敗：${error.message}`;
+            }
+        }
+
+        // 添加管理員
+        async function addAdminUser() {
+            const resultDiv = document.getElementById('fixResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在添加管理員...';
+
+            try {
+                const { data, error } = await window.apiService.supabase
+                    .from('students')
+                    .upsert({
+                        name: 'admin',
+                        password: 'admin123',
+                        group_name: '管理組',
+                        isadmin: true
+                    })
+                    .select()
+                    .single();
+
+                if (error) {
+                    throw error;
+                }
+
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 管理員添加成功！\n\n姓名：${data.name}\n組別：${data.group_name}\n管理員：${data.isadmin ? '是' : '否'}`;
+
+                // 重新檢查學生列表
+                setTimeout(() => {
+                    checkAllStudents();
+                }, 1000);
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 添加管理員失敗：${error.message}`;
+            }
+        }
+
+        // 修復所有用戶
+        async function fixAllUsers() {
+            const resultDiv = document.getElementById('fixResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在修復所有用戶...';
+
+            try {
+                // 先添加管理員
+                await addAdminUser();
+                
+                // 等待一下再添加學生
+                setTimeout(async () => {
+                    await addTestStudents();
+                    
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ 所有用戶修復完成！\n\n請重新測試登入功能。`;
+                }, 2000);
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 修復失敗：${error.message}`;
+            }
+        }
+
+        // 頁面載入時初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.apiService) {
+                console.log('✅ 調試工具API服務已載入');
+                checkConfig();
+            } else {
+                console.error('❌ 調試工具API服務載入失敗');
+            }
+        });
+    </script>
+</body>
+</html>

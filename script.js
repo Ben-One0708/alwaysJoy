@@ -2393,7 +2393,7 @@ function openScoreRegistrationModal() {
 }
 
 // 提交成績登記
-function submitScoreRegistration() {
+async function submitScoreRegistration() {
     const currentStudent = getCurrentStudent();
     const practiceDate = document.getElementById('practiceDate').value;
     const magazineScore = document.getElementById('magazineScore').value;
@@ -2415,38 +2415,93 @@ function submitScoreRegistration() {
         return;
     }
 
-    // 創建成績記錄
-    const scoreRecord = {
-        id: Date.now(),
-        studentName: currentStudent,
-        date: practiceDate,
-        scores: {
-            magazine: parseInt(magazineScore) || 0,
-            spelling: parseInt(spellingScore) || 0
-        },
-        notes: practiceNotes,
-        timestamp: new Date().toISOString()
-    };
+    // 顯示載入狀態
+    const submitBtn = document.querySelector('.submit-btn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 儲存中...';
+    submitBtn.disabled = true;
 
-    // 儲存成績記錄
-    saveScoreRecord(scoreRecord);
+    try {
+        // 儲存到 Supabase 資料庫
+        if (window.apiService) {
+            // 儲存雜誌練習成績（如果有分數）
+            if (magazineScore && magazineScore > 0) {
+                const magazineScoreData = {
+                    studentName: currentStudent,
+                    quizType: 'personal_magazine_practice',
+                    score: parseInt(magazineScore),
+                    totalQuestions: 100, // 假設滿分100
+                    percentage: 0, // 讓API客戶端重新計算
+                    date: new Date(practiceDate).toISOString(),
+                    details: {
+                        practiceType: 'magazine',
+                        notes: practiceNotes,
+                        practiceDate: practiceDate
+                    }
+                };
+                await window.apiService.saveScore(magazineScoreData);
+            }
 
-    // 調試：檢查儲存結果
-    console.log('儲存的成績記錄:', scoreRecord);
-    console.log('當前學生:', currentStudent);
-    console.log('儲存後的數據:', localStorage.getItem(`studentScores_${currentStudent}`));
+            // 儲存拼字練習成績（如果有分數）
+            if (spellingScore && spellingScore > 0) {
+                const spellingScoreData = {
+                    studentName: currentStudent,
+                    quizType: 'personal_spelling_practice',
+                    score: parseInt(spellingScore),
+                    totalQuestions: 100, // 假設滿分100
+                    percentage: 0, // 讓API客戶端重新計算
+                    date: new Date(practiceDate).toISOString(),
+                    details: {
+                        practiceType: 'spelling',
+                        notes: practiceNotes,
+                        practiceDate: practiceDate
+                    }
+                };
+                await window.apiService.saveScore(spellingScoreData);
+            }
+        }
 
-    // 清空表單
-    clearScoreForm();
+        // 同時儲存到本地儲存作為備份
+        const scoreRecord = {
+            id: Date.now(),
+            studentName: currentStudent,
+            date: practiceDate,
+            scores: {
+                magazine: parseInt(magazineScore) || 0,
+                spelling: parseInt(spellingScore) || 0
+            },
+            notes: practiceNotes,
+            timestamp: new Date().toISOString()
+        };
+        saveScoreRecord(scoreRecord);
 
-    // 重新載入歷史記錄
-    loadScoreHistory();
+        // 清空表單
+        clearScoreForm();
 
-    // 更新學習地圖統計
-    updateLearningMapStats();
+        // 重新載入歷史記錄
+        loadScoreHistory();
 
-    // 顯示成功訊息
-    showSuccessMessage('成績登記成功！');
+        // 更新學習地圖統計
+        updateLearningMapStats();
+
+        // 顯示成功訊息
+        showSuccessMessage('成績登記成功！已儲存到資料庫，管理員可以即時查看。');
+
+        console.log('成績已儲存到資料庫:', {
+            student: currentStudent,
+            magazineScore: magazineScore,
+            spellingScore: spellingScore,
+            date: practiceDate
+        });
+
+    } catch (error) {
+        console.error('儲存成績失敗:', error);
+        alert('儲存失敗，請檢查網路連接或聯繫管理員。錯誤：' + error.message);
+    } finally {
+        // 恢復按鈕狀態
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
 }
 
 // 儲存成績記錄
@@ -2457,58 +2512,151 @@ function saveScoreRecord(scoreRecord) {
 }
 
 // 載入成績歷史記錄
-function loadScoreHistory() {
+async function loadScoreHistory() {
     const currentStudent = getCurrentStudent();
-    const studentScores = JSON.parse(localStorage.getItem(`studentScores_${currentStudent}`) || '[]');
     const historyContainer = document.getElementById('scoreHistory');
 
-    if (studentScores.length === 0) {
+    // 顯示載入狀態
+    historyContainer.innerHTML = `
+        <div style="text-align: center; padding: 40px; color: #666;">
+            <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 15px;"></i>
+            <p>載入成績記錄中...</p>
+        </div>
+    `;
+
+    try {
+        let allRecords = [];
+
+        // 從資料庫載入成績記錄
+        if (window.apiService) {
+            try {
+                const dbScores = await window.apiService.getStudentScores(currentStudent);
+
+                // 過濾個人練習記錄
+                const personalRecords = dbScores.filter(score =>
+                    score.quiztype === 'personal_magazine_practice' ||
+                    score.quiztype === 'personal_spelling_practice'
+                );
+
+                // 將資料庫記錄轉換為本地格式
+                const groupedRecords = {};
+                personalRecords.forEach(score => {
+                    const date = new Date(score.date).toISOString().split('T')[0];
+                    if (!groupedRecords[date]) {
+                        groupedRecords[date] = {
+                            id: Date.now() + Math.random(),
+                            studentName: currentStudent,
+                            date: date,
+                            scores: { magazine: 0, spelling: 0 },
+                            notes: score.details?.notes || '',
+                            timestamp: score.date,
+                            source: 'database'
+                        };
+                    }
+
+                    if (score.quiztype === 'personal_magazine_practice') {
+                        groupedRecords[date].scores.magazine = score.score;
+                    } else if (score.quiztype === 'personal_spelling_practice') {
+                        groupedRecords[date].scores.spelling = score.score;
+                    }
+                });
+
+                allRecords = Object.values(groupedRecords);
+            } catch (error) {
+                console.warn('從資料庫載入成績失敗，使用本地記錄:', error);
+            }
+        }
+
+        // 從本地儲存載入備份記錄
+        const localScores = JSON.parse(localStorage.getItem(`studentScores_${currentStudent}`) || '[]');
+        allRecords = allRecords.concat(localScores);
+
+        // 去重並按日期排序（最新的在前）
+        const uniqueRecords = [];
+        const seenDates = new Set();
+
+        allRecords.forEach(record => {
+            if (!seenDates.has(record.date)) {
+                seenDates.add(record.date);
+                uniqueRecords.push(record);
+            }
+        });
+
+        uniqueRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        if (uniqueRecords.length === 0) {
+            historyContainer.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: #666;">
+                    <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                    <p>尚無成績記錄</p>
+                    <p style="font-size: 0.9rem;">開始登記您的練習成績吧！</p>
+                </div>
+            `;
+            return;
+        }
+
+        const historyHTML = uniqueRecords.map(record => {
+            const totalScore = Object.values(record.scores).reduce((sum, score) => sum + score, 0);
+            const averageScore = Math.round(totalScore / Object.keys(record.scores).filter(key => record.scores[key] > 0).length);
+            const sourceBadge = record.source === 'database' ? '<span style="background: #28a745; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.7rem; margin-left: 5px;">雲端</span>' : '';
+
+            return `
+                <div class="history-item">
+                    <div class="history-header">
+                        <div class="history-date">
+                            <i class="fas fa-calendar"></i>
+                            ${formatDate(record.date)}
+                            ${sourceBadge}
+                        </div>
+                        <div style="color: #667eea; font-weight: 600;">
+                            平均分：${averageScore} 分
+                        </div>
+                    </div>
+                    <div class="history-scores">
+                        <div class="score-item">
+                            <div class="score-label">雜誌單字</div>
+                            <div class="score-value">${record.scores.magazine}</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">拼字模擬100題</div>
+                            <div class="score-value">${record.scores.spelling}</div>
+                        </div>
+                    </div>
+                    ${record.notes ? `
+                        <div class="history-notes">
+                            <i class="fas fa-comment"></i>
+                            ${record.notes}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }).join('');
+
+        historyContainer.innerHTML = historyHTML;
+    } catch (error) {
+        console.error('載入成績歷史記錄失敗:', error);
         historyContainer.innerHTML = `
             <div style="text-align: center; padding: 40px; color: #666;">
-                <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-                <p>尚無成績記錄</p>
-                <p style="font-size: 0.9rem;">開始登記您的練習成績吧！</p>
+                <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 15px; color: #dc3545;"></i>
+                <p>載入失敗</p>
+                <p style="font-size: 0.9rem;">請檢查網路連接或重新整理頁面</p>
             </div>
         `;
-        return;
     }
-
-    // 按日期排序（最新的在前）
-    studentScores.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    const historyHTML = studentScores.map(record => {
-        const totalScore = Object.values(record.scores).reduce((sum, score) => sum + score, 0);
-        const averageScore = Math.round(totalScore / Object.keys(record.scores).filter(key => record.scores[key] > 0).length);
-
-        return `
-            <div class="history-item">
-                <div class="history-header">
-                    <div class="history-date">
-                        <i class="fas fa-calendar"></i>
-                        ${formatDate(record.date)}
-                    </div>
-                    <div style="color: #667eea; font-weight: 600;">
-                        平均分：${averageScore} 分
-                    </div>
-                </div>
-                <div class="history-scores">
-                    <div class="score-item">
-                        <div class="score-label">雜誌單字</div>
-                        <div class="score-value">${record.scores.magazine}</div>
-                    </div>
-                    <div class="score-item">
-                        <div class="score-label">拼字模擬100題</div>
-                        <div class="score-value">${record.scores.spelling}</div>
-                    </div>
-                </div>
-                ${record.notes ? `
+}
+<div class="score-value">${record.scores.spelling}</div>
+                    </div >
+                </div >
+    ${
+        record.notes ? `
                     <div class="history-notes">
                         <i class="fas fa-comment"></i>
                         ${record.notes}
                     </div>
-                ` : ''}
-            </div>
-        `;
+                ` : ''
+}
+            </div >
+    `;
     }).join('');
 
     historyContainer.innerHTML = historyHTML;
@@ -2520,7 +2668,7 @@ function formatDate(dateString) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
-    return `${year}/${month}/${day}`;
+    return `${ year } /${month}/${ day } `;
 }
 
 // 清空成績表單
@@ -2535,7 +2683,7 @@ function updateLearningMapStats() {
     const currentStudent = getCurrentStudent();
     if (!currentStudent) return;
 
-    const studentScores = JSON.parse(localStorage.getItem(`studentScores_${currentStudent}`) || '[]');
+    const studentScores = JSON.parse(localStorage.getItem(`studentScores_${ currentStudent } `) || '[]');
 
     // 計算統計數據
     const totalRecords = studentScores.length;
@@ -2551,8 +2699,8 @@ function updateLearningMapStats() {
     if (scoreArea) {
         const statItems = scoreArea.querySelectorAll('.stat-item span');
         if (statItems.length >= 2) {
-            statItems[0].textContent = `已登記: ${totalRecords} 次`;
-            statItems[1].textContent = `平均分: ${averageScore} 分`;
+            statItems[0].textContent = `已登記: ${ totalRecords } 次`;
+            statItems[1].textContent = `平均分: ${ averageScore } 分`;
         }
     }
 
@@ -2587,7 +2735,7 @@ function updateAdminAreaStats() {
     // 計算總成績記錄
     let totalRecords = 0;
     allStudents.forEach(studentName => {
-        const studentScores = JSON.parse(localStorage.getItem(`studentScores_${studentName}`) || '[]');
+        const studentScores = JSON.parse(localStorage.getItem(`studentScores_${ studentName } `) || '[]');
         totalRecords += studentScores.length;
     });
 
@@ -2619,8 +2767,8 @@ function updateAdminAreaStats() {
     // 更新管理員區域的統計顯示
     const adminStats = document.querySelectorAll('.admin-area .area-stats .stat-item span');
     if (adminStats.length >= 2) {
-        adminStats[0].textContent = `總學生: ${totalStudents} 人`;
-        adminStats[1].textContent = `總記錄: ${totalRecords} 筆`;
+        adminStats[0].textContent = `總學生: ${ totalStudents } 人`;
+        adminStats[1].textContent = `總記錄: ${ totalRecords } 筆`;
     }
 }
 
@@ -2628,40 +2776,40 @@ function updateAdminAreaStats() {
 function showLevelPracticeNotice() {
     // 創建提示模態框
     const noticeHTML = `
-        <div id="levelNoticeModal" class="modal">
-            <div class="modal-content notice-content">
-                <span class="close" onclick="closeModal('levelNoticeModal')">&times;</span>
-                
-                <!-- 提示標題 -->
-                <div class="notice-header">
-                    <div class="logo-section">
-                        <div class="logo-text">
-                            <div class="logo-main">課外練習</div>
-                        </div>
-                    </div>
-                    <h1 class="notice-title">各級別單字練習</h1>
-                </div>
+    < div id = "levelNoticeModal" class="modal" >
+        <div class="modal-content notice-content">
+            <span class="close" onclick="closeModal('levelNoticeModal')">&times;</span>
 
-                <!-- 提示內容 -->
-                <div class="notice-body">
-                    <div class="notice-icon">
-                        <i class="fas fa-info-circle"></i>
-                    </div>
-                    <div class="notice-message">
-                        <h3>請至佳音雲端學院官網練習</h3>
-                        <p>額外的單字還在準備中，敬請期待！</p>
-                        <p class="notice-subtitle">我們正在為您準備更豐富的練習內容</p>
+            <!-- 提示標題 -->
+            <div class="notice-header">
+                <div class="logo-section">
+                    <div class="logo-text">
+                        <div class="logo-main">課外練習</div>
                     </div>
                 </div>
+                <h1 class="notice-title">各級別單字練習</h1>
+            </div>
 
-                <!-- 按鈕區域 -->
-                <div class="notice-actions">
-                    <button onclick="closeModal('levelNoticeModal')" class="notice-btn">
-                        <i class="fas fa-check"></i> 我知道了
-                    </button>
+            <!-- 提示內容 -->
+            <div class="notice-body">
+                <div class="notice-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="notice-message">
+                    <h3>請至佳音雲端學院官網練習</h3>
+                    <p>額外的單字還在準備中，敬請期待！</p>
+                    <p class="notice-subtitle">我們正在為您準備更豐富的練習內容</p>
                 </div>
             </div>
+
+            <!-- 按鈕區域 -->
+            <div class="notice-actions">
+                <button onclick="closeModal('levelNoticeModal')" class="notice-btn">
+                    <i class="fas fa-check"></i> 我知道了
+                </button>
+            </div>
         </div>
+        </div >
     `;
 
     // 如果模態框已存在，先移除
@@ -2681,7 +2829,7 @@ function showLevelPracticeNotice() {
 function showAdminStudentsList() {
     const practiceSection = document.getElementById('practice');
     practiceSection.innerHTML = `
-        <h2><i class="fas fa-chart-bar"></i> 學生成績管理</h2>
+    < h2 > <i class="fas fa-chart-bar"></i> 學生成績管理</h2 >
         <div class="admin-welcome">
             <h1>歡迎 ${getCurrentStudent()}！</h1>
             <p>查看所有學生的練習成績和學習狀況</p>
@@ -2750,7 +2898,7 @@ function showAdminStudentsList() {
                 </button>
             </div>
         </div>
-    `;
+`;
 
     // 載入管理員數據
     loadAdminData();
@@ -2766,14 +2914,14 @@ async function loadAdminData() {
 
         // 從Supabase獲取所有成績數據
         const allScores = await window.apiService.getAllScores();
-        
+
         // 獲取所有學生
         const allStudents = Object.keys(students).filter(name => !students[name].isAdmin);
         const totalStudents = allStudents.length;
 
         // 計算統計數據
         const totalRecords = allScores.length;
-        
+
         // 計算活躍學生（有成績記錄的學生）
         const studentsWithScores = new Set(allScores.map(score => score.studentname));
         const activeStudents = studentsWithScores.size;
@@ -2785,7 +2933,7 @@ async function loadAdminData() {
 
         // 載入學生列表
         await loadStudentsListWithScores(allScores);
-        
+
     } catch (error) {
         console.error('載入管理員數據失敗:', error);
         // 顯示錯誤訊息
@@ -2812,17 +2960,17 @@ async function loadStudentsListWithScores(allScores, filterGroup = '') {
 
     if (filteredStudents.length === 0) {
         studentsListContainer.innerHTML = `
-            <div class="no-students">
+    < div class="no-students" >
                 <i class="fas fa-users-slash"></i>
                 <p>沒有找到學生</p>
-            </div>
-        `;
+            </div >
+    `;
         return;
     }
 
     const studentsHTML = filteredStudents.map(studentName => {
         const studentInfo = students[studentName];
-        
+
         // 從Supabase數據中獲取該學生的成績記錄
         const studentScores = allScores.filter(score => score.studentname === studentName);
         const recordCount = studentScores.length;
@@ -2839,7 +2987,7 @@ async function loadStudentsListWithScores(allScores, filterGroup = '') {
         const latestDate = latestScore ? new Date(latestScore.date).toLocaleDateString() : '無記錄';
 
         return `
-            <div class="student-card" onclick="viewStudentDetailsFromSupabase('${studentName}')">
+    < div class="student-card" onclick = "viewStudentDetailsFromSupabase('${studentName}')" >
                 <div class="student-info">
                     <div class="student-name">${studentName}</div>
                     <div class="student-group">${studentInfo.group} - ${studentInfo.level}</div>
@@ -2861,8 +3009,8 @@ async function loadStudentsListWithScores(allScores, filterGroup = '') {
                 <div class="student-arrow">
                     <i class="fas fa-chevron-right"></i>
                 </div>
-            </div>
-        `;
+            </div >
+    `;
     }).join('');
 
     studentsListContainer.innerHTML = studentsHTML;
@@ -2895,17 +3043,17 @@ function loadStudentsList(filterGroup = '') {
 
     if (filteredStudents.length === 0) {
         studentsListContainer.innerHTML = `
-            <div class="no-students">
+    < div class="no-students" >
                 <i class="fas fa-users-slash"></i>
                 <p>沒有找到學生</p>
-            </div>
-        `;
+            </div >
+    `;
         return;
     }
 
     const studentsHTML = filteredStudents.map(studentName => {
         const studentInfo = students[studentName];
-        const studentScores = JSON.parse(localStorage.getItem(`studentScores_${studentName}`) || '[]');
+        const studentScores = JSON.parse(localStorage.getItem(`studentScores_${ studentName } `) || '[]');
         const recordCount = studentScores.length;
 
         // 計算平均分數
@@ -2920,7 +3068,7 @@ function loadStudentsList(filterGroup = '') {
         }
 
         return `
-            <div class="student-card" onclick="viewStudentDetails('${studentName}')">
+    < div class="student-card" onclick = "viewStudentDetails('${studentName}')" >
                 <div class="student-info">
                     <div class="student-name">${studentName}</div>
                     <div class="student-group">${studentInfo.group} - ${studentInfo.level}</div>
@@ -2938,8 +3086,8 @@ function loadStudentsList(filterGroup = '') {
                 <div class="student-arrow">
                     <i class="fas fa-chevron-right"></i>
                 </div>
-            </div>
-        `;
+            </div >
+    `;
     }).join('');
 
     studentsListContainer.innerHTML = studentsHTML;
@@ -2963,29 +3111,29 @@ async function viewStudentDetailsFromSupabase(studentName) {
     try {
         const studentInfo = students[studentName];
         const studentScores = await window.apiService.getStudentScores(studentName);
-        
+
         // 顯示學生詳細資料
         const practiceSection = document.getElementById('practice');
         practiceSection.innerHTML = `
-            <div class="student-details-header">
+    < div class="student-details-header" >
                 <button onclick="showAdminStudentsList()" class="back-btn">
                     <i class="fas fa-arrow-left"></i> 返回學生列表
                 </button>
                 <h2><i class="fas fa-user"></i> ${studentName} 的詳細資料</h2>
-            </div>
-            
-            <div class="student-info-card">
-                <div class="student-basic-info">
-                    <h3>基本資訊</h3>
-                    <p><strong>姓名：</strong>${studentName}</p>
-                    <p><strong>組別：</strong>${studentInfo.group}</p>
-                    <p><strong>等級：</strong>${studentInfo.level}</p>
-                    <p><strong>總記錄數：</strong>${studentScores.length}</p>
-                </div>
-                
-                <div class="student-scores-section">
-                    <h3>成績記錄</h3>
-                    ${studentScores.length > 0 ? `
+            </div >
+
+    <div class="student-info-card">
+        <div class="student-basic-info">
+            <h3>基本資訊</h3>
+            <p><strong>姓名：</strong>${studentName}</p>
+            <p><strong>組別：</strong>${studentInfo.group}</p>
+            <p><strong>等級：</strong>${studentInfo.level}</p>
+            <p><strong>總記錄數：</strong>${studentScores.length}</p>
+        </div>
+
+        <div class="student-scores-section">
+            <h3>成績記錄</h3>
+            ${studentScores.length > 0 ? `
                         <div class="scores-list">
                             ${studentScores.map(score => `
                                 <div class="score-record">
@@ -3000,10 +3148,10 @@ async function viewStudentDetailsFromSupabase(studentName) {
                             `).join('')}
                         </div>
                     ` : '<p class="no-scores">暫無成績記錄</p>'}
-                </div>
-            </div>
-        `;
-        
+        </div>
+    </div>
+`;
+
     } catch (error) {
         console.error('載入學生詳細資料失敗:', error);
         alert('載入學生詳細資料失敗，請重試');
@@ -3013,53 +3161,53 @@ async function viewStudentDetailsFromSupabase(studentName) {
 // 查看學生詳細資料
 function viewStudentDetails(studentName) {
     const studentInfo = students[studentName];
-    const studentScores = JSON.parse(localStorage.getItem(`studentScores_${studentName}`) || '[]');
+    const studentScores = JSON.parse(localStorage.getItem(`studentScores_${ studentName } `) || '[]');
 
     // 創建學生詳細資料模態框
     const detailsHTML = `
-        <div id="studentDetailsModal" class="modal">
-            <div class="modal-content student-details-content">
-                <span class="close" onclick="closeModal('studentDetailsModal')">&times;</span>
-                
-                <!-- 學生資訊標題 -->
-                <div class="student-details-header">
-                    <div class="logo-section">
-                        <div class="logo-text">
-                            <div class="logo-main">課外練習</div>
+    < div id = "studentDetailsModal" class="modal" >
+        <div class="modal-content student-details-content">
+            <span class="close" onclick="closeModal('studentDetailsModal')">&times;</span>
+
+            <!-- 學生資訊標題 -->
+            <div class="student-details-header">
+                <div class="logo-section">
+                    <div class="logo-text">
+                        <div class="logo-main">課外練習</div>
+                    </div>
+                </div>
+                <h1 class="details-title">學生詳細資料</h1>
+            </div>
+
+            <!-- 學生基本資訊 -->
+            <div class="student-details-info">
+                <div class="info-section">
+                    <h3><i class="fas fa-user"></i> 基本資訊</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>姓名：</label>
+                            <span>${studentName}</span>
+                        </div>
+                        <div class="info-item">
+                            <label>組別：</label>
+                            <span>${studentInfo.group}</span>
+                        </div>
+                        <div class="info-item">
+                            <label>級別：</label>
+                            <span>${studentInfo.level}</span>
+                        </div>
+                        <div class="info-item">
+                            <label>成績記錄數：</label>
+                            <span>${studentScores.length} 筆</span>
                         </div>
                     </div>
-                    <h1 class="details-title">學生詳細資料</h1>
                 </div>
 
-                <!-- 學生基本資訊 -->
-                <div class="student-details-info">
-                    <div class="info-section">
-                        <h3><i class="fas fa-user"></i> 基本資訊</h3>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <label>姓名：</label>
-                                <span>${studentName}</span>
-                            </div>
-                            <div class="info-item">
-                                <label>組別：</label>
-                                <span>${studentInfo.group}</span>
-                            </div>
-                            <div class="info-item">
-                                <label>級別：</label>
-                                <span>${studentInfo.level}</span>
-                            </div>
-                            <div class="info-item">
-                                <label>成績記錄數：</label>
-                                <span>${studentScores.length} 筆</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 成績記錄 -->
-                    <div class="scores-section">
-                        <h3><i class="fas fa-chart-line"></i> 成績記錄</h3>
-                        <div id="studentScoresList" class="scores-list">
-                            ${studentScores.length === 0 ? `
+                <!-- 成績記錄 -->
+                <div class="scores-section">
+                    <h3><i class="fas fa-chart-line"></i> 成績記錄</h3>
+                    <div id="studentScoresList" class="scores-list">
+                        ${studentScores.length === 0 ? `
                                 <div class="no-scores">
                                     <i class="fas fa-inbox"></i>
                                     <p>尚無成績記錄</p>
@@ -3090,18 +3238,18 @@ function viewStudentDetails(studentName) {
                                     ` : ''}
                                 </div>
                             `).join('')}
-                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- 關閉按鈕 -->
-                <div class="details-actions">
-                    <button onclick="closeModal('studentDetailsModal')" class="close-btn">
-                        <i class="fas fa-times"></i> 關閉
-                    </button>
-                </div>
+            <!-- 關閉按鈕 -->
+            <div class="details-actions">
+                <button onclick="closeModal('studentDetailsModal')" class="close-btn">
+                    <i class="fas fa-times"></i> 關閉
+                </button>
             </div>
         </div>
+        </div >
     `;
 
     // 如果模態框已存在，先移除
