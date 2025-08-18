@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>測試雜誌練習分數儲存</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .test-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .test-btn:hover {
+            background: #0056b3;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .student-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🧪 測試雜誌練習分數儲存功能</h1>
+
+    <div class="test-container">
+        <h2>📝 學生資訊</h2>
+        <input type="text" id="studentName" class="student-input" placeholder="輸入學生姓名（例如：Annie）" value="Annie">
+    </div>
+
+    <div class="test-container">
+        <h2>🔧 測試功能</h2>
+        <button class="test-btn" onclick="testVocabularyScoreSave()">測試雜誌練習分數儲存</button>
+        <button class="test-btn" onclick="checkAnnieScores()">檢查Annie的成績記錄</button>
+        <button class="test-btn" onclick="testAllVocabularyTypes()">測試所有雜誌類型</button>
+        <div id="testResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>📊 成績記錄</h2>
+        <div id="scoresList"></div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="api-supabase-client.js"></script>
+    <script>
+        // 測試雜誌練習分數儲存
+        async function testVocabularyScoreSave() {
+            const resultDiv = document.getElementById('testResult');
+            const studentName = document.getElementById('studentName').value || 'Annie';
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在測試雜誌練習分數儲存...';
+
+            try {
+                // 模擬雜誌練習完成
+                const scoreData = {
+                    studentName: studentName,
+                    quizType: 'vocabulary_part1',
+                    score: 25,
+                    totalQuestions: 36,
+                    percentage: 0, // 讓API客戶端重新計算
+                    date: new Date().toISOString(),
+                    details: {
+                        correctAnswers: 25,
+                        totalQuestions: 36,
+                        userAnswers: [],
+                        questions: []
+                    }
+                };
+
+                console.log('準備儲存分數:', scoreData);
+
+                if (window.apiService) {
+                    const result = await window.apiService.saveScore(scoreData);
+                    console.log('分數儲存結果:', result);
+
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ 分數儲存成功！\n\n學生：${studentName}\n分數：25/36\n百分比：${Math.round((25 / 36) * 100)}%\n時間：${new Date().toLocaleString()}`;
+                } else {
+                    throw new Error('API服務未載入');
+                }
+
+                // 重新載入成績記錄
+                setTimeout(() => {
+                    loadScoresList();
+                }, 1000);
+
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 分數儲存失敗：${error.message}`;
+                console.error('儲存錯誤:', error);
+            }
+        }
+
+        // 檢查Annie的成績記錄
+        async function checkAnnieScores() {
+            const resultDiv = document.getElementById('testResult');
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在檢查Annie的成績記錄...';
+
+            try {
+                const scores = await window.apiService.getStudentScores('Annie');
+
+                if (scores && scores.length > 0) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ 找到 ${scores.length} 筆Annie的成績記錄\n\n${scores.map(score =>
+                        `${score.quiztype}: ${score.score}/${score.totalquestions} (${score.percentage}%) - ${new Date(score.date).toLocaleString()}`
+                    ).join('\n')}`;
+                } else {
+                    resultDiv.className = 'result info';
+                    resultDiv.innerHTML = '📝 沒有找到Annie的成績記錄';
+                }
+
+                loadScoresList();
+
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 檢查失敗：${error.message}`;
+            }
+        }
+
+        // 測試所有雜誌類型
+        async function testAllVocabularyTypes() {
+            const resultDiv = document.getElementById('testResult');
+            const studentName = document.getElementById('studentName').value || 'Annie';
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在測試所有雜誌類型...';
+
+            const quizTypes = [
+                { type: 'vocabulary_part1', score: 25, total: 36 },
+                { type: 'vocabulary_part2', score: 18, total: 24 },
+                { type: 'vocabulary_part3', score: 12, total: 20 },
+                { type: 'vocabulary_full', score: 55, total: 80 }
+            ];
+
+            let successCount = 0;
+            let errorCount = 0;
+
+            for (const quiz of quizTypes) {
+                try {
+                    const scoreData = {
+                        studentName: studentName,
+                        quizType: quiz.type,
+                        score: quiz.score,
+                        totalQuestions: quiz.total,
+                        percentage: 0,
+                        date: new Date().toISOString()
+                    };
+
+                    await window.apiService.saveScore(scoreData);
+                    successCount++;
+
+                    resultDiv.innerHTML = `🔄 正在測試所有雜誌類型...\n\n進度：${successCount + errorCount}/${quizTypes.length}\n成功：${successCount}\n失敗：${errorCount}`;
+
+                } catch (error) {
+                    errorCount++;
+                    console.error(`儲存 ${quiz.type} 失敗:`, error);
+                }
+            }
+
+            resultDiv.className = 'result success';
+            resultDiv.innerHTML = `✅ 測試完成！\n\n總計：${quizTypes.length} 個測試\n成功：${successCount}\n失敗：${errorCount}`;
+
+            setTimeout(() => {
+                loadScoresList();
+            }, 1000);
+        }
+
+        // 載入成績記錄列表
+        async function loadScoresList() {
+            const scoresListDiv = document.getElementById('scoresList');
+
+            try {
+                const allScores = await window.apiService.getAllScores();
+
+                if (allScores.length === 0) {
+                    scoresListDiv.innerHTML = '<p>沒有成績記錄</p>';
+                    return;
+                }
+
+                // 按時間排序（最新的在前）
+                allScores.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                const scoresHTML = allScores.slice(0, 20).map(score => `
+                    <div style="background: white; border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin: 5px 0;">
+                        <strong>${score.studentname}</strong> - ${score.quiztype}<br>
+                        <small>分數：${score.score}/${score.totalquestions} (${score.percentage}%) | 時間：${new Date(score.date).toLocaleString()}</small>
+                    </div>
+                `).join('');
+
+                scoresListDiv.innerHTML = scoresHTML;
+
+            } catch (error) {
+                scoresListDiv.innerHTML = `<p style="color: red;">載入失敗：${error.message}</p>`;
+            }
+        }
+
+        // 頁面載入時檢查API服務
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.apiService) {
+                console.log('✅ 測試工具API服務已載入');
+                loadScoresList();
+            } else {
+                console.error('❌ 測試工具API服務載入失敗');
+            }
+        });
+    </script>
+</body>
+
+</html>
