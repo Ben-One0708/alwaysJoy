@@ -402,11 +402,11 @@
         }
     </script>
 
-    <!-- Supabase整合 -->
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <script src="api-supabase-client.js"></script>
+    <!-- 本地存儲整合 -->
+    <!-- 本地存儲 API 客戶端 -->
+    <script src="api-local-client.js"></script>
     <script>
-        // 詞彙練習完成後儲存分數到Supabase
+        // 詞彙練習完成後儲存分數到本地存儲
         async function saveVocabularyScore(score, totalQuestions, quizType) {
             try {
                 // 獲取當前學生資訊（從URL參數或localStorage）
@@ -432,15 +432,15 @@
                     }
                 };
 
-                // 儲存到Supabase
+                // 儲存到本地存儲
                 if (window.apiService) {
                     const result = await window.apiService.saveScore(scoreData);
-                    console.log('分數已儲存到Supabase:', result);
+                    console.log('分數已儲存到本地存儲:', result);
 
                     // 顯示成功訊息
                     showScoreSavedMessage();
                 } else {
-                    console.warn('Supabase API服務未載入，儲存到本地儲存');
+                    console.warn('本地存儲 API服務未載入，儲存到本地儲存');
                     // 備用：儲存到本地儲存
                     const existingScores = JSON.parse(localStorage.getItem('vocabularyScores') || '[]');
                     existingScores.push(scoreData);
