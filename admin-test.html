@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理員功能測試</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔧 管理員功能測試</h1>
+
+        <div class="test-section info">
+            <h3>📋 測試說明</h3>
+            <p>這個頁面會測試管理員功能，包括成績讀取、統計和顯示。</p>
+        </div>
+
+        <div class="test-section">
+            <h3>🚀 執行測試</h3>
+            <button onclick="testLoadScores()">測試載入成績</button>
+            <button onclick="testDisplayScores()">測試顯示成績</button>
+            <button onclick="testAdminStats()">測試統計數據</button>
+            <button onclick="testRealTimeUpdate()">測試實時更新</button>
+            <button onclick="runAllAdminTests()">執行所有測試</button>
+        </div>
+
+        <div class="test-section">
+            <h3>📊 統計數據</h3>
+            <div class="stats">
+                <div class="stat-card">
+                    <h4>總學生數</h4>
+                    <div class="stat-number" id="totalStudents">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>總記錄數</h4>
+                    <div class="stat-number" id="totalRecords">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>平均分數</h4>
+                    <div class="stat-number" id="averageScore">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>今日新增</h4>
+                    <div class="stat-number" id="todayRecords">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>📋 成績記錄</h3>
+            <table id="scoresTable">
+                <thead>
+                    <tr>
+                        <th>學生姓名</th>
+                        <th>組別</th>
+                        <th>練習類型</th>
+                        <th>分數</th>
+                        <th>日期</th>
+                        <th>備註</th>
+                    </tr>
+                </thead>
+                <tbody id="scoresTableBody">
+                    <tr>
+                        <td colspan="6" class="loading">載入中...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase API 客戶端 -->
+    <script src="api-firebase-client.js"></script>
+
+    <script>
+        const resultsDiv = document.getElementById('results');
+
+        function addResult(title, content, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test-section ${type}`;
+            div.innerHTML = `
+                <h4>${title}</h4>
+                <pre>${content}</pre>
+            `;
+            resultsDiv.appendChild(div);
+        }
+
+        function clearResults() {
+            resultsDiv.innerHTML = '';
+        }
+
+        // 學生資料（從 script.js 複製）
+        const students = {
+            'C2 Yuni': { group: 'B組', level: 'C2', password: 'Yuni', isAdmin: false },
+            'C2 Emily': { group: 'B組', level: 'C2', password: 'Emily', isAdmin: false },
+            'A8 Vito': { group: 'B組', level: 'A8', password: 'Vito', isAdmin: false },
+            'A4 Eudora': { group: 'C組', level: 'A4', password: 'Eudora', isAdmin: false },
+            'A5 Zoe': { group: 'C組', level: 'A5', password: 'Zoe', isAdmin: false },
+            'N6 Bruce': { group: 'D組', level: 'N6', password: 'Bruce', isAdmin: false },
+            'N7 Laura': { group: 'D組', level: 'N7', password: 'Laura', isAdmin: false },
+            'K9 Lilian': { group: 'E組', level: 'K9', password: 'Lilian', isAdmin: false },
+            'K9 Jill': { group: 'E組', level: 'K9', password: 'Jill', isAdmin: false },
+            'I2 Candy': { group: 'F組', level: 'I2', password: 'Candy', isAdmin: false },
+            'N3 Avery': { group: 'F組', level: 'N3', password: 'Avery', isAdmin: false },
+            '教務組 Annie': { group: '教務組', level: 'Admin', password: 'Annie', isAdmin: false },
+            '教務組 Celina': { group: '教務組', level: 'Admin', password: 'Celina', isAdmin: false },
+            '教務組 Nina': { group: '教務組', level: 'Admin', password: 'Nina', isAdmin: false },
+            'Ben': { group: '管理員', level: 'Admin', password: 'BenBenBen', isAdmin: true }
+        };
+
+        // 獲取學生組別
+        function getStudentGroup(studentName) {
+            return students[studentName] ? students[studentName].group : '未知';
+        }
+
+        // 格式化日期
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('zh-TW');
+        }
+
+        // 顯示成績數據
+        function displayScores(scores) {
+            const tbody = document.getElementById('scoresTableBody');
+
+            if (!scores || scores.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="no-data">暫無成績記錄</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = scores.map(score => `
+                <tr>
+                    <td>${score.studentName || score.student_name}</td>
+                    <td>${getStudentGroup(score.studentName || score.student_name)}</td>
+                    <td>${score.quizType || score.quiz_type}</td>
+                    <td>${score.score}</td>
+                    <td>${formatDate(score.date)}</td>
+                    <td>${score.notes || '-'}</td>
+                </tr>
+            `).join('');
+        }
+
+        // 更新統計數據
+        function updateAdminStats(scores) {
+            const totalStudents = new Set(scores.map(s => s.studentName || s.student_name)).size;
+            const totalRecords = scores.length;
+            const averageScore = scores.length > 0 ?
+                Math.round(scores.reduce((sum, s) => sum + s.score, 0) / scores.length) : 0;
+
+            const today = new Date().toDateString();
+            const todayRecords = scores.filter(s =>
+                new Date(s.date).toDateString() === today
+            ).length;
+
+            document.getElementById('totalStudents').textContent = totalStudents;
+            document.getElementById('totalRecords').textContent = totalRecords;
+            document.getElementById('averageScore').textContent = averageScore;
+            document.getElementById('todayRecords').textContent = todayRecords;
+        }
+
+        async function testLoadScores() {
+            clearResults();
+            addResult('🔄 測試載入成績', '正在從 Firebase 載入成績數據...', 'info');
+
+            try {
+                if (window.apiService && typeof window.apiService.getAllScores === 'function') {
+                    console.log('使用 Firebase 載入成績數據');
+                    const scores = await window.apiService.getAllScores();
+                    console.log('載入到的成績數據:', scores);
+
+                    addResult('✅ 載入成績成功',
+                        `成功載入 ${scores.length} 筆成績記錄\n\n詳細數據：\n${JSON.stringify(scores, null, 2)}`,
+                        'success'
+                    );
+
+                    return scores;
+                } else {
+                    addResult('❌ Firebase API 不可用', 'window.apiService 或 getAllScores 方法不存在', 'error');
+                    return [];
+                }
+            } catch (error) {
+                addResult('❌ 載入成績失敗', `錯誤詳情：${error.message}`, 'error');
+                return [];
+            }
+        }
+
+        async function testDisplayScores() {
+            addResult('🔄 測試顯示成績', '正在測試成績顯示功能...', 'info');
+
+            try {
+                const scores = await testLoadScores();
+                displayScores(scores);
+                updateAdminStats(scores);
+
+                addResult('✅ 顯示成績成功',
+                    `已顯示 ${scores.length} 筆成績記錄\n統計數據已更新`,
+                    'success'
+                );
+            } catch (error) {
+                addResult('❌ 顯示成績失敗', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function testAdminStats() {
+            addResult('🔄 測試統計數據', '正在測試管理員統計功能...', 'info');
+
+            try {
+                const scores = await window.apiService.getAllScores();
+                updateAdminStats(scores);
+
+                const totalStudents = new Set(scores.map(s => s.studentName || s.student_name)).size;
+                const totalRecords = scores.length;
+                const averageScore = scores.length > 0 ?
+                    Math.round(scores.reduce((sum, s) => sum + s.score, 0) / scores.length) : 0;
+
+                addResult('✅ 統計數據更新成功',
+                    `總學生數：${totalStudents}\n總記錄數：${totalRecords}\n平均分數：${averageScore}`,
+                    'success'
+                );
+            } catch (error) {
+                addResult('❌ 統計數據更新失敗', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function testRealTimeUpdate() {
+            addResult('🔄 測試實時更新', '正在測試實時數據更新...', 'info');
+
+            try {
+                // 模擬添加新成績
+                const testScore = {
+                    studentName: '測試學生',
+                    quizType: '測試練習',
+                    score: 85,
+                    date: new Date().toISOString(),
+                    notes: '實時更新測試'
+                };
+
+                // 保存測試成績
+                const result = await window.apiService.saveScore(
+                    testScore.studentName,
+                    '測試組',
+                    testScore.quizType,
+                    testScore.score
+                );
+
+                if (result.success) {
+                    addResult('✅ 實時更新測試成功',
+                        `測試成績已保存：${JSON.stringify(result.score, null, 2)}`,
+                        'success'
+                    );
+
+                    // 重新載入數據
+                    setTimeout(async () => {
+                        const scores = await window.apiService.getAllScores();
+                        displayScores(scores);
+                        updateAdminStats(scores);
+                        addResult('✅ 數據重新載入成功',
+                            `重新載入後共有 ${scores.length} 筆記錄`,
+                            'success'
+                        );
+                    }, 1000);
+                } else {
+                    addResult('❌ 實時更新測試失敗', `保存失敗：${result.message}`, 'error');
+                }
+            } catch (error) {
+                addResult('❌ 實時更新測試失敗', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function runAllAdminTests() {
+            clearResults();
+            addResult('🚀 開始執行所有管理員功能測試', '正在執行完整測試...', 'info');
+
+            // 測試 1：載入成績
+            await testLoadScores();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // 測試 2：顯示成績
+            await testDisplayScores();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // 測試 3：統計數據
+            await testAdminStats();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // 測試 4：實時更新
+            await testRealTimeUpdate();
+
+            addResult('🎉 所有管理員功能測試完成', '請查看上面的測試結果', 'success');
+        }
+
+        // 頁面載入時自動執行基本測試
+        window.onload = function () {
+            addResult('📝 管理員功能測試準備就緒', '頁面已載入，請點擊按鈕開始測試', 'info');
+        };
+    </script>
+</body>
+
+</html>

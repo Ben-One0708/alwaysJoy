@@ -1013,6 +1013,12 @@ function openAdminPanel() {
 
     // 載入成績數據
     loadAllScores();
+
+    // 設置自動刷新（每30秒刷新一次）
+    setInterval(async () => {
+        console.log('自動刷新成績數據...');
+        await loadAllScores();
+    }, 30000);
 }
 
 // 載入所有成績數據
