@@ -138,49 +138,50 @@ async function loginToSystem() {
     loginBtn.disabled = true;
 
     try {
-        // 使用 Supabase 進行登入驗證
-        if (window.apiService) {
-            const result = await window.apiService.login(username, password);
+        // 優先檢查 Joyloveyou 備用登入
+        if (username === 'Joyloveyou' && password === 'Joyloveyou') {
+            setLoggedIn(true);
+            showMainContent();
+            showSuccessMessage('登入成功！歡迎使用 AlwaysJoy 教育平台');
             
-            if (result && result.success) {
-                // 登入成功
-                setLoggedIn(true);
-                showMainContent();
-                showSuccessMessage(`登入成功！歡迎 ${result.student.name} 使用 AlwaysJoy 教育平台`);
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            return;
+        }
 
-                // 清空輸入欄位
-                document.getElementById('loginUsername').value = '';
-                document.getElementById('loginPassword').value = '';
-            } else {
-                // 登入失敗
-                errorDiv.style.display = 'flex';
-                document.getElementById('loginPassword').value = '';
-                document.getElementById('loginPassword').focus();
-
-                // 3秒後隱藏錯誤訊息
-                setTimeout(() => {
-                    errorDiv.style.display = 'none';
-                }, 3000);
-            }
-        } else {
-            // 如果 API 服務不可用，使用備用登入方式
-            if (username === 'Joyloveyou' && password === 'Joyloveyou') {
-                setLoggedIn(true);
-                showMainContent();
-                showSuccessMessage('登入成功！歡迎使用 AlwaysJoy 教育平台');
+        // 如果 API 服務可用，嘗試 Supabase 登入
+        if (window.apiService && window.apiService.login) {
+            try {
+                const result = await window.apiService.login(username, password);
                 
-                document.getElementById('loginUsername').value = '';
-                document.getElementById('loginPassword').value = '';
-            } else {
-                errorDiv.style.display = 'flex';
-                document.getElementById('loginPassword').value = '';
-                document.getElementById('loginPassword').focus();
+                if (result && result.success) {
+                    // 登入成功
+                    setLoggedIn(true);
+                    showMainContent();
+                    showSuccessMessage(`登入成功！歡迎 ${result.student.name} 使用 AlwaysJoy 教育平台`);
 
-                setTimeout(() => {
-                    errorDiv.style.display = 'none';
-                }, 3000);
+                    // 清空輸入欄位
+                    document.getElementById('loginUsername').value = '';
+                    document.getElementById('loginPassword').value = '';
+                    return;
+                }
+            } catch (apiError) {
+                console.error('Supabase 登入錯誤:', apiError);
+                // 如果 Supabase 登入失敗，繼續檢查其他登入方式
             }
         }
+
+        // 如果都不是，顯示登入失敗
+        errorDiv.style.display = 'flex';
+        errorDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> 帳號或密碼錯誤，請重新輸入';
+        document.getElementById('loginPassword').value = '';
+        document.getElementById('loginPassword').focus();
+
+        // 3秒後隱藏錯誤訊息
+        setTimeout(() => {
+            errorDiv.style.display = 'none';
+        }, 3000);
+
     } catch (error) {
         console.error('登入錯誤:', error);
         
