@@ -5,12 +5,6 @@ let currentStudent = null;
 let currentScores = {};
 let practiceData = {};
 
-// Supabase 配置
-let apiService = null;
-if (typeof window !== 'undefined' && window.apiService) {
-    apiService = window.apiService;
-}
-
 // 學生資料
 const students = {
     'C2 Yuni': { group: 'B組', level: 'C2', password: 'Yuni', isAdmin: false },
@@ -555,14 +549,8 @@ function studentLogin() {
         // 隱藏錯誤訊息
         errorDiv.style.display = 'none';
 
-        // 檢查是否為管理員
-        if (students[name].isAdmin) {
-            // 管理員登入，顯示管理員面板
-            openAdminPanel();
-        } else {
-            // 一般學生登入，顯示學習地圖
-            showLearningMap();
-        }
+        // 顯示學習地圖
+        showLearningMap();
     } else {
         // 登入失敗
         errorDiv.textContent = '密碼錯誤，請重新輸入';
@@ -610,157 +598,6 @@ function studentLogout() {
 
     showSuccessMessage('已登出');
     showStudentLogin();
-}
-
-// 管理員功能
-function openAdminPanel() {
-    const modal = document.getElementById('adminModal');
-    modal.style.display = 'block';
-    loadAdminData();
-}
-
-// 載入管理員資料
-function loadAdminData() {
-    // 載入學生列表和分數
-    loadStudentsListWithScores();
-}
-
-// 載入學生列表和分數
-function loadStudentsListWithScores() {
-    const container = document.getElementById('adminStudentsList');
-
-    // 從本地儲存獲取分數
-    const practiceScores = JSON.parse(localStorage.getItem('practiceScores') || '[]');
-    const studentScores = JSON.parse(localStorage.getItem('studentScores') || '[]');
-
-    // 合併所有分數
-    const allScores = [...practiceScores, ...studentScores];
-
-    // 按學生分組
-    const scoresByStudent = {};
-    allScores.forEach(score => {
-        if (!scoresByStudent[score.studentName]) {
-            scoresByStudent[score.studentName] = [];
-        }
-        scoresByStudent[score.studentName].push(score);
-    });
-
-    // 生成 HTML
-    let html = '';
-    Object.keys(students).forEach(studentName => {
-        const student = students[studentName];
-        const studentScores = scoresByStudent[studentName] || [];
-
-        html += `
-            <div class="admin-student-card">
-                <div class="student-header">
-                    <h4>${studentName}</h4>
-                    <span class="student-group">${student.group}</span>
-                </div>
-                <div class="student-scores">
-                    ${studentScores.length > 0 ?
-                studentScores.map(score => `
-                            <div class="score-item">
-                                <span class="score-date">${score.practiceDate || score.date}</span>
-                                <span class="score-type">${getScoreType(score)}</span>
-                                <span class="score-value">${getScoreValue(score)}</span>
-                            </div>
-                        `).join('') :
-                '<p class="no-scores">尚無成績記錄</p>'
-            }
-                </div>
-            </div>
-        `;
-    });
-
-    container.innerHTML = html;
-}
-
-// 獲取分數類型
-function getScoreType(score) {
-    if (score.quizType) {
-        const types = {
-            'personal_magazine_practice': '雜誌練習',
-            'personal_spelling_practice': '拼字練習'
-        };
-        return types[score.quizType] || '練習';
-    }
-
-    if (score.magazineScore > 0) return '雜誌練習';
-    if (score.spellingScore > 0) return '拼字練習';
-    if (score.levelScore > 0) return '級別練習';
-    if (score.paragraphScore > 0) return '段落練習';
-    if (score.mixedScore > 0) return '混合練習';
-    if (score.batchScore > 0) return '大批次練習';
-
-    return '練習';
-}
-
-// 獲取分數值
-function getScoreValue(score) {
-    if (score.quizType) {
-        return `${score.score}分`;
-    }
-
-    const scores = [
-        score.magazineScore,
-        score.spellingScore,
-        score.levelScore,
-        score.paragraphScore,
-        score.mixedScore,
-        score.batchScore
-    ].filter(s => s > 0);
-
-    return scores.length > 0 ? `${scores.join(', ')}分` : '0分';
-}
-
-// 匯出成績功能
-function exportScores() {
-    const practiceScores = JSON.parse(localStorage.getItem('practiceScores') || '[]');
-    const studentScores = JSON.parse(localStorage.getItem('studentScores') || '[]');
-    const allScores = [...practiceScores, ...studentScores];
-
-    if (allScores.length === 0) {
-        alert('目前沒有成績資料可以匯出');
-        return;
-    }
-
-    // 準備 CSV 資料
-    const csvData = [
-        ['學生姓名', '組別', '日期', '練習類型', '分數', '備註']
-    ];
-
-    allScores.forEach(score => {
-        const student = students[score.studentName] || { group: '未知' };
-        const scoreType = getScoreType(score);
-        const scoreValue = getScoreValue(score);
-        const notes = score.practiceNotes || '';
-
-        csvData.push([
-            score.studentName,
-            student.group,
-            score.practiceDate || score.date,
-            scoreType,
-            scoreValue,
-            notes
-        ]);
-    });
-
-    // 轉換為 CSV 字串
-    const csvString = csvData.map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
-
-    // 下載檔案
-    const blob = new Blob(['\ufeff' + csvString], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    link.setAttribute('href', url);
-    link.setAttribute('download', `學生成績報告_${new Date().toISOString().split('T')[0]}.csv`);
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    showSuccessMessage('成績資料已成功匯出！');
 }
 
 // 顯示學習地圖
