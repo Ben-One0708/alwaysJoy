@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase 連接測試</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+            color: #0c5460;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-color: #ffeaa7;
+            color: #856404;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .config-section {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .config-section h4 {
+            margin-top: 0;
+            color: #495057;
+        }
+        .config-input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Firebase 連接測試</h1>
+        
+        <div class="test-section info">
+            <h3>📋 測試說明</h3>
+            <p>這個頁面會測試您的 Firebase 連接是否正常工作，包括 Firestore 數據庫連接。</p>
+        </div>
+
+        <div class="config-section">
+            <h4>⚙️ Firebase 配置</h4>
+            <p>請確保您已經在 <code>api-firebase-client.js</code> 中更新了正確的 Firebase 配置。</p>
+            <p>如果還沒有配置，請按照 <code>FIREBASE_SETUP.md</code> 的步驟進行設置。</p>
+        </div>
+
+        <div class="test-section">
+            <h3>🚀 執行測試</h3>
+            <button onclick="testConnection()">測試基本連接</button>
+            <button onclick="testGetStudents()">測試獲取學生</button>
+            <button onclick="testGetScores()">測試獲取成績</button>
+            <button onclick="testLogin()">測試學生登入</button>
+            <button onclick="testSaveScore()">測試保存成績</button>
+            <button onclick="initializeData()">初始化示例數據</button>
+            <button onclick="runAllTests()">執行所有測試</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Firebase API 客戶端 -->
+    <script src="api-firebase-client.js"></script>
+    
+    <script>
+        const resultsDiv = document.getElementById('results');
+
+        function addResult(title, content, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test-section ${type}`;
+            div.innerHTML = `
+                <h4>${title}</h4>
+                <pre>${content}</pre>
+            `;
+            resultsDiv.appendChild(div);
+        }
+
+        function clearResults() {
+            resultsDiv.innerHTML = '';
+        }
+
+        async function testConnection() {
+            clearResults();
+            addResult('🔄 測試基本連接', '正在測試 Firebase 連接...', 'info');
+            
+            try {
+                const result = await apiService.testConnection();
+                if (result) {
+                    addResult('✅ 基本連接成功', 'Firebase 連接正常！', 'success');
+                } else {
+                    addResult('❌ 基本連接失敗', '無法連接到 Firebase', 'error');
+                }
+            } catch (error) {
+                addResult('❌ 連接錯誤', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function testGetStudents() {
+            addResult('🔄 測試獲取學生', '正在獲取學生列表...', 'info');
+            
+            try {
+                const students = await apiService.getAllStudents();
+                if (students.length > 0) {
+                    addResult('✅ 獲取學生成功', `成功獲取 ${students.length} 位學生\n${JSON.stringify(students, null, 2)}`, 'success');
+                } else {
+                    addResult('⚠️ 學生列表為空', '沒有找到學生數據，請先初始化示例數據', 'warning');
+                }
+            } catch (error) {
+                addResult('❌ 獲取學生失敗', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function testGetScores() {
+            addResult('🔄 測試獲取成績', '正在獲取成績列表...', 'info');
+            
+            try {
+                const scores = await apiService.getAllScores();
+                addResult('✅ 獲取成績成功', `成功獲取 ${scores.length} 筆成績記錄\n${JSON.stringify(scores, null, 2)}`, 'success');
+            } catch (error) {
+                addResult('❌ 獲取成績失敗', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function testLogin() {
+            addResult('🔄 測試學生登入', '正在測試登入功能...', 'info');
+            
+            try {
+                const result = await apiService.login('Ben', 'BenBenBen');
+                if (result.success) {
+                    addResult('✅ 學生登入成功', `登入成功：${result.student.name} (${result.student.group})`, 'success');
+                } else {
+                    addResult('❌ 學生登入失敗', `登入失敗：${result.message}`, 'error');
+                }
+            } catch (error) {
+                addResult('❌ 登入錯誤', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function testSaveScore() {
+            addResult('🔄 測試保存成績', '正在測試保存成績功能...', 'info');
+            
+            try {
+                const result = await apiService.saveScore('Test Student', '測試組', '測試練習', 85);
+                if (result.success) {
+                    addResult('✅ 保存成績成功', `成績已保存：${JSON.stringify(result.score, null, 2)}`, 'success');
+                } else {
+                    addResult('❌ 保存成績失敗', `保存失敗：${result.message}`, 'error');
+                }
+            } catch (error) {
+                addResult('❌ 保存成績錯誤', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function initializeData() {
+            addResult('🔄 初始化示例數據', '正在初始化示例學生和成績數據...', 'info');
+            
+            try {
+                const result = await apiService.initializeSampleData();
+                if (result) {
+                    addResult('✅ 數據初始化成功', '示例數據已成功初始化！', 'success');
+                } else {
+                    addResult('⚠️ 數據初始化跳過', '數據已存在，跳過初始化', 'warning');
+                }
+            } catch (error) {
+                addResult('❌ 數據初始化失敗', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function runAllTests() {
+            clearResults();
+            addResult('🚀 開始執行所有測試', '正在執行完整的 Firebase 測試...', 'info');
+            
+            // 測試 1：基本連接
+            await testConnection();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // 測試 2：初始化數據
+            await initializeData();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // 測試 3：獲取學生
+            await testGetStudents();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // 測試 4：獲取成績
+            await testGetScores();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // 測試 5：學生登入
+            await testLogin();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // 測試 6：保存成績
+            await testSaveScore();
+            
+            addResult('🎉 所有測試完成', '請查看上面的測試結果，確保所有功能都正常工作', 'success');
+        }
+
+        // 頁面載入時自動執行基本測試
+        window.onload = function() {
+            addResult('📝 測試準備', '頁面已載入，Firebase SDK 已準備就緒。請點擊按鈕開始測試。', 'info');
+        };
+    </script>
+</body>
+</html>

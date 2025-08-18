@@ -9,7 +9,7 @@
 - **成績記錄**：自動記錄和查看練習成績
 - **管理員功能**：管理員可查看所有學生成績
 - **響應式設計**：支援手機、平板、電腦
-- **本地存儲**：使用瀏覽器本地存儲保存數據
+- **雲端數據庫**：使用 Firebase Firestore 保存數據
 
 ## 🚀 快速開始
 
@@ -34,7 +34,11 @@
    cd alwaysJoy
    ```
 
-2. **開啟網站**：
+2. **配置 Firebase**：
+   - 按照 `FIREBASE_SETUP.md` 的步驟設置 Firebase
+   - 更新 `api-firebase-client.js` 中的配置
+
+3. **開啟網站**：
    - 用瀏覽器打開 `index.html`
    - 或使用本地服務器：
    ```bash
@@ -64,7 +68,9 @@ alwaysJoy/
 ├── index.html              # 主頁面
 ├── script.js               # 主要 JavaScript 邏輯
 ├── styles.css              # 樣式文件
-├── api-local-client.js     # 本地存儲 API 客戶端
+├── api-firebase-client.js  # Firebase API 客戶端
+├── FIREBASE_SETUP.md       # Firebase 設置指南
+├── firebase-test.html      # Firebase 測試頁面
 ├── MJ3.html               # 詞彙練習遊戲
 ├── vocabulary_quiz_*.html  # 詞彙練習頁面
 ├── image/                 # 圖片資源
@@ -78,13 +84,14 @@ alwaysJoy/
 - **CSS3**：樣式和響應式設計
 - **JavaScript (ES6+)**：互動邏輯和數據處理
 
-### 數據存儲
-- **本地存儲 (LocalStorage)**：瀏覽器本地數據存儲
-- **JSON 格式**：結構化數據存儲
-- **自動備份**：數據導出和導入功能
+### 後端服務
+- **Firebase Firestore**：雲端 NoSQL 數據庫
+- **Firebase SDK**：JavaScript 客戶端庫
+- **實時同步**：數據實時更新
 
 ### 部署平台
 - **GitHub Pages**：靜態網站託管
+- **Firebase Hosting**：可選的託管服務
 - **Git**：版本控制
 
 ## 📊 功能模組
@@ -125,10 +132,10 @@ alwaysJoy/
 
 ## 🔒 數據安全
 
-- **本地存儲**：數據保存在用戶瀏覽器中
-- **無服務器**：不需要後端服務器
-- **隱私保護**：數據不會上傳到外部服務器
-- **數據備份**：支援數據導出和導入
+- **Firebase 安全規則**：可配置的數據訪問權限
+- **身份驗證**：支援多種登入方式
+- **數據備份**：自動備份和恢復
+- **實時同步**：多設備數據同步
 
 ## 📱 響應式設計
 
@@ -149,8 +156,8 @@ alwaysJoy/
 3. 更新導航和成績記錄
 
 ### 數據管理
-- 數據存儲在瀏覽器本地存儲中
-- 使用 `api-local-client.js` 管理數據
+- 數據存儲在 Firebase Firestore 中
+- 使用 `api-firebase-client.js` 管理數據
 - 支援數據導出和導入
 
 ## 🚀 部署
@@ -161,17 +168,34 @@ alwaysJoy/
 3. 選擇分支和目錄
 4. 等待部署完成
 
+### Firebase Hosting 部署（可選）
+1. 安裝 Firebase CLI
+2. 初始化 Firebase 項目
+3. 部署到 Firebase Hosting
+
 ### 本地部署
 1. 下載所有文件
-2. 用瀏覽器打開 `index.html`
-3. 或使用本地服務器
+2. 配置 Firebase
+3. 用瀏覽器打開 `index.html`
+4. 或使用本地服務器
+
+## 🔧 Firebase 設置
+
+詳細的 Firebase 設置步驟請參考 `FIREBASE_SETUP.md`：
+
+1. **創建 Firebase 項目**
+2. **啟用 Firestore 數據庫**
+3. **獲取配置信息**
+4. **更新代碼配置**
+5. **設置安全規則**
+6. **初始化數據**
 
 ## 📞 支援
 
 如有問題或建議，請：
 1. 檢查瀏覽器控制台是否有錯誤
-2. 清除瀏覽器快取
-3. 重新載入頁面
+2. 確認 Firebase 配置正確
+3. 使用 `firebase-test.html` 測試連接
 4. 聯繫開發者
 
 ## 📄 授權
