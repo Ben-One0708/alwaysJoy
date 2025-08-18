@@ -13,10 +13,24 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies (if any)
+      run: |
+        # 如果有 package.json，取消註釋以下行
+        # npm install
+        
+    - name: Build (if needed)
+      run: |
+        # 如果有構建步驟，取消註釋以下行
+        # npm run build
+        
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: .
-        publish_branch: gh-pages
-        force_orphan: true
+        publish_dir: ./

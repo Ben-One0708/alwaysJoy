@@ -476,7 +476,6 @@
 
     <!-- Supabase整合 -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <script src="supabase-config.js"></script>
     <script src="api-supabase-client.js"></script>
     <script>
         // 詞彙練習完成後儲存分數到Supabase
@@ -491,7 +490,7 @@
                     quizType: quizType, // 'vocabulary_part1', 'vocabulary_part2', etc.
                     score: score,
                     totalQuestions: totalQuestions,
-                    percentage: 0, // 讓API客戶端重新計算,
+                    percentage: Math.round((score / totalQuestions) * 100),
                     date: new Date().toISOString(),
                     details: {
                         correctAnswers: score,
@@ -527,7 +526,7 @@
                     quizType: quizType,
                     score: score,
                     totalQuestions: totalQuestions,
-                    percentage: 0, // 讓API客戶端重新計算,
+                    percentage: Math.round((score / totalQuestions) * 100),
                     date: new Date().toISOString()
                 };
                 const existingScores = JSON.parse(localStorage.getItem('vocabularyScores') || '[]');

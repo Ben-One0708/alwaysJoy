@@ -1,43 +1,22 @@
 // Supabase客戶端API服務
 class SupabaseClientService {
     constructor() {
-        // 從配置文件或環境變數獲取Supabase設置
-        this.supabaseUrl = this.getSupabaseUrl();
-        this.supabaseKey = this.getSupabaseKey();
-
-        // 檢查配置是否正確
-        if (!this.supabaseUrl || !this.supabaseKey ||
-            this.supabaseUrl.includes('your-project-ref') ||
-            this.supabaseKey.includes('your-anon-key')) {
-            console.error('❌ Supabase配置未設置！請檢查 supabase-config.js 文件');
-            throw new Error('Supabase配置未正確設置');
-        }
+        // 這些值需要從您的Supabase項目設置中獲取
+        // 請在部署前更新這些值
+        this.supabaseUrl = 'https://your-project-ref.supabase.co'; // 請替換為您的 Project URL
+        this.supabaseKey = 'your-anon-key'; // 請替換為您的 anon key
 
         // 初始化Supabase客戶端
         this.supabase = window.supabase.createClient(this.supabaseUrl, this.supabaseKey);
-        console.log('✅ Supabase客戶端已初始化');
-    }
 
-    // 獲取Supabase URL
-    getSupabaseUrl() {
-        // 優先使用配置文件
-        if (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.PROJECT_URL) {
-            return window.SUPABASE_CONFIG.PROJECT_URL;
-        }
-
-        // 備用：環境變數或默認值
-        return process.env.SUPABASE_URL || 'https://your-project-ref.supabase.co';
-    }
-
-    // 獲取Supabase Key
-    getSupabaseKey() {
-        // 優先使用配置文件
-        if (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.ANON_KEY) {
-            return window.SUPABASE_CONFIG.ANON_KEY;
-        }
-
-        // 備用：環境變數或默認值
-        return process.env.SUPABASE_ANON_KEY || 'your-anon-key';
+        // 測試連接
+        this.testConnection().then(isConnected => {
+            if (!isConnected) {
+                console.warn('Supabase 連接失敗，請檢查配置');
+            } else {
+                console.log('Supabase 連接成功');
+            }
+        });
     }
 
     // 學生登入
@@ -45,33 +24,23 @@ class SupabaseClientService {
         try {
             const { data, error } = await this.supabase
                 .from('students')
-                .select('*')
+                .select('name, group, level, isAdmin')
                 .eq('name', name)
-                .eq('password', password);
+                .eq('password', password)
+                .single();
 
             if (error) {
-                console.error('登入查詢錯誤:', error);
-                return { success: false, error: error.message };
+                throw new Error(error.message);
             }
 
-            if (data && data.length > 0) {
-                const userData = data[0];
-                // 將 group_name 映射為 group 以保持向後兼容
-                return {
-                    success: true,
-                    student: {
-                        name: userData.name,
-                        group: userData.group_name || userData.group,
-                        level: userData.level,
-                        isAdmin: userData.isadmin || userData.isAdmin || false
-                    }
-                };
+            if (data) {
+                return { success: true, student: data };
             } else {
                 return { success: false, error: '帳號或密碼錯誤' };
             }
         } catch (error) {
             console.error('登入錯誤:', error);
-            return { success: false, error: error.message };
+            throw error;
         }
     }
 
@@ -81,7 +50,7 @@ class SupabaseClientService {
             const { data, error } = await this.supabase
                 .from('scores')
                 .select('*')
-                .eq('studentname', studentName)
+                .eq('studentName', studentName)
                 .order('date', { ascending: false });
 
             if (error) {
@@ -98,35 +67,16 @@ class SupabaseClientService {
     // 儲存成績
     async saveScore(scoreData) {
         try {
-            const score = parseInt(scoreData.score) || 0;
-            const totalQuestions = parseInt(scoreData.totalQuestions) || 0;
-
-            // 正確計算百分比，確保不超過100%
-            let percentage = 0;
-            if (totalQuestions > 0) {
-                percentage = Math.round((score / totalQuestions) * 100);
-                // 確保百分比不超過100%
-                percentage = Math.min(percentage, 100);
-            }
-
             // 確保scoreData包含必要欄位
             const scoreRecord = {
-                studentname: scoreData.studentName || 'Anonymous',
-                quiztype: scoreData.quizType || 'unknown',
-                score: score,
-                totalquestions: totalQuestions,
-                percentage: percentage,
+                studentName: scoreData.studentName || 'Anonymous',
+                quizType: scoreData.quizType || 'unknown',
+                score: scoreData.score || 0,
+                totalQuestions: scoreData.totalQuestions || 0,
+                percentage: scoreData.percentage || 0,
                 date: scoreData.date || new Date().toISOString(),
                 details: scoreData.details || {}
             };
-
-            // 調試：檢查計算結果
-            console.log('成績儲存調試:', {
-                score: score,
-                totalQuestions: totalQuestions,
-                calculatedPercentage: percentage,
-                originalPercentage: scoreData.percentage
-            });
 
             const { data, error } = await this.supabase
                 .from('scores')
@@ -169,20 +119,14 @@ class SupabaseClientService {
         try {
             const { data, error } = await this.supabase
                 .from('students')
-                .select('*')
+                .select('name, group, level, isAdmin')
                 .order('name');
 
             if (error) {
                 throw new Error(error.message);
             }
 
-            // 將 group_name 映射為 group 以保持向後兼容
-            return (data || []).map(student => ({
-                name: student.name,
-                group: student.group_name || student.group,
-                level: student.level,
-                isAdmin: student.isadmin || student.isAdmin || false
-            }));
+            return data || [];
         } catch (error) {
             console.error('獲取學生列表錯誤:', error);
             throw error;
@@ -286,18 +230,13 @@ class SupabaseClientService {
         try {
             const { data, error } = await this.supabase
                 .from('students')
-                .select('*')
+                .select('count')
                 .limit(1);
 
-            if (error) {
-                console.error('連接測試錯誤:', error);
-                return { success: false, error: error.message };
-            }
-
-            return { success: true, message: '資料庫連接正常' };
+            return !error;
         } catch (error) {
             console.error('連接測試失敗:', error);
-            return { success: false, error: error.message };
+            return false;
         }
     }
 }

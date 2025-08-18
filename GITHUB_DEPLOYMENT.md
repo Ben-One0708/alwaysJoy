@@ -1,234 +1,203 @@
-# GitHub + Supabase 部署指南
+# GitHub 部署指南
 
-## 🚀 完整部署流程
-
-### **步驟1：創建Supabase項目**
-
-1. 前往 [Supabase](https://supabase.com)
-2. 註冊帳號並創建新項目
-3. 項目名稱：`alwaysjoy-learning`
-4. 記錄項目URL和API密鑰
-
-### **步驟2：配置Supabase數據庫**
-
-#### **在Supabase Dashboard中執行SQL：**
-
-```sql
--- 創建學生表
-CREATE TABLE students (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) UNIQUE NOT NULL,
-    "group" VARCHAR(50) NOT NULL,
-    level VARCHAR(50) NOT NULL,
-    password VARCHAR(100) NOT NULL,
-    "isAdmin" BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- 創建成績表
-CREATE TABLE scores (
-    id SERIAL PRIMARY KEY,
-    "studentName" VARCHAR(100) NOT NULL,
-    date DATE NOT NULL,
-    scores JSONB NOT NULL,
-    notes TEXT,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY ("studentName") REFERENCES students(name) ON DELETE CASCADE
-);
-
--- 創建題目表
-CREATE TABLE questions (
-    id SERIAL PRIMARY KEY,
-    question TEXT NOT NULL,
-    answer TEXT NOT NULL,
-    category VARCHAR(100) NOT NULL,
-    difficulty VARCHAR(50) NOT NULL,
-    options JSONB,
-    explanation TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- 創建索引
-CREATE INDEX idx_scores_student_name ON scores("studentName");
-CREATE INDEX idx_scores_date ON scores(date);
-CREATE INDEX idx_questions_category ON questions(category);
-CREATE INDEX idx_questions_difficulty ON questions(difficulty);
-CREATE INDEX idx_questions_category_difficulty ON questions(category, difficulty);
-
--- 插入學生數據
-INSERT INTO students (name, "group", level, password, "isAdmin") VALUES
-('C2 Yuni', 'B組', 'C2', 'Yuni', false),
-('C2 Emily', 'B組', 'C2', 'Emily', false),
-('A8 Vito', 'B組', 'A8', 'Vito', false),
-('A4 Eudora', 'C組', 'A4', 'Eudora', false),
-('A5 Zoe', 'C組', 'A5', 'Zoe', false),
-('N6 Bruce', 'D組', 'N6', 'Bruce', false),
-('N7 Laura', 'D組', 'N7', 'Laura', false),
-('K9 Lilian', 'E組', 'K9', 'Lilian', false),
-('K9 Jill', 'E組', 'K9', 'Jill', false),
-('I2 Candy', 'F組', 'I2', 'Candy', false),
-('N3 Avery', 'F組', 'N3', 'Avery', false),
-('教務組 Annie', '教務組', 'Admin', 'Annie', false),
-('教務組 Celina', '教務組', 'Admin', 'Celina', false),
-('教務組 Nina', '教務組', 'Admin', 'Nina', false),
-('Ben', '管理員', 'Admin', 'BenBenBen', true);
-
--- 插入示例題目
-INSERT INTO questions (question, answer, category, difficulty, options, explanation) VALUES
-('請填入缺少的字母：app_e (apple)', 'l', '拼字練習', '初級', '["l", "e", "a", "p"]', 'apple是蘋果的意思，缺少的字母是l'),
-('請填入缺少的字母：b_ok (book)', 'o', '拼字練習', '初級', '["o", "a", "e", "i"]', 'book是書的意思，缺少的字母是o'),
-('請填入缺少的字母：c_t (cat)', 'a', '拼字練習', '初級', '["a", "e", "i", "o"]', 'cat是貓的意思，缺少的字母是a'),
-('請填入缺少的字母：d_g (dog)', 'o', '拼字練習', '初級', '["o", "a", "e", "i"]', 'dog是狗的意思，缺少的字母是o'),
-('請填入缺少的字母：h_se (house)', 'ou', '拼字練習', '中級', '["ou", "au", "eu", "oi"]', 'house是房子的意思，缺少的字母是ou');
-```
-
-### **步驟3：配置Supabase API密鑰**
-
-1. 在Supabase Dashboard中點擊「Settings」→「API」
-2. 複製「Project URL」和「anon public」密鑰
-3. 編輯 `api-supabase-client.js` 文件：
-
-```javascript
-this.supabaseUrl = 'https://your-project-ref.supabase.co'; // 替換為您的Project URL
-this.supabaseKey = 'your-anon-key'; // 替換為您的anon public密鑰
-```
-
-### **步驟4：創建GitHub倉庫**
+## 1. 創建 GitHub 倉庫
 
 1. 前往 [GitHub](https://github.com)
-2. 點擊「New repository」
-3. 倉庫名稱：`alwaysjoy-learning`
-4. 選擇「Public」
-5. 不要初始化README（我們已有文件）
+2. 點擊右上角的 "+" 號，選擇 "New repository"
+3. 填寫倉庫資訊：
+   - **Repository name**: `alwaysjoy-learning`
+   - **Description**: AlwaysJoy 拼字比賽練習平台
+   - **Visibility**: Public (或 Private，根據需要)
+   - **Initialize this repository with**: 不要勾選任何選項
+4. 點擊 "Create repository"
 
-### **步驟5：推送代碼到GitHub**
+## 2. 推送代碼到 GitHub
+
+在本地終端機中執行以下命令：
 
 ```bash
-# 添加所有文件
+# 確保在項目目錄中
+cd /Users/hsienjenchiu/Desktop/alwaysJoy
+
+# 添加所有文件到 Git
 git add .
 
 # 提交更改
-git commit -m "Initial commit: AlwaysJoy Learning System with Supabase"
+git commit -m "Initial commit: AlwaysJoy learning platform"
 
-# 添加遠程倉庫（替換為您的GitHub倉庫URL）
-git remote add origin https://github.com/your-username/alwaysjoy-learning.git
+# 添加遠程倉庫（替換 YOUR_USERNAME 為您的 GitHub 用戶名）
+git remote add origin https://github.com/YOUR_USERNAME/alwaysjoy-learning.git
 
-# 推送到GitHub
+# 推送到主分支
+git branch -M main
 git push -u origin main
 ```
 
-### **步驟6：啟用GitHub Pages**
+## 3. 設置 GitHub Pages
 
-1. 在GitHub倉庫頁面點擊「Settings」
-2. 滾動到「Pages」部分
-3. Source選擇「Deploy from a branch」
-4. Branch選擇「gh-pages」
-5. 點擊「Save」
+1. 在 GitHub 倉庫頁面中，點擊 "Settings" 標籤
+2. 在左側選單中點擊 "Pages"
+3. 在 "Source" 部分：
+   - 選擇 "Deploy from a branch"
+   - 在 "Branch" 下拉選單中選擇 "main"
+   - 在 "Folder" 中選擇 "/ (root)"
+4. 點擊 "Save"
 
-### **步驟7：配置GitHub Actions**
+## 4. 自動部署設置
 
-GitHub Actions會自動部署到GitHub Pages。確保 `.github/workflows/deploy.yml` 文件存在。
+創建 GitHub Actions 工作流程來自動部署：
 
-## 🔧 配置說明
+### 創建 `.github/workflows/deploy.yml` 文件
 
-### **Supabase設置**
+```yaml
+name: Deploy to GitHub Pages
 
-#### **Row Level Security (RLS)**
-```sql
--- 啟用RLS
-ALTER TABLE students ENABLE ROW LEVEL SECURITY;
-ALTER TABLE scores ENABLE ROW LEVEL SECURITY;
-ALTER TABLE questions ENABLE ROW LEVEL SECURITY;
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
--- 創建策略（可選）
-CREATE POLICY "Allow public read access" ON students FOR SELECT USING (true);
-CREATE POLICY "Allow public read access" ON scores FOR SELECT USING (true);
-CREATE POLICY "Allow public read access" ON questions FOR SELECT USING (true);
-CREATE POLICY "Allow public insert access" ON scores FOR INSERT WITH CHECK (true);
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies (if any)
+      run: |
+        # 如果有 package.json，取消註釋以下行
+        # npm install
+        
+    - name: Build (if needed)
+      run: |
+        # 如果有構建步驟，取消註釋以下行
+        # npm run build
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
 ```
 
-#### **API密鑰安全**
-- 使用 `anon public` 密鑰（只讀權限）
-- 在生產環境中設置適當的RLS策略
-- 定期輪換密鑰
+## 5. 自定義域名設置（可選）
 
-### **GitHub Pages設置**
+如果您有自己的域名：
 
-#### **自定義域名（可選）**
-1. 在GitHub Pages設置中添加自定義域名
-2. 更新DNS記錄
-3. 配置SSL證書
+1. 在 GitHub 倉庫的 "Settings" → "Pages" 中
+2. 在 "Custom domain" 欄位中輸入您的域名
+3. 點擊 "Save"
+4. 在您的域名提供商處設置 DNS 記錄：
+   - 類型：CNAME
+   - 名稱：www（或您想要的子域名）
+   - 值：`YOUR_USERNAME.github.io`
 
-#### **CORS設置**
-確保Supabase允許GitHub Pages域名訪問：
-1. 在Supabase Dashboard中設置CORS
-2. 添加您的GitHub Pages URL
+## 6. 環境變數設置
 
-## 📊 功能測試
+為了保護 API 密鑰，建議使用環境變數：
 
-### **本地測試**
-```bash
-# 啟動本地伺服器
-python3 -m http.server 8000
+1. 在 GitHub 倉庫的 "Settings" → "Secrets and variables" → "Actions"
+2. 點擊 "New repository secret"
+3. 添加以下密鑰：
+   - `SUPABASE_URL`: 您的 Supabase Project URL
+   - `SUPABASE_ANON_KEY`: 您的 Supabase anon key
 
-# 訪問 http://localhost:8000
-```
+## 7. 更新 API 配置
 
-### **生產測試**
-1. 等待GitHub Actions部署完成
-2. 訪問您的GitHub Pages URL
-3. 測試所有功能
+在部署前，確保更新 `api-supabase-client.js` 中的配置：
 
-## 🔍 故障排除
-
-### **常見問題**
-
-#### **CORS錯誤**
-- 檢查Supabase CORS設置
-- 確認API密鑰正確
-- 檢查域名白名單
-
-#### **數據庫連接錯誤**
-- 確認Supabase項目URL正確
-- 檢查API密鑰是否有效
-- 驗證表結構是否正確
-
-#### **GitHub Pages部署失敗**
-- 檢查GitHub Actions日誌
-- 確認文件路徑正確
-- 檢查分支設置
-
-### **調試技巧**
 ```javascript
-// 在瀏覽器控制台中測試連接
-window.apiService.testConnection().then(result => {
-    console.log('連接測試結果:', result);
-});
+// 使用環境變數或直接設置
+this.supabaseUrl = process.env.SUPABASE_URL || 'https://your-project-ref.supabase.co';
+this.supabaseKey = process.env.SUPABASE_ANON_KEY || 'your-anon-key';
 ```
 
-## 📈 監控和維護
+## 8. 測試部署
 
-### **Supabase監控**
-- 在Supabase Dashboard中查看使用量
-- 監控API請求數量
-- 查看數據庫性能
+1. 推送代碼後，GitHub Actions 會自動構建和部署
+2. 等待幾分鐘後，訪問您的 GitHub Pages URL：
+   - `https://YOUR_USERNAME.github.io/alwaysjoy-learning`
+3. 測試所有功能是否正常運作
 
-### **GitHub監控**
-- 查看GitHub Actions部署狀態
-- 監控GitHub Pages訪問量
-- 檢查錯誤日誌
+## 9. 持續部署
 
-## 🎯 最佳實踐
+每次推送到 `main` 分支時，GitHub Actions 會自動重新部署網站。
 
-1. **安全第一**：使用適當的RLS策略
-2. **版本控制**：定期提交代碼更改
-3. **備份數據**：定期導出Supabase數據
-4. **性能優化**：監控查詢性能
-5. **用戶體驗**：測試所有功能流程
+## 10. 監控和維護
 
-## 📞 支持
+### 檢查部署狀態
+- 在 GitHub 倉庫頁面點擊 "Actions" 標籤
+- 查看最新的工作流程運行狀態
 
-- [Supabase文檔](https://supabase.com/docs)
-- [GitHub Pages文檔](https://pages.github.com)
-- [GitHub Actions文檔](https://docs.github.com/en/actions)
+### 查看網站統計
+- 在 "Settings" → "Pages" 中查看訪問統計
+- 監控網站性能和可用性
+
+### 備份和恢復
+- 定期備份代碼和資料庫
+- 設置自動備份流程
+
+## 11. 故障排除
+
+### 常見問題
+
+1. **部署失敗**：
+   - 檢查 GitHub Actions 日誌
+   - 確認所有文件都已提交
+   - 檢查語法錯誤
+
+2. **網站無法訪問**：
+   - 確認 GitHub Pages 已啟用
+   - 檢查自定義域名設置
+   - 等待部署完成
+
+3. **API 連接問題**：
+   - 確認 Supabase 配置正確
+   - 檢查 CORS 設置
+   - 驗證 API 密鑰
+
+### 調試技巧
+
+```bash
+# 本地測試
+python3 -m http.server 8000
+# 訪問 http://localhost:8000
+
+# 檢查 Git 狀態
+git status
+git log --oneline
+
+# 檢查遠程倉庫
+git remote -v
+```
+
+## 12. 安全最佳實踐
+
+1. **代碼安全**：
+   - 不要在前端代碼中硬編碼敏感資訊
+   - 使用環境變數管理密鑰
+   - 定期更新依賴項
+
+2. **訪問控制**：
+   - 設置適當的倉庫權限
+   - 使用分支保護規則
+   - 審查所有代碼更改
+
+3. **監控**：
+   - 設置錯誤監控
+   - 監控網站性能
+   - 定期檢查安全漏洞
+
+---
+
+**版本**: 1.0.0  
+**最後更新**: 2024年12月  
+**適用於**: AlwaysJoy 學習平台

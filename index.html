@@ -729,34 +729,7 @@
         </div>
     </div>
 
-    <!-- 管理員面板模態框 -->
-    <div id="adminModal" class="modal">
-        <div class="modal-content admin-modal-content">
-            <span class="close" onclick="closeModal('adminModal')">&times;</span>
-            <div class="admin-header">
-                <h2><i class="fas fa-user-shield"></i> 管理員面板</h2>
-                <p>查看所有學生的練習成績和統計資料</p>
-            </div>
-
-            <div class="admin-controls">
-                <button onclick="loadAdminData()" class="admin-btn">
-                    <i class="fas fa-sync-alt"></i> 重新整理
-                </button>
-                <button onclick="exportScores()" class="admin-btn">
-                    <i class="fas fa-download"></i> 匯出成績
-                </button>
-            </div>
-
-            <div class="admin-content">
-                <div id="adminStudentsList" class="admin-students-list">
-                    <!-- 學生列表將在這裡動態載入 -->
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <script src="supabase-config.js"></script>
     <script src="api-supabase-client.js"></script>
     <script src="script.js"></script>
 </body>
