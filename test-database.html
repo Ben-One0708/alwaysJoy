@@ -225,7 +225,7 @@
                     quizType: quizType,
                     score: score,
                     totalQuestions: totalQuestions,
-                    percentage: Math.round((score / totalQuestions) * 100),
+                    percentage: 0, // 讓API客戶端重新計算
                     date: new Date().toISOString(),
                     details: { manual_test: true }
                 };

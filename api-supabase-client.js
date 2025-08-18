@@ -97,16 +97,35 @@ class SupabaseClientService {
     // 儲存成績
     async saveScore(scoreData) {
         try {
+            const score = parseInt(scoreData.score) || 0;
+            const totalQuestions = parseInt(scoreData.totalQuestions) || 0;
+            
+            // 正確計算百分比，確保不超過100%
+            let percentage = 0;
+            if (totalQuestions > 0) {
+                percentage = Math.round((score / totalQuestions) * 100);
+                // 確保百分比不超過100%
+                percentage = Math.min(percentage, 100);
+            }
+
             // 確保scoreData包含必要欄位
             const scoreRecord = {
                 studentname: scoreData.studentName || 'Anonymous',
                 quiztype: scoreData.quizType || 'unknown',
-                score: scoreData.score || 0,
-                totalquestions: scoreData.totalQuestions || 0,
-                percentage: scoreData.percentage || 0,
+                score: score,
+                totalquestions: totalQuestions,
+                percentage: percentage,
                 date: scoreData.date || new Date().toISOString(),
                 details: scoreData.details || {}
             };
+
+            // 調試：檢查計算結果
+            console.log('成績儲存調試:', {
+                score: score,
+                totalQuestions: totalQuestions,
+                calculatedPercentage: percentage,
+                originalPercentage: scoreData.percentage
+            });
 
             const { data, error } = await this.supabase
                 .from('scores')
