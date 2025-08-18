@@ -122,142 +122,193 @@
 
                 <!-- 學生練習 -->
                 <div id="practice" class="content-section">
-                    <h2><i class="fas fa-user-graduate"></i> 學生登入</h2>
-                    <p>請選擇您的組別和姓名，並輸入密碼：</p>
-
-                    <div class="student-login-container">
-                        <div class="login-form-card">
-                            <div class="form-header">
-                                <i class="fas fa-user-graduate header-icon"></i>
-                                <h3>學生身份驗證</h3>
-                                <p>請選擇您的組別和姓名進行登入</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="studentGroup">
-                                    <i class="fas fa-users"></i> 組別：
-                                </label>
-                                <select id="studentGroup" onchange="updateStudentNames()" class="form-select">
-                                    <option value="">請選擇組別</option>
-                                    <option value="B組">B組</option>
-                                    <option value="C組">C組</option>
-                                    <option value="D組">D組</option>
-                                    <option value="E組">E組</option>
-                                    <option value="F組">F組</option>
-                                    <option value="教務組">教務組</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="studentName">
-                                    <i class="fas fa-user"></i> 姓名：
-                                </label>
-                                <select id="studentName" class="form-select" disabled>
-                                    <option value="">請先選擇組別</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="studentPassword">
-                                    <i class="fas fa-key"></i> 密碼：
-                                </label>
-                                <div class="password-container">
-                                    <input type="password" id="studentPassword" placeholder="請輸入您的英文名字"
-                                        class="form-input">
-                                    <button type="button" class="password-toggle" onclick="togglePassword()">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div id="studentLoginError" class="login-error" style="display: none;">
-                                <i class="fas fa-exclamation-triangle"></i> 密碼錯誤，請重新輸入
-                            </div>
-
-                            <button onclick="studentLogin()" class="login-submit-btn">
-                                <i class="fas fa-sign-in-alt"></i> 登入學習
-                            </button>
-
-                            <div class="login-help">
-                                <p><i class="fas fa-info-circle"></i> 密碼為您的英文名字（例如：Yuni、Emily、Vito）</p>
-                            </div>
-                        </div>
-
-                        <!-- 練習選擇區域 -->
-                        <div class="practice-selection-card" id="practiceSelectionCard" style="display: none;">
-                            <h3><i class="fas fa-dumbbell"></i> 練習選擇</h3>
-                            <div class="practice-options">
-                                <div class="practice-option" onclick="openMagazinePractice()">
-                                    <i class="fas fa-book"></i>
-                                    <span>雜誌單字練習</span>
-                                </div>
-                                <div class="practice-option" onclick="openSpellingPractice()">
-                                    <i class="fas fa-language"></i>
-                                    <span>拼字練習</span>
-                                </div>
-                                <div class="practice-option" onclick="openCloudAcademy()">
-                                    <i class="fas fa-cloud"></i>
-                                    <span>雲端學院</span>
-                                </div>
-                                <div class="practice-option" onclick="openOtherPractice()">
-                                    <i class="fas fa-tasks"></i>
-                                    <span>其他練習</span>
-                                </div>
-                                <div class="practice-option" onclick="openScoreRegistration()">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>成績登記</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="practice-header">
+                        <h2><i class="fas fa-user-graduate"></i> 學生練習中心</h2>
+                        <p>歡迎來到 AlwaysJoy 學生練習平台，請選擇您的身份並開始練習</p>
                     </div>
 
-                    <!-- 學生列表 -->
-                    <div class="student-list-card">
-                        <h3><i class="fas fa-list"></i> 學生名單</h3>
-                        <div class="student-groups">
-                            <div class="group-section">
-                                <h4><span class="group-badge">B組</span></h4>
-                                <ul>
-                                    <li>C2 Yuni</li>
-                                    <li>C2 Emily</li>
-                                    <li>A8 Vito</li>
-                                </ul>
+                    <div class="practice-main-container">
+                        <!-- 左側：登入區域 -->
+                        <div class="practice-left-panel">
+                            <div class="login-section">
+                                <div class="section-header">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <h3>學生登入</h3>
+                                </div>
+
+                                <div class="login-form">
+                                    <div class="form-group">
+                                        <label for="studentGroup">
+                                            <i class="fas fa-users"></i> 選擇組別
+                                        </label>
+                                        <select id="studentGroup" onchange="updateStudentNames()" class="form-select">
+                                            <option value="">請選擇您的組別</option>
+                                            <option value="B組">B組</option>
+                                            <option value="C組">C組</option>
+                                            <option value="D組">D組</option>
+                                            <option value="E組">E組</option>
+                                            <option value="F組">F組</option>
+                                            <option value="教務組">教務組</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="studentName">
+                                            <i class="fas fa-user"></i> 選擇姓名
+                                        </label>
+                                        <select id="studentName" class="form-select" disabled>
+                                            <option value="">請先選擇組別</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="studentPassword">
+                                            <i class="fas fa-key"></i> 輸入密碼
+                                        </label>
+                                        <div class="password-container">
+                                            <input type="password" id="studentPassword" placeholder="請輸入您的英文名字"
+                                                class="form-input">
+                                            <button type="button" class="password-toggle" onclick="togglePassword()">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div id="studentLoginError" class="login-error" style="display: none;">
+                                        <i class="fas fa-exclamation-triangle"></i> 密碼錯誤，請重新輸入
+                                    </div>
+
+                                    <button onclick="studentLogin()" class="login-submit-btn">
+                                        <i class="fas fa-sign-in-alt"></i> 登入學習
+                                    </button>
+
+                                    <div class="login-help">
+                                        <p><i class="fas fa-info-circle"></i> 密碼為您的英文名字（例如：Yuni、Emily、Vito）</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="group-section">
-                                <h4><span class="group-badge">C組</span></h4>
-                                <ul>
-                                    <li>A4 Eudora</li>
-                                    <li>A5 Zoe</li>
-                                </ul>
+
+                            <!-- 練習選擇區域 -->
+                            <div class="practice-selection-section" id="practiceSelectionCard" style="display: none;">
+                                <div class="section-header">
+                                    <i class="fas fa-dumbbell"></i>
+                                    <h3>練習選擇</h3>
+                                </div>
+                                <div class="practice-grid">
+                                    <div class="practice-card" onclick="openMagazinePractice()">
+                                        <div class="card-icon">
+                                            <i class="fas fa-book"></i>
+                                        </div>
+                                        <div class="card-content">
+                                            <h4>雜誌單字練習</h4>
+                                            <p>練習雜誌中的單字和詞彙</p>
+                                        </div>
+                                    </div>
+                                    <div class="practice-card" onclick="openSpellingPractice()">
+                                        <div class="card-icon">
+                                            <i class="fas fa-language"></i>
+                                        </div>
+                                        <div class="card-content">
+                                            <h4>拼字練習</h4>
+                                            <p>提升拼字能力和準確性</p>
+                                        </div>
+                                    </div>
+                                    <div class="practice-card" onclick="openCloudAcademy()">
+                                        <div class="card-icon">
+                                            <i class="fas fa-cloud"></i>
+                                        </div>
+                                        <div class="card-content">
+                                            <h4>雲端學院</h4>
+                                            <p>線上學習和測驗系統</p>
+                                        </div>
+                                    </div>
+                                    <div class="practice-card" onclick="openOtherPractice()">
+                                        <div class="card-icon">
+                                            <i class="fas fa-tasks"></i>
+                                        </div>
+                                        <div class="card-content">
+                                            <h4>其他練習</h4>
+                                            <p>多樣化的練習題型</p>
+                                        </div>
+                                    </div>
+                                    <div class="practice-card" onclick="openScoreRegistration()">
+                                        <div class="card-icon">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="card-content">
+                                            <h4>成績登記</h4>
+                                            <p>記錄和查看練習成績</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="group-section">
-                                <h4><span class="group-badge">D組</span></h4>
-                                <ul>
-                                    <li>N6 Bruce</li>
-                                    <li>N7 Laura</li>
-                                </ul>
-                            </div>
-                            <div class="group-section">
-                                <h4><span class="group-badge">E組</span></h4>
-                                <ul>
-                                    <li>K9 Lilian</li>
-                                    <li>K9 Jill</li>
-                                </ul>
-                            </div>
-                            <div class="group-section">
-                                <h4><span class="group-badge">F組</span></h4>
-                                <ul>
-                                    <li>I2 Candy</li>
-                                    <li>N3 Avery</li>
-                                </ul>
-                            </div>
-                            <div class="group-section">
-                                <h4><span class="group-badge">教務組</span></h4>
-                                <ul>
-                                    <li>教務組 Annie</li>
-                                    <li>教務組 Celina</li>
-                                    <li>教務組 Nina</li>
-                                </ul>
+                        </div>
+
+                        <!-- 右側：學生名單 -->
+                        <div class="practice-right-panel">
+                            <div class="student-directory">
+                                <div class="section-header">
+                                    <i class="fas fa-address-book"></i>
+                                    <h3>學生名錄</h3>
+                                </div>
+                                <div class="student-groups-grid">
+                                    <div class="group-card">
+                                        <div class="group-header">
+                                            <span class="group-badge">B組</span>
+                                        </div>
+                                        <div class="student-list">
+                                            <div class="student-item">C2 Yuni</div>
+                                            <div class="student-item">C2 Emily</div>
+                                            <div class="student-item">A8 Vito</div>
+                                        </div>
+                                    </div>
+                                    <div class="group-card">
+                                        <div class="group-header">
+                                            <span class="group-badge">C組</span>
+                                        </div>
+                                        <div class="student-list">
+                                            <div class="student-item">A4 Eudora</div>
+                                            <div class="student-item">A5 Zoe</div>
+                                        </div>
+                                    </div>
+                                    <div class="group-card">
+                                        <div class="group-header">
+                                            <span class="group-badge">D組</span>
+                                        </div>
+                                        <div class="student-list">
+                                            <div class="student-item">N6 Bruce</div>
+                                            <div class="student-item">N7 Laura</div>
+                                        </div>
+                                    </div>
+                                    <div class="group-card">
+                                        <div class="group-header">
+                                            <span class="group-badge">E組</span>
+                                        </div>
+                                        <div class="student-list">
+                                            <div class="student-item">K9 Lilian</div>
+                                            <div class="student-item">K9 Jill</div>
+                                        </div>
+                                    </div>
+                                    <div class="group-card">
+                                        <div class="group-header">
+                                            <span class="group-badge">F組</span>
+                                        </div>
+                                        <div class="student-list">
+                                            <div class="student-item">I2 Candy</div>
+                                            <div class="student-item">N3 Avery</div>
+                                        </div>
+                                    </div>
+                                    <div class="group-card">
+                                        <div class="group-header">
+                                            <span class="group-badge">教務組</span>
+                                        </div>
+                                        <div class="student-list">
+                                            <div class="student-item">教務組 Annie</div>
+                                            <div class="student-item">教務組 Celina</div>
+                                            <div class="student-item">教務組 Nina</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
