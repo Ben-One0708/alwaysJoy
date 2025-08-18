@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>測試個人練習成績登記</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .test-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .test-btn:hover {
+            background: #0056b3;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .score-display {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🧪 測試個人練習成績登記功能</h1>
+
+    <div class="test-container">
+        <h2>📝 學生資訊</h2>
+        <div class="form-group">
+            <label>學生姓名：</label>
+            <input type="text" id="studentName" value="Annie" placeholder="輸入學生姓名">
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>📊 成績登記測試</h2>
+        <div class="form-group">
+            <label>練習日期：</label>
+            <input type="date" id="practiceDate" value="">
+        </div>
+        <div class="form-group">
+            <label>雜誌單字練習分數：</label>
+            <input type="number" id="magazineScore" min="0" max="100" placeholder="0-100">
+        </div>
+        <div class="form-group">
+            <label>拼字模擬100題分數：</label>
+            <input type="number" id="spellingScore" min="0" max="100" placeholder="0-100">
+        </div>
+        <div class="form-group">
+            <label>練習備註：</label>
+            <textarea id="practiceNotes" placeholder="請輸入練習心得或備註..."></textarea>
+        </div>
+        <button class="test-btn" onclick="testPersonalScoreRegistration()">測試個人練習成績登記</button>
+        <div id="testResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>📋 功能測試</h2>
+        <button class="test-btn" onclick="testStudentLogin()">測試學生登入</button>
+        <button class="test-btn" onclick="testScoreRetrieval()">測試成績查詢</button>
+        <button class="test-btn" onclick="testAdminView()">測試管理員查看</button>
+        <button class="test-btn" onclick="checkAllPersonalScores()">檢查所有個人練習成績</button>
+        <div id="functionResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>📈 成績記錄</h2>
+        <div id="scoresList"></div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="api-supabase-client.js"></script>
+    <script>
+        // 設置今天的日期
+        document.getElementById('practiceDate').value = new Date().toISOString().split('T')[0];
+
+        // 測試個人練習成績登記
+        async function testPersonalScoreRegistration() {
+            const resultDiv = document.getElementById('testResult');
+            const studentName = document.getElementById('studentName').value;
+            const practiceDate = document.getElementById('practiceDate').value;
+            const magazineScore = document.getElementById('magazineScore').value;
+            const spellingScore = document.getElementById('spellingScore').value;
+            const practiceNotes = document.getElementById('practiceNotes').value;
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在測試個人練習成績登記...';
+
+            try {
+                // 驗證輸入
+                if (!practiceDate) {
+                    throw new Error('請選擇練習日期');
+                }
+
+                const scores = [magazineScore, spellingScore];
+                const hasScore = scores.some(score => score && score > 0);
+                if (!hasScore) {
+                    throw new Error('請至少輸入一個練習分數');
+                }
+
+                let successCount = 0;
+                let totalCount = 0;
+
+                // 儲存雜誌練習成績（如果有分數）
+                if (magazineScore && magazineScore > 0) {
+                    totalCount++;
+                    const magazineScoreData = {
+                        studentName: studentName,
+                        quizType: 'personal_magazine_practice',
+                        score: parseInt(magazineScore),
+                        totalQuestions: 100,
+                        percentage: 0,
+                        date: new Date(practiceDate).toISOString(),
+                        details: {
+                            practiceType: 'magazine',
+                            notes: practiceNotes,
+                            practiceDate: practiceDate
+                        }
+                    };
+
+                    const result = await window.apiService.saveScore(magazineScoreData);
+                    if (result && result.id) {
+                        successCount++;
+                    }
+                }
+
+                // 儲存拼字練習成績（如果有分數）
+                if (spellingScore && spellingScore > 0) {
+                    totalCount++;
+                    const spellingScoreData = {
+                        studentName: studentName,
+                        quizType: 'personal_spelling_practice',
+                        score: parseInt(spellingScore),
+                        totalQuestions: 100,
+                        percentage: 0,
+                        date: new Date(practiceDate).toISOString(),
+                        details: {
+                            practiceType: 'spelling',
+                            notes: practiceNotes,
+                            practiceDate: practiceDate
+                        }
+                    };
+
+                    const result = await window.apiService.saveScore(spellingScoreData);
+                    if (result && result.id) {
+                        successCount++;
+                    }
+                }
+
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 個人練習成績登記成功！\n\n學生：${studentName}\n日期：${practiceDate}\n雜誌練習：${magazineScore || 0} 分\n拼字練習：${spellingScore || 0} 分\n備註：${practiceNotes || '無'}\n\n儲存結果：${successCount}/${totalCount} 筆記錄成功\n\n管理員Ben可以即時在後台查看這些成績！`;
+
+                // 重新載入成績記錄
+                setTimeout(() => {
+                    loadPersonalScores();
+                }, 1000);
+
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 個人練習成績登記失敗：${error.message}`;
+            }
+        }
+
+        // 測試學生登入
+        async function testStudentLogin() {
+            const resultDiv = document.getElementById('functionResult');
+            const studentName = document.getElementById('studentName').value;
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = `🔄 正在測試學生登入...\n\n學生：${studentName}`;
+
+            try {
+                const student = await window.apiService.login(studentName, '1234');
+
+                if (student) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ 學生登入成功！\n\n姓名：${student.name}\n組別：${student.group}\n管理員：${student.isAdmin ? '是' : '否'}\n\n學生可以在家登入並登記成績！`;
+                } else {
+                    throw new Error('登入失敗');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 學生登入失敗：${error.message}`;
+            }
+        }
+
+        // 測試成績查詢
+        async function testScoreRetrieval() {
+            const resultDiv = document.getElementById('functionResult');
+            const studentName = document.getElementById('studentName').value;
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = `🔄 正在測試成績查詢...\n\n學生：${studentName}`;
+
+            try {
+                const scores = await window.apiService.getStudentScores(studentName);
+
+                const personalScores = scores.filter(score =>
+                    score.quiztype === 'personal_magazine_practice' ||
+                    score.quiztype === 'personal_spelling_practice'
+                );
+
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 成績查詢成功！\n\n學生：${studentName}\n總成績記錄：${scores.length} 筆\n個人練習記錄：${personalScores.length} 筆\n\n學生可以查看自己的歷史成績記錄！`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 成績查詢失敗：${error.message}`;
+            }
+        }
+
+        // 測試管理員查看
+        async function testAdminView() {
+            const resultDiv = document.getElementById('functionResult');
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在測試管理員查看功能...';
+
+            try {
+                // 測試管理員登入
+                const admin = await window.apiService.login('admin', 'admin123');
+                if (!admin || !admin.isAdmin) {
+                    throw new Error('管理員登入失敗');
+                }
+
+                // 測試獲取所有成績
+                const allScores = await window.apiService.getAllScores();
+
+                const personalScores = allScores.filter(score =>
+                    score.quiztype === 'personal_magazine_practice' ||
+                    score.quiztype === 'personal_spelling_practice'
+                );
+
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 管理員查看功能正常！\n\n管理員：${admin.name}\n總成績記錄：${allScores.length} 筆\n個人練習記錄：${personalScores.length} 筆\n\n管理員Ben可以即時查看所有學生的個人練習成績！`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 管理員查看測試失敗：${error.message}`;
+            }
+        }
+
+        // 檢查所有個人練習成績
+        async function checkAllPersonalScores() {
+            const resultDiv = document.getElementById('functionResult');
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在檢查所有個人練習成績...';
+
+            try {
+                const allScores = await window.apiService.getAllScores();
+
+                const personalScores = allScores.filter(score =>
+                    score.quiztype === 'personal_magazine_practice' ||
+                    score.quiztype === 'personal_spelling_practice'
+                );
+
+                // 按學生分組
+                const studentGroups = {};
+                personalScores.forEach(score => {
+                    if (!studentGroups[score.studentname]) {
+                        studentGroups[score.studentname] = [];
+                    }
+                    studentGroups[score.studentname].push(score);
+                });
+
+                let summary = `✅ 個人練習成績檢查完成！\n\n總個人練習記錄：${personalScores.length} 筆\n參與學生數：${Object.keys(studentGroups).length} 人\n\n各學生記錄數：\n`;
+
+                Object.keys(studentGroups).forEach(student => {
+                    summary += `• ${student}: ${studentGroups[student].length} 筆\n`;
+                });
+
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = summary;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 檢查失敗：${error.message}`;
+            }
+        }
+
+        // 載入個人練習成績記錄
+        async function loadPersonalScores() {
+            const scoresListDiv = document.getElementById('scoresList');
+
+            try {
+                const allScores = await window.apiService.getAllScores();
+
+                const personalScores = allScores.filter(score =>
+                    score.quiztype === 'personal_magazine_practice' ||
+                    score.quiztype === 'personal_spelling_practice'
+                );
+
+                if (personalScores.length === 0) {
+                    scoresListDiv.innerHTML = '<p>沒有個人練習成績記錄</p>';
+                    return;
+                }
+
+                // 按日期排序（最新的在前）
+                personalScores.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                const scoresHTML = personalScores.slice(0, 20).map(score => `
+                    <div class="score-display">
+                        <div class="score-item">
+                            <strong>學生：</strong>
+                            <span>${score.studentname}</span>
+                        </div>
+                        <div class="score-item">
+                            <strong>練習類型：</strong>
+                            <span>${score.quiztype === 'personal_magazine_practice' ? '雜誌單字練習' : '拼字模擬練習'}</span>
+                        </div>
+                        <div class="score-item">
+                            <strong>分數：</strong>
+                            <span>${score.score}/${score.totalquestions} (${score.percentage}%)</span>
+                        </div>
+                        <div class="score-item">
+                            <strong>日期：</strong>
+                            <span>${new Date(score.date).toLocaleString()}</span>
+                        </div>
+                        ${score.details?.notes ? `
+                            <div class="score-item">
+                                <strong>備註：</strong>
+                                <span>${score.details.notes}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                `).join('');
+
+                scoresListDiv.innerHTML = scoresHTML;
+
+            } catch (error) {
+                scoresListDiv.innerHTML = `<p style="color: red;">載入失敗：${error.message}</p>`;
+            }
+        }
+
+        // 頁面載入時初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.apiService) {
+                console.log('✅ 個人練習測試工具API服務已載入');
+                loadPersonalScores();
+            } else {
+                console.error('❌ 個人練習測試工具API服務載入失敗');
+            }
+        });
+    </script>
+</body>
+
+</html>
