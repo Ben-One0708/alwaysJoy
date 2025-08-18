@@ -4070,3 +4070,68 @@ body {
         align-items: center;
     }
 }
+
+/* 練習選擇區域樣式 */
+.practice-selection-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow-light);
+    border: 1px solid #e1e5e9;
+    margin-top: 30px;
+}
+
+.practice-selection-card h3 {
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.practice-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.practice-option {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: var(--primary-gradient);
+    color: var(--white);
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-light);
+    border: none;
+}
+
+.practice-option:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+.practice-option i {
+    font-size: 1.5rem;
+}
+
+.practice-option span {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* 練習選項響應式設計 */
+@media (max-width: 768px) {
+    .practice-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .student-login-container {
+        grid-template-columns: 1fr;
+    }
+}

@@ -217,7 +217,12 @@ function loginStudent() {
     if (student && student.password === password) {
         currentStudent = studentName;
         showSuccessMessage(`歡迎 ${studentName}！`);
-        // 這裡可以添加更多學生功能
+        
+        // 顯示練習選擇區域
+        document.getElementById('practiceSelectionCard').style.display = 'block';
+        
+        // 隱藏登入表單
+        document.querySelector('.login-form-card').style.display = 'none';
     } else {
         errorDiv.style.display = 'flex';
         errorDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> 密碼錯誤，請重新輸入';
@@ -226,13 +231,19 @@ function loginStudent() {
     }
 }
 
+// 學生登入（別名函數）
+function studentLogin() {
+    loginStudent();
+}
+
 // 更新學生列表
-function updateStudentList() {
+function updateStudentNames() {
     const group = document.getElementById('studentGroup').value;
     const studentSelect = document.getElementById('studentName');
-
+    
     studentSelect.innerHTML = '<option value="">請選擇姓名</option>';
-
+    studentSelect.disabled = !group;
+    
     if (group && groupStudents[group]) {
         groupStudents[group].forEach(student => {
             const option = document.createElement('option');
@@ -240,6 +251,20 @@ function updateStudentList() {
             option.textContent = student;
             studentSelect.appendChild(option);
         });
+    }
+}
+
+// 切換密碼顯示
+function togglePassword() {
+    const passwordInput = document.getElementById('studentPassword');
+    const toggleButton = document.querySelector('.password-toggle i');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleButton.className = 'fas fa-eye-slash';
+    } else {
+        passwordInput.type = 'password';
+        toggleButton.className = 'fas fa-eye';
     }
 }
 
@@ -421,6 +446,129 @@ function openScoreRegistration() {
 
     openModal('scoreRegistrationModal');
     loadScoreHistory();
+}
+
+// 拼字練習功能
+function openSpellingPractice() {
+    openModal('spellingPracticeModal');
+    initializeSpellingPractice();
+}
+
+function initializeSpellingPractice() {
+    // 初始化拼字練習
+    console.log('初始化拼字練習');
+}
+
+function goToQuestion() {
+    const questionSelect = document.getElementById('questionSelect');
+    const questionNumber = parseInt(questionSelect.value);
+    console.log('跳轉到第', questionNumber, '題');
+}
+
+function submitAnswer() {
+    console.log('提交答案');
+}
+
+function previousQuestion() {
+    console.log('上一題');
+}
+
+function nextQuestion() {
+    console.log('下一題');
+}
+
+function completePractice() {
+    showSuccessMessage('練習完成！');
+    closeModal('spellingPracticeModal');
+}
+
+// 雜誌練習功能
+function openMagazinePractice() {
+    openModal('magazineSelectionModal');
+}
+
+function openVocabularyQuiz(part) {
+    closeModal('magazineSelectionModal');
+    
+    // 根據部分打開對應的練習頁面
+    const quizPages = {
+        'part1': 'vocabulary_quiz_part1.html',
+        'part2': 'vocabulary_quiz_part2.html',
+        'part3': 'vocabulary_quiz_part3.html',
+        'full': 'vocabulary_quiz_full.html'
+    };
+    
+    if (quizPages[part]) {
+        window.open(quizPages[part], '_blank');
+    }
+}
+
+function closeMagazinePractice() {
+    closeModal('magazinePracticeModal');
+}
+
+function goToMagazineQuestion() {
+    const questionSelect = document.getElementById('magazineQuestionSelect');
+    const questionNumber = parseInt(questionSelect.value);
+    console.log('跳轉到雜誌第', questionNumber, '題');
+}
+
+// 雲端學院功能
+function openCloudAcademy() {
+    openModal('cloudAcademyModal');
+}
+
+function startCloudAcademyPractice() {
+    console.log('開始雲端學院練習');
+    closeModal('cloudAcademyModal');
+}
+
+function startCloudAcademyTimed() {
+    console.log('開始雲端學院計時模式');
+    closeModal('cloudAcademyModal');
+}
+
+// 其他練習功能
+function openOtherPractice() {
+    openModal('otherPracticeModal');
+}
+
+function startOtherPractice(type) {
+    console.log('開始其他練習:', type);
+    closeModal('otherPracticeModal');
+}
+
+// 儲存分數功能
+function saveScores() {
+    const score1 = document.getElementById('score1').value;
+    const score2 = document.getElementById('score2').value;
+    const score3 = document.getElementById('score3').value;
+    const score4 = document.getElementById('score4').value;
+    const score5 = document.getElementById('score5').value;
+
+    if (!score1 && !score2 && !score3 && !score4 && !score5) {
+        alert('請至少輸入一項分數');
+        return;
+    }
+
+    // 儲存到本地儲存
+    const scores = {
+        studentName: currentStudent,
+        date: new Date().toISOString().split('T')[0],
+        magazineScore: score1 || 0,
+        levelScore: score2 || 0,
+        paragraphScore: score3 || 0,
+        mixedScore: score4 || 0,
+        batchScore: score5 || 0,
+        timestamp: new Date().toISOString()
+    };
+
+    let existingScores = JSON.parse(localStorage.getItem('studentScores') || '[]');
+    existingScores.push(scores);
+    localStorage.setItem('studentScores', JSON.stringify(existingScores));
+
+    showSuccessMessage('分數儲存成功！');
+    closeModal('practiceModal');
 }
 
 // 頁面載入時初始化
