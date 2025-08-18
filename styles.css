@@ -633,6 +633,14 @@ body {
     margin-top: 30px;
 }
 
+/* 確保桌面版保持左右排列 */
+@media (min-width: 769px) {
+    .student-login-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
+
 .login-form-card {
     background: var(--white);
     border-radius: var(--border-radius);
@@ -4130,8 +4138,12 @@ body {
     .practice-options {
         grid-template-columns: 1fr;
     }
-    
+}
+
+/* 學生登入響應式設計 */
+@media (max-width: 768px) {
     .student-login-container {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
