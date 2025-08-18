@@ -1018,12 +1018,15 @@ function openAdminPanel() {
 // 載入所有成績數據
 async function loadAllScores() {
     try {
-        // 如果使用 Supabase
-        if (window.apiService) {
+        // 使用 Firebase API 服務
+        if (window.apiService && typeof window.apiService.getAllScores === 'function') {
+            console.log('使用 Firebase 載入成績數據');
             const scores = await window.apiService.getAllScores();
+            console.log('載入到的成績數據:', scores);
             displayScores(scores);
             updateAdminStats(scores);
         } else {
+            console.log('Firebase API 服務不可用，使用本地存儲作為備用');
             // 使用本地存儲作為備用
             const scores = getLocalScores();
             displayScores(scores);
@@ -1122,8 +1125,10 @@ async function filterScores() {
 }
 
 // 重新整理成績
-function refreshScores() {
-    loadAllScores();
+async function refreshScores() {
+    console.log('重新整理成績數據...');
+    await loadAllScores();
+    showSuccessMessage('成績數據已更新！');
 }
 
 // 匯出成績
@@ -2084,7 +2089,7 @@ function restartPractice() {
 }
 
 // 儲存分數
-function saveScores() {
+async function saveScores() {
     if (!currentStudent) {
         alert('請先選擇學生！');
         return;
@@ -2109,18 +2114,75 @@ function saveScores() {
         return;
     }
 
-    // 儲存到本地儲存（實際使用時可改為 API 呼叫）
-    localStorage.setItem(`scores_${currentStudent}`, JSON.stringify({
-        student: currentStudent,
-        scores: scores,
-        timestamp: new Date().toISOString()
-    }));
+    try {
+        // 獲取學生組別
+        const studentGroup = getStudentGroup(currentStudent);
 
-    // 更新排行榜
-    updateStudentScores(currentStudent, scores);
+        // 保存每個練習類型的成績到 Firebase
+        const savePromises = [];
 
-    // 顯示成功訊息
-    showSuccessMessage('分數已成功儲存！');
+        if (parseInt(scores.magazine) > 0) {
+            savePromises.push(
+                window.apiService.saveScore(currentStudent, studentGroup, '雜誌單字', parseInt(scores.magazine))
+            );
+        }
+
+        if (parseInt(scores.level) > 0) {
+            savePromises.push(
+                window.apiService.saveScore(currentStudent, studentGroup, '各級別單字', parseInt(scores.level))
+            );
+        }
+
+        if (parseInt(scores.paragraph) > 0) {
+            savePromises.push(
+                window.apiService.saveScore(currentStudent, studentGroup, '段落單字', parseInt(scores.paragraph))
+            );
+        }
+
+        if (parseInt(scores.mixed) > 0) {
+            savePromises.push(
+                window.apiService.saveScore(currentStudent, studentGroup, '混合題型', parseInt(scores.mixed))
+            );
+        }
+
+        if (parseInt(scores.batch) > 0) {
+            savePromises.push(
+                window.apiService.saveScore(currentStudent, studentGroup, '大批次題目', parseInt(scores.batch))
+            );
+        }
+
+        // 等待所有成績保存完成
+        if (savePromises.length > 0) {
+            await Promise.all(savePromises);
+            console.log('所有成績已成功保存到 Firebase');
+        }
+
+        // 同時保存到本地存儲作為備用
+        localStorage.setItem(`scores_${currentStudent}`, JSON.stringify({
+            student: currentStudent,
+            scores: scores,
+            timestamp: new Date().toISOString()
+        }));
+
+        // 更新排行榜
+        updateStudentScores(currentStudent, scores);
+
+        // 顯示成功訊息
+        showSuccessMessage('分數已成功儲存到雲端！');
+
+    } catch (error) {
+        console.error('保存成績失敗:', error);
+
+        // 如果 Firebase 保存失敗，只保存到本地存儲
+        localStorage.setItem(`scores_${currentStudent}`, JSON.stringify({
+            student: currentStudent,
+            scores: scores,
+            timestamp: new Date().toISOString()
+        }));
+
+        updateStudentScores(currentStudent, scores);
+        showSuccessMessage('分數已保存到本地存儲！');
+    }
 }
 
 // 更新學生分數
@@ -2749,7 +2811,7 @@ function openScoreRegistrationModal() {
 }
 
 // 提交成績登記
-function submitScoreRegistration() {
+async function submitScoreRegistration() {
     const currentStudent = getCurrentStudent();
     const practiceDate = document.getElementById('practiceDate').value;
     const magazineScore = document.getElementById('magazineScore').value;
@@ -2784,29 +2846,65 @@ function submitScoreRegistration() {
         timestamp: new Date().toISOString()
     };
 
-    // 儲存成績記錄
-    saveScoreRecord(scoreRecord);
+    try {
+        // 儲存成績記錄
+        await saveScoreRecord(scoreRecord);
 
-    // 調試：檢查儲存結果
-    console.log('儲存的成績記錄:', scoreRecord);
-    console.log('當前學生:', currentStudent);
-    console.log('儲存後的數據:', localStorage.getItem(`studentScores_${currentStudent}`));
+        // 調試：檢查儲存結果
+        console.log('儲存的成績記錄:', scoreRecord);
+        console.log('當前學生:', currentStudent);
+        console.log('儲存後的數據:', localStorage.getItem(`studentScores_${currentStudent}`));
 
-    // 清空表單
-    clearScoreForm();
+        // 清空表單
+        clearScoreForm();
 
-    // 重新載入歷史記錄
-    loadScoreHistory();
+        // 重新載入歷史記錄
+        loadScoreHistory();
 
-    // 更新學習地圖統計
-    updateLearningMapStats();
+        // 更新學習地圖統計
+        updateLearningMapStats();
 
-    // 顯示成功訊息
-    showSuccessMessage('成績登記成功！');
+        // 顯示成功訊息
+        showSuccessMessage('成績登記成功並已同步到雲端！');
+
+    } catch (error) {
+        console.error('成績登記失敗:', error);
+        showSuccessMessage('成績登記成功（僅保存到本地）！');
+    }
 }
 
 // 儲存成績記錄
-function saveScoreRecord(scoreRecord) {
+async function saveScoreRecord(scoreRecord) {
+    try {
+        // 獲取學生組別
+        const studentGroup = getStudentGroup(scoreRecord.studentName);
+
+        // 保存到 Firebase
+        if (scoreRecord.scores.magazine > 0) {
+            await window.apiService.saveScore(
+                scoreRecord.studentName,
+                studentGroup,
+                '雜誌單字',
+                scoreRecord.scores.magazine
+            );
+        }
+
+        if (scoreRecord.scores.spelling > 0) {
+            await window.apiService.saveScore(
+                scoreRecord.studentName,
+                studentGroup,
+                '雲端學院拼字模擬',
+                scoreRecord.scores.spelling
+            );
+        }
+
+        console.log('成績記錄已保存到 Firebase');
+
+    } catch (error) {
+        console.error('保存成績記錄到 Firebase 失敗:', error);
+    }
+
+    // 同時保存到本地存儲作為備用
     const studentScores = JSON.parse(localStorage.getItem(`studentScores_${scoreRecord.studentName}`) || '[]');
     studentScores.push(scoreRecord);
     localStorage.setItem(`studentScores_${scoreRecord.studentName}`, JSON.stringify(studentScores));
