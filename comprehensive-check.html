@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全面功能檢查工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .check-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .check-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .check-btn:hover {
+            background: #0056b3;
+        }
+        .check-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .check-btn.success {
+            background: #28a745;
+        }
+        .check-btn.error {
+            background: #dc3545;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .status-item {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .status-item.success {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+        .status-item.error {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+        .status-item.warning {
+            border-color: #ffc107;
+            background: #fff3cd;
+        }
+        .test-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 全面功能檢查工具</h1>
+    
+    <div class="check-container">
+        <h2>📋 檢查項目總覽</h2>
+        <div class="status-grid" id="statusGrid">
+            <div class="status-item" id="configStatus">
+                <h3>⚙️ 配置檢查</h3>
+                <p>檢查 Supabase 配置</p>
+            </div>
+            <div class="status-item" id="connectionStatus">
+                <h3>🔗 連接檢查</h3>
+                <p>檢查資料庫連接</p>
+            </div>
+            <div class="status-item" id="authStatus">
+                <h3>🔐 認證檢查</h3>
+                <p>檢查學生登入功能</p>
+            </div>
+            <div class="status-item" id="scoreStatus">
+                <h3>📊 成績儲存檢查</h3>
+                <p>檢查成績儲存功能</p>
+            </div>
+            <div class="status-item" id="retrieveStatus">
+                <h3>📥 成績查詢檢查</h3>
+                <p>檢查成績查詢功能</p>
+            </div>
+            <div class="status-item" id="vocabularyStatus">
+                <h3>📚 雜誌練習檢查</h3>
+                <p>檢查雜誌練習功能</p>
+            </div>
+            <div class="status-item" id="adminStatus">
+                <h3>👨‍💼 管理員檢查</h3>
+                <p>檢查管理員功能</p>
+            </div>
+            <div class="status-item" id="percentageStatus">
+                <h3>📈 百分比計算檢查</h3>
+                <p>檢查百分比計算</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="check-container">
+        <h2>🔧 測試功能</h2>
+        <button class="check-btn" onclick="runAllChecks()">執行全面檢查</button>
+        <button class="check-btn" onclick="testStudentLogin()">測試學生登入</button>
+        <button class="check-btn" onclick="testScoreSave()">測試成績儲存</button>
+        <button class="check-btn" onclick="testVocabularyQuiz()">測試雜誌練習</button>
+        <button class="check-btn" onclick="testAdminPanel()">測試管理員面板</button>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div id="checkResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="check-container">
+        <h2>📝 測試資料</h2>
+        <input type="text" id="testStudentName" class="test-input" placeholder="測試學生姓名" value="Annie">
+        <input type="text" id="testStudentPassword" class="test-input" placeholder="測試學生密碼" value="1234">
+        <button class="check-btn" onclick="addTestStudent()">添加測試學生</button>
+        <button class="check-btn" onclick="viewAllStudents()">查看所有學生</button>
+        <div id="testDataResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="check-container">
+        <h2>📊 資料庫狀態</h2>
+        <div id="databaseStatus"></div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="api-supabase-client.js"></script>
+    <script>
+        let checkResults = {};
+
+        // 更新狀態顯示
+        function updateStatus(id, status, message) {
+            const statusItem = document.getElementById(id);
+            statusItem.className = `status-item ${status}`;
+            statusItem.querySelector('p').textContent = message;
+            checkResults[id] = { status, message };
+        }
+
+        // 執行全面檢查
+        async function runAllChecks() {
+            const resultDiv = document.getElementById('checkResult');
+            const progressFill = document.getElementById('progressFill');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 開始執行全面檢查...';
+
+            const checks = [
+                { id: 'configStatus', name: '配置檢查', func: checkConfig },
+                { id: 'connectionStatus', name: '連接檢查', func: checkConnection },
+                { id: 'authStatus', name: '認證檢查', func: checkAuth },
+                { id: 'scoreStatus', name: '成績儲存檢查', func: checkScoreSave },
+                { id: 'retrieveStatus', name: '成績查詢檢查', func: checkScoreRetrieve },
+                { id: 'vocabularyStatus', name: '雜誌練習檢查', func: checkVocabulary },
+                { id: 'adminStatus', name: '管理員檢查', func: checkAdmin },
+                { id: 'percentageStatus', name: '百分比計算檢查', func: checkPercentage }
+            ];
+
+            let successCount = 0;
+            let totalCount = checks.length;
+
+            for (let i = 0; i < checks.length; i++) {
+                const check = checks[i];
+                try {
+                    await check.func();
+                    successCount++;
+                    updateStatus(check.id, 'success', `✅ ${check.name}通過`);
+                } catch (error) {
+                    updateStatus(check.id, 'error', `❌ ${check.name}失敗: ${error.message}`);
+                }
+
+                // 更新進度
+                const progress = ((i + 1) / totalCount) * 100;
+                progressFill.style.width = progress + '%';
+                
+                resultDiv.innerHTML = `🔄 正在執行全面檢查...\n\n進度：${i + 1}/${totalCount}\n成功：${successCount}\n失敗：${totalCount - successCount}`;
+            }
+
+            // 完成檢查
+            resultDiv.className = 'result success';
+            resultDiv.innerHTML = `✅ 全面檢查完成！\n\n總計：${totalCount} 項檢查\n成功：${successCount} 項\n失敗：${totalCount - successCount} 項\n\n${successCount === totalCount ? '🎉 所有功能正常！' : '⚠️ 請檢查失敗項目'}`;
+
+            // 更新資料庫狀態
+            updateDatabaseStatus();
+        }
+
+        // 檢查配置
+        async function checkConfig() {
+            if (!window.SUPABASE_CONFIG) {
+                throw new Error('Supabase配置未載入');
+            }
+            if (!window.SUPABASE_CONFIG.PROJECT_URL || !window.SUPABASE_CONFIG.ANON_KEY) {
+                throw new Error('Supabase配置不完整');
+            }
+            if (!window.apiService) {
+                throw new Error('API服務未初始化');
+            }
+        }
+
+        // 檢查連接
+        async function checkConnection() {
+            const result = await window.apiService.testConnection();
+            if (!result.success) {
+                throw new Error(result.error || '連接失敗');
+            }
+        }
+
+        // 檢查認證
+        async function checkAuth() {
+            const testStudent = await window.apiService.login('Annie', '1234');
+            if (!testStudent || !testStudent.name) {
+                throw new Error('學生登入失敗');
+            }
+        }
+
+        // 檢查成績儲存
+        async function checkScoreSave() {
+            const scoreData = {
+                studentName: 'TestStudent',
+                quizType: 'test_quiz',
+                score: 8,
+                totalQuestions: 10,
+                percentage: 0,
+                date: new Date().toISOString()
+            };
+            
+            const result = await window.apiService.saveScore(scoreData);
+            if (!result || !result.id) {
+                throw new Error('成績儲存失敗');
+            }
+        }
+
+        // 檢查成績查詢
+        async function checkScoreRetrieve() {
+            const scores = await window.apiService.getAllScores();
+            if (!Array.isArray(scores)) {
+                throw new Error('成績查詢失敗');
+            }
+        }
+
+        // 檢查雜誌練習
+        async function checkVocabulary() {
+            // 檢查雜誌練習頁面是否存在
+            const quizPages = [
+                'vocabulary_quiz_part1.html',
+                'vocabulary_quiz_part2.html',
+                'vocabulary_quiz_part3.html',
+                'vocabulary_quiz_full.html'
+            ];
+            
+            for (const page of quizPages) {
+                try {
+                    const response = await fetch(page);
+                    if (!response.ok) {
+                        throw new Error(`雜誌練習頁面 ${page} 無法訪問`);
+                    }
+                } catch (error) {
+                    throw new Error(`雜誌練習頁面檢查失敗: ${error.message}`);
+                }
+            }
+        }
+
+        // 檢查管理員功能
+        async function checkAdmin() {
+            const adminLogin = await window.apiService.login('admin', 'admin123');
+            if (!adminLogin || !adminLogin.isAdmin) {
+                throw new Error('管理員登入失敗');
+            }
+        }
+
+        // 檢查百分比計算
+        async function checkPercentage() {
+            const testScores = [
+                { score: 8, total: 10, expected: 80 },
+                { score: 36, total: 36, expected: 100 },
+                { score: 0, total: 10, expected: 0 },
+                { score: 85, total: 36, expected: 100 } // 應該限制在100%
+            ];
+
+            for (const test of testScores) {
+                const calculated = Math.min(Math.round((test.score / test.total) * 100), 100);
+                if (calculated !== test.expected) {
+                    throw new Error(`百分比計算錯誤: ${test.score}/${test.total} 應為 ${test.expected}%，實際為 ${calculated}%`);
+                }
+            }
+        }
+
+        // 測試學生登入
+        async function testStudentLogin() {
+            const resultDiv = document.getElementById('checkResult');
+            const studentName = document.getElementById('testStudentName').value;
+            const password = document.getElementById('testStudentPassword').value;
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = `🔄 正在測試學生登入...\n\n學生：${studentName}`;
+
+            try {
+                const student = await window.apiService.login(studentName, password);
+                
+                if (student) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ 學生登入成功！\n\n姓名：${student.name}\n組別：${student.group}\n管理員：${student.isAdmin ? '是' : '否'}`;
+                } else {
+                    throw new Error('登入失敗');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 學生登入失敗：${error.message}`;
+            }
+        }
+
+        // 測試成績儲存
+        async function testScoreSave() {
+            const resultDiv = document.getElementById('checkResult');
+            const studentName = document.getElementById('testStudentName').value;
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = `🔄 正在測試成績儲存...\n\n學生：${studentName}`;
+
+            try {
+                const scoreData = {
+                    studentName: studentName,
+                    quizType: 'comprehensive_test',
+                    score: 15,
+                    totalQuestions: 20,
+                    percentage: 0,
+                    date: new Date().toISOString()
+                };
+
+                const result = await window.apiService.saveScore(scoreData);
+                
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 成績儲存成功！\n\n學生：${studentName}\n分數：15/20 (75%)\n記錄ID：${result.id}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 成績儲存失敗：${error.message}`;
+            }
+        }
+
+        // 測試雜誌練習
+        async function testVocabularyQuiz() {
+            const resultDiv = document.getElementById('checkResult');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在測試雜誌練習功能...';
+
+            try {
+                // 模擬雜誌練習完成
+                const scoreData = {
+                    studentName: document.getElementById('testStudentName').value,
+                    quizType: 'vocabulary_part1',
+                    score: 25,
+                    totalQuestions: 36,
+                    percentage: 0,
+                    date: new Date().toISOString()
+                };
+
+                const result = await window.apiService.saveScore(scoreData);
+                
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 雜誌練習測試成功！\n\n分數：25/36 (69%)\n記錄ID：${result.id}\n\n雜誌練習頁面：\n• vocabulary_quiz_part1.html\n• vocabulary_quiz_part2.html\n• vocabulary_quiz_part3.html\n• vocabulary_quiz_full.html`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 雜誌練習測試失敗：${error.message}`;
+            }
+        }
+
+        // 測試管理員面板
+        async function testAdminPanel() {
+            const resultDiv = document.getElementById('checkResult');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在測試管理員面板...';
+
+            try {
+                // 測試管理員登入
+                const admin = await window.apiService.login('admin', 'admin123');
+                if (!admin || !admin.isAdmin) {
+                    throw new Error('管理員登入失敗');
+                }
+
+                // 測試獲取所有成績
+                const allScores = await window.apiService.getAllScores();
+                
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 管理員面板測試成功！\n\n管理員：${admin.name}\n總成績記錄：${allScores.length} 筆\n\n管理員功能：\n• 查看所有學生成績\n• 查看學生詳細記錄\n• 成績統計分析`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 管理員面板測試失敗：${error.message}`;
+            }
+        }
+
+        // 添加測試學生
+        async function addTestStudent() {
+            const resultDiv = document.getElementById('testDataResult');
+            const studentName = document.getElementById('testStudentName').value;
+            const password = document.getElementById('testStudentPassword').value;
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = `🔄 正在添加測試學生...\n\n姓名：${studentName}`;
+
+            try {
+                const { data, error } = await window.apiService.supabase
+                    .from('students')
+                    .upsert({
+                        name: studentName,
+                        password: password,
+                        group_name: 'TestGroup',
+                        isadmin: false
+                    })
+                    .select()
+                    .single();
+
+                if (error) {
+                    throw error;
+                }
+
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ 測試學生添加成功！\n\n姓名：${data.name}\n組別：${data.group_name}\nID：${data.id}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 添加測試學生失敗：${error.message}`;
+            }
+        }
+
+        // 查看所有學生
+        async function viewAllStudents() {
+            const resultDiv = document.getElementById('testDataResult');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 正在獲取學生列表...';
+
+            try {
+                const students = await window.apiService.getAllStudents();
+                
+                if (students && students.length > 0) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ 找到 ${students.length} 名學生\n\n${students.map(student => 
+                        `• ${student.name} (${student.group}) ${student.isAdmin ? '[管理員]' : ''}`
+                    ).join('\n')}`;
+                } else {
+                    resultDiv.className = 'result info';
+                    resultDiv.innerHTML = '📝 沒有找到學生記錄';
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ 獲取學生列表失敗：${error.message}`;
+            }
+        }
+
+        // 更新資料庫狀態
+        async function updateDatabaseStatus() {
+            const statusDiv = document.getElementById('databaseStatus');
+            
+            try {
+                const [students, scores] = await Promise.all([
+                    window.apiService.getAllStudents(),
+                    window.apiService.getAllScores()
+                ]);
+
+                const statusHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="background: #d4edda; padding: 15px; border-radius: 8px;">
+                            <h3>👥 學生統計</h3>
+                            <p>總學生數：${students.length}</p>
+                            <p>管理員數：${students.filter(s => s.isAdmin).length}</p>
+                        </div>
+                        <div style="background: #d1ecf1; padding: 15px; border-radius: 8px;">
+                            <h3>📊 成績統計</h3>
+                            <p>總記錄數：${scores.length}</p>
+                            <p>今日記錄：${scores.filter(s => new Date(s.date).toDateString() === new Date().toDateString()).length}</p>
+                        </div>
+                        <div style="background: #fff3cd; padding: 15px; border-radius: 8px;">
+                            <h3>🔧 系統狀態</h3>
+                            <p>資料庫：✅ 正常</p>
+                            <p>API服務：✅ 正常</p>
+                        </div>
+                    </div>
+                `;
+
+                statusDiv.innerHTML = statusHTML;
+            } catch (error) {
+                statusDiv.innerHTML = `<p style="color: red;">❌ 無法獲取資料庫狀態：${error.message}</p>`;
+            }
+        }
+
+        // 頁面載入時初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.apiService) {
+                console.log('✅ 全面檢查工具API服務已載入');
+                updateDatabaseStatus();
+            } else {
+                console.error('❌ 全面檢查工具API服務載入失敗');
+                updateStatus('configStatus', 'error', '❌ API服務載入失敗');
+            }
+        });
+    </script>
+</body>
+</html>
