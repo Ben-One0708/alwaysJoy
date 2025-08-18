@@ -9,75 +9,42 @@ Firebase 是 Google 提供的後端服務，具有以下優勢：
 - **安全可靠**：Google 基礎設施保障
 - **無需服務器**：完全託管服務
 
+## ✅ 您的 Firebase 配置
+
+您的 Firebase 項目已經創建完成，配置信息如下：
+
+```javascript
+const firebaseConfig = {
+  apiKey: "AIzaSyBlQm3N1f8gno83eMExUhf_ArLqZShXLj0",
+  authDomain: "alwaysjoy-1872b.firebaseapp.com",
+  projectId: "alwaysjoy-1872b",
+  storageBucket: "alwaysjoy-1872b.firebasestorage.app",
+  messagingSenderId: "838707106957",
+  appId: "1:838707106957:web:1946b429778966711fbec4",
+  measurementId: "G-4BLLQG8DND"
+};
+```
+
+**項目信息**：
+- **項目名稱**：alwaysjoy-1872b
+- **項目 ID**：alwaysjoy-1872b
+- **Web 應用 ID**：1:838707106957:web:1946b429778966711fbec4
+
 ## 🚀 設置步驟
 
-### 步驟 1：創建 Firebase 項目
+### 步驟 1：啟用 Firestore 數據庫
 
-1. **前往 Firebase Console**：
-   - 訪問 [https://console.firebase.google.com/](https://console.firebase.google.com/)
-   - 使用 Google 帳號登入
-
-2. **創建新項目**：
-   - 點擊 "創建項目"
-   - 項目名稱：`alwaysjoy-learning`
-   - 選擇是否啟用 Google Analytics（可選）
-   - 點擊 "創建項目"
-
-### 步驟 2：啟用 Firestore 數據庫
-
-1. **在項目控制台中**：
+1. **在 Firebase Console 中**：
+   - 前往 [https://console.firebase.google.com/project/alwaysjoy-1872b](https://console.firebase.google.com/project/alwaysjoy-1872b)
    - 點擊左側選單的 "Firestore Database"
-   - 點擊 "創建數據庫"
 
-2. **選擇安全規則**：
+2. **創建數據庫**：
+   - 點擊 "創建數據庫"
    - 選擇 "以測試模式開始"
-   - 選擇數據庫位置（建議選擇離您最近的區域）
+   - 選擇數據庫位置（建議選擇 `asia-east1` 或 `asia-southeast1`）
    - 點擊 "完成"
 
-### 步驟 3：獲取配置信息
-
-1. **項目設置**：
-   - 點擊左側選單的齒輪圖標 "項目設置"
-   - 滾動到 "您的應用" 部分
-
-2. **添加 Web 應用**：
-   - 點擊 Web 圖標 `</>`
-   - 應用暱稱：`AlwaysJoy Web`
-   - 點擊 "註冊應用"
-
-3. **複製配置**：
-   - 複製顯示的配置對象
-   - 它看起來像這樣：
-   ```javascript
-   const firebaseConfig = {
-     apiKey: "AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-     authDomain: "alwaysjoy-learning.firebaseapp.com",
-     projectId: "alwaysjoy-learning",
-     storageBucket: "alwaysjoy-learning.appspot.com",
-     messagingSenderId: "123456789012",
-     appId: "1:123456789012:web:abcdefghijklmnop"
-   };
-   ```
-
-### 步驟 4：更新代碼配置
-
-1. **編輯 `api-firebase-client.js`**：
-   - 找到 `this.config` 對象
-   - 用您的實際配置替換示例配置
-
-2. **更新配置示例**：
-   ```javascript
-   this.config = {
-       apiKey: "您的實際 API 密鑰",
-       authDomain: "您的項目域名",
-       projectId: "您的項目 ID",
-       storageBucket: "您的存儲桶",
-       messagingSenderId: "您的發送者 ID",
-       appId: "您的應用 ID"
-   };
-   ```
-
-### 步驟 5：設置安全規則
+### 步驟 2：設置安全規則
 
 1. **在 Firestore Database 中**：
    - 點擊 "規則" 標籤
@@ -106,11 +73,20 @@ service cloud.firestore {
 
 2. **點擊 "發布"** 保存規則
 
-### 步驟 6：初始化數據
+### 步驟 3：測試連接
 
-1. **在您的網站中**：
-   - 打開瀏覽器開發者工具（F12）
-   - 在控制台中執行：
+1. **訪問測試頁面**：
+   - 前往：[https://ben-one0708.github.io/alwaysJoy/firebase-test.html](https://ben-one0708.github.io/alwaysJoy/firebase-test.html)
+
+2. **執行測試**：
+   - 點擊 "執行所有測試" 按鈕
+   - 檢查所有測試是否通過
+
+### 步驟 4：初始化示例數據
+
+在測試頁面中點擊 "初始化示例數據" 按鈕，或者：
+
+1. **在瀏覽器控制台中執行**：
    ```javascript
    apiService.initializeSampleData().then(result => {
        console.log('數據初始化結果:', result);
@@ -128,22 +104,9 @@ service cloud.firestore {
 
 ### 方法一：使用測試頁面
 
-1. **創建測試頁面**：
-   - 在您的網站中添加 Firebase SDK
-   - 創建簡單的測試頁面
-
-2. **測試代碼**：
-   ```javascript
-   // 測試連接
-   apiService.testConnection().then(result => {
-       console.log('連接測試結果:', result);
-   });
-
-   // 測試登入
-   apiService.login('Ben', 'BenBenBen').then(result => {
-       console.log('登入測試結果:', result);
-   });
-   ```
+1. **訪問測試頁面**：[https://ben-one0708.github.io/alwaysJoy/firebase-test.html](https://ben-one0708.github.io/alwaysJoy/firebase-test.html)
+2. **點擊 "執行所有測試"**
+3. **檢查結果**：確保所有測試都顯示綠色成功標誌
 
 ### 方法二：在控制台中測試
 
@@ -227,6 +190,7 @@ Firebase 提供以下免費額度：
 - **Firestore**：1GB 存儲，50,000 讀取/天，20,000 寫入/天
 - **Hosting**：10GB 存儲，360MB/天 傳輸
 - **Authentication**：10,000 用戶
+- **Analytics**：無限事件
 
 對於 AlwaysJoy 學習平台，這些免費額度完全足夠使用。
 
@@ -242,6 +206,18 @@ Firebase 提供以下免費額度：
    - 設置自動備份
    - 監控使用量
 
+## 📈 監控和維護
+
+1. **Firebase Console**：
+   - 監控數據庫使用量
+   - 查看錯誤日誌
+   - 管理安全規則
+
+2. **性能優化**：
+   - 監控查詢性能
+   - 優化數據結構
+   - 設置索引
+
 ---
 
-**🎉 完成 Firebase 設置後，您的網站就能完美連接雲端數據庫了！**
+**🎉 您的 Firebase 配置已完成！現在可以開始使用雲端數據庫了！**

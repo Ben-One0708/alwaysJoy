@@ -6,12 +6,13 @@ class FirebaseClientService {
     constructor() {
         // Firebase 配置
         this.config = {
-            apiKey: "AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-            authDomain: "alwaysjoy-learning.firebaseapp.com",
-            projectId: "alwaysjoy-learning",
-            storageBucket: "alwaysjoy-learning.appspot.com",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abcdefghijklmnop"
+            apiKey: "AIzaSyBlQm3N1f8gno83eMExUhf_ArLqZShXLj0",
+            authDomain: "alwaysjoy-1872b.firebaseapp.com",
+            projectId: "alwaysjoy-1872b",
+            storageBucket: "alwaysjoy-1872b.firebasestorage.app",
+            messagingSenderId: "838707106957",
+            appId: "1:838707106957:web:1946b429778966711fbec4",
+            measurementId: "G-4BLLQG8DND"
         };
 
         // 初始化 Firebase
@@ -32,7 +33,7 @@ class FirebaseClientService {
             if (!this.db) {
                 return false;
             }
-            
+
             // 嘗試讀取一個測試文檔
             const testDoc = await this.db.collection('test').doc('connection').get();
             return true;
@@ -101,7 +102,7 @@ class FirebaseClientService {
 
             const scoresRef = this.db.collection('scores');
             const snapshot = await scoresRef.orderBy('date', 'desc').get();
-            
+
             const scores = [];
             snapshot.forEach(doc => {
                 scores.push({
@@ -128,7 +129,7 @@ class FirebaseClientService {
 
             const scoresRef = this.db.collection('scores');
             const query = await scoresRef.where('studentName', '==', studentName).orderBy('date', 'desc').get();
-            
+
             const scores = [];
             query.forEach(doc => {
                 scores.push({
@@ -163,7 +164,7 @@ class FirebaseClientService {
             };
 
             const docRef = await this.db.collection('scores').add(scoreData);
-            
+
             return {
                 success: true,
                 score: {
@@ -191,7 +192,7 @@ class FirebaseClientService {
 
             const studentsRef = this.db.collection('students');
             const snapshot = await studentsRef.orderBy('name').get();
-            
+
             const students = [];
             snapshot.forEach(doc => {
                 students.push({
