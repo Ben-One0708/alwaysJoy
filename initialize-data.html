@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初始化 AlwaysJoy 數據</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+        }
+        button:hover { background-color: #0056b3; }
+        button:disabled { background-color: #6c757d; cursor: not-allowed; }
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 AlwaysJoy 數據初始化</h1>
+        
+        <div class="status info">
+            <h3>📋 說明</h3>
+            <p>這個頁面會初始化 AlwaysJoy 學習平台的示例數據，包括學生帳號和示例成績。</p>
+        </div>
+
+        <div>
+            <button onclick="testConnection()">測試 Firebase 連接</button>
+            <button onclick="initializeData()">初始化示例數據</button>
+            <button onclick="checkData()">檢查現有數據</button>
+            <button onclick="clearData()">清除所有數據</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Firebase API 客戶端 -->
+    <script src="api-firebase-client.js"></script>
+    
+    <script>
+        const resultsDiv = document.getElementById('results');
+
+        function addResult(title, content, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.innerHTML = `
+                <h4>${title}</h4>
+                <pre>${content}</pre>
+            `;
+            resultsDiv.appendChild(div);
+        }
+
+        function clearResults() {
+            resultsDiv.innerHTML = '';
+        }
+
+        async function testConnection() {
+            clearResults();
+            addResult('🔄 測試 Firebase 連接', '正在測試...', 'info');
+            
+            try {
+                const result = await apiService.testConnection();
+                if (result) {
+                    addResult('✅ Firebase 連接成功', 'Firebase 連接正常！', 'success');
+                } else {
+                    addResult('❌ Firebase 連接失敗', '無法連接到 Firebase，請檢查配置', 'error');
+                }
+            } catch (error) {
+                addResult('❌ 連接錯誤', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function initializeData() {
+            clearResults();
+            addResult('🔄 初始化示例數據', '正在初始化學生和成績數據...', 'info');
+            
+            try {
+                const result = await apiService.initializeSampleData();
+                if (result) {
+                    addResult('✅ 數據初始化成功', '示例數據已成功初始化！\n\n包含：\n- 15 位學生帳號\n- 5 筆示例成績記錄', 'success');
+                } else {
+                    addResult('⚠️ 數據已存在', '數據已存在，跳過初始化', 'info');
+                }
+            } catch (error) {
+                addResult('❌ 初始化失敗', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function checkData() {
+            clearResults();
+            addResult('🔄 檢查現有數據', '正在檢查數據庫中的數據...', 'info');
+            
+            try {
+                const [students, scores] = await Promise.all([
+                    apiService.getAllStudents(),
+                    apiService.getAllScores()
+                ]);
+                
+                addResult('📊 數據統計', 
+                    `學生數量：${students.length}\n成績記錄：${scores.length}\n\n學生列表：\n${students.map(s => `- ${s.name} (${s.group})`).join('\n')}\n\n成績記錄：\n${scores.map(s => `- ${s.studentName}: ${s.quizType} ${s.score}分`).join('\n')}`, 
+                    'success'
+                );
+            } catch (error) {
+                addResult('❌ 檢查失敗', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function clearData() {
+            if (!confirm('確定要清除所有數據嗎？此操作不可恢復！')) {
+                return;
+            }
+            
+            clearResults();
+            addResult('🔄 清除數據', '正在清除所有數據...', 'info');
+            
+            try {
+                // 清除學生數據
+                const students = await apiService.getAllStudents();
+                for (const student of students) {
+                    await apiService.deleteStudent(student.id);
+                }
+                
+                // 清除成績數據
+                const scores = await apiService.getAllScores();
+                for (const score of scores) {
+                    await apiService.deleteScore(score.id);
+                }
+                
+                addResult('✅ 數據清除成功', '所有數據已清除', 'success');
+            } catch (error) {
+                addResult('❌ 清除失敗', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        // 頁面載入時自動測試連接
+        window.onload = function() {
+            addResult('📝 準備就緒', '頁面已載入，請點擊按鈕開始操作', 'info');
+        };
+    </script>
+</body>
+</html>
