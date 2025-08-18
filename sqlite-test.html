@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQLite 測試頁面</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #5a6fd8;
+        }
+
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔧 SQLite 數據庫測試</h1>
+
+        <div class="test-section">
+            <h3>📋 測試說明</h3>
+            <p>這個頁面用於測試 SQLite 數據庫的連接和基本操作。請按順序執行測試以確保所有功能正常。</p>
+        </div>
+
+        <div class="test-section">
+            <h3>🔗 連接測試</h3>
+            <button onclick="testConnection()">測試數據庫連接</button>
+            <button onclick="testInitialization()">測試數據初始化</button>
+            <div id="connectionResults" class="results"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>👥 學生管理測試</h3>
+            <button onclick="testGetStudents()">獲取所有學生</button>
+            <button onclick="testAddStudent()">添加測試學生</button>
+            <div id="studentResults" class="results"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>📊 成績管理測試</h3>
+            <button onclick="testGetScores()">獲取所有成績</button>
+            <button onclick="testSaveScore()">保存測試成績</button>
+            <div id="scoreResults" class="results"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>🔐 登入測試</h3>
+            <div class="form-group">
+                <label for="testUsername">用戶名：</label>
+                <input type="text" id="testUsername" value="ben" placeholder="輸入用戶名">
+            </div>
+            <div class="form-group">
+                <label for="testPassword">密碼：</label>
+                <input type="password" id="testPassword" value="admin123" placeholder="輸入密碼">
+            </div>
+            <button onclick="testLogin()">測試登入</button>
+            <div id="loginResults" class="results"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>🔄 完整測試</h3>
+            <button onclick="runAllTests()">執行所有測試</button>
+            <div id="allResults" class="results"></div>
+        </div>
+    </div>
+
+    <!-- SQLite API 客戶端 -->
+    <script src="api-sqlite-client.js"></script>
+
+    <script>
+        const resultsDivs = {
+            connection: document.getElementById('connectionResults'),
+            student: document.getElementById('studentResults'),
+            score: document.getElementById('scoreResults'),
+            login: document.getElementById('loginResults'),
+            all: document.getElementById('allResults')
+        };
+
+        function addResult(divId, message, type = 'info') {
+            const div = resultsDivs[divId];
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'success' ? 'success' :
+                type === 'error' ? 'error' :
+                    type === 'warning' ? 'warning' : 'info';
+
+            div.innerHTML += `[${timestamp}] ${message}\n`;
+            div.className = `results ${className}`;
+            div.scrollTop = div.scrollHeight;
+        }
+
+        function clearResults(divId) {
+            resultsDivs[divId].innerHTML = '';
+        }
+
+        async function testConnection() {
+            clearResults('connection');
+            addResult('connection', '🔄 測試 SQLite 數據庫連接...', 'info');
+
+            try {
+                // 等待 API 服務初始化
+                let attempts = 0;
+                while (!window.apiService || !window.apiService.isInitialized) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    attempts++;
+                    if (attempts > 50) {
+                        throw new Error('API 服務初始化超時');
+                    }
+                }
+
+                const isConnected = await window.apiService.testConnection();
+
+                if (isConnected) {
+                    addResult('connection', '✅ SQLite 數據庫連接成功！', 'success');
+                } else {
+                    addResult('connection', '❌ SQLite 數據庫連接失敗', 'error');
+                }
+            } catch (error) {
+                addResult('connection', `❌ 連接測試失敗: ${error.message}`, 'error');
+            }
+        }
+
+        async function testInitialization() {
+            clearResults('connection');
+            addResult('connection', '🔄 測試數據初始化...', 'info');
+
+            try {
+                const result = await window.apiService.initializeSampleData();
+
+                if (result.success) {
+                    addResult('connection', '✅ 樣本數據初始化成功！', 'success');
+                    addResult('connection', result.message, 'success');
+                } else {
+                    addResult('connection', `❌ 初始化失敗: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                addResult('connection', `❌ 初始化測試失敗: ${error.message}`, 'error');
+            }
+        }
+
+        async function testGetStudents() {
+            clearResults('student');
+            addResult('student', '🔄 獲取所有學生...', 'info');
+
+            try {
+                const students = await window.apiService.getAllStudents();
+
+                if (students.length > 0) {
+                    addResult('student', `✅ 成功獲取 ${students.length} 個學生`, 'success');
+                    addResult('student', '學生列表：\n' + students.map(s =>
+                        `- ${s.name} (${s.username}) - ${s.group} ${s.isAdmin ? '[管理員]' : ''}`
+                    ).join('\n'), 'success');
+                } else {
+                    addResult('student', '⚠️ 沒有找到學生數據', 'warning');
+                }
+            } catch (error) {
+                addResult('student', `❌ 獲取學生失敗: ${error.message}`, 'error');
+            }
+        }
+
+        async function testAddStudent() {
+            clearResults('student');
+            addResult('student', '🔄 添加測試學生...', 'info');
+
+            try {
+                const result = await window.apiService.addStudent(
+                    'testuser',
+                    'testpass',
+                    '測試用戶',
+                    '測試組'
+                );
+
+                if (result.success) {
+                    addResult('student', '✅ 測試學生添加成功！', 'success');
+                    addResult('student', `學生ID: ${result.student.id}`, 'success');
+                } else {
+                    addResult('student', `❌ 添加失敗: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                addResult('student', `❌ 添加學生失敗: ${error.message}`, 'error');
+            }
+        }
+
+        async function testGetScores() {
+            clearResults('score');
+            addResult('score', '🔄 獲取所有成績...', 'info');
+
+            try {
+                const scores = await window.apiService.getAllScores();
+
+                if (scores.length > 0) {
+                    addResult('score', `✅ 成功獲取 ${scores.length} 筆成績記錄`, 'success');
+                    addResult('score', '成績列表：\n' + scores.slice(0, 5).map(s =>
+                        `- ${s.studentName} - ${s.quizType}: ${s.score}分 (${s.date})`
+                    ).join('\n'), 'success');
+
+                    if (scores.length > 5) {
+                        addResult('score', `... 還有 ${scores.length - 5} 筆記錄`, 'info');
+                    }
+                } else {
+                    addResult('score', '⚠️ 沒有找到成績數據', 'warning');
+                }
+            } catch (error) {
+                addResult('score', `❌ 獲取成績失敗: ${error.message}`, 'error');
+            }
+        }
+
+        async function testSaveScore() {
+            clearResults('score');
+            addResult('score', '🔄 保存測試成績...', 'info');
+
+            try {
+                const result = await window.apiService.saveScore(
+                    '測試用戶',
+                    '測試組',
+                    '測試題型',
+                    85
+                );
+
+                if (result.success) {
+                    addResult('score', '✅ 測試成績保存成功！', 'success');
+                    addResult('score', `成績ID: ${result.score.id}`, 'success');
+                } else {
+                    addResult('score', `❌ 保存失敗: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                addResult('score', `❌ 保存成績失敗: ${error.message}`, 'error');
+            }
+        }
+
+        async function testLogin() {
+            clearResults('login');
+            addResult('login', '🔄 測試登入...', 'info');
+
+            try {
+                const username = document.getElementById('testUsername').value;
+                const password = document.getElementById('testPassword').value;
+
+                if (!username || !password) {
+                    addResult('login', '❌ 請輸入用戶名和密碼', 'error');
+                    return;
+                }
+
+                const result = await window.apiService.login(username, password);
+
+                if (result.success) {
+                    addResult('login', '✅ 登入成功！', 'success');
+                    addResult('login', `歡迎 ${result.student.name} (${result.student.group})`, 'success');
+                    if (result.student.isAdmin) {
+                        addResult('login', '👑 管理員權限', 'success');
+                    }
+                } else {
+                    addResult('login', `❌ 登入失敗: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                addResult('login', `❌ 登入測試失敗: ${error.message}`, 'error');
+            }
+        }
+
+        async function runAllTests() {
+            clearResults('all');
+            addResult('all', '🚀 開始執行所有 SQLite 測試...', 'info');
+
+            // 測試 1：連接
+            addResult('all', '📋 測試 1: 數據庫連接', 'info');
+            await testConnection();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // 測試 2：初始化
+            addResult('all', '📋 測試 2: 數據初始化', 'info');
+            await testInitialization();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // 測試 3：學生管理
+            addResult('all', '📋 測試 3: 學生管理', 'info');
+            await testGetStudents();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // 測試 4：成績管理
+            addResult('all', '📋 測試 4: 成績管理', 'info');
+            await testGetScores();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // 測試 5：登入
+            addResult('all', '📋 測試 5: 用戶登入', 'info');
+            await testLogin();
+
+            addResult('all', '🎉 所有 SQLite 測試完成！', 'success');
+        }
+
+        // 頁面載入時自動執行基本測試
+        window.onload = function () {
+            addResult('all', '📝 SQLite 測試頁面已載入，請點擊按鈕開始測試', 'info');
+        };
+    </script>
+</body>
+
+</html>

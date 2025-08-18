@@ -1024,15 +1024,15 @@ function openAdminPanel() {
 // 載入所有成績數據
 async function loadAllScores() {
     try {
-        // 使用 Firebase API 服務
+        // 使用 SQLite API 服務
         if (window.apiService && typeof window.apiService.getAllScores === 'function') {
-            console.log('使用 Firebase 載入成績數據');
+            console.log('使用 SQLite 載入成績數據');
             const scores = await window.apiService.getAllScores();
             console.log('載入到的成績數據:', scores);
             displayScores(scores);
             updateAdminStats(scores);
         } else {
-            console.log('Firebase API 服務不可用，使用本地存儲作為備用');
+            console.log('SQLite API 服務不可用，使用本地存儲作為備用');
             // 使用本地存儲作為備用
             const scores = getLocalScores();
             displayScores(scores);
@@ -2124,7 +2124,7 @@ async function saveScores() {
         // 獲取學生組別
         const studentGroup = getStudentGroup(currentStudent);
 
-        // 保存每個練習類型的成績到 Firebase
+        // 保存每個練習類型的成績到 SQLite
         const savePromises = [];
 
         if (parseInt(scores.magazine) > 0) {
@@ -2160,7 +2160,7 @@ async function saveScores() {
         // 等待所有成績保存完成
         if (savePromises.length > 0) {
             await Promise.all(savePromises);
-            console.log('所有成績已成功保存到 Firebase');
+            console.log('所有成績已成功保存到 SQLite');
         }
 
         // 同時保存到本地存儲作為備用
@@ -2174,12 +2174,12 @@ async function saveScores() {
         updateStudentScores(currentStudent, scores);
 
         // 顯示成功訊息
-        showSuccessMessage('分數已成功儲存到雲端！');
+        showSuccessMessage('分數已成功儲存到 SQLite 數據庫！');
 
     } catch (error) {
         console.error('保存成績失敗:', error);
 
-        // 如果 Firebase 保存失敗，只保存到本地存儲
+        // 如果 SQLite 保存失敗，只保存到本地存儲
         localStorage.setItem(`scores_${currentStudent}`, JSON.stringify({
             student: currentStudent,
             scores: scores,
@@ -2885,7 +2885,7 @@ async function saveScoreRecord(scoreRecord) {
         // 獲取學生組別
         const studentGroup = getStudentGroup(scoreRecord.studentName);
 
-        // 保存到 Firebase
+        // 保存到 SQLite
         if (scoreRecord.scores.magazine > 0) {
             await window.apiService.saveScore(
                 scoreRecord.studentName,
@@ -2904,10 +2904,10 @@ async function saveScoreRecord(scoreRecord) {
             );
         }
 
-        console.log('成績記錄已保存到 Firebase');
+        console.log('成績記錄已保存到 SQLite');
 
     } catch (error) {
-        console.error('保存成績記錄到 Firebase 失敗:', error);
+        console.error('保存成績記錄到 SQLite 失敗:', error);
     }
 
     // 同時保存到本地存儲作為備用

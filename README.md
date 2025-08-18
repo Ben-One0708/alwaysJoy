@@ -9,7 +9,7 @@
 - **成績記錄**：自動記錄和查看練習成績
 - **管理員功能**：管理員可查看所有學生成績
 - **響應式設計**：支援手機、平板、電腦
-- **雲端數據庫**：使用 Firebase Firestore 保存數據
+- **客戶端數據庫**：使用 SQLite 保存數據
 
 ## 🚀 快速開始
 
@@ -34,9 +34,9 @@
    cd alwaysJoy
    ```
 
-2. **配置 Firebase**：
-   - 按照 `FIREBASE_SETUP.md` 的步驟設置 Firebase
-   - 更新 `api-firebase-client.js` 中的配置
+2. **配置 SQLite**：
+   - 按照 `SQLITE_SETUP.md` 的步驟設置 SQLite
+   - 系統會自動初始化數據庫
 
 3. **開啟網站**：
    - 用瀏覽器打開 `index.html`
@@ -49,17 +49,15 @@
 ## 👥 測試帳號
 
 ### 管理員帳號
-- **帳號**：Ben
-- **密碼**：BenBenBen
+- **帳號**：ben
+- **密碼**：admin123
 - **功能**：查看所有學生成績、管理系統
 
 ### 學生帳號
-- **B組**：C2 Yuni / yuni, C2 Emily / emily, A8 Vito / vito
-- **C組**：A4 Eudora / eudora, A5 Zoe / zoe
-- **D組**：N6 Bruce / bruce, N7 Laura / laura
-- **E組**：K9 Lilian / lilian, K9 Jill / jill
-- **F組**：I2 Candy / candy, N3 Avery / avery
-- **教務組**：教務組 Annie / annie, 教務組 Celina / celina, 教務組 Nina / nina
+- **A組**：annie / student123
+- **B組**：bob / student123
+- **C組**：cathy / student123
+- **D組**：david / student123
 
 ## 📁 文件結構
 
@@ -68,9 +66,9 @@ alwaysJoy/
 ├── index.html              # 主頁面
 ├── script.js               # 主要 JavaScript 邏輯
 ├── styles.css              # 樣式文件
-├── api-firebase-client.js  # Firebase API 客戶端
-├── FIREBASE_SETUP.md       # Firebase 設置指南
-├── firebase-test.html      # Firebase 測試頁面
+├── api-sqlite-client.js    # SQLite API 客戶端
+├── SQLITE_SETUP.md         # SQLite 設置指南
+├── sqlite-test.html        # SQLite 測試頁面
 ├── MJ3.html               # 詞彙練習遊戲
 ├── vocabulary_quiz_*.html  # 詞彙練習頁面
 ├── image/                 # 圖片資源
@@ -84,14 +82,14 @@ alwaysJoy/
 - **CSS3**：樣式和響應式設計
 - **JavaScript (ES6+)**：互動邏輯和數據處理
 
-### 後端服務
-- **Firebase Firestore**：雲端 NoSQL 數據庫
-- **Firebase SDK**：JavaScript 客戶端庫
-- **實時同步**：數據實時更新
+### 數據庫技術
+- **SQLite**：客戶端數據庫引擎
+- **SQL.js**：JavaScript SQLite 實現
+- **本地存儲**：瀏覽器本地存儲備用
 
 ### 部署平台
 - **GitHub Pages**：靜態網站託管
-- **Firebase Hosting**：可選的託管服務
+- **Git**：版本控制
 - **Git**：版本控制
 
 ## 📊 功能模組
