@@ -281,9 +281,239 @@ function closeModal(modalId) {
 function openPDF(date, type) {
     const modal = document.getElementById('pdfModal');
     const content = document.getElementById('pdfContent');
+    const title = document.getElementById('pdfTitle');
 
-    content.innerHTML = `<h3>${date} 課程資料</h3><p>這裡將顯示 ${date} 的課程 PDF 內容。</p>`;
+    // 設置標題
+    title.textContent = `${date} 課程資料`;
+
+    // 根據日期顯示不同的內容
+    const pdfContent = getPDFContent(date);
+    content.innerHTML = pdfContent;
+    
     modal.style.display = 'block';
+}
+
+// 獲取 PDF 內容
+function getPDFContent(date) {
+    const pdfData = {
+        '7/26': `
+            <div class="pdf-content">
+                <h3>7月26日 課程內容</h3>
+                <div class="pdf-section">
+                    <h4>📚 今日課程重點</h4>
+                    <ul>
+                        <li>基礎詞彙練習</li>
+                        <li>發音規則複習</li>
+                        <li>句型結構練習</li>
+                    </ul>
+                </div>
+                <div class="pdf-section">
+                    <h4>📝 練習作業</h4>
+                    <ul>
+                        <li>完成詞彙練習冊第1-10頁</li>
+                        <li>背誦今日新單字</li>
+                        <li>預習下週課程內容</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        '8/2': `
+            <div class="pdf-content">
+                <h3>8月2日 課程內容</h3>
+                <div class="pdf-section">
+                    <h4>📚 今日課程重點</h4>
+                    <ul>
+                        <li>進階詞彙學習</li>
+                        <li>語法結構分析</li>
+                        <li>閱讀理解練習</li>
+                    </ul>
+                </div>
+                <div class="pdf-section">
+                    <h4>📝 練習作業</h4>
+                    <ul>
+                        <li>完成閱讀練習題</li>
+                        <li>複習語法重點</li>
+                        <li>準備下週測驗</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        '8/23': `
+            <div class="pdf-content">
+                <h3>8月23日 課程內容</h3>
+                <div class="pdf-section">
+                    <h4>📚 今日課程重點</h4>
+                    <ul>
+                        <li>綜合能力評估</li>
+                        <li>模擬測驗練習</li>
+                        <li>弱點分析與改進</li>
+                    </ul>
+                </div>
+                <div class="pdf-section">
+                    <h4>📝 練習作業</h4>
+                    <ul>
+                        <li>完成模擬測驗</li>
+                        <li>檢討錯誤題目</li>
+                        <li>加強弱點練習</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        '9/13': `
+            <div class="pdf-content">
+                <h3>9月13日 課程內容</h3>
+                <div class="pdf-section">
+                    <h4>📚 今日課程重點</h4>
+                    <ul>
+                        <li>高級詞彙學習</li>
+                        <li>寫作技巧訓練</li>
+                        <li>口語表達練習</li>
+                    </ul>
+                </div>
+                <div class="pdf-section">
+                    <h4>📝 練習作業</h4>
+                    <ul>
+                        <li>完成寫作練習</li>
+                        <li>練習口語表達</li>
+                        <li>預習下週內容</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        '9/27': `
+            <div class="pdf-content">
+                <h3>9月27日 課程內容</h3>
+                <div class="pdf-section">
+                    <h4>📚 今日課程重點</h4>
+                    <ul>
+                        <li>考試技巧指導</li>
+                        <li>時間管理訓練</li>
+                        <li>心理素質培養</li>
+                    </ul>
+                </div>
+                <div class="pdf-section">
+                    <h4>📝 練習作業</h4>
+                    <ul>
+                        <li>練習考試技巧</li>
+                        <li>模擬考試環境</li>
+                        <li>調整學習心態</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        '10/18': `
+            <div class="pdf-content">
+                <h3>10月18日 課程內容</h3>
+                <div class="pdf-section">
+                    <h4>📚 今日課程重點</h4>
+                    <ul>
+                        <li>重點詞彙複習</li>
+                        <li>常見錯誤分析</li>
+                        <li>答題策略指導</li>
+                    </ul>
+                </div>
+                <div class="pdf-section">
+                    <h4>📝 練習作業</h4>
+                    <ul>
+                        <li>重點詞彙背誦</li>
+                        <li>錯誤題目重做</li>
+                        <li>策略練習應用</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        '11/1': `
+            <div class="pdf-content">
+                <h3>11月1日 課程內容</h3>
+                <div class="pdf-section">
+                    <h4>📚 今日課程重點</h4>
+                    <ul>
+                        <li>最後衝刺準備</li>
+                        <li>重點題型練習</li>
+                        <li>信心建立訓練</li>
+                    </ul>
+                </div>
+                <div class="pdf-section">
+                    <h4>📝 練習作業</h4>
+                    <ul>
+                        <li>重點題型練習</li>
+                        <li>建立考試信心</li>
+                        <li>調整最佳狀態</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        '11/15': `
+            <div class="pdf-content">
+                <h3>11月15日 課程內容</h3>
+                <div class="pdf-section">
+                    <h4>📚 今日課程重點</h4>
+                    <ul>
+                        <li>模擬考試進行</li>
+                        <li>成績分析檢討</li>
+                        <li>最後調整指導</li>
+                    </ul>
+                </div>
+                <div class="pdf-section">
+                    <h4>📝 練習作業</h4>
+                    <ul>
+                        <li>完成模擬考試</li>
+                        <li>檢討考試結果</li>
+                        <li>最後衝刺準備</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        '11/22': `
+            <div class="pdf-content">
+                <h3>11月22日 課程內容</h3>
+                <div class="pdf-section">
+                    <h4>📚 今日課程重點</h4>
+                    <ul>
+                        <li>考試前最後準備</li>
+                        <li>心理狀態調整</li>
+                        <li>考試注意事項</li>
+                    </ul>
+                </div>
+                <div class="pdf-section">
+                    <h4>📝 練習作業</h4>
+                    <ul>
+                        <li>放鬆心情準備</li>
+                        <li>檢查考試用品</li>
+                        <li>保持最佳狀態</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        '11/29': `
+            <div class="pdf-content">
+                <h3>11月29日 課程內容</h3>
+                <div class="pdf-section">
+                    <h4>📚 今日課程重點</h4>
+                    <ul>
+                        <li>考試後檢討</li>
+                        <li>成績分析討論</li>
+                        <li>未來學習規劃</li>
+                    </ul>
+                </div>
+                <div class="pdf-section">
+                    <h4>📝 練習作業</h4>
+                    <ul>
+                        <li>檢討考試表現</li>
+                        <li>分析學習成果</li>
+                        <li>規劃未來學習</li>
+                    </ul>
+                </div>
+            </div>
+        `
+    };
+
+    return pdfData[date] || `
+        <div class="pdf-content">
+            <h3>${date} 課程資料</h3>
+            <p>此日期的課程資料正在準備中，敬請期待。</p>
+        </div>
+    `;
 }
 
 // 練習功能

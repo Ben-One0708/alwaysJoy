@@ -4288,6 +4288,64 @@ body {
     transform: translateX(5px);
 }
 
+/* PDF 內容樣式 */
+.pdf-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pdf-content h3 {
+    color: var(--text-dark);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+}
+
+.pdf-section {
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius-small);
+    padding: 20px;
+    box-shadow: var(--shadow-light);
+}
+
+.pdf-section h4 {
+    color: var(--secondary-color);
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pdf-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.pdf-section li {
+    color: var(--text-dark);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pdf-section li:before {
+    content: '•';
+    color: var(--secondary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.pdf-section li:last-child {
+    border-bottom: none;
+}
+
 /* 響應式設計 */
 @media (max-width: 768px) {
     .practice-main-container {
@@ -4305,5 +4363,17 @@ body {
     
     .practice-header h2 {
         font-size: 2rem;
+    }
+    
+    .pdf-content {
+        padding: 15px;
+    }
+    
+    .pdf-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .pdf-section {
+        padding: 15px;
     }
 }
