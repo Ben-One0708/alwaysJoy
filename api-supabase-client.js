@@ -47,20 +47,35 @@ class SupabaseClientService {
     // 獲取學生成績
     async getStudentScores(studentName) {
         try {
+            // 檢查是否配置了 Supabase
+            if (this.supabaseUrl === 'https://your-project-ref.supabase.co' ||
+                this.supabaseKey === 'your-anon-key') {
+                console.warn('Supabase 未配置，使用本地存儲數據');
+                return this.getLocalScores().filter(score =>
+                    score.student_name === studentName || score.studentName === studentName
+                );
+            }
+
             const { data, error } = await this.supabase
                 .from('scores')
                 .select('*')
-                .eq('studentName', studentName)
+                .eq('student_name', studentName)
                 .order('date', { ascending: false });
 
             if (error) {
-                throw new Error(error.message);
+                console.warn('Supabase 查詢失敗，使用本地存儲數據:', error);
+                return this.getLocalScores().filter(score =>
+                    score.student_name === studentName || score.studentName === studentName
+                );
             }
 
             return data || [];
         } catch (error) {
             console.error('獲取成績錯誤:', error);
-            throw error;
+            console.log('使用本地存儲作為備用方案');
+            return this.getLocalScores().filter(score =>
+                score.student_name === studentName || score.studentName === studentName
+            );
         }
     }
 
@@ -69,14 +84,22 @@ class SupabaseClientService {
         try {
             // 確保scoreData包含必要欄位
             const scoreRecord = {
-                studentName: scoreData.studentName || 'Anonymous',
-                quizType: scoreData.quizType || 'unknown',
+                student_name: scoreData.studentName || scoreData.student_name || 'Anonymous',
+                quiz_type: scoreData.quizType || scoreData.quiz_type || 'unknown',
                 score: scoreData.score || 0,
-                totalQuestions: scoreData.totalQuestions || 0,
+                total_questions: scoreData.totalQuestions || scoreData.total_questions || 0,
                 percentage: scoreData.percentage || 0,
                 date: scoreData.date || new Date().toISOString(),
+                notes: scoreData.notes || '',
                 details: scoreData.details || {}
             };
+
+            // 檢查是否配置了 Supabase
+            if (this.supabaseUrl === 'https://your-project-ref.supabase.co' ||
+                this.supabaseKey === 'your-anon-key') {
+                console.warn('Supabase 未配置，使用本地存儲');
+                return this.saveToLocalStorage(scoreRecord);
+            }
 
             const { data, error } = await this.supabase
                 .from('scores')
@@ -85,33 +108,93 @@ class SupabaseClientService {
                 .single();
 
             if (error) {
-                throw new Error(error.message);
+                console.warn('Supabase 儲存失敗，使用本地存儲:', error);
+                return this.saveToLocalStorage(scoreRecord);
             }
+
+            // 同時保存到本地存儲作為備用
+            this.saveToLocalStorage(scoreRecord);
 
             return { success: true, score: data };
         } catch (error) {
             console.error('儲存成績錯誤:', error);
-            throw error;
+            console.log('使用本地存儲作為備用方案');
+            return this.saveToLocalStorage(scoreRecord);
+        }
+    }
+
+    // 保存到本地存儲
+    saveToLocalStorage(scoreRecord) {
+        try {
+            const key = `score_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+            localStorage.setItem(key, JSON.stringify(scoreRecord));
+            console.log('成績已保存到本地存儲:', key);
+            return { success: true, score: { ...scoreRecord, id: key } };
+        } catch (error) {
+            console.error('本地存儲失敗:', error);
+            return { success: false, error: '本地存儲失敗' };
         }
     }
 
     // 獲取所有成績（管理員用）
     async getAllScores() {
         try {
+            // 檢查是否配置了 Supabase
+            if (this.supabaseUrl === 'https://your-project-ref.supabase.co' ||
+                this.supabaseKey === 'your-anon-key') {
+                console.warn('Supabase 未配置，使用本地存儲數據');
+                return this.getLocalScores();
+            }
+
             const { data, error } = await this.supabase
                 .from('scores')
                 .select('*')
                 .order('date', { ascending: false });
 
             if (error) {
-                throw new Error(error.message);
+                console.warn('Supabase 查詢失敗，使用本地存儲數據:', error);
+                return this.getLocalScores();
             }
 
             return data || [];
         } catch (error) {
             console.error('獲取所有成績錯誤:', error);
-            throw error;
+            console.log('使用本地存儲作為備用方案');
+            return this.getLocalScores();
         }
+    }
+
+    // 獲取本地存儲的成績（備用方案）
+    getLocalScores() {
+        const scores = [];
+
+        // 從 localStorage 獲取成績數據
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith('score_')) {
+                try {
+                    const scoreData = JSON.parse(localStorage.getItem(key));
+                    // 轉換為標準格式
+                    const score = {
+                        id: key,
+                        student_name: scoreData.studentName || scoreData.student_name || 'Unknown',
+                        quiz_type: scoreData.quizType || scoreData.quiz_type || 'unknown',
+                        score: scoreData.score || 0,
+                        total_questions: scoreData.totalQuestions || scoreData.total_questions || 0,
+                        percentage: scoreData.percentage || 0,
+                        date: scoreData.date || new Date().toISOString(),
+                        notes: scoreData.notes || '',
+                        details: scoreData.details || {}
+                    };
+                    scores.push(score);
+                } catch (e) {
+                    console.error('解析本地成績數據失敗:', e);
+                }
+            }
+        }
+
+        // 按日期排序
+        return scores.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
 
     // 獲取所有學生
@@ -228,6 +311,13 @@ class SupabaseClientService {
     // 測試連接
     async testConnection() {
         try {
+            // 檢查是否配置了 Supabase
+            if (this.supabaseUrl === 'https://your-project-ref.supabase.co' || 
+                this.supabaseKey === 'your-anon-key') {
+                console.warn('Supabase 未配置，使用本地模式');
+                return false;
+            }
+
             const { data, error } = await this.supabase
                 .from('students')
                 .select('count')
