@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase 連接測試</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .info {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+            color: #0c5460;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔧 Supabase 連接測試</h1>
+
+        <div class="test-section info">
+            <h3>📋 測試說明</h3>
+            <p>這個頁面會測試您的 Supabase 連接是否正常工作，包括 CORS 設置。</p>
+        </div>
+
+        <div class="test-section">
+            <h3>🚀 執行測試</h3>
+            <button onclick="testConnection()">測試基本連接</button>
+            <button onclick="testGetScores()">測試獲取成績</button>
+            <button onclick="testLogin()">測試學生登入</button>
+            <button onclick="runAllTests()">執行所有測試</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <!-- Supabase 客戶端 -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="api-supabase-client.js"></script>
+
+    <script>
+        const apiService = new SupabaseClientService();
+        const resultsDiv = document.getElementById('results');
+
+        function addResult(title, content, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test-section ${type}`;
+            div.innerHTML = `
+                <h4>${title}</h4>
+                <pre>${content}</pre>
+            `;
+            resultsDiv.appendChild(div);
+        }
+
+        function clearResults() {
+            resultsDiv.innerHTML = '';
+        }
+
+        async function testConnection() {
+            clearResults();
+            addResult('🔄 測試基本連接', '正在測試...', 'info');
+
+            try {
+                const result = await apiService.testConnection();
+                if (result) {
+                    addResult('✅ 基本連接成功', 'Supabase 連接正常！', 'success');
+                } else {
+                    addResult('❌ 基本連接失敗', '無法連接到 Supabase', 'error');
+                }
+            } catch (error) {
+                addResult('❌ 連接錯誤', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function testGetScores() {
+            addResult('🔄 測試獲取成績', '正在測試...', 'info');
+
+            try {
+                const scores = await apiService.getAllScores();
+                addResult('✅ 獲取成績成功', `成功獲取 ${scores.length} 筆成績記錄\n${JSON.stringify(scores, null, 2)}`, 'success');
+            } catch (error) {
+                addResult('❌ 獲取成績失敗', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function testLogin() {
+            addResult('🔄 測試學生登入', '正在測試...', 'info');
+
+            try {
+                const result = await apiService.login('C2 Yuni', 'yuni');
+                if (result.success) {
+                    addResult('✅ 學生登入成功', `登入成功：${result.student.name} (${result.student.group})`, 'success');
+                } else {
+                    addResult('❌ 學生登入失敗', `登入失敗：${result.message}`, 'error');
+                }
+            } catch (error) {
+                addResult('❌ 登入錯誤', `錯誤詳情：${error.message}`, 'error');
+            }
+        }
+
+        async function runAllTests() {
+            clearResults();
+            addResult('🚀 開始執行所有測試', '正在執行...', 'info');
+
+            // 測試 1：基本連接
+            await testConnection();
+
+            // 等待一下
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // 測試 2：獲取成績
+            await testGetScores();
+
+            // 等待一下
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // 測試 3：學生登入
+            await testLogin();
+
+            addResult('🎉 所有測試完成', '請查看上面的測試結果', 'success');
+        }
+
+        // 頁面載入時自動執行基本測試
+        window.onload = function () {
+            addResult('📝 測試準備', '頁面已載入，請點擊按鈕開始測試', 'info');
+        };
+    </script>
+</body>
+
+</html>
