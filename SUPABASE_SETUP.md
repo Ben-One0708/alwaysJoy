@@ -54,7 +54,7 @@ INSERT INTO students (name, group_name, level, password, is_admin) VALUES
 ('教務組 Annie', '教務組', 'Admin', 'annie', TRUE),
 ('教務組 Celina', '教務組', 'Admin', 'celina', TRUE),
 ('教務組 Nina', '教務組', 'Admin', 'nina', TRUE),
-('Ben', '管理員', 'Admin', 'ben', TRUE);
+('Ben', '管理員', 'Admin', 'BenBenBen', TRUE);
 ```
 
 ### 創建 scores 表
@@ -77,6 +77,20 @@ CREATE TABLE scores (
 CREATE INDEX idx_scores_student_name ON scores(student_name);
 CREATE INDEX idx_scores_date ON scores(date);
 CREATE INDEX idx_scores_quiz_type ON scores(quiz_type);
+
+-- 插入一些示例成績數據
+INSERT INTO scores (student_name, quiz_type, score, total_questions, percentage, notes) VALUES
+('C2 Yuni', 'magazine_vocabulary', 85, 36, 85.00, '雜誌單字練習'),
+('C2 Emily', 'magazine_vocabulary', 92, 36, 92.00, '雜誌單字練習'),
+('A8 Vito', 'level_practice', 78, 50, 78.00, '各級別單字練習'),
+('A4 Eudora', 'paragraph_reading', 88, 30, 88.00, '段落閱讀練習'),
+('A5 Zoe', 'mixed_questions', 95, 100, 95.00, '混合題型練習'),
+('N6 Bruce', 'magazine_vocabulary', 82, 36, 82.00, '雜誌單字練習'),
+('N7 Laura', 'level_practice', 90, 50, 90.00, '各級別單字練習'),
+('K9 Lilian', 'paragraph_reading', 87, 30, 87.00, '段落閱讀練習'),
+('K9 Jill', 'mixed_questions', 93, 100, 93.00, '混合題型練習'),
+('I2 Candy', 'magazine_vocabulary', 89, 36, 89.00, '雜誌單字練習'),
+('N3 Avery', 'level_practice', 85, 50, 85.00, '各級別單字練習');
 ```
 
 ### 創建 questions 表
@@ -154,7 +168,17 @@ this.supabaseUrl = 'https://your-project-ref.supabase.co'; // 替換為您的 Pr
 this.supabaseKey = 'your-anon-key'; // 替換為您的 anon key
 ```
 
-## 6. 測試連接
+## 6. 設置 CORS
+
+在 Supabase Dashboard 中：
+
+1. 前往 "Settings" → "API"
+2. 在 "CORS" 部分添加您的域名：
+   - `https://ben-one0708.github.io`
+   - `http://localhost:3000` (開發用)
+   - `http://localhost:8000` (開發用)
+
+## 7. 測試連接
 
 在瀏覽器控制台中測試連接：
 
@@ -163,9 +187,46 @@ this.supabaseKey = 'your-anon-key'; // 替換為您的 anon key
 apiService.testConnection().then(result => {
     console.log('連接測試結果:', result);
 });
+
+// 測試獲取所有成績
+apiService.getAllScores().then(scores => {
+    console.log('所有成績:', scores);
+});
+
+// 測試獲取所有學生
+apiService.getAllStudents().then(students => {
+    console.log('所有學生:', students);
+});
 ```
 
-## 7. 安全注意事項
+## 8. 功能測試
+
+### 測試學生登入
+```javascript
+// 測試學生登入
+apiService.login('C2 Yuni', 'yuni').then(result => {
+    console.log('登入結果:', result);
+});
+```
+
+### 測試儲存成績
+```javascript
+// 測試儲存成績
+const testScore = {
+    studentName: 'C2 Yuni',
+    quizType: 'magazine_vocabulary',
+    score: 85,
+    totalQuestions: 36,
+    percentage: 85.00,
+    notes: '測試成績'
+};
+
+apiService.saveScore(testScore).then(result => {
+    console.log('儲存成績結果:', result);
+});
+```
+
+## 9. 安全注意事項
 
 1. **API 密鑰安全**：
    - 不要將 API 密鑰提交到公開的 Git 倉庫
@@ -181,7 +242,7 @@ apiService.testConnection().then(result => {
    - 使用 HTTPS
    - 定期更新依賴項
 
-## 8. 故障排除
+## 10. 故障排除
 
 ### 常見問題
 
@@ -202,3 +263,19 @@ apiService.testConnection().then(result => {
 - Supabase 文檔：https://supabase.com/docs
 - Supabase 社群：https://github.com/supabase/supabase/discussions
 - 技術支援：https://supabase.com/support
+
+## 11. 部署檢查清單
+
+- [ ] Supabase 項目已創建
+- [ ] 資料庫表已創建
+- [ ] 學生資料已插入
+- [ ] 示例成績數據已插入
+- [ ] RLS 策略已設置
+- [ ] API 密鑰已更新
+- [ ] CORS 設置已完成
+- [ ] 連接測試通過
+- [ ] 功能測試通過
+
+---
+
+**完成這些步驟後，您的 AlwaysJoy 學習平台將具備完整的資料庫功能！**

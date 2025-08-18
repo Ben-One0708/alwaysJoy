@@ -908,12 +908,250 @@ function openLearningArea(areaType) {
         // 各級別單字：顯示提示訊息
         showLevelPracticeNotice();
     } else if (areaType === 'admin') {
-        // 管理員成績管理：顯示學生成績列表
-        showAdminStudentsList();
+        // 管理員成績管理：顯示所有學生成績
+        openAdminPanel();
     } else {
         // 其他練習：直接打開練習
         openPracticeModal(areaType);
     }
+}
+
+// 打開管理員面板
+function openAdminPanel() {
+    const currentStudent = getCurrentStudent();
+    const isAdmin = students[currentStudent] && students[currentStudent].isAdmin;
+
+    if (!isAdmin) {
+        showError('您沒有權限訪問管理員功能');
+        return;
+    }
+
+    // 顯示管理員面板
+    const practiceSection = document.getElementById('practice');
+    practiceSection.innerHTML = `
+        <div class="admin-panel">
+            <div class="admin-header">
+                <h2><i class="fas fa-chart-bar"></i> 成績管理面板</h2>
+                <p>歡迎 ${currentStudent}，您可以查看所有學生的練習成績</p>
+            </div>
+            
+            <div class="admin-controls">
+                <div class="filter-section">
+                    <label for="groupFilter">按組別篩選：</label>
+                    <select id="groupFilter" onchange="filterScores()">
+                        <option value="">全部組別</option>
+                        <option value="B組">B組</option>
+                        <option value="C組">C組</option>
+                        <option value="D組">D組</option>
+                        <option value="E組">E組</option>
+                        <option value="F組">F組</option>
+                        <option value="教務組">教務組</option>
+                    </select>
+                    
+                    <label for="dateFilter">按日期篩選：</label>
+                    <input type="date" id="dateFilter" onchange="filterScores()">
+                    
+                    <button onclick="refreshScores()" class="refresh-btn">
+                        <i class="fas fa-sync-alt"></i> 重新整理
+                    </button>
+                </div>
+            </div>
+            
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <h3>總學生數</h3>
+                    <div class="stat-number" id="totalStudents">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>總記錄數</h3>
+                    <div class="stat-number" id="totalRecords">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>平均分數</h3>
+                    <div class="stat-number" id="averageScore">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>今日新增</h3>
+                    <div class="stat-number" id="todayRecords">0</div>
+                </div>
+            </div>
+            
+            <div class="scores-table-container">
+                <h3><i class="fas fa-table"></i> 所有學生成績記錄</h3>
+                <div class="table-wrapper">
+                    <table class="scores-table" id="scoresTable">
+                        <thead>
+                            <tr>
+                                <th>學生姓名</th>
+                                <th>組別</th>
+                                <th>練習類型</th>
+                                <th>分數</th>
+                                <th>日期</th>
+                                <th>備註</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scoresTableBody">
+                            <tr>
+                                <td colspan="7" class="loading">載入中...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="admin-actions">
+                <button onclick="exportScores()" class="export-btn">
+                    <i class="fas fa-download"></i> 匯出成績
+                </button>
+                <button onclick="showLearningMap()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> 返回學習地圖
+                </button>
+            </div>
+        </div>
+    `;
+
+    // 載入成績數據
+    loadAllScores();
+}
+
+// 載入所有成績數據
+async function loadAllScores() {
+    try {
+        // 如果使用 Supabase
+        if (window.apiService) {
+            const scores = await window.apiService.getAllScores();
+            displayScores(scores);
+            updateAdminStats(scores);
+        } else {
+            // 使用本地存儲作為備用
+            const scores = getLocalScores();
+            displayScores(scores);
+            updateAdminStats(scores);
+        }
+    } catch (error) {
+        console.error('載入成績失敗:', error);
+        showError('載入成績失敗，請稍後再試');
+
+        // 使用本地存儲作為備用
+        const scores = getLocalScores();
+        displayScores(scores);
+        updateAdminStats(scores);
+    }
+}
+
+// 顯示成績數據
+function displayScores(scores) {
+    const tbody = document.getElementById('scoresTableBody');
+
+    if (!scores || scores.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="no-data">暫無成績記錄</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = scores.map(score => `
+        <tr>
+            <td>${score.studentName || score.student_name}</td>
+            <td>${getStudentGroup(score.studentName || score.student_name)}</td>
+            <td>${score.quizType || score.quiz_type}</td>
+            <td>${score.score}</td>
+            <td>${formatDate(score.date)}</td>
+            <td>${score.notes || '-'}</td>
+            <td>
+                <button onclick="viewScoreDetails('${score.id}')" class="view-btn">
+                    <i class="fas fa-eye"></i> 查看
+                </button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+// 更新管理員統計數據
+function updateAdminStats(scores) {
+    const totalStudents = new Set(scores.map(s => s.studentName || s.student_name)).size;
+    const totalRecords = scores.length;
+    const averageScore = scores.length > 0 ?
+        Math.round(scores.reduce((sum, s) => sum + s.score, 0) / scores.length) : 0;
+
+    const today = new Date().toDateString();
+    const todayRecords = scores.filter(s =>
+        new Date(s.date).toDateString() === today
+    ).length;
+
+    document.getElementById('totalStudents').textContent = totalStudents;
+    document.getElementById('totalRecords').textContent = totalRecords;
+    document.getElementById('averageScore').textContent = averageScore;
+    document.getElementById('todayRecords').textContent = todayRecords;
+}
+
+// 篩選成績
+function filterScores() {
+    const groupFilter = document.getElementById('groupFilter').value;
+    const dateFilter = document.getElementById('dateFilter').value;
+
+    // 重新載入並篩選數據
+    loadAllScores().then(scores => {
+        let filteredScores = scores;
+
+        if (groupFilter) {
+            filteredScores = filteredScores.filter(score =>
+                getStudentGroup(score.studentName || score.student_name) === groupFilter
+            );
+        }
+
+        if (dateFilter) {
+            filteredScores = filteredScores.filter(score =>
+                score.date.startsWith(dateFilter)
+            );
+        }
+
+        displayScores(filteredScores);
+    });
+}
+
+// 重新整理成績
+function refreshScores() {
+    loadAllScores();
+}
+
+// 匯出成績
+function exportScores() {
+    // 實現匯出功能
+    showSuccess('匯出功能開發中...');
+}
+
+// 查看成績詳情
+function viewScoreDetails(scoreId) {
+    // 實現查看詳情功能
+    showSuccess('詳情查看功能開發中...');
+}
+
+// 獲取學生組別
+function getStudentGroup(studentName) {
+    return students[studentName] ? students[studentName].group : '未知';
+}
+
+// 格式化日期
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('zh-TW');
+}
+
+// 獲取本地存儲的成績（備用）
+function getLocalScores() {
+    const scores = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('score_')) {
+            try {
+                const score = JSON.parse(localStorage.getItem(key));
+                scores.push(score);
+            } catch (e) {
+                console.error('解析成績數據失敗:', e);
+            }
+        }
+    }
+    return scores.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
 // 顯示登入模態框
@@ -1854,6 +2092,42 @@ function showSuccessMessage(message) {
             }
         }, 300);
     }, 3000);
+}
+
+// 顯示錯誤訊息
+function showError(message) {
+    // 創建錯誤訊息元素
+    const errorDiv = document.createElement('div');
+    errorDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #dc3545;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 10000;
+        animation: slideInRight 0.3s ease-out;
+    `;
+    errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+
+    document.body.appendChild(errorDiv);
+
+    // 5秒後自動移除
+    setTimeout(() => {
+        errorDiv.style.animation = 'slideOutRight 0.3s ease-out';
+        setTimeout(() => {
+            if (errorDiv.parentNode) {
+                errorDiv.parentNode.removeChild(errorDiv);
+            }
+        }, 300);
+    }, 5000);
+}
+
+// 顯示成功訊息（簡化版）
+function showSuccess(message) {
+    showSuccessMessage(message);
 }
 
 // 關閉模態框
