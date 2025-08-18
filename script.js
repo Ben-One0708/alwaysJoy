@@ -126,31 +126,77 @@ function showMainContent() {
 }
 
 // 主登入功能
-function loginToSystem() {
+async function loginToSystem() {
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
     const errorDiv = document.getElementById('loginPageError');
 
-    // 驗證帳號密碼
-    if (username === 'Joyloveyou' && password === 'Joyloveyou') {
-        // 登入成功
-        setLoggedIn(true);
-        showMainContent();
-        showSuccessMessage('登入成功！歡迎使用 AlwaysJoy 教育平台');
+    // 顯示載入狀態
+    const loginBtn = document.querySelector('.login-btn');
+    const originalText = loginBtn.innerHTML;
+    loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 登入中...';
+    loginBtn.disabled = true;
 
-        // 清空輸入欄位
-        document.getElementById('loginUsername').value = '';
-        document.getElementById('loginPassword').value = '';
-    } else {
-        // 登入失敗
+    try {
+        // 使用 Supabase 進行登入驗證
+        if (window.apiService) {
+            const result = await window.apiService.login(username, password);
+            
+            if (result && result.success) {
+                // 登入成功
+                setLoggedIn(true);
+                showMainContent();
+                showSuccessMessage(`登入成功！歡迎 ${result.student.name} 使用 AlwaysJoy 教育平台`);
+
+                // 清空輸入欄位
+                document.getElementById('loginUsername').value = '';
+                document.getElementById('loginPassword').value = '';
+            } else {
+                // 登入失敗
+                errorDiv.style.display = 'flex';
+                document.getElementById('loginPassword').value = '';
+                document.getElementById('loginPassword').focus();
+
+                // 3秒後隱藏錯誤訊息
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                }, 3000);
+            }
+        } else {
+            // 如果 API 服務不可用，使用備用登入方式
+            if (username === 'Joyloveyou' && password === 'Joyloveyou') {
+                setLoggedIn(true);
+                showMainContent();
+                showSuccessMessage('登入成功！歡迎使用 AlwaysJoy 教育平台');
+                
+                document.getElementById('loginUsername').value = '';
+                document.getElementById('loginPassword').value = '';
+            } else {
+                errorDiv.style.display = 'flex';
+                document.getElementById('loginPassword').value = '';
+                document.getElementById('loginPassword').focus();
+
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                }, 3000);
+            }
+        }
+    } catch (error) {
+        console.error('登入錯誤:', error);
+        
+        // 顯示錯誤訊息
         errorDiv.style.display = 'flex';
+        errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> 登入失敗：${error.message}`;
         document.getElementById('loginPassword').value = '';
         document.getElementById('loginPassword').focus();
 
-        // 3秒後隱藏錯誤訊息
         setTimeout(() => {
             errorDiv.style.display = 'none';
         }, 3000);
+    } finally {
+        // 恢復按鈕狀態
+        loginBtn.innerHTML = originalText;
+        loginBtn.disabled = false;
     }
 }
 
@@ -931,29 +977,74 @@ function showLoginModal(areaType) {
 }
 
 // 登入驗證
-function login() {
+async function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const errorDiv = document.getElementById('loginError');
 
-    // 驗證帳號密碼
-    if (username === 'Joyloveyou' && password === 'Joyloveyou') {
-        // 登入成功
-        setLoggedIn(true);
-        closeModal('loginModal');
+    // 顯示載入狀態
+    const loginBtn = document.querySelector('.modal-login-btn');
+    const originalText = loginBtn.innerHTML;
+    loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 登入中...';
+    loginBtn.disabled = true;
 
-        // 打開練習模態框
-        if (window.pendingArea) {
-            openPracticeModal(window.pendingArea);
-            window.pendingArea = null;
+    try {
+        // 使用 Supabase 進行登入驗證
+        if (window.apiService) {
+            const result = await window.apiService.login(username, password);
+            
+            if (result && result.success) {
+                // 登入成功
+                setLoggedIn(true);
+                setCurrentStudent(result.student.name);
+                closeModal('loginModal');
+
+                // 打開練習模態框
+                if (window.pendingArea) {
+                    openPracticeModal(window.pendingArea);
+                    window.pendingArea = null;
+                }
+
+                showSuccessMessage(`登入成功！歡迎 ${result.student.name}`);
+            } else {
+                // 登入失敗
+                errorDiv.style.display = 'flex';
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> 帳號或密碼錯誤，請重新輸入';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        } else {
+            // 如果 API 服務不可用，使用備用登入方式
+            if (username === 'Joyloveyou' && password === 'Joyloveyou') {
+                setLoggedIn(true);
+                setCurrentStudent('Joyloveyou');
+                closeModal('loginModal');
+
+                if (window.pendingArea) {
+                    openPracticeModal(window.pendingArea);
+                    window.pendingArea = null;
+                }
+
+                showSuccessMessage('登入成功！');
+            } else {
+                errorDiv.style.display = 'flex';
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> 帳號或密碼錯誤，請重新輸入';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
         }
-
-        showSuccessMessage('登入成功！');
-    } else {
-        // 登入失敗
+    } catch (error) {
+        console.error('登入錯誤:', error);
+        
+        // 顯示錯誤訊息
         errorDiv.style.display = 'flex';
+        errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> 登入失敗：${error.message}`;
         document.getElementById('password').value = '';
         document.getElementById('password').focus();
+    } finally {
+        // 恢復按鈕狀態
+        loginBtn.innerHTML = originalText;
+        loginBtn.disabled = false;
     }
 }
 
@@ -971,6 +1062,12 @@ function setLoggedIn(status) {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('loginTime');
     }
+}
+
+// 設置當前學生
+function setCurrentStudent(studentName) {
+    currentStudent = studentName;
+    localStorage.setItem('currentStudent', studentName);
 }
 
 // 登出

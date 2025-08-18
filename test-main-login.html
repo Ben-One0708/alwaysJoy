@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             padding: 20px;
             background-color: #f5f5f5;
         }
+
         .test-container {
             background: white;
             padding: 20px;
@@ -19,6 +21,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
+
         .test-btn {
             background: #007bff;
             color: white;
@@ -29,9 +32,11 @@
             margin: 5px;
             font-size: 14px;
         }
+
         .test-btn:hover {
             background: #0056b3;
         }
+
         .result {
             margin-top: 15px;
             padding: 15px;
@@ -39,29 +44,35 @@
             font-family: monospace;
             white-space: pre-wrap;
         }
+
         .success {
             background: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
+
         .error {
             background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+
         .info {
             background: #d1ecf1;
             color: #0c5460;
             border: 1px solid #bee5eb;
         }
+
         .form-group {
             margin: 15px 0;
         }
+
         .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
+
         .form-group input {
             width: 100%;
             padding: 10px;
@@ -71,9 +82,10 @@
         }
     </style>
 </head>
+
 <body>
     <h1>🔍 測試主網站登入</h1>
-    
+
     <div class="test-container">
         <h2>📝 登入測試</h2>
         <div class="form-group">
@@ -95,14 +107,14 @@
             <h3>管理員帳號：</h3>
             <p><strong>帳號：</strong>admin</p>
             <p><strong>密碼：</strong>admin123</p>
-            
+
             <h3>學生帳號：</h3>
             <p><strong>帳號：</strong>Annie</p>
             <p><strong>密碼：</strong>1234</p>
-            
+
             <p><strong>帳號：</strong>Ben</p>
             <p><strong>密碼：</strong>1234</p>
-            
+
             <h3>備用帳號：</h3>
             <p><strong>帳號：</strong>Joyloveyou</p>
             <p><strong>密碼：</strong>Joyloveyou</p>
@@ -124,7 +136,7 @@
             const resultDiv = document.getElementById('testResult');
             const username = document.getElementById('testUsername').value;
             const password = document.getElementById('testPassword').value;
-            
+
             resultDiv.style.display = 'block';
             resultDiv.className = 'result info';
             resultDiv.innerHTML = '🔄 正在測試主網站登入邏輯...';
@@ -135,7 +147,7 @@
                 }
 
                 const result = await window.apiService.login(username, password);
-                
+
                 if (result && result.success) {
                     resultDiv.className = 'result success';
                     resultDiv.innerHTML = `✅ 登入成功！\n\n姓名：${result.student.name}\n組別：${result.student.group}\n管理員：${result.student.isAdmin ? '是' : '否'}\n\n主網站登入應該可以正常工作！`;
@@ -153,7 +165,7 @@
         // 測試直接登入
         async function testDirectLogin() {
             const resultDiv = document.getElementById('testResult');
-            
+
             resultDiv.style.display = 'block';
             resultDiv.className = 'result info';
             resultDiv.innerHTML = '🔄 正在測試直接登入...';
@@ -161,7 +173,7 @@
             try {
                 // 測試管理員登入
                 const adminResult = await window.apiService.login('admin', 'admin123');
-                
+
                 if (adminResult && adminResult.success) {
                     resultDiv.className = 'result success';
                     resultDiv.innerHTML = `✅ 管理員登入成功！\n\n姓名：${adminResult.student.name}\n組別：${adminResult.student.group}\n管理員：${adminResult.student.isAdmin ? '是' : '否'}`;
@@ -177,7 +189,7 @@
         }
 
         // 頁面載入時初始化
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             if (window.apiService) {
                 console.log('✅ 主網站登入測試工具API服務已載入');
             } else {
@@ -186,4 +198,5 @@
         });
     </script>
 </body>
+
 </html>
