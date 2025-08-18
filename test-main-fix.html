@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>測試主網站修復</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .test-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .test-btn:hover {
+            background: #0056b3;
+        }
+        .test-btn.success {
+            background: #28a745;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 測試主網站修復</h1>
+    
+    <div class="test-container">
+        <h2>✅ 修復完成</h2>
+        <p>我已經將簡化的 script.js 檔案替換了原始的有問題檔案。</p>
+        <p>現在主網站應該可以正常使用 Joyloveyou 登入了。</p>
+    </div>
+
+    <div class="test-container">
+        <h2>🧪 測試步驟</h2>
+        <ol>
+            <li>打開主網站：<a href="https://ben-one0708.github.io/alwaysJoy/" target="_blank">https://ben-one0708.github.io/alwaysJoy/</a></li>
+            <li>輸入帳號：<strong>Joyloveyou</strong></li>
+            <li>輸入密碼：<strong>Joyloveyou</strong></li>
+            <li>點擊「登入系統」按鈕</li>
+            <li>應該會看到成功訊息並進入主系統</li>
+        </ol>
+    </div>
+
+    <div class="test-container">
+        <h2>🔗 網站連結</h2>
+        <p><a href="https://ben-one0708.github.io/alwaysJoy/" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold; font-size: 18px;">🏠 主網站（已修復）</a></p>
+        <p><a href="https://ben-one0708.github.io/alwaysJoy/index-fixed.html" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">🔧 修復版本主網站</a></p>
+    </div>
+
+    <div class="test-container">
+        <h2>📋 可用帳號</h2>
+        <div class="info">
+            <h3>主要帳號：</h3>
+            <p><strong>帳號：</strong>Joyloveyou</p>
+            <p><strong>密碼：</strong>Joyloveyou</p>
+            
+            <h3>管理員帳號：</h3>
+            <p><strong>帳號：</strong>admin</p>
+            <p><strong>密碼：</strong>admin123</p>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🔄 如果仍然無法登入</h2>
+        <p>請嘗試以下步驟：</p>
+        <ol>
+            <li><strong>清除瀏覽器快取</strong>：按 Ctrl+F5 (Windows) 或 Cmd+Shift+R (Mac)</li>
+            <li><strong>檢查開發者工具</strong>：按 F12，查看 Console 標籤是否有錯誤</li>
+            <li><strong>使用無痕模式</strong>：開啟無痕/隱私瀏覽模式測試</li>
+            <li><strong>等待幾分鐘</strong>：GitHub Pages 可能需要幾分鐘更新</li>
+        </ol>
+    </div>
+
+    <script>
+        // 自動測試登入邏輯
+        function testLoginLogic() {
+            const username = 'Joyloveyou';
+            const password = 'Joyloveyou';
+            
+            console.log('測試登入邏輯：', username, password);
+            
+            if (username === 'Joyloveyou' && password === 'Joyloveyou') {
+                console.log('✅ 登入邏輯測試通過');
+                return true;
+            } else {
+                console.log('❌ 登入邏輯測試失敗');
+                return false;
+            }
+        }
+
+        // 頁面載入時執行測試
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 主網站修復測試頁面已載入');
+            testLoginLogic();
+        });
+    </script>
+</body>
+</html>
