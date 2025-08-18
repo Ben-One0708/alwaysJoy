@@ -1,10 +1,9 @@
 // Supabase客戶端API服務
 class SupabaseClientService {
     constructor() {
-        // 這些值需要從您的Supabase項目設置中獲取
-        // 請在部署前更新這些值
-        this.supabaseUrl = 'https://your-project-ref.supabase.co'; // 請替換為您的 Project URL
-        this.supabaseKey = 'your-anon-key'; // 請替換為您的 anon key
+        // Supabase 配置
+        this.supabaseUrl = 'https://cxdzsefbblkadblxzhddga.supabase.co';
+        this.supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4ZHNlZmJsa2FkYmx4emhkZGdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzNTU1ODgsImV4cCI6MjA3MDkzMTU4OH0.Q_xlceGEBytHRc5zD2dgIlu-5Y8RIE9cJUD9Uvqo0z4';
 
         // 初始化Supabase客戶端
         this.supabase = window.supabase.createClient(this.supabaseUrl, this.supabaseKey);
@@ -47,15 +46,6 @@ class SupabaseClientService {
     // 獲取學生成績
     async getStudentScores(studentName) {
         try {
-            // 檢查是否配置了 Supabase
-            if (this.supabaseUrl === 'https://your-project-ref.supabase.co' ||
-                this.supabaseKey === 'your-anon-key') {
-                console.warn('Supabase 未配置，使用本地存儲數據');
-                return this.getLocalScores().filter(score =>
-                    score.student_name === studentName || score.studentName === studentName
-                );
-            }
-
             const { data, error } = await this.supabase
                 .from('scores')
                 .select('*')
@@ -93,13 +83,6 @@ class SupabaseClientService {
                 notes: scoreData.notes || '',
                 details: scoreData.details || {}
             };
-
-            // 檢查是否配置了 Supabase
-            if (this.supabaseUrl === 'https://your-project-ref.supabase.co' ||
-                this.supabaseKey === 'your-anon-key') {
-                console.warn('Supabase 未配置，使用本地存儲');
-                return this.saveToLocalStorage(scoreRecord);
-            }
 
             const { data, error } = await this.supabase
                 .from('scores')
@@ -139,13 +122,6 @@ class SupabaseClientService {
     // 獲取所有成績（管理員用）
     async getAllScores() {
         try {
-            // 檢查是否配置了 Supabase
-            if (this.supabaseUrl === 'https://your-project-ref.supabase.co' ||
-                this.supabaseKey === 'your-anon-key') {
-                console.warn('Supabase 未配置，使用本地存儲數據');
-                return this.getLocalScores();
-            }
-
             const { data, error } = await this.supabase
                 .from('scores')
                 .select('*')
@@ -311,19 +287,18 @@ class SupabaseClientService {
     // 測試連接
     async testConnection() {
         try {
-            // 檢查是否配置了 Supabase
-            if (this.supabaseUrl === 'https://your-project-ref.supabase.co' || 
-                this.supabaseKey === 'your-anon-key') {
-                console.warn('Supabase 未配置，使用本地模式');
-                return false;
-            }
-
             const { data, error } = await this.supabase
                 .from('students')
                 .select('count')
                 .limit(1);
 
-            return !error;
+            if (error) {
+                console.warn('Supabase 連接測試失敗:', error);
+                return false;
+            }
+
+            console.log('Supabase 連接測試成功');
+            return true;
         } catch (error) {
             console.error('連接測試失敗:', error);
             return false;
