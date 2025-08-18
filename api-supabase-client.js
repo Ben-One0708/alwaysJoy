@@ -47,22 +47,23 @@ class SupabaseClientService {
                 .from('students')
                 .select('*')
                 .eq('name', name)
-                .eq('password', password)
-                .single();
+                .eq('password', password);
 
             if (error) {
-                throw new Error(error.message);
+                console.error('登入查詢錯誤:', error);
+                return { success: false, error: error.message };
             }
 
-            if (data) {
+            if (data && data.length > 0) {
+                const userData = data[0];
                 // 將 group_name 映射為 group 以保持向後兼容
                 return {
                     success: true,
                     student: {
-                        name: data.name,
-                        group: data.group_name || data.group,
-                        level: data.level,
-                        isAdmin: data.isadmin || data.isAdmin || false
+                        name: userData.name,
+                        group: userData.group_name || userData.group,
+                        level: userData.level,
+                        isAdmin: userData.isadmin || userData.isAdmin || false
                     }
                 };
             } else {
@@ -70,7 +71,7 @@ class SupabaseClientService {
             }
         } catch (error) {
             console.error('登入錯誤:', error);
-            throw error;
+            return { success: false, error: error.message };
         }
     }
 
