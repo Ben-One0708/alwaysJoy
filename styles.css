@@ -625,6 +625,180 @@ body {
     box-shadow: var(--shadow-medium);
 }
 
+/* 成績登記介面 */
+.score-registration-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    min-height: 400px;
+}
+
+.score-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    box-shadow: var(--shadow-heavy);
+    border: 1px solid #e1e5e9;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.score-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.score-card-header {
+    margin-bottom: 30px;
+}
+
+.score-icon {
+    font-size: 4rem;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    display: block;
+    animation: pulse 2s infinite;
+}
+
+.score-card-header h3 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.score-card-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.score-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.score-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: #f8f9fa;
+    border-radius: var(--border-radius-small);
+    border-left: 4px solid var(--secondary-color);
+}
+
+.info-item i {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    width: 20px;
+}
+
+.info-item span {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.score-open-btn {
+    background: var(--primary-gradient);
+    color: var(--white);
+    border: none;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 auto;
+    min-width: 250px;
+}
+
+.score-open-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.score-open-btn:active {
+    transform: translateY(-1px);
+}
+
+.score-link-info {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: var(--border-radius-small);
+    border: 1px solid #e9ecef;
+}
+
+.score-link-info p {
+    color: var(--text-light);
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.score-link-info i {
+    color: var(--secondary-color);
+}
+
+.link-display {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.link-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    background: var(--white);
+    color: var(--text-dark);
+    font-family: 'Courier New', monospace;
+}
+
+.copy-btn {
+    background: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.copy-btn:hover {
+    background: #357abd;
+    transform: translateY(-1px);
+}
+
+.copy-btn:active {
+    transform: translateY(0);
+}
+
 /* 學生登入介面 */
 .student-login-container {
     display: grid;
@@ -3594,7 +3768,8 @@ body {
     opacity: 0.9;
 }
 
-.question-counter, .timer {
+.question-counter,
+.timer {
     background: rgba(255, 255, 255, 0.2);
     padding: 8px 15px;
     border-radius: 8px;
@@ -3941,22 +4116,22 @@ body {
         gap: 20px;
         padding: 20px;
     }
-    
+
     .image-container {
         height: 200px;
     }
-    
+
     .practice-info {
         flex-direction: column;
         gap: 10px;
         align-items: flex-start;
     }
-    
+
     .magazine-navigation-buttons {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .magazine-practice-stats {
         flex-direction: column;
         gap: 15px;
@@ -4187,44 +4362,44 @@ body {
         padding: 20px;
         margin: 10px 0;
     }
-    
+
     .filter-section {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .filter-section select,
     .filter-section input {
         width: 100%;
     }
-    
+
     .admin-stats {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
-    
+
     .stat-card {
         padding: 20px;
     }
-    
+
     .stat-number {
         font-size: 2rem;
     }
-    
+
     .scores-table {
         font-size: 12px;
     }
-    
+
     .scores-table th,
     .scores-table td {
         padding: 8px 5px;
     }
-    
+
     .admin-actions {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .export-btn,
     .back-btn {
         width: 100%;

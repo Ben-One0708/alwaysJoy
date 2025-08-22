@@ -98,6 +98,9 @@
                 <button class="tab" data-tab="practice">
                     <i class="fas fa-pencil-alt"></i> 學生練習
                 </button>
+                <button class="tab" data-tab="score">
+                    <i class="fas fa-chart-line"></i> 成績登記
+                </button>
             </div>
 
             <!-- 內容區域 -->
@@ -230,6 +233,56 @@
                                         <li>教務組 Celina</li>
                                         <li>教務組 Nina</li>
                                     </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 成績登記 -->
+                <div id="score" class="content-section">
+                    <h2><i class="fas fa-chart-line"></i> 成績登記</h2>
+                    <p>點擊下方按鈕開啟成績登記表：</p>
+
+                    <div class="score-registration-container">
+                        <div class="score-card">
+                            <div class="score-card-header">
+                                <i class="fas fa-chart-line score-icon"></i>
+                                <h3>2025佳音拼字比賽成績登記表</h3>
+                                <p>點擊按鈕開啟 Google Sheets 成績登記表</p>
+                            </div>
+
+                            <div class="score-card-content">
+                                <div class="score-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>登記日期：2025年拼字比賽</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-users"></i>
+                                        <span>適用對象：所有參賽學生</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-file-excel"></i>
+                                        <span>檔案類型：Google Sheets</span>
+                                    </div>
+                                </div>
+
+                                <button onclick="openScoreSheet()" class="score-open-btn">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    開啟成績登記表
+                                </button>
+
+                                <div class="score-link-info">
+                                    <p><i class="fas fa-info-circle"></i> 如果按鈕無法開啟，請手動複製以下連結：</p>
+                                    <div class="link-display">
+                                        <input type="text"
+                                            value="https://docs.google.com/spreadsheets/d/1dVtlnLWCdgloPTiD15FkqcF-MjYbZUu1sMOQX15LjbQ/edit?gid=0#gid=0"
+                                            readonly class="link-input">
+                                        <button onclick="copyLink()" class="copy-btn">
+                                            <i class="fas fa-copy"></i> 複製
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -729,7 +782,7 @@
         </div>
     </div>
 
-        <!-- SQLite API 客戶端 -->
+    <!-- SQLite API 客戶端 -->
     <script src="api-sqlite-client.js"></script>
     <script src="script.js"></script>
 </body>

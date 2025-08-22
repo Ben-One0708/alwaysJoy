@@ -469,6 +469,52 @@ function downloadPDF(date, type) {
     }
 }
 
+// 開啟成績登記表
+function openScoreSheet() {
+    const scoreSheetUrl = 'https://docs.google.com/spreadsheets/d/1dVtlnLWCdgloPTiD15FkqcF-MjYbZUu1sMOQX15LjbQ/edit?gid=0#gid=0';
+
+    try {
+        // 在新分頁開啟 Google Sheets
+        const newWindow = window.open(scoreSheetUrl, '_blank', 'noopener,noreferrer');
+
+        // 檢查是否成功開啟視窗
+        if (newWindow) {
+            // 成功開啟
+            alert('成績登記表已在新分頁開啟！\n\n如果頁面顯示空白，請：\n1. 檢查瀏覽器是否阻擋了彈出視窗\n2. 確保您已登入 Google 帳號\n3. 重新整理頁面');
+        } else {
+            // 可能被瀏覽器阻擋
+            alert('無法開啟新分頁，可能是瀏覽器阻擋了彈出視窗。\n\n請手動複製以下連結到新分頁開啟：\n\n' + scoreSheetUrl);
+        }
+    } catch (error) {
+        // 發生錯誤
+        console.error('開啟成績登記表時發生錯誤:', error);
+        alert('開啟成績登記表時發生錯誤。\n\n請手動複製以下連結到新分頁開啟：\n\n' + scoreSheetUrl);
+    }
+}
+
+// 複製連結到剪貼簿
+function copyLink() {
+    const linkInput = document.querySelector('.link-input');
+    linkInput.select();
+    linkInput.setSelectionRange(0, 99999); // 用於移動設備
+
+    try {
+        document.execCommand('copy');
+        alert('連結已複製到剪貼簿！');
+    } catch (err) {
+        // 如果 execCommand 失敗，嘗試使用新的 Clipboard API
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(linkInput.value).then(() => {
+                alert('連結已複製到剪貼簿！');
+            }).catch(() => {
+                alert('無法複製連結，請手動選擇並複製。');
+            });
+        } else {
+            alert('無法複製連結，請手動選擇並複製。');
+        }
+    }
+}
+
 // 預覽 PDF
 function previewPDF(date, type) {
     // 這裡可以實現 PDF 線上預覽功能
