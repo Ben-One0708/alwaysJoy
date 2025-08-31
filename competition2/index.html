@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雙組虛擬鍵盤 - 英文單字輸入</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="scoreboard">
+            <div class="scoreboard-header">
+                <h1 class="title">
+                    <span class="bee-icon">🐝</span>
+                    Spelling Bee
+                    <span class="bee-icon">🐝</span>
+                </h1>
+            </div>
+            <div class="score-display">
+                <div class="team-score team-a">
+                    <div class="team-name">Team A</div>
+                    <div class="score" id="team1-score">0</div>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="team-score team-b">
+                    <div class="team-name">Team B</div>
+                    <div class="score" id="team2-score">0</div>
+                </div>
+            </div>
+            <div class="score-controls">
+                <button class="score-btn team-a-btn" id="team1-add">+1</button>
+                <button class="score-btn team-a-btn" id="team1-minus">-1</button>
+                <button class="score-btn team-b-btn" id="team2-add">+1</button>
+                <button class="score-btn team-b-btn" id="team2-minus">-1</button>
+            </div>
+        </div>
+
+        <div class="teams-container">
+            <!-- Team A -->
+            <div class="team-section">
+                <div class="team-header">
+                    <h2 class="team-title">Team A</h2>
+                    <div class="team-display">
+                        <span class="display-text" id="team1-display"></span>
+                    </div>
+                </div>
+                <div class="keyboard-container">
+                    <div class="keyboard" id="keyboard1">
+                        <!-- 第一行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="q">Q</button>
+                            <button class="key" data-key="w">W</button>
+                            <button class="key" data-key="e">E</button>
+                            <button class="key" data-key="r">R</button>
+                            <button class="key" data-key="t">T</button>
+                            <button class="key" data-key="y">Y</button>
+                            <button class="key" data-key="u">U</button>
+                            <button class="key" data-key="i">I</button>
+                            <button class="key" data-key="o">O</button>
+                            <button class="key" data-key="p">P</button>
+                        </div>
+                        <!-- 第二行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="a">A</button>
+                            <button class="key" data-key="s">S</button>
+                            <button class="key" data-key="d">D</button>
+                            <button class="key" data-key="f">F</button>
+                            <button class="key" data-key="g">G</button>
+                            <button class="key" data-key="h">H</button>
+                            <button class="key" data-key="j">J</button>
+                            <button class="key" data-key="k">K</button>
+                            <button class="key" data-key="l">L</button>
+                        </div>
+                        <!-- 第三行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="z">Z</button>
+                            <button class="key" data-key="x">X</button>
+                            <button class="key" data-key="c">C</button>
+                            <button class="key" data-key="v">V</button>
+                            <button class="key" data-key="b">B</button>
+                            <button class="key" data-key="n">N</button>
+                            <button class="key" data-key="m">M</button>
+                            <button class="key special-key" data-key="backspace">←</button>
+                        </div>
+                        <!-- 第四行 -->
+                        <div class="keyboard-row">
+                            <button class="key special-key" data-key="shift">Shift</button>
+                            <button class="key special-key" data-key="space">Space</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team B -->
+            <div class="team-section">
+                <div class="team-header">
+                    <h2 class="team-title">Team B</h2>
+                    <div class="team-display">
+                        <span class="display-text" id="team2-display"></span>
+                    </div>
+                </div>
+                <div class="keyboard-container">
+                    <div class="keyboard" id="keyboard2">
+                        <!-- 第一行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="q">Q</button>
+                            <button class="key" data-key="w">W</button>
+                            <button class="key" data-key="e">E</button>
+                            <button class="key" data-key="r">R</button>
+                            <button class="key" data-key="t">T</button>
+                            <button class="key" data-key="y">Y</button>
+                            <button class="key" data-key="u">U</button>
+                            <button class="key" data-key="i">I</button>
+                            <button class="key" data-key="o">O</button>
+                            <button class="key" data-key="p">P</button>
+                        </div>
+                        <!-- 第二行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="a">A</button>
+                            <button class="key" data-key="s">S</button>
+                            <button class="key" data-key="d">D</button>
+                            <button class="key" data-key="f">F</button>
+                            <button class="key" data-key="g">G</button>
+                            <button class="key" data-key="h">H</button>
+                            <button class="key" data-key="j">J</button>
+                            <button class="key" data-key="k">K</button>
+                            <button class="key" data-key="l">L</button>
+                        </div>
+                        <!-- 第三行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="z">Z</button>
+                            <button class="key" data-key="x">X</button>
+                            <button class="key" data-key="c">C</button>
+                            <button class="key" data-key="v">V</button>
+                            <button class="key" data-key="b">B</button>
+                            <button class="key" data-key="n">N</button>
+                            <button class="key" data-key="m">M</button>
+                            <button class="key special-key" data-key="backspace">←</button>
+                        </div>
+                        <!-- 第四行 -->
+                        <div class="keyboard-row">
+                            <button class="key special-key" data-key="shift">Shift</button>
+                            <button class="key special-key" data-key="space">Space</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

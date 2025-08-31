@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>詞彙測驗 + 虛擬鍵盤</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px;
+            text-align: center;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            max-width: 1800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* 詞彙測驗區域 */
+        .quiz-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            animation: slideInUp 0.8s ease-out;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .quiz-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .question-header {
+            text-align: left;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            top: 25px;
+            left: 35px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .question-number-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-number-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .question-image {
+            margin: 40px auto;
+            width: 900px;
+            height: 450px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            display: block;
+            object-fit: contain;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 4px solid rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .question-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 25px 30px;
+            font-size: 32px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-nav-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: translateY(-50%) scale(1);
+        }
+
+        .image-nav-btn.prev {
+            left: -120px;
+        }
+
+        .image-nav-btn.next {
+            right: -120px;
+        }
+
+        .question-content {
+            margin-top: 40px;
+            font-size: 52px;
+            line-height: 1.3;
+            color: #2c3e50;
+            font-weight: 700;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+            border-radius: 25px;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .teams-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            margin-top: 50px;
+        }
+
+        .team-section {
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            border-radius: 35px;
+            padding: 60px;
+            border: 4px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.12),
+                0 0 0 1px rgba(255, 255, 255, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-section.team-a {
+            border-left: 6px solid #007bff;
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+        }
+
+        .team-section.team-a::before {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+        }
+
+        .team-section.team-b {
+            border-left: 6px solid #dc3545;
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+        }
+
+        .team-section.team-b::before {
+            background: linear-gradient(90deg, #dc3545, #c82333);
+        }
+
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .team-section:hover {
+            border-color: #667eea;
+            box-shadow:
+                0 15px 35px rgba(102, 126, 234, 0.15),
+                0 0 0 1px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .team-header {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .team-title {
+            color: #2c3e50;
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .team-section.team-a .team-title::before {
+            content: '🔵';
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .team-section.team-b .team-title::before {
+            content: '🔴';
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            animation: pulse 2s infinite 1s;
+        }
+
+        .team-section.team-a .team-display::after {
+            content: 'BLUE TEAM';
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #007bff;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .team-section.team-b .team-display::after {
+            content: 'RED TEAM';
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #dc3545;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .team-display {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 4px solid rgba(102, 126, 234, 0.15);
+            border-radius: 30px;
+            padding: 40px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                inset 0 4px 8px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-section.team-a .team-display {
+            border-color: rgba(0, 123, 255, 0.2);
+            background: linear-gradient(145deg, #ffffff, #f0f8ff);
+        }
+
+        .team-section.team-b .team-display {
+            border-color: rgba(220, 53, 69, 0.2);
+            background: linear-gradient(145deg, #ffffff, #fff5f5);
+        }
+
+        .team-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+        }
+
+        .display-text {
+            color: #2c3e50;
+            font-size: 3.2rem;
+            font-weight: 700;
+            min-height: 1.5em;
+            word-break: break-all;
+        }
+
+        .answer-display {
+            padding: 20px 25px;
+            width: 400px;
+            font-size: 26px;
+            text-align: center;
+            border: 3px solid #e1e5e9;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #2c3e50;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .answer-display:focus-within::before {
+            left: 100%;
+        }
+
+        .answer-display:focus-within {
+            border-color: #667eea;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .check-btn {
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+            position: relative;
+            overflow: hidden;
+            min-width: 100px;
+        }
+
+        .check-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .check-btn:hover::before {
+            left: 100%;
+        }
+
+        .check-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        }
+
+        .check-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .feedback {
+            margin-top: 40px;
+            font-weight: bold;
+            font-size: 36px;
+            min-height: 60px;
+            padding: 25px 40px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .scoreboard {
+            margin-top: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 20px 35px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
+            border-radius: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            display: inline-block;
+        }
+
+
+
+
+
+
+
+        /* 鍵盤區域 */
+        .keyboard-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .keyboard {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            padding: 50px;
+            border-radius: 35px;
+            box-shadow:
+                0 30px 70px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.8);
+            border: 4px solid rgba(102, 126, 234, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-section.team-a .keyboard {
+            border-color: rgba(0, 123, 255, 0.15);
+            background: linear-gradient(145deg, #ffffff, #f0f8ff);
+        }
+
+        .team-section.team-b .keyboard {
+            border-color: rgba(220, 53, 69, 0.15);
+            background: linear-gradient(145deg, #ffffff, #fff5f5);
+        }
+
+        .keyboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .team-section.team-a .keyboard::before {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+        }
+
+        .team-section.team-b .keyboard::before {
+            background: linear-gradient(90deg, #dc3545, #c82333);
+        }
+
+        .keyboard-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .key {
+            width: 120px;
+            height: 120px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            color: #2c3e50;
+            font-size: 2.4rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-section.team-a .key:hover {
+            box-shadow:
+                0 12px 25px rgba(0, 123, 255, 0.2),
+                0 0 0 1px rgba(0, 123, 255, 0.3);
+        }
+
+        .team-section.team-b .key:hover {
+            box-shadow:
+                0 12px 25px rgba(220, 53, 69, 0.2),
+                0 0 0 1px rgba(220, 53, 69, 0.3);
+        }
+
+        .key::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .key:hover::before {
+            left: 100%;
+        }
+
+        .key:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 12px 25px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(102, 126, 234, 0.2);
+        }
+
+        .key:active {
+            transform: translateY(-1px);
+        }
+
+        .key.special-key {
+            width: 180px;
+            font-size: 1.8rem;
+        }
+
+        .key[data-key="space"] {
+            width: 300px;
+        }
+
+
+
+        .keyboard-title {
+            display: none;
+        }
+
+        /* 動畫效果 */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
+            }
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 1200px) {
+            .main-container {
+                max-width: 1000px;
+            }
+
+            .question-image {
+                width: 420px;
+                height: 300px;
+            }
+
+            .teams-container {
+                gap: 40px;
+            }
+
+            .team-section.team-a .team-title::before,
+            .team-section.team-b .team-title::before {
+                left: -30px;
+                font-size: 1.5rem;
+            }
+
+            .team-section.team-a .team-display::after,
+            .team-section.team-b .team-display::after {
+                font-size: 0.6rem;
+                padding: 3px 6px;
+            }
+
+            .key {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+
+            .key.special-key {
+                width: 90px;
+                font-size: 1rem;
+            }
+
+            .key[data-key="space"] {
+                width: 150px;
+            }
+
+            .question-content {
+                font-size: 28px;
+                padding: 15px;
+            }
+
+            .answer-display {
+                width: 300px;
+                font-size: 24px;
+            }
+
+
+
+            .keyboard-section {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .main-container {
+                gap: 20px;
+            }
+
+            .quiz-section {
+                padding: 25px 20px;
+            }
+
+            .question-header {
+                top: 20px;
+                left: 25px;
+                font-size: 20px;
+            }
+
+            .question-number-badge {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+
+            .question-image {
+                width: 320px;
+                height: 230px;
+                margin: 25px auto;
+            }
+
+            .teams-container {
+                gap: 30px;
+            }
+
+            .team-section.team-a .team-title::before,
+            .team-section.team-b .team-title::before {
+                left: -25px;
+                font-size: 1.2rem;
+            }
+
+            .team-section.team-a .team-display::after,
+            .team-section.team-b .team-display::after {
+                font-size: 0.5rem;
+                padding: 2px 5px;
+            }
+
+            .key {
+                width: 35px;
+                height: 35px;
+                font-size: 12px;
+            }
+
+            .key.special-key {
+                width: 50px;
+                font-size: 10px;
+            }
+
+            .key[data-key="space"] {
+                width: 80px;
+            }
+
+            .image-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .image-nav-btn.prev {
+                left: -50px;
+            }
+
+            .image-nav-btn.next {
+                right: -50px;
+            }
+
+            .question-content {
+                font-size: 22px;
+                padding: 15px;
+                margin-top: 20px;
+            }
+
+            .answer-display {
+                width: 250px;
+                font-size: 20px;
+                padding: 15px 20px;
+            }
+
+
+
+
+
+            .keyboard-section {
+                padding: 25px 20px;
+            }
+
+            .keyboard-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .quiz-section {
+                padding: 20px 15px;
+            }
+
+            .question-image {
+                width: 280px;
+                height: 200px;
+            }
+
+            .teams-container {
+                gap: 20px;
+            }
+
+            .team-section.team-a .team-title::before,
+            .team-section.team-b .team-title::before {
+                left: -20px;
+                font-size: 1rem;
+            }
+
+            .team-section.team-a .team-display::after,
+            .team-section.team-b .team-display::after {
+                font-size: 0.4rem;
+                padding: 1px 3px;
+            }
+
+            .key {
+                width: 30px;
+                height: 30px;
+                font-size: 10px;
+            }
+
+            .key.special-key {
+                width: 45px;
+                font-size: 9px;
+            }
+
+            .key[data-key="space"] {
+                width: 70px;
+            }
+
+            .image-nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+
+            .image-nav-btn.prev {
+                left: -40px;
+            }
+
+            .image-nav-btn.next {
+                right: -40px;
+            }
+
+            .question-content {
+                font-size: 18px;
+                padding: 12px;
+            }
+
+            .answer-display {
+                width: 200px;
+                font-size: 18px;
+                padding: 12px 15px;
+            }
+
+
+
+
+
+            .keyboard-section {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- 詞彙測驗區域 -->
+        <div class="quiz-section">
+            <div class="question-header">
+                <div class="question-number-badge" id="question-number-badge">1</div>
+                <span id="question-number">題目 1</span>
+            </div>
+
+            <div style="position: relative; display: inline-block;">
+                <img id="question-image" class="question-image" alt="Question Image" />
+                <button class="image-nav-btn prev" id="imagePrevBtn" onclick="previousQuestion()">◀</button>
+                <button class="image-nav-btn next" id="imageNextBtn" onclick="nextQuestion()">▶</button>
+            </div>
+            <div class="question-content" id="question-text"></div>
+
+            <div class="teams-container">
+                <!-- Team A -->
+                <div class="team-section team-a">
+                    <div class="team-header">
+                        <h2 class="team-title"></h2>
+                        <div class="team-display">
+                            <span class="display-text" id="team1-display">answer</span>
+                        </div>
+                    </div>
+                    <div class="keyboard-container">
+                        <div class="keyboard" id="keyboard1">
+                            <!-- 第一行 -->
+                            <div class="keyboard-row">
+                                <button class="key" data-key="q">Q</button>
+                                <button class="key" data-key="w">W</button>
+                                <button class="key" data-key="e">E</button>
+                                <button class="key" data-key="r">R</button>
+                                <button class="key" data-key="t">T</button>
+                                <button class="key" data-key="y">Y</button>
+                                <button class="key" data-key="u">U</button>
+                                <button class="key" data-key="i">I</button>
+                                <button class="key" data-key="o">O</button>
+                                <button class="key" data-key="p">P</button>
+                            </div>
+                            <!-- 第二行 -->
+                            <div class="keyboard-row">
+                                <button class="key" data-key="a">A</button>
+                                <button class="key" data-key="s">S</button>
+                                <button class="key" data-key="d">D</button>
+                                <button class="key" data-key="f">F</button>
+                                <button class="key" data-key="g">G</button>
+                                <button class="key" data-key="h">H</button>
+                                <button class="key" data-key="j">J</button>
+                                <button class="key" data-key="k">K</button>
+                                <button class="key" data-key="l">L</button>
+                            </div>
+                            <!-- 第三行 -->
+                            <div class="keyboard-row">
+                                <button class="key" data-key="z">Z</button>
+                                <button class="key" data-key="x">X</button>
+                                <button class="key" data-key="c">C</button>
+                                <button class="key" data-key="v">V</button>
+                                <button class="key" data-key="b">B</button>
+                                <button class="key" data-key="n">N</button>
+                                <button class="key" data-key="m">M</button>
+                                <button class="key special-key" data-key="backspace">←</button>
+                            </div>
+                            <!-- 第四行 -->
+                            <div class="keyboard-row">
+                                <button class="key special-key" data-key="shift">Shift</button>
+                                <button class="key special-key" data-key="space">Space</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team B -->
+                <div class="team-section team-b">
+                    <div class="team-header">
+                        <h2 class="team-title"></h2>
+                        <div class="team-display">
+                            <span class="display-text" id="team2-display">answer</span>
+                        </div>
+                    </div>
+                    <div class="keyboard-container">
+                        <div class="keyboard" id="keyboard2">
+                            <!-- 第一行 -->
+                            <div class="keyboard-row">
+                                <button class="key" data-key="q">Q</button>
+                                <button class="key" data-key="w">W</button>
+                                <button class="key" data-key="e">E</button>
+                                <button class="key" data-key="r">R</button>
+                                <button class="key" data-key="t">T</button>
+                                <button class="key" data-key="y">Y</button>
+                                <button class="key" data-key="u">U</button>
+                                <button class="key" data-key="i">I</button>
+                                <button class="key" data-key="o">O</button>
+                                <button class="key" data-key="p">P</button>
+                            </div>
+                            <!-- 第二行 -->
+                            <div class="keyboard-row">
+                                <button class="key" data-key="a">A</button>
+                                <button class="key" data-key="s">S</button>
+                                <button class="key" data-key="d">D</button>
+                                <button class="key" data-key="f">F</button>
+                                <button class="key" data-key="g">G</button>
+                                <button class="key" data-key="h">H</button>
+                                <button class="key" data-key="j">J</button>
+                                <button class="key" data-key="k">K</button>
+                                <button class="key" data-key="l">L</button>
+                            </div>
+                            <!-- 第三行 -->
+                            <div class="keyboard-row">
+                                <button class="key" data-key="z">Z</button>
+                                <button class="key" data-key="x">X</button>
+                                <button class="key" data-key="c">C</button>
+                                <button class="key" data-key="v">V</button>
+                                <button class="key" data-key="b">B</button>
+                                <button class="key" data-key="n">N</button>
+                                <button class="key" data-key="m">M</button>
+                                <button class="key special-key" data-key="backspace">←</button>
+                            </div>
+                            <!-- 第四行 -->
+                            <div class="keyboard-row">
+                                <button class="key special-key" data-key="shift">Shift</button>
+                                <button class="key special-key" data-key="space">Space</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+            <div class="scoreboard" id="scoreboard"></div>
+
+            <script>
+                // 詞彙資料
+                const questions = [
+                    { clue: "We can take a boat to the i_____d.", definition: "island (n.) 島嶼", answer: "island", image: "image2/1.png" },
+                    { clue: "My father is a s_____r; he works on a ship.", definition: "sailor (n.) 水手", answer: "sailor", image: "image2/2.png" },
+                    { clue: "The forest is in the n_____h of the city.", definition: "north (n.) 北方", answer: "north", image: "image2/3.png" },
+                    { clue: "The stars l_____t up the night sky.", definition: "light (v.) 點亮", answer: "light", image: "image2/4.png" },
+                    { clue: "C_____s give us light when it is dark.", definition: "candle (n.) 蠟燭", answer: "candles", image: "image2/5.png" },
+                    { clue: "All Saints' Day is a day to r_____r loved ones.", definition: "remember (v.) 記得", answer: "remember", image: "image2/6.png" },
+                    { clue: "Don't f_____t to turn off the lights before you leave.", definition: "forget (v.) 忘記", answer: "forget", image: "image2/7.png" },
+                    { clue: "Can you b_____g me a glass of orange juice?", definition: "bring (v.) 帶來", answer: "bring", image: "image2/8.png" },
+                    { clue: "The sunset looks w_____l with its colorful clouds.", definition: "wonderful (adj.) 奇妙的", answer: "wonderful", image: "image2/9.png" },
+                    { clue: "Jane has two p_____s: a cat and a turtle.", definition: "pet (n.) 寵物", answer: "pets", image: "image2/10.png" }
+                ];
+
+                let currentQuestion = 0;
+                let team1Text = '';
+                let team2Text = '';
+                let isShiftPressed = false;
+                let userAnswers = Array(questions.length).fill('');
+
+                // DOM 元素
+                const questionNumberBadge = document.getElementById('question-number-badge');
+                const questionNumber = document.getElementById('question-number');
+                const questionImage = document.getElementById('question-image');
+                const questionText = document.getElementById('question-text');
+                const team1Display = document.getElementById('team1-display');
+                const team2Display = document.getElementById('team2-display');
+                const feedback = document.getElementById('feedback');
+                const scoreboard = document.getElementById('scoreboard');
+
+                // 初始化
+                document.addEventListener('DOMContentLoaded', function () {
+                    loadQuestion();
+                    setupKeyboard();
+                    setupKeyboardNavigation();
+                });
+
+                // 載入題目
+                function loadQuestion() {
+                    const question = questions[currentQuestion];
+
+                    questionNumberBadge.textContent = currentQuestion + 1;
+                    questionNumber.textContent = `題目 ${currentQuestion + 1}`;
+                    questionText.textContent = question.clue;
+                    questionImage.src = question.image;
+
+                    // 載入已保存的答案
+                    team1Text = userAnswers[currentQuestion] || '';
+                    team1Display.textContent = team1Text || 'answer';
+                    team2Display.textContent = 'answer';
+
+                    // 清除反饋
+                    feedback.textContent = '';
+                    scoreboard.textContent = '';
+
+                    // 更新按鈕狀態
+                    updateNavigationButtons();
+                }
+
+                // 更新導航按鈕狀態
+                function updateNavigationButtons() {
+                    const imagePrevBtn = document.getElementById('imagePrevBtn');
+                    const imageNextBtn = document.getElementById('imageNextBtn');
+
+                    if (imagePrevBtn) imagePrevBtn.disabled = currentQuestion === 0;
+                    if (imageNextBtn) imageNextBtn.disabled = currentQuestion === questions.length - 1;
+                }
+
+                // 設置鍵盤
+                function setupKeyboard() {
+                    const keys = document.querySelectorAll('.key');
+
+                    keys.forEach(key => {
+                        key.addEventListener('click', function () {
+                            const keyValue = this.getAttribute('data-key');
+                            const keyboardId = this.closest('.keyboard').id;
+                            handleKeyPress(keyValue, keyboardId);
+                        });
+                    });
+
+                    // 更新Shift鍵顯示
+                    updateShiftDisplay();
+                }
+
+                // 更新Shift鍵顯示
+                function updateShiftDisplay() {
+                    const shiftKeys = document.querySelectorAll('[data-key="shift"]');
+                    shiftKeys.forEach(shiftKey => {
+                        shiftKey.textContent = isShiftPressed ? 'SHIFT' : 'Shift';
+                        shiftKey.style.background = isShiftPressed ?
+                            'linear-gradient(135deg, #764ba2 0%, #667eea 100%)' :
+                            'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                    });
+
+                    // 更新所有字母鍵的顯示
+                    const letterKeys = document.querySelectorAll('.key[data-key]');
+                    letterKeys.forEach(key => {
+                        const keyValue = key.getAttribute('data-key');
+                        if (keyValue && keyValue.length === 1) {
+                            key.textContent = isShiftPressed ? keyValue.toUpperCase() : keyValue.toLowerCase();
+                        }
+                    });
+                }
+
+                // 設置鍵盤導航
+                function setupKeyboardNavigation() {
+                    document.addEventListener('keydown', function (e) {
+                        // 方向鍵導航
+                        if (e.key === 'ArrowLeft') {
+                            e.preventDefault();
+                            previousQuestion();
+                        } else if (e.key === 'ArrowRight') {
+                            e.preventDefault();
+                            nextQuestion();
+                        } else if (e.key === 'Enter') {
+                            e.preventDefault();
+                            checkAnswer();
+                        } else if (e.key === 'Backspace') {
+                            e.preventDefault();
+                            handleKeyPress('backspace', 'keyboard1');
+                        } else if (e.key === ' ') {
+                            e.preventDefault();
+                            handleKeyPress('space', 'keyboard1');
+                        } else if (e.key.length === 1) {
+                            e.preventDefault();
+                            const char = isShiftPressed ? e.key.toUpperCase() : e.key.toLowerCase();
+                            addCharacter(char, 'keyboard1');
+                        }
+                    });
+                }
+
+                // 處理按鍵輸入
+                function handleKeyPress(key, keyboardId) {
+                    switch (key) {
+                        case 'backspace':
+                            if (keyboardId === 'keyboard1') {
+                                team1Text = team1Text.slice(0, -1);
+                                team1Display.textContent = team1Text || 'answer';
+                            } else if (keyboardId === 'keyboard2') {
+                                team2Text = team2Text.slice(0, -1);
+                                team2Display.textContent = team2Text || 'answer';
+                            }
+                            break;
+                        case 'shift':
+                            isShiftPressed = !isShiftPressed;
+                            updateShiftDisplay();
+                            return;
+                        case 'space':
+                            if (keyboardId === 'keyboard1') {
+                                addCharacter(' ', 'keyboard1');
+                            } else if (keyboardId === 'keyboard2') {
+                                addCharacter(' ', 'keyboard2');
+                            }
+                            return;
+                        default:
+                            if (key.length === 1) {
+                                const char = isShiftPressed ? key.toUpperCase() : key.toLowerCase();
+                                addCharacter(char, keyboardId);
+                            }
+                            break;
+                    }
+                }
+
+                // 添加字符
+                function addCharacter(char, keyboardId) {
+                    if (keyboardId === 'keyboard1') {
+                        team1Text += char;
+                        team1Display.textContent = team1Text;
+                    } else if (keyboardId === 'keyboard2') {
+                        team2Text += char;
+                        team2Display.textContent = team2Text;
+                    }
+                }
+
+                // 檢查答案
+                function checkAnswer() {
+                    const question = questions[currentQuestion];
+                    const isCorrect1 = team1Text.toLowerCase().trim() === question.answer.toLowerCase();
+                    const isCorrect2 = team2Text.toLowerCase().trim() === question.answer.toLowerCase();
+
+                    let feedbackText = '';
+                    let feedbackColor = '';
+                    let feedbackBackground = '';
+                    let feedbackBorder = '';
+
+                    if (isCorrect1 && isCorrect2) {
+                        feedbackText = '✅ 兩個答案都正確！';
+                        feedbackColor = '#28a745';
+                        feedbackBackground = 'rgba(40, 167, 69, 0.1)';
+                        feedbackBorder = '2px solid #28a745';
+                    } else if (isCorrect1 || isCorrect2) {
+                        feedbackText = `✅ 部分正確！正確答案是：${question.answer}`;
+                        feedbackColor = '#ffc107';
+                        feedbackBackground = 'rgba(255, 193, 7, 0.1)';
+                        feedbackBorder = '2px solid #ffc107';
+                    } else {
+                        feedbackText = `❌ 錯誤！正確答案是：${question.answer}`;
+                        feedbackColor = '#dc3545';
+                        feedbackBackground = 'rgba(220, 53, 69, 0.1)';
+                        feedbackBorder = '2px solid #dc3545';
+                    }
+
+                    feedback.textContent = feedbackText;
+                    feedback.style.color = feedbackColor;
+                    feedback.style.background = feedbackBackground;
+                    feedback.style.border = feedbackBorder;
+
+                    // 顯示分數
+                    const correctCount = userAnswers.reduce((sum, ans, i) =>
+                        sum + (ans.toLowerCase().trim() === questions[i].answer.toLowerCase() ? 1 : 0), 0);
+                    scoreboard.textContent = `得分：${correctCount} / ${questions.length}`;
+
+                    // 保存答案（使用第一個答案）
+                    userAnswers[currentQuestion] = team1Text;
+                }
+
+                // 上一題
+                function previousQuestion() {
+                    if (currentQuestion > 0) {
+                        currentQuestion--;
+                        loadQuestion();
+                    }
+                }
+
+                // 下一題
+                function nextQuestion() {
+                    if (currentQuestion < questions.length - 1) {
+                        currentQuestion++;
+                        loadQuestion();
+                    }
+                }
+            </script>
+</body>
+
+</html>

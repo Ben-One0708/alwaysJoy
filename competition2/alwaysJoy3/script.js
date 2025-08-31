@@ -381,160 +381,44 @@ function openPDFModal(date, type) {
 
     title.textContent = `課程總覽 - ${date}`;
 
-    // 檢查是否為 8/2、8/23、9/13 或 訂正在電腦 日期
+    // 檢查是否為 8/2 或 8/23 日期
     if (date === '8/2') {
         // 顯示 8/2 的 PDF 文件
         content.innerHTML = `
-            <div class="pdf-container" style="background: #f8f9fa; padding: 15px; border-radius: 15px; margin: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <div class="pdf-header" style="margin-bottom: 20px; text-align: center;">
-                    <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.5rem;">
-                        <i class="fas fa-file-pdf" style="color: #e74c3c; margin-right: 8px;"></i>課程資料 PDF
-                    </h3>
-                    <div class="pdf-info" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; color: #666;">
-                        <span><strong>日期：</strong>${date}</span>
-                        <span><strong>類型：</strong>課程總覽</span>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3><i class="fas fa-file-pdf"></i> 課程資料 PDF</h3>
+                <p><strong>日期：</strong>${date}</p>
+                <p><strong>類型：</strong>課程總覽</p>
+                <div style="margin: 20px 0;">
+                    <iframe src="2025拼字練習2.pdf" width="100%" height="600px" style="border: 1px solid #ddd; border-radius: 5px;"></iframe>
+                    <div style="margin-top: 15px;">
+                        <button onclick="downloadPDF('${date}', '${type}')" style="background: #4a90e2; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px;">
+                            <i class="fas fa-download"></i> 下載 PDF
+                        </button>
+                        <a href="2025拼字練習2.pdf" target="_blank" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block;">
+                            <i class="fas fa-external-link-alt"></i> 在新視窗開啟
+                        </a>
                     </div>
-                </div>
-                
-                <div class="pdf-viewer-container" style="position: relative; margin: 20px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <div class="pdf-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; background: rgba(255,255,255,0.9); padding: 20px; border-radius: 10px; display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-spinner fa-spin" style="color: #3498db;"></i>
-                        <span>載入中...</span>
-                    </div>
-                    <iframe src="2025拼字練習2.pdf" 
-                            style="width: 100%; height: 70vh; min-height: 400px; max-height: 600px; border: none; border-radius: 10px; display: block;"
-                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
-                    </iframe>
-                </div>
-                
-                <div class="pdf-actions" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
-                    <button onclick="downloadPDF('${date}', '${type}')" 
-                            class="pdf-btn download-btn" 
-                            style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(52,152,219,0.3);">
-                        <i class="fas fa-download" style="margin-right: 8px;"></i>下載 PDF
-                    </button>
-                    <a href="2025拼字練習2.pdf" target="_blank" 
-                       class="pdf-btn open-btn" 
-                       style="background: linear-gradient(135deg, #27ae60, #229954); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-decoration: none; display: inline-block; box-shadow: 0 2px 5px rgba(39,174,96,0.3);">
-                        <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>在新視窗開啟
-                    </a>
                 </div>
             </div>
         `;
     } else if (date === '8/23') {
         // 顯示 8/23 的 PDF 文件
         content.innerHTML = `
-            <div class="pdf-container" style="background: #f8f9fa; padding: 15px; border-radius: 15px; margin: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <div class="pdf-header" style="margin-bottom: 20px; text-align: center;">
-                    <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.5rem;">
-                        <i class="fas fa-file-pdf" style="color: #e74c3c; margin-right: 8px;"></i>課程資料 PDF
-                    </h3>
-                    <div class="pdf-info" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; color: #666;">
-                        <span><strong>日期：</strong>${date}</span>
-                        <span><strong>類型：</strong>課程總覽</span>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3><i class="fas fa-file-pdf"></i> 課程資料 PDF</h3>
+                <p><strong>日期：</strong>${date}</p>
+                <p><strong>類型：</strong>課程總覽</p>
+                <div style="margin: 20px 0;">
+                    <iframe src="2025拼字練習3.pdf" width="100%" height="600px" style="border: 1px solid #ddd; border-radius: 5px;"></iframe>
+                    <div style="margin-top: 15px;">
+                        <button onclick="downloadPDF('${date}', '${type}')" style="background: #4a90e2; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px;">
+                            <i class="fas fa-download"></i> 下載 PDF
+                        </button>
+                        <a href="2025拼字練習3.pdf" target="_blank" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block;">
+                            <i class="fas fa-external-link-alt"></i> 在新視窗開啟
+                        </a>
                     </div>
-                </div>
-                
-                <div class="pdf-viewer-container" style="position: relative; margin: 20px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <div class="pdf-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; background: rgba(255,255,255,0.9); padding: 20px; border-radius: 10px; display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-spinner fa-spin" style="color: #3498db;"></i>
-                        <span>載入中...</span>
-                    </div>
-                    <iframe src="2025拼字練習3.pdf" 
-                            style="width: 100%; height: 70vh; min-height: 400px; max-height: 600px; border: none; border-radius: 10px; display: block;"
-                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
-                    </iframe>
-                </div>
-                
-                <div class="pdf-actions" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
-                    <button onclick="downloadPDF('${date}', '${type}')" 
-                            class="pdf-btn download-btn" 
-                            style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(52,152,219,0.3);">
-                        <i class="fas fa-download" style="margin-right: 8px;"></i>下載 PDF
-                    </button>
-                    <a href="2025拼字練習3.pdf" target="_blank" 
-                       class="pdf-btn open-btn" 
-                       style="background: linear-gradient(135deg, #27ae60, #229954); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-decoration: none; display: inline-block; box-shadow: 0 2px 5px rgba(39,174,96,0.3);">
-                        <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>在新視窗開啟
-                    </a>
-                </div>
-            </div>
-        `;
-    } else if (date === '9/13') {
-        // 顯示 9/13 的 PDF 文件
-        content.innerHTML = `
-            <div class="pdf-container" style="background: #f8f9fa; padding: 15px; border-radius: 15px; margin: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <div class="pdf-header" style="margin-bottom: 20px; text-align: center;">
-                    <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.5rem;">
-                        <i class="fas fa-file-pdf" style="color: #e74c3c; margin-right: 8px;"></i>課程資料 PDF
-                    </h3>
-                    <div class="pdf-info" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; color: #666;">
-                        <span><strong>日期：</strong>${date}</span>
-                        <span><strong>類型：</strong>課程總覽</span>
-                    </div>
-                </div>
-                
-                <div class="pdf-viewer-container" style="position: relative; margin: 20px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <div class="pdf-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; background: rgba(255,255,255,0.9); padding: 20px; border-radius: 10px; display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-spinner fa-spin" style="color: #3498db;"></i>
-                        <span>載入中...</span>
-                    </div>
-                    <iframe src="2025拼字練習4.pdf" 
-                            style="width: 100%; height: 70vh; min-height: 400px; max-height: 600px; border: none; border-radius: 10px; display: block;"
-                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
-                    </iframe>
-                </div>
-                
-                <div class="pdf-actions" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
-                    <button onclick="downloadPDF('${date}', '${type}')" 
-                            class="pdf-btn download-btn" 
-                            style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(52,152,219,0.3);">
-                        <i class="fas fa-download" style="margin-right: 8px;"></i>下載 PDF
-                    </button>
-                    <a href="2025拼字練習4.pdf" target="_blank" 
-                       class="pdf-btn open-btn" 
-                       style="background: linear-gradient(135deg, #27ae60, #229954); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-decoration: none; display: inline-block; box-shadow: 0 2px 5px rgba(39,174,96,0.3);">
-                        <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>在新視窗開啟
-                    </a>
-                </div>
-            </div>
-        `;
-    } else if (date === '訂正在電腦') {
-        // 顯示 訂正在電腦 的 PDF 文件
-        content.innerHTML = `
-            <div class="pdf-container" style="background: #f8f9fa; padding: 15px; border-radius: 15px; margin: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <div class="pdf-header" style="margin-bottom: 20px; text-align: center;">
-                    <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.5rem;">
-                        <i class="fas fa-laptop" style="color: #e74c3c; margin-right: 8px;"></i>訂正在電腦 PDF
-                    </h3>
-                    <div class="pdf-info" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; color: #666;">
-                        <span><strong>類型：</strong>訂正在電腦</span>
-                        <span><strong>檔案：</strong>佳音拼字比賽-訂正在電腦上-2</span>
-                    </div>
-                </div>
-                
-                <div class="pdf-viewer-container" style="position: relative; margin: 20px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <div class="pdf-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; background: rgba(255,255,255,0.95); padding: 20px; border-radius: 10px; display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-spinner fa-spin" style="color: #3498db;"></i>
-                        <span>載入中...</span>
-                    </div>
-                    <iframe src="佳音拼字比賽-訂正在電腦上-2.pdf" 
-                            style="width: 100%; height: 70vh; min-height: 400px; max-height: 600px; border: none; border-radius: 10px; display: block;"
-                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
-                    </iframe>
-                </div>
-                
-                <div class="pdf-actions" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
-                    <button onclick="downloadPDF('${date}', '${type}')" 
-                            class="pdf-btn download-btn" 
-                            style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(52,152,219,0.3);">
-                        <i class="fas fa-download" style="margin-right: 8px;"></i>下載 PDF
-                    </button>
-                    <a href="佳音拼字比賽-訂正在電腦上-2.pdf" target="_blank" 
-                       class="pdf-btn open-btn" 
-                       style="background: linear-gradient(135deg, #27ae60, #229954); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-decoration: none; display: inline-block; box-shadow: 0 2px 5px rgba(39,174,96,0.3);">
-                        <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>在新視窗開啟
-                    </a>
                 </div>
             </div>
         `;
@@ -578,106 +462,10 @@ function downloadPDF(date, type) {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    } else if (date === '9/13') {
-        // 創建下載連結
-        const link = document.createElement('a');
-        link.href = '2025拼字練習4.pdf';
-        link.download = `9-13_課程總覽.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    } else if (date === '訂正在電腦') {
-        // 創建下載連結
-        const link = document.createElement('a');
-        link.href = '佳音拼字比賽-訂正在電腦上-2.pdf';
-        link.download = `訂正在電腦_佳音拼字比賽.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
     } else {
         // 這裡可以實現實際的 PDF 下載功能
         console.log(`下載 ${type} PDF: ${date}`);
         alert(`正在下載 ${date} 的課程總覽 PDF 文件...`);
-    }
-}
-
-// 開啟成績登記表
-function openScoreSheet() {
-    const scoreSheetUrl = 'https://docs.google.com/spreadsheets/d/1dVtlnLWCdgloPTiD15FkqcF-MjYbZUu1sMOQX15LjbQ/edit?gid=0#gid=0';
-
-    try {
-        // 在新分頁開啟 Google Sheets
-        const newWindow = window.open(scoreSheetUrl, '_blank', 'noopener,noreferrer');
-
-        // 檢查是否成功開啟視窗
-        if (newWindow) {
-            // 成功開啟
-            alert('成績登記表已在新分頁開啟！\n\n如果頁面顯示空白，請：\n1. 檢查瀏覽器是否阻擋了彈出視窗\n2. 確保您已登入 Google 帳號\n3. 重新整理頁面');
-        } else {
-            // 可能被瀏覽器阻擋
-            alert('無法開啟新分頁，可能是瀏覽器阻擋了彈出視窗。\n\n請手動複製以下連結到新分頁開啟：\n\n' + scoreSheetUrl);
-        }
-    } catch (error) {
-        // 發生錯誤
-        console.error('開啟成績登記表時發生錯誤:', error);
-        alert('開啟成績登記表時發生錯誤。\n\n請手動複製以下連結到新分頁開啟：\n\n' + scoreSheetUrl);
-    }
-}
-
-// 複製連結到剪貼簿
-function copyLink() {
-    const linkInput = document.querySelector('.link-input');
-    linkInput.select();
-    linkInput.setSelectionRange(0, 99999); // 用於移動設備
-
-    try {
-        document.execCommand('copy');
-        alert('連結已複製到剪貼簿！');
-    } catch (err) {
-        // 如果 execCommand 失敗，嘗試使用新的 Clipboard API
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(linkInput.value).then(() => {
-                alert('連結已複製到剪貼簿！');
-            }).catch(() => {
-                alert('無法複製連結，請手動選擇並複製。');
-            });
-        } else {
-            alert('無法複製連結，請手動選擇並複製。');
-        }
-    }
-}
-
-// 開啟遊戲平台
-function openGamePlatform() {
-    try {
-        window.open('competition2/homepage.html', '_blank');
-        console.log('遊戲平台已在新分頁開啟');
-    } catch (error) {
-        console.error('開啟遊戲平台時發生錯誤:', error);
-        alert('開啟遊戲平台時發生錯誤。\n\n請手動複製以下連結到新分頁開啟：\n\ncompetition2/homepage.html');
-    }
-}
-
-// 複製遊戲連結
-function copyGameLink() {
-    const gameLinkInput = document.querySelector('.game-link-info .link-input');
-    gameLinkInput.select();
-    gameLinkInput.setSelectionRange(0, 99999); // 用於移動設備
-
-    try {
-        document.execCommand('copy');
-        alert('遊戲連結已複製到剪貼簿！');
-    } catch (err) {
-        // 如果 execCommand 失敗，嘗試使用新的 Clipboard API
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(gameLinkInput.value).then(() => {
-                alert('遊戲連結已複製到剪貼簿！');
-            }).catch(() => {
-                alert('無法複製遊戲連結，請手動選擇並複製。');
-            });
-        } else {
-            alert('無法複製遊戲連結，請手動選擇並複製。');
-        }
     }
 }
 
@@ -1120,343 +908,12 @@ function openLearningArea(areaType) {
         // 各級別單字：顯示提示訊息
         showLevelPracticeNotice();
     } else if (areaType === 'admin') {
-        // 管理員成績管理：顯示所有學生成績
-        openAdminPanel();
+        // 管理員成績管理：顯示學生成績列表
+        showAdminStudentsList();
     } else {
         // 其他練習：直接打開練習
         openPracticeModal(areaType);
     }
-}
-
-// 打開管理員面板
-function openAdminPanel() {
-    const currentStudent = getCurrentStudent();
-    const isAdmin = students[currentStudent] && students[currentStudent].isAdmin;
-
-    if (!isAdmin) {
-        showError('您沒有權限訪問管理員功能');
-        return;
-    }
-
-    // 顯示管理員面板
-    const practiceSection = document.getElementById('practice');
-    practiceSection.innerHTML = `
-        <div class="admin-panel">
-            <div class="admin-header">
-                <h2><i class="fas fa-chart-bar"></i> 成績管理面板</h2>
-                <p>歡迎 ${currentStudent}，您可以查看所有學生的練習成績</p>
-            </div>
-            
-            <div class="admin-controls">
-                <div class="filter-section">
-                    <label for="groupFilter">按組別篩選：</label>
-                    <select id="groupFilter" onchange="filterScores()">
-                        <option value="">全部組別</option>
-                        <option value="B組">B組</option>
-                        <option value="C組">C組</option>
-                        <option value="D組">D組</option>
-                        <option value="E組">E組</option>
-                        <option value="F組">F組</option>
-                        <option value="教務組">教務組</option>
-                    </select>
-                    
-                    <label for="dateFilter">按日期篩選：</label>
-                    <input type="date" id="dateFilter" onchange="filterScores()">
-                    
-                    <button onclick="refreshScores()" class="refresh-btn">
-                        <i class="fas fa-sync-alt"></i> 重新整理
-                    </button>
-                </div>
-            </div>
-            
-            <div class="admin-stats">
-                <div class="stat-card">
-                    <h3>總學生數</h3>
-                    <div class="stat-number" id="totalStudents">0</div>
-                </div>
-                <div class="stat-card">
-                    <h3>總記錄數</h3>
-                    <div class="stat-number" id="totalRecords">0</div>
-                </div>
-                <div class="stat-card">
-                    <h3>平均分數</h3>
-                    <div class="stat-number" id="averageScore">0</div>
-                </div>
-                <div class="stat-card">
-                    <h3>今日新增</h3>
-                    <div class="stat-number" id="todayRecords">0</div>
-                </div>
-            </div>
-            
-            <div class="scores-table-container">
-                <h3><i class="fas fa-table"></i> 所有學生成績記錄</h3>
-                <div class="table-wrapper">
-                    <table class="scores-table" id="scoresTable">
-                        <thead>
-                            <tr>
-                                <th>學生姓名</th>
-                                <th>組別</th>
-                                <th>練習類型</th>
-                                <th>分數</th>
-                                <th>日期</th>
-                                <th>備註</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody id="scoresTableBody">
-                            <tr>
-                                <td colspan="7" class="loading">載入中...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="admin-actions">
-                <button onclick="exportScores()" class="export-btn">
-                    <i class="fas fa-download"></i> 匯出成績
-                </button>
-                <button onclick="showLearningMap()" class="back-btn">
-                    <i class="fas fa-arrow-left"></i> 返回學習地圖
-                </button>
-            </div>
-        </div>
-    `;
-
-    // 載入成績數據
-    loadAllScores();
-
-    // 設置自動刷新（每30秒刷新一次）
-    setInterval(async () => {
-        console.log('自動刷新成績數據...');
-        await loadAllScores();
-    }, 30000);
-}
-
-// 載入所有成績數據
-async function loadAllScores() {
-    try {
-        // 使用 SQLite API 服務
-        if (window.apiService && typeof window.apiService.getAllScores === 'function') {
-            console.log('使用 SQLite 載入成績數據');
-            const scores = await window.apiService.getAllScores();
-            console.log('載入到的成績數據:', scores);
-            displayScores(scores);
-            updateAdminStats(scores);
-        } else {
-            console.log('SQLite API 服務不可用，使用本地存儲作為備用');
-            // 使用本地存儲作為備用
-            const scores = getLocalScores();
-            displayScores(scores);
-            updateAdminStats(scores);
-        }
-    } catch (error) {
-        console.error('載入成績失敗:', error);
-        console.log('使用本地存儲作為備用方案');
-
-        // 使用本地存儲作為備用
-        const scores = getLocalScores();
-        displayScores(scores);
-        updateAdminStats(scores);
-    }
-}
-
-// 顯示成績數據
-function displayScores(scores) {
-    const tbody = document.getElementById('scoresTableBody');
-
-    if (!scores || scores.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="no-data">暫無成績記錄</td></tr>';
-        return;
-    }
-
-    tbody.innerHTML = scores.map(score => `
-        <tr>
-            <td>${score.studentName || score.student_name}</td>
-            <td>${getStudentGroup(score.studentName || score.student_name)}</td>
-            <td>${score.quizType || score.quiz_type}</td>
-            <td>${score.score}</td>
-            <td>${formatDate(score.date)}</td>
-            <td>${score.notes || '-'}</td>
-            <td>
-                <button onclick="viewScoreDetails('${score.id}')" class="view-btn">
-                    <i class="fas fa-eye"></i> 查看
-                </button>
-            </td>
-        </tr>
-    `).join('');
-}
-
-// 更新管理員統計數據
-function updateAdminStats(scores) {
-    const totalStudents = new Set(scores.map(s => s.studentName || s.student_name)).size;
-    const totalRecords = scores.length;
-    const averageScore = scores.length > 0 ?
-        Math.round(scores.reduce((sum, s) => sum + s.score, 0) / scores.length) : 0;
-
-    const today = new Date().toDateString();
-    const todayRecords = scores.filter(s =>
-        new Date(s.date).toDateString() === today
-    ).length;
-
-    document.getElementById('totalStudents').textContent = totalStudents;
-    document.getElementById('totalRecords').textContent = totalRecords;
-    document.getElementById('averageScore').textContent = averageScore;
-    document.getElementById('todayRecords').textContent = todayRecords;
-}
-
-// 篩選成績
-async function filterScores() {
-    const groupFilter = document.getElementById('groupFilter').value;
-    const dateFilter = document.getElementById('dateFilter').value;
-
-    try {
-        // 重新載入並篩選數據
-        let scores;
-        if (window.apiService) {
-            scores = await window.apiService.getAllScores();
-        } else {
-            scores = getLocalScores();
-        }
-
-        let filteredScores = scores;
-
-        if (groupFilter) {
-            filteredScores = filteredScores.filter(score =>
-                getStudentGroup(score.studentName || score.student_name) === groupFilter
-            );
-        }
-
-        if (dateFilter) {
-            filteredScores = filteredScores.filter(score =>
-                score.date.startsWith(dateFilter)
-            );
-        }
-
-        displayScores(filteredScores);
-    } catch (error) {
-        console.error('篩選成績失敗:', error);
-        // 使用本地存儲作為備用
-        const scores = getLocalScores();
-        displayScores(scores);
-    }
-}
-
-// 重新整理成績
-async function refreshScores() {
-    console.log('重新整理成績數據...');
-    await loadAllScores();
-    showSuccessMessage('成績數據已更新！');
-}
-
-// 匯出成績
-function exportScores() {
-    // 實現匯出功能
-    showSuccess('匯出功能開發中...');
-}
-
-// 查看成績詳情
-function viewScoreDetails(scoreId) {
-    // 實現查看詳情功能
-    showSuccess('詳情查看功能開發中...');
-}
-
-// 獲取學生組別
-function getStudentGroup(studentName) {
-    return students[studentName] ? students[studentName].group : '未知';
-}
-
-// 格式化日期
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('zh-TW');
-}
-
-// 獲取本地存儲的成績（備用）
-function getLocalScores() {
-    const scores = [];
-
-    // 檢查是否有本地存儲的成績
-    let hasLocalScores = false;
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && key.startsWith('score_')) {
-            hasLocalScores = true;
-            try {
-                const score = JSON.parse(localStorage.getItem(key));
-                scores.push(score);
-            } catch (e) {
-                console.error('解析成績數據失敗:', e);
-            }
-        }
-    }
-
-    // 如果沒有本地成績，創建一些示例數據
-    if (!hasLocalScores) {
-        console.log('創建示例成績數據');
-        const sampleScores = [
-            {
-                id: 'sample_1',
-                student_name: 'C2 Yuni',
-                quiz_type: 'magazine_vocabulary',
-                score: 85,
-                total_questions: 36,
-                percentage: 85.00,
-                date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-                notes: '雜誌單字練習'
-            },
-            {
-                id: 'sample_2',
-                student_name: 'C2 Emily',
-                quiz_type: 'magazine_vocabulary',
-                score: 92,
-                total_questions: 36,
-                percentage: 92.00,
-                date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-                notes: '雜誌單字練習'
-            },
-            {
-                id: 'sample_3',
-                student_name: 'A8 Vito',
-                quiz_type: 'level_practice',
-                score: 78,
-                total_questions: 50,
-                percentage: 78.00,
-                date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
-                notes: '各級別單字練習'
-            },
-            {
-                id: 'sample_4',
-                student_name: 'A4 Eudora',
-                quiz_type: 'paragraph_reading',
-                score: 88,
-                total_questions: 30,
-                percentage: 88.00,
-                date: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
-                notes: '段落閱讀練習'
-            },
-            {
-                id: 'sample_5',
-                student_name: 'A5 Zoe',
-                quiz_type: 'mixed_questions',
-                score: 95,
-                total_questions: 100,
-                percentage: 95.00,
-                date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-                notes: '混合題型練習'
-            }
-        ];
-
-        // 保存示例數據到本地存儲
-        sampleScores.forEach((score, index) => {
-            const key = `score_sample_${index + 1}`;
-            localStorage.setItem(key, JSON.stringify(score));
-        });
-
-        return sampleScores;
-    }
-
-    return scores.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
 // 顯示登入模態框
@@ -2307,7 +1764,7 @@ function restartPractice() {
 }
 
 // 儲存分數
-async function saveScores() {
+function saveScores() {
     if (!currentStudent) {
         alert('請先選擇學生！');
         return;
@@ -2332,75 +1789,18 @@ async function saveScores() {
         return;
     }
 
-    try {
-        // 獲取學生組別
-        const studentGroup = getStudentGroup(currentStudent);
+    // 儲存到本地儲存（實際使用時可改為 API 呼叫）
+    localStorage.setItem(`scores_${currentStudent}`, JSON.stringify({
+        student: currentStudent,
+        scores: scores,
+        timestamp: new Date().toISOString()
+    }));
 
-        // 保存每個練習類型的成績到 SQLite
-        const savePromises = [];
+    // 更新排行榜
+    updateStudentScores(currentStudent, scores);
 
-        if (parseInt(scores.magazine) > 0) {
-            savePromises.push(
-                window.apiService.saveScore(currentStudent, studentGroup, '雜誌單字', parseInt(scores.magazine))
-            );
-        }
-
-        if (parseInt(scores.level) > 0) {
-            savePromises.push(
-                window.apiService.saveScore(currentStudent, studentGroup, '各級別單字', parseInt(scores.level))
-            );
-        }
-
-        if (parseInt(scores.paragraph) > 0) {
-            savePromises.push(
-                window.apiService.saveScore(currentStudent, studentGroup, '段落單字', parseInt(scores.paragraph))
-            );
-        }
-
-        if (parseInt(scores.mixed) > 0) {
-            savePromises.push(
-                window.apiService.saveScore(currentStudent, studentGroup, '混合題型', parseInt(scores.mixed))
-            );
-        }
-
-        if (parseInt(scores.batch) > 0) {
-            savePromises.push(
-                window.apiService.saveScore(currentStudent, studentGroup, '大批次題目', parseInt(scores.batch))
-            );
-        }
-
-        // 等待所有成績保存完成
-        if (savePromises.length > 0) {
-            await Promise.all(savePromises);
-            console.log('所有成績已成功保存到 SQLite');
-        }
-
-        // 同時保存到本地存儲作為備用
-        localStorage.setItem(`scores_${currentStudent}`, JSON.stringify({
-            student: currentStudent,
-            scores: scores,
-            timestamp: new Date().toISOString()
-        }));
-
-        // 更新排行榜
-        updateStudentScores(currentStudent, scores);
-
-        // 顯示成功訊息
-        showSuccessMessage('分數已成功儲存到 SQLite 數據庫！');
-
-    } catch (error) {
-        console.error('保存成績失敗:', error);
-
-        // 如果 SQLite 保存失敗，只保存到本地存儲
-        localStorage.setItem(`scores_${currentStudent}`, JSON.stringify({
-            student: currentStudent,
-            scores: scores,
-            timestamp: new Date().toISOString()
-        }));
-
-        updateStudentScores(currentStudent, scores);
-        showSuccessMessage('分數已保存到本地存儲！');
-    }
+    // 顯示成功訊息
+    showSuccessMessage('分數已成功儲存！');
 }
 
 // 更新學生分數
@@ -2454,42 +1854,6 @@ function showSuccessMessage(message) {
             }
         }, 300);
     }, 3000);
-}
-
-// 顯示錯誤訊息
-function showError(message) {
-    // 創建錯誤訊息元素
-    const errorDiv = document.createElement('div');
-    errorDiv.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #dc3545;
-        color: white;
-        padding: 15px 20px;
-        border-radius: 5px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        z-index: 10000;
-        animation: slideInRight 0.3s ease-out;
-    `;
-    errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
-
-    document.body.appendChild(errorDiv);
-
-    // 5秒後自動移除
-    setTimeout(() => {
-        errorDiv.style.animation = 'slideOutRight 0.3s ease-out';
-        setTimeout(() => {
-            if (errorDiv.parentNode) {
-                errorDiv.parentNode.removeChild(errorDiv);
-            }
-        }, 300);
-    }, 5000);
-}
-
-// 顯示成功訊息（簡化版）
-function showSuccess(message) {
-    showSuccessMessage(message);
 }
 
 // 關閉模態框
@@ -3029,7 +2393,7 @@ function openScoreRegistrationModal() {
 }
 
 // 提交成績登記
-async function submitScoreRegistration() {
+function submitScoreRegistration() {
     const currentStudent = getCurrentStudent();
     const practiceDate = document.getElementById('practiceDate').value;
     const magazineScore = document.getElementById('magazineScore').value;
@@ -3064,65 +2428,29 @@ async function submitScoreRegistration() {
         timestamp: new Date().toISOString()
     };
 
-    try {
-        // 儲存成績記錄
-        await saveScoreRecord(scoreRecord);
+    // 儲存成績記錄
+    saveScoreRecord(scoreRecord);
 
-        // 調試：檢查儲存結果
-        console.log('儲存的成績記錄:', scoreRecord);
-        console.log('當前學生:', currentStudent);
-        console.log('儲存後的數據:', localStorage.getItem(`studentScores_${currentStudent}`));
+    // 調試：檢查儲存結果
+    console.log('儲存的成績記錄:', scoreRecord);
+    console.log('當前學生:', currentStudent);
+    console.log('儲存後的數據:', localStorage.getItem(`studentScores_${currentStudent}`));
 
-        // 清空表單
-        clearScoreForm();
+    // 清空表單
+    clearScoreForm();
 
-        // 重新載入歷史記錄
-        loadScoreHistory();
+    // 重新載入歷史記錄
+    loadScoreHistory();
 
-        // 更新學習地圖統計
-        updateLearningMapStats();
+    // 更新學習地圖統計
+    updateLearningMapStats();
 
-        // 顯示成功訊息
-        showSuccessMessage('成績登記成功並已同步到雲端！');
-
-    } catch (error) {
-        console.error('成績登記失敗:', error);
-        showSuccessMessage('成績登記成功（僅保存到本地）！');
-    }
+    // 顯示成功訊息
+    showSuccessMessage('成績登記成功！');
 }
 
 // 儲存成績記錄
-async function saveScoreRecord(scoreRecord) {
-    try {
-        // 獲取學生組別
-        const studentGroup = getStudentGroup(scoreRecord.studentName);
-
-        // 保存到 SQLite
-        if (scoreRecord.scores.magazine > 0) {
-            await window.apiService.saveScore(
-                scoreRecord.studentName,
-                studentGroup,
-                '雜誌單字',
-                scoreRecord.scores.magazine
-            );
-        }
-
-        if (scoreRecord.scores.spelling > 0) {
-            await window.apiService.saveScore(
-                scoreRecord.studentName,
-                studentGroup,
-                '雲端學院拼字模擬',
-                scoreRecord.scores.spelling
-            );
-        }
-
-        console.log('成績記錄已保存到 SQLite');
-
-    } catch (error) {
-        console.error('保存成績記錄到 SQLite 失敗:', error);
-    }
-
-    // 同時保存到本地存儲作為備用
+function saveScoreRecord(scoreRecord) {
     const studentScores = JSON.parse(localStorage.getItem(`studentScores_${scoreRecord.studentName}`) || '[]');
     studentScores.push(scoreRecord);
     localStorage.setItem(`studentScores_${scoreRecord.studentName}`, JSON.stringify(studentScores));
