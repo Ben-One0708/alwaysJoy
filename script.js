@@ -385,60 +385,117 @@ function openPDFModal(date, type) {
     if (date === '8/2') {
         // 顯示 8/2 的 PDF 文件
         content.innerHTML = `
-            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                <h3><i class="fas fa-file-pdf"></i> 課程資料 PDF</h3>
-                <p><strong>日期：</strong>${date}</p>
-                <p><strong>類型：</strong>課程總覽</p>
-                <div style="margin: 20px 0;">
-                    <iframe src="2025拼字練習2.pdf" width="100%" height="600px" style="border: 1px solid #ddd; border-radius: 5px;"></iframe>
-                    <div style="margin-top: 15px;">
-                        <button onclick="downloadPDF('${date}', '${type}')" style="background: #4a90e2; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px;">
-                            <i class="fas fa-download"></i> 下載 PDF
-                        </button>
-                        <a href="2025拼字練習2.pdf" target="_blank" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block;">
-                            <i class="fas fa-external-link-alt"></i> 在新視窗開啟
-                        </a>
+            <div class="pdf-container" style="background: #f8f9fa; padding: 15px; border-radius: 15px; margin: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div class="pdf-header" style="margin-bottom: 20px; text-align: center;">
+                    <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.5rem;">
+                        <i class="fas fa-file-pdf" style="color: #e74c3c; margin-right: 8px;"></i>課程資料 PDF
+                    </h3>
+                    <div class="pdf-info" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; color: #666;">
+                        <span><strong>日期：</strong>${date}</span>
+                        <span><strong>類型：</strong>課程總覽</span>
                     </div>
+                </div>
+                
+                <div class="pdf-viewer-container" style="position: relative; margin: 20px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <div class="pdf-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; background: rgba(255,255,255,0.9); padding: 20px; border-radius: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-spinner fa-spin" style="color: #3498db;"></i>
+                        <span>載入中...</span>
+                    </div>
+                    <iframe src="2025拼字練習2.pdf" 
+                            style="width: 100%; height: 70vh; min-height: 400px; max-height: 600px; border: none; border-radius: 10px; display: block;"
+                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                    </iframe>
+                </div>
+                
+                <div class="pdf-actions" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                    <button onclick="downloadPDF('${date}', '${type}')" 
+                            class="pdf-btn download-btn" 
+                            style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(52,152,219,0.3);">
+                        <i class="fas fa-download" style="margin-right: 8px;"></i>下載 PDF
+                    </button>
+                    <a href="2025拼字練習2.pdf" target="_blank" 
+                       class="pdf-btn open-btn" 
+                       style="background: linear-gradient(135deg, #27ae60, #229954); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-decoration: none; display: inline-block; box-shadow: 0 2px 5px rgba(39,174,96,0.3);">
+                        <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>在新視窗開啟
+                    </a>
                 </div>
             </div>
         `;
     } else if (date === '8/23') {
         // 顯示 8/23 的 PDF 文件
         content.innerHTML = `
-            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                <h3><i class="fas fa-file-pdf"></i> 課程資料 PDF</h3>
-                <p><strong>日期：</strong>${date}</p>
-                <p><strong>類型：</strong>課程總覽</p>
-                <div style="margin: 20px 0;">
-                    <iframe src="2025拼字練習3.pdf" width="100%" height="600px" style="border: 1px solid #ddd; border-radius: 5px;"></iframe>
-                    <div style="margin-top: 15px;">
-                        <button onclick="downloadPDF('${date}', '${type}')" style="background: #4a90e2; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px;">
-                            <i class="fas fa-download"></i> 下載 PDF
-                        </button>
-                        <a href="2025拼字練習3.pdf" target="_blank" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block;">
-                            <i class="fas fa-external-link-alt"></i> 在新視窗開啟
-                        </a>
+            <div class="pdf-container" style="background: #f8f9fa; padding: 15px; border-radius: 15px; margin: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div class="pdf-header" style="margin-bottom: 20px; text-align: center;">
+                    <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.5rem;">
+                        <i class="fas fa-file-pdf" style="color: #e74c3c; margin-right: 8px;"></i>課程資料 PDF
+                    </h3>
+                    <div class="pdf-info" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; color: #666;">
+                        <span><strong>日期：</strong>${date}</span>
+                        <span><strong>類型：</strong>課程總覽</span>
                     </div>
+                </div>
+                
+                <div class="pdf-viewer-container" style="position: relative; margin: 20px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <div class="pdf-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; background: rgba(255,255,255,0.9); padding: 20px; border-radius: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-spinner fa-spin" style="color: #3498db;"></i>
+                        <span>載入中...</span>
+                    </div>
+                    <iframe src="2025拼字練習3.pdf" 
+                            style="width: 100%; height: 70vh; min-height: 400px; max-height: 600px; border: none; border-radius: 10px; display: block;"
+                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                    </iframe>
+                </div>
+                
+                <div class="pdf-actions" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                    <button onclick="downloadPDF('${date}', '${type}')" 
+                            class="pdf-btn download-btn" 
+                            style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(52,152,219,0.3);">
+                        <i class="fas fa-download" style="margin-right: 8px;"></i>下載 PDF
+                    </button>
+                    <a href="2025拼字練習3.pdf" target="_blank" 
+                       class="pdf-btn open-btn" 
+                       style="background: linear-gradient(135deg, #27ae60, #229954); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-decoration: none; display: inline-block; box-shadow: 0 2px 5px rgba(39,174,96,0.3);">
+                        <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>在新視窗開啟
+                    </a>
                 </div>
             </div>
         `;
     } else if (date === '9/13') {
         // 顯示 9/13 的 PDF 文件
         content.innerHTML = `
-            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                <h3><i class="fas fa-file-pdf"></i> 課程資料 PDF</h3>
-                <p><strong>日期：</strong>${date}</p>
-                <p><strong>類型：</strong>課程總覽</p>
-                <div style="margin: 20px 0;">
-                    <iframe src="2025拼字練習4.pdf" width="100%" height="600px" style="border: 1px solid #ddd; border-radius: 5px;"></iframe>
-                    <div style="margin-top: 15px;">
-                        <button onclick="downloadPDF('${date}', '${type}')" style="background: #4a90e2; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px;">
-                            <i class="fas fa-download"></i> 下載 PDF
-                        </button>
-                        <a href="2025拼字練習4.pdf" target="_blank" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block;">
-                            <i class="fas fa-external-link-alt"></i> 在新視窗開啟
-                        </a>
+            <div class="pdf-container" style="background: #f8f9fa; padding: 15px; border-radius: 15px; margin: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div class="pdf-header" style="margin-bottom: 20px; text-align: center;">
+                    <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.5rem;">
+                        <i class="fas fa-file-pdf" style="color: #e74c3c; margin-right: 8px;"></i>課程資料 PDF
+                    </h3>
+                    <div class="pdf-info" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; color: #666;">
+                        <span><strong>日期：</strong>${date}</span>
+                        <span><strong>類型：</strong>課程總覽</span>
                     </div>
+                </div>
+                
+                <div class="pdf-viewer-container" style="position: relative; margin: 20px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <div class="pdf-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; background: rgba(255,255,255,0.9); padding: 20px; border-radius: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-spinner fa-spin" style="color: #3498db;"></i>
+                        <span>載入中...</span>
+                    </div>
+                    <iframe src="2025拼字練習4.pdf" 
+                            style="width: 100%; height: 70vh; min-height: 400px; max-height: 600px; border: none; border-radius: 10px; display: block;"
+                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                    </iframe>
+                </div>
+                
+                <div class="pdf-actions" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                    <button onclick="downloadPDF('${date}', '${type}')" 
+                            class="pdf-btn download-btn" 
+                            style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(52,152,219,0.3);">
+                        <i class="fas fa-download" style="margin-right: 8px;"></i>下載 PDF
+                    </button>
+                    <a href="2025拼字練習4.pdf" target="_blank" 
+                       class="pdf-btn open-btn" 
+                       style="background: linear-gradient(135deg, #27ae60, #229954); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-decoration: none; display: inline-block; box-shadow: 0 2px 5px rgba(39,174,96,0.3);">
+                        <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>在新視窗開啟
+                    </a>
                 </div>
             </div>
         `;
