@@ -381,7 +381,7 @@ function openPDFModal(date, type) {
 
     title.textContent = `課程總覽 - ${date}`;
 
-    // 檢查是否為 8/2 或 8/23 日期
+    // 檢查是否為 8/2、8/23 或 9/13 日期
     if (date === '8/2') {
         // 顯示 8/2 的 PDF 文件
         content.innerHTML = `
@@ -416,6 +416,26 @@ function openPDFModal(date, type) {
                             <i class="fas fa-download"></i> 下載 PDF
                         </button>
                         <a href="2025拼字練習3.pdf" target="_blank" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block;">
+                            <i class="fas fa-external-link-alt"></i> 在新視窗開啟
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else if (date === '9/13') {
+        // 顯示 9/13 的 PDF 文件
+        content.innerHTML = `
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3><i class="fas fa-file-pdf"></i> 課程資料 PDF</h3>
+                <p><strong>日期：</strong>${date}</p>
+                <p><strong>類型：</strong>課程總覽</p>
+                <div style="margin: 20px 0;">
+                    <iframe src="2025拼字練習4.pdf" width="100%" height="600px" style="border: 1px solid #ddd; border-radius: 5px;"></iframe>
+                    <div style="margin-top: 15px;">
+                        <button onclick="downloadPDF('${date}', '${type}')" style="background: #4a90e2; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px;">
+                            <i class="fas fa-download"></i> 下載 PDF
+                        </button>
+                        <a href="2025拼字練習4.pdf" target="_blank" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block;">
                             <i class="fas fa-external-link-alt"></i> 在新視窗開啟
                         </a>
                     </div>
@@ -459,6 +479,14 @@ function downloadPDF(date, type) {
         const link = document.createElement('a');
         link.href = '2025拼字練習3.pdf';
         link.download = `8-23_課程總覽.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else if (date === '9/13') {
+        // 創建下載連結
+        const link = document.createElement('a');
+        link.href = '2025拼字練習4.pdf';
+        link.download = `9-13_課程總覽.pdf`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
