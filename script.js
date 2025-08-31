@@ -1712,14 +1712,66 @@ function openMagazinePracticeModal() {
 
     // 更新進度條
     updateMagazineProgress();
+
+    // 添加鍵盤事件監聽
+    addMagazineKeyboardListeners();
 }
 
 function closeMagazinePractice() {
     document.getElementById('magazinePracticeModal').style.display = 'none';
     stopMagazineTimer();
 
+    // 移除鍵盤事件監聽
+    removeMagazineKeyboardListeners();
+
     // 重置練習狀態
     magazinePracticeConfig = null;
+}
+
+// 添加鍵盤事件監聽
+function addMagazineKeyboardListeners() {
+    document.addEventListener('keydown', handleMagazineKeyboard);
+}
+
+// 移除鍵盤事件監聽
+function removeMagazineKeyboardListeners() {
+    document.removeEventListener('keydown', handleMagazineKeyboard);
+}
+
+// 處理鍵盤事件
+function handleMagazineKeyboard(event) {
+    // 如果焦點在輸入框上，不處理導航快捷鍵
+    if (event.target.id === 'magazineAnswerInput') {
+        // 只處理 Enter 鍵提交答案
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            submitMagazineAnswer();
+        }
+        return;
+    }
+
+    switch (event.key) {
+        case 'ArrowLeft':
+            event.preventDefault();
+            if (magazinePracticeConfig.currentQuestion > 1) {
+                previousMagazineQuestion();
+            }
+            break;
+        case 'ArrowRight':
+            event.preventDefault();
+            if (magazinePracticeConfig.currentQuestion < magazinePracticeConfig.totalQuestions) {
+                nextMagazineQuestion();
+            }
+            break;
+        case 'Enter':
+            event.preventDefault();
+            submitMagazineAnswer();
+            break;
+        case 'Escape':
+            event.preventDefault();
+            closeMagazinePractice();
+            break;
+    }
 }
 
 function generateMagazineQuestions(count) {
@@ -1856,8 +1908,10 @@ function loadMagazineQuestion(questionNumber) {
         imageOverlay.style.display = 'flex';
     }
 
-    // 清空答案輸入框
-    document.getElementById('magazineAnswerInput').value = '';
+    // 清空答案輸入框並聚焦
+    const answerInput = document.getElementById('magazineAnswerInput');
+    answerInput.value = '';
+    answerInput.focus();
 
     // 隱藏答案反饋
     document.getElementById('magazineAnswerFeedback').style.display = 'none';
@@ -1867,6 +1921,14 @@ function loadMagazineQuestion(questionNumber) {
 
     // 更新進度
     updateMagazineProgress();
+
+    // 手機優化：滾動到頂部
+    if (window.innerWidth <= 768) {
+        const modalContent = document.querySelector('.magazine-practice-content');
+        if (modalContent) {
+            modalContent.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
 }
 
 function submitMagazineAnswer() {
@@ -1875,7 +1937,8 @@ function submitMagazineAnswer() {
     const question = magazineQuestions[currentQuestion - 1];
 
     if (!userAnswer) {
-        alert('請輸入答案！');
+        // 手機友好的提示
+        showMobileToast('請輸入答案！', 'warning');
         return;
     }
 
@@ -1890,10 +1953,12 @@ function submitMagazineAnswer() {
         magazinePracticeConfig.correctAnswers++;
         feedbackElement.className = 'answer-feedback correct';
         feedbackElement.innerHTML = `<i class="fas fa-check-circle"></i> 正確！答案：${question.answer}`;
+        showMobileToast('答對了！', 'success');
     } else {
         magazinePracticeConfig.incorrectAnswers++;
         feedbackElement.className = 'answer-feedback incorrect';
         feedbackElement.innerHTML = `<i class="fas fa-times-circle"></i> 錯誤！正確答案：${question.answer}`;
+        showMobileToast('答錯了，再接再厲！', 'error');
     }
 
     feedbackElement.style.display = 'block';
@@ -1907,6 +1972,41 @@ function submitMagazineAnswer() {
             completeMagazinePractice();
         }, 2000);
     }
+}
+
+// 手機友好的提示功能
+function showMobileToast(message, type = 'info') {
+    // 移除現有的提示
+    const existingToast = document.querySelector('.mobile-toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+
+    // 創建新的提示
+    const toast = document.createElement('div');
+    toast.className = `mobile-toast mobile-toast-${type}`;
+    toast.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'times-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+        <span>${message}</span>
+    `;
+
+    // 添加到頁面
+    document.body.appendChild(toast);
+
+    // 顯示動畫
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+
+    // 自動隱藏
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.remove();
+            }
+        }, 300);
+    }, 3000);
 }
 
 function updateMagazineNavigationButtons(currentQuestion) {
