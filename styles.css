@@ -618,6 +618,11 @@ body {
     transition: var(--transition);
     box-shadow: var(--shadow-light);
     font-weight: 600;
+    height: fit-content;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .date-item:hover {
@@ -629,9 +634,14 @@ body {
     background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
     grid-column: span 2;
     font-size: 1.2rem;
-    padding: 20px 15px;
+    padding: 15px;
     border: 2px solid rgba(255, 255, 255, 0.3);
     position: relative;
+    height: fit-content;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .special-item::before {
@@ -652,8 +662,13 @@ body {
 }
 
 @keyframes shine {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
 }
 
 /* 成績登記介面 */
@@ -4568,6 +4583,13 @@ body {
 
 /* 響應式設計 */
 @media (max-width: 768px) {
+    .special-item {
+        grid-column: span 1;
+        font-size: 1rem;
+        padding: 12px;
+        min-height: 50px;
+    }
+    
     .pdf-container {
         padding: 10px;
         margin: 10px 0;
@@ -4614,6 +4636,12 @@ body {
 }
 
 @media (max-width: 480px) {
+    .special-item {
+        font-size: 0.9rem;
+        padding: 10px;
+        min-height: 45px;
+    }
+    
     .pdf-container {
         padding: 8px;
         border-radius: 10px;
@@ -4641,6 +4669,12 @@ body {
 }
 
 @media (max-width: 320px) {
+    .special-item {
+        font-size: 0.85rem;
+        padding: 8px;
+        min-height: 40px;
+    }
+    
     .pdf-container {
         padding: 5px;
     }
