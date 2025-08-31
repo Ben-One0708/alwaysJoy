@@ -686,9 +686,11 @@ body {
     0% {
         left: -100%;
     }
+
     50% {
         left: 100%;
     }
+
     100% {
         left: 100%;
     }
@@ -4593,20 +4595,20 @@ body {
         margin-top: 20px;
         min-height: 350px;
     }
-    
+
     .game-card {
         padding: 30px 20px;
         margin: 0 15px;
     }
-    
+
     .game-card-header h3 {
         font-size: 1.5rem;
     }
-    
+
     .game-card-header p {
         font-size: 1rem;
     }
-    
+
     .game-open-btn {
         padding: 15px 30px;
         font-size: 1.1rem;
@@ -4617,391 +4619,648 @@ body {
     .game-card {
         padding: 25px 15px;
     }
-    
+
     .game-card-header h3 {
         font-size: 1.3rem;
     }
-    
+
     .game-icon {
         font-size: 3rem;
     }
-    
+
     .game-open-btn {
         padding: 12px 25px;
         font-size: 1rem;
     }
 }
 
-/* PDF 查看器響應式設計 */
-.pdf-container {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 15px;
-    margin: 15px 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.pdf-container:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-}
-
-.pdf-header {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.pdf-header h3 {
-    color: #2c3e50;
-    margin: 0 0 10px 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.pdf-header h3 i {
-    color: #e74c3c;
-    margin-right: 8px;
-}
-
-.pdf-info {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.pdf-info span {
-    background: rgba(52, 152, 219, 0.1);
-    padding: 5px 12px;
-    border-radius: 15px;
-    border: 1px solid rgba(52, 152, 219, 0.2);
-}
-
-.pdf-viewer-container {
-    position: relative;
-    margin: 20px 0;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    background: #fff;
-}
-
-.pdf-loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-}
-
-.pdf-loading i {
-    color: #3498db;
-    font-size: 1.2rem;
-}
-
-.pdf-viewer-container iframe {
-    width: 100%;
-    height: 70vh;
-    min-height: 400px;
-    max-height: 600px;
-    border: none;
-    border-radius: 10px;
-    display: block;
-    transition: all 0.3s ease;
-}
-
-.pdf-actions {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.pdf-btn {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.9rem;
-}
-
-.pdf-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
-}
-
-.pdf-btn.download-btn {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-}
-
-.pdf-btn.open-btn {
-    background: linear-gradient(135deg, #27ae60, #229954);
-    box-shadow: 0 2px 5px rgba(39, 174, 96, 0.3);
-}
-
-.pdf-btn.open-btn:hover {
-    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.4);
-}
-
-/* PDF 響應式設計 */
+/* 雜誌單字練習響應式設計 */
 @media (max-width: 768px) {
-    .pdf-container {
-        padding: 10px;
-        margin: 10px 0;
+    .magazine-selection-content {
+        width: 95%;
+        max-height: 95vh;
+        margin: 10px;
     }
-    
-    .pdf-header h3 {
+
+    .magazine-selection-header {
+        padding: 20px 15px;
+    }
+
+    .logo-main {
+        font-size: 2rem;
+    }
+
+    .selection-title {
+        font-size: 1.5rem;
+    }
+
+    .magazine-options-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 20px 15px;
+        margin: 0 10px 15px 10px;
+    }
+
+    .magazine-option-card {
+        padding: 20px 15px;
+    }
+
+    .option-main-text {
         font-size: 1.3rem;
     }
-    
-    .pdf-info {
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
+
+    .option-sub-text {
+        font-size: 0.9rem;
     }
-    
-    .pdf-info span {
+
+    .button-text {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    /* 練習題頁面響應式 */
+    .magazine-practice-content {
+        width: 95%;
+        max-height: 95vh;
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .practice-header {
+        padding: 15px 0;
+    }
+
+    .practice-title h2 {
+        font-size: 1.3rem;
+    }
+
+    .practice-info {
+        flex-direction: column;
+        gap: 5px;
         font-size: 0.8rem;
-        padding: 4px 10px;
     }
-    
-    .pdf-viewer-container iframe {
-        height: 60vh;
-        min-height: 300px;
-        max-height: 500px;
-    }
-    
-    .pdf-actions {
+
+    .magazine-question-navigation {
         flex-direction: column;
         gap: 10px;
-        align-items: center;
+        padding: 10px 0;
     }
-    
-    .pdf-btn {
+
+    .question-selector {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .question-selector select {
         width: 100%;
-        max-width: 250px;
-        padding: 15px 20px;
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .progress-indicator {
+        width: 100%;
+    }
+
+    .magazine-question-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 0;
+    }
+
+    .question-image-section {
+        width: 100%;
+        max-width: none;
+    }
+
+    .image-container {
+        height: 200px;
+    }
+
+    .question-text-section {
+        width: 100%;
+        padding: 15px 0;
+    }
+
+    .question-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        margin-bottom: 15px;
+    }
+
+    .question-number {
+        font-size: 1.1rem;
+    }
+
+    .question-type {
+        font-size: 0.9rem;
+        padding: 4px 8px;
+    }
+
+    .answer-section {
+        margin: 20px 0;
+    }
+
+    .answer-input-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .answer-input-container input {
+        width: 100%;
+        padding: 12px;
         font-size: 1rem;
     }
-    
-    .pdf-loading {
-        padding: 15px;
+
+    .submit-answer {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .magazine-navigation-buttons {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0;
+    }
+
+    .nav-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .magazine-practice-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 15px 0;
+    }
+
+    .stat-item {
+        padding: 10px;
         font-size: 0.9rem;
+    }
+
+    .complete-practice {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.1rem;
     }
 }
 
 @media (max-width: 480px) {
-    .pdf-container {
-        padding: 8px;
-        border-radius: 10px;
+    .magazine-selection-content {
+        width: 98%;
+        max-height: 98vh;
+        margin: 5px;
     }
-    
-    .pdf-header h3 {
+
+    .magazine-selection-header {
+        padding: 15px 10px;
+    }
+
+    .logo-main {
+        font-size: 1.8rem;
+    }
+
+    .selection-title {
+        font-size: 1.3rem;
+    }
+
+    .magazine-options-grid {
+        padding: 15px 10px;
+        margin: 0 5px 10px 5px;
+        gap: 10px;
+    }
+
+    .magazine-option-card {
+        padding: 15px 10px;
+    }
+
+    .option-main-text {
         font-size: 1.2rem;
     }
-    
-    .pdf-viewer-container iframe {
-        height: 50vh;
-        min-height: 250px;
-        max-height: 400px;
+
+    .option-sub-text {
+        font-size: 0.8rem;
     }
-    
-    .pdf-btn {
-        padding: 12px 16px;
+
+    .button-text {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+
+    /* 練習題頁面響應式 */
+    .magazine-practice-content {
+        width: 98%;
+        max-height: 98vh;
+        margin: 5px;
+        padding: 10px;
+    }
+
+    .practice-header {
+        padding: 10px 0;
+    }
+
+    .practice-title h2 {
+        font-size: 1.2rem;
+    }
+
+    .practice-info {
+        font-size: 0.75rem;
+    }
+
+    .magazine-question-navigation {
+        padding: 8px 0;
+    }
+
+    .question-selector select {
+        padding: 6px;
+        font-size: 0.85rem;
+    }
+
+    .magazine-question-container {
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+    .image-container {
+        height: 150px;
+    }
+
+    .question-text-section {
+        padding: 10px 0;
+    }
+
+    .question-header {
+        margin-bottom: 10px;
+    }
+
+    .question-number {
+        font-size: 1rem;
+    }
+
+    .question-type {
+        font-size: 0.8rem;
+        padding: 3px 6px;
+    }
+
+    .answer-section {
+        margin: 15px 0;
+    }
+
+    .answer-input-container input {
+        padding: 10px;
         font-size: 0.9rem;
     }
-    
-    .pdf-loading {
-        padding: 12px;
+
+    .submit-answer {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .magazine-navigation-buttons {
+        padding: 10px 0;
+    }
+
+    .nav-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .magazine-practice-stats {
+        padding: 10px 0;
+    }
+
+    .stat-item {
+        padding: 8px;
         font-size: 0.8rem;
+    }
+
+    .complete-practice {
+        padding: 12px;
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 320px) {
-    .pdf-container {
-        padding: 5px;
+    .magazine-selection-content {
+        width: 100%;
+        max-height: 100vh;
+        margin: 0;
+        border-radius: 0;
     }
-    
-    .pdf-header h3 {
+
+    .magazine-selection-header {
+        padding: 10px 5px;
+        border-radius: 0;
+    }
+
+    .logo-main {
+        font-size: 1.6rem;
+    }
+
+    .selection-title {
         font-size: 1.1rem;
     }
-    
-    .pdf-viewer-container iframe {
-        height: 45vh;
-        min-height: 200px;
-        max-height: 350px;
+
+    .magazine-options-grid {
+        padding: 10px 5px;
+        margin: 0 5px 5px 5px;
+        gap: 8px;
     }
-    
-    .pdf-btn {
-        padding: 10px 14px;
+
+    .magazine-option-card {
+        padding: 12px 8px;
+    }
+
+    .option-main-text {
+        font-size: 1.1rem;
+    }
+
+    .option-sub-text {
+        font-size: 0.75rem;
+    }
+
+    .button-text {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+
+    /* 練習題頁面響應式 */
+    .magazine-practice-content {
+        width: 100%;
+        max-height: 100vh;
+        margin: 0;
+        padding: 5px;
+        border-radius: 0;
+    }
+
+    .practice-header {
+        padding: 8px 0;
+    }
+
+    .practice-title h2 {
+        font-size: 1.1rem;
+    }
+
+    .practice-info {
+        font-size: 0.7rem;
+    }
+
+    .magazine-question-navigation {
+        padding: 5px 0;
+    }
+
+    .question-selector select {
+        padding: 5px;
+        font-size: 0.8rem;
+    }
+
+    .magazine-question-container {
+        gap: 8px;
+        padding: 8px 0;
+    }
+
+    .image-container {
+        height: 120px;
+    }
+
+    .question-text-section {
+        padding: 8px 0;
+    }
+
+    .question-header {
+        margin-bottom: 8px;
+    }
+
+    .question-number {
+        font-size: 0.9rem;
+    }
+
+    .question-type {
+        font-size: 0.75rem;
+        padding: 2px 5px;
+    }
+
+    .answer-section {
+        margin: 12px 0;
+    }
+
+    .answer-input-container input {
+        padding: 8px;
         font-size: 0.85rem;
+    }
+
+    .submit-answer {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .magazine-navigation-buttons {
+        padding: 8px 0;
+    }
+
+    .nav-btn {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .magazine-practice-stats {
+        padding: 8px 0;
+    }
+
+    .stat-item {
+        padding: 6px;
+        font-size: 0.75rem;
+    }
+
+    .complete-practice {
+        padding: 10px;
+        font-size: 0.9rem;
     }
 }
 
 /* 平板設備優化 */
 @media (min-width: 769px) and (max-width: 1024px) {
-    .pdf-container {
-        padding: 20px;
+    .magazine-selection-content {
+        width: 92%;
+        max-height: 92vh;
     }
-    
-    .pdf-viewer-container iframe {
-        height: 65vh;
-        min-height: 450px;
-        max-height: 550px;
-    }
-    
-    .pdf-actions {
+
+    .magazine-options-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
+        padding: 30px;
     }
-    
-    .pdf-btn {
-        padding: 14px 28px;
-        font-size: 1rem;
+
+    .magazine-option-card {
+        padding: 25px 20px;
+    }
+
+    /* 練習題頁面響應式 */
+    .magazine-practice-content {
+        width: 92%;
+        max-height: 92vh;
+        padding: 25px;
+    }
+
+    .magazine-question-container {
+        gap: 25px;
+    }
+
+    .image-container {
+        height: 300px;
+    }
+
+    .answer-input-container {
+        gap: 15px;
+    }
+
+    .answer-input-container input {
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+
+    .submit-answer {
+        padding: 15px 25px;
+        font-size: 1.1rem;
     }
 }
 
 /* 大螢幕設備優化 */
 @media (min-width: 1025px) {
-    .pdf-container {
-        padding: 25px;
-        max-width: 1000px;
-        margin: 20px auto;
+    .magazine-selection-content {
+        width: 85%;
+        max-height: 85vh;
     }
-    
-    .pdf-viewer-container iframe {
-        height: 75vh;
-        min-height: 500px;
-        max-height: 700px;
+
+    .magazine-options-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        padding: 40px;
     }
-    
-    .pdf-actions {
-        gap: 25px;
+
+    .magazine-option-card {
+        padding: 30px 25px;
     }
-    
-    .pdf-btn {
-        padding: 15px 30px;
-        font-size: 1.1rem;
+
+    /* 練習題頁面響應式 */
+    .magazine-practice-content {
+        width: 85%;
+        max-height: 85vh;
+        padding: 30px;
+    }
+
+    .magazine-question-container {
+        gap: 30px;
+    }
+
+    .image-container {
+        height: 350px;
+    }
+
+    .answer-input-container {
+        gap: 20px;
+    }
+
+    .answer-input-container input {
+        padding: 18px;
+        font-size: 1.2rem;
+    }
+
+    .submit-answer {
+        padding: 18px 30px;
+        font-size: 1.2rem;
     }
 }
 
 /* 橫向模式優化 */
 @media (orientation: landscape) and (max-height: 600px) {
-    .pdf-viewer-container iframe {
-        height: 50vh;
-        min-height: 200px;
-        max-height: 300px;
+    .magazine-selection-content {
+        max-height: 95vh;
     }
-    
-    .pdf-header {
-        margin-bottom: 15px;
+
+    .magazine-selection-header {
+        padding: 15px 30px;
     }
-    
-    .pdf-actions {
-        margin-top: 15px;
+
+    .logo-main {
+        font-size: 2rem;
+    }
+
+    .selection-title {
+        font-size: 1.5rem;
+    }
+
+    .magazine-options-grid {
+        padding: 20px 40px;
+        gap: 15px;
+    }
+
+    .magazine-option-card {
+        padding: 20px 15px;
+    }
+
+    /* 練習題頁面響應式 */
+    .magazine-practice-content {
+        max-height: 95vh;
+        padding: 15px 30px;
+    }
+
+    .practice-header {
+        padding: 10px 0;
+    }
+
+    .magazine-question-container {
+        gap: 20px;
+    }
+
+    .image-container {
+        height: 200px;
+    }
+
+    .magazine-navigation-buttons {
+        padding: 10px 0;
+    }
+
+    .magazine-practice-stats {
+        padding: 10px 0;
     }
 }
 
-/* 高解析度螢幕優化 */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .pdf-container {
-        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+/* 觸控設備優化 */
+@media (hover: none) and (pointer: coarse) {
+    .magazine-option-card:hover {
+        transform: none;
     }
-    
-    .pdf-viewer-container {
-        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    }
-}
 
-/* 深色模式支援 */
-@media (prefers-color-scheme: dark) {
-    .pdf-container {
-        background: #2c3e50;
-        color: #ecf0f1;
+    .magazine-option-card:active {
+        transform: scale(0.98);
     }
-    
-    .pdf-header h3 {
-        color: #ecf0f1;
-    }
-    
-    .pdf-info {
-        color: #bdc3c7;
-    }
-    
-    .pdf-info span {
-        background: rgba(52, 152, 219, 0.2);
-        border-color: rgba(52, 152, 219, 0.3);
-        color: #ecf0f1;
-    }
-    
-    .pdf-viewer-container {
-        background: #34495e;
-    }
-    
-    .pdf-loading {
-        background: rgba(44, 62, 80, 0.95);
-        color: #ecf0f1;
-    }
-}
 
-/* 動畫效果 */
-@keyframes pdfFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+    .nav-btn:hover {
+        transform: none;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    .nav-btn:active {
+        transform: scale(0.95);
     }
-}
 
-.pdf-container {
-    animation: pdfFadeIn 0.5s ease-out;
-}
-
-/* 無障礙設計 */
-.pdf-btn:focus {
-    outline: 2px solid #3498db;
-    outline-offset: 2px;
-}
-
-.pdf-viewer-container:focus-within {
-    outline: 2px solid #3498db;
-    outline-offset: 2px;
-}
-
-/* 列印樣式 */
-@media print {
-    .pdf-container {
-        box-shadow: none;
-        border: 1px solid #ddd;
+    .submit-answer:hover {
+        transform: none;
     }
-    
-    .pdf-actions {
-        display: none;
+
+    .submit-answer:active {
+        transform: scale(0.95);
     }
-    
-    .pdf-viewer-container iframe {
-        height: 100vh;
-        max-height: none;
+
+    .complete-practice:hover {
+        transform: none;
+    }
+
+    .complete-practice:active {
+        transform: scale(0.95);
     }
 }
