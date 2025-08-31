@@ -608,6 +608,70 @@ body {
     margin-top: 20px;
 }
 
+/* 日期網格響應式設計 */
+@media (max-width: 768px) {
+    .date-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+        margin-top: 15px;
+    }
+
+    .date-item {
+        padding: 12px;
+        min-height: 50px;
+        font-size: 0.9rem;
+    }
+
+    .special-item {
+        grid-column: span 2;
+        font-size: 1rem;
+        padding: 12px;
+        min-height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .date-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .date-item {
+        padding: 10px;
+        min-height: 45px;
+        font-size: 0.85rem;
+    }
+
+    .special-item {
+        grid-column: span 2;
+        font-size: 0.9rem;
+        padding: 10px;
+        min-height: 45px;
+    }
+}
+
+@media (max-width: 320px) {
+    .date-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .date-item {
+        padding: 8px;
+        min-height: 40px;
+        font-size: 0.8rem;
+    }
+
+    .special-item {
+        grid-column: span 2;
+        font-size: 0.85rem;
+        padding: 8px;
+        min-height: 40px;
+    }
+}
+
 .date-item {
     background: var(--primary-gradient);
     color: var(--white);
@@ -1720,6 +1784,27 @@ body {
     overflow-y: auto;
     box-shadow: var(--shadow-heavy);
     animation: slideInDown 0.3s ease-out;
+}
+
+/* PDF模態框響應式設計 */
+#pdfModal .modal-content {
+    max-width: 1200px;
+    max-height: 90vh;
+}
+
+#pdfModal .close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 10;
+}
+
+#pdfModal h2 {
+    margin: 0 0 20px 0;
+    color: #2c3e50;
+    font-size: 1.8rem;
+    text-align: center;
+    padding-right: 40px;
 }
 
 .close {
@@ -5506,8 +5591,363 @@ body {
         font-size: 0.85rem;
         max-width: 95%;
     }
-
+    
     .mobile-toast i {
         font-size: 0.9rem;
+    }
+}
+
+/* 課程總覽PDF響應式設計 */
+.responsive-pdf-container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 15px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.pdf-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pdf-title {
+    color: #2c3e50;
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pdf-icon {
+    color: #e74c3c;
+}
+
+.pdf-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.pdf-date,
+.pdf-type,
+.pdf-file {
+    background: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.pdf-viewer-container {
+    position: relative;
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: white;
+}
+
+.pdf-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background: rgba(255,255,255,0.95);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.loading-icon {
+    color: #3498db;
+    font-size: 1.2rem;
+}
+
+.pdf-iframe {
+    width: 100%;
+    height: 70vh;
+    min-height: 400px;
+    max-height: 600px;
+    border: none;
+    border-radius: 10px;
+    display: block;
+}
+
+.pdf-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.pdf-btn {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 5px rgba(52,152,219,0.3);
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+.pdf-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52,152,219,0.4);
+}
+
+.pdf-btn.open-btn {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    box-shadow: 0 2px 5px rgba(39,174,96,0.3);
+}
+
+.pdf-btn.open-btn:hover {
+    box-shadow: 0 4px 12px rgba(39,174,96,0.4);
+}
+
+/* PDF響應式設計 */
+@media (max-width: 768px) {
+    .responsive-pdf-container {
+        padding: 15px;
+        margin: 10px 0;
+    }
+
+    .pdf-header {
+        margin-bottom: 15px;
+    }
+
+    .pdf-title {
+        font-size: 1.3rem;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .pdf-info {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .pdf-date,
+    .pdf-type,
+    .pdf-file {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .pdf-viewer-container {
+        margin: 15px 0;
+    }
+
+    .pdf-iframe {
+        height: 60vh;
+        min-height: 300px;
+        max-height: 500px;
+    }
+
+    .pdf-actions {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .pdf-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .responsive-pdf-container {
+        padding: 10px;
+        margin: 5px 0;
+    }
+
+    .pdf-title {
+        font-size: 1.2rem;
+    }
+
+    .pdf-info {
+        font-size: 0.8rem;
+    }
+
+    .pdf-date,
+    .pdf-type,
+    .pdf-file {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .pdf-iframe {
+        height: 50vh;
+        min-height: 250px;
+        max-height: 400px;
+    }
+
+    .pdf-btn {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+
+    .pdf-loading {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .responsive-pdf-container {
+        padding: 8px;
+        border-radius: 10px;
+    }
+
+    .pdf-title {
+        font-size: 1.1rem;
+    }
+
+    .pdf-iframe {
+        height: 45vh;
+        min-height: 200px;
+        max-height: 350px;
+    }
+
+    .pdf-btn {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+}
+
+/* 橫向手機優化 */
+@media (max-width: 768px) and (orientation: landscape) {
+    .pdf-iframe {
+        height: 70vh;
+        min-height: 200px;
+        max-height: 400px;
+    }
+
+    .pdf-actions {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .pdf-btn {
+        width: auto;
+        flex: 1;
+    }
+}
+
+/* 平板設備優化 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .responsive-pdf-container {
+        padding: 25px;
+    }
+
+    .pdf-title {
+        font-size: 1.4rem;
+    }
+
+    .pdf-iframe {
+        height: 65vh;
+        min-height: 350px;
+        max-height: 550px;
+    }
+
+    .pdf-actions {
+        gap: 20px;
+    }
+
+    .pdf-btn {
+        padding: 14px 28px;
+        font-size: 1.1rem;
+    }
+
+    /* PDF模態框平板優化 */
+    #pdfModal .modal-content {
+        max-width: 95%;
+        padding: 25px;
+    }
+}
+
+/* PDF模態框響應式 */
+@media (max-width: 768px) {
+    #pdfModal .modal-content {
+        margin: 2% auto;
+        padding: 15px;
+        width: 95%;
+        max-height: 96vh;
+    }
+
+    #pdfModal .close {
+        right: 15px;
+        top: 10px;
+        font-size: 24px;
+    }
+
+    #pdfModal h2 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        padding-right: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    #pdfModal .modal-content {
+        margin: 1% auto;
+        padding: 10px;
+        width: 98%;
+        max-height: 98vh;
+        border-radius: 10px;
+    }
+
+    #pdfModal .close {
+        right: 10px;
+        top: 8px;
+        font-size: 20px;
+    }
+
+    #pdfModal h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        padding-right: 25px;
+    }
+}
+
+@media (max-width: 320px) {
+    #pdfModal .modal-content {
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+
+    #pdfModal .close {
+        right: 8px;
+        top: 5px;
+        font-size: 18px;
+    }
+
+    #pdfModal h2 {
+        font-size: 1.1rem;
+        padding-right: 20px;
     }
 }
