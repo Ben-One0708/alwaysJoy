@@ -381,7 +381,7 @@ function openPDFModal(date, type) {
 
     title.textContent = `課程總覽 - ${date}`;
 
-    // 檢查是否為 8/2、8/23 或 9/13 日期
+    // 檢查是否為 8/2、8/23、9/13 或 訂正在電腦 日期
     if (date === '8/2') {
         // 顯示 8/2 的 PDF 文件
         content.innerHTML = `
@@ -499,6 +499,45 @@ function openPDFModal(date, type) {
                 </div>
             </div>
         `;
+    } else if (date === '訂正在電腦') {
+        // 顯示 訂正在電腦 的 PDF 文件
+        content.innerHTML = `
+            <div class="pdf-container" style="background: #f8f9fa; padding: 15px; border-radius: 15px; margin: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div class="pdf-header" style="margin-bottom: 20px; text-align: center;">
+                    <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.5rem;">
+                        <i class="fas fa-laptop" style="color: #e74c3c; margin-right: 8px;"></i>訂正在電腦 PDF
+                    </h3>
+                    <div class="pdf-info" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; color: #666;">
+                        <span><strong>類型：</strong>訂正在電腦</span>
+                        <span><strong>檔案：</strong>佳音拼字比賽-訂正在電腦上-2</span>
+                    </div>
+                </div>
+                
+                <div class="pdf-viewer-container" style="position: relative; margin: 20px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <div class="pdf-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; background: rgba(255,255,255,0.95); padding: 20px; border-radius: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-spinner fa-spin" style="color: #3498db;"></i>
+                        <span>載入中...</span>
+                    </div>
+                    <iframe src="佳音拼字比賽-訂正在電腦上-2.pdf" 
+                            style="width: 100%; height: 70vh; min-height: 400px; max-height: 600px; border: none; border-radius: 10px; display: block;"
+                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                    </iframe>
+                </div>
+                
+                <div class="pdf-actions" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                    <button onclick="downloadPDF('${date}', '${type}')" 
+                            class="pdf-btn download-btn" 
+                            style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(52,152,219,0.3);">
+                        <i class="fas fa-download" style="margin-right: 8px;"></i>下載 PDF
+                    </button>
+                    <a href="佳音拼字比賽-訂正在電腦上-2.pdf" target="_blank" 
+                       class="pdf-btn open-btn" 
+                       style="background: linear-gradient(135deg, #27ae60, #229954); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; text-decoration: none; display: inline-block; box-shadow: 0 2px 5px rgba(39,174,96,0.3);">
+                        <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>在新視窗開啟
+                    </a>
+                </div>
+            </div>
+        `;
     } else {
         // 顯示準備中的訊息
         content.innerHTML = `
@@ -544,6 +583,14 @@ function downloadPDF(date, type) {
         const link = document.createElement('a');
         link.href = '2025拼字練習4.pdf';
         link.download = `9-13_課程總覽.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else if (date === '訂正在電腦') {
+        // 創建下載連結
+        const link = document.createElement('a');
+        link.href = '佳音拼字比賽-訂正在電腦上-2.pdf';
+        link.download = `訂正在電腦_佳音拼字比賽.pdf`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
