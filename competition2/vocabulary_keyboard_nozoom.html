@@ -173,6 +173,16 @@
             transform: scale(1);
         }
 
+        /* 導航按鈕觸碰優化 */
+        .total-nav-btn {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .total-nav-btn:active {
+            transform: scale(0.95);
+        }
+
         /* AB組計分版 */
         .score-board {
             position: absolute;
@@ -907,10 +917,11 @@
 <body>
     <div class="container">
         <!-- 防止縮放說明 -->
-        <div style="background: linear-gradient(145deg, #4CAF50, #45a049); color: white; padding: 15px; border-radius: 15px; margin-bottom: 20px; text-align: center; font-weight: 600; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
+        <div
+            style="background: linear-gradient(145deg, #4CAF50, #45a049); color: white; padding: 15px; border-radius: 15px; margin-bottom: 20px; text-align: center; font-weight: 600; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
             🚫 防止縮放版本 - 此版本已優化防止頁面縮放，適合比賽使用
         </div>
-        
+
         <!-- 題目區域 -->
         <div class="question-section">
             <div class="question-header">
@@ -1467,6 +1478,7 @@
         updateLetterKeys(2);
         addTouchSupport();
         addKeyboardEventListeners();
+        addNavigationTouchSupport();
 
         // 防止頁面縮放 - 強化版本
         document.addEventListener('touchstart', (e) => {
@@ -1483,6 +1495,36 @@
             }
             lastTouchEnd = now;
         }, { passive: false });
+
+        // 為導航按鈕添加特殊的觸碰事件處理
+        function addNavigationTouchSupport() {
+            const prevBtn = document.getElementById('total-prev-btn');
+            const nextBtn = document.getElementById('total-next-btn');
+
+            if (prevBtn) {
+                prevBtn.addEventListener('touchstart', (e) => {
+                    e.stopPropagation();
+                    // 不阻止默認行為，讓按鈕正常工作
+                }, { passive: true });
+
+                prevBtn.addEventListener('touchend', (e) => {
+                    e.stopPropagation();
+                    // 不阻止默認行為，讓按鈕正常工作
+                }, { passive: true });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('touchstart', (e) => {
+                    e.stopPropagation();
+                    // 不阻止默認行為，讓按鈕正常工作
+                }, { passive: true });
+
+                nextBtn.addEventListener('touchend', (e) => {
+                    e.stopPropagation();
+                    // 不阻止默認行為，讓按鈕正常工作
+                }, { passive: true });
+            }
+        }
 
         // 防止手勢縮放
         document.addEventListener('gesturestart', (e) => {
