@@ -124,6 +124,10 @@
             animation-delay: 0.6s;
         }
 
+        .card:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
         /* 比賽模式卡片特殊樣式 */
         .competition-card {
             border: 3px solid #ff6b6b;
@@ -150,6 +154,34 @@
         .competition-card .card-button:hover {
             background: linear-gradient(135deg, #ee5a52, #d32f2f);
             box-shadow: 0 12px 35px rgba(255, 107, 107, 0.5);
+        }
+
+        /* App Test 卡片特殊樣式 */
+        .app-test-card {
+            border: 3px solid #9c27b0;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(156, 39, 176, 0.05));
+        }
+
+        .app-test-card::before {
+            background: linear-gradient(90deg, #9c27b0, #7b1fa2, #6a1b9a);
+        }
+
+        .app-test-card:hover {
+            border-color: #6a1b9a;
+            box-shadow:
+                0 35px 70px rgba(156, 39, 176, 0.25),
+                0 0 0 1px rgba(156, 39, 176, 0.3);
+        }
+
+        .app-test-card .card-button {
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+            color: white;
+            box-shadow: 0 8px 25px rgba(156, 39, 176, 0.4);
+        }
+
+        .app-test-card .card-button:hover {
+            background: linear-gradient(135deg, #7b1fa2, #6a1b9a);
+            box-shadow: 0 12px 35px rgba(156, 39, 176, 0.5);
         }
 
         /* 推薦標籤樣式 */
@@ -552,6 +584,14 @@
                 <p class="card-description">防止縮放版本，適合比賽使用，確保公平性</p>
                 <button class="card-button">Start Competition</button>
             </div>
+
+            <div class="card app-test-card" onclick="openAppTest()">
+                <div class="new-badge">NEW</div>
+                <span class="card-icon">📱</span>
+                <h2 class="card-title">App Test</h2>
+                <p class="card-description">測試 App 版本功能，體驗原生觸碰體驗</p>
+                <button class="card-button">Test App</button>
+            </div>
         </div>
 
 
@@ -591,8 +631,203 @@
                 window.location.href = 'dice.html';
             } else if (e.key === '4') {
                 window.location.href = 'vocabulary_keyboard_nozoom.html';
+            } else if (e.key === '5') {
+                openAppTest();
             }
         });
+
+        // App Test 功能
+        function openAppTest() {
+            // 創建一個模擬 App 測試頁面
+            const appTestHTML = `
+                <!DOCTYPE html>
+                <html lang="zh-TW">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+                    <title>App Test - Spelling Bee</title>
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+                        
+                        body {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            background: linear-gradient(135deg, #9c27b0, #7b1fa2, #6a1b9a);
+                            min-height: 100vh;
+                            padding: 20px;
+                            overflow: hidden;
+                        }
+                        
+                        .app-container {
+                            max-width: 800px;
+                            margin: 0 auto;
+                            background: rgba(255, 255, 255, 0.95);
+                            border-radius: 25px;
+                            padding: 30px;
+                            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+                        }
+                        
+                        .app-header {
+                            text-align: center;
+                            margin-bottom: 30px;
+                        }
+                        
+                        .app-title {
+                            font-size: 2.5rem;
+                            color: #9c27b0;
+                            margin-bottom: 15px;
+                        }
+                        
+                        .app-subtitle {
+                            font-size: 1.2rem;
+                            color: #666;
+                        }
+                        
+                        .test-section {
+                            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+                            border-radius: 20px;
+                            padding: 25px;
+                            margin-bottom: 25px;
+                            border: 2px solid rgba(156, 39, 176, 0.1);
+                        }
+                        
+                        .test-title {
+                            font-size: 1.5rem;
+                            color: #9c27b0;
+                            margin-bottom: 20px;
+                            text-align: center;
+                        }
+                        
+                        .app-features {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                            gap: 20px;
+                            margin-bottom: 25px;
+                        }
+                        
+                        .feature-card {
+                            background: white;
+                            border-radius: 15px;
+                            padding: 20px;
+                            text-align: center;
+                            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+                            border: 1px solid rgba(156, 39, 176, 0.1);
+                        }
+                        
+                        .feature-icon {
+                            font-size: 2.5rem;
+                            margin-bottom: 15px;
+                        }
+                        
+                        .feature-title {
+                            font-size: 1.2rem;
+                            color: #9c27b0;
+                            margin-bottom: 10px;
+                            font-weight: 600;
+                        }
+                        
+                        .feature-desc {
+                            color: #666;
+                            line-height: 1.5;
+                        }
+                        
+                        .back-button {
+                            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+                            color: white;
+                            border: none;
+                            padding: 15px 30px;
+                            border-radius: 15px;
+                            font-size: 1.1rem;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            display: block;
+                            margin: 0 auto;
+                            text-decoration: none;
+                            text-align: center;
+                            width: fit-content;
+                        }
+                        
+                        .back-button:hover {
+                            background: linear-gradient(135deg, #7b1fa2, #6a1b9a);
+                            transform: translateY(-2px);
+                            box-shadow: 0 8px 25px rgba(156, 39, 176, 0.4);
+                        }
+                        
+                        .app-preview {
+                            background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
+                            border-radius: 15px;
+                            padding: 30px;
+                            text-align: center;
+                            margin-bottom: 25px;
+                            border: 2px dashed #9c27b0;
+                        }
+                        
+                        .preview-text {
+                            font-size: 1.3rem;
+                            color: #9c27b0;
+                            font-weight: 600;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="app-container">
+                        <div class="app-header">
+                            <h1 class="app-title">📱 App Test</h1>
+                            <p class="app-subtitle">體驗 Spelling Bee App 版本的功能</p>
+                        </div>
+                        
+                        <div class="test-section">
+                            <h2 class="test-title">App 版本特色</h2>
+                            <div class="app-features">
+                                <div class="feature-card">
+                                    <div class="feature-icon">🎯</div>
+                                    <div class="feature-title">原生觸碰體驗</div>
+                                    <div class="feature-desc">專為觸碰設備優化，無縮放問題</div>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">📱</div>
+                                    <div class="feature-title">跨平台支持</div>
+                                    <div class="feature-desc">iOS 和 Android 雙平台支持</div>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">⚡</div>
+                                    <div class="feature-title">離線功能</div>
+                                    <div class="feature-desc">本地數據存儲，無需網路連接</div>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🎨</div>
+                                    <div class="feature-title">現代化 UI</div>
+                                    <div class="feature-desc">Material Design 風格，流暢動畫</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="test-section">
+                            <h2 class="test-title">開發進度</h2>
+                            <div class="app-preview">
+                                <div class="preview-text">🚧 App 版本正在開發中...</div>
+                                <p style="margin-top: 15px; color: #666;">
+                                    目前已完成基礎架構和核心組件設計<br>
+                                    預計 2-3 個月內完成基礎版本
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <a href="homepage.html" class="back-button">返回主頁</a>
+                    </div>
+                </body>
+                </html>
+            `;
+
+            // 在新視窗中打開 App 測試頁面
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(appTestHTML);
+            newWindow.document.close();
+        }
     </script>
 </body>
 
