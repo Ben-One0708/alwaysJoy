@@ -488,6 +488,32 @@ body::before {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* 觸碰優化樣式 */
+.key:focus {
+    outline: none;
+}
+
+.key:focus-visible {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* 觸碰設備優化 */
+@media (hover: none) and (pointer: coarse) {
+    .key {
+        min-height: 44px; /* 確保觸碰目標足夠大 */
+        touch-action: manipulation; /* 優化觸碰操作 */
+    }
+    
+    .keyboard {
+        gap: 8px; /* 在觸碰設備上減少間距 */
+    }
+    
+    .keyboard-row {
+        gap: 8px;
+    }
+}
+
 .special-key {
     background: linear-gradient(145deg, #ff6b6b, #ee5a52);
     color: white;

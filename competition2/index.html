@@ -152,6 +152,31 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // 觸碰事件優化
+        function addTouchSupport() {
+            const keys = document.querySelectorAll('.key');
+            keys.forEach(key => {
+                // 移除preventDefault，讓觸碰事件正常工作
+                key.addEventListener('touchstart', (e) => {
+                    // 添加觸碰反饋
+                    key.style.transform = 'scale(0.95)';
+                    key.style.opacity = '0.8';
+                }, { passive: true });
+                
+                key.addEventListener('touchend', (e) => {
+                    // 恢復觸碰反饋
+                    key.style.transform = '';
+                    key.style.opacity = '';
+                }, { passive: true });
+                
+                // 防止觸碰時的選中文字
+                key.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                }, { passive: false });
+            });
+        }
+    </script>
 </body>
 
 </html>

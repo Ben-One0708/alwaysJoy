@@ -165,12 +165,6 @@ keyboard1.addEventListener('click', (e) => {
     if (e.target.classList.contains('key')) {
         const key = e.target.getAttribute('data-key');
         handleKeyClick(key, 1);
-
-        // 添加視覺反饋
-        e.target.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            e.target.style.transform = '';
-        }, 100);
     }
 });
 
@@ -179,14 +173,50 @@ keyboard2.addEventListener('click', (e) => {
     if (e.target.classList.contains('key')) {
         const key = e.target.getAttribute('data-key');
         handleKeyClick(key, 2);
-
-        // 添加視覺反饋
-        e.target.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            e.target.style.transform = '';
-        }, 100);
     }
 });
+
+// 添加觸碰事件支持，讓兩個鍵盤可以同時觸碰
+function addTouchEventListeners() {
+    const keys1 = keyboard1.querySelectorAll('.key');
+    const keys2 = keyboard2.querySelectorAll('.key');
+
+    // Team A 觸碰事件
+    keys1.forEach(key => {
+        key.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const keyValue = key.getAttribute('data-key');
+            handleKeyClick(keyValue, 1);
+            
+            // 觸碰反饋
+            key.style.transform = 'scale(0.95)';
+            key.style.opacity = '0.8';
+        }, { passive: false });
+        
+        key.addEventListener('touchend', (e) => {
+            key.style.transform = '';
+            key.style.opacity = '';
+        }, { passive: true });
+    });
+
+    // Team B 觸碰事件
+    keys2.forEach(key => {
+        key.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const keyValue = key.getAttribute('data-key');
+            handleKeyClick(keyValue, 2);
+            
+            // 觸碰反饋
+            key.style.transform = 'scale(0.95)';
+            key.style.opacity = '0.8';
+        }, { passive: false });
+        
+        key.addEventListener('touchend', (e) => {
+            key.style.transform = '';
+            key.style.opacity = '';
+        }, { passive: true });
+    });
+}
 
 
 
@@ -243,13 +273,21 @@ function addTouchSupport() {
     const keys = document.querySelectorAll('.key');
 
     keys.forEach(key => {
-        // 防止觸碰時的選中文字
+        // 移除preventDefault，讓觸碰事件正常工作
         key.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-        }, { passive: false });
-
-        // 防止觸碰時的縮放
+            // 添加觸碰反饋
+            key.style.transform = 'scale(0.95)';
+            key.style.opacity = '0.8';
+        }, { passive: true });
+        
         key.addEventListener('touchend', (e) => {
+            // 恢復觸碰反饋
+            key.style.transform = '';
+            key.style.opacity = '';
+        }, { passive: true });
+        
+        // 防止觸碰時的選中文字
+        key.addEventListener('touchmove', (e) => {
             e.preventDefault();
         }, { passive: false });
     });
@@ -299,6 +337,7 @@ updateScore();
 
 // 添加觸碰支持
 addTouchSupport();
+addTouchEventListeners();
 
 // 防止頁面縮放（在觸碰設備上）
 document.addEventListener('touchstart', (e) => {

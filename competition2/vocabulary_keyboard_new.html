@@ -577,6 +577,35 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
+        /* 觸碰優化樣式 */
+        .key:focus {
+            outline: none;
+        }
+
+        .key:focus-visible {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        /* 觸碰設備優化 */
+        @media (hover: none) and (pointer: coarse) {
+            .key {
+                min-height: 44px;
+                /* 確保觸碰目標足夠大 */
+                touch-action: manipulation;
+                /* 優化觸碰操作 */
+            }
+
+            .keyboard {
+                gap: 8px;
+                /* 在觸碰設備上減少間距 */
+            }
+
+            .keyboard-row {
+                gap: 8px;
+            }
+        }
+
         .special-key {
             background: linear-gradient(145deg, #ff6b6b, #ee5a52);
             color: white;
@@ -1265,30 +1294,64 @@
             updateDisplay(teamNumber);
         }
 
-        // 鍵盤事件監聽
-        keyboard1.addEventListener('click', (e) => {
-            if (e.target.classList.contains('key')) {
-                const key = e.target.getAttribute('data-key');
-                handleKeyClick(key, 1);
+        // 鍵盤事件監聽 - 同時支持點擊和觸碰
+        function addKeyboardEventListeners() {
+            // Team A 鍵盤事件
+            keyboard1.addEventListener('click', (e) => {
+                if (e.target.classList.contains('key')) {
+                    const key = e.target.getAttribute('data-key');
+                    handleKeyClick(key, 1);
+                }
+            });
 
-                e.target.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    e.target.style.transform = '';
-                }, 100);
-            }
-        });
+            // Team B 鍵盤事件
+            keyboard2.addEventListener('click', (e) => {
+                if (e.target.classList.contains('key')) {
+                    const key = e.target.getAttribute('data-key');
+                    handleKeyClick(key, 2);
+                }
+            });
 
-        keyboard2.addEventListener('click', (e) => {
-            if (e.target.classList.contains('key')) {
-                const key = e.target.getAttribute('data-key');
-                handleKeyClick(key, 2);
+            // 觸碰事件支持
+            const keys1 = keyboard1.querySelectorAll('.key');
+            const keys2 = keyboard2.querySelectorAll('.key');
 
-                e.target.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    e.target.style.transform = '';
-                }, 100);
-            }
-        });
+            // Team A 觸碰事件
+            keys1.forEach(key => {
+                key.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    const keyValue = key.getAttribute('data-key');
+                    handleKeyClick(keyValue, 1);
+
+                    // 觸碰反饋
+                    key.style.transform = 'scale(0.95)';
+                    key.style.opacity = '0.8';
+                }, { passive: false });
+
+                key.addEventListener('touchend', (e) => {
+                    key.style.transform = '';
+                    key.style.opacity = '';
+                }, { passive: true });
+            });
+
+            // Team B 觸碰事件
+            keys2.forEach(key => {
+                key.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    const keyValue = key.getAttribute('data-key');
+                    handleKeyClick(keyValue, 2);
+
+                    // 觸碰反饋
+                    key.style.transform = 'scale(0.95)';
+                    key.style.opacity = '0.8';
+                }, { passive: false });
+
+                key.addEventListener('touchend', (e) => {
+                    key.style.transform = '';
+                    key.style.opacity = '';
+                }, { passive: true });
+            });
+        }
 
         // 鍵盤事件支持
         document.addEventListener('keydown', (e) => {
@@ -1335,10 +1398,21 @@
         function addTouchSupport() {
             const keys = document.querySelectorAll('.key');
             keys.forEach(key => {
+                // 移除preventDefault，讓觸碰事件正常工作
                 key.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                }, { passive: false });
+                    // 添加觸碰反饋
+                    key.style.transform = 'scale(0.95)';
+                    key.style.opacity = '0.8';
+                }, { passive: true });
+
                 key.addEventListener('touchend', (e) => {
+                    // 恢復觸碰反饋
+                    key.style.transform = '';
+                    key.style.opacity = '';
+                }, { passive: true });
+
+                // 防止觸碰時的選中文字
+                key.addEventListener('touchmove', (e) => {
                     e.preventDefault();
                 }, { passive: false });
             });
@@ -1365,6 +1439,7 @@
         updateLetterKeys(1);
         updateLetterKeys(2);
         addTouchSupport();
+        addKeyboardEventListeners();
 
         // 防止頁面縮放
         document.addEventListener('touchstart', (e) => {
