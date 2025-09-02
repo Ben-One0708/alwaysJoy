@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-    <title>詞彙測驗 - 雙組虛擬鍵盤</title>
+    <title>詞彙測驗 - 雙組虛擬鍵盤 (防止縮放版本)</title>
     <style>
         * {
             margin: 0;
@@ -607,6 +607,27 @@
             }
         }
 
+        /* 防止縮放 - CSS 層面 */
+        html,
+        body {
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .keyboard,
+        .key {
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
         .special-key {
             background: linear-gradient(145deg, #ff6b6b, #ee5a52);
             color: white;
@@ -885,6 +906,11 @@
 
 <body>
     <div class="container">
+        <!-- 防止縮放說明 -->
+        <div style="background: linear-gradient(145deg, #4CAF50, #45a049); color: white; padding: 15px; border-radius: 15px; margin-bottom: 20px; text-align: center; font-weight: 600; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
+            🚫 防止縮放版本 - 此版本已優化防止頁面縮放，適合比賽使用
+        </div>
+        
         <!-- 題目區域 -->
         <div class="question-section">
             <div class="question-header">
