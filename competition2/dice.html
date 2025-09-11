@@ -52,9 +52,9 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 2000px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 40px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -69,15 +69,15 @@
         }
 
         .main-title {
-            font-size: 4rem;
+            font-size: 5.5rem;
             font-weight: 800;
             color: white;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .subtitle {
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: rgba(255, 255, 255, 0.9);
             font-weight: 300;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -85,15 +85,15 @@
 
         .dice-container {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 40px;
+            border-radius: 40px;
+            padding: 60px;
             text-align: center;
             box-shadow:
-                0 25px 50px rgba(0, 0, 0, 0.15),
+                0 35px 70px rgba(0, 0, 0, 0.15),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             position: relative;
             overflow: hidden;
             animation: fadeInUp 1s ease-out 0.3s both;
@@ -126,13 +126,13 @@
             background: linear-gradient(135deg, #ff6b9d, #c44569);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 1rem;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.4rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.3);
         }
 
         .dice-option:hover {
@@ -151,16 +151,16 @@
             background: linear-gradient(135deg, #ff6b9d, #c44569);
             color: white;
             border: none;
-            padding: 20px 40px;
-            border-radius: 30px;
-            font-size: 1.5rem;
+            padding: 30px 60px;
+            border-radius: 40px;
+            font-size: 2.2rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+            box-shadow: 0 12px 35px rgba(255, 107, 157, 0.3);
             position: relative;
             overflow: hidden;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .roll-button::before {
@@ -198,18 +198,18 @@
         }
 
         .dice {
-            width: 80px;
-            height: 80px;
+            width: 120px;
+            height: 120px;
             background: linear-gradient(145deg, #ffffff, #f0f0f0);
-            border-radius: 15px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 3rem;
             font-weight: bold;
             color: #c44569;
-            box-shadow: 
-                0 8px 16px rgba(0, 0, 0, 0.1),
+            box-shadow:
+                0 12px 24px rgba(0, 0, 0, 0.1),
                 0 0 0 1px rgba(255, 255, 255, 0.8);
             transition: all 0.3s ease;
             position: relative;
@@ -233,63 +233,77 @@
         }
 
         @keyframes roll {
-            0% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(90deg) scale(1.1); }
-            50% { transform: rotate(180deg) scale(0.9); }
-            75% { transform: rotate(270deg) scale(1.1); }
-            100% { transform: rotate(360deg) scale(1); }
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: rotate(90deg) scale(1.1);
+            }
+
+            50% {
+                transform: rotate(180deg) scale(0.9);
+            }
+
+            75% {
+                transform: rotate(270deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
         }
 
         .result-display {
             background: linear-gradient(135deg, #ff6b9d, #c44569);
             color: white;
-            padding: 20px;
-            border-radius: 20px;
-            font-size: 1.5rem;
+            padding: 30px;
+            border-radius: 30px;
+            font-size: 2.2rem;
             font-weight: 700;
-            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
-            margin-bottom: 20px;
-            min-width: 200px;
+            box-shadow: 0 12px 35px rgba(255, 107, 157, 0.3);
+            margin-bottom: 30px;
+            min-width: 300px;
         }
 
         .history-container {
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 20px;
-            max-height: 200px;
+            border-radius: 30px;
+            padding: 30px;
+            max-height: 300px;
             overflow-y: auto;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
         }
 
         .history-title {
-            font-size: 1.2rem;
+            font-size: 1.8rem;
             font-weight: 600;
             color: #c44569;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
         .history-item {
             background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            padding: 10px 15px;
-            border-radius: 10px;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
             color: #666;
-            border-left: 3px solid #ff6b9d;
+            border-left: 4px solid #ff6b9d;
         }
 
         .home-button {
             background: linear-gradient(135deg, #c44569, #ff6b9d);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 1.1rem;
+            padding: 20px 40px;
+            border-radius: 30px;
+            font-size: 1.5rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(196, 69, 105, 0.3);
+            box-shadow: 0 8px 25px rgba(196, 69, 105, 0.3);
             text-decoration: none;
             display: inline-block;
         }
@@ -520,7 +534,7 @@
             </div>
         </div>
 
-        <a href="homepage.html" class="home-button">Back to Home</a>
+        <a href="vocabulary_keyboard_new.html" class="home-button">Back to Vocabulary Quiz</a>
     </div>
 
     <script>

@@ -54,11 +54,11 @@
         }
 
         .container {
-            max-width: 1800px;
+            max-width: 3000px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.92);
             border-radius: 25px;
-            padding: 40px;
+            padding: 70px;
             box-shadow:
                 0 25px 50px rgba(0, 0, 0, 0.15),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -190,8 +190,6 @@
             gap: 20px;
             z-index: 10;
             border: 2px solid rgba(102, 126, 234, 0.1);
-            backdrop-filter: blur(10px);
-            animation: slideInScore 0.6s ease-out;
         }
 
         .score-board::before {
@@ -204,6 +202,7 @@
             background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
             border-radius: 25px 25px 0 0;
         }
+
 
         .score-team {
             display: flex;
@@ -230,25 +229,31 @@
 
         .score-display {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             background: linear-gradient(145deg, #f8f9fa, #ffffff);
-            padding: 8px 12px;
-            border-radius: 15px;
+            padding: 15px;
+            border-radius: 20px;
             box-shadow:
-                0 4px 15px rgba(0, 0, 0, 0.08),
+                0 6px 20px rgba(0, 0, 0, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .score-buttons-row {
+            display: flex;
+            gap: 8px;
         }
 
         .score-btn {
             background: linear-gradient(145deg, #667eea, #5a6fd8);
             color: white;
             border: none;
-            border-radius: 12px;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
+            border-radius: 15px;
+            width: 60px;
+            height: 60px;
+            font-size: 1.4rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -256,10 +261,11 @@
             align-items: center;
             justify-content: center;
             box-shadow:
-                0 4px 15px rgba(102, 126, 234, 0.3),
+                0 6px 20px rgba(102, 126, 234, 0.3),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
+            margin: 5px;
         }
 
         .score-btn::before {
@@ -292,7 +298,7 @@
         .score-btn.minus {
             background: linear-gradient(145deg, #ff6b6b, #ee5a52);
             box-shadow:
-                0 4px 15px rgba(255, 107, 107, 0.3),
+                0 6px 20px rgba(255, 107, 107, 0.3),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
@@ -304,9 +310,9 @@
         }
 
         .score {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            min-width: 40px;
+            min-width: 60px;
             text-align: center;
             color: #2c3e50;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -315,6 +321,10 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-family: 'Arial Black', sans-serif;
+            padding: 10px 20px;
+            background-color: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
         }
 
         @keyframes slideInScore {
@@ -328,6 +338,7 @@
                 transform: translateY(0) scale(1);
             }
         }
+
 
         @keyframes pulse {
 
@@ -410,14 +421,14 @@
         .teams-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 40px;
+            gap: 180px;
+            margin-bottom: 60px;
         }
 
         .team-section {
             background: linear-gradient(145deg, #f8f9fa, #ffffff);
             border-radius: 25px;
-            padding: 35px;
+            padding: 65px;
             border: 2px solid rgba(102, 126, 234, 0.1);
             transition: all 0.3s ease;
             box-shadow:
@@ -499,9 +510,9 @@
         .keyboard {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 20px;
             background: linear-gradient(145deg, #ffffff, #f8f9fa);
-            padding: 30px;
+            padding: 60px;
             border-radius: 25px;
             box-shadow:
                 0 15px 40px rgba(0, 0, 0, 0.1),
@@ -523,18 +534,18 @@
 
         .keyboard-row {
             display: flex;
-            gap: 10px;
+            gap: 18px;
             justify-content: center;
         }
 
         .key {
-            width: 80px;
-            height: 80px;
+            width: 110px;
+            height: 110px;
             border: none;
-            border-radius: 18px;
+            border-radius: 24px;
             background: linear-gradient(145deg, #ffffff, #f8f9fa);
             color: #2c3e50;
-            font-size: 1.6rem;
+            font-size: 2.2rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -625,15 +636,15 @@
         }
 
         .key[data-key="space"] {
-            width: 280px;
+            width: 400px;
         }
 
         .key[data-key="backspace"] {
-            width: 110px;
+            width: 160px;
         }
 
         .key[data-key="shift"] {
-            width: 140px;
+            width: 200px;
         }
 
         /* 動畫效果 */
@@ -672,6 +683,8 @@
         .keyboard {
             animation: fadeIn 1s ease-out 0.5s both;
         }
+
+
 
         /* 答案彈出視窗 */
         .answer-modal {
@@ -767,6 +780,337 @@
             }
         }
 
+
+
+        /* 骰子連結按鈕 */
+        .dice-link-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            font-size: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+            z-index: 100;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .dice-link-button:hover {
+            background: linear-gradient(135deg, #ffb347, #ff8c42);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+
+        .dice-link-button:active {
+            transform: translateY(-1px) scale(1.05);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+            }
+        }
+
+        /* 轉盤連結按鈕 */
+        .spin-link-button {
+            position: fixed;
+            top: 20px;
+            right: 140px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            font-size: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            z-index: 100;
+            animation: pulseSpin 2s ease-in-out infinite;
+        }
+
+        .spin-link-button:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+
+        .spin-link-button:active {
+            transform: translateY(-1px) scale(1.05);
+        }
+
+        @keyframes pulseSpin {
+            0% {
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            }
+        }
+
+        /* 轉盤彈出視窗 */
+        .spinner-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .spinner-modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            animation: slideIn 0.4s ease-out;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .spinner-modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4ecdc4, #45b7d1, #96ceb4);
+            border-radius: 30px 30px 0 0;
+        }
+
+        .spinner-modal-header {
+            margin-bottom: 30px;
+        }
+
+        .spinner-modal-title {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .spinner-container {
+            margin-bottom: 30px;
+        }
+
+        /* 轉盤樣式 */
+        .wheel-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .wheel {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: conic-gradient(#ff6b6b 0deg 30deg,
+                    #4ecdc4 30deg 60deg,
+                    #45b7d1 60deg 90deg,
+                    #96ceb4 90deg 120deg,
+                    #feca57 120deg 150deg,
+                    #ff9ff3 150deg 180deg,
+                    #ff6b6b 180deg 210deg,
+                    #4ecdc4 210deg 240deg,
+                    #45b7d1 240deg 270deg,
+                    #96ceb4 270deg 300deg,
+                    #feca57 300deg 330deg,
+                    #ff9ff3 330deg 360deg);
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid #333;
+            z-index: 10;
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            border: 4px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+
+        .spin-button {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .spin-button:hover {
+            background: linear-gradient(135deg, #45b7d1, #96ceb4);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(78, 205, 196, 0.4);
+        }
+
+        .spin-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .spinner-result {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 25px;
+            border-radius: 25px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
+            text-align: center;
+            animation: resultPop 0.5s ease-out;
+        }
+
+        @keyframes resultPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .team-selection {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+            animation: teamSelectionFadeIn 0.5s ease-out;
+        }
+
+        @keyframes teamSelectionFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .team-select-btn {
+            background: linear-gradient(135deg, #667eea, #5a6fd8);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .team-select-btn:hover {
+            background: linear-gradient(135deg, #5a6fd8, #4a5fc8);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .team-select-btn.team-a {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        }
+
+        .team-select-btn.team-b {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        }
+
+        .spinner-close-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .spinner-close-btn:hover {
+            background: linear-gradient(135deg, #ff5252, #d32f2f);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
         /* 題目內容樣式 */
         .question-content {
             margin: 30px auto;
@@ -801,10 +1145,28 @@
         }
 
         /* 響應式設計 */
+        @media (max-width: 1800px) {
+            .teams-container {
+                gap: 120px;
+            }
+        }
+
+        @media (max-width: 1600px) {
+            .teams-container {
+                gap: 100px;
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .teams-container {
+                gap: 80px;
+            }
+        }
+
         @media (max-width: 1200px) {
             .teams-container {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 70px;
             }
 
             .question-image {
@@ -869,21 +1231,28 @@
             }
 
             .key[data-key="space"] {
-                width: 200px;
+                width: 320px;
             }
 
             .key[data-key="backspace"] {
-                width: 80px;
+                width: 130px;
             }
 
             .key[data-key="shift"] {
-                width: 100px;
+                width: 160px;
             }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- 骰子連結按鈕 -->
+    <a href="dice.html" class="dice-link-button">🎲</a>
+
+    <!-- 轉盤連結按鈕 -->
+    <a href="spin_wheel.html" class="spin-link-button">🎡</a>
+
     <div class="container">
         <!-- 題目區域 -->
         <div class="question-section">
@@ -899,17 +1268,29 @@
                     <div class="score-team">
                         <div class="team-label">Team A</div>
                         <div class="score-display">
-                            <button class="score-btn minus" onclick="updateScore('A', -1)">-1</button>
+                            <div class="score-buttons-row">
+                                <button class="score-btn minus" onclick="updateScore('A', -5)">-5</button>
+                                <button class="score-btn minus" onclick="updateScore('A', -1)">-1</button>
+                            </div>
                             <span class="score" id="score-a">0</span>
-                            <button class="score-btn plus" onclick="updateScore('A', 1)">+1</button>
+                            <div class="score-buttons-row">
+                                <button class="score-btn plus" onclick="updateScore('A', 1)">+1</button>
+                                <button class="score-btn plus" onclick="updateScore('A', 5)">+5</button>
+                            </div>
                         </div>
                     </div>
                     <div class="score-team">
                         <div class="team-label">Team B</div>
                         <div class="score-display">
-                            <button class="score-btn minus" onclick="updateScore('B', -1)">-1</button>
+                            <div class="score-buttons-row">
+                                <button class="score-btn minus" onclick="updateScore('B', -5)">-5</button>
+                                <button class="score-btn minus" onclick="updateScore('B', -1)">-1</button>
+                            </div>
                             <span class="score" id="score-b">0</span>
-                            <button class="score-btn plus" onclick="updateScore('B', 1)">+1</button>
+                            <div class="score-buttons-row">
+                                <button class="score-btn plus" onclick="updateScore('B', 1)">+1</button>
+                                <button class="score-btn plus" onclick="updateScore('B', 5)">+5</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1522,7 +1903,65 @@
                 closeAnswerModal();
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
+
+
+    <!-- 轉盤彈出視窗 -->
+    <div id="spinnerModal" class="spinner-modal">
+        <div class="spinner-modal-content">
+            <div class="spinner-modal-header">
+                <h2 class="spinner-modal-title">🎡 轉盤遊戲</h2>
+            </div>
+
+            <div class="spinner-container">
+                <div class="wheel-container">
+                    <div class="wheel" id="spinnerWheel">
+                        <div class="wheel-pointer"></div>
+                        <div class="wheel-center" id="spinnerResult">?</div>
+                    </div>
+                </div>
+                <button class="spin-button" id="spinButton" onclick="spinWheel()">開始轉動</button>
+                <button class="spin-button" onclick="testSpinner()"
+                    style="background: #ff6b6b; margin-left: 10px;">測試轉盤</button>
+                <div class="spinner-result" id="spinnerResultDisplay">
+                    準備轉動轉盤！
+                </div>
+            </div>
+
+            <div class="team-selection" id="spinnerTeamSelection" style="display: none;">
+                <button class="team-select-btn team-a" onclick="addSpinnerScoreToTeam('A')">Team A +<span
+                        id="spinnerScoreA">0</span></button>
+                <button class="team-select-btn team-b" onclick="addSpinnerScoreToTeam('B')">Team B +<span
+                        id="spinnerScoreB">0</span></button>
+            </div>
+
+            <button class="spinner-close-btn" onclick="closeSpinnerModal()">關閉</button>
+        </div>
+    </div>
+
 
     <!-- 答案彈出視窗 -->
     <div id="answerModal" class="answer-modal">
