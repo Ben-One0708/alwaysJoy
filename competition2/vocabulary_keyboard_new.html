@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=3.0, minimum-scale=0.5">
     <title>詞彙測驗 - 雙組虛擬鍵盤</title>
     <style>
         * {
@@ -17,22 +17,23 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             background-size: 400% 400%;
+            height: auto;
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
             overflow-x: auto;
             /* 允許水平滾動 */
-            overflow-y: auto;
-            /* 允許垂直滾動，顯示滾動條 */
+            overflow-y: scroll;
+            /* 強制顯示垂直滾動條 */
             animation: gradientShift 15s ease infinite;
             position: relative;
-            touch-action: none;
-            /* 禁止所有觸控手勢 */
+            touch-action: pan-y;
+            /* 允許垂直滾動手勢 */
             -webkit-overflow-scrolling: touch;
         }
 
         body::before {
             content: '';
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -64,7 +65,7 @@
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.92);
             border-radius: 25px;
-            padding: 70px;
+            padding: 40px;
             box-shadow:
                 0 25px 50px rgba(0, 0, 0, 0.15),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -88,8 +89,8 @@
         .question-section {
             background: linear-gradient(145deg, #ffffff, #f8f9fa);
             border-radius: 25px;
-            padding: 30px;
-            margin-bottom: 40px;
+            padding: 20px;
+            margin-bottom: 25px;
             box-shadow:
                 0 15px 40px rgba(0, 0, 0, 0.1),
                 0 0 0 1px rgba(255, 255, 255, 0.8);
@@ -110,7 +111,7 @@
 
         .question-header {
             position: relative;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .question-title {
@@ -491,14 +492,14 @@
         .teams-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 180px;
-            margin-bottom: 60px;
+            gap: 120px;
+            margin-bottom: 40px;
         }
 
         .team-section {
             background: linear-gradient(145deg, #f8f9fa, #ffffff);
             border-radius: 25px;
-            padding: 65px;
+            padding: 40px;
             border: 2px solid rgba(102, 126, 234, 0.1);
             transition: all 0.3s ease;
             box-shadow:
@@ -527,14 +528,14 @@
         }
 
         .team-header {
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             text-align: center;
         }
 
         .team-title {
             color: #2c3e50;
             font-size: 2.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: 600;
         }
 
@@ -580,9 +581,9 @@
         .keyboard {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
             background: linear-gradient(145deg, #ffffff, #f8f9fa);
-            padding: 60px;
+            padding: 40px;
             border-radius: 25px;
             box-shadow:
                 0 15px 40px rgba(0, 0, 0, 0.1),
@@ -1183,13 +1184,13 @@
 
         /* 題目內容樣式 */
         .question-content {
-            margin: 30px auto;
+            margin: 20px auto;
             font-size: 3.5rem;
             line-height: 1.4;
             color: #2c3e50;
             font-weight: 700;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 25px 40px;
+            padding: 20px 30px;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
             border-radius: 20px;
             border: 2px solid rgba(255, 255, 255, 0.7);
@@ -1415,10 +1416,22 @@
 
         /* 確保解除固定後可以正常滾動 */
         body:not(.pinned) {
-            overflow: auto !important;
+            overflow-y: scroll !important;
+            overflow-x: auto !important;
             position: relative !important;
             width: auto !important;
             height: auto !important;
+        }
+
+        /* 強制確保滾動功能 */
+        html {
+            overflow-y: scroll;
+            overflow-x: auto;
+        }
+
+        html,
+        body {
+            height: 100%;
         }
 
         .pin-overlay {
@@ -2136,7 +2149,8 @@
 
             // 確保滾動功能完全恢復
             setTimeout(() => {
-                document.body.style.overflow = 'auto';
+                document.body.style.overflowY = 'scroll';
+                document.body.style.overflowX = 'auto';
                 document.body.style.position = 'relative';
             }, 100);
         }
