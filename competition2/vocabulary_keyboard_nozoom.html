@@ -18,10 +18,15 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             background-size: 400% 400%;
             min-height: 100vh;
+            max-height: 100vh;
             padding: 20px;
-            overflow-x: auto;
+            overflow: hidden;
+            /* 完全禁止滾動 */
             animation: gradientShift 15s ease infinite;
             position: relative;
+            touch-action: none;
+            /* 禁止所有觸控手勢 */
+            -webkit-overflow-scrolling: touch;
         }
 
         body::before {
@@ -951,6 +956,25 @@
                     </div>
                 </div>
 
+                <!-- 重置分數按鈕 -->
+                <div style="position: absolute; top: 20px; right: 20px;">
+                    <button onclick="resetScores()" style="
+                        background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 8px 12px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+                        transition: all 0.3s ease;
+                    " onmouseover="this.style.transform='translateY(-2px) scale(1.05)'"
+                        onmouseout="this.style.transform='translateY(0) scale(1)'">
+                        <i class="fas fa-undo"></i> 重置分數
+                    </button>
+                </div>
+
                 <h1 class="question-title">
                 </h1>
             </div>
@@ -1460,17 +1484,53 @@
         let teamAScore = 0;
         let teamBScore = 0;
 
-        function updateScore(team, change) {
-            if (team === 'A') {
-                teamAScore = Math.max(0, teamAScore + change);
+        // 從 localStorage 恢復分數
+        function loadScores() {
+            const savedScores = localStorage.getItem('vocabularyGameScores');
+            if (savedScores) {
+                const scores = JSON.parse(savedScores);
+                teamAScore = scores.teamA || 0;
+                teamBScore = scores.teamB || 0;
                 document.getElementById('score-a').textContent = teamAScore;
-            } else if (team === 'B') {
-                teamBScore = Math.max(0, teamBScore + change);
                 document.getElementById('score-b').textContent = teamBScore;
             }
         }
 
+        // 保存分數到 localStorage
+        function saveScores() {
+            const scores = {
+                teamA: teamAScore,
+                teamB: teamBScore,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('vocabularyGameScores', JSON.stringify(scores));
+        }
+
+        function updateScore(team, change) {
+            if (team === 'A') {
+                teamAScore = teamAScore + change;
+                document.getElementById('score-a').textContent = teamAScore;
+            } else if (team === 'B') {
+                teamBScore = teamBScore + change;
+                document.getElementById('score-b').textContent = teamBScore;
+            }
+            // 每次更新分數後都保存
+            saveScores();
+        }
+
+        // 重置分數功能
+        function resetScores() {
+            if (confirm('確定要重置所有分數嗎？')) {
+                teamAScore = 0;
+                teamBScore = 0;
+                document.getElementById('score-a').textContent = teamAScore;
+                document.getElementById('score-b').textContent = teamBScore;
+                localStorage.removeItem('vocabularyGameScores');
+            }
+        }
+
         // 初始化
+        loadScores(); // 載入保存的分數
         loadQuestion(0);
         updateDisplay(1);
         updateDisplay(2);
@@ -1539,20 +1599,66 @@
             e.preventDefault();
         }, { passive: false });
 
-        // 防止滾動縮放
+        // 防止滾動縮放和滾動
         document.addEventListener('wheel', (e) => {
-            if (e.ctrlKey) {
+            e.preventDefault();
+        }, { passive: false });
+
+        // 防止所有滾動行為
+        document.addEventListener('touchmove', (e) => {
+            // 只允許在特定元素上的滾動（如模態框）
+            const target = e.target;
+            const isModal = target.closest('.modal-content') || target.closest('.spinner-modal-content');
+            if (!isModal) {
                 e.preventDefault();
             }
         }, { passive: false });
 
-        // 強制固定縮放比例
+        // 防止鍵盤滾動
+        document.addEventListener('keydown', (e) => {
+            // 防止方向鍵、Page Up/Down、Home/End 等滾動
+            if ([32, 33, 34, 35, 36, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // 防止拖拽
+        document.addEventListener('dragstart', (e) => {
+            e.preventDefault();
+        });
+
+        // 防止選擇文字
+        document.addEventListener('selectstart', (e) => {
+            e.preventDefault();
+        });
+
+        // 強制固定縮放比例和防止滾動
         function preventZoom() {
             const viewport = document.querySelector('meta[name="viewport"]');
             if (viewport) {
-                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0');
+                viewport.setAttribute('content',
+                    'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover'
+                );
             }
+
+            // 強制設定 body 樣式
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            document.body.style.height = '100%';
+            document.body.style.touchAction = 'none';
         }
+
+        // 頁面載入時執行
+        preventZoom();
+
+        // 監聽視窗大小變化
+        window.addEventListener('resize', preventZoom);
+
+        // 監聽方向變化
+        window.addEventListener('orientationchange', () => {
+            setTimeout(preventZoom, 100);
+        });
 
         // 定期檢查並防止縮放
         setInterval(preventZoom, 1000);

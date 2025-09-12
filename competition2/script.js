@@ -86,9 +86,9 @@ function addScore(teamNumber) {
 
 function minusScore(teamNumber) {
     if (teamNumber === 1) {
-        team1ScoreValue = Math.max(0, team1ScoreValue - 1);
+        team1ScoreValue = team1ScoreValue - 1;
     } else {
-        team2ScoreValue = Math.max(0, team2ScoreValue - 1);
+        team2ScoreValue = team2ScoreValue - 1;
     }
     updateScore();
 }
@@ -187,12 +187,12 @@ function addTouchEventListeners() {
             e.preventDefault();
             const keyValue = key.getAttribute('data-key');
             handleKeyClick(keyValue, 1);
-            
+
             // 觸碰反饋
             key.style.transform = 'scale(0.95)';
             key.style.opacity = '0.8';
         }, { passive: false });
-        
+
         key.addEventListener('touchend', (e) => {
             key.style.transform = '';
             key.style.opacity = '';
@@ -205,12 +205,12 @@ function addTouchEventListeners() {
             e.preventDefault();
             const keyValue = key.getAttribute('data-key');
             handleKeyClick(keyValue, 2);
-            
+
             // 觸碰反饋
             key.style.transform = 'scale(0.95)';
             key.style.opacity = '0.8';
         }, { passive: false });
-        
+
         key.addEventListener('touchend', (e) => {
             key.style.transform = '';
             key.style.opacity = '';
@@ -279,13 +279,13 @@ function addTouchSupport() {
             key.style.transform = 'scale(0.95)';
             key.style.opacity = '0.8';
         }, { passive: true });
-        
+
         key.addEventListener('touchend', (e) => {
             // 恢復觸碰反饋
             key.style.transform = '';
             key.style.opacity = '';
         }, { passive: true });
-        
+
         // 防止觸碰時的選中文字
         key.addEventListener('touchmove', (e) => {
             e.preventDefault();

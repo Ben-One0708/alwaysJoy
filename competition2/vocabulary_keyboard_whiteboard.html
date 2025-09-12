@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+    <title>詞彙練習 - 互動式白板專用版</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: auto;
+            /* 允許水平滾動 */
+            overflow-y: auto;
+            /* 允許垂直滾動，顯示滾動條 */
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+            touch-action: none;
+            /* 禁止所有觸控手勢 */
+            -webkit-overflow-scrolling: touch;
+            user-select: none;
+            /* 禁止選擇文字 */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* 互動式白板專用提示 */
+        .whiteboard-notice {
+            background: linear-gradient(145deg, #FF6B35, #F7931E);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            position: relative;
+            z-index: 100;
+        }
+
+        .whiteboard-notice i {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            max-height: calc(100vh - 40px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* AB組計分版 */
+        .score-board {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 50;
+        }
+
+        .score-team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .team-label {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+        }
+
+        .score-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .score-buttons-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .score-btn {
+            background: linear-gradient(145deg, #667eea, #5a6fd8);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 50px;
+            min-height: 50px;
+            /* 確保觸碰目標足夠大 */
+            touch-action: manipulation;
+        }
+
+        .score-btn.minus {
+            background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .score-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .score-btn:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        .score {
+            font-size: 2.5rem;
+            font-weight: 800;
+            min-width: 60px;
+            text-align: center;
+            color: #333;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 重置分數按鈕 */
+        .reset-score-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+            min-width: 80px;
+            min-height: 40px;
+            touch-action: manipulation;
+        }
+
+        .reset-score-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .reset-score-btn:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        /* 題目區域 */
+        .question-section {
+            margin-top: 120px;
+            /* 為計分板留出空間 */
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(102, 126, 234, 0.08);
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .question-image-wrapper {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .question-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 鍵盤區域 */
+        .keyboard {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(102, 126, 234, 0.08);
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .key {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            min-width: 50px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .key:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .key:active {
+            transform: translateY(0) scale(0.95);
+            background: linear-gradient(145deg, #667eea, #5a6fd8);
+            color: white;
+        }
+
+        /* 導航按鈕 */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(145deg, #667eea, #5a6fd8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            z-index: 10;
+            touch-action: manipulation;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-btn:active {
+            transform: translateY(-50%) scale(0.9);
+        }
+
+        .nav-btn.prev {
+            left: -30px;
+        }
+
+        .nav-btn.next {
+            right: -30px;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .score-board {
+                position: relative;
+                top: 0;
+                left: 0;
+                right: 0;
+                margin-bottom: 20px;
+            }
+
+            .question-section {
+                margin-top: 0;
+            }
+
+            .key {
+                padding: 12px 16px;
+                font-size: 1rem;
+                min-width: 45px;
+                min-height: 45px;
+            }
+        }
+
+        /* 防止文字選擇 */
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* 防止拖拽 */
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            -webkit-user-drag: none;
+        }
+
+        /* 圖釘功能 */
+        .pin-container {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pin-button {
+            background: linear-gradient(145deg, #FF6B35, #F7931E);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            position: relative;
+        }
+
+        .pin-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .pin-button:active {
+            transform: scale(0.95);
+        }
+
+        .pin-button.pinned {
+            background: linear-gradient(145deg, #4CAF50, #45a049);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .pin-button.pinned:hover {
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .pin-indicator {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .pin-button.pinned .pin-indicator {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .pin-status {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            min-width: 80px;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .pin-container:hover .pin-status {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* 圖釘固定時的頁面狀態 - 只固定滾動位置 */
+        body.pinned {
+            overflow: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* 確保解除固定後可以正常滾動 */
+        body:not(.pinned) {
+            overflow: auto !important;
+            position: relative !important;
+            width: auto !important;
+            height: auto !important;
+        }
+
+        .pin-overlay {
+            display: none;
+            /* 隱藏覆蓋層，讓內容可以點擊 */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 互動式白板專用提示 -->
+    <div class="whiteboard-notice">
+        <i class="fas fa-chalkboard-teacher"></i>
+        互動式白板專用版 - 已優化防止滾動和縮放
+    </div>
+
+    <!-- 圖釘功能 -->
+    <div class="pin-container">
+        <button class="pin-button" id="pinButton" onclick="togglePin()">
+            <i class="fas fa-thumbtack"></i>
+            <div class="pin-indicator">📌</div>
+        </button>
+        <div class="pin-status" id="pinStatus">點擊固定位置</div>
+    </div>
+
+    <!-- 圖釘覆蓋層 -->
+    <div class="pin-overlay" id="pinOverlay"></div>
+
+    <div class="container">
+        <!-- AB組計分版 -->
+        <div class="score-board">
+            <div class="score-team">
+                <div class="team-label">Team A</div>
+                <div class="score-display">
+                    <div class="score-buttons-row">
+                        <button class="score-btn minus" onclick="updateScore('A', -5)">-5</button>
+                        <button class="score-btn minus" onclick="updateScore('A', -1)">-1</button>
+                    </div>
+                    <span class="score" id="score-a">0</span>
+                    <div class="score-buttons-row">
+                        <button class="score-btn plus" onclick="updateScore('A', 1)">+1</button>
+                        <button class="score-btn plus" onclick="updateScore('A', 5)">+5</button>
+                    </div>
+                </div>
+            </div>
+            <div class="score-team">
+                <div class="team-label">Team B</div>
+                <div class="score-display">
+                    <div class="score-buttons-row">
+                        <button class="score-btn minus" onclick="updateScore('B', -5)">-5</button>
+                        <button class="score-btn minus" onclick="updateScore('B', -1)">-1</button>
+                    </div>
+                    <span class="score" id="score-b">0</span>
+                    <div class="score-buttons-row">
+                        <button class="score-btn plus" onclick="updateScore('B', 1)">+1</button>
+                        <button class="score-btn plus" onclick="updateScore('B', 5)">+5</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 重置分數按鈕 -->
+        <button class="reset-score-btn" onclick="resetScores()">
+            <i class="fas fa-undo"></i> 重置分數
+        </button>
+
+        <!-- 題目區域 -->
+        <div class="question-section">
+            <div class="question-image-wrapper">
+                <img class="question-image" id="question-image" src="image2/1.png" alt="題目圖片">
+            </div>
+            <h1 class="question-title" id="question-title">題目 1</h1>
+
+            <!-- 導航按鈕 -->
+            <button class="nav-btn prev" onclick="previousQuestion()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn next" onclick="nextQuestion()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- 鍵盤區域 -->
+        <div class="keyboard">
+            <div class="keyboard-row">
+                <div class="key" data-key="Q">Q</div>
+                <div class="key" data-key="W">W</div>
+                <div class="key" data-key="E">E</div>
+                <div class="key" data-key="R">R</div>
+                <div class="key" data-key="T">T</div>
+                <div class="key" data-key="Y">Y</div>
+                <div class="key" data-key="U">U</div>
+                <div class="key" data-key="I">I</div>
+                <div class="key" data-key="O">O</div>
+                <div class="key" data-key="P">P</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="key" data-key="A">A</div>
+                <div class="key" data-key="S">S</div>
+                <div class="key" data-key="D">D</div>
+                <div class="key" data-key="F">F</div>
+                <div class="key" data-key="G">G</div>
+                <div class="key" data-key="H">H</div>
+                <div class="key" data-key="J">J</div>
+                <div class="key" data-key="K">K</div>
+                <div class="key" data-key="L">L</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="key" data-key="Z">Z</div>
+                <div class="key" data-key="X">X</div>
+                <div class="key" data-key="C">C</div>
+                <div class="key" data-key="V">V</div>
+                <div class="key" data-key="B">B</div>
+                <div class="key" data-key="N">N</div>
+                <div class="key" data-key="M">M</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 題目數據
+        const questions = [
+            { number: 1, image: 'image2/1.png', content: 'h____o', answer: 'hello' },
+            { number: 2, image: 'image2/2.png', content: 'w____d', answer: 'world' },
+            { number: 3, image: 'image2/3.png', content: 'c____e', answer: 'close' },
+            { number: 4, image: 'image2/4.png', content: 'o____n', answer: 'often' },
+            { number: 5, image: 'image2/5.png', content: 'n____r', answer: 'never' },
+            { number: 6, image: 'image2/6.png', content: 's____e', answer: 'since' },
+            { number: 7, image: 'image2/7.png', content: 'w____e', answer: 'while' },
+            { number: 8, image: 'image2/8.png', content: 'h____e', answer: 'house' },
+            { number: 9, image: 'image2/9.png', content: 'p____e', answer: 'place' },
+            { number: 10, image: 'image2/10.png', content: 'a____n', answer: 'again' }
+        ];
+
+        let currentQuestionIndex = 0;
+        let teamAScore = 0;
+        let teamBScore = 0;
+        let isPinned = false;
+        let pinnedPosition = { x: 0, y: 0 };
+
+        // 從 localStorage 恢復分數
+        function loadScores() {
+            const savedScores = localStorage.getItem('vocabularyGameScores');
+            if (savedScores) {
+                const scores = JSON.parse(savedScores);
+                teamAScore = scores.teamA || 0;
+                teamBScore = scores.teamB || 0;
+                document.getElementById('score-a').textContent = teamAScore;
+                document.getElementById('score-b').textContent = teamBScore;
+            }
+        }
+
+        // 保存分數到 localStorage
+        function saveScores() {
+            const scores = {
+                teamA: teamAScore,
+                teamB: teamBScore,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('vocabularyGameScores', JSON.stringify(scores));
+        }
+
+        function updateScore(team, change) {
+            if (team === 'A') {
+                teamAScore = teamAScore + change;
+                document.getElementById('score-a').textContent = teamAScore;
+            } else if (team === 'B') {
+                teamBScore = teamBScore + change;
+                document.getElementById('score-b').textContent = teamBScore;
+            }
+            saveScores();
+        }
+
+        // 重置分數功能
+        function resetScores() {
+            if (confirm('確定要重置所有分數嗎？')) {
+                teamAScore = 0;
+                teamBScore = 0;
+                document.getElementById('score-a').textContent = teamAScore;
+                document.getElementById('score-b').textContent = teamBScore;
+                localStorage.removeItem('vocabularyGameScores');
+            }
+        }
+
+        // 圖釘功能 - 只固定滾動位置，保持內容可點擊
+        function togglePin() {
+            const pinButton = document.getElementById('pinButton');
+            const pinStatus = document.getElementById('pinStatus');
+
+            if (!isPinned) {
+                // 固定當前滾動位置
+                pinCurrentPosition();
+                isPinned = true;
+                pinButton.classList.add('pinned');
+                pinStatus.textContent = '已固定位置';
+
+                // 保存固定狀態
+                localStorage.setItem('pinnedPosition', JSON.stringify(pinnedPosition));
+                localStorage.setItem('isPinned', 'true');
+
+                // 顯示成功提示
+                showPinNotification('位置已固定！內容仍可點擊', 'success');
+            } else {
+                // 解除固定
+                unpinPosition();
+                isPinned = false;
+                pinButton.classList.remove('pinned');
+                pinStatus.textContent = '點擊固定位置';
+
+                // 清除保存的狀態
+                localStorage.removeItem('pinnedPosition');
+                localStorage.removeItem('isPinned');
+
+                // 顯示提示
+                showPinNotification('已解除固定，可以正常滾動', 'info');
+            }
+        }
+
+        function pinCurrentPosition() {
+            // 記錄當前滾動位置
+            pinnedPosition = {
+                x: window.scrollX || window.pageXOffset,
+                y: window.scrollY || window.pageYOffset
+            };
+
+            // 固定頁面位置
+            document.body.classList.add('pinned');
+            document.body.style.top = `-${pinnedPosition.y}px`;
+            document.body.style.left = `-${pinnedPosition.x}px`;
+        }
+
+        function unpinPosition() {
+            // 解除固定
+            document.body.classList.remove('pinned');
+            document.body.style.top = '';
+            document.body.style.left = '';
+            document.body.style.width = '';
+            document.body.style.height = '';
+            document.body.style.position = '';
+            document.body.style.overflow = '';
+
+            // 恢復滾動位置
+            window.scrollTo(pinnedPosition.x, pinnedPosition.y);
+
+            // 確保滾動功能完全恢復
+            setTimeout(() => {
+                document.body.style.overflow = 'auto';
+                document.body.style.position = 'relative';
+            }, 100);
+        }
+
+        function loadPinnedState() {
+            const savedPinned = localStorage.getItem('isPinned');
+            const savedPosition = localStorage.getItem('pinnedPosition');
+
+            if (savedPinned === 'true' && savedPosition) {
+                isPinned = true;
+                pinnedPosition = JSON.parse(savedPosition);
+
+                const pinButton = document.getElementById('pinButton');
+                const pinStatus = document.getElementById('pinStatus');
+
+                pinButton.classList.add('pinned');
+                pinStatus.textContent = '已固定位置';
+
+                // 應用固定位置
+                pinCurrentPosition();
+            }
+        }
+
+        function showPinNotification(message, type = 'info') {
+            // 創建通知元素
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+                color: white;
+                padding: 12px 24px;
+                border-radius: 25px;
+                font-weight: 600;
+                font-size: 14px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                z-index: 10000;
+                opacity: 0;
+                transition: all 0.3s ease;
+            `;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            // 顯示動畫
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(-50%) translateY(10px)';
+            }, 100);
+
+            // 自動隱藏
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(-50%) translateY(-10px)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 2000);
+        }
+
+        // 載入題目
+        function loadQuestion(index) {
+            const question = questions[index];
+            document.getElementById('question-image').src = question.image;
+            document.getElementById('question-title').textContent = `題目 ${question.number}`;
+        }
+
+        // 上一題
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion(currentQuestionIndex);
+            }
+        }
+
+        // 下一題
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion(currentQuestionIndex);
+            }
+        }
+
+        // 鍵盤事件處理
+        function handleKeyClick(key) {
+            console.log(`按下了鍵: ${key}`);
+            // 這裡可以添加按鍵處理邏輯
+        }
+
+        // 初始化
+        loadScores();
+        loadPinnedState(); // 載入圖釘狀態
+        loadQuestion(0);
+
+        // 添加鍵盤點擊事件
+        document.querySelectorAll('.key').forEach(key => {
+            key.addEventListener('click', () => {
+                const keyValue = key.getAttribute('data-key');
+                handleKeyClick(keyValue);
+            });
+
+            // 觸控事件
+            key.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                key.style.transform = 'scale(0.95)';
+                key.style.opacity = '0.8';
+            }, { passive: false });
+
+            key.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                key.style.transform = '';
+                key.style.opacity = '';
+                const keyValue = key.getAttribute('data-key');
+                handleKeyClick(keyValue);
+            }, { passive: false });
+        });
+
+        // 為圖釘按鈕添加觸控事件
+        const pinButton = document.getElementById('pinButton');
+        pinButton.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            pinButton.style.transform = 'scale(0.95)';
+        }, { passive: false });
+
+        pinButton.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            pinButton.style.transform = '';
+            togglePin();
+        }, { passive: false });
+
+        // 互動式白板專用 - 強化滾動防止
+        function preventScrollAndZoom() {
+            // 強制設定 viewport
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) {
+                viewport.setAttribute('content',
+                    'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover'
+                );
+            }
+
+            // 強制設定 body 樣式
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            document.body.style.height = '100%';
+            document.body.style.touchAction = 'none';
+            document.body.style.userSelect = 'none';
+        }
+
+        // 防止所有滾動和縮放行為
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchend', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('gesturestart', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('gesturechange', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('gestureend', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('wheel', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('keydown', (e) => {
+            // 防止方向鍵、Page Up/Down、Home/End 等滾動
+            if ([32, 33, 34, 35, 36, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('dragstart', (e) => {
+            e.preventDefault();
+        });
+
+        document.addEventListener('selectstart', (e) => {
+            e.preventDefault();
+        });
+
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+
+        // 頁面載入時執行
+        preventScrollAndZoom();
+
+        // 監聽視窗大小變化
+        window.addEventListener('resize', preventScrollAndZoom);
+
+        // 監聽方向變化
+        window.addEventListener('orientationchange', () => {
+            setTimeout(preventScrollAndZoom, 100);
+        });
+
+        // 定期檢查並防止縮放
+        setInterval(preventScrollAndZoom, 1000);
+    </script>
+</body>
+
+</html>
