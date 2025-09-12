@@ -143,14 +143,16 @@
             left: 0;
             background: linear-gradient(135deg, #ff6b6b, #ee5a52);
             color: white;
-            padding: 12px 20px;
-            border-radius: 18px;
+            padding: 20px 30px;
+            border-radius: 20px;
             font-size: 1.5rem;
             font-weight: 700;
             box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
+            /* 擴展點擊區域 */
+            min-height: 60px;
         }
 
         .total-nav-btn {
@@ -158,14 +160,30 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            font-size: 1.6rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
+            /* 擴展點擊區域 */
+            padding: 8px;
+            margin: -8px;
+            position: relative;
+        }
+
+        /* 為按鈕添加擴展的點擊區域 */
+        .total-nav-btn::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            right: -12px;
+            bottom: -12px;
+            border-radius: 50%;
+            z-index: -1;
         }
 
         .total-nav-btn:hover {
@@ -177,6 +195,52 @@
             opacity: 0.5;
             cursor: not-allowed;
             transform: scale(1);
+        }
+
+        /* 隨機按鈕特殊樣式 */
+        .random-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52) !important;
+            animation: randomPulse 2s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* 擴展點擊區域 */
+            padding: 8px !important;
+            margin: -8px !important;
+        }
+
+        .random-btn:hover {
+            background: linear-gradient(135deg, #ee5a52, #d32f2f) !important;
+            transform: scale(1.15) !important;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+            animation: randomShake 0.5s ease-in-out;
+        }
+
+        @keyframes randomPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+            }
+        }
+
+        @keyframes randomShake {
+
+            0%,
+            100% {
+                transform: scale(1.15) rotate(0deg);
+            }
+
+            25% {
+                transform: scale(1.15) rotate(-5deg);
+            }
+
+            75% {
+                transform: scale(1.15) rotate(5deg);
+            }
         }
 
         /* AB組計分版 */
@@ -1392,6 +1456,8 @@
                     <button class="total-nav-btn" id="total-prev-btn" onclick="previousQuestion()">‹</button>
                     <span id="total-text">1/10</span>
                     <button class="total-nav-btn" id="total-next-btn" onclick="nextQuestion()">›</button>
+                    <button class="total-nav-btn random-btn" id="random-btn" onclick="randomQuestion()"
+                        title="隨機跳題">🎲</button>
                 </div>
 
                 <!-- AB組計分版 -->
@@ -1426,24 +1492,6 @@
                     </div>
                 </div>
 
-                <!-- 重置分數按鈕 -->
-                <div style="position: absolute; top: 20px; right: 20px;">
-                    <button onclick="resetScores()" style="
-                        background: linear-gradient(145deg, #ff6b6b, #ee5a52);
-                        color: white;
-                        border: none;
-                        border-radius: 8px;
-                        padding: 8px 12px;
-                        font-size: 12px;
-                        font-weight: 600;
-                        cursor: pointer;
-                        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-                        transition: all 0.3s ease;
-                    " onmouseover="this.style.transform='translateY(-2px) scale(1.05)'"
-                        onmouseout="this.style.transform='translateY(0) scale(1)'">
-                        <i class="fas fa-undo"></i> 重置分數
-                    </button>
-                </div>
 
                 <h1 class="question-title">
                 </h1>
@@ -1739,6 +1787,25 @@
             }
         }
 
+        // 隨機跳題
+        function randomQuestion() {
+            // 生成隨機題目索引 (0 到 questions.length-1)
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * questions.length);
+            } while (randomIndex === currentQuestionIndex && questions.length > 1); // 避免跳到同一題
+
+            currentQuestionIndex = randomIndex;
+            loadQuestion(currentQuestionIndex);
+
+            // 添加視覺反饋
+            const randomBtn = document.getElementById('random-btn');
+            randomBtn.style.transform = 'scale(1.2) rotate(360deg)';
+            setTimeout(() => {
+                randomBtn.style.transform = '';
+            }, 500);
+        }
+
         // 更新字母鍵顯示
         function updateLetterKeys(teamNumber) {
             const keyboard = teamNumber === 1 ? keyboard1 : keyboard2;
@@ -2006,15 +2073,6 @@
         }
 
         // 重置分數功能
-        function resetScores() {
-            if (confirm('確定要重置所有分數嗎？')) {
-                teamAScore = 0;
-                teamBScore = 0;
-                document.getElementById('score-a').textContent = teamAScore;
-                document.getElementById('score-b').textContent = teamBScore;
-                localStorage.removeItem('vocabularyGameScores');
-            }
-        }
 
         // 圖釘功能 - 只固定滾動位置，保持內容可點擊
         function togglePin() {

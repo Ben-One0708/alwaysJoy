@@ -266,32 +266,6 @@
             min-width: 300px;
         }
 
-        .history-container {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 30px;
-            padding: 30px;
-            max-height: 300px;
-            overflow-y: auto;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
-        }
-
-        .history-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #c44569;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .history-item {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            padding: 15px 20px;
-            border-radius: 15px;
-            margin-bottom: 12px;
-            font-size: 1.3rem;
-            color: #666;
-            border-left: 4px solid #ff6b9d;
-        }
 
         .home-button {
             background: linear-gradient(135deg, #c44569, #ff6b9d);
@@ -528,10 +502,6 @@
                 Total: 1
             </div>
 
-            <div class="history-container">
-                <div class="history-title">Roll History</div>
-                <div id="historyList"></div>
-            </div>
         </div>
 
         <a href="vocabulary_keyboard_new.html" class="home-button">Back to Vocabulary Quiz</a>
@@ -540,7 +510,6 @@
     <script>
         let currentSides = 6;
         let diceCount = 1;
-        let rollHistory = [];
 
         // Dice selector
         document.querySelectorAll('.dice-option').forEach(button => {
@@ -588,17 +557,6 @@
                 });
 
                 document.getElementById('resultDisplay').textContent = `Total: ${total}`;
-
-                // Add to history
-                const historyItem = {
-                    dice: `D${currentSides}`,
-                    results: results,
-                    total: total,
-                    timestamp: new Date().toLocaleTimeString()
-                };
-                rollHistory.unshift(historyItem);
-                if (rollHistory.length > 10) rollHistory.pop();
-                updateHistory();
             }, 600);
         }
 
@@ -614,17 +572,6 @@
             }
         }
 
-        function updateHistory() {
-            const historyList = document.getElementById('historyList');
-            historyList.innerHTML = '';
-
-            rollHistory.forEach(item => {
-                const historyItem = document.createElement('div');
-                historyItem.className = 'history-item';
-                historyItem.textContent = `${item.timestamp} - ${item.dice}: ${item.results.join(', ')} = ${item.total}`;
-                historyList.appendChild(historyItem);
-            });
-        }
 
         // Initialize
         updateDiceDisplay();

@@ -52,9 +52,9 @@
         }
 
         .container {
-            max-width: 2000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 40px;
+            padding: 40px 30px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -64,20 +64,20 @@
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             animation: fadeInDown 1s ease-out;
         }
 
         .main-title {
-            font-size: 5.5rem;
+            font-size: 4rem;
             font-weight: 800;
             color: white;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .subtitle {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: rgba(255, 255, 255, 0.9);
             font-weight: 300;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -86,17 +86,44 @@
         .wheel-container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 40px;
-            padding: 60px;
+            padding: 50px;
             text-align: center;
             box-shadow:
-                0 35px 70px rgba(0, 0, 0, 0.15),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
+                0 30px 60px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 0 0 3px rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            margin-bottom: 30px;
             position: relative;
             overflow: hidden;
             animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* 卡通風格的裝飾邊框 */
+        .wheel-container::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3);
+            border-radius: 55px;
+            z-index: -1;
+            animation: rainbowBorder 3s ease-in-out infinite;
+        }
+
+        @keyframes rainbowBorder {
+
+            0%,
+            100% {
+                background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3);
+            }
+
+            50% {
+                background: linear-gradient(45deg, #ff9ff3, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            }
         }
 
         .wheel-container::before {
@@ -111,14 +138,14 @@
         }
 
         .wheel-controls {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .team-selector {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
         }
 
@@ -126,13 +153,13 @@
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 18px 36px;
-            border-radius: 30px;
-            font-size: 1.6rem;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1.3rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
         .team-option:hover {
@@ -151,16 +178,16 @@
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 30px 60px;
-            border-radius: 40px;
-            font-size: 2.2rem;
+            padding: 20px 40px;
+            border-radius: 30px;
+            font-size: 1.8rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
             position: relative;
             overflow: hidden;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
         }
 
         .spin-button::before {
@@ -176,8 +203,21 @@
 
         .spin-button:hover {
             background: linear-gradient(135deg, #764ba2, #f093fb);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+            animation: buttonBounce 0.6s ease-in-out;
+        }
+
+        @keyframes buttonBounce {
+
+            0%,
+            100% {
+                transform: translateY(-3px) scale(1.05);
+            }
+
+            50% {
+                transform: translateY(-8px) scale(1.1);
+            }
         }
 
         .spin-button:hover::before {
@@ -192,13 +232,13 @@
         .wheel-display {
             display: flex;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .wheel-wrapper {
             position: relative;
-            width: 450px;
-            height: 450px;
+            width: 700px;
+            height: 700px;
         }
 
         .wheel {
@@ -207,10 +247,10 @@
             border-radius: 50%;
             position: relative;
             overflow: hidden;
-            border: 8px solid #fff;
+            border: 12px solid #fff;
             box-shadow:
-                0 0 30px rgba(0, 0, 0, 0.3),
-                0 8px 16px rgba(0, 0, 0, 0.1);
+                0 0 40px rgba(0, 0, 0, 0.3),
+                0 12px 24px rgba(0, 0, 0, 0.1);
             transition: transform 4s cubic-bezier(0.23, 1, 0.32, 1);
             background: conic-gradient(#ff6b6b 0deg 30deg,
                     #ff8c42 30deg 60deg,
@@ -235,9 +275,9 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.6rem;
+            font-size: 2.6rem;
             color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
         }
 
         .wheel-segment:nth-child(1) {
@@ -294,16 +334,16 @@
 
         .pointer {
             position: absolute;
-            top: -10px;
+            top: -20px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 30px solid #fff;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 50px solid #fff;
             z-index: 10;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
         }
 
         .center {
@@ -311,65 +351,39 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
+            width: 100px;
+            height: 100px;
             background: linear-gradient(145deg, #667eea, #764ba2);
             border-radius: 50%;
-            border: 4px solid #fff;
+            border: 8px solid #fff;
             z-index: 5;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .result-display {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 30px;
-            border-radius: 30px;
-            font-size: 2.2rem;
-            font-weight: 700;
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.3);
-            margin-bottom: 30px;
-            min-width: 300px;
-        }
-
-        .history-container {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 30px;
-            padding: 30px;
-            max-height: 300px;
-            overflow-y: auto;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
-        }
-
-        .history-title {
+            padding: 20px 30px;
+            border-radius: 25px;
             font-size: 1.8rem;
-            font-weight: 600;
-            color: #764ba2;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
             margin-bottom: 20px;
-            text-align: center;
+            min-width: 250px;
         }
 
-        .history-item {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            padding: 15px 20px;
-            border-radius: 15px;
-            margin-bottom: 12px;
-            font-size: 1.3rem;
-            color: #666;
-            border-left: 4px solid #667eea;
-        }
 
         .home-button {
             background: linear-gradient(135deg, #764ba2, #667eea);
             color: white;
             border: none;
-            padding: 20px 40px;
-            border-radius: 30px;
-            font-size: 1.5rem;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.3rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
             text-decoration: none;
             display: inline-block;
         }
@@ -392,9 +406,16 @@
 
         .floating-element {
             position: absolute;
-            font-size: 2rem;
-            opacity: 0.1;
+            font-size: 2.5rem;
+            opacity: 0.15;
             animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .floating-element:hover {
+            opacity: 0.3;
+            transform: scale(1.2);
         }
 
         .floating-element:nth-child(1) {
@@ -466,6 +487,48 @@
             animation-delay: 9s;
         }
 
+        .floating-element:nth-child(11) {
+            top: 25%;
+            left: 75%;
+            font-size: 2.1rem;
+            animation-delay: 10s;
+        }
+
+        .floating-element:nth-child(12) {
+            top: 75%;
+            left: 25%;
+            font-size: 1.9rem;
+            animation-delay: 11s;
+        }
+
+        .floating-element:nth-child(13) {
+            top: 45%;
+            left: 85%;
+            font-size: 2.3rem;
+            animation-delay: 12s;
+        }
+
+        .floating-element:nth-child(14) {
+            top: 65%;
+            left: 15%;
+            font-size: 1.8rem;
+            animation-delay: 13s;
+        }
+
+        .floating-element:nth-child(15) {
+            top: 35%;
+            left: 5%;
+            font-size: 2.2rem;
+            animation-delay: 14s;
+        }
+
+        .floating-element:nth-child(16) {
+            top: 55%;
+            left: 95%;
+            font-size: 1.6rem;
+            animation-delay: 15s;
+        }
+
         @keyframes spin {
             from {
                 transform: rotate(0deg);
@@ -477,14 +540,24 @@
         }
 
         @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
 
-            0%,
-            100% {
-                transform: translateY(0px) rotate(0deg);
+            25% {
+                transform: translateY(-15px) rotate(90deg) scale(1.1);
             }
 
             50% {
-                transform: translateY(-20px) rotate(180deg);
+                transform: translateY(-25px) rotate(180deg) scale(1);
+            }
+
+            75% {
+                transform: translateY(-15px) rotate(270deg) scale(1.1);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(360deg) scale(1);
             }
         }
 
@@ -611,21 +684,62 @@
             }
 
             .wheel-container {
-                padding: 30px;
+                padding: 40px;
             }
 
             .wheel-wrapper {
-                width: 250px;
-                height: 250px;
+                width: 400px;
+                height: 400px;
             }
 
-            .wheel-selector {
+            .wheel-segment {
+                font-size: 1.8rem;
+            }
+
+            .center {
+                width: 60px;
+                height: 60px;
+                border: 4px solid #fff;
+            }
+
+            .pointer {
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+                border-top: 30px solid #fff;
+                top: -10px;
+            }
+
+            .team-selector {
                 gap: 10px;
             }
 
-            .wheel-option {
-                padding: 8px 16px;
-                font-size: 0.9rem;
+            .team-option {
+                padding: 12px 24px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wheel-wrapper {
+                width: 320px;
+                height: 320px;
+            }
+
+            .wheel-segment {
+                font-size: 1.4rem;
+            }
+
+            .center {
+                width: 50px;
+                height: 50px;
+                border: 3px solid #fff;
+            }
+
+            .pointer {
+                border-left: 12px solid transparent;
+                border-right: 12px solid transparent;
+                border-top: 24px solid #fff;
+                top: -8px;
             }
         }
     </style>
@@ -636,13 +750,19 @@
         <div class="floating-element">🎡</div>
         <div class="floating-element">🎯</div>
         <div class="floating-element">🎪</div>
-        <div class="floating-element">🎡</div>
-        <div class="floating-element">🎯</div>
+        <div class="floating-element">🎨</div>
+        <div class="floating-element">🎭</div>
         <div class="floating-element">🎪</div>
         <div class="floating-element">🎡</div>
         <div class="floating-element">🎯</div>
+        <div class="floating-element">🎨</div>
+        <div class="floating-element">🎭</div>
         <div class="floating-element">🎪</div>
         <div class="floating-element">🎡</div>
+        <div class="floating-element">🎯</div>
+        <div class="floating-element">🎨</div>
+        <div class="floating-element">🎭</div>
+        <div class="floating-element">🎪</div>
     </div>
 
     <div class="container">
@@ -691,10 +811,6 @@
                 </div>
             </div>
 
-            <div class="history-container">
-                <div class="history-title">Spin History</div>
-                <div id="historyList"></div>
-            </div>
         </div>
 
         <a href="vocabulary_keyboard_new.html" class="home-button">Back to Vocabulary Quiz</a>
@@ -702,7 +818,6 @@
 
     <script>
         let currentTeam = 'A';
-        let spinHistory = [];
         let isSpinning = false;
 
         const wheelScores = [-50, -20, -10, -5, -1, 0, +1, +5, +10, +20, +50, +100];
@@ -763,15 +878,6 @@
                 resultDisplay.textContent = `Team ${currentTeam}: ${sign}${result} points`;
                 resultDisplay.classList.add('updated');
 
-                // Add to history
-                const historyItem = {
-                    team: currentTeam,
-                    score: result,
-                    timestamp: new Date().toLocaleTimeString()
-                };
-                spinHistory.unshift(historyItem);
-                if (spinHistory.length > 10) spinHistory.pop();
-                updateHistory();
 
                 // Reset button
                 spinButton.disabled = false;
@@ -816,26 +922,8 @@
             }, 3000);
         }
 
-        function updateHistory() {
-            const historyList = document.getElementById('historyList');
-            historyList.innerHTML = '';
-
-            if (spinHistory.length === 0) {
-                historyList.innerHTML = '<div class="history-item">Ready to spin!</div>';
-                return;
-            }
-
-            spinHistory.forEach(item => {
-                const historyItem = document.createElement('div');
-                historyItem.className = 'history-item';
-                const sign = item.score >= 0 ? '+' : '';
-                historyItem.textContent = `${item.timestamp} - Team ${item.team}: ${sign}${item.score} points`;
-                historyList.appendChild(historyItem);
-            });
-        }
 
         // Initialize
-        updateHistory();
     </script>
 </body>
 
