@@ -381,8 +381,43 @@ function openPDFModal(date, type) {
 
     title.textContent = `課程總覽 - ${date}`;
 
-    // 檢查是否為 8/2、8/23、9/13 或 訂正在電腦 日期
-    if (date === '8/2') {
+    // 檢查是否為 7/26、8/2、8/23、9/13 或 訂正在電腦 日期
+    if (date === '7/26') {
+        // 顯示 7/26 的 PDF 文件
+        content.innerHTML = `
+            <div class="pdf-container responsive-pdf-container">
+                <div class="pdf-header">
+                    <h3 class="pdf-title">
+                        <i class="fas fa-file-pdf pdf-icon"></i>課程資料 PDF
+                    </h3>
+                    <div class="pdf-info">
+                        <span class="pdf-date"><strong>日期：</strong>${date}</span>
+                        <span class="pdf-type"><strong>類型：</strong>課程總覽</span>
+                    </div>
+                </div>
+                
+                <div class="pdf-viewer-container">
+                    <div class="pdf-loading">
+                        <i class="fas fa-spinner fa-spin loading-icon"></i>
+                        <span>載入中...</span>
+                    </div>
+                    <iframe src="2025拼字練習1.pdf" 
+                            class="pdf-iframe"
+                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                    </iframe>
+                </div>
+                
+                <div class="pdf-actions">
+                    <button onclick="downloadPDF('${date}', '${type}')" class="pdf-btn download-btn">
+                        <i class="fas fa-download"></i>下載 PDF
+                    </button>
+                    <a href="2025拼字練習1.pdf" target="_blank" class="pdf-btn open-btn">
+                        <i class="fas fa-external-link-alt"></i>在新視窗開啟
+                    </a>
+                </div>
+            </div>
+        `;
+    } else if (date === '8/2') {
         // 顯示 8/2 的 PDF 文件
         content.innerHTML = `
             <div class="pdf-container responsive-pdf-container">
@@ -546,7 +581,15 @@ function openPDFModal(date, type) {
 
 // 下載 PDF
 function downloadPDF(date, type) {
-    if (date === '8/2') {
+    if (date === '7/26') {
+        // 創建下載連結
+        const link = document.createElement('a');
+        link.href = '2025拼字練習1.pdf';
+        link.download = `7-26_課程總覽.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else if (date === '8/2') {
         // 創建下載連結
         const link = document.createElement('a');
         link.href = '2025拼字練習2.pdf';
