@@ -379,12 +379,74 @@ function openPDFModal(date, type) {
     const title = document.getElementById('pdfTitle');
     const content = document.getElementById('pdfContent');
 
-    title.textContent = `課程總覽 - ${date}`;
+    // 根據類型設定標題
+    if (type === 'online') {
+        title.textContent = `課程總覽(線上課程) - ${date}`;
+    } else {
+        title.textContent = `課程總覽 - ${date}`;
+    }
 
-    // 檢查是否為 7/26、8/2、8/23、9/13 或 訂正在電腦 日期
-    if (date === '7/26') {
-        // 顯示 7/26 的 PDF 文件
-        content.innerHTML = `
+    // 檢查是否為線上課程類型
+    if (type === 'online') {
+        // 處理 9/18 的線上課程 PDF
+        if (date === '9/18') {
+            content.innerHTML = `
+                <div class="pdf-container responsive-pdf-container">
+                    <div class="pdf-header">
+                        <h3 class="pdf-title">
+                            <i class="fas fa-laptop pdf-icon"></i>線上課程資料 PDF
+                        </h3>
+                        <div class="pdf-info">
+                            <span class="pdf-date"><strong>日期：</strong>${date}</span>
+                            <span class="pdf-type"><strong>類型：</strong>線上課程</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pdf-viewer-container">
+                        <div class="pdf-loading">
+                            <i class="fas fa-spinner fa-spin loading-icon"></i>
+                            <span>載入中...</span>
+                        </div>
+                        <iframe src="2025 online1.pdf" 
+                                class="pdf-iframe"
+                                onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                        </iframe>
+                    </div>
+                    
+                    <div class="pdf-actions">
+                        <button onclick="downloadPDF('${date}', '${type}')" class="pdf-btn download-btn">
+                            <i class="fas fa-download"></i>下載 PDF
+                        </button>
+                        <a href="2025 online1.pdf" target="_blank" class="pdf-btn open-btn">
+                            <i class="fas fa-external-link-alt"></i>在新視窗開啟
+                        </a>
+                    </div>
+                </div>
+            `;
+        } else {
+            // 其他線上課程日期顯示準備中訊息
+            content.innerHTML = `
+                <div style="text-align: center; padding: 60px 20px;">
+                    <div style="font-size: 4rem; color: #e91e63; margin-bottom: 20px;">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.5rem;">線上課程資料準備中</h3>
+                    <p style="color: #7f8c8d; font-size: 1.1rem; margin-bottom: 10px;">日期：${date}</p>
+                    <p style="color: #95a5a6; font-size: 1rem;">請稍後再來查看，線上課程資料正在準備中</p>
+                    <div style="margin-top: 30px;">
+                        <button onclick="closeModal('pdfModal')" style="background: #e91e63; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: all 0.3s ease;">
+                            <i class="fas fa-times"></i> 關閉
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+    } else {
+        // 原有的課程總覽處理邏輯
+        // 檢查是否為 7/26、8/2、8/23、9/13 或 訂正在電腦 日期
+        if (date === '7/26') {
+            // 顯示 7/26 的 PDF 文件
+            content.innerHTML = `
             <div class="pdf-container responsive-pdf-container">
                 <div class="pdf-header">
                     <h3 class="pdf-title">
@@ -417,9 +479,9 @@ function openPDFModal(date, type) {
                 </div>
             </div>
         `;
-    } else if (date === '8/2') {
-        // 顯示 8/2 的 PDF 文件
-        content.innerHTML = `
+        } else if (date === '8/2') {
+            // 顯示 8/2 的 PDF 文件
+            content.innerHTML = `
             <div class="pdf-container responsive-pdf-container">
                 <div class="pdf-header">
                     <h3 class="pdf-title">
@@ -452,9 +514,9 @@ function openPDFModal(date, type) {
                 </div>
             </div>
         `;
-    } else if (date === '8/23') {
-        // 顯示 8/23 的 PDF 文件
-        content.innerHTML = `
+        } else if (date === '8/23') {
+            // 顯示 8/23 的 PDF 文件
+            content.innerHTML = `
             <div class="pdf-container responsive-pdf-container">
                 <div class="pdf-header">
                     <h3 class="pdf-title">
@@ -487,9 +549,9 @@ function openPDFModal(date, type) {
                 </div>
             </div>
         `;
-    } else if (date === '9/13') {
-        // 顯示 9/13 的 PDF 文件
-        content.innerHTML = `
+        } else if (date === '9/13') {
+            // 顯示 9/13 的 PDF 文件
+            content.innerHTML = `
             <div class="pdf-container responsive-pdf-container">
                 <div class="pdf-header">
                     <h3 class="pdf-title">
@@ -522,9 +584,9 @@ function openPDFModal(date, type) {
                 </div>
             </div>
         `;
-    } else if (date === '訂正在電腦') {
-        // 顯示 訂正在電腦 的 PDF 文件
-        content.innerHTML = `
+        } else if (date === '訂正在電腦') {
+            // 顯示 訂正在電腦 的 PDF 文件
+            content.innerHTML = `
             <div class="pdf-container responsive-pdf-container">
                 <div class="pdf-header">
                     <h3 class="pdf-title">
@@ -557,9 +619,9 @@ function openPDFModal(date, type) {
                 </div>
             </div>
         `;
-    } else {
-        // 顯示準備中的訊息
-        content.innerHTML = `
+        } else {
+            // 顯示準備中的訊息
+            content.innerHTML = `
             <div style="text-align: center; padding: 60px 20px;">
                 <div style="font-size: 4rem; color: #ffc107; margin-bottom: 20px;">
                     <i class="fas fa-clock"></i>
@@ -574,6 +636,7 @@ function openPDFModal(date, type) {
                 </div>
             </div>
         `;
+        }
     }
 
     modal.style.display = 'block';
@@ -581,6 +644,23 @@ function openPDFModal(date, type) {
 
 // 下載 PDF
 function downloadPDF(date, type) {
+    // 處理線上課程下載
+    if (type === 'online') {
+        if (date === '9/18') {
+            // 創建下載連結
+            const link = document.createElement('a');
+            link.href = '2025 online1.pdf';
+            link.download = `${date}_線上課程.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
+            alert(`線上課程 ${date} 的資料正在準備中，請稍後再試。`);
+        }
+        return;
+    }
+
+    // 原有的課程總覽下載邏輯
     if (date === '7/26') {
         // 創建下載連結
         const link = document.createElement('a');
@@ -707,6 +787,7 @@ function copyGameLink() {
         }
     }
 }
+
 
 // 預覽 PDF
 function previewPDF(date, type) {
