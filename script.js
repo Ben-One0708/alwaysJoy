@@ -708,6 +708,152 @@ function downloadPDF(date, type) {
     }
 }
 
+// 打開雜誌單字PDF
+function openMagazinePDF(period) {
+    // 檢查是否已登入
+    if (!isLoggedIn()) {
+        // 顯示登入模態框
+        showLoginModalForMagazinePDF(period);
+        return;
+    }
+
+    // 已登入，直接打開PDF
+    openMagazinePDFModal(period);
+}
+
+// 顯示登入模態框（用於雜誌PDF）
+function showLoginModalForMagazinePDF(period) {
+    // 儲存要打開的PDF資訊
+    window.pendingMagazinePDF = { period: period };
+
+    // 清空輸入欄位
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('loginError').style.display = 'none';
+
+    // 顯示登入模態框
+    document.getElementById('loginModal').style.display = 'block';
+}
+
+// 打開雜誌PDF模態框
+function openMagazinePDFModal(period) {
+    const modal = document.getElementById('pdfModal');
+    const title = document.getElementById('pdfTitle');
+    const content = document.getElementById('pdfContent');
+
+    // 設定標題
+    title.textContent = `雜誌單字 ${period}期`;
+
+    // 根據期數顯示對應的PDF
+    if (period === '298-306') {
+        content.innerHTML = `
+            <div class="pdf-container responsive-pdf-container">
+                <div class="pdf-header">
+                    <h3 class="pdf-title">
+                        <i class="fas fa-book-open pdf-icon"></i>雜誌單字練習 PDF
+                    </h3>
+                    <div class="pdf-info">
+                        <span class="pdf-date"><strong>期數：</strong>${period}期</span>
+                        <span class="pdf-type"><strong>類型：</strong>雜誌單字練習</span>
+                    </div>
+                </div>
+                
+                <div class="pdf-viewer-container">
+                    <div class="pdf-loading">
+                        <i class="fas fa-spinner fa-spin loading-icon"></i>
+                        <span>載入中...</span>
+                    </div>
+                    <iframe src="2025 拼字練習雜誌單字298-306期.pdf" 
+                            class="pdf-iframe"
+                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                    </iframe>
+                </div>
+                
+                <div class="pdf-actions">
+                    <button onclick="downloadMagazinePDF('${period}')" class="pdf-btn download-btn">
+                        <i class="fas fa-download"></i>下載 PDF
+                    </button>
+                    <a href="2025 拼字練習雜誌單字298-306期.pdf" target="_blank" class="pdf-btn open-btn">
+                        <i class="fas fa-external-link-alt"></i>在新視窗開啟
+                    </a>
+                </div>
+            </div>
+        `;
+    } else if (period === '307-309') {
+        content.innerHTML = `
+            <div class="pdf-container responsive-pdf-container">
+                <div class="pdf-header">
+                    <h3 class="pdf-title">
+                        <i class="fas fa-book-open pdf-icon"></i>雜誌單字練習 PDF
+                    </h3>
+                    <div class="pdf-info">
+                        <span class="pdf-date"><strong>期數：</strong>${period}期</span>
+                        <span class="pdf-type"><strong>類型：</strong>雜誌單字練習</span>
+                    </div>
+                </div>
+                
+                <div class="pdf-viewer-container">
+                    <div class="pdf-loading">
+                        <i class="fas fa-spinner fa-spin loading-icon"></i>
+                        <span>載入中...</span>
+                    </div>
+                    <iframe src="307-309.pdf" 
+                            class="pdf-iframe"
+                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                    </iframe>
+                </div>
+                
+                <div class="pdf-actions">
+                    <button onclick="downloadMagazinePDF('${period}')" class="pdf-btn download-btn">
+                        <i class="fas fa-download"></i>下載 PDF
+                    </button>
+                    <a href="307-309.pdf" target="_blank" class="pdf-btn open-btn">
+                        <i class="fas fa-external-link-alt"></i>在新視窗開啟
+                    </a>
+                </div>
+            </div>
+        `;
+    } else {
+        // 其他期數顯示準備中訊息
+        content.innerHTML = `
+            <div style="text-align: center; padding: 60px 20px;">
+                <div style="font-size: 4rem; color: #667eea; margin-bottom: 20px;">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.5rem;">雜誌單字練習準備中</h3>
+                <p style="color: #7f8c8d; font-size: 1.1rem; margin-bottom: 10px;">期數：${period}期</p>
+                <p style="color: #95a5a6; font-size: 1rem;">請稍後再來查看，雜誌單字練習正在準備中</p>
+                <div style="margin-top: 30px;">
+                    <button onclick="closeModal('pdfModal')" style="background: #667eea; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: all 0.3s ease;">
+                        <i class="fas fa-times"></i> 關閉
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    modal.style.display = 'block';
+}
+
+// 下載雜誌PDF
+function downloadMagazinePDF(period) {
+    if (period === '298-306') {
+        const link = document.createElement('a');
+        link.href = '2025 拼字練習雜誌單字298-306期.pdf';
+        link.download = '2025 拼字練習雜誌單字298-306期.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else if (period === '307-309') {
+        const link = document.createElement('a');
+        link.href = '307-309.pdf';
+        link.download = '307-309期雜誌單字練習.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
 // 開啟成績登記表
 function openScoreSheet() {
     const scoreSheetUrl = 'https://docs.google.com/spreadsheets/d/1dVtlnLWCdgloPTiD15FkqcF-MjYbZUu1sMOQX15LjbQ/edit?gid=0#gid=0';
@@ -935,14 +1081,14 @@ function showLearningMap() {
         
         <div class="learning-map">
             <div class="map-container">
-                <!-- 雜誌單字學習區 -->
-                <div class="learning-area magazine-area" onclick="openLearningArea('magazine')">
+                <!-- 雜誌單字第298-306期學習區 -->
+                <div class="learning-area magazine-area" onclick="openMagazinePeriod('298-306')">
                     <div class="area-icon">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2702/2702134.png" alt="雜誌單字" class="area-image">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2702/2702134.png" alt="雜誌單字298-306期" class="area-image">
                     </div>
                     <div class="area-content">
-                        <h3>雜誌單字</h3>
-                        <p>從有趣的雜誌文章中學習實用單字</p>
+                        <h3>雜誌單字第298-306期</h3>
+                        <p>從第298期到第306期的雜誌單字練習</p>
                         <div class="area-stats">
                             <span class="stat-item">
                                 <i class="fas fa-star"></i>
@@ -962,14 +1108,14 @@ function showLearningMap() {
                 <!-- 連接線 -->
                 <div class="connection-line"></div>
 
-                <!-- 各級別單字學習區 -->
-                <div class="learning-area level-area" onclick="openLearningArea('level')">
+                <!-- 雜誌單字第307-309期學習區 -->
+                <div class="learning-area magazine-area" onclick="openMagazinePeriod('307-309')">
                     <div class="area-icon">
-                        <img src="https://cdn-icons-png.flaticon.com/512/1995/1995515.png" alt="各級別單字" class="area-image">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2702/2702134.png" alt="雜誌單字307-309期" class="area-image">
                     </div>
                     <div class="area-content">
-                        <h3>各級別單字</h3>
-                        <p>按照不同級別系統性地學習單字</p>
+                        <h3>雜誌單字第307-309期</h3>
+                        <p>從第307期到第309期的雜誌單字練習</p>
                         <div class="area-stats">
                             <span class="stat-item">
                                 <i class="fas fa-star"></i>
@@ -986,87 +1132,8 @@ function showLearningMap() {
                     </div>
                 </div>
 
-                <!-- 連接線 -->
-                <div class="connection-line"></div>
-
-                <!-- 個人練習成績登記區 -->
-                <div class="learning-area score-area" onclick="openLearningArea('score')">
-                    <div class="area-icon">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="成績登記" class="area-image">
-                    </div>
-                    <div class="area-content">
-                        <h3>個人練習成績登記</h3>
-                        <p>記錄您的練習成績和學習進度</p>
-                        <div class="area-stats">
-                            <span class="stat-item">
-                                <i class="fas fa-calendar"></i>
-                                <span>已登記: 0 次</span>
-                            </span>
-                            <span class="stat-item">
-                                <i class="fas fa-chart-line"></i>
-                                <span>平均分: 0 分</span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="area-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </div>
-
-                ${isAdmin ? `
-                <!-- 連接線 -->
-                <div class="connection-line"></div>
-
-                <!-- 成績管理區 (僅管理員可見) -->
-                <div class="learning-area admin-area" onclick="openLearningArea('admin')">
-                    <div class="area-icon">
-                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png" alt="成績管理" class="area-image">
-                    </div>
-                    <div class="area-content">
-                        <h3>成績管理</h3>
-                        <p>查看所有學生的練習成績和學習狀況</p>
-                        <div class="area-stats">
-                            <span class="stat-item">
-                                <i class="fas fa-users"></i>
-                                <span>總學生: 0 人</span>
-                            </span>
-                            <span class="stat-item">
-                                <i class="fas fa-chart-bar"></i>
-                                <span>總記錄: 0 筆</span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="area-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </div>
-                ` : ''}
             </div>
 
-            <!-- 學習進度總覽 -->
-            <div class="progress-overview">
-                <h3><i class="fas fa-chart-line"></i> 學習進度總覽</h3>
-                <div class="progress-stats">
-                    <div class="progress-item">
-                        <div class="progress-circle">
-                            <span class="progress-number">0</span>
-                            <span class="progress-label">總練習次數</span>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-circle">
-                            <span class="progress-number">0</span>
-                            <span class="progress-label">平均分數</span>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-circle">
-                            <span class="progress-number">0</span>
-                            <span class="progress-label">學習天數</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
             <!-- 登出按鈕 -->
             <div style="text-align: center; margin-top: 30px;">
@@ -1076,14 +1143,6 @@ function showLearningMap() {
             </div>
         </div>
     `;
-
-    // 更新成績統計
-    updateLearningMapStats();
-
-    // 如果是管理員，更新管理員區域的統計數據
-    if (isAdmin) {
-        updateAdminAreaStats();
-    }
 }
 
 // 顯示學生登入介面
@@ -1234,6 +1293,76 @@ function openLearningArea(areaType) {
         // 其他練習：直接打開練習
         openPracticeModal(areaType);
     }
+}
+
+// 打開雜誌單字期數練習
+function openMagazinePeriod(period) {
+    // 檢查是否已登入
+    if (!isStudentLoggedIn()) {
+        showStudentLogin();
+        return;
+    }
+
+    if (period === '298-306') {
+        // 第298-306期：打開雜誌單字練習選擇頁面
+        openMagazineSelectionModal();
+    } else if (period === '307-309') {
+        // 第307-309期：直接開啟307-309期練習
+        openMagazine307_309Practice();
+    }
+}
+
+// 從首頁打開雜誌單字練習
+function openMagazinePractice(period) {
+    if (period === '298-306') {
+        // 第298-306期：打開雜誌單字PDF檔案
+        openMagazinePDF('298-306');
+    } else if (period === '307-309') {
+        // 第307-309期：打開雜誌單字PDF檔案
+        openMagazinePDF('307-309');
+    }
+}
+
+// 開啟307-309期雜誌單字練習
+function openMagazine307_309Practice() {
+    // 檢查是否已登入
+    if (!isStudentLoggedIn()) {
+        showStudentLogin();
+        return;
+    }
+
+    // 直接開啟307-309期練習頁面
+    window.location.href = 'vocabulary_quiz_307_309.html';
+}
+
+// 顯示雜誌單字期數通知
+function showMagazinePeriodNotice(period) {
+    const practiceSection = document.getElementById('practice');
+    practiceSection.innerHTML = `
+        <div class="period-notice">
+            <div class="notice-header">
+                <h2><i class="fas fa-clock"></i> 雜誌單字第${period}期</h2>
+                <p>此期數的練習內容即將推出，敬請期待！</p>
+            </div>
+            
+            <div class="notice-content">
+                <div class="notice-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="notice-text">
+                    <h3>功能開發中</h3>
+                    <p>我們正在為您準備第${period}期的雜誌單字練習內容，</p>
+                    <p>預計很快就會上線，請耐心等待！</p>
+                </div>
+            </div>
+            
+            <div class="notice-actions">
+                <button onclick="showLearningMap()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> 返回學習地圖
+                </button>
+            </div>
+        </div>
+    `;
 }
 
 // 打開管理員面板
@@ -1597,6 +1726,18 @@ function login() {
         if (window.pendingArea) {
             openPracticeModal(window.pendingArea);
             window.pendingArea = null;
+        }
+
+        // 打開PDF模態框
+        if (window.pendingPDF) {
+            openPDFModal(window.pendingPDF.date, window.pendingPDF.type);
+            window.pendingPDF = null;
+        }
+
+        // 打開雜誌PDF模態框
+        if (window.pendingMagazinePDF) {
+            openMagazinePDFModal(window.pendingMagazinePDF.period);
+            window.pendingMagazinePDF = null;
         }
 
         showSuccessMessage('登入成功！');

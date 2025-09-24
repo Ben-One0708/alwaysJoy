@@ -625,6 +625,35 @@ body {
         font-size: 0.9rem;
     }
 
+    .magazine-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+    }
+
+    .magazine-item {
+        padding: 20px 15px;
+        min-height: 120px;
+    }
+
+    .magazine-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .magazine-icon-decoration {
+        width: 50px;
+        height: 50px;
+    }
+
+    .magazine-period {
+        font-size: 1.1rem;
+    }
+
+    .magazine-description {
+        font-size: 0.8rem;
+    }
+
     .special-item {
         grid-column: span 2;
         font-size: 1rem;
@@ -644,6 +673,35 @@ body {
         padding: 10px;
         min-height: 45px;
         font-size: 0.85rem;
+    }
+
+    .magazine-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .magazine-item {
+        padding: 18px 15px;
+        min-height: 110px;
+    }
+
+    .magazine-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    .magazine-icon-decoration {
+        width: 45px;
+        height: 45px;
+    }
+
+    .magazine-period {
+        font-size: 1rem;
+    }
+
+    .magazine-description {
+        font-size: 0.75rem;
     }
 
     .special-item {
@@ -767,6 +825,121 @@ body {
 .date-item:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-medium);
+}
+
+/* 雜誌單字網格樣式 */
+.magazine-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.magazine-item {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--white);
+    padding: 25px 20px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.magazine-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.magazine-item:hover::before {
+    left: 100%;
+}
+
+.magazine-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.magazine-298-306 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.magazine-307-309 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.magazine-icon-container {
+    position: relative;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.magazine-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: var(--white);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.magazine-icon-decoration {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    animation: rotate 8s linear infinite;
+}
+
+.magazine-item:hover .magazine-icon {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.magazine-period {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.magazine-description {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* 線上課程區塊樣式 */

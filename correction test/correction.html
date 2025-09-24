@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>單字訂正練習</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .word-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 3px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .word-section.active {
+            border-color: #28a745;
+            background: #d4edda;
+            transform: scale(1.02);
+        }
+
+        .word-section.completed {
+            border-color: #17a2b8;
+            background: #d1ecf1;
+            opacity: 0.7;
+        }
+
+        .word-info {
+            margin-bottom: 20px;
+        }
+
+        .chinese-meaning {
+            font-size: 1.5em;
+            color: #495057;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .correct-word {
+            font-size: 2em;
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-decoration: line-through;
+        }
+
+        .attempts-left {
+            color: #6c757d;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            padding: 15px 20px;
+            border: 3px solid #dee2e6;
+            border-radius: 10px;
+            font-size: 1.2em;
+            width: 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #1e7e34;
+            transform: translateY(-2px);
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .completion-message {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 3px solid #bee5eb;
+        }
+
+        .completion-message h2 {
+            color: #0c5460;
+            margin-bottom: 15px;
+        }
+
+        .restart-btn {
+            background: #6f42c1;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            background: #5a32a3;
+            transform: translateY(-2px);
+        }
+
+        .hint-section {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .hint-button {
+            background: #ffc107;
+            color: #212529;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .hint-button:hover {
+            background: #e0a800;
+            transform: translateY(-1px);
+        }
+
+        .hint-answer {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #856404;
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px dashed #ffc107;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .hint-answer.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hint-warning {
+            font-size: 0.9em;
+            color: #856404;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            input[type="text"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🍎 單字訂正練習 🍊</h1>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">進度: 0/15 次訂正</div>
+
+        <div id="wordContainer">
+            <!-- 單字練習區域將由JavaScript動態生成 -->
+        </div>
+
+        <div id="completionMessage" class="completion-message" style="display: none;">
+            <h2>🎉 恭喜你完成了所有訂正練習！</h2>
+            <p>你已經成功訂正了所有三個單字，每個單字都練習了5次！</p>
+            <button class="restart-btn" onclick="restartPractice()">重新開始練習</button>
+        </div>
+    </div>
+
+    <script>
+        // 單字資料
+        const words = [
+            { chinese: '蘋果', correct: 'apple', wrong: 'appple' },
+            { chinese: '橘子', correct: 'orange', wrong: 'oorange' },
+            { chinese: '香蕉', correct: 'banana', wrong: 'baanana' }
+        ];
+
+        let currentWordIndex = 0;
+        let currentAttempt = 0;
+        let totalAttempts = 0;
+        const maxAttempts = 15; // 3個單字 × 5次 = 15次
+        let completedWords = 0;
+
+        // 初始化練習
+        function initPractice() {
+            currentWordIndex = 0;
+            currentAttempt = 0;
+            totalAttempts = 0;
+            completedWords = 0;
+            document.getElementById('completionMessage').style.display = 'none';
+            renderCurrentWord();
+            updateProgress();
+        }
+
+        // 渲染當前單字
+        function renderCurrentWord() {
+            const container = document.getElementById('wordContainer');
+            const word = words[currentWordIndex];
+
+            container.innerHTML = `
+                <div class="word-section ${currentAttempt >= 5 ? 'completed' : 'active'}" id="wordSection">
+                    <div class="word-info">
+                        <div class="chinese-meaning">中文意思: ${word.chinese}</div>
+                        <div class="correct-word">錯誤拼寫: ${word.wrong}</div>
+                        <div class="attempts-left">剩餘訂正次數: ${5 - currentAttempt}</div>
+                    </div>
+                    <div class="hint-section">
+                        <button class="hint-button" onclick="toggleHint()">
+                            💡 需要提示嗎？點我看看正確答案
+                        </button>
+                        <div class="hint-answer" id="hintAnswer">
+                            正確答案: <strong>${word.correct}</strong>
+                        </div>
+                        <div class="hint-warning">
+                            記住：先自己思考，真的想不出來再看提示哦！
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="correctionInput" placeholder="請輸入正確拼寫" autocomplete="off">
+                        <button class="btn btn-primary" onclick="checkCorrection()">檢查</button>
+                    </div>
+                    <div id="feedback"></div>
+                </div>
+            `;
+
+            // 讓輸入框獲得焦點
+            document.getElementById('correctionInput').focus();
+
+            // 添加Enter鍵事件
+            document.getElementById('correctionInput').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    checkCorrection();
+                }
+            });
+        }
+
+        // 檢查訂正
+        function checkCorrection() {
+            const input = document.getElementById('correctionInput');
+            const feedback = document.getElementById('feedback');
+            const userInput = input.value.toLowerCase().trim();
+            const correctWord = words[currentWordIndex].correct.toLowerCase();
+
+            if (userInput === correctWord) {
+                // 訂正正確
+                feedback.innerHTML = `
+                    <div class="feedback correct">
+                        ✅ 太棒了！訂正正確！<br>
+                        正確拼寫: <strong>${words[currentWordIndex].correct}</strong>
+                    </div>
+                `;
+                currentAttempt++;
+                totalAttempts++;
+
+                if (currentAttempt >= 5) {
+                    // 當前單字完成
+                    completedWords++;
+                    setTimeout(() => {
+                        if (currentWordIndex < words.length - 1) {
+                            // 移到下一個單字
+                            currentWordIndex++;
+                            currentAttempt = 0;
+                            renderCurrentWord();
+                        } else {
+                            // 所有單字完成
+                            showCompletionMessage();
+                        }
+                    }, 2000);
+                } else {
+                    // 繼續當前單字
+                    setTimeout(() => {
+                        input.value = '';
+                        input.focus();
+                        renderCurrentWord();
+                    }, 1500);
+                }
+            } else {
+                // 訂正錯誤
+                feedback.innerHTML = `
+                    <div class="feedback incorrect">
+                        ❌ 訂正錯誤，請再試一次！<br>
+                        提示: 正確拼寫是 <strong>${words[currentWordIndex].correct}</strong>
+                    </div>
+                `;
+                input.value = '';
+                input.focus();
+            }
+
+            updateProgress();
+        }
+
+        // 更新進度
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const progress = (totalAttempts / maxAttempts) * 100;
+
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `進度: ${totalAttempts}/${maxAttempts} 次訂正`;
+        }
+
+        // 顯示完成訊息
+        function showCompletionMessage() {
+            document.getElementById('wordContainer').style.display = 'none';
+            document.getElementById('completionMessage').style.display = 'block';
+
+            // 更新進度到100%
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('progressText').textContent = `進度: ${maxAttempts}/${maxAttempts} 次訂正`;
+        }
+
+        // 重新開始練習
+        function restartPractice() {
+            document.getElementById('wordContainer').style.display = 'block';
+            initPractice();
+        }
+
+        // 切換提示顯示
+        function toggleHint() {
+            const hintAnswer = document.getElementById('hintAnswer');
+            const hintButton = document.querySelector('.hint-button');
+
+            if (hintAnswer.classList.contains('show')) {
+                hintAnswer.classList.remove('show');
+                hintButton.textContent = '💡 需要提示嗎？點我看看正確答案';
+            } else {
+                hintAnswer.classList.add('show');
+                hintButton.textContent = '🙈 點我隱藏答案';
+            }
+        }
+
+        // 頁面載入時初始化
+        window.onload = function () {
+            initPractice();
+        };
+    </script>
+</body>
+
+</html>

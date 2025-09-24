@@ -127,6 +127,34 @@
                         </div>
                     </div>
 
+                    <h2 class="magazine-title">
+                        <i class="fas fa-newspaper"></i> 雜誌單字
+                        <span class="required-badge">必讀</span>
+                    </h2>
+                    <p>選擇雜誌單字閱讀：</p>
+                    <div class="date-grid magazine-grid">
+                        <div class="date-item magazine-item magazine-298-306" onclick="openMagazinePractice('298-306')">
+                            <div class="magazine-icon-container">
+                                <div class="magazine-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <div class="magazine-icon-decoration"></div>
+                            </div>
+                            <div class="magazine-period">298-306期</div>
+                            <div class="magazine-description">雜誌單字練習</div>
+                        </div>
+                        <div class="date-item magazine-item magazine-307-309" onclick="openMagazinePractice('307-309')">
+                            <div class="magazine-icon-container">
+                                <div class="magazine-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <div class="magazine-icon-decoration"></div>
+                            </div>
+                            <div class="magazine-period">307-309期</div>
+                            <div class="magazine-description">雜誌單字練習</div>
+                        </div>
+                    </div>
+
                     <h2><i class="fas fa-book"></i> 課程總覽</h2>
                     <p>選擇日期查看課程資料：</p>
                     <div class="date-grid">
@@ -149,9 +177,11 @@
                         <p>選擇日期查看線上課程資料：</p>
                         <div class="date-grid online-date-grid">
                             <div class="date-item online-date-item" onclick="openPDF('9/18', 'online')">9/18</div>
-                            <div class="date-item online-date-item" onclick="openPDF('10/18', 'online')">10/18</div>
-                            <div class="date-item online-date-item" onclick="openPDF('11/1', 'online')">11/1</div>
-                            <div class="date-item online-date-item" onclick="openPDF('11/22', 'online')">11/22</div>
+                            <div class="date-item online-date-item" onclick="openPDF('10/18', 'online')">10/18（尚未補課）
+                            </div>
+                            <div class="date-item online-date-item" onclick="openPDF('11/1', 'online')">11/1（尚未補課）</div>
+                            <div class="date-item online-date-item" onclick="openPDF('11/22', 'online')">11/22（尚未補課）
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -618,39 +648,6 @@
 
             <!-- 練習選項網格 -->
             <div class="magazine-options-grid">
-                <!-- 1~36題選項 -->
-                <div class="magazine-option-card" onclick="openVocabularyQuiz('part1')">
-                    <div class="option-content">
-                        <div class="option-main-text">1~36題</div>
-                        <div class="option-sub-text">基礎練習</div>
-                    </div>
-                    <div class="option-button">
-                        <span class="button-text">開始練習</span>
-                    </div>
-                </div>
-
-                <!-- 37~72題選項 -->
-                <div class="magazine-option-card" onclick="openVocabularyQuiz('part2')">
-                    <div class="option-content">
-                        <div class="option-main-text">37~72題</div>
-                        <div class="option-sub-text">進階練習</div>
-                    </div>
-                    <div class="option-button">
-                        <span class="button-text">開始練習</span>
-                    </div>
-                </div>
-
-                <!-- 73~108題選項 -->
-                <div class="magazine-option-card" onclick="openVocabularyQuiz('part3')">
-                    <div class="option-content">
-                        <div class="option-main-text">73~108題</div>
-                        <div class="option-sub-text">高級練習</div>
-                    </div>
-                    <div class="option-button">
-                        <span class="button-text">開始練習</span>
-                    </div>
-                </div>
-
                 <!-- 1~108題完整選項 -->
                 <div class="magazine-option-card" onclick="openVocabularyQuiz('full')">
                     <div class="option-content">

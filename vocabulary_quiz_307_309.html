@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>雜誌單字練習 - 307-309期</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-color: #27ae60;
+            --error-color: #e74c3c;
+            --warning-color: #f39c12;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --white: #ffffff;
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.3);
+            --border-radius: 15px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft JhengHei', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--secondary-gradient);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 200, 255, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .quiz-box {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 0;
+            border-radius: 25px;
+            box-shadow: var(--shadow-heavy);
+            width: 100%;
+            max-width: 900px;
+            min-height: 700px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+            animation: slideInUp 0.8s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quiz-box.results-mode {
+            max-width: 1200px;
+            min-height: 90vh;
+        }
+
+        .quiz-header {
+            background: var(--secondary-gradient);
+            padding: 25px 30px;
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .quiz-title {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .quiz-stats {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .quiz-content {
+            flex: 1;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .progress-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 6px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        @keyframes progressShine {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .question-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin: 30px auto;
+            display: block;
+            box-shadow: var(--shadow-medium);
+            border: 4px solid var(--white);
+            transition: var(--transition);
+        }
+
+        .question-image:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .question-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 30px 0;
+            text-align: center;
+            line-height: 1.4;
+            background: linear-gradient(135deg, var(--text-dark) 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .definition {
+            font-size: 20px;
+            color: var(--text-light);
+            margin: 20px 0;
+            font-style: italic;
+            text-align: center;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .answer-section {
+            margin: 40px 0;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 20px 25px;
+            font-size: 24px;
+            border: 3px solid #e0e6ed;
+            border-radius: 15px;
+            text-align: center;
+            background: var(--white);
+            transition: var(--transition);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .answer-input::placeholder {
+            color: #bdc3c7;
+            font-weight: 400;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .btn {
+            background: var(--secondary-gradient);
+            color: var(--white);
+            border: none;
+            padding: 18px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color) 0%, #2ecc71 100%);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning-color) 0%, #e67e22 100%);
+        }
+
+        .btn-hint {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            font-size: 16px;
+            padding: 12px 25px;
+            margin-top: 15px;
+        }
+
+        .hint-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .hint-content {
+            margin-top: 15px;
+            padding: 20px;
+            background: rgba(243, 156, 18, 0.1);
+            border-radius: 15px;
+            border-left: 4px solid #f39c12;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .hint-text {
+            color: var(--text-dark);
+            font-size: 16px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .results-container {
+            text-align: left;
+            max-height: 600px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: var(--shadow-light);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .result-item {
+            margin: 15px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            border-left: 5px solid #f093fb;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .result-item.correct {
+            border-left-color: var(--success-color);
+            background: rgba(39, 174, 96, 0.1);
+        }
+
+        .result-item.incorrect {
+            border-left-color: var(--error-color);
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .correction-button {
+            background: var(--success-color);
+            color: var(--white);
+            border: none;
+            padding: 18px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 15px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .correction-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .quiz-box {
+                max-width: 100%;
+                min-height: 100vh;
+                border-radius: 0;
+            }
+
+            .quiz-header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .quiz-title {
+                font-size: 20px;
+            }
+
+            .quiz-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .quiz-content {
+                padding: 20px;
+            }
+
+            .question-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .question-text {
+                font-size: 24px;
+            }
+
+            .definition {
+                font-size: 18px;
+                padding: 12px 20px;
+            }
+
+            .answer-input {
+                font-size: 20px;
+                padding: 15px 20px;
+            }
+
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quiz-header {
+                padding: 15px;
+            }
+
+            .quiz-content {
+                padding: 15px;
+            }
+
+            .question-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .question-text {
+                font-size: 20px;
+            }
+
+            .definition {
+                font-size: 16px;
+            }
+
+            .answer-input {
+                font-size: 18px;
+            }
+        }
+
+        /* 額外樣式 */
+        .text-success {
+            color: var(--success-color);
+        }
+
+        .text-error {
+            color: var(--error-color);
+        }
+
+        .result-question {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .result-definition {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .result-answers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .your-answer,
+        .correct-answer {
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .result-status {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-weight: 600;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            padding: 40px;
+            border-radius: 25px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .score-number {
+            font-size: 72px;
+            font-weight: 900;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .score-text {
+            font-size: 20px;
+            color: var(--text-light);
+            margin: 8px 0;
+            font-weight: 500;
+        }
+
+        /* 動畫效果 */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timer {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #f093fb;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .score-text {
+            font-size: 18px;
+            color: white;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="quiz-box" id="quizBox">
+            <div class="quiz-header">
+                <div class="quiz-title">
+                    <i class="fas fa-book-open"></i>
+                    307-309期雜誌單字練習
+                </div>
+                <div class="quiz-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-list-ol"></i>
+                        <span id="questionCounter">第 1 題 / 共 36 題</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <span id="timer">時間: 00:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 3.33%"></div>
+                </div>
+            </div>
+
+            <div class="quiz-content">
+                <img id="questionImage" class="question-image" src="" alt="題目圖片" style="display: none;">
+
+                <div class="question-text" id="questionText">載入中...</div>
+                <!-- 定義區域已隱藏，避免學生邊做邊看答案 -->
+                <div class="definition" id="definition" style="display: none;"></div>
+
+                <div class="answer-section">
+                    <input type="text" id="answerInput" class="answer-input" placeholder="請輸入答案..." autocomplete="off">
+                    <div class="hint-section">
+                        <button class="btn btn-hint" onclick="showHint()" id="hintBtn">
+                            <i class="fas fa-lightbulb"></i>
+                            提示
+                        </button>
+                        <div class="hint-content" id="hintContent" style="display: none;">
+                            <div class="hint-text" id="hintText"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn btn-success" onclick="checkAnswer()">
+                        <i class="fas fa-check"></i>
+                        確認答案
+                    </button>
+                    <button class="btn btn-secondary" onclick="skipQuestion()">
+                        <i class="fas fa-forward"></i>
+                        跳過
+                    </button>
+                    <button class="btn btn-warning" onclick="goToPage('index.html')">
+                        <i class="fas fa-home"></i>
+                        返回主頁
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 307-309期雜誌單字練習題目
+        // 請根據您的PDF內容填入實際題目
+        const questions = [
+            // 第 1-36 題：請從您的 307-309 PDF 中填入實際題目
+            // 格式說明：
+            // { clue: "挖空格的句子", definition: "單字 (詞性) 中文意思", answer: "正確答案", image: "image_307_309/題號.png" },
+
+            // 307-309期實際題目：
+            { clue: "In winter, there is a lot of s_____w in the mountains.", definition: "snow (n.) 雪", answer: "snow", image: "image_307_309/1.png" },
+            { clue: "This g_____t tree is about five hundred years old.", definition: "giant (adj.) 巨大的", answer: "giant", image: "image_307_309/2.png" },
+            { clue: "The little girl has a cute r_____d face.", definition: "round (adj.) 圓形的", answer: "round", image: "image_307_309/3.png" },
+            { clue: "The w_____h wears a big black hat.", definition: "witch (n.) 巫婆", answer: "witch", image: "image_307_309/4.png" },
+            { clue: "The soup is too s_____y; you need to add some water.", definition: "salty (adj.) 鹹的", answer: "salty", image: "image_307_309/5.png" },
+            { clue: "The man w_____ks his dog in the park every morning.", definition: "walk (v.) 遛(動物)", answer: "walks", image: "image_307_309/6.png" },
+            { clue: "Please p_____r some hot water into my cup.", definition: "pour (v.) 倒", answer: "pour", image: "image_307_309/7.png" },
+            { clue: "I share my s_____t with my best friend.", definition: "secret (n.) 祕密", answer: "secret", image: "image_307_309/8.png" },
+            { clue: "Mary enjoys her l_____e on the farm very much.", definition: "life (n.) 生活", answer: "life", image: "image_307_309/9.png" },
+            { clue: "I want to go on a t_____p with my family.", definition: "trip (n.) 旅行", answer: "trip", image: "image_307_309/10.png" },
+            { clue: "My brother likes to drink milk tea with i_____e.", definition: "ice (n.) 冰", answer: "ice", image: "image_307_309/11.png" },
+            { clue: "Be careful not to b_____k the glass bowl.", definition: "break (v.) 打破", answer: "break", image: "image_307_309/12.png" },
+            { clue: "Let's row a boat down the r_____r.", definition: "river (n.) 河流", answer: "river", image: "image_307_309/13.png" },
+            { clue: "The sun r_____s behind the mountains.", definition: "rise (v.) 聳立；升起", answer: "rises", image: "image_307_309/14.png" },
+            { clue: "In winter, white snow c_____s the roofs of the houses.", definition: "cover (v.) 覆蓋", answer: "covers", image: "image_307_309/15.png" },
+            { clue: "After you peel the mango, put the s_____n in the trash bag.", definition: "skin (n.) 皮", answer: "skin", image: "image_307_309/16.png" },
+            { clue: "Can you see the t_____y ants in the tree?", definition: "tiny (adj.) 細小的", answer: "tiny", image: "image_307_309/17.png" },
+            { clue: "The s_____d grow fast with water and sun.", definition: "seed (n.) 種子", answer: "seeds", image: "image_307_309/18.png" },
+            { clue: "Lemon juice is very s_____r, so I always add water and sugar to it.", definition: "sour (adj.) 酸的", answer: "sour", image: "image_307_309/19.png" },
+            { clue: "The c_____n soup tastes nice and sweet.", definition: "corn (n.) 玉米", answer: "corn", image: "image_307_309/20.png" },
+            { clue: "A wildfire b_____s down the forest and village.", definition: "burn (v.) 燒", answer: "burns", image: "image_307_309/21.png" },
+            { clue: "Many soldiers die in the w_____r.", definition: "war (n.) 戰爭", answer: "war", image: "image_307_309/22.png" },
+            { clue: "We will s_____y in the town for three days.", definition: "stay (v.) 停留；留下", answer: "stay", image: "image_307_309/23.png" },
+            { clue: "The blue team beats the red team and w_____s the game.", definition: "win (v.) 獲勝；贏", answer: "wins", image: "image_307_309/24.png" },
+            { clue: "Music shows at the Kaohsiung Music Center a_____t visitors from other cities.", definition: "attract (v.) 吸引", answer: "attract", image: "image_307_309/25.png" },
+            { clue: "We can r_____x at the café in the Pier-2 Art Center.", definition: "relax (v.) 放鬆；休息", answer: "relax", image: "image_307_309/26.png" },
+            { clue: "Dave's family owns a large piece of l_____d in the country.", definition: "land (n.) 土地；陸地", answer: "land", image: "image_307_309/27.png" },
+            { clue: "I don't like this t_____e of movie.", definition: "type (n.) 種類", answer: "type", image: "image_307_309/28.png" },
+            { clue: "The muntjacs b_____k when they sense danger.", definition: "bark (v.) 吠叫", answer: "bark", image: "image_307_309/29.png" },
+            { clue: "Please use a red pen to m_____k the wrong answers on your test.", definition: "mark (v.) 標記", answer: "mark", image: "image_307_309/30.png" },
+            { clue: "The boy helps his mother h_____g the millet to dry.", definition: "hang (v.) 吊掛", answer: "hang", image: "image_307_309/31.png" },
+            { clue: "Students at Padan Asang School s_____y many interesting things.", definition: "study (v.) 研讀", answer: "study", image: "image_307_309/32.png" },
+            { clue: "Jess is r_____ing her new song in the studio.", definition: "record (v.) 錄音", answer: "recording", image: "image_307_309/33.png" },
+            { clue: "The chef is good at making d_____t.", definition: "dessert (n.) 甜點", answer: "dessert", image: "image_307_309/34.png" },
+            { clue: "We usually have three or four d_____s for dinner.", definition: "dish (n.) 菜餚", answer: "dishes", image: "image_307_309/35.png" },
+            { clue: "The boy is p_____d of his hometown, Kaohsiung.", definition: "proud (adj.) 自豪的", answer: "proud", image: "image_307_309/36.png" }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let startTime = new Date();
+        let timerInterval;
+
+        function initQuiz() {
+            const select = document.createElement('select');
+            select.id = 'questionSelect';
+            select.style.cssText = `
+                margin: 20px;
+                padding: 10px;
+                border-radius: 5px;
+                border: 2px solid #ddd;
+                font-size: 16px;
+            `;
+
+            questions.forEach((_, i) => {
+                const option = document.createElement('option');
+                option.value = i;
+                option.text = `題目 ${i + 1}`;
+                select.appendChild(option);
+            });
+
+            document.querySelector('.button-container').appendChild(select);
+            select.addEventListener('change', () => {
+                currentQuestion = parseInt(select.value);
+                loadQuestion();
+            });
+
+            loadQuestion();
+            startTimer();
+        }
+
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('questionText').textContent = question.clue;
+            // 隱藏定義，不讓學生邊做邊看答案
+            document.getElementById('definition').style.display = 'none';
+            document.getElementById('questionCounter').textContent = `第 ${currentQuestion + 1} 題 / 共 36 題`;
+
+            // 重置提示狀態
+            const hintContent = document.getElementById('hintContent');
+            const hintBtn = document.getElementById('hintBtn');
+            hintContent.style.display = 'none';
+            hintBtn.disabled = false;
+            hintBtn.innerHTML = '<i class="fas fa-lightbulb"></i> 提示';
+            hintBtn.style.background = '';
+
+            // 更新進度條
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            // 載入圖片
+            const img = document.getElementById('questionImage');
+            if (question.image) {
+                img.src = question.image;
+                img.style.display = 'block';
+                img.onerror = () => {
+                    img.style.display = 'none';
+                };
+            } else {
+                img.style.display = 'none';
+            }
+
+            // 清空答案輸入框
+            document.getElementById('answerInput').value = userAnswers[currentQuestion] || '';
+            document.getElementById('answerInput').focus();
+
+            // 更新題目選擇器
+            const select = document.getElementById('questionSelect');
+            if (select) {
+                select.value = currentQuestion;
+            }
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
+            userAnswers[currentQuestion] = userAnswer;
+
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function skipQuestion() {
+            userAnswers[currentQuestion] = '';
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showHint() {
+            const question = questions[currentQuestion];
+            const hintContent = document.getElementById('hintContent');
+            const hintText = document.getElementById('hintText');
+            const hintBtn = document.getElementById('hintBtn');
+
+            // 顯示提示（單字定義）
+            hintText.textContent = question.definition;
+            hintContent.style.display = 'block';
+
+            // 禁用提示按鈕，避免重複點擊
+            hintBtn.disabled = true;
+            hintBtn.innerHTML = '<i class="fas fa-eye-slash"></i> 提示已顯示';
+            hintBtn.style.background = '#95a5a6';
+        }
+
+        function showResults() {
+            clearInterval(timerInterval);
+            const endTime = new Date();
+            const timeSpent = Math.floor((endTime - startTime) / 1000);
+            const minutes = Math.floor(timeSpent / 60);
+            const seconds = timeSpent % 60;
+
+            let correctCount = 0;
+            questions.forEach((question, index) => {
+                if (userAnswers[index] && userAnswers[index].toLowerCase() === question.answer.toLowerCase()) {
+                    correctCount++;
+                }
+            });
+
+            const score = Math.round((correctCount / questions.length) * 100);
+
+            document.getElementById('quizBox').classList.add('results-mode');
+            document.getElementById('quizBox').innerHTML = `
+                <div class="quiz-header">
+                    <div class="quiz-title">
+                        <i class="fas fa-trophy"></i>
+                        練習完成！
+                    </div>
+                    <div class="quiz-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-clock"></i>
+                            <span>用時: ${minutes}:${seconds.toString().padStart(2, '0')}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quiz-content">
+                    <div class="score-display">
+                        <div class="score-number">${score}</div>
+                        <div class="score-text">分 (${correctCount}/${questions.length} 題正確)</div>
+                        <div class="score-text">正確率: ${Math.round((correctCount / questions.length) * 100)}%</div>
+                    </div>
+                    
+                    <div class="results-container">
+                        <h3><i class="fas fa-list-check"></i> 詳細結果</h3>
+                        <div class="result-items">
+                            ${questions.map((q, i) => {
+                const ua = userAnswers[i] || "(未作答)";
+                const ok = ua.toLowerCase() === q.answer.toLowerCase();
+                return `<div class="result-item ${ok ? 'correct' : 'incorrect'}">
+                                    <div class="result-question">
+                                        <strong>${q.clue}</strong>
+                                    </div>
+                                    <div class="result-definition">
+                                        ${q.definition}
+                                    </div>
+                                    <div class="result-answers">
+                                        <div class="your-answer">
+                                            <i class="fas fa-user"></i>
+                                            你的答案：<strong>${ua}</strong>
+                                        </div>
+                                        <div class="correct-answer">
+                                            <i class="fas fa-check-circle"></i>
+                                            正確答案：<strong>${q.answer}</strong>
+                                        </div>
+                                        <div class="result-status">
+                                            ${ok ? '<i class="fas fa-check text-success"></i> 正確' : '<i class="fas fa-times text-error"></i> 錯誤'}
+                                        </div>
+                                    </div>
+                                </div>`;
+            }).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="button-container">
+                        <button class="btn btn-success" onclick="goToCorrection()">
+                            <i class="fas fa-edit"></i>
+                            訂正練習
+                        </button>
+                        <button class="btn" onclick="goToPage('index.html')">
+                            <i class="fas fa-home"></i>
+                            返回主頁
+                        </button>
+                        <button class="btn btn-secondary" onclick="restartQuiz()">
+                            <i class="fas fa-redo"></i>
+                            重新開始
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                const now = new Date();
+                const timeSpent = Math.floor((now - startTime) / 1000);
+                const minutes = Math.floor(timeSpent / 60);
+                const seconds = timeSpent % 60;
+                document.getElementById('timer').textContent = `時間: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function goToCorrection() {
+            // 計算正確和錯誤答案
+            let correctCount = 0;
+            const wrongAnswers = [];
+
+            questions.forEach((q, i) => {
+                const userAnswer = userAnswers[i] || '';
+                if (userAnswer.toLowerCase() === q.answer.toLowerCase()) {
+                    correctCount++;
+                } else {
+                    wrongAnswers.push({
+                        clue: q.clue,
+                        definition: q.definition,
+                        correctAnswer: q.answer,
+                        userAnswer: userAnswer || '(未作答)'
+                    });
+                }
+            });
+
+            if (wrongAnswers.length > 0) {
+                // 準備訂正資料
+                const correctionData = {
+                    studentName: '學生',
+                    totalQuestions: questions.length,
+                    correctCount: correctCount,
+                    wrongAnswers: wrongAnswers,
+                    quizTitle: '307-309期雜誌單字練習'
+                };
+
+                // 儲存到 sessionStorage 供訂正頁面使用
+                sessionStorage.setItem('correctionData', JSON.stringify(correctionData));
+                window.location.href = 'correction.html';
+            } else {
+                alert('恭喜！所有題目都答對了，不需要訂正練習。');
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            startTime = new Date();
+
+            // 重新載入頁面
+            window.location.reload();
+        }
+
+        function goToPage(url) {
+            if (url === 'index.html') {
+                window.history.back();
+            } else {
+                window.location.href = url;
+            }
+        }
+
+        // 鍵盤事件
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                checkAnswer();
+            }
+        });
+
+        // 頁面載入時初始化
+        window.onload = function () {
+            initQuiz();
+        };
+    </script>
+</body>
+
+</html>

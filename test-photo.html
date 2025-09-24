@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班級照片測試</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .photo-frame {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 12px 35px rgba(255, 154, 158, 0.4);
+            border: 4px solid #ff6b6b;
+            margin: 20px 0;
+        }
+
+        .class-photo {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-message {
+            color: red;
+            background: #ffe6e6;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .success-message {
+            color: green;
+            background: #e6ffe6;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-container">
+        <h1>📷 班級照片測試</h1>
+        <p>測試 classphoto.png 是否能正確載入</p>
+
+        <div class="photo-frame">
+            <img src="classphoto.png" alt="班級照片" class="class-photo" onload="showSuccess()" onerror="showError()">
+        </div>
+
+        <div id="status"></div>
+
+        <p><strong>照片路徑：</strong> classphoto.png</p>
+        <p><strong>文件位置：</strong> 網站根目錄</p>
+    </div>
+
+    <script>
+        function showSuccess() {
+            document.getElementById('status').innerHTML =
+                '<div class="success-message">✅ 照片載入成功！</div>';
+        }
+
+        function showError() {
+            document.getElementById('status').innerHTML =
+                '<div class="error-message">❌ 照片載入失敗！請檢查文件路徑。</div>';
+        }
+
+        // 檢查照片是否載入
+        window.onload = function () {
+            const img = document.querySelector('.class-photo');
+            if (img.complete && img.naturalHeight !== 0) {
+                showSuccess();
+            } else {
+                showError();
+            }
+        };
+    </script>
+</body>
+
+</html>
