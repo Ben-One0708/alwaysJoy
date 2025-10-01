@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MJ4 - 初級英語練習題</title>
+        <style>
+                body {
+                        font-family: Arial, sans-serif;
+                        background: #ffffff;
+                        padding: 30px;
+                        text-align: center;
+                }
+
+                .quiz-box {
+                        background: white;
+                        padding: 30px;
+                        border-radius: 16px;
+                        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+                        display: inline-block;
+                        min-width: 600px;
+                        position: relative;
+                }
+
+                .question-header {
+                        text-align: left;
+                        font-size: 20px;
+                        color: #4CAF50;
+                        font-weight: bold;
+                        position: absolute;
+                        top: 20px;
+                        left: 30px;
+                }
+
+                .difficulty-badge {
+                        position: absolute;
+                        top: 20px;
+                        right: 30px;
+                        background: #4CAF50;
+                        color: white;
+                        padding: 5px 15px;
+                        border-radius: 20px;
+                        font-size: 14px;
+                        font-weight: bold;
+                }
+
+                .question-content {
+                        margin-top: 40px;
+                        font-size: 24px;
+                }
+
+                input[type="text"] {
+                        padding: 10px;
+                        width: 250px;
+                        font-size: 20px;
+                        text-align: center;
+                        margin-top: 10px;
+                }
+
+                button {
+                        padding: 10px 20px;
+                        font-size: 16px;
+                        margin: 15px 5px;
+                        border: none;
+                        border-radius: 8px;
+                        background-color: #4CAF50;
+                        color: white;
+                        cursor: pointer;
+                }
+
+                .feedback {
+                        margin-top: 15px;
+                        font-weight: bold;
+                        font-size: 18px;
+                }
+
+                .scoreboard {
+                        margin-top: 10px;
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: #333;
+                }
+
+                .answers {
+                        margin-top: 20px;
+                        text-align: left;
+                        font-size: 18px;
+                }
+
+                .nav-panel {
+                        margin-top: 20px;
+                }
+
+                select {
+                        font-size: 16px;
+                        padding: 5px 10px;
+                }
+
+                .back-button {
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        background-color: #ff6b81;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 8px 16px;
+                        font-size: 16px;
+                        cursor: pointer;
+                        z-index: 999;
+                }
+
+                .back-button:hover {
+                        background-color: #ff4757;
+                }
+        </style>
+</head>
+
+<body>
+        <button onclick="goToPage('home.html')" class="back-button">← 回上一頁</button>
+
+        <div class="quiz-box">
+                <div class="question-header" id="question-number"></div>
+                <div class="difficulty-badge">初級英語</div>
+                <div class="question-content" id="question-text"></div>
+                <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+                <br />
+                <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+                <div class="feedback" id="feedback"></div>
+                <div class="scoreboard" id="scoreboard"></div>
+                <div class="answers" id="answers" style="display: none;"></div>
+                <div class="nav-panel">
+                        <label for="questionSelect">跳題：</label>
+                        <select id="questionSelect" onchange="jumpToQuestion()"></select>
+                </div>
+        </div>
+
+        <script>
+                const questions = [
+                        {
+                                "clue": "I l___e to play video game when I go home.",
+                                "answer": "like",
+                        },
+                        {
+                                "clue": "Which fruit do you l___e, apple or orange?",
+                                "answer": "like",
+                        },
+                        {
+                                "clue": "Where is my c___________e b___r? I'm hungry.",
+                                "answer": "chocolate bar"
+                        },
+                        {
+                                "clue": "The c___s in the bakery looks yummy. May I have one?",
+                                "answer": "cupcakes"
+                        },
+                        {
+                                "clue": "Is there any candy in the box? Yes, there are some l_____ps in the box.",
+                                "answer": "lollipops"
+                        },
+                        {
+                                "clue": "In Thailand , people can ride on an e___t.",
+                                "answer": "elephant"
+                        },
+                        {
+                                "clue": "E___t is the biggest animal in the zoo.",
+                                "answer": "Elephant"
+                        },
+                        {
+                                "clue": "S___k is a dangerous animal in the sea.",
+                                "answer": "shark"
+                        },
+                        {
+                                "clue": "There are many f___s making noise near the pond.",
+                                "answer": "frogs"
+                        },
+                        {
+                                "clue": "My house is so dirty! There are r___s running in my kitchen.",
+                                "answer": "rats"
+                        },
+                        {
+                                "clue": "The r___t likes to eat carrot.",
+                                "answer": "rabbit"
+                        },
+                        {
+                                "clue": "A h___e can run very fast.",
+                                "answer": "horse",
+                        },
+                        {
+                                "clue": "I like to play w_____r g___n with my friends. We shoot w___nr to each other.",
+                                "answer": "water gun",
+                        },
+                        {
+                                "clue": "James is a smart boy. He can finish a p___e.",
+                                "answer": "puzzle",
+                        },
+                        {
+                                "clue": "The kid over there is crying because her b____n flew away .",
+                                "answer": "balloon",
+                        },
+                        {
+                                "clue": "Jason likes to read c____c b_____s in his free time.",
+                                "answer": "comic books",
+                        },
+                        {
+                                "clue": "The teacher was mad because Martin watched c___c b_____s in class.",
+                                "answer": "comic books"
+                        },
+                        {
+                                "clue": "Tobby has many t___y c___s. He likes to play with them with his brothers.",
+                                "answer": "toy cars"
+                        },
+                        {
+                                "clue": "The monkeys in the zoo like to eat b_____s.",
+                                "answer": "bananas"
+                        },
+                        {
+                                "clue": "I drink a cup of p___a milk after I eat dinner.",
+                                "answer": "payaya",
+                        },
+                        {
+                                "clue": "My favorite fruit is s_________s. It’s sour and sweet.",
+                                "answer": "strawberries",
+                        },
+                        {
+                                "clue": "Jadon doesn’t like l___s. It’s too sour for him.",
+                                "answer": "lemons",
+                        },
+                        {
+                                "clue": "Would you like a p___r for fruit after lunch?",
+                                "answer": "pear",
+                        },
+                        {
+                                "clue": "What does she want for fruit? She wants g___s for fruit.",
+                                "answer": "grapes",
+                        },
+                        {
+                                "clue": "What do you w___t to do after school? I w___t  to play in the playground after school.",
+                                "answer": "want",
+                        },
+                        {
+                                "clue": "Emily w___s her father to buy a doll for her.",
+                                "answer": "wants",
+                        },
+                        {
+                                "clue": "What do you want for breakfast? I want s___d for my breakfast.",
+                                "answer": "salad",
+                        },
+                        {
+                                "clue": "What do you want to do with so many apples? I want to make f___t s___d.",
+                                "answer": "fruit salad"
+                        },
+                        {
+                                "clue": "The h___t d___g is so yummy. May I have another one?",
+                                "answer": "hot dog"
+                        },
+                        {
+                                "clue": "Harry has a s___h for his dinner.",
+                                "answer": "sandwich"
+                        },
+                        {
+                                "clue": "What do you have for your lunch? I eat a h___r for lunch.",
+                                "answer": "hamburger",
+                        },
+                        {
+                                "clue": "What do you eat in the restaurant? I eat p___a in the restaurant.",
+                                "answer": "pizza",
+                        },
+                        {
+                                "clue": "May I have some s___t in my soup?",
+                                "answer": "salt",
+                        },
+                        {
+                                "clue": "I want to have some p___r on my fried chicken.",
+                                "answer": "pepper",
+                        },
+                        {
+                                "clue": "The lemon juice is too sour. May I put some s___r in it?",
+                                "answer": "sugar",
+                        },
+                        {
+                                "clue": "People usually eats pancake with some b___r.",
+                                "answer": "butter"
+                        },
+                        {
+                                "clue": "We used o___l to cook food.",
+                                "answer": "oil"
+                        },
+                        {
+                                "clue": "I want some k___p for my fried eggs.",
+                                "answer": "ketchup"
+                        },
+                        {
+                                "clue": "I want a s_____r for my birthday gift.",
+                                "answer": "scooter",
+                        },
+                        {
+                                "clue": "I need a c___r to do my online test.",
+                                "answer": "computer",
+                        },
+                        {
+                                "clue": "What do you use to call your parents? I use a c_____e to call my parents.",
+                                "answer": "cellphone",
+                        },
+                        {
+                                "clue": "What is that over there? It is a t____e r_________r.",
+                                "answer": "tape recorder",
+                        },
+                        {
+                                "clue": "Let's take some pictures! Does anyone have a c___a?",
+                                "answer": "camera"
+                        },
+                        {
+                                "clue": "Matt is a cool boy. He can play s___d.",
+                                "answer": "skateboard"
+                        },
+                        {
+                                "clue": "You should wear a h___t before riding a scooter.",
+                                "answer": "helmet"
+                        },
+                        {
+                                "clue": "I have a big b___k. I can put many books in it.",
+                                "answer": "backpack"
+                        },
+                        {
+                                "clue": "What do you use to do exercise? I use a j___p r___e.",
+                                "answer": "jump rope",
+                        },
+                        {
+                                "clue": "Mom give me a new b____e. I can ride it to school every day.",
+                                "answer": "bicycle",
+                        },
+                        {
+                                "clue": "I want to call my mom. Do you h___e a cellphone?",
+                                "answer": "have",
+                        },
+                        {
+                                "clue": "My feet is wet(濕的). Do you have a m___t?",
+                                "answer": "mat"
+                        },
+                        {
+                                "clue": "I have three sandwiches in my p___c b___t. We can eat sandwiches for lunch.",
+                                "answer": "picnic basket"
+                        },
+                        {
+                                "clue": "Do you have an u_____a? It’s rainy outside and I can’t go home.",
+                                "answer": "umbrella",
+                        },
+                        {
+                                "clue": "What is in your l___h b__x? There are two hamburgers  in it.",
+                                "answer": "lunch box",
+                        },
+                        {
+                                "clue": "What do you like to eat in Japan? I like to eat s___i r___l in Japan.",
+                                "answer": "sushi roll",
+                        },
+                        {
+                                "clue": "It's time for dinner. Can you give everyone a pair of c___s?",
+                                "answer": "chopsticks",
+                        },
+                        {
+                                "clue": "I want to eat the steak. Please give me a k___e and a f___k.",
+                                "answer": "knife fork",
+                        },
+                        {
+                                "clue": "The soup smells great. I need a s___n to eat it.",
+                                "answer": "spoon"
+                        },
+                        {
+                                "clue": "Where is my b___l? I want to have some rice for dinner.",
+                                "answer": "bowl"
+                        },
+                        {
+                                "clue": "Where should I put the salad at? Just put it on the p___e.",
+                                "answer": "plate"
+                        },
+                        {
+                                "clue": "I can't spell the word. Can you give me the d_____y?",
+                                "answer": "dictionary"
+                        },
+                        {
+                                "clue": "How much is the t___t to get into the museum?",
+                                "answer": "ticket"
+                        },
+                        {
+                                "clue": "Do you see my t___t? I have to get into the amusement park with it.",
+                                "answer": "ticket",
+                        },
+                        {
+                                "clue": "What time is it? Let me see my w___h.",
+                                "answer": "watch",
+                        },
+                        {
+                                "clue": "The rich man has a golden w___h on his hand.",
+                                "answer": "watch",
+                        },
+                        {
+                                "clue": "It's cold outside. Remember to put on your j___t when you go out.",
+                                "answer": "jacket",
+                        },
+                        {
+                                "clue": "Where is my r___t. It's rainy outside and I have to walk to school.",
+                                "answer": "raincoat",
+                        },
+                        {
+                                "clue": "It's time to clean the room. Can I borrow your b___m?",
+                                "answer": "broom",
+                        },
+                        {
+                                "clue": "The floor is too dirty. Get a b___m and clean it.",
+                                "answer": "broom",
+                        },
+                        {
+                                "clue": "Teacher! May I use the t___e to call my mom?",
+                                "answer": "telephone",
+                        },
+                        {
+                                "clue": "The t___e is ringing. Please answer it for me.",
+                                "answer": "telephone",
+                        },
+                        {
+                                "clue": "My grandma likes to listen to the r___o in the living room.",
+                                "answer": "radio"
+                        },
+                        {
+                                "clue": "I need to listen to the CD. Where is the C___D p___r?",
+                                "answer": "CD player"
+                        },
+                        {
+                                "clue": "Grandpa uses the t___n to watch news.",
+                                "answer": "television"
+                        },
+                        {
+                                "clue": "How m___h is the toy car? It is nine hundred dollars.",
+                                "answer": "much",
+                        },
+                        {
+                                "clue": "How much is the robot over there? It is one t___d dollars.",
+                                "answer": "thousand",
+                        },
+                        {
+                                "clue": "How much are the marbles? They are ninety d___s.",
+                                "answer": "dollars",
+                        },
+                        {
+                                "clue": "My father likes to drink c___e in the morning.",
+                                "answer": "coffee",
+                        },
+                        {
+                                "clue": "I have a sandwich and a cup of orange j___e for my breakfast.",
+                                "answer": "juice",
+                        },
+                        {
+                                "clue": "Jimmy likes sweet drinks. His favorite drink is c___a.",
+                                "answer": "cola",
+                        },
+                        {
+                                "clue": "The weather is so hot! I want to have an i___ c___m.",
+                                "answer": "ice cream",
+                        },
+                        {
+                                "clue": "Tommy is sick. He can't eat i___ c___m with us.",
+                                "answer": "ice cream",
+                        },
+                        {
+                                "clue": "There are m___y people in the classroom.",
+                                "answer": "many"
+                        },
+                        {
+                                "clue": "How many animals are there in the zoo? There are twenty animals in the zoo.",
+                                "answer": "many"
+                        },
+                        {
+                                "clue": "I want to write something on my notebook. I need a p___n.",
+                                "answer": "pen"
+                        },
+                        {
+                                "clue": "Can you write your name on my book? Okay. Please give me a p___n.",
+                                "answer": "pen"
+                        },
+                        {
+                                "clue": "There are many people l___e u___p in front of the restaurant.",
+                                "answer": "line up"
+                        },
+                        {
+                                "clue": "I always read a s___k to my little brother before we sleep.",
+                                "answer": "storybook"
+                        },
+                        {
+                                "clue": "Cody likes to play y___o in his free time.",
+                                "answer": "yoyo",
+                        },
+                        {
+                                "clue": "What are those small glass balls? They are m____s.",
+                                "answer": "marbles",
+                        },
+                        {
+                                "clue": "Derik is good at playing b___l. He can hit the ball very far.",
+                                "answer": "baseball"
+                        },
+                        {
+                                "clue": "Tony is playing f___e with his dog. He throws it and his dog runs to catch it.",
+                                "answer": "frisbee"
+                        },
+                        {
+                                "clue": "What d___y is it today? It is Wednesday.",
+                                "answer": "day"
+                        },
+                        {
+                                "clue": "Today is Sunday. Tomorrow is M___y.",
+                                "answer": "Monday"
+                        },
+                        {
+                                "clue": "What day is it today. It's F___y.",
+                                "answer": "Friday",
+                        },
+                        {
+                                "clue": "Today is Wednesday. Yesterday is T___y.",
+                                "answer": "Tuesday",
+                        },
+                        {
+                                "clue": "It's time for dinner. Everyone comes to the d___g r___m.",
+                                "answer": "dining room",
+                        },
+                        {
+                                "clue": "I want to take a nap. I need to go to my b___m.",
+                                "answer": "bedroom",
+                        },
+                        {
+                                "clue": "What is mom doing? She is cooking in the k___n.",
+                                "answer": "kitchen",
+                        },
+                        {
+                                "clue": "Before you sleep, you should go to the b___m to take a shower.",
+                                "answer": "bathroom",
+                        },
+                        {
+                                "clue": "My father likes to watch TV in the l___g r___m.",
+                                "answer": "living room"
+                        }
+                ];
+
+                let current = 0;
+                let userAnswers = Array(questions.length).fill("");
+
+                window.onload = () => {
+                        const select = document.getElementById("questionSelect");
+                        questions.forEach((_, i) => {
+                                const option = document.createElement("option");
+                                option.value = i;
+                                option.text = `題目 ${i + 1}`;
+                                select.appendChild(option);
+                        });
+                        loadQuestion();
+                };
+
+                document.addEventListener("keydown", function (event) {
+                        if (event.key === "Enter") {
+                                event.preventDefault();
+                                saveAnswer();
+                                nextQuestion();
+                        }
+                });
+
+                function goToPage(url) {
+                        window.location.href = url;
+                }
+
+                function manualSubmit() {
+                        saveAnswer();
+                        nextQuestion();
+                }
+
+                function loadQuestion() {
+                        document.getElementById("question-number").textContent = `${current + 1}. 字義填空`;
+                        document.getElementById("question-text").textContent = questions[current].clue;
+                        document.getElementById("answer").value = userAnswers[current] || "";
+                        document.getElementById("feedback").textContent = "";
+                        document.getElementById("scoreboard").textContent = "";
+                        document.getElementById("answers").style.display = "none";
+                        document.getElementById("questionSelect").value = current;
+                        document.getElementById("answer").style.display = "inline-block";
+                        document.getElementById("submitBtn").style.display = "inline-block";
+                }
+
+                function saveAnswer() {
+                        const input = document.getElementById("answer").value.trim().toLowerCase();
+                        userAnswers[current] = input;
+                }
+
+                function nextQuestion() {
+                        if (current < questions.length - 1) {
+                                current++;
+                                loadQuestion();
+                        } else {
+                                showFinalResult();
+                        }
+                }
+
+                function jumpToQuestion() {
+                        saveAnswer();
+                        current = parseInt(document.getElementById("questionSelect").value);
+                        loadQuestion();
+                }
+
+                function showFinalResult() {
+                        document.getElementById("question-number").textContent = "全部完成！";
+                        document.getElementById("question-text").textContent = "";
+                        document.getElementById("answer").style.display = "none";
+                        document.getElementById("submitBtn").style.display = "none";
+                        document.getElementById("feedback").textContent = "";
+
+                        const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+                        document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}`;
+
+                        const answerBox = document.getElementById("answers");
+                        answerBox.style.display = "block";
+                        answerBox.innerHTML = "<h3>正確答案：</h3><ol>" +
+                                questions.map((q, i) => {
+                                        const ua = userAnswers[i] || "(未作答)";
+                                        const ok = ua === q.answer;
+                                        return `<li><strong>${q.clue}</strong><br>
+                      你的答案：<strong>${ua}</strong> ${ok ? 'correct' : 'wrong'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                                }).join("") + "</ol>";
+                }
+
+                function getGrade(score) {
+                        const pct = (score / questions.length) * 100;
+                        if (pct === 100) return "Perfect! Great job!";
+                        if (pct >= 70) return "Good work!";
+                        return "Keep practicing!";
+                }
+        </script>
+</body>
+
+</html>

@@ -89,6 +89,11 @@ function initializeApp() {
 
     // 顯示歡迎訊息
     showWelcomeMessage();
+
+    // 調試課本習題區域
+    setTimeout(() => {
+        debugTextbookExercises();
+    }, 2000);
 }
 
 // 檢查學生登入狀態
@@ -584,6 +589,41 @@ function openPDFModal(date, type) {
                 </div>
             </div>
         `;
+        } else if (date === '9/27') {
+            // 顯示 9/27 的 PDF 文件
+            content.innerHTML = `
+            <div class="pdf-container responsive-pdf-container">
+                <div class="pdf-header">
+                    <h3 class="pdf-title">
+                        <i class="fas fa-file-pdf pdf-icon"></i>課程資料 PDF
+                    </h3>
+                    <div class="pdf-info">
+                        <span class="pdf-date"><strong>日期：</strong>${date}</span>
+                        <span class="pdf-type"><strong>類型：</strong>課程總覽</span>
+                    </div>
+                </div>
+                
+                <div class="pdf-viewer-container">
+                    <div class="pdf-loading">
+                        <i class="fas fa-spinner fa-spin loading-icon"></i>
+                        <span>載入中...</span>
+                    </div>
+                    <iframe src="Annie please help.pdf" 
+                            class="pdf-iframe"
+                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                    </iframe>
+                </div>
+                
+                <div class="pdf-actions">
+                    <button onclick="downloadPDF('${date}', '${type}')" class="pdf-btn download-btn">
+                        <i class="fas fa-download"></i>下載 PDF
+                    </button>
+                    <a href="Annie please help.pdf" target="_blank" class="pdf-btn open-btn">
+                        <i class="fas fa-external-link-alt"></i>在新視窗開啟
+                    </a>
+                </div>
+            </div>
+        `;
         } else if (date === '訂正在電腦') {
             // 顯示 訂正在電腦 的 PDF 文件
             content.innerHTML = `
@@ -690,6 +730,14 @@ function downloadPDF(date, type) {
         const link = document.createElement('a');
         link.href = '2025拼字練習4.pdf';
         link.download = `9-13_課程總覽.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else if (date === '9/27') {
+        // 創建下載連結
+        const link = document.createElement('a');
+        link.href = 'Annie please help.pdf';
+        link.download = `9-27_課程總覽.pdf`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -1129,6 +1177,155 @@ function showLearningMap() {
                     </div>
                     <div class="area-arrow">
                         <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- 連接線 -->
+                <div class="connection-line"></div>
+
+                <!-- 課本習題學習區 -->
+                <div class="learning-area textbook-area">
+                    <div class="area-icon">
+                        <i class="fas fa-book-open" style="font-size: 48px; color: #667eea;"></i>
+                    </div>
+                    <div class="area-content">
+                        <h3>課本習題練習</h3>
+                        <p>選擇課本等級進行練習</p>
+                        <div class="area-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-layer-group"></i>
+                                <span>8 個等級</span>
+                            </span>
+                        </div>
+                        <div class="textbook-grid-enhanced">
+                            <div class="textbook-enhanced-card" onclick="openTextbookExercise('MJ3')" data-level="3">
+                                <div class="enhanced-card-header">
+                                    <div class="level-badge">MJ3</div>
+                                    <div class="status-indicator available"></div>
+                                </div>
+                                <div class="enhanced-card-content">
+                                    <div class="level-title">基礎練習</div>
+                                    <div class="level-info">
+                                        <span class="question-count">96題</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="textbook-enhanced-card" onclick="openTextbookExercise('MJ4')" data-level="4">
+                                <div class="enhanced-card-header">
+                                    <div class="level-badge">MJ4</div>
+                                    <div class="status-indicator coming-soon"></div>
+                                </div>
+                                <div class="enhanced-card-content">
+                                    <div class="level-title">進階練習</div>
+                                    <div class="level-info">
+                                        <span class="question-count">習題練習</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="textbook-enhanced-card" onclick="openTextbookExercise('MJ5')" data-level="5">
+                                <div class="enhanced-card-header">
+                                    <div class="level-badge">MJ5</div>
+                                    <div class="status-indicator coming-soon"></div>
+                                </div>
+                                <div class="enhanced-card-content">
+                                    <div class="level-title">中級練習</div>
+                                    <div class="level-info">
+                                        <span class="question-count">習題練習</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="textbook-enhanced-card" onclick="openTextbookExercise('MJ6')" data-level="6">
+                                <div class="enhanced-card-header">
+                                    <div class="level-badge">MJ6</div>
+                                    <div class="status-indicator coming-soon"></div>
+                                </div>
+                                <div class="enhanced-card-content">
+                                    <div class="level-title">中高級練習</div>
+                                    <div class="level-info">
+                                        <span class="question-count">習題練習</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="textbook-enhanced-card" onclick="openTextbookExercise('MJ7')" data-level="7">
+                                <div class="enhanced-card-header">
+                                    <div class="level-badge">MJ7</div>
+                                    <div class="status-indicator coming-soon"></div>
+                                </div>
+                                <div class="enhanced-card-content">
+                                    <div class="level-title">高級練習</div>
+                                    <div class="level-info">
+                                        <span class="question-count">習題練習</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="textbook-enhanced-card" onclick="openTextbookExercise('MJ8')" data-level="8">
+                                <div class="enhanced-card-header">
+                                    <div class="level-badge">MJ8</div>
+                                    <div class="status-indicator coming-soon"></div>
+                                </div>
+                                <div class="enhanced-card-content">
+                                    <div class="level-title">進階高級</div>
+                                    <div class="level-info">
+                                        <span class="question-count">習題練習</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="textbook-enhanced-card" onclick="openTextbookExercise('MJ9')" data-level="9">
+                                <div class="enhanced-card-header">
+                                    <div class="level-badge">MJ9</div>
+                                    <div class="status-indicator coming-soon"></div>
+                                </div>
+                                <div class="enhanced-card-content">
+                                    <div class="level-title">專家級練習</div>
+                                    <div class="level-info">
+                                        <span class="question-count">習題練習</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="textbook-enhanced-card" onclick="openTextbookExercise('MJ10')" data-level="10">
+                                <div class="enhanced-card-header">
+                                    <div class="level-badge">MJ10</div>
+                                    <div class="status-indicator coming-soon"></div>
+                                </div>
+                                <div class="enhanced-card-content">
+                                    <div class="level-title">大師級練習</div>
+                                    <div class="level-info">
+                                        <span class="question-count">習題練習</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -3986,6 +4183,183 @@ function viewStudentDetails(studentName) {
 
     // 顯示模態框
     document.getElementById('studentDetailsModal').style.display = 'block';
+}
+
+// MJ3 字義填空練習功能
+function openMJ3Quiz() {
+    // 開啟 MJ3 字義填空練習頁面
+    window.open('vocabulary_quiz_mj3.html', '_blank');
+}
+
+// 課本習題功能
+function openTextbookExercise(level) {
+    console.log(`開啟 ${level} 課本習題練習`);
+
+    // 添加點擊動畫效果
+    const card = event.target.closest('.textbook-enhanced-card');
+    if (card) {
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            card.style.transform = '';
+        }, 150);
+    }
+
+    // 根據不同的課本等級開啟對應的練習頁面
+    switch (level) {
+        case 'MJ3':
+            // 顯示載入動畫
+            showLoadingAnimation();
+            setTimeout(() => {
+                window.open('Extrapractice/MJ3.html', '_blank');
+            }, 500);
+            break;
+        case 'MJ4':
+            // 顯示載入動畫
+            showLoadingAnimation();
+            setTimeout(() => {
+                window.open('Extrapractice/MJ4.html', '_blank');
+            }, 500);
+            break;
+        case 'MJ5':
+            // 顯示載入動畫
+            showLoadingAnimation();
+            setTimeout(() => {
+                window.open('Extrapractice/MJ5.html', '_blank');
+            }, 500);
+            break;
+        case 'MJ6':
+            // 顯示載入動畫
+            showLoadingAnimation();
+            setTimeout(() => {
+                window.open('Extrapractice/MJ6.html', '_blank');
+            }, 500);
+            break;
+        case 'MJ7':
+            // 顯示載入動畫
+            showLoadingAnimation();
+            setTimeout(() => {
+                window.open('Extrapractice/MJ7.html', '_blank');
+            }, 500);
+            break;
+        case 'MJ8':
+            // 顯示載入動畫
+            showLoadingAnimation();
+            setTimeout(() => {
+                window.open('Extrapractice/MJ8.html', '_blank');
+            }, 500);
+            break;
+        case 'MJ9':
+            // 顯示載入動畫
+            showLoadingAnimation();
+            setTimeout(() => {
+                window.open('Extrapractice/MJ9.html', '_blank');
+            }, 500);
+            break;
+        case 'MJ10':
+            // 顯示載入動畫
+            showLoadingAnimation();
+            setTimeout(() => {
+                window.open('Extrapractice/MJ10.html', '_blank');
+            }, 500);
+            break;
+        default:
+            alert('未知的課本等級！');
+    }
+}
+
+// 顯示載入動畫
+function showLoadingAnimation() {
+    const loadingModal = document.createElement('div');
+    loadingModal.className = 'loading-modal';
+    loadingModal.innerHTML = `
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3>正在載入練習...</h3>
+            <p>請稍候，即將為您開啟練習頁面</p>
+        </div>
+    `;
+    document.body.appendChild(loadingModal);
+
+    // 3秒後自動移除
+    setTimeout(() => {
+        if (loadingModal.parentNode) {
+            loadingModal.parentNode.removeChild(loadingModal);
+        }
+    }, 3000);
+}
+
+// 顯示開發中提示
+function showComingSoonModal(level) {
+    const modal = document.createElement('div');
+    modal.className = 'coming-soon-modal';
+    modal.innerHTML = `
+        <div class="coming-soon-content">
+            <div class="coming-soon-icon">🚧</div>
+            <h3>${level} 課本習題</h3>
+            <p>此功能正在開發中，敬請期待！</p>
+            <p class="coming-soon-subtitle">我們正在為您準備更豐富的練習內容</p>
+            <button onclick="closeComingSoonModal()" class="coming-soon-btn">
+                <i class="fas fa-check"></i> 我知道了
+            </button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // 點擊背景關閉
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeComingSoonModal();
+        }
+    });
+}
+
+// 關閉開發中提示
+function closeComingSoonModal() {
+    const modal = document.querySelector('.coming-soon-modal');
+    if (modal && modal.parentNode) {
+        modal.parentNode.removeChild(modal);
+    }
+}
+
+// 調試函數 - 檢查課本習題區域
+function debugTextbookExercises() {
+    console.log('檢查課本習題區域...');
+
+    // 檢查課本習題區域是否存在
+    const textbookSection = document.querySelector('.textbook-exercises');
+    if (textbookSection) {
+        console.log('課本習題區域存在:', textbookSection);
+        console.log('課本習題區域顯示狀態:', textbookSection.style.display);
+        console.log('課本習題區域可見性:', textbookSection.offsetHeight > 0 ? '可見' : '不可見');
+
+        // 檢查網格區域
+        const textbookGrid = textbookSection.querySelector('.textbook-grid');
+        if (textbookGrid) {
+            console.log('課本習題網格存在:', textbookGrid);
+            console.log('網格子元素數量:', textbookGrid.children.length);
+        } else {
+            console.log('找不到課本習題網格！');
+        }
+
+        // 檢查卡片
+        const textbookCards = textbookSection.querySelectorAll('.textbook-card');
+        console.log('課本習題卡片數量:', textbookCards.length);
+
+        textbookCards.forEach((card, index) => {
+            console.log(`卡片 ${index}:`, card.querySelector('h4')?.textContent);
+        });
+    } else {
+        console.log('找不到課本習題區域！');
+    }
+
+    // 檢查學生練習區域
+    const practiceSection = document.getElementById('practice');
+    if (practiceSection) {
+        console.log('學生練習區域存在');
+        console.log('學生練習區域內容長度:', practiceSection.innerHTML.length);
+    } else {
+        console.log('找不到學生練習區域！');
+    }
 }
 
 
