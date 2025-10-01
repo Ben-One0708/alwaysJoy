@@ -188,7 +188,287 @@
 
                 <!-- 學生練習 -->
                 <div id="practice" class="content-section">
-                    <h2><i class="fas fa-user-graduate"></i> 學生登入</h2>
+                    <h2><i class="fas fa-user-graduate"></i> 學生練習</h2>
+                    <p>選擇練習項目：</p>
+
+                    <!-- MJ3 練習選項 -->
+                    <div class="practice-options">
+                        <div class="practice-card" onclick="openMJ3Quiz()">
+                            <div class="practice-card-header">
+                                <i class="fas fa-book-open practice-icon"></i>
+                                <h3>MJ3 字義填空練習</h3>
+                                <p>96題字義填空練習，包含各種主題單字</p>
+                            </div>
+                            <div class="practice-card-content">
+                                <div class="practice-info">
+                                    <div class="info-item">
+                                        <i class="fas fa-list-ol"></i>
+                                        <span>題目數量：96題</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>練習時間：約30-45分鐘</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-graduation-cap"></i>
+                                        <span>適用對象：所有學生</span>
+                                    </div>
+                                </div>
+                                <button class="practice-start-btn">
+                                    <i class="fas fa-play"></i>
+                                    開始練習
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 課本習題區域 -->
+                    <div class="textbook-exercises">
+                        <h3><i class="fas fa-book"></i> 學習地圖 - 課本習題練習</h3>
+                        <p>選擇對應的課本等級進行 100 題字義填空練習：</p>
+                        <div class="textbook-status-info">
+                            <div class="status-item">
+                                <i class="fas fa-star" style="color: #4CAF50;"></i>
+                                <span>已準備完成</span>
+                            </div>
+                            <div class="status-item">
+                                <i class="fas fa-tools" style="color: #FF9800;"></i>
+                                <span>準備中</span>
+                            </div>
+                        </div>
+
+                        <div class="textbook-grid">
+                            <!-- MJ3 -->
+                            <div class="textbook-card" onclick="openTextbookExercise('MJ3')">
+                                <div class="textbook-card-header">
+                                    <i class="fas fa-graduation-cap textbook-icon"></i>
+                                    <h4>MJ3</h4>
+                                    <p>課本習題練習</p>
+                                </div>
+                                <div class="textbook-card-content">
+                                    <div class="textbook-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-list-ol"></i>
+                                            <span>96題練習</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>約30-45分鐘</span>
+                                        </div>
+                                    </div>
+                                    <button class="textbook-start-btn">
+                                        <i class="fas fa-play"></i>
+                                        開始練習
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- MJ4 -->
+                            <div class="textbook-card" onclick="openTextbookExercise('MJ4')">
+                                <div class="textbook-card-header">
+                                    <i class="fas fa-graduation-cap textbook-icon"></i>
+                                    <h4>MJ4</h4>
+                                    <p>課本習題練習</p>
+                                </div>
+                                <div class="textbook-card-content">
+                                    <div class="textbook-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-list-ol"></i>
+                                            <span>100題練習</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>約45-60分鐘</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-star"></i>
+                                            <span>已準備完成</span>
+                                        </div>
+                                    </div>
+                                    <button class="textbook-start-btn">
+                                        <i class="fas fa-play"></i>
+                                        開始練習
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- MJ5 -->
+                            <div class="textbook-card" onclick="openTextbookExercise('MJ5')">
+                                <div class="textbook-card-header">
+                                    <i class="fas fa-graduation-cap textbook-icon"></i>
+                                    <h4>MJ5</h4>
+                                    <p>課本習題練習</p>
+                                </div>
+                                <div class="textbook-card-content">
+                                    <div class="textbook-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-list-ol"></i>
+                                            <span>100題練習</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>約45-60分鐘</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-tools"></i>
+                                            <span>準備中</span>
+                                        </div>
+                                    </div>
+                                    <button class="textbook-start-btn">
+                                        <i class="fas fa-play"></i>
+                                        開始練習
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- MJ6 -->
+                            <div class="textbook-card" onclick="openTextbookExercise('MJ6')">
+                                <div class="textbook-card-header">
+                                    <i class="fas fa-graduation-cap textbook-icon"></i>
+                                    <h4>MJ6</h4>
+                                    <p>課本習題練習</p>
+                                </div>
+                                <div class="textbook-card-content">
+                                    <div class="textbook-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-list-ol"></i>
+                                            <span>100題練習</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>約45-60分鐘</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-tools"></i>
+                                            <span>準備中</span>
+                                        </div>
+                                    </div>
+                                    <button class="textbook-start-btn">
+                                        <i class="fas fa-play"></i>
+                                        開始練習
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- MJ7 -->
+                            <div class="textbook-card" onclick="openTextbookExercise('MJ7')">
+                                <div class="textbook-card-header">
+                                    <i class="fas fa-graduation-cap textbook-icon"></i>
+                                    <h4>MJ7</h4>
+                                    <p>課本習題練習</p>
+                                </div>
+                                <div class="textbook-card-content">
+                                    <div class="textbook-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-list-ol"></i>
+                                            <span>100題練習</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>約45-60分鐘</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-tools"></i>
+                                            <span>準備中</span>
+                                        </div>
+                                    </div>
+                                    <button class="textbook-start-btn">
+                                        <i class="fas fa-play"></i>
+                                        開始練習
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- MJ8 -->
+                            <div class="textbook-card" onclick="openTextbookExercise('MJ8')">
+                                <div class="textbook-card-header">
+                                    <i class="fas fa-graduation-cap textbook-icon"></i>
+                                    <h4>MJ8</h4>
+                                    <p>課本習題練習</p>
+                                </div>
+                                <div class="textbook-card-content">
+                                    <div class="textbook-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-list-ol"></i>
+                                            <span>100題練習</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>約45-60分鐘</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-tools"></i>
+                                            <span>準備中</span>
+                                        </div>
+                                    </div>
+                                    <button class="textbook-start-btn">
+                                        <i class="fas fa-play"></i>
+                                        開始練習
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- MJ9 -->
+                            <div class="textbook-card" onclick="openTextbookExercise('MJ9')">
+                                <div class="textbook-card-header">
+                                    <i class="fas fa-graduation-cap textbook-icon"></i>
+                                    <h4>MJ9</h4>
+                                    <p>課本習題練習</p>
+                                </div>
+                                <div class="textbook-card-content">
+                                    <div class="textbook-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-list-ol"></i>
+                                            <span>100題練習</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>約45-60分鐘</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-tools"></i>
+                                            <span>準備中</span>
+                                        </div>
+                                    </div>
+                                    <button class="textbook-start-btn">
+                                        <i class="fas fa-play"></i>
+                                        開始練習
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- MJ10 -->
+                            <div class="textbook-card" onclick="openTextbookExercise('MJ10')">
+                                <div class="textbook-card-header">
+                                    <i class="fas fa-graduation-cap textbook-icon"></i>
+                                    <h4>MJ10</h4>
+                                    <p>課本習題練習</p>
+                                </div>
+                                <div class="textbook-card-content">
+                                    <div class="textbook-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-list-ol"></i>
+                                            <span>100題練習</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>約45-60分鐘</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-tools"></i>
+                                            <span>準備中</span>
+                                        </div>
+                                    </div>
+                                    <button class="textbook-start-btn">
+                                        <i class="fas fa-play"></i>
+                                        開始練習
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3><i class="fas fa-sign-in-alt"></i> 學生登入</h3>
                     <p>請選擇您的組別和姓名，並輸入密碼：</p>
 
                     <div class="student-login-container">
