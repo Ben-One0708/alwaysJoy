@@ -608,7 +608,7 @@ function openPDFModal(date, type) {
                         <i class="fas fa-spinner fa-spin loading-icon"></i>
                         <span>載入中...</span>
                     </div>
-                    <iframe src="Annie please help.pdf" 
+                    <iframe src="Annie%20please%20help.pdf" 
                             class="pdf-iframe"
                             onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
                     </iframe>
@@ -618,7 +618,7 @@ function openPDFModal(date, type) {
                     <button onclick="downloadPDF('${date}', '${type}')" class="pdf-btn download-btn">
                         <i class="fas fa-download"></i>下載 PDF
                     </button>
-                    <a href="Annie please help.pdf" target="_blank" class="pdf-btn open-btn">
+                    <a href="Annie%20please%20help.pdf" target="_blank" class="pdf-btn open-btn">
                         <i class="fas fa-external-link-alt"></i>在新視窗開啟
                     </a>
                 </div>
