@@ -624,6 +624,41 @@ function openPDFModal(date, type) {
                 </div>
             </div>
         `;
+        } else if (date === '10/18') {
+            // 顯示 10/18 的 PDF 文件
+            content.innerHTML = `
+            <div class="pdf-container responsive-pdf-container">
+                <div class="pdf-header">
+                    <h3 class="pdf-title">
+                        <i class="fas fa-file-pdf pdf-icon"></i>課程資料 PDF
+                    </h3>
+                    <div class="pdf-info">
+                        <span class="pdf-date"><strong>日期：</strong>${date}</span>
+                        <span class="pdf-type"><strong>類型：</strong>課程總覽</span>
+                    </div>
+                </div>
+                
+                <div class="pdf-viewer-container">
+                    <div class="pdf-loading">
+                        <i class="fas fa-spinner fa-spin loading-icon"></i>
+                        <span>載入中...</span>
+                    </div>
+                    <iframe src="2025拼字練習6.pdf" 
+                            class="pdf-iframe"
+                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                    </iframe>
+                </div>
+                
+                <div class="pdf-actions">
+                    <button onclick="downloadPDF('${date}', '${type}')" class="pdf-btn download-btn">
+                        <i class="fas fa-download"></i>下載 PDF
+                    </button>
+                    <a href="2025拼字練習6.pdf" target="_blank" class="pdf-btn open-btn">
+                        <i class="fas fa-external-link-alt"></i>在新視窗開啟
+                    </a>
+                </div>
+            </div>
+        `;
         } else if (date === '訂正在電腦') {
             // 顯示 訂正在電腦 的 PDF 文件
             content.innerHTML = `
@@ -738,6 +773,14 @@ function downloadPDF(date, type) {
         const link = document.createElement('a');
         link.href = 'Annie please help.pdf';
         link.download = `9-27_課程總覽.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else if (date === '10/18') {
+        // 創建下載連結
+        const link = document.createElement('a');
+        link.href = '2025拼字練習6.pdf';
+        link.download = `10-18_課程總覽.pdf`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -4362,5 +4405,466 @@ function debugTextbookExercises() {
     }
 }
 
+// 開啟組別模擬考
+function openGroupExam(group, questionType) {
+    console.log(`開啟${group}${questionType}模擬考`);
 
+    const examConfigs = {
+        'B組': {
+            '150題': {
+                name: 'B組 - 150題基礎模擬考',
+                questions: 150,
+                time: 45,
+                difficulty: '基礎',
+                color: '#4CAF50'
+            },
+            '300題': {
+                name: 'B組 - 300題進階模擬考',
+                questions: 300,
+                time: 100,
+                difficulty: '進階',
+                color: '#4CAF50'
+            }
+        },
+        'C組': {
+            '150題': {
+                name: 'C組 - 150題進階模擬考',
+                questions: 150,
+                time: 45,
+                difficulty: '進階',
+                color: '#2196F3'
+            },
+            '300題': {
+                name: 'C組 - 300題高級模擬考',
+                questions: 300,
+                time: 100,
+                difficulty: '高級',
+                color: '#2196F3'
+            }
+        },
+        'D組': {
+            '150題': {
+                name: 'D組 - 150題高級模擬考',
+                questions: 150,
+                time: 45,
+                difficulty: '高級',
+                color: '#FF9800'
+            },
+            '300題': {
+                name: 'D組 - 300題專家模擬考',
+                questions: 300,
+                time: 100,
+                difficulty: '專家',
+                color: '#FF9800'
+            }
+        },
+        'E組': {
+            '150題': {
+                name: 'E組 - 150題專家模擬考',
+                questions: 150,
+                time: 45,
+                difficulty: '專家',
+                color: '#9C27B0'
+            },
+            '300題': {
+                name: 'E組 - 300題大師模擬考',
+                questions: 300,
+                time: 100,
+                difficulty: '大師',
+                color: '#9C27B0'
+            }
+        },
+        'F組': {
+            '150題': {
+                name: 'F組 - 150題大師模擬考',
+                questions: 150,
+                time: 45,
+                difficulty: '大師',
+                color: '#F44336'
+            },
+            '300題': {
+                name: 'F組 - 300題終極模擬考',
+                questions: 300,
+                time: 100,
+                difficulty: '終極',
+                color: '#F44336'
+            }
+        }
+    };
+
+    const config = examConfigs[group]?.[questionType];
+    if (config) {
+        showGroupExamModal(config, group, questionType);
+    }
+}
+
+// 顯示模擬考模態框
+function showExamModal(config) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.id = 'examModal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('examModal')">&times;</span>
+            <div class="exam-modal-header">
+                <div class="exam-modal-icon" style="color: ${config.color};">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <div class="exam-modal-title">
+                    <h2>${config.name}</h2>
+                    <p>準備開始您的模擬考試</p>
+                </div>
+            </div>
+
+            <div class="exam-modal-content">
+                <div class="exam-modal-info">
+                    <div class="info-card">
+                        <i class="fas fa-list-ol"></i>
+                        <h4>題目數量</h4>
+                        <p>${config.questions}題</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>考試時間</h4>
+                        <p>${config.time}分鐘</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-star"></i>
+                        <h4>難度等級</h4>
+                        <p>${config.difficulty}</p>
+                    </div>
+                </div>
+
+                <div class="exam-modal-description">
+                    <h3><i class="fas fa-info-circle"></i> 考試規則</h3>
+                    <ul>
+                        <li>請在規定時間內完成所有題目</li>
+                        <li>考試過程中可以暫停，但時間會繼續計算</li>
+                        <li>完成考試後會立即顯示成績和詳細分析</li>
+                        <li>考試結果會自動保存到您的學習記錄中</li>
+                    </ul>
+                </div>
+
+                <div class="exam-modal-actions">
+                    <button onclick="startExam('${config.name}')" class="start-exam-btn" style="background: ${config.color};">
+                        <i class="fas fa-play"></i>
+                        開始考試
+                    </button>
+                    <button onclick="closeModal('examModal')" class="close-exam-btn">
+                        <i class="fas fa-times"></i>
+                        取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 添加樣式
+    const style = document.createElement('style');
+    style.textContent = `
+        .exam-modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .exam-modal-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+        }
+
+        .exam-modal-title h2 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+
+        .exam-modal-title p {
+            margin: 0;
+            color: #666;
+        }
+
+        .exam-modal-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .exam-modal-info .info-card {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .exam-modal-info .info-card i {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-bottom: 8px;
+        }
+
+        .exam-modal-info .info-card h4 {
+            margin: 0 0 5px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .exam-modal-info .info-card p {
+            margin: 0;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .exam-modal-description {
+            margin-bottom: 20px;
+        }
+
+        .exam-modal-description h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .exam-modal-description ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .exam-modal-description li {
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .exam-modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .start-exam-btn, .close-exam-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .start-exam-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+        }
+
+        .close-exam-btn {
+            background: #6c757d;
+        }
+
+        .close-exam-btn:hover {
+            background: #545b62;
+        }
+    `;
+
+    document.head.appendChild(style);
+    document.body.appendChild(modal);
+    modal.style.display = 'block';
+}
+
+// 開始考試
+function startExam(examName) {
+    console.log(`開始${examName}`);
+    alert(`${examName}功能正在開發中，敬請期待！`);
+    closeModal('examModal');
+}
+
+// 顯示組別模擬考模態框
+function showGroupExamModal(config, group, questionType) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.id = 'groupExamModal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('groupExamModal')">&times;</span>
+            <div class="group-exam-modal-header">
+                <div class="group-exam-modal-icon" style="color: ${config.color};">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <div class="group-exam-modal-title">
+                    <h2>${config.name}</h2>
+                    <p>準備開始您的組別模擬考試</p>
+                </div>
+            </div>
+
+            <div class="group-exam-modal-content">
+                <div class="group-exam-modal-info">
+                    <div class="info-card">
+                        <i class="fas fa-list-ol"></i>
+                        <h4>題目數量</h4>
+                        <p>${config.questions}題</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>考試時間</h4>
+                        <p>${config.time}分鐘</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-star"></i>
+                        <h4>難度等級</h4>
+                        <p>${config.difficulty}</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-users"></i>
+                        <h4>適用組別</h4>
+                        <p>${group}</p>
+                    </div>
+                </div>
+
+                <div class="group-exam-modal-description">
+                    <h3><i class="fas fa-info-circle"></i> 考試規則</h3>
+                    <ul>
+                        <li>請在規定時間內完成所有題目</li>
+                        <li>考試過程中可以暫停，但時間會繼續計算</li>
+                        <li>完成考試後會立即顯示成績和詳細分析</li>
+                        <li>考試結果會自動保存到您的學習記錄中</li>
+                        <li>此考試專為${group}學生設計，難度適中</li>
+                    </ul>
+                </div>
+
+                <div class="group-exam-modal-actions">
+                    <button onclick="startGroupExam('${config.name}')" class="start-group-exam-btn" style="background: ${config.color};">
+                        <i class="fas fa-play"></i>
+                        開始考試
+                    </button>
+                    <button onclick="closeModal('groupExamModal')" class="close-group-exam-btn">
+                        <i class="fas fa-times"></i>
+                        取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 添加樣式
+    const style = document.createElement('style');
+    style.textContent = `
+        .group-exam-modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .group-exam-modal-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+        }
+
+        .group-exam-modal-title h2 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+
+        .group-exam-modal-title p {
+            margin: 0;
+            color: #666;
+        }
+
+        .group-exam-modal-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .group-exam-modal-info .info-card {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .group-exam-modal-info .info-card i {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-bottom: 8px;
+        }
+
+        .group-exam-modal-info .info-card h4 {
+            margin: 0 0 5px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .group-exam-modal-info .info-card p {
+            margin: 0;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .group-exam-modal-description {
+            margin-bottom: 20px;
+        }
+
+        .group-exam-modal-description h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .group-exam-modal-description ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .group-exam-modal-description li {
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .group-exam-modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .start-group-exam-btn, .close-group-exam-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .start-group-exam-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+        }
+
+        .close-group-exam-btn {
+            background: #6c757d;
+        }
+
+        .close-group-exam-btn:hover {
+            background: #545b62;
+        }
+    `;
+
+    document.head.appendChild(style);
+    document.body.appendChild(modal);
+    modal.style.display = 'block';
+}
+
+// 開始組別考試
+function startGroupExam(examName) {
+    console.log(`開始${examName}`);
+    alert(`${examName}功能正在開發中，敬請期待！`);
+    closeModal('groupExamModal');
+}
 
