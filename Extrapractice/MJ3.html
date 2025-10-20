@@ -568,7 +568,7 @@
                 }
 
                 function saveAnswer() {
-                        const input = document.getElementById("answer").value.trim().toLowerCase();
+                        const input = document.getElementById("answer").value.trim();
                         userAnswers[current] = input;
                 }
 
@@ -594,7 +594,11 @@
                         document.getElementById("submitBtn").style.display = "none";
                         document.getElementById("feedback").textContent = "";
 
-                        const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+                        const score = userAnswers.reduce((sum, ans, i) => {
+                                const ua = (ans || "").trim();
+                                const correct = (questions[i].answer || "").trim();
+                                return sum + (ua === correct ? 1 : 0);
+                        }, 0);
                         document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}`;
 
                         const answerBox = document.getElementById("answers");
@@ -602,7 +606,7 @@
                         answerBox.innerHTML = "<h3>正確答案：</h3><ol>" +
                                 questions.map((q, i) => {
                                         const ua = userAnswers[i] || "(未作答)";
-                                        const ok = ua === q.answer;
+                                        const ok = (ua || "").trim() === (q.answer || "").trim();
                                         return `<li><strong>${q.clue}</strong><br>
                       你的答案：<strong>${ua}</strong> ${ok ? 'correct' : 'wrong'}<br>
                       正確答案：<strong>${q.answer}</strong></li><br>`;

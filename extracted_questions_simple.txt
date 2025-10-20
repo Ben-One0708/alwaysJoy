@@ -1,0 +1,2108 @@
+拼字比賽練習題目
+==================================================
+
+第 1 題:
+題目: Q 1看圖拼字   l_____________n A .  lemon  
+											_____
+										 ID:2644
+答案: lemon
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_141.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1f61dcd2375fe54c306beeedb8e1dfee287eedb15dcafcf570eff6f4d3c88de3
+------------------------------
+
+第 2 題:
+題目: Q 2看圖拼字   c_____________ks A .  chopsticks  
+											__________
+										 ID:921
+答案: chopsticks
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_047.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a336d140927f0c0f10636e5de4a79047613a112af76844ff59428352ddb45ee7
+------------------------------
+
+第 3 題:
+題目: Q 3看圖拼字   f_____________r A .  farmer  
+											______
+										 ID:3745
+答案: farmer
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_022.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=bf6d0e20c807179ebdf5e178358909195e297955310bfb84fd5f5d111a9726b7
+------------------------------
+
+第 4 題:
+題目: Q 4看圖拼字   b_____________y A .  butterfly  
+											_________
+										 ID:3126
+答案: butterfly
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_153.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=86942a8f85a6a309822e36260dcedfb3309d2620dcf343605679fe1c3a9801c8
+------------------------------
+
+第 5 題:
+題目: Q 5看圖拼字   k_____________e A .  kite  
+											____
+										 ID:2004
+答案: kite
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_101.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=4fe8952483a0cfe2f95aaa8f6e271ed79fe30a61ca75b6813eaf167d028d4654
+------------------------------
+
+第 6 題:
+題目: Q 6看圖拼字   s_____________n A .  seven  
+											_____
+										 ID:2632
+答案: seven
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1e3ea8d845ffb48103ccda54d2e3fbcbaf221f14a543c06eddb47370391f249b
+------------------------------
+
+第 7 題:
+題目: Q 7看圖拼字   r_____________d A .  read  
+											____
+										 ID:934
+答案: read
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_060.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=d4a974610afb9e1c54d2a7c127005e4fca503a50e0ad802c0f8dd041c16dbca4
+------------------------------
+
+第 8 題:
+題目: Q 8看圖拼字   d_____________r A .  doctor  
+											______
+										 ID:2011
+答案: doctor
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_108.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=9585bc785f4cd4b3ea27229caf1f8821bf9863ba083a5e5c90aa26f604cc3503
+------------------------------
+
+第 9 題:
+題目: Q 9看圖拼字   s_____________i A .  sushi  
+											_____
+										 ID:3750
+答案: sushi
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_027.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=e4a2a17cc4a4a140f723ac848b45d32d9c6d5485c493a382da37e98fa272049c
+------------------------------
+
+第 10 題:
+題目: Q 10看圖拼字   s_____________r A .  sticker  
+											_______
+										 ID:186
+答案: sticker
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_015.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1d0aaf2d6928f739759079b628f74410e56c348099e90bbc36ce6332a7ae3416
+------------------------------
+
+第 11 題:
+題目: Q 11看圖拼字   u_____________r A .  under  
+											_____
+										 ID:1304
+答案: under
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_069.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1bd437d78e7954e2cc28468f9bba9e9c92454d9e6568933f8825f3b612734023
+------------------------------
+
+第 12 題:
+題目: Q 12看圖拼字   s_____________h A .  sandwich  
+											________
+										 ID:3135
+答案: sandwich
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_162.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=162555deab324261ed79525caf465941a19e287eeef0951949262931c8b1283a
+------------------------------
+
+第 13 題:
+題目: Q 13看圖拼字   w_____________y A .  windy  
+											_____
+										 ID:2646
+答案: windy
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_143.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=dceac90cc0c7f46d182860ebf3025c0af169810a7f39f1b4912cf254b9b503ec
+------------------------------
+
+第 14 題:
+題目: Q 14看圖拼字   T_____________n A .  Taiwan  
+											______
+										 ID:2641
+答案: Taiwan
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_138.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=35ead3e5915ff279560f7f8101d9cb8283baf0f40f7913e3cf44f7439b6591e9
+------------------------------
+
+第 15 題:
+題目: Q 15看圖拼字   w_____________h A .  watch  
+											_____
+										 ID:3733
+答案: watch
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_010.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=aa67b70b4661e319df4edfb33aeedf16a26ed0aa4ea1ea23cc1deaaa99bf02b9
+------------------------------
+
+第 16 題:
+題目: Q 16看圖拼字   d_____________r A .  door  
+											____
+										 ID:3753
+答案: door
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_030.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=17444ee01ca75a357bc54e765f19a993f5a02dfc4ef216cc9bd819ab4f7b51e6
+------------------------------
+
+第 17 題:
+題目: Q 17看圖拼字   f_____________r A .  flower  
+											______
+										 ID:2642
+答案: flower
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_139.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=f208038fd9c3196faf7bb6ba15530d87e3004816991956b924a08e76cc52b1ff
+------------------------------
+
+第 18 題:
+題目: Q 18看圖拼字   b_____________r A .  bear  
+											____
+										 ID:3148
+答案: bear
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_175.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=028584f25597e5515338841ab599131ceb54860f409563d0139eeb17d5833737
+------------------------------
+
+第 19 題:
+題目: Q 19看圖拼字   c_____________n A .  crayon  
+											______
+										 ID:3726
+答案: crayon
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_003.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=e75e4b12132c615d86a479106cc67011a054aecf7829cb4f2d7ee21bc56a8a48
+------------------------------
+
+第 20 題:
+題目: Q 20看圖拼字   p_____________a A .  papaya  
+											______
+										 ID:930
+答案: papaya
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_056.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a3782962eccf599e1c39b0d6da21fc597aa1768a7c678273dd96e384eefb0b00
+------------------------------
+
+第 21 題:
+題目: Q 21看圖拼字   d_____________k A .  desk  
+											____
+										 ID:2010
+答案: desk
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_107.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=c3ce4905b7f5e77d0a93909a80dda315f16c6b79085d27d1916c3f3772b99ec5
+------------------------------
+
+第 22 題:
+題目: Q 22看圖拼字   j_____________e A .  juice  
+											_____
+										 ID:1321
+答案: juice
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_086.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=9ff355fc1bf031b5643a0242065ea4469093fd9ac0c4008138c3bcdd4d31f684
+------------------------------
+
+第 23 題:
+題目: Q 23看圖拼字   s_____________r A .  sugar  
+											_____
+										 ID:929
+答案: sugar
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_055.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=afb579e44a3f77f8e5d441c575e1542fc28278fe2806fcc37177ff2eeac72773
+------------------------------
+
+第 24 題:
+題目: Q 24看圖拼字   m_____________y A .  monkey  
+											______
+										 ID:1999
+答案: monkey
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_096.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=c994ce325d38f07371c4c2449bb7a356d9b724ab322a8019ad5ac2f9b734d1df
+------------------------------
+
+第 25 題:
+題目: Q 25看圖拼字   f_____________t A .  feet  
+											____
+										 ID:188
+答案: feet
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_017.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=b2764e038ec09409d45fc0e7b80256bee04cd13828724c920b9bca1e22cf6c58
+------------------------------
+
+第 26 題:
+題目: Q 26看圖拼字   c_____________p A .  cap  
+											___
+										 ID:2633
+答案: cap
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_130.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=498f6c37d5a86abe900fcfb96db0f8dedeabbeea428cf6e975c4799ee79bc5f9
+------------------------------
+
+第 27 題:
+題目: Q 27看圖拼字   m_____________n A .  magician  
+											________
+										 ID:1315
+答案: magician
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_080.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1148e21df4872337ab2e9ee8a977dd1320fc6d219a941641c6d38128b56c100c
+------------------------------
+
+第 28 題:
+題目: Q 28看圖拼字   s_____________k A .  sick  
+											____
+										 ID:1317
+答案: sick
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_082.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=76434261f103bd7f8847435fb2378dbb3f66b0c8886ce4875818a3e71edfcf2e
+------------------------------
+
+第 29 題:
+題目: Q 29看圖拼字   tape r_____________r A .  recorder  
+											________
+										 ID:928
+答案: recorder
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_054.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=30c57bf34471a8db63744f3cec42ddc5aa2c1d5f789222e5b518e1478fe957ca
+------------------------------
+
+第 30 題:
+題目: Q 30看圖拼字   j_____________t A .  jacket  
+											______
+										 ID:3152
+答案: jacket
+圖片: https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_179.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a0fb3d278f001830f72f27a36dc901931d5cf3a05b4645707454e6d8b8239af4
+------------------------------
+
+第 31 題:
+題目: Q 31文意字彙 I want two h_____ers and three hot dogs.  h_____________ers A .  hamburgers  
+											__________
+										 ID:3183
+答案: hamburgers
+------------------------------
+
+第 32 題:
+題目: Q 32文意字彙 Amy is riding a s_____d at the park.  s_____________d A .  skateboard  
+											__________
+										 ID:2679
+答案: skateboard
+------------------------------
+
+第 33 題:
+題目: Q 33文意字彙 I'm hungry. I want a h_____r.  h_____________r A .  hamburger  
+											_________
+										 ID:3790
+答案: hamburger
+------------------------------
+
+第 34 題:
+題目: Q 34文意字彙 There are two pencils and one e_____r in my bag.  e_____________r A .  eraser  
+											______
+										 ID:947
+答案: eraser
+------------------------------
+
+第 35 題:
+題目: Q 35文意字彙 Meggie has a fruit s_____d and an ice cream for dinner (晚餐).  s_____________d A .  salad  
+											_____
+										 ID:3791
+答案: salad
+------------------------------
+
+第 36 題:
+題目: Q 36文意字彙 Peter is riding a s_____r to school.  s_____________r A .  scooter  
+											_______
+										 ID:2684
+答案: scooter
+------------------------------
+
+第 37 題:
+題目: Q 37文意字彙 S_____ks are sea (海洋) animals.  S_____________ks A .  Sharks  
+											______
+										 ID:1349
+答案: Sharks
+------------------------------
+
+第 38 題:
+題目: Q 38文意字彙 My brother is 7 years old.  He is a cute b_____y.  b_____________y A .  boy  
+											___
+										 ID:2025
+答案: boy
+------------------------------
+
+第 39 題:
+題目: Q 39文意字彙 Billy is my c_____n. His father and my father are brothers.  c_____________n A .  cousin  
+											______
+										 ID:3155
+答案: cousin
+------------------------------
+
+第 40 題:
+題目: Q 40文意字彙 Kenny has five pets: a dog, two cats, and two r_____its.  r_____________its A .  rabbits  
+											_______
+										 ID:1347
+答案: rabbits
+------------------------------
+
+第 41 題:
+題目: Q 41文意字彙 The pig is fat. It's not t_____n.  t_____________n A .  thin  
+											____
+										 ID:23
+答案: thin
+------------------------------
+
+第 42 題:
+題目: Q 42文意字彙 I'm b_____ed. Can you play games with me?  b_____________ed A .  bored  
+											_____
+										 ID:231
+答案: bored
+------------------------------
+
+第 43 題:
+題目: Q 43文意字彙 Andy is tired. He is sl_____y.  sl_____________y A .  sleepy  
+											______
+										 ID:3192
+答案: sleepy
+------------------------------
+
+第 44 題:
+題目: Q 44文意字彙 Good morning! Let's go to s_____l.  s_____________l A .  school  
+											______
+										 ID:2050
+答案: school
+------------------------------
+
+第 45 題:
+題目: Q 45文意字彙 Those boxes are full. They're h_____y.  h_____________y A .  heavy  
+											_____
+										 ID:2036
+答案: heavy
+------------------------------
+
+第 46 題:
+題目: Q 46文意字彙 Mom is t_____ed. She is sleepy.  t_____________ed A .  tired  
+											_____
+										 ID:3792
+答案: tired
+------------------------------
+
+第 47 題:
+題目: Q 47文意字彙 Put some cookies in the p_____e, not in the bowl.  p_____________e A .  plate  
+											_____
+										 ID:2687
+答案: plate
+------------------------------
+
+第 48 題:
+題目: Q 48文意字彙 The boy is weak. He's not s_____g.  s_____________g A .  strong  
+											______
+										 ID:203
+答案: strong
+------------------------------
+
+第 49 題:
+題目: Q 49文意字彙 There are many b_____lies and bees at the park.  b_____________lies A .  butterflies  
+											___________
+										 ID:2683
+答案: butterflies
+------------------------------
+
+第 50 題:
+題目: Q 50文意字彙 We can see many famous (有名的) pictures in this m_____m.  m_____________m A .  museum  
+											______
+										 ID:3182
+答案: museum
+------------------------------
+
+第 51 題:
+題目: My father usually l___s to the radio in the morning.
+答案: listens
+------------------------------
+
+第 52 題:
+題目: My mother tells me to wash the d___s in the kitchen after dinner.
+答案: dishes
+------------------------------
+
+第 53 題:
+題目: It's not polite to t__k on the phone during a concert.
+答案: talk
+------------------------------
+
+第 54 題:
+題目: When Tim o__s the door, the cat runs out quickly.
+答案: opens
+------------------------------
+
+第 55 題:
+題目: My grandfather likes to go mountain c___g. He likes Mt. Ali very much.
+答案: climbing
+------------------------------
+
+第 56 題:
+題目: John loves to play c___s. He is the best c___s player in our class.
+答案: chess
+------------------------------
+
+第 57 題:
+題目: I like to w___h TV in my free time, but my mother hates it. She says it's bad for my eyes.
+答案: watch
+------------------------------
+
+第 58 題:
+題目: The teacher y___s at the students because no one is listening to him.
+答案: yells
+------------------------------
+
+第 59 題:
+題目: Jane is g___d at sports. She runs fast and plays basketball well.
+答案: good
+------------------------------
+
+第 60 題:
+題目: Tiffany's mother tells her to c___n her room because her room is too messy.
+答案: clean
+------------------------------
+
+第 61 題:
+題目: If you want to visit a f___s lake, Sun Moon Lake is a good place to go.
+答案: famous
+------------------------------
+
+第 62 題:
+題目: The businessman will not a__d the meeting tomorrow because he had a car accident yesterday.
+答案: attend
+------------------------------
+
+第 63 題:
+題目: I p__d a tea pot in the art class today. I think my grandmother will love it because she loves drinking tea.
+答案: painted
+------------------------------
+
+第 64 題:
+題目: The actor didn't a__t in a play because he was sick.
+答案: act
+------------------------------
+
+第 65 題:
+題目: When Eve saw her boyfriend s___e with another girl, she got angry and broke up with him.
+答案: skate
+------------------------------
+
+第 66 題:
+題目: When Jim saw his daughter c___t with a man, he hid behind them and listened to what they were talking about.
+答案: chat
+------------------------------
+
+第 67 題:
+題目: The police officer k___s on the door, but no one answers.
+答案: knocks
+------------------------------
+
+第 68 題:
+題目: There is an empty box on the ground. There is nothing i___e.
+答案: inside
+------------------------------
+
+第 69 題:
+題目: She didn't take out the trash last night, but she took it out the day b___e yesterday, which was two days ago.
+答案: before
+------------------------------
+
+第 70 題:
+題目: S______y, my brother hits me in the back and scared me.
+答案: Suddenly
+------------------------------
+
+第 71 題:
+題目: The clown p__d out of the box and surprised the audience.
+答案: popped
+------------------------------
+
+第 72 題:
+題目: Timmy feels dizzy because the ball hit his h___d.
+答案: head
+------------------------------
+
+第 73 題:
+題目: Yvonne likes to study h____y because she is interested in what happened in the past.
+答案: history
+------------------------------
+
+第 74 題:
+題目: Joanne has to t__y her room, or she will be grounded.
+答案: tidy
+------------------------------
+
+第 75 題:
+題目: It suddenly starts to rain outside, so I have to dry the c____s or there will be nothing to wear.
+答案: clothes
+------------------------------
+
+第 76 題:
+題目: The class starts at 8:00, and it's now 7:50. You better h__y to school or you will be late.
+答案: hurry
+------------------------------
+
+第 77 題:
+題目: Linda forgets to c___y her l___xx this morning and is really hungry now.
+答案: lunchbox
+------------------------------
+
+第 78 題:
+題目: We always try the moon c__s every Moon Festival because there are more and more new flavors.
+答案: cakes
+------------------------------
+
+第 79 題:
+題目: As the saying goes, 'When l__e gives you lemon, make lemonade.'
+答案: life
+------------------------------
+
+第 80 題:
+題目: Please t__y on the clothes before you buy them, or it might be too large or too small.
+答案: try
+------------------------------
+
+第 81 題:
+題目: You have to be q___k, or the cockroach will disappear at any time.
+答案: quick
+------------------------------
+
+第 82 題:
+題目: Michael w___s for the bus for thirty minutes at the bus stop every day to get to work.
+答案: waits
+------------------------------
+
+第 83 題:
+題目: Students are not allowed to use c___s during class. If the teacher sees it, he or she will take it and keep it for you until break time.
+答案: cellphones
+------------------------------
+
+第 84 題:
+題目: You will get points after you raise your hands and a___r the questions.
+答案: answer
+------------------------------
+
+第 85 題:
+題目: Don't forget to thank the d____r before you get off the bus or the taxi.
+答案: driver
+------------------------------
+
+第 86 題:
+題目: The clerk is t___g his report now so that he can get off work on time.
+答案: typing
+------------------------------
+
+第 87 題:
+題目: Philip forgot to l__k the door before he left, so the thief simply got into the house and stole everything.
+答案: lock
+------------------------------
+
+第 88 題:
+題目: Annie is a teacher, and Nina is, t___.
+答案: too
+------------------------------
+
+第 89 題:
+題目: Billy is not a farmer, and Charles isn't, e___r.
+答案: either
+------------------------------
+
+第 90 題:
+題目: There are six t__s in the dragon boat race, but only one of them can win the championship.
+答案: teams
+------------------------------
+
+第 91 題:
+題目: Jason is t___g a trip to Japan tomorrow, so he won't come to work next week.
+答案: taking
+------------------------------
+
+第 92 題:
+題目: A burglar broke i__o my house yesterday. Luckily, no one was hurt, and she got caught in two hours.
+答案: into
+------------------------------
+
+第 93 題:
+題目: In the art class, the teacher asks the students to draw a p____e of a tiger.
+答案: picture
+------------------------------
+
+第 94 題:
+題目: There is a sign by the pond that says, 'Do not f__d the fish. They are too fat now.'
+答案: feed
+------------------------------
+
+第 95 題:
+題目: When I go to the office to see the teacher, she isn't there. So I w___e a n___e and left it on her table.
+答案: note
+------------------------------
+
+第 96 題:
+題目: In the music class, the teacher asks everyone to sing a s__g in front of the class.
+答案: song
+------------------------------
+
+第 97 題:
+題目: My little brother likes to fly a k___e at the park when it is windy.
+答案: kite
+------------------------------
+
+第 98 題:
+題目: I want to take a trip to N____y because I heard that's where the Vikings come from.
+答案: Norway
+------------------------------
+
+第 99 題:
+題目: Iceland is a popular tourist spot because it's famous for the N______n Lights there.
+答案: Northern
+------------------------------
+
+第 100 題:
+題目: My favorite part of going camping is sitting by the c___e and chat with my friends at night.
+答案: campfire
+------------------------------
+
+第 101 題:
+題目: Daniel took a t___n to travel around Taiwan last year.
+答案: train
+------------------------------
+
+第 102 題:
+題目: Jessie took a s___p to Green Island last month.
+答案: ship
+------------------------------
+
+第 103 題:
+題目: Kyle needs to get to the airport now, so he takes a t__i there.
+答案: taxi
+------------------------------
+
+第 104 題:
+題目: If you want to go to Penghu, you can take a p__e there.
+答案: plane
+------------------------------
+
+第 105 題:
+題目: Ray takes a b__s to school every day.
+答案: bus
+------------------------------
+
+第 106 題:
+題目: Patrick rides a b__e to cram school on Wednesdays.
+答案: bike
+------------------------------
+
+第 107 題:
+題目: In New York, you can go almost anywhere by s___y.
+答案: subway
+------------------------------
+
+第 108 題:
+題目: In Taiwan, most people goes everywhere by riding a s____r because they have a car.
+答案: scooter
+------------------------------
+
+第 109 題:
+題目: Last weekend, my father d___e a car and took us to Taichung to go shopping.
+答案: drove
+------------------------------
+
+第 110 題:
+題目: Sandy lives next to the school, so she can w__k to school every day.
+答案: walk
+------------------------------
+
+第 111 題:
+題目: Justin just came back from The USA, so I picked him up at the a____t.
+答案: airport
+------------------------------
+
+第 112 題:
+題目: There are sixty minutes in an h__r.
+答案: hour
+------------------------------
+
+第 113 題:
+題目: Please don't s___e the cola can, or you will have to clean up the mess by yourself.
+答案: shake
+------------------------------
+
+第 114 題:
+題目: There is s___g inside the box, but I don't know what that is.
+答案: something
+------------------------------
+
+第 115 題:
+題目: The child f__s down and hits his arm. Now, he is crying.
+答案: falls
+------------------------------
+
+第 116 題:
+題目: M______s aren't real. They only exist in fairy tales.
+答案: Mermaids
+------------------------------
+
+第 117 題:
+題目: The famous writer, Andersen, is from D_____k.
+答案: Denmark
+------------------------------
+
+第 118 題:
+題目: Jarvis saw the s___r near the house last night, and he was scared.
+答案: stranger
+------------------------------
+
+第 119 題:
+題目: When Diana meets the s___r, she asks him to sign on her bag.
+答案: singer
+------------------------------
+
+第 120 題:
+題目: The house was b___t seventy years ago. No one lives there now.
+答案: built
+------------------------------
+
+第 121 題:
+題目: The farmer goes to the market and tries to s__l the cow, but no one wants to buy it.
+答案: sell
+------------------------------
+
+第 122 題:
+題目: Percy loves turtles, so he asked his mother to b__y one for him.
+答案: buy
+------------------------------
+
+第 123 題:
+題目: In the art class, the teacher asked the students to d__w their favorite animals.
+答案: draw
+------------------------------
+
+第 124 題:
+題目: After sixty m____s of work, the shopkeeper takes a rest and closes the shop.
+答案: minutes
+------------------------------
+
+第 125 題:
+題目: Christine is a fast runner. She can run one hundred meters in twelve s____s.
+答案: seconds
+------------------------------
+
+第 126 題:
+題目: Two days a__o, a thief came to the store and stole a lot of money.
+答案: ago
+------------------------------
+
+第 127 題:
+題目: When Roxy sees his friends on the street, he w__s his hands and smiles at them.
+答案: waves
+------------------------------
+
+第 128 題:
+題目: There are some h___e snakes at the zoo. The kids are scared when they see the snakes.
+答案: huge
+------------------------------
+
+第 129 題:
+題目: Please s__t the door before you go. It is cold outside.
+答案: shut
+------------------------------
+
+第 130 題:
+題目: The teacher s__t the rules for the students to follow.
+答案: set
+------------------------------
+
+第 131 題:
+題目: Aaron h__t the ball so hard that it flew over the field and broke the window.
+答案: hit
+------------------------------
+
+第 132 題:
+題目: The chef takes out the knife and c__t the pie into ten pieces.
+答案: cut
+------------------------------
+
+第 133 題:
+題目: The students are asked to r___d the magazine every morning.
+答案: read
+------------------------------
+
+第 134 題:
+題目: The teacher asks the kids to p___t at the picture that has a circle in it.
+答案: point
+------------------------------
+
+第 135 題:
+題目: Max doesn't like his sister. They often f__t with each other over small things.
+答案: fight
+------------------------------
+
+第 136 題:
+題目: The elephants are g___t animals. They can be taller than a building.
+答案: giant
+------------------------------
+
+第 137 題:
+題目: Don't talk with your mouth full. S_____w the food before you start talking.
+答案: Swallow
+------------------------------
+
+第 138 題:
+題目: After ten hours of flight, the plane finally l__d at the airport.
+答案: landed
+------------------------------
+
+第 139 題:
+題目: In the e__d, the thief got caught by the police and returned everything he took.
+答案: end
+------------------------------
+
+第 140 題:
+題目: If you feel dizzy and your body temperature is high, you might have a f___r.
+答案: fever
+------------------------------
+
+第 141 題:
+題目: The businessman had a h___e. His head hurt badly.
+答案: headache
+------------------------------
+
+第 142 題:
+題目: Peter starts coughing and he can't talk well. He has a s__e throat.
+答案: throat
+------------------------------
+
+第 143 題:
+題目: Roger c___t a cold and didn't come to school yesterday.
+答案: caught
+------------------------------
+
+第 144 題:
+題目: Remember to see a d____r when you don't feel comfortable.
+答案: doctor
+------------------------------
+
+第 145 題:
+題目: The worker looks tired. I think he need some r__t.
+答案: rest
+------------------------------
+
+第 146 題:
+題目: After you see the doctor, make sure you take some m___e to get well sooner.
+答案: medicine
+------------------------------
+
+第 147 題:
+題目: There should be at least seven w___s in a sentence, or you get no points.
+答案: words
+------------------------------
+
+第 148 題:
+題目: Kids shouldn't go to dangerous p___s. They should be with their parents.
+答案: places
+------------------------------
+
+第 149 題:
+題目: Elizabeth and Mason have three k__s. They are all studying in the elementary school now.
+答案: kids
+------------------------------
+
+第 150 題:
+題目: There is a typhoon coming tomorrow, s__o people are preparing food now.
+答案: so
+------------------------------
+
+第 151 題:
+題目: In the p__t, when most people didn't have telephones, they wrote letters to contact each other.
+答案: past
+------------------------------
+
+第 152 題:
+題目: The V_____s were warriors from Norway in the past.
+答案: Vikings
+------------------------------
+
+第 153 題:
+題目: Taipei is in the n___h of Taiwan.
+答案: north
+------------------------------
+
+第 154 題:
+題目: There is a w__r going on between Israel and Iran.
+答案: war
+------------------------------
+
+第 155 題:
+題目: Jonathan is a___d of dark. He thinks there are monsters hiding inside it.
+答案: afraid
+------------------------------
+
+第 156 題:
+題目: I don't have e___h money to buy the toy. I still need five hundred dollars.
+答案: enough
+------------------------------
+
+第 157 題:
+題目: Perry doesn't like to eat v___s. He likes to eat meat.
+答案: vegetables
+------------------------------
+
+第 158 題:
+題目: Thomas' mother only smiles at him when he gets good g___s at school.
+答案: grades
+------------------------------
+
+第 159 題:
+題目: On Lucy's birthday, her father o___s a big meal to celebrate.
+答案: orders
+------------------------------
+
+第 160 題:
+題目: It might rain in the afternoon, so don't forget to bring an u___a.
+答案: umbrella
+------------------------------
+
+第 161 題:
+題目: You have to study h___d to get good grades.
+答案: hard
+------------------------------
+
+第 162 題:
+題目: The food in the restaurant tastes d___s.
+答案: delicious
+------------------------------
+
+第 163 題:
+題目: Seth got hit by the car b____e the driver was drunk-driving.
+答案: because
+------------------------------
+
+第 164 題:
+題目: There is a stranger standing o____e the house. Be careful.
+答案: outside
+------------------------------
+
+第 165 題:
+題目: There are some c___n playing in the park.
+答案: children
+------------------------------
+
+第 166 題:
+題目: Wilson lives in a small v____e with his grandfather.
+答案: village
+------------------------------
+
+第 167 題:
+題目: Remember to bathe the dog in the t__b once every two weeks.
+答案: tub
+------------------------------
+
+第 168 題:
+題目: Aurora didn't t___w away the trash last night, so she got punished by her father.
+答案: throw
+------------------------------
+
+第 169 題:
+題目: You are not allowed to p__k flowers in the park.
+答案: pick
+------------------------------
+
+第 170 題:
+題目: It's cold outside. P__t on the jacket before you go out.
+答案: put
+------------------------------
+
+第 171 題:
+題目: It's dark in here. Please t__n on the lights.
+答案: turn
+------------------------------
+
+第 172 題:
+題目: Don't forget to turn o__f the lights before you go out.
+答案: off
+------------------------------
+
+第 173 題:
+題目: Your clothes are dirty. Please t__e them off.
+答案: take
+------------------------------
+
+第 174 題:
+題目: Put the trash into the trash c__n.
+答案: can
+------------------------------
+
+第 175 題:
+題目: There is too much t__h on the ground. Please pick them up.
+答案: trash
+------------------------------
+
+第 176 題:
+題目: There is a f__n on the ceiling. You can turn it on if it's too hot.
+答案: fan
+------------------------------
+
+第 177 題:
+題目: The room is so d__k. There is no light.
+答案: dark
+------------------------------
+
+第 178 題:
+題目: Don't forget to turn off the l___s before you leave the room.
+答案: lights
+------------------------------
+
+第 179 題:
+題目: There is snow e___e. Let's build a snowman.
+答案: everywhere
+------------------------------
+
+第 180 題:
+題目: Lance puts the scarf around his n__k because it's really cold outside.
+答案: neck
+------------------------------
+
+第 181 題:
+題目: People sometimes give a__y free food to help the poor.
+答案: away
+------------------------------
+
+第 182 題:
+題目: Iris forgets to give b___k the book she borrowed from the library.
+答案: back
+------------------------------
+
+第 183 題:
+題目: When you're taking a test, please w___e down your answers on the paper.
+答案: write
+------------------------------
+
+第 184 題:
+題目: My grandfather forgot to b___w out the candle and nearly caused the fire.
+答案: blow
+------------------------------
+
+第 185 題:
+題目: It's Audrey's eighteenth birthday. There are eighteen c____s on her birthday cake.
+答案: candles
+------------------------------
+
+第 186 題:
+題目: What is your n___e? You can call me Steven.
+答案: name
+------------------------------
+
+第 187 題:
+題目: What is your phone n___r? It's 0987-654-321.
+答案: number
+------------------------------
+
+第 188 題:
+題目: Where do you live? Can you give me your a____s?
+答案: address
+------------------------------
+
+第 189 題:
+題目: Sheldon asks his mother to pick him up b__y evening.
+答案: by
+------------------------------
+
+第 190 題:
+題目: The l___e ducks are following their mother.
+答案: little
+------------------------------
+
+第 191 題:
+題目: Although chickens have w___s, they can't fly.
+答案: wings
+------------------------------
+
+第 192 題:
+題目: Renolds tries to s___e his brother by suddenly yelling, but it doesn't work.
+答案: scare
+------------------------------
+
+第 193 題:
+題目: My grandparents loves to watch Chinese TV p___s at night.
+答案: programs
+------------------------------
+
+第 194 題:
+題目: My mother chats with n___r every day. They talk about everything.
+答案: neighbor
+------------------------------
+
+第 195 題:
+題目: It could be dangerous to chat on the I______t because you may not know who you are really talking to.
+答案: Internet
+------------------------------
+
+第 196 題:
+題目: After the chubby man sat on the s___w, it was broken into half.
+答案: seesaw
+------------------------------
+
+第 197 題:
+題目: Every time Tyrion plays on the s___g, he asks his father to push him higher.
+答案: swing
+------------------------------
+
+第 198 題:
+題目: There are some children r___________g-r____________g in the park. Be careful when you walk near them.
+答案: roller-skating
+------------------------------
+
+第 199 題:
+題目: When you go i_________g-i_________g, don't forget to put on some clothes because it could be cold.
+答案: ice-skating
+------------------------------
+
+第 200 題:
+題目: If Podrick doesn't go to bed n__w, he won't be able to wake up early tomorrow.
+答案: now
+------------------------------
+
+第 201 題:
+題目: Joffrey w___s that he can become the king when he grows up.
+答案: wishes
+------------------------------
+
+第 202 題:
+題目: My mother m__s me do my homework now. I don't want to do it, but I have no choice.
+答案: makes
+------------------------------
+
+第 203 題:
+題目: Every Christmas, Santa Claus rides on the s___d with his reindeers and gives away gifts.
+答案: sled
+------------------------------
+
+第 204 題:
+題目: Wayne likes to play the g__r in his free time, but his brother thinks it's noisy.
+答案: guitar
+------------------------------
+
+第 205 題:
+題目: Every time Galahad p___s playing the trumpet, his neighbor comes knocking on his door to make him stop.
+答案: practices
+------------------------------
+
+第 206 題:
+題目: Diane practices b___n every day because she wants to better at it.
+答案: badminton
+------------------------------
+
+第 207 題:
+題目: Kimberly practices table t___s every day because she wants to be the best in her class.
+答案: tennis
+------------------------------
+
+第 208 題:
+題目: In the USA and Australia, playing f___l is very popular.
+答案: football
+------------------------------
+
+第 209 題:
+題目: Eric really e___s watching movies in his free time.
+答案: enjoys
+------------------------------
+
+第 210 題:
+題目: The teacher asked the students to f___h their homework in thirty minutes.
+答案: finish
+------------------------------
+
+第 211 題:
+題目: Humphrey's father tells him to stop laughing, but he k___s doing it.
+答案: keeps
+------------------------------
+
+第 212 題:
+題目: On Christmas Eve, the adults will dress up as S___a and give the kids presents.
+答案: Santa
+------------------------------
+
+第 213 題:
+題目: The kids are told to put a s___g in front of their bed in Christmas Eve, and their parents will put the gifts inside it.
+答案: stocking
+------------------------------
+
+第 214 題:
+題目: The principle didn't come to school today because she had a car a___t on her way to work.
+答案: accident
+------------------------------
+
+第 215 題:
+題目: Tobey was hit by the b___y in his class today, and his parent were angry about it.
+答案: bully
+------------------------------
+
+第 216 題:
+題目: The police officer are looking for anyone who saw the r____y at the bank this morning.
+答案: robbery
+------------------------------
+
+第 217 題:
+題目: 'Call 119! The house is on f__e!' Lupin yelled.
+答案: fire
+------------------------------
+
+第 218 題:
+題目: When Bradford came home from work, he saw a t___f running out his house and called 110.
+答案: thief
+------------------------------
+
+第 219 題:
+題目: Andy goes to the bank to get some m___y.
+答案: money
+------------------------------
+
+第 220 題:
+題目: Ten minutes later, the p___e officers comes and saves the old lady.
+答案: police
+------------------------------
+
+第 221 題:
+題目: The teacher tells the naughty boy if he doesn't say sorry, she will tell his p____s.
+答案: parents
+------------------------------
+
+第 222 題:
+題目: Please don't t___h the stray animals. They could attack you.
+答案: touch
+------------------------------
+
+第 223 題:
+題目: Remember to turn off the fan w__n you leave the room.
+答案: when
+------------------------------
+
+第 224 題:
+題目: Some people say that Michael Jordan is the best basketball player e__r.
+答案: ever
+------------------------------
+
+第 225 題:
+題目: It's m___t. Please go to bed now, or you will be late tomorrow.
+答案: midnight
+------------------------------
+
+第 226 題:
+題目: There are a___t twenty kids on the playground.
+答案: about
+------------------------------
+
+第 227 題:
+題目: The thief steals from a lot of people. He e__n hits an old lady and took her bag.
+答案: even
+------------------------------
+
+第 228 題:
+題目: Every student in the class s___d follow the class rules.
+答案: should
+------------------------------
+
+第 229 題:
+題目: Larry really loves French f___s. He wants to drink it every day.
+答案: fries
+------------------------------
+
+第 230 題:
+題目: Iverson w___d like to have steak for lunch.
+答案: would
+------------------------------
+
+第 231 題:
+題目: Please don't play with the f__d on your plate. It's impolite.
+答案: food
+------------------------------
+
+第 232 題:
+題目: Helen feels hungry, but it's not dinner time yet. So, she eats some s___s.
+答案: snacks
+------------------------------
+
+第 233 題:
+題目: Most of the kids don't want b___s for lunch, but it's healthy for them.
+答案: beans
+------------------------------
+
+第 234 題:
+題目: Jolyne is going to be late, so she only has t___t for breakfast.
+答案: toast
+------------------------------
+
+第 235 題:
+題目: There's a new Italian restaurant. You should try its s___i.
+答案: spaghetti
+------------------------------
+
+第 236 題:
+題目: Benson has a pet mouse. He always feeds it with c___e.
+答案: cheese
+------------------------------
+
+第 237 題:
+題目: Roxanne is mad because her neighbors are making loud n___s again.
+答案: noises
+------------------------------
+
+第 238 題:
+題目: Do you hear it? That is the s___d of a bird.
+答案: sound
+------------------------------
+
+第 239 題:
+題目: How would you like your steak? I would want it r__e.
+答案: rare
+------------------------------
+
+第 240 題:
+題目: My father wants his steak m___m. It's not too raw, but not too hard to bite.
+答案: medium
+------------------------------
+
+第 241 題:
+題目: The customer is mad because he wanted his steak medium, but it is served well-d__e.
+答案: done
+------------------------------
+
+第 242 題:
+題目: w____d made the flowers grow with magic.
+答案: wizard
+------------------------------
+
+第 243 題:
+題目: The superhero used his p___r to save the city.
+答案: power
+------------------------------
+
+第 244 題:
+題目: Oscar loves science. He wants to be a s______t when he grows up.
+答案: scientist
+------------------------------
+
+第 245 題:
+題目: She works as a c__k in a restaurant.
+答案: cook
+------------------------------
+
+第 246 題:
+題目: The w____r wrote an interesting book. It sold very well.
+答案: writer
+------------------------------
+
+第 247 題:
+題目: It's time to g__w u__p. You're not a kid anymore.
+答案: grow up
+------------------------------
+
+第 248 題:
+題目: He had a g___t time at the party with his friends, and he enjoyed the nice music and delicious food.
+答案: great
+------------------------------
+
+第 249 題:
+題目: We'll l___n to play the guitar tomorrow.
+答案: learn
+------------------------------
+
+第 250 題:
+題目: She is not h__e right now, but she will be back soon.
+答案: here
+------------------------------
+
+第 251 題:
+題目: If you eat bad food, you'll b__e sick.
+答案: be
+------------------------------
+
+第 252 題:
+題目: Something h______d this morning, so Oscar was late for school.
+答案: happened
+------------------------------
+
+第 253 題:
+題目: Oscar was l__e for school because he got on the wrong bus.
+答案: late
+------------------------------
+
+第 254 題:
+題目: Because Oscar g__t o__n the wrong bus, he was late for school this morning.
+答案: got on
+------------------------------
+
+第 255 題:
+題目: Oscar got on the wrong bus because he had to l__k a___r his owl's baby.
+答案: look after
+------------------------------
+
+第 256 題:
+題目: Oscar said that Yolanda was s___y because she thought that Oscar has a baby.
+答案: silly
+------------------------------
+
+第 257 題:
+題目: Paragraph: Something h______d this morning, so Oscar was _____ for school. (Fill in: happened)
+答案: happened
+------------------------------
+
+第 258 題:
+題目: Paragraph: Something happened this morning, so Oscar was l__e for school. (Fill in: late)
+答案: late
+------------------------------
+
+第 259 題:
+題目: Paragraph: He g__t o__n the wrong bus because he had to look after his owl's baby. (Fill in: got on)
+答案: got on
+------------------------------
+
+第 260 題:
+題目: Paragraph: He got on the wrong bus because he had to l__k a___r his owl's baby. (Fill in: look after)
+答案: look after
+------------------------------
+
+第 261 題:
+題目: Paragraph: Oscar told Yolanda not to be s___y because she thought that Oscar has a baby. (Fill in: silly)
+答案: silly
+------------------------------
+
+第 262 題:
+題目: Hey g__s! Please be quiet when the teacher is talking.
+答案: guys
+------------------------------
+
+第 263 題:
+題目: My brother and I enjoy watching magic shows. We talk about the magic t____s after watching them.
+答案: tricks
+------------------------------
+
+第 264 題:
+題目: Tell a teacher or call the police when you see anything that look like a b__b.
+答案: bomb
+------------------------------
+
+第 265 題:
+題目: That tall g__y standing over there is my cousin. He is 190 centimeters tall.
+答案: guy
+------------------------------
+
+第 266 題:
+題目: Paragraph: There was a spelling c_____t in our school last Sunday. (Fill in: contest)
+答案: contest
+------------------------------
+
+第 267 題:
+題目: Paragraph: My friend, Cathy, and I studied very hard for it. We practiced spelling all the words with e__h o___r during the break time. (Fill in: each other)
+答案: each other
+------------------------------
+
+第 268 題:
+題目: Paragraph: On the test day, I was so nervous that I forgot some words. I didn't know what to do so I just g____d. (Fill in: guessed)
+答案: guessed
+------------------------------
+
+第 269 題:
+題目: Paragraph: After the test, I l____d a__t my report card and felt a little upset. I will study harder next time! (Fill in: looked at)
+答案: looked at
+------------------------------
+
+第 270 題:
+題目: Dialog: Alex: Why are you standing by the w__l? (Fill in: wall)
+答案: wall
+------------------------------
+
+第 271 題:
+題目: Dialog: Ben: I'm l_____g a__t the cats over there. (Fill in: looking at)
+答案: looking at
+------------------------------
+
+第 272 題:
+題目: Dialog: Ben: They are running after e__h o___r and trying to catch a butterfly. (Fill in: each other)
+答案: each other
+------------------------------
+
+第 273 題:
+題目: Dialog: Alex: Haha! That's f___y! (Fill in: funny)
+答案: funny
+------------------------------
+
+第 274 題:
+題目: I have three bananas. One is yellow, and the o___rs are green.
+答案: others
+------------------------------
+
+第 275 題:
+題目: I have two apples. One is green, and the other is g___n.
+答案: golden
+------------------------------
+
+第 276 題:
+題目: Time to s___p. Sweet dreams.
+答案: sleep
+------------------------------
+
+第 277 題:
+題目: It's time to go to bed. Sweet d___ms.
+答案: dreams
+------------------------------
+
+第 278 題:
+題目: There are two cats. One likes to play with a ball, but the o___r doesn't.
+答案: other
+------------------------------
+
+第 279 題:
+題目: The princess wore a beautiful g___n crown on her head.
+答案: golden
+------------------------------
+
+第 280 題:
+題目: After a long day of playing, the tired boy went to s___p.
+答案: sleep
+------------------------------
+
+第 281 題:
+題目: I had a wonderful d___m about flying in the sky like a bird.
+答案: dream
+------------------------------
+
+第 282 題:
+題目: Last night, a lot of people g_____d at the department store because there was a big sale.
+答案: gathered
+------------------------------
+
+第 283 題:
+題目: Mary: I can't find my umbrella. Where did you put it? John: Do you see a box on the shelf? I put it in t___e.
+答案: there
+------------------------------
+
+第 284 題:
+題目: Why not g____r at John's house and have a barbecue tomorrow?
+答案: gather
+------------------------------
+
+第 285 題:
+題目: The bakery closed early today, so I couldn't buy any bread. I will go t___e again tomorrow.
+答案: there
+------------------------------
+
+第 286 題:
+題目: We have walked for such a long time. Can we find a place to s__t and rest?
+答案: sit
+------------------------------
+
+第 287 題:
+題目: Get a chair and s__t down. Let's enjoy some cake and milk tea together.
+答案: sit
+------------------------------
+
+第 288 題:
+題目: Patty: Don't forget that we will have lunch with May at 11:30 tomorrow. John: Sure. I will see you t__n.
+答案: then
+------------------------------
+
+第 289 題:
+題目: I need more time to think about the questions. Can you call me next Monday? I will have the answers t__n.
+答案: then
+------------------------------
+
+第 290 題:
+題目: The n___e is too loud. I can't hear you.
+答案: noise
+------------------------------
+
+第 291 題:
+題目: Stop making n___e. My ears hurt.
+答案: noise
+------------------------------
+
+第 292 題:
+題目: It is r____y hot in the room. Can you turn on the fan, please?
+答案: really
+------------------------------
+
+第 293 題:
+題目: The question is over my head. I don't k__w the answer.
+答案: know
+------------------------------
+
+第 294 題:
+題目: After Sara got on the train, she turned a____d and waved goodbye to us.
+答案: around
+------------------------------
+
+第 295 題:
+題目: Art teacher: Do you want this artwork back or can I k__p it? Lisa: I want to bring it home to my sister as her birthday gift.
+答案: keep
+------------------------------
+
+第 296 題:
+題目: Uncle Ken l__t his left leg in a car accident two years ago.
+答案: lost
+------------------------------
+
+第 297 題:
+題目: There were so many people on the bus. We couldn't find any seats to sit on, so we had to s___d.
+答案: stand
+------------------------------
+
+第 298 題:
+題目: That TV program is r____y funny. I want to watch it again.
+答案: really
+------------------------------
+
+第 299 題:
+題目: Granny says her feet hurt because she s____s for a long time. We should take her to the doctor.
+答案: stands
+------------------------------
+
+第 300 題:
+題目: The washing machine made a loud noise, I k__w something was wrong. We need to call someone to fix it.
+答案: knew
+------------------------------
+
+第 301 題:
+題目: Mom: How much is the skirt? The Clerk: It is 489 dollars. Mom: Here's 500, and you can k__p the change.
+答案: keep
+------------------------------
+
+第 302 題:
+題目: I can't find my keys. I think I l__t them on the train. What should I do?
+答案: lost
+------------------------------
+
+第 303 題:
+題目: The whole family was sitting a____d grandpa singing 'Happy Birthday'. Each of us brought a gift for him.
+答案: around
+------------------------------
+
+第 304 題:
+題目: I f____t to buy milk at the store this morning, so I'll go there again later.
+答案: forgot
+------------------------------
+
+第 305 題:
+題目: I heard a s_____e sound coming from under my bed at night.
+答案: strange
+------------------------------
+
+第 306 題:
+題目: I felt so scared that I r__n out of my room.
+答案: ran
+------------------------------
+
+第 307 題:
+題目: I r__d the novel once, and now I'm reading it again.
+答案: read
+------------------------------
+
+第 308 題:
+題目: The lights are still on i____e the office.
+答案: inside
+------------------------------
+
+第 309 題:
+題目: Maybe s_____e is there. Let's see who it is.
+答案: someone
+------------------------------
+
+第 310 題:
+題目: Yesterday was the Balloon Festival. When we lay down on the g____d.
+答案: ground
+------------------------------
+
+第 311 題:
+題目: We watched the hot air balloons fly into the a__r.
+答案: air
+------------------------------
+
+第 312 題:
+題目: When I opened the window this morning, it was snowy. e________g was cold and white.
+答案: everything
+------------------------------
+
+第 313 題:
+題目: A bird flew down and l____d on my hand. I held the bird and kept it warm.
+答案: landed
+------------------------------
+
+第 314 題:
+題目: When the e_____e hit yesterday, Samuel was practicing his magic.
+答案: earthquake
+------------------------------
+
+第 315 題:
+題目: Samuel was practicing his magic when the earthquake hit and he made a h__e in the wall.
+答案: hole
+------------------------------
+
+第 316 題:
+題目: Jolly was cooking in the school kitchen when the earthquake h__t.
+答案: hit
+------------------------------
+
+第 317 題:
+題目: When Samuel asked Yolanda about the earthquake news on the newspaper, Yolanda asked him not to r__h her.
+答案: rush
+------------------------------
+
+第 318 題:
+題目: The news about the earthquake in the newspaper s__s: Fire Dragon and Forest Witches Are up to Something.
+答案: says
+------------------------------
+
+第 319 題:
+題目: It's important to f____w the steps in the recipe when cooking.
+答案: follow
+------------------------------
+
+第 320 題:
+題目: You did a great job sharing your toys with your friend. That's the r___t way to be kind.
+答案: right
+------------------------------
+
+第 321 題:
+題目: The music at the party was too l__d for my ears.
+答案: loud
+------------------------------
+
+第 322 題:
+題目: When we visit the library, we need to be q___t so that others can read their books.
+答案: quiet
+------------------------------
+
+第 323 題:
+題目: Can you m__e the chair to the other side of the room, please? We need more space.
+答案: move
+------------------------------
+
+第 324 題:
+題目: Marvin: How f__r does the sports car drive? Peter: Very f__r on the highway! (first blank)
+答案: far
+------------------------------
+
+第 325 題:
+題目: Frank: How do we get from one classroom to another? Maggie: Easy! Just walk down the h_____y.
+答案: hallway
+------------------------------
+
+第 326 題:
+題目: Dad: We should look left and right before crossing the road. Nick: Okay, Daddy! Dad: Good boy! Remember, we must always p_____t ourselves.
+答案: protect
+------------------------------
+
+第 327 題:
+題目: Some monkeys are very smart. They can finish some t___s with practice. For example, they can open a box and take out food, jump through hoops or stand on a ball.
+答案: tasks
+------------------------------
+
+第 328 題:
+題目: Molly: Hurry up, o__r we will be late for the train. Cathy: Okay! Let's run!
+答案: or
+------------------------------
+
+第 329 題:
+題目: Eric: I'm having t_____e with this science report. Iris: Really? I thought it was a piece of cake! Eric: Can you please help me? Iris: Sure! Let's go to the library!
+答案: trouble
+------------------------------
+
+第 330 題:
+題目: Grandma: The sky is getting dark. Maybe you s____d take an umbrella. Lisa: Okay. I'll be back before dinner. Goodbye!
+答案: should
+------------------------------
+
+第 331 題:
+題目: When I was driving in Australia, I saw some kangaroos h___g by the road.
+答案: hopping
+------------------------------
+
+第 332 題:
+題目: The teachers went to the restroom to c__k why the children were shouting.
+答案: check
+------------------------------
+
+第 333 題:
+題目: Please drive faster. I'm in a h___y because I can't be late for my important meeting.
+答案: hurry
+------------------------------
+
+第 334 題:
+題目: It's raining heavily now. We are so lucky that we found a c__e to hide from the rain.
+答案: cave
+------------------------------
+
+第 335 題:
+題目: We are going to visit a famous t__n next month. There is a river passing through it and three small gardens in it.
+答案: town
+------------------------------
+
+第 336 題:
+題目: Our new teacher looks very s__m and short. I think even my sister's uniform may be big enough for her.
+答案: slim
+------------------------------
+
+第 337 題:
+題目: The boy was scaring the other kids by wearing a g___t mask.
+答案: ghost
+------------------------------
+
+第 338 題:
+題目: My little brother showed me the picture he drew. It was a m___r with three eyes and long teeth shouting in a cave.
+答案: monster
+------------------------------
+
+第 339 題:
+題目: My little sister drank a lot of water and needed to use the r___m in math class. She did not want to go by herself because she read a story about a monster at school.
+答案: restroom
+------------------------------
+
+第 340 題:
+題目: My backpack is empty. There is n___g in it.
+答案: nothing
+------------------------------
+
+第 341 題:
+題目: Emily is very famous in our town because she looks l___e the famous actress, Amelia Smith.
+答案: like
+------------------------------
+
+第 342 題:
+題目: I checked my report S_____l times before I handed it to the teacher.
+答案: Several
+------------------------------
+
+第 343 題:
+題目: Did you go a___e during the vacation?
+答案: anywhere
+------------------------------
+
+第 344 題:
+題目: Oh my! The basketball player is a__tall as a tree. No one can pass him!
+答案: as
+------------------------------
+
+第 345 題:
+題目: Did you see the robber? No. It all happened very s___y.
+答案: suddenly
+------------------------------
+
+第 346 題:
+題目: The weather is weird. It was sunny a minute ago. Then, It turned dark s___y and started raining.
+答案: suddenly
+------------------------------
+
+第 347 題:
+題目: There is a lot of s__w in the yard. Can we go out and play?
+答案: snow
+------------------------------
+
+第 348 題:
+題目: There are many animals living in the w___s. We have to protect the place when we camp here.
+答案: woods
+------------------------------
+
+第 349 題:
+題目: Excuse me. May I use the restroom? Sorry! It is full of toilet p___r, and the toilet needs to be fixed. If you're in a hurry, you can find one in the gas station on the corner.
+答案: paper
+------------------------------
+
+第 350 題:
+題目: Miss Smith, may I have a piece of p___r? Kevin and I want to play bingo.
+答案: paper
+------------------------------
+
+第 351 題:
+題目: What will you do this weekend? I'll clean the balcony and the t___t.
+答案: toilet
+------------------------------
+
+第 352 題:
+題目: Someone who is able to think quickly and have good ideas (s___t)
+答案: smart
+------------------------------
+
+第 353 題:
+題目: Someone who works very hard and does their work well (h___g)
+答案: hard-working
+------------------------------
+
+第 354 題:
+題目: Someone who is kind to people and loves to help everyone (f___y)
+答案: friendly
+------------------------------
+
+第 355 題:
+題目: Liked or enjoyed by a lot of people (p___r)
+答案: popular
+------------------------------
+
+第 356 題:
+題目: We are lucky to have such f___y neighbors. They help us look after our dog when we are not home and usually share yummy food with us.
+答案: friendly
+------------------------------
+
+第 357 題:
+題目: This song was very p___r when my parents were students. Many people who are my parents' age know how to sing this song.
+答案: popular
+------------------------------
+
+第 358 題:
+題目: Ivy is a h___g student. She always reviews all the subjects and finishes her homework after she gets home.
+答案: hard-working
+------------------------------
+
+第 359 題:
+題目: Brian is very s___t. He always knows the answers in class.
+答案: smart
+------------------------------
+
+第 360 題:
+題目: I am laughing because my little brother made a funny f___e at me.
+答案: face
+------------------------------
+
+第 361 題:
+題目: I think the flowers are very p___y. They have different colors and shapes.
+答案: pretty
+------------------------------
+
+第 362 題:
+題目: I h__t my arm when I was riding a bike.
+答案: hurt
+------------------------------
+
+第 363 題:
+題目: I like ice cream v___y much. It's so delicious.
+答案: very
+------------------------------
+
+第 364 題:
+題目: Can I a__k you a question about the homework?
+答案: ask
+------------------------------
+
+第 365 題:
+題目: Who will l__d the students to the park? I don't think they know how to get there.
+答案: lead
+------------------------------
+
+第 366 題:
+題目: Who is that p___n standing near the door? He is my cousin.
+答案: person
+------------------------------
+
+第 367 題:
+題目: Do you and your friend have the s__e favorite color? Yes, we do. We both like blue.
+答案: same
+------------------------------
+
+第 368 題:
+題目: We went to the h__l for our picnic. It had a great view!
+答案: hill
+------------------------------
+
+第 369 題:
+題目: The weather was n__e today. It was sunny and warm.
+答案: nice
+------------------------------
+
+第 370 題:
+題目: What do you c__l your cat? My cat's name is 'Kitty.' It's a cute name.
+答案: call
+------------------------------
+
+第 371 題:
+題目: How do you keep your room so n__t? I put things back after I use them. And I tidy up my room every day.
+答案: neat
+------------------------------
+
+第 372 題:
+題目: Did you know that my sister was b__n last night?
+答案: born
+------------------------------
+
+第 373 題:
+題目: Oh, that's great! How is she now? She's just a l___e baby, but she's healthy and cute.
+答案: little
+------------------------------
+
+第 374 題:
+題目: I have a great idea for a game we can play today. Oh yeah? I'm c___s! What game are you thinking of?
+答案: curious
+------------------------------
+
+第 375 題:
+題目: Let's play h__e a__d-s__k!
+答案: hide-and-seek
+------------------------------
+
+第 376 題:
+題目: Hey. I saw something interesting at the park today. Really? I'm c___s. Tell me about it.
+答案: curious
+------------------------------
+
+第 377 題:
+題目: Well, there was a l___e kitten. How cute! How did it look? It looked a bit scared. I tried to let it know I am a kind person, and f___y, it played with me.
+答案: little
+------------------------------
+
+第 378 題:
+題目: Well, there was a little kitten. How cute! How did it look? It looked a bit scared. I tried to let it know I am a kind person, and f___y, it played with me.
+答案: finally
+------------------------------
+
+第 379 題:
+題目: We put one more light in our bedroom because it was too d__k.
+答案: dark
+------------------------------
+
+第 380 題:
+題目: At night, I enjoy watching the l___t stars shining in the sky.
+答案: light
+------------------------------
+
+第 381 題:
+題目: The lights in this room are too b___t. I can't open my eyes.
+答案: bright
+------------------------------
+
+第 382 題:
+題目: Last weekend, Troy went fishing and brought many f___h fish home for dinner.
+答案: fresh
+------------------------------
+
+第 383 題:
+題目: The short trees in this part of the forest are still very y___g because there was a fire here five years ago.
+答案: young
+------------------------------
+
+第 384 題:
+題目: It's getting d__k. We should go home now, or our parents will be worried.
+答案: dark
+------------------------------
+
+第 385 題:
+題目: My mom is getting o__d. I can tell from her gray hair. I must do more housework for her.
+答案: old
+------------------------------
+
+第 386 題:
+題目: Nick looks like a high school student, but he is actually a teacher. He looks y___g for his age.
+答案: young
+------------------------------
+
+第 387 題:
+題目: The bread smells so great. It is f___h out of the oven.
+答案: fresh
+------------------------------
+
+第 388 題:
+題目: My sister is a two-year-old girl. She is too y___g, so she doesn't go to school.
+答案: young
+------------------------------
+
+第 389 題:
+題目: The kitchen is d___r t__n the living room.
+答案: darker than
+------------------------------
+
+第 390 題:
+題目: The woman is s___r t__n Dennis.
+答案: stronger than
+------------------------------
+
+第 391 題:
+題目: The ring is c___r t__n the necklace.
+答案: cheaper than
+------------------------------
+
+第 392 題:
+題目: The plane is f___r t__n the ship.
+答案: faster than
+------------------------------
+
+第 393 題:
+題目: Maria is y___r t__n Elvin.
+答案: younger than
+------------------------------
+
+第 394 題:
+題目: The classroom 101 is n___r t__n the classroom 103.
+答案: neater than
+------------------------------
+
+第 395 題:
+題目: James is t___r t__n Ben right now.
+答案: taller than
+------------------------------
+

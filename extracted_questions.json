@@ -1,0 +1,2596 @@
+{
+  "total_questions": 395,
+  "extracted_at": "2025-01-27",
+  "questions": [
+    {
+      "id": "q_1",
+      "question": "Q 1看圖拼字   l_____________n A .  lemon  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2644",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_141.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1f61dcd2375fe54c306beeedb8e1dfee287eedb15dcafcf570eff6f4d3c88de3",
+      "answer": "lemon",
+      "blanks": [
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_3",
+      "question": "Q 2看圖拼字   c_____________ks A .  chopsticks  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:921",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_047.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a336d140927f0c0f10636e5de4a79047613a112af76844ff59428352ddb45ee7",
+      "answer": "chopsticks",
+      "blanks": [
+        "_____________",
+        "__________"
+      ]
+    },
+    {
+      "id": "q_5",
+      "question": "Q 3看圖拼字   f_____________r A .  farmer  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3745",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_022.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=bf6d0e20c807179ebdf5e178358909195e297955310bfb84fd5f5d111a9726b7",
+      "answer": "farmer",
+      "blanks": [
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_7",
+      "question": "Q 4看圖拼字   b_____________y A .  butterfly  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3126",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_153.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=86942a8f85a6a309822e36260dcedfb3309d2620dcf343605679fe1c3a9801c8",
+      "answer": "butterfly",
+      "blanks": [
+        "_____________",
+        "_________"
+      ]
+    },
+    {
+      "id": "q_9",
+      "question": "Q 5看圖拼字   k_____________e A .  kite  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2004",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_101.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=4fe8952483a0cfe2f95aaa8f6e271ed79fe30a61ca75b6813eaf167d028d4654",
+      "answer": "kite",
+      "blanks": [
+        "_____________",
+        "____"
+      ]
+    },
+    {
+      "id": "q_11",
+      "question": "Q 6看圖拼字   s_____________n A .  seven  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2632",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1e3ea8d845ffb48103ccda54d2e3fbcbaf221f14a543c06eddb47370391f249b",
+      "answer": "seven",
+      "blanks": [
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_13",
+      "question": "Q 7看圖拼字   r_____________d A .  read  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:934",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_060.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=d4a974610afb9e1c54d2a7c127005e4fca503a50e0ad802c0f8dd041c16dbca4",
+      "answer": "read",
+      "blanks": [
+        "_____________",
+        "____"
+      ]
+    },
+    {
+      "id": "q_15",
+      "question": "Q 8看圖拼字   d_____________r A .  doctor  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2011",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_108.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=9585bc785f4cd4b3ea27229caf1f8821bf9863ba083a5e5c90aa26f604cc3503",
+      "answer": "doctor",
+      "blanks": [
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_17",
+      "question": "Q 9看圖拼字   s_____________i A .  sushi  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3750",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_027.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=e4a2a17cc4a4a140f723ac848b45d32d9c6d5485c493a382da37e98fa272049c",
+      "answer": "sushi",
+      "blanks": [
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_19",
+      "question": "Q 10看圖拼字   s_____________r A .  sticker  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:186",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_015.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1d0aaf2d6928f739759079b628f74410e56c348099e90bbc36ce6332a7ae3416",
+      "answer": "sticker",
+      "blanks": [
+        "_____________",
+        "_______"
+      ]
+    },
+    {
+      "id": "q_21",
+      "question": "Q 11看圖拼字   u_____________r A .  under  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1304",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_069.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1bd437d78e7954e2cc28468f9bba9e9c92454d9e6568933f8825f3b612734023",
+      "answer": "under",
+      "blanks": [
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_23",
+      "question": "Q 12看圖拼字   s_____________h A .  sandwich  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:3135",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_162.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=162555deab324261ed79525caf465941a19e287eeef0951949262931c8b1283a",
+      "answer": "sandwich",
+      "blanks": [
+        "_____________",
+        "________"
+      ]
+    },
+    {
+      "id": "q_25",
+      "question": "Q 13看圖拼字   w_____________y A .  windy  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2646",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_143.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=dceac90cc0c7f46d182860ebf3025c0af169810a7f39f1b4912cf254b9b503ec",
+      "answer": "windy",
+      "blanks": [
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_27",
+      "question": "Q 14看圖拼字   T_____________n A .  Taiwan  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2641",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_138.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=35ead3e5915ff279560f7f8101d9cb8283baf0f40f7913e3cf44f7439b6591e9",
+      "answer": "Taiwan",
+      "blanks": [
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_29",
+      "question": "Q 15看圖拼字   w_____________h A .  watch  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3733",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_010.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=aa67b70b4661e319df4edfb33aeedf16a26ed0aa4ea1ea23cc1deaaa99bf02b9",
+      "answer": "watch",
+      "blanks": [
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_31",
+      "question": "Q 16看圖拼字   d_____________r A .  door  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:3753",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_030.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=17444ee01ca75a357bc54e765f19a993f5a02dfc4ef216cc9bd819ab4f7b51e6",
+      "answer": "door",
+      "blanks": [
+        "_____________",
+        "____"
+      ]
+    },
+    {
+      "id": "q_33",
+      "question": "Q 17看圖拼字   f_____________r A .  flower  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2642",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_139.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=f208038fd9c3196faf7bb6ba15530d87e3004816991956b924a08e76cc52b1ff",
+      "answer": "flower",
+      "blanks": [
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_35",
+      "question": "Q 18看圖拼字   b_____________r A .  bear  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:3148",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_175.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=028584f25597e5515338841ab599131ceb54860f409563d0139eeb17d5833737",
+      "answer": "bear",
+      "blanks": [
+        "_____________",
+        "____"
+      ]
+    },
+    {
+      "id": "q_37",
+      "question": "Q 19看圖拼字   c_____________n A .  crayon  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3726",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_003.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=e75e4b12132c615d86a479106cc67011a054aecf7829cb4f2d7ee21bc56a8a48",
+      "answer": "crayon",
+      "blanks": [
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_39",
+      "question": "Q 20看圖拼字   p_____________a A .  papaya  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:930",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_056.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a3782962eccf599e1c39b0d6da21fc597aa1768a7c678273dd96e384eefb0b00",
+      "answer": "papaya",
+      "blanks": [
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_41",
+      "question": "Q 21看圖拼字   d_____________k A .  desk  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2010",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_107.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=c3ce4905b7f5e77d0a93909a80dda315f16c6b79085d27d1916c3f3772b99ec5",
+      "answer": "desk",
+      "blanks": [
+        "_____________",
+        "____"
+      ]
+    },
+    {
+      "id": "q_43",
+      "question": "Q 22看圖拼字   j_____________e A .  juice  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1321",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_086.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=9ff355fc1bf031b5643a0242065ea4469093fd9ac0c4008138c3bcdd4d31f684",
+      "answer": "juice",
+      "blanks": [
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_45",
+      "question": "Q 23看圖拼字   s_____________r A .  sugar  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:929",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_055.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=afb579e44a3f77f8e5d441c575e1542fc28278fe2806fcc37177ff2eeac72773",
+      "answer": "sugar",
+      "blanks": [
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_47",
+      "question": "Q 24看圖拼字   m_____________y A .  monkey  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:1999",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_096.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=c994ce325d38f07371c4c2449bb7a356d9b724ab322a8019ad5ac2f9b734d1df",
+      "answer": "monkey",
+      "blanks": [
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_49",
+      "question": "Q 25看圖拼字   f_____________t A .  feet  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:188",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_017.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=b2764e038ec09409d45fc0e7b80256bee04cd13828724c920b9bca1e22cf6c58",
+      "answer": "feet",
+      "blanks": [
+        "_____________",
+        "____"
+      ]
+    },
+    {
+      "id": "q_51",
+      "question": "Q 26看圖拼字   c_____________p A .  cap  \n\t\t\t\t\t\t\t\t\t\t\t___\n\t\t\t\t\t\t\t\t\t\t ID:2633",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_130.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=498f6c37d5a86abe900fcfb96db0f8dedeabbeea428cf6e975c4799ee79bc5f9",
+      "answer": "cap",
+      "blanks": [
+        "_____________",
+        "___"
+      ]
+    },
+    {
+      "id": "q_53",
+      "question": "Q 27看圖拼字   m_____________n A .  magician  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:1315",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_080.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1148e21df4872337ab2e9ee8a977dd1320fc6d219a941641c6d38128b56c100c",
+      "answer": "magician",
+      "blanks": [
+        "_____________",
+        "________"
+      ]
+    },
+    {
+      "id": "q_55",
+      "question": "Q 28看圖拼字   s_____________k A .  sick  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:1317",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_082.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=76434261f103bd7f8847435fb2378dbb3f66b0c8886ce4875818a3e71edfcf2e",
+      "answer": "sick",
+      "blanks": [
+        "_____________",
+        "____"
+      ]
+    },
+    {
+      "id": "q_57",
+      "question": "Q 29看圖拼字   tape r_____________r A .  recorder  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:928",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_054.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=30c57bf34471a8db63744f3cec42ddc5aa2c1d5f789222e5b518e1478fe957ca",
+      "answer": "recorder",
+      "blanks": [
+        "_____________",
+        "________"
+      ]
+    },
+    {
+      "id": "q_59",
+      "question": "Q 30看圖拼字   j_____________t A .  jacket  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3152",
+      "image_url": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_179.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a0fb3d278f001830f72f27a36dc901931d5cf3a05b4645707454e6d8b8239af4",
+      "answer": "jacket",
+      "blanks": [
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_61",
+      "question": "Q 31文意字彙 I want two h_____ers and three hot dogs.  h_____________ers A .  hamburgers  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:3183",
+      "image_url": null,
+      "answer": "hamburgers",
+      "blanks": [
+        "_____",
+        "_____________",
+        "__________"
+      ]
+    },
+    {
+      "id": "q_63",
+      "question": "Q 32文意字彙 Amy is riding a s_____d at the park.  s_____________d A .  skateboard  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:2679",
+      "image_url": null,
+      "answer": "skateboard",
+      "blanks": [
+        "_____",
+        "_____________",
+        "__________"
+      ]
+    },
+    {
+      "id": "q_65",
+      "question": "Q 33文意字彙 I'm hungry. I want a h_____r.  h_____________r A .  hamburger  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3790",
+      "image_url": null,
+      "answer": "hamburger",
+      "blanks": [
+        "_____",
+        "_____________",
+        "_________"
+      ]
+    },
+    {
+      "id": "q_67",
+      "question": "Q 34文意字彙 There are two pencils and one e_____r in my bag.  e_____________r A .  eraser  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:947",
+      "image_url": null,
+      "answer": "eraser",
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_69",
+      "question": "Q 35文意字彙 Meggie has a fruit s_____d and an ice cream for dinner (晚餐).  s_____________d A .  salad  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3791",
+      "image_url": null,
+      "answer": "salad",
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_71",
+      "question": "Q 36文意字彙 Peter is riding a s_____r to school.  s_____________r A .  scooter  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:2684",
+      "image_url": null,
+      "answer": "scooter",
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ]
+    },
+    {
+      "id": "q_73",
+      "question": "Q 37文意字彙 S_____ks are sea (海洋) animals.  S_____________ks A .  Sharks  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:1349",
+      "image_url": null,
+      "answer": "Sharks",
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_75",
+      "question": "Q 38文意字彙 My brother is 7 years old.  He is a cute b_____y.  b_____________y A .  boy  \n\t\t\t\t\t\t\t\t\t\t\t___\n\t\t\t\t\t\t\t\t\t\t ID:2025",
+      "image_url": null,
+      "answer": "boy",
+      "blanks": [
+        "_____",
+        "_____________",
+        "___"
+      ]
+    },
+    {
+      "id": "q_77",
+      "question": "Q 39文意字彙 Billy is my c_____n. His father and my father are brothers.  c_____________n A .  cousin  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3155",
+      "image_url": null,
+      "answer": "cousin",
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_79",
+      "question": "Q 40文意字彙 Kenny has five pets: a dog, two cats, and two r_____its.  r_____________its A .  rabbits  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:1347",
+      "image_url": null,
+      "answer": "rabbits",
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ]
+    },
+    {
+      "id": "q_81",
+      "question": "Q 41文意字彙 The pig is fat. It's not t_____n.  t_____________n A .  thin  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:23",
+      "image_url": null,
+      "answer": "thin",
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ]
+    },
+    {
+      "id": "q_83",
+      "question": "Q 42文意字彙 I'm b_____ed. Can you play games with me?  b_____________ed A .  bored  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:231",
+      "image_url": null,
+      "answer": "bored",
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_85",
+      "question": "Q 43文意字彙 Andy is tired. He is sl_____y.  sl_____________y A .  sleepy  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3192",
+      "image_url": null,
+      "answer": "sleepy",
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_87",
+      "question": "Q 44文意字彙 Good morning! Let's go to s_____l.  s_____________l A .  school  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2050",
+      "image_url": null,
+      "answer": "school",
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_89",
+      "question": "Q 45文意字彙 Those boxes are full. They're h_____y.  h_____________y A .  heavy  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2036",
+      "image_url": null,
+      "answer": "heavy",
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_91",
+      "question": "Q 46文意字彙 Mom is t_____ed. She is sleepy.  t_____________ed A .  tired  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3792",
+      "image_url": null,
+      "answer": "tired",
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_93",
+      "question": "Q 47文意字彙 Put some cookies in the p_____e, not in the bowl.  p_____________e A .  plate  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2687",
+      "image_url": null,
+      "answer": "plate",
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ]
+    },
+    {
+      "id": "q_95",
+      "question": "Q 48文意字彙 The boy is weak. He's not s_____g.  s_____________g A .  strong  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:203",
+      "image_url": null,
+      "answer": "strong",
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "q_97",
+      "question": "Q 49文意字彙 There are many b_____lies and bees at the park.  b_____________lies A .  butterflies  \n\t\t\t\t\t\t\t\t\t\t\t___________\n\t\t\t\t\t\t\t\t\t\t ID:2683",
+      "image_url": null,
+      "answer": "butterflies",
+      "blanks": [
+        "_____",
+        "_____________",
+        "___________"
+      ]
+    },
+    {
+      "id": "q_99",
+      "question": "Q 50文意字彙 We can see many famous (有名的) pictures in this m_____m.  m_____________m A .  museum  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3182",
+      "image_url": null,
+      "answer": "museum",
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ]
+    },
+    {
+      "id": "html_q_1",
+      "question": "My father usually l___s to the radio in the morning.",
+      "answer": "listens",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_2",
+      "question": "My mother tells me to wash the d___s in the kitchen after dinner.",
+      "answer": "dishes",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_3",
+      "question": "It's not polite to t__k on the phone during a concert.",
+      "answer": "talk",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_4",
+      "question": "When Tim o__s the door, the cat runs out quickly.",
+      "answer": "opens",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_5",
+      "question": "My grandfather likes to go mountain c___g. He likes Mt. Ali very much.",
+      "answer": "climbing",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_6",
+      "question": "John loves to play c___s. He is the best c___s player in our class.",
+      "answer": "chess",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_7",
+      "question": "I like to w___h TV in my free time, but my mother hates it. She says it's bad for my eyes.",
+      "answer": "watch",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_8",
+      "question": "The teacher y___s at the students because no one is listening to him.",
+      "answer": "yells",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_9",
+      "question": "Jane is g___d at sports. She runs fast and plays basketball well.",
+      "answer": "good",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_10",
+      "question": "Tiffany's mother tells her to c___n her room because her room is too messy.",
+      "answer": "clean",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_11",
+      "question": "If you want to visit a f___s lake, Sun Moon Lake is a good place to go.",
+      "answer": "famous",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_12",
+      "question": "The businessman will not a__d the meeting tomorrow because he had a car accident yesterday.",
+      "answer": "attend",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_13",
+      "question": "I p__d a tea pot in the art class today. I think my grandmother will love it because she loves drinking tea.",
+      "answer": "painted",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_14",
+      "question": "The actor didn't a__t in a play because he was sick.",
+      "answer": "act",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_15",
+      "question": "When Eve saw her boyfriend s___e with another girl, she got angry and broke up with him.",
+      "answer": "skate",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_16",
+      "question": "When Jim saw his daughter c___t with a man, he hid behind them and listened to what they were talking about.",
+      "answer": "chat",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_17",
+      "question": "The police officer k___s on the door, but no one answers.",
+      "answer": "knocks",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_18",
+      "question": "There is an empty box on the ground. There is nothing i___e.",
+      "answer": "inside",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_19",
+      "question": "She didn't take out the trash last night, but she took it out the day b___e yesterday, which was two days ago.",
+      "answer": "before",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_20",
+      "question": "S______y, my brother hits me in the back and scared me.",
+      "answer": "Suddenly",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_21",
+      "question": "The clown p__d out of the box and surprised the audience.",
+      "answer": "popped",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_22",
+      "question": "Timmy feels dizzy because the ball hit his h___d.",
+      "answer": "head",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_23",
+      "question": "Yvonne likes to study h____y because she is interested in what happened in the past.",
+      "answer": "history",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_24",
+      "question": "Joanne has to t__y her room, or she will be grounded.",
+      "answer": "tidy",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_25",
+      "question": "It suddenly starts to rain outside, so I have to dry the c____s or there will be nothing to wear.",
+      "answer": "clothes",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_26",
+      "question": "The class starts at 8:00, and it's now 7:50. You better h__y to school or you will be late.",
+      "answer": "hurry",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_27",
+      "question": "Linda forgets to c___y her l___xx this morning and is really hungry now.",
+      "answer": "lunchbox",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_28",
+      "question": "We always try the moon c__s every Moon Festival because there are more and more new flavors.",
+      "answer": "cakes",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_29",
+      "question": "As the saying goes, 'When l__e gives you lemon, make lemonade.'",
+      "answer": "life",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_30",
+      "question": "Please t__y on the clothes before you buy them, or it might be too large or too small.",
+      "answer": "try",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_31",
+      "question": "You have to be q___k, or the cockroach will disappear at any time.",
+      "answer": "quick",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_32",
+      "question": "Michael w___s for the bus for thirty minutes at the bus stop every day to get to work.",
+      "answer": "waits",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_33",
+      "question": "Students are not allowed to use c___s during class. If the teacher sees it, he or she will take it and keep it for you until break time.",
+      "answer": "cellphones",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_34",
+      "question": "You will get points after you raise your hands and a___r the questions.",
+      "answer": "answer",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_35",
+      "question": "Don't forget to thank the d____r before you get off the bus or the taxi.",
+      "answer": "driver",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_36",
+      "question": "The clerk is t___g his report now so that he can get off work on time.",
+      "answer": "typing",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_37",
+      "question": "Philip forgot to l__k the door before he left, so the thief simply got into the house and stole everything.",
+      "answer": "lock",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_38",
+      "question": "Annie is a teacher, and Nina is, t___.",
+      "answer": "too",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_39",
+      "question": "Billy is not a farmer, and Charles isn't, e___r.",
+      "answer": "either",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_40",
+      "question": "There are six t__s in the dragon boat race, but only one of them can win the championship.",
+      "answer": "teams",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_41",
+      "question": "Jason is t___g a trip to Japan tomorrow, so he won't come to work next week.",
+      "answer": "taking",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_42",
+      "question": "A burglar broke i__o my house yesterday. Luckily, no one was hurt, and she got caught in two hours.",
+      "answer": "into",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_43",
+      "question": "In the art class, the teacher asks the students to draw a p____e of a tiger.",
+      "answer": "picture",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_44",
+      "question": "There is a sign by the pond that says, 'Do not f__d the fish. They are too fat now.'",
+      "answer": "feed",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_45",
+      "question": "When I go to the office to see the teacher, she isn't there. So I w___e a n___e and left it on her table.",
+      "answer": "note",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_46",
+      "question": "In the music class, the teacher asks everyone to sing a s__g in front of the class.",
+      "answer": "song",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_47",
+      "question": "My little brother likes to fly a k___e at the park when it is windy.",
+      "answer": "kite",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_48",
+      "question": "I want to take a trip to N____y because I heard that's where the Vikings come from.",
+      "answer": "Norway",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_49",
+      "question": "Iceland is a popular tourist spot because it's famous for the N______n Lights there.",
+      "answer": "Northern",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_50",
+      "question": "My favorite part of going camping is sitting by the c___e and chat with my friends at night.",
+      "answer": "campfire",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_51",
+      "question": "Daniel took a t___n to travel around Taiwan last year.",
+      "answer": "train",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_52",
+      "question": "Jessie took a s___p to Green Island last month.",
+      "answer": "ship",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_53",
+      "question": "Kyle needs to get to the airport now, so he takes a t__i there.",
+      "answer": "taxi",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_54",
+      "question": "If you want to go to Penghu, you can take a p__e there.",
+      "answer": "plane",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_55",
+      "question": "Ray takes a b__s to school every day.",
+      "answer": "bus",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_56",
+      "question": "Patrick rides a b__e to cram school on Wednesdays.",
+      "answer": "bike",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_57",
+      "question": "In New York, you can go almost anywhere by s___y.",
+      "answer": "subway",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_58",
+      "question": "In Taiwan, most people goes everywhere by riding a s____r because they have a car.",
+      "answer": "scooter",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_59",
+      "question": "Last weekend, my father d___e a car and took us to Taichung to go shopping.",
+      "answer": "drove",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_60",
+      "question": "Sandy lives next to the school, so she can w__k to school every day.",
+      "answer": "walk",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_61",
+      "question": "Justin just came back from The USA, so I picked him up at the a____t.",
+      "answer": "airport",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_62",
+      "question": "There are sixty minutes in an h__r.",
+      "answer": "hour",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_63",
+      "question": "Please don't s___e the cola can, or you will have to clean up the mess by yourself.",
+      "answer": "shake",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_64",
+      "question": "There is s___g inside the box, but I don't know what that is.",
+      "answer": "something",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_65",
+      "question": "The child f__s down and hits his arm. Now, he is crying.",
+      "answer": "falls",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_66",
+      "question": "M______s aren't real. They only exist in fairy tales.",
+      "answer": "Mermaids",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_67",
+      "question": "The famous writer, Andersen, is from D_____k.",
+      "answer": "Denmark",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_68",
+      "question": "Jarvis saw the s___r near the house last night, and he was scared.",
+      "answer": "stranger",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_69",
+      "question": "When Diana meets the s___r, she asks him to sign on her bag.",
+      "answer": "singer",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_70",
+      "question": "The house was b___t seventy years ago. No one lives there now.",
+      "answer": "built",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_71",
+      "question": "The farmer goes to the market and tries to s__l the cow, but no one wants to buy it.",
+      "answer": "sell",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_72",
+      "question": "Percy loves turtles, so he asked his mother to b__y one for him.",
+      "answer": "buy",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_73",
+      "question": "In the art class, the teacher asked the students to d__w their favorite animals.",
+      "answer": "draw",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_74",
+      "question": "After sixty m____s of work, the shopkeeper takes a rest and closes the shop.",
+      "answer": "minutes",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_75",
+      "question": "Christine is a fast runner. She can run one hundred meters in twelve s____s.",
+      "answer": "seconds",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_76",
+      "question": "Two days a__o, a thief came to the store and stole a lot of money.",
+      "answer": "ago",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_77",
+      "question": "When Roxy sees his friends on the street, he w__s his hands and smiles at them.",
+      "answer": "waves",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_78",
+      "question": "There are some h___e snakes at the zoo. The kids are scared when they see the snakes.",
+      "answer": "huge",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_79",
+      "question": "Please s__t the door before you go. It is cold outside.",
+      "answer": "shut",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_80",
+      "question": "The teacher s__t the rules for the students to follow.",
+      "answer": "set",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_81",
+      "question": "Aaron h__t the ball so hard that it flew over the field and broke the window.",
+      "answer": "hit",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_82",
+      "question": "The chef takes out the knife and c__t the pie into ten pieces.",
+      "answer": "cut",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_83",
+      "question": "The students are asked to r___d the magazine every morning.",
+      "answer": "read",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_84",
+      "question": "The teacher asks the kids to p___t at the picture that has a circle in it.",
+      "answer": "point",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_85",
+      "question": "Max doesn't like his sister. They often f__t with each other over small things.",
+      "answer": "fight",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_86",
+      "question": "The elephants are g___t animals. They can be taller than a building.",
+      "answer": "giant",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_87",
+      "question": "Don't talk with your mouth full. S_____w the food before you start talking.",
+      "answer": "Swallow",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_88",
+      "question": "After ten hours of flight, the plane finally l__d at the airport.",
+      "answer": "landed",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_89",
+      "question": "In the e__d, the thief got caught by the police and returned everything he took.",
+      "answer": "end",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_90",
+      "question": "If you feel dizzy and your body temperature is high, you might have a f___r.",
+      "answer": "fever",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_91",
+      "question": "The businessman had a h___e. His head hurt badly.",
+      "answer": "headache",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_92",
+      "question": "Peter starts coughing and he can't talk well. He has a s__e throat.",
+      "answer": "throat",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_93",
+      "question": "Roger c___t a cold and didn't come to school yesterday.",
+      "answer": "caught",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_94",
+      "question": "Remember to see a d____r when you don't feel comfortable.",
+      "answer": "doctor",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_95",
+      "question": "The worker looks tired. I think he need some r__t.",
+      "answer": "rest",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_96",
+      "question": "After you see the doctor, make sure you take some m___e to get well sooner.",
+      "answer": "medicine",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_97",
+      "question": "There should be at least seven w___s in a sentence, or you get no points.",
+      "answer": "words",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_98",
+      "question": "Kids shouldn't go to dangerous p___s. They should be with their parents.",
+      "answer": "places",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_99",
+      "question": "Elizabeth and Mason have three k__s. They are all studying in the elementary school now.",
+      "answer": "kids",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_100",
+      "question": "There is a typhoon coming tomorrow, s__o people are preparing food now.",
+      "answer": "so",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_101",
+      "question": "In the p__t, when most people didn't have telephones, they wrote letters to contact each other.",
+      "answer": "past",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_102",
+      "question": "The V_____s were warriors from Norway in the past.",
+      "answer": "Vikings",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_103",
+      "question": "Taipei is in the n___h of Taiwan.",
+      "answer": "north",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_104",
+      "question": "There is a w__r going on between Israel and Iran.",
+      "answer": "war",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_105",
+      "question": "Jonathan is a___d of dark. He thinks there are monsters hiding inside it.",
+      "answer": "afraid",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_106",
+      "question": "I don't have e___h money to buy the toy. I still need five hundred dollars.",
+      "answer": "enough",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_107",
+      "question": "Perry doesn't like to eat v___s. He likes to eat meat.",
+      "answer": "vegetables",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_108",
+      "question": "Thomas' mother only smiles at him when he gets good g___s at school.",
+      "answer": "grades",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_109",
+      "question": "On Lucy's birthday, her father o___s a big meal to celebrate.",
+      "answer": "orders",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_110",
+      "question": "It might rain in the afternoon, so don't forget to bring an u___a.",
+      "answer": "umbrella",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_111",
+      "question": "You have to study h___d to get good grades.",
+      "answer": "hard",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_112",
+      "question": "The food in the restaurant tastes d___s.",
+      "answer": "delicious",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_113",
+      "question": "Seth got hit by the car b____e the driver was drunk-driving.",
+      "answer": "because",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_114",
+      "question": "There is a stranger standing o____e the house. Be careful.",
+      "answer": "outside",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_115",
+      "question": "There are some c___n playing in the park.",
+      "answer": "children",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_116",
+      "question": "Wilson lives in a small v____e with his grandfather.",
+      "answer": "village",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_117",
+      "question": "Remember to bathe the dog in the t__b once every two weeks.",
+      "answer": "tub",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_118",
+      "question": "Aurora didn't t___w away the trash last night, so she got punished by her father.",
+      "answer": "throw",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_119",
+      "question": "You are not allowed to p__k flowers in the park.",
+      "answer": "pick",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_120",
+      "question": "It's cold outside. P__t on the jacket before you go out.",
+      "answer": "put",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_121",
+      "question": "It's dark in here. Please t__n on the lights.",
+      "answer": "turn",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_122",
+      "question": "Don't forget to turn o__f the lights before you go out.",
+      "answer": "off",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_123",
+      "question": "Your clothes are dirty. Please t__e them off.",
+      "answer": "take",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_124",
+      "question": "Put the trash into the trash c__n.",
+      "answer": "can",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_125",
+      "question": "There is too much t__h on the ground. Please pick them up.",
+      "answer": "trash",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_126",
+      "question": "There is a f__n on the ceiling. You can turn it on if it's too hot.",
+      "answer": "fan",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_127",
+      "question": "The room is so d__k. There is no light.",
+      "answer": "dark",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_128",
+      "question": "Don't forget to turn off the l___s before you leave the room.",
+      "answer": "lights",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_129",
+      "question": "There is snow e___e. Let's build a snowman.",
+      "answer": "everywhere",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_130",
+      "question": "Lance puts the scarf around his n__k because it's really cold outside.",
+      "answer": "neck",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_131",
+      "question": "People sometimes give a__y free food to help the poor.",
+      "answer": "away",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_132",
+      "question": "Iris forgets to give b___k the book she borrowed from the library.",
+      "answer": "back",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_133",
+      "question": "When you're taking a test, please w___e down your answers on the paper.",
+      "answer": "write",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_134",
+      "question": "My grandfather forgot to b___w out the candle and nearly caused the fire.",
+      "answer": "blow",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_135",
+      "question": "It's Audrey's eighteenth birthday. There are eighteen c____s on her birthday cake.",
+      "answer": "candles",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_136",
+      "question": "What is your n___e? You can call me Steven.",
+      "answer": "name",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_137",
+      "question": "What is your phone n___r? It's 0987-654-321.",
+      "answer": "number",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_138",
+      "question": "Where do you live? Can you give me your a____s?",
+      "answer": "address",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_139",
+      "question": "Sheldon asks his mother to pick him up b__y evening.",
+      "answer": "by",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_140",
+      "question": "The l___e ducks are following their mother.",
+      "answer": "little",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_141",
+      "question": "Although chickens have w___s, they can't fly.",
+      "answer": "wings",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_142",
+      "question": "Renolds tries to s___e his brother by suddenly yelling, but it doesn't work.",
+      "answer": "scare",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_143",
+      "question": "My grandparents loves to watch Chinese TV p___s at night.",
+      "answer": "programs",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_144",
+      "question": "My mother chats with n___r every day. They talk about everything.",
+      "answer": "neighbor",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_145",
+      "question": "It could be dangerous to chat on the I______t because you may not know who you are really talking to.",
+      "answer": "Internet",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_146",
+      "question": "After the chubby man sat on the s___w, it was broken into half.",
+      "answer": "seesaw",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_147",
+      "question": "Every time Tyrion plays on the s___g, he asks his father to push him higher.",
+      "answer": "swing",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_148",
+      "question": "There are some children r___________g-r____________g in the park. Be careful when you walk near them.",
+      "answer": "roller-skating",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_149",
+      "question": "When you go i_________g-i_________g, don't forget to put on some clothes because it could be cold.",
+      "answer": "ice-skating",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_150",
+      "question": "If Podrick doesn't go to bed n__w, he won't be able to wake up early tomorrow.",
+      "answer": "now",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_151",
+      "question": "Joffrey w___s that he can become the king when he grows up.",
+      "answer": "wishes",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_152",
+      "question": "My mother m__s me do my homework now. I don't want to do it, but I have no choice.",
+      "answer": "makes",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_153",
+      "question": "Every Christmas, Santa Claus rides on the s___d with his reindeers and gives away gifts.",
+      "answer": "sled",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_154",
+      "question": "Wayne likes to play the g__r in his free time, but his brother thinks it's noisy.",
+      "answer": "guitar",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_155",
+      "question": "Every time Galahad p___s playing the trumpet, his neighbor comes knocking on his door to make him stop.",
+      "answer": "practices",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_156",
+      "question": "Diane practices b___n every day because she wants to better at it.",
+      "answer": "badminton",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_157",
+      "question": "Kimberly practices table t___s every day because she wants to be the best in her class.",
+      "answer": "tennis",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_158",
+      "question": "In the USA and Australia, playing f___l is very popular.",
+      "answer": "football",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_159",
+      "question": "Eric really e___s watching movies in his free time.",
+      "answer": "enjoys",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_160",
+      "question": "The teacher asked the students to f___h their homework in thirty minutes.",
+      "answer": "finish",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_161",
+      "question": "Humphrey's father tells him to stop laughing, but he k___s doing it.",
+      "answer": "keeps",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_162",
+      "question": "On Christmas Eve, the adults will dress up as S___a and give the kids presents.",
+      "answer": "Santa",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_163",
+      "question": "The kids are told to put a s___g in front of their bed in Christmas Eve, and their parents will put the gifts inside it.",
+      "answer": "stocking",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_164",
+      "question": "The principle didn't come to school today because she had a car a___t on her way to work.",
+      "answer": "accident",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_165",
+      "question": "Tobey was hit by the b___y in his class today, and his parent were angry about it.",
+      "answer": "bully",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_166",
+      "question": "The police officer are looking for anyone who saw the r____y at the bank this morning.",
+      "answer": "robbery",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_167",
+      "question": "'Call 119! The house is on f__e!' Lupin yelled.",
+      "answer": "fire",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_168",
+      "question": "When Bradford came home from work, he saw a t___f running out his house and called 110.",
+      "answer": "thief",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_169",
+      "question": "Andy goes to the bank to get some m___y.",
+      "answer": "money",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_170",
+      "question": "Ten minutes later, the p___e officers comes and saves the old lady.",
+      "answer": "police",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_171",
+      "question": "The teacher tells the naughty boy if he doesn't say sorry, she will tell his p____s.",
+      "answer": "parents",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_172",
+      "question": "Please don't t___h the stray animals. They could attack you.",
+      "answer": "touch",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_173",
+      "question": "Remember to turn off the fan w__n you leave the room.",
+      "answer": "when",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_174",
+      "question": "Some people say that Michael Jordan is the best basketball player e__r.",
+      "answer": "ever",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_175",
+      "question": "It's m___t. Please go to bed now, or you will be late tomorrow.",
+      "answer": "midnight",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_176",
+      "question": "There are a___t twenty kids on the playground.",
+      "answer": "about",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_177",
+      "question": "The thief steals from a lot of people. He e__n hits an old lady and took her bag.",
+      "answer": "even",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_178",
+      "question": "Every student in the class s___d follow the class rules.",
+      "answer": "should",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_179",
+      "question": "Larry really loves French f___s. He wants to drink it every day.",
+      "answer": "fries",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_180",
+      "question": "Iverson w___d like to have steak for lunch.",
+      "answer": "would",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_181",
+      "question": "Please don't play with the f__d on your plate. It's impolite.",
+      "answer": "food",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_182",
+      "question": "Helen feels hungry, but it's not dinner time yet. So, she eats some s___s.",
+      "answer": "snacks",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_183",
+      "question": "Most of the kids don't want b___s for lunch, but it's healthy for them.",
+      "answer": "beans",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_184",
+      "question": "Jolyne is going to be late, so she only has t___t for breakfast.",
+      "answer": "toast",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_185",
+      "question": "There's a new Italian restaurant. You should try its s___i.",
+      "answer": "spaghetti",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_186",
+      "question": "Benson has a pet mouse. He always feeds it with c___e.",
+      "answer": "cheese",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_187",
+      "question": "Roxanne is mad because her neighbors are making loud n___s again.",
+      "answer": "noises",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_188",
+      "question": "Do you hear it? That is the s___d of a bird.",
+      "answer": "sound",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_189",
+      "question": "How would you like your steak? I would want it r__e.",
+      "answer": "rare",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_190",
+      "question": "My father wants his steak m___m. It's not too raw, but not too hard to bite.",
+      "answer": "medium",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_191",
+      "question": "The customer is mad because he wanted his steak medium, but it is served well-d__e.",
+      "answer": "done",
+      "source": "Extrapractice/MJ8.html"
+    },
+    {
+      "id": "html_q_1",
+      "question": "w____d made the flowers grow with magic.",
+      "answer": "wizard",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_2",
+      "question": "The superhero used his p___r to save the city.",
+      "answer": "power",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_3",
+      "question": "Oscar loves science. He wants to be a s______t when he grows up.",
+      "answer": "scientist",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_4",
+      "question": "She works as a c__k in a restaurant.",
+      "answer": "cook",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_5",
+      "question": "The w____r wrote an interesting book. It sold very well.",
+      "answer": "writer",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_6",
+      "question": "It's time to g__w u__p. You're not a kid anymore.",
+      "answer": "grow up",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_7",
+      "question": "He had a g___t time at the party with his friends, and he enjoyed the nice music and delicious food.",
+      "answer": "great",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_8",
+      "question": "We'll l___n to play the guitar tomorrow.",
+      "answer": "learn",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_9",
+      "question": "She is not h__e right now, but she will be back soon.",
+      "answer": "here",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_10",
+      "question": "If you eat bad food, you'll b__e sick.",
+      "answer": "be",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_11",
+      "question": "Something h______d this morning, so Oscar was late for school.",
+      "answer": "happened",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_12",
+      "question": "Oscar was l__e for school because he got on the wrong bus.",
+      "answer": "late",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_13",
+      "question": "Because Oscar g__t o__n the wrong bus, he was late for school this morning.",
+      "answer": "got on",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_14",
+      "question": "Oscar got on the wrong bus because he had to l__k a___r his owl's baby.",
+      "answer": "look after",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_15",
+      "question": "Oscar said that Yolanda was s___y because she thought that Oscar has a baby.",
+      "answer": "silly",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_16",
+      "question": "Paragraph: Something h______d this morning, so Oscar was _____ for school. (Fill in: happened)",
+      "answer": "happened",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_17",
+      "question": "Paragraph: Something happened this morning, so Oscar was l__e for school. (Fill in: late)",
+      "answer": "late",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_18",
+      "question": "Paragraph: He g__t o__n the wrong bus because he had to look after his owl's baby. (Fill in: got on)",
+      "answer": "got on",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_19",
+      "question": "Paragraph: He got on the wrong bus because he had to l__k a___r his owl's baby. (Fill in: look after)",
+      "answer": "look after",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_20",
+      "question": "Paragraph: Oscar told Yolanda not to be s___y because she thought that Oscar has a baby. (Fill in: silly)",
+      "answer": "silly",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_21",
+      "question": "Hey g__s! Please be quiet when the teacher is talking.",
+      "answer": "guys",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_22",
+      "question": "My brother and I enjoy watching magic shows. We talk about the magic t____s after watching them.",
+      "answer": "tricks",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_23",
+      "question": "Tell a teacher or call the police when you see anything that look like a b__b.",
+      "answer": "bomb",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_24",
+      "question": "That tall g__y standing over there is my cousin. He is 190 centimeters tall.",
+      "answer": "guy",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_25",
+      "question": "Paragraph: There was a spelling c_____t in our school last Sunday. (Fill in: contest)",
+      "answer": "contest",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_26",
+      "question": "Paragraph: My friend, Cathy, and I studied very hard for it. We practiced spelling all the words with e__h o___r during the break time. (Fill in: each other)",
+      "answer": "each other",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_27",
+      "question": "Paragraph: On the test day, I was so nervous that I forgot some words. I didn't know what to do so I just g____d. (Fill in: guessed)",
+      "answer": "guessed",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_28",
+      "question": "Paragraph: After the test, I l____d a__t my report card and felt a little upset. I will study harder next time! (Fill in: looked at)",
+      "answer": "looked at",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_29",
+      "question": "Dialog: Alex: Why are you standing by the w__l? (Fill in: wall)",
+      "answer": "wall",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_30",
+      "question": "Dialog: Ben: I'm l_____g a__t the cats over there. (Fill in: looking at)",
+      "answer": "looking at",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_31",
+      "question": "Dialog: Ben: They are running after e__h o___r and trying to catch a butterfly. (Fill in: each other)",
+      "answer": "each other",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_32",
+      "question": "Dialog: Alex: Haha! That's f___y! (Fill in: funny)",
+      "answer": "funny",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_33",
+      "question": "I have three bananas. One is yellow, and the o___rs are green.",
+      "answer": "others",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_34",
+      "question": "I have two apples. One is green, and the other is g___n.",
+      "answer": "golden",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_35",
+      "question": "Time to s___p. Sweet dreams.",
+      "answer": "sleep",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_36",
+      "question": "It's time to go to bed. Sweet d___ms.",
+      "answer": "dreams",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_37",
+      "question": "There are two cats. One likes to play with a ball, but the o___r doesn't.",
+      "answer": "other",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_38",
+      "question": "The princess wore a beautiful g___n crown on her head.",
+      "answer": "golden",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_39",
+      "question": "After a long day of playing, the tired boy went to s___p.",
+      "answer": "sleep",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_40",
+      "question": "I had a wonderful d___m about flying in the sky like a bird.",
+      "answer": "dream",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_41",
+      "question": "Last night, a lot of people g_____d at the department store because there was a big sale.",
+      "answer": "gathered",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_42",
+      "question": "Mary: I can't find my umbrella. Where did you put it? John: Do you see a box on the shelf? I put it in t___e.",
+      "answer": "there",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_43",
+      "question": "Why not g____r at John's house and have a barbecue tomorrow?",
+      "answer": "gather",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_44",
+      "question": "The bakery closed early today, so I couldn't buy any bread. I will go t___e again tomorrow.",
+      "answer": "there",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_45",
+      "question": "We have walked for such a long time. Can we find a place to s__t and rest?",
+      "answer": "sit",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_46",
+      "question": "Get a chair and s__t down. Let's enjoy some cake and milk tea together.",
+      "answer": "sit",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_47",
+      "question": "Patty: Don't forget that we will have lunch with May at 11:30 tomorrow. John: Sure. I will see you t__n.",
+      "answer": "then",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_48",
+      "question": "I need more time to think about the questions. Can you call me next Monday? I will have the answers t__n.",
+      "answer": "then",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_49",
+      "question": "The n___e is too loud. I can't hear you.",
+      "answer": "noise",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_50",
+      "question": "Stop making n___e. My ears hurt.",
+      "answer": "noise",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_51",
+      "question": "It is r____y hot in the room. Can you turn on the fan, please?",
+      "answer": "really",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_52",
+      "question": "The question is over my head. I don't k__w the answer.",
+      "answer": "know",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_53",
+      "question": "After Sara got on the train, she turned a____d and waved goodbye to us.",
+      "answer": "around",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_54",
+      "question": "Art teacher: Do you want this artwork back or can I k__p it? Lisa: I want to bring it home to my sister as her birthday gift.",
+      "answer": "keep",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_55",
+      "question": "Uncle Ken l__t his left leg in a car accident two years ago.",
+      "answer": "lost",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_56",
+      "question": "There were so many people on the bus. We couldn't find any seats to sit on, so we had to s___d.",
+      "answer": "stand",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_57",
+      "question": "That TV program is r____y funny. I want to watch it again.",
+      "answer": "really",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_58",
+      "question": "Granny says her feet hurt because she s____s for a long time. We should take her to the doctor.",
+      "answer": "stands",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_59",
+      "question": "The washing machine made a loud noise, I k__w something was wrong. We need to call someone to fix it.",
+      "answer": "knew",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_60",
+      "question": "Mom: How much is the skirt? The Clerk: It is 489 dollars. Mom: Here's 500, and you can k__p the change.",
+      "answer": "keep",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_61",
+      "question": "I can't find my keys. I think I l__t them on the train. What should I do?",
+      "answer": "lost",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_62",
+      "question": "The whole family was sitting a____d grandpa singing 'Happy Birthday'. Each of us brought a gift for him.",
+      "answer": "around",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_63",
+      "question": "I f____t to buy milk at the store this morning, so I'll go there again later.",
+      "answer": "forgot",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_64",
+      "question": "I heard a s_____e sound coming from under my bed at night.",
+      "answer": "strange",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_65",
+      "question": "I felt so scared that I r__n out of my room.",
+      "answer": "ran",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_66",
+      "question": "I r__d the novel once, and now I'm reading it again.",
+      "answer": "read",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_67",
+      "question": "The lights are still on i____e the office.",
+      "answer": "inside",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_68",
+      "question": "Maybe s_____e is there. Let's see who it is.",
+      "answer": "someone",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_69",
+      "question": "Yesterday was the Balloon Festival. When we lay down on the g____d.",
+      "answer": "ground",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_70",
+      "question": "We watched the hot air balloons fly into the a__r.",
+      "answer": "air",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_71",
+      "question": "When I opened the window this morning, it was snowy. e________g was cold and white.",
+      "answer": "everything",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_72",
+      "question": "A bird flew down and l____d on my hand. I held the bird and kept it warm.",
+      "answer": "landed",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_73",
+      "question": "When the e_____e hit yesterday, Samuel was practicing his magic.",
+      "answer": "earthquake",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_74",
+      "question": "Samuel was practicing his magic when the earthquake hit and he made a h__e in the wall.",
+      "answer": "hole",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_75",
+      "question": "Jolly was cooking in the school kitchen when the earthquake h__t.",
+      "answer": "hit",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_76",
+      "question": "When Samuel asked Yolanda about the earthquake news on the newspaper, Yolanda asked him not to r__h her.",
+      "answer": "rush",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_77",
+      "question": "The news about the earthquake in the newspaper s__s: Fire Dragon and Forest Witches Are up to Something.",
+      "answer": "says",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_78",
+      "question": "It's important to f____w the steps in the recipe when cooking.",
+      "answer": "follow",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_79",
+      "question": "You did a great job sharing your toys with your friend. That's the r___t way to be kind.",
+      "answer": "right",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_80",
+      "question": "The music at the party was too l__d for my ears.",
+      "answer": "loud",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_81",
+      "question": "When we visit the library, we need to be q___t so that others can read their books.",
+      "answer": "quiet",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_82",
+      "question": "Can you m__e the chair to the other side of the room, please? We need more space.",
+      "answer": "move",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_83",
+      "question": "Marvin: How f__r does the sports car drive? Peter: Very f__r on the highway! (first blank)",
+      "answer": "far",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_84",
+      "question": "Frank: How do we get from one classroom to another? Maggie: Easy! Just walk down the h_____y.",
+      "answer": "hallway",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_85",
+      "question": "Dad: We should look left and right before crossing the road. Nick: Okay, Daddy! Dad: Good boy! Remember, we must always p_____t ourselves.",
+      "answer": "protect",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_86",
+      "question": "Some monkeys are very smart. They can finish some t___s with practice. For example, they can open a box and take out food, jump through hoops or stand on a ball.",
+      "answer": "tasks",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_87",
+      "question": "Molly: Hurry up, o__r we will be late for the train. Cathy: Okay! Let's run!",
+      "answer": "or",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_88",
+      "question": "Eric: I'm having t_____e with this science report. Iris: Really? I thought it was a piece of cake! Eric: Can you please help me? Iris: Sure! Let's go to the library!",
+      "answer": "trouble",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_89",
+      "question": "Grandma: The sky is getting dark. Maybe you s____d take an umbrella. Lisa: Okay. I'll be back before dinner. Goodbye!",
+      "answer": "should",
+      "source": "Extrapractice/MJ9.html"
+    },
+    {
+      "id": "html_q_1",
+      "question": "When I was driving in Australia, I saw some kangaroos h___g by the road.",
+      "answer": "hopping",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_2",
+      "question": "The teachers went to the restroom to c__k why the children were shouting.",
+      "answer": "check",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_3",
+      "question": "Please drive faster. I'm in a h___y because I can't be late for my important meeting.",
+      "answer": "hurry",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_4",
+      "question": "It's raining heavily now. We are so lucky that we found a c__e to hide from the rain.",
+      "answer": "cave",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_5",
+      "question": "We are going to visit a famous t__n next month. There is a river passing through it and three small gardens in it.",
+      "answer": "town",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_6",
+      "question": "Our new teacher looks very s__m and short. I think even my sister's uniform may be big enough for her.",
+      "answer": "slim",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_7",
+      "question": "The boy was scaring the other kids by wearing a g___t mask.",
+      "answer": "ghost",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_8",
+      "question": "My little brother showed me the picture he drew. It was a m___r with three eyes and long teeth shouting in a cave.",
+      "answer": "monster",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_9",
+      "question": "My little sister drank a lot of water and needed to use the r___m in math class. She did not want to go by herself because she read a story about a monster at school.",
+      "answer": "restroom",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_10",
+      "question": "My backpack is empty. There is n___g in it.",
+      "answer": "nothing",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_11",
+      "question": "Emily is very famous in our town because she looks l___e the famous actress, Amelia Smith.",
+      "answer": "like",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_12",
+      "question": "I checked my report S_____l times before I handed it to the teacher.",
+      "answer": "Several",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_13",
+      "question": "Did you go a___e during the vacation?",
+      "answer": "anywhere",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_14",
+      "question": "Oh my! The basketball player is a__tall as a tree. No one can pass him!",
+      "answer": "as",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_15",
+      "question": "Did you see the robber? No. It all happened very s___y.",
+      "answer": "suddenly",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_16",
+      "question": "The weather is weird. It was sunny a minute ago. Then, It turned dark s___y and started raining.",
+      "answer": "suddenly",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_17",
+      "question": "There is a lot of s__w in the yard. Can we go out and play?",
+      "answer": "snow",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_18",
+      "question": "There are many animals living in the w___s. We have to protect the place when we camp here.",
+      "answer": "woods",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_19",
+      "question": "Excuse me. May I use the restroom? Sorry! It is full of toilet p___r, and the toilet needs to be fixed. If you're in a hurry, you can find one in the gas station on the corner.",
+      "answer": "paper",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_20",
+      "question": "Miss Smith, may I have a piece of p___r? Kevin and I want to play bingo.",
+      "answer": "paper",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_21",
+      "question": "What will you do this weekend? I'll clean the balcony and the t___t.",
+      "answer": "toilet",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_22",
+      "question": "Someone who is able to think quickly and have good ideas (s___t)",
+      "answer": "smart",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_23",
+      "question": "Someone who works very hard and does their work well (h___g)",
+      "answer": "hard-working",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_24",
+      "question": "Someone who is kind to people and loves to help everyone (f___y)",
+      "answer": "friendly",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_25",
+      "question": "Liked or enjoyed by a lot of people (p___r)",
+      "answer": "popular",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_26",
+      "question": "We are lucky to have such f___y neighbors. They help us look after our dog when we are not home and usually share yummy food with us.",
+      "answer": "friendly",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_27",
+      "question": "This song was very p___r when my parents were students. Many people who are my parents' age know how to sing this song.",
+      "answer": "popular",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_28",
+      "question": "Ivy is a h___g student. She always reviews all the subjects and finishes her homework after she gets home.",
+      "answer": "hard-working",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_29",
+      "question": "Brian is very s___t. He always knows the answers in class.",
+      "answer": "smart",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_30",
+      "question": "I am laughing because my little brother made a funny f___e at me.",
+      "answer": "face",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_31",
+      "question": "I think the flowers are very p___y. They have different colors and shapes.",
+      "answer": "pretty",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_32",
+      "question": "I h__t my arm when I was riding a bike.",
+      "answer": "hurt",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_33",
+      "question": "I like ice cream v___y much. It's so delicious.",
+      "answer": "very",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_34",
+      "question": "Can I a__k you a question about the homework?",
+      "answer": "ask",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_35",
+      "question": "Who will l__d the students to the park? I don't think they know how to get there.",
+      "answer": "lead",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_36",
+      "question": "Who is that p___n standing near the door? He is my cousin.",
+      "answer": "person",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_37",
+      "question": "Do you and your friend have the s__e favorite color? Yes, we do. We both like blue.",
+      "answer": "same",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_38",
+      "question": "We went to the h__l for our picnic. It had a great view!",
+      "answer": "hill",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_39",
+      "question": "The weather was n__e today. It was sunny and warm.",
+      "answer": "nice",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_40",
+      "question": "What do you c__l your cat? My cat's name is 'Kitty.' It's a cute name.",
+      "answer": "call",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_41",
+      "question": "How do you keep your room so n__t? I put things back after I use them. And I tidy up my room every day.",
+      "answer": "neat",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_42",
+      "question": "Did you know that my sister was b__n last night?",
+      "answer": "born",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_43",
+      "question": "Oh, that's great! How is she now? She's just a l___e baby, but she's healthy and cute.",
+      "answer": "little",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_44",
+      "question": "I have a great idea for a game we can play today. Oh yeah? I'm c___s! What game are you thinking of?",
+      "answer": "curious",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_45",
+      "question": "Let's play h__e a__d-s__k!",
+      "answer": "hide-and-seek",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_46",
+      "question": "Hey. I saw something interesting at the park today. Really? I'm c___s. Tell me about it.",
+      "answer": "curious",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_47",
+      "question": "Well, there was a l___e kitten. How cute! How did it look? It looked a bit scared. I tried to let it know I am a kind person, and f___y, it played with me.",
+      "answer": "little",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_48",
+      "question": "Well, there was a little kitten. How cute! How did it look? It looked a bit scared. I tried to let it know I am a kind person, and f___y, it played with me.",
+      "answer": "finally",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_49",
+      "question": "We put one more light in our bedroom because it was too d__k.",
+      "answer": "dark",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_50",
+      "question": "At night, I enjoy watching the l___t stars shining in the sky.",
+      "answer": "light",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_51",
+      "question": "The lights in this room are too b___t. I can't open my eyes.",
+      "answer": "bright",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_52",
+      "question": "Last weekend, Troy went fishing and brought many f___h fish home for dinner.",
+      "answer": "fresh",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_53",
+      "question": "The short trees in this part of the forest are still very y___g because there was a fire here five years ago.",
+      "answer": "young",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_54",
+      "question": "It's getting d__k. We should go home now, or our parents will be worried.",
+      "answer": "dark",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_55",
+      "question": "My mom is getting o__d. I can tell from her gray hair. I must do more housework for her.",
+      "answer": "old",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_56",
+      "question": "Nick looks like a high school student, but he is actually a teacher. He looks y___g for his age.",
+      "answer": "young",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_57",
+      "question": "The bread smells so great. It is f___h out of the oven.",
+      "answer": "fresh",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_58",
+      "question": "My sister is a two-year-old girl. She is too y___g, so she doesn't go to school.",
+      "answer": "young",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_59",
+      "question": "The kitchen is d___r t__n the living room.",
+      "answer": "darker than",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_60",
+      "question": "The woman is s___r t__n Dennis.",
+      "answer": "stronger than",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_61",
+      "question": "The ring is c___r t__n the necklace.",
+      "answer": "cheaper than",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_62",
+      "question": "The plane is f___r t__n the ship.",
+      "answer": "faster than",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_63",
+      "question": "Maria is y___r t__n Elvin.",
+      "answer": "younger than",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_64",
+      "question": "The classroom 101 is n___r t__n the classroom 103.",
+      "answer": "neater than",
+      "source": "Extrapractice/MJ10.html"
+    },
+    {
+      "id": "html_q_65",
+      "question": "James is t___r t__n Ben right now.",
+      "answer": "taller than",
+      "source": "Extrapractice/MJ10.html"
+    }
+  ]
+}

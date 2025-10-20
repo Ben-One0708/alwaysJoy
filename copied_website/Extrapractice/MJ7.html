@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MJ7 - 中級英語練習題</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .quiz-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            min-width: 600px;
+            position: relative;
+        }
+
+        .question-header {
+            text-align: left;
+            font-size: 20px;
+            color: #4CAF50;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        .difficulty-badge {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .question-content {
+            margin-top: 40px;
+            font-size: 24px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 15px 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .scoreboard {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .answers {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .nav-panel {
+            margin-top: 20px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .back-button:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="goToPage('../index.html')" class="back-button">← 回上一頁</button>
+
+    <div class="quiz-box">
+        <div class="question-header" id="question-number"></div>
+        <div class="difficulty-badge">中級英語</div>
+        <div class="question-content" id="question-text"></div>
+        <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+        <br />
+        <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+        <div class="feedback" id="feedback"></div>
+        <div class="scoreboard" id="scoreboard"></div>
+        <div class="answers" id="answers" style="display: none;"></div>
+        <div class="nav-panel">
+            <label for="questionSelect">跳題：</label>
+            <select id="questionSelect" onchange="jumpToQuestion()"></select>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                "clue": "Darby went to the post office to s___d a letter to his brother.",
+                "answer": "send"
+            },
+            {
+                "clue": "Before telephones were invented, people contacted each other with l___s.",
+                "answer": "letters"
+            },
+            {
+                "clue": "In Chinese New Year, the kids will get red e___e from their parents.",
+                "answer": "envelope"
+            },
+            {
+                "clue": "Winston's father g___s some markers to him and let him draw on the paper.",
+                "answer": "gives"
+            },
+            {
+                "clue": "The singer w___e a song to his lover, but she didn't like it.",
+                "answer": "wrote"
+            },
+            {
+                "clue": "When the police officer s___d the picture to the woman, she started crying.",
+                "answer": "showed"
+            },
+            {
+                "clue": "Paul wrote an e___l to his friends in Japan to invite them to his wedding.",
+                "answer": "e-mail"
+            },
+            {
+                "clue": "After watching the horror movie, Louis can't stop t___g about the ghosts.",
+                "answer": "thinking"
+            },
+            {
+                "clue": "If you have any questions, feel free to a___k the teacher.",
+                "answer": "ask"
+            },
+            {
+                "clue": "Finn finally won the championship, and everyone was g___d for him.",
+                "answer": "glad"
+            },
+            {
+                "clue": "When Elena's parents tell her S___a Claus isn't real, she starts crying.",
+                "answer": "Santa"
+            },
+            {
+                "clue": "Please don't draw on the whiteboard, or you will get into t___e.",
+                "answer": "trouble"
+            },
+            {
+                "clue": "Eason wants his mother to buy a new cellphone f___r him, but she doesn't want to.",
+                "answer": "for"
+            },
+            {
+                "clue": "Can you g___t the book on the shelf for me? I'm not tall enough.",
+                "answer": "get"
+            },
+            {
+                "clue": "It's so hot outside. Let's stay at home and turn on the f___n.",
+                "answer": "fan"
+            },
+            {
+                "clue": "On Timmy's birthday, his father gives him a t___y truck.",
+                "answer": "toy"
+            },
+            {
+                "clue": "Irene is sick, so her father m___s some rice porridge for her.",
+                "answer": "makes"
+            },
+            {
+                "clue": "If you see a w___t on the street, you should give it to the police.",
+                "answer": "wallet"
+            },
+            {
+                "clue": "Harry goes to the Green Island by s___p. He throws up many times on it.",
+                "answer": "ship"
+            },
+            {
+                "clue": "The weather is cool today. Please put on a v___t before you go.",
+                "answer": "vest"
+            },
+            {
+                "clue": "Mary is doing her homework now. Please don't b___r her.",
+                "answer": "bother"
+            },
+            {
+                "clue": "Yuki really loves Japanese f___d, like sushi or ramen.",
+                "answer": "food"
+            },
+            {
+                "clue": "Adam wants to be an astronaut when he grows up. He wants to fly in the s___p.",
+                "answer": "spaceship"
+            },
+            {
+                "clue": "Gina is very hungry. She wants to have fried p___k for dinner tonight.",
+                "answer": "pork"
+            },
+            {
+                "clue": "Do you want some p___n when watching the movie?",
+                "answer": "popcorn"
+            },
+            {
+                "clue": "The robber put on the m___k, so no one would know what he looked like.",
+                "answer": "mask"
+            },
+            {
+                "clue": "Joshua gave his wife r___s on Valentine's day, and she loved them.",
+                "answer": "roses"
+            },
+            {
+                "clue": "Martin is sad because he doesn't get any p___s on his birthday.",
+                "answer": "presents"
+            },
+            {
+                "clue": "It is really cold outside. You may want to put on a s___r.",
+                "answer": "sweater"
+            },
+            {
+                "clue": "Please give me a c___l when you get home.",
+                "answer": "call"
+            },
+            {
+                "clue": "Before Dorothy gets on the train, she gives her father a h___g.",
+                "answer": "hug"
+            },
+            {
+                "clue": "Why did you put sugar in curry? Now it t___s sweet!",
+                "answer": "tastes"
+            },
+            {
+                "clue": "Gordan f___s angry because the cook burns the fish again.",
+                "answer": "feels"
+            },
+            {
+                "clue": "The tiger l___s angry. Maybe we should leave it alone.",
+                "answer": "looks"
+            },
+            {
+                "clue": "The stinky tofu s___s bad, but they are very delicious.",
+                "answer": "smells"
+            },
+            {
+                "clue": "Fiona wants to go skiing because it s___s interesting.",
+                "answer": "sounds"
+            },
+            {
+                "clue": "Most of the Indian food tastes s___y. You need to be careful before you try them.",
+                "answer": "spicy"
+            },
+            {
+                "clue": "Steve loves s___r food. His favorite fruit is lemon.",
+                "answer": "sour"
+            },
+            {
+                "clue": "The coconut is h___d on the outside, so it hurts when you got hit by it.",
+                "answer": "hard"
+            },
+            {
+                "clue": "The grapes are s___t and juicy, so the tourists always buy a lot of grapes home.",
+                "answer": "sweet"
+            },
+            {
+                "clue": "Karen doesn't like candy because she thinks it's too s___t and not healthy.",
+                "answer": "sweet"
+            },
+            {
+                "clue": "The potato chips tastes s___y. It's not healthy to eat too many chips.",
+                "answer": "salty"
+            },
+            {
+                "clue": "Mozart is a g___t musician(音樂家). He created a lot of wonderful music.",
+                "answer": "great"
+            },
+            {
+                "clue": "Ben had a w___l time at the concert. He wants to go there again.",
+                "answer": "wonderful"
+            },
+            {
+                "clue": "Akon always feels l___y because he doesn't have any friends.",
+                "answer": "lonely"
+            },
+            {
+                "clue": "There was a t___e typhoon last week. A village was destroyed during the flood.",
+                "answer": "terrible"
+            },
+            {
+                "clue": "Leo looks u___y. Let's see if he is fine.",
+                "answer": "unhappy"
+            },
+            {
+                "clue": "Howard looked for his wallet everywhere, but he just couldn't f___d it.",
+                "answer": "find"
+            },
+            {
+                "clue": "Please check your seat number before you s___t down.",
+                "answer": "sit"
+            },
+            {
+                "clue": "Nolan wants to go to the theater, but he doesn't know the a___s.",
+                "answer": "address"
+            },
+            {
+                "clue": "Kim wants to buy new clothes and bags, so she goes shopping at the m___l.",
+                "answer": "mall"
+            },
+            {
+                "clue": "Tammy goes to the r___t to celebrate her birthday. The food was delicious there.",
+                "answer": "restaurant"
+            },
+            {
+                "clue": "If you want some bread or toast, you can go to the b___y. They have the best bread in town.",
+                "answer": "bakery"
+            },
+            {
+                "clue": "Patricia usually goes to the b___e to buy new novels or textbooks.",
+                "answer": "bookstore"
+            },
+            {
+                "clue": "On the National Day, people will put the national flag on the s___t to celebrate.",
+                "answer": "street"
+            },
+            {
+                "clue": "The man standing n___t to the singer is her husband.",
+                "answer": "next"
+            },
+            {
+                "clue": "The police officers are chasing after the robber on the r___d.",
+                "answer": "road"
+            },
+            {
+                "clue": "Robert decides to open a new store on the c___r of two main roads. He thinks that there will be more customers.",
+                "answer": "corner"
+            },
+            {
+                "clue": "Go down the street, and turn right on the first block. You'll see the library on your left, a___s from the flower shop.",
+                "answer": "across"
+            },
+            {
+                "clue": "After the car accident, the old lady was sent to the h___l. Let's pray for her.",
+                "answer": "hospital"
+            },
+            {
+                "clue": "The thief got caught and was taken to the police s___n.",
+                "answer": "station"
+            },
+            {
+                "clue": "The parents always tell their kids that if they don't be nice, they will be taken to the p___e station.",
+                "answer": "police"
+            },
+            {
+                "clue": "My grandparents pray at the c___h on Sundays. They always pray for the family.",
+                "answer": "church"
+            },
+            {
+                "clue": "The mother was holding the baby with her left hand when the phone rang, so she picked it up with her r___t hand.",
+                "answer": "right"
+            },
+            {
+                "clue": "When you go down the street, you'll see the post office on the l___t, not on the right.",
+                "answer": "left"
+            },
+            {
+                "clue": "After going for three minutes, Polly finds out she goes the wrong way and turns l___t.",
+                "answer": "left"
+            },
+            {
+                "clue": "If you want to go to the post office, just go d___n this road and you will see it soon.",
+                "answer": "down"
+            },
+            {
+                "clue": "Before Jason sees his blood, he doesn't even know he is h___t.",
+                "answer": "hurt"
+            },
+            {
+                "clue": "There is a clinic n___y. You can see the doctor in five minutes.",
+                "answer": "nearby"
+            },
+            {
+                "clue": "The box is sitting in the c___r of the room. Let's see if anything is in it.",
+                "answer": "corner"
+            },
+            {
+                "clue": "Before the game starts, you have to p___k your teammates to play with you.",
+                "answer": "pick"
+            },
+            {
+                "clue": "The baby s___d to cry when she found out her mother was gone.",
+                "answer": "started"
+            },
+            {
+                "clue": "It suddenly s___s raining heavily, and I get wet because I don't have an umbrella.",
+                "answer": "starts"
+            },
+            {
+                "clue": "The girl goes to the f___t food restaurant again. She comes out with a bag full of French fries, hamburgers, and cola.",
+                "answer": "fast"
+            },
+            {
+                "clue": "The bus is coming in ten minutes. You better hurry to the bus s___p now.",
+                "answer": "stop"
+            },
+            {
+                "clue": "After Joanna got off the train, she went to the h___l first to put her luggage.",
+                "answer": "hotel"
+            },
+            {
+                "clue": "Steward went to the r___y station to pick up his parents.",
+                "answer": "railway"
+            },
+            {
+                "clue": "The car is low on fuel, so the driver goes to the g___s station.",
+                "answer": "gas"
+            },
+            {
+                "clue": "The man tells the boy to h___d on because the ambulance is on the way.",
+                "answer": "hold"
+            },
+            {
+                "clue": "The fire fighters work at the fire s___n.",
+                "answer": "station"
+            }
+        ];
+
+        let current = 0;
+        let userAnswers = Array(questions.length).fill("");
+
+        window.onload = () => {
+            const select = document.getElementById("questionSelect");
+            questions.forEach((_, i) => {
+                const option = document.createElement("option");
+                option.value = i;
+                option.text = `題目 ${i + 1}`;
+                select.appendChild(option);
+            });
+            loadQuestion();
+        };
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                saveAnswer();
+                nextQuestion();
+            }
+        }); function goToPage(url) {
+            window.location.href = url;
+        }
+
+        function manualSubmit() {
+            saveAnswer();
+            nextQuestion();
+        }
+
+        function loadQuestion() {
+            document.getElementById("question-number").textContent = `${current + 1}. 字義填空`;
+            document.getElementById("question-text").textContent = questions[current].clue;
+            document.getElementById("answer").value = userAnswers[current] || "";
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("scoreboard").textContent = "";
+            document.getElementById("answers").style.display = "none";
+            document.getElementById("questionSelect").value = current;
+            document.getElementById("answer").style.display = "inline-block";
+            document.getElementById("submitBtn").style.display = "inline-block";
+        }
+
+        function saveAnswer() {
+            const input = document.getElementById("answer").value.trim().toLowerCase();
+            userAnswers[current] = input;
+        }
+
+        function nextQuestion() {
+            if (current < questions.length - 1) {
+                current++;
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function jumpToQuestion() {
+            saveAnswer();
+            current = parseInt(document.getElementById("questionSelect").value);
+            loadQuestion();
+        }
+
+        function showFinalResult() {
+            document.getElementById("question-number").textContent = "全部完成！";
+            document.getElementById("question-text").textContent = "";
+            document.getElementById("answer").style.display = "none";
+            document.getElementById("submitBtn").style.display = "none";
+            document.getElementById("feedback").textContent = "";
+
+            const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+            document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}`;
+
+            const answerBox = document.getElementById("answers");
+            answerBox.style.display = "block";
+            answerBox.innerHTML = "<h3>正確答案：</h3><ol>" +
+                questions.map((q, i) => {
+                    const ua = userAnswers[i] || "(未作答)";
+                    const ok = ua === q.answer;
+                    return `<li><strong>${q.clue}</strong><br>
+                      你的答案：<strong>${ua}</strong> ${ok ? 'correct' : 'wrong'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                }).join("") + "</ol>";
+        }
+
+        function getGrade(score) {
+            const pct = (score / questions.length) * 100;
+            if (pct === 100) return "Perfect! Great job!";
+            if (pct >= 70) return "Good work!";
+            return "Keep practicing!";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>英語練習題總覽</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .difficulty-section {
+            margin-bottom: 40px;
+        }
+
+        .difficulty-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        .beginner {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+        }
+
+        .intermediate {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+        }
+
+        .advanced {
+            background: linear-gradient(45deg, #FF9800, #F57C00);
+        }
+
+        .expert {
+            background: linear-gradient(45deg, #F44336, #D32F2F);
+        }
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .quiz-card.beginner-card {
+            border-color: #4CAF50;
+        }
+
+        .quiz-card.intermediate-card {
+            border-color: #2196F3;
+        }
+
+        .quiz-card.advanced-card {
+            border-color: #FF9800;
+        }
+
+        .quiz-card.expert-card {
+            border-color: #F44336;
+        }
+
+        .quiz-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .quiz-info {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .quiz-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .quiz-button:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transform: scale(1.05);
+        }
+
+        .stats {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .stats h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 英語練習題總覽</h1>
+            <p>從基礎到進階，全面提升您的英語能力</p>
+        </div>
+
+        <div class="difficulty-section">
+            <div class="difficulty-title beginner">🌱 初級英語 (Beginner)</div>
+            <div class="quiz-grid">
+                <div class="quiz-card beginner-card">
+                    <div class="quiz-title">MJ3 - 基礎詞彙</div>
+                    <div class="quiz-info">📍 地點、動物、身體部位、職業、天氣等基礎詞彙</div>
+                    <div class="quiz-info">📊 96 個練習題</div>
+                    <a href="MJ3.html" class="quiz-button">開始練習</a>
+                </div>
+                <div class="quiz-card beginner-card">
+                    <div class="quiz-title">MJ4 - 食物與日常用品</div>
+                    <div class="quiz-info">🍎 食物、飲料、玩具、電子產品等日常詞彙</div>
+                    <div class="quiz-info">📊 100 個練習題</div>
+                    <a href="MJ4.html" class="quiz-button">開始練習</a>
+                </div>
+                <div class="quiz-card beginner-card">
+                    <div class="quiz-title">MJ5 - 時間與日常活動</div>
+                    <div class="quiz-info">⏰ 月份、日期、日常活動、學科等時間相關詞彙</div>
+                    <div class="quiz-info">📊 143 個練習題</div>
+                    <a href="MJ5.html" class="quiz-button">開始練習</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="difficulty-section">
+            <div class="difficulty-title intermediate">🎯 中級英語 (Intermediate)</div>
+            <div class="quiz-grid">
+                <div class="quiz-card intermediate-card">
+                    <div class="quiz-title">MJ6 - 形狀與活動</div>
+                    <div class="quiz-info">🔺 幾何形狀、運動、樂器等中級詞彙</div>
+                    <div class="quiz-info">📊 22 個練習題</div>
+                    <a href="MJ6.html" class="quiz-button">開始練習</a>
+                </div>
+                <div class="quiz-card intermediate-card">
+                    <div class="quiz-title">MJ7 - 進階詞彙</div>
+                    <div class="quiz-info">💭 情感、形容詞、動詞等較複雜詞彙</div>
+                    <div class="quiz-info">📊 80 個練習題</div>
+                    <a href="MJ7.html" class="quiz-button">開始練習</a>
+                </div>
+                <div class="quiz-card intermediate-card">
+                    <div class="quiz-title">MJ8 - 高級詞彙</div>
+                    <div class="quiz-info">🧠 抽象概念、複雜動詞等高級詞彙</div>
+                    <div class="quiz-info">📊 126 個練習題</div>
+                    <a href="MJ8.html" class="quiz-button">開始練習</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="difficulty-section">
+            <div class="difficulty-title advanced">🚀 高級英語 (Advanced)</div>
+            <div class="quiz-grid">
+                <div class="quiz-card advanced-card">
+                    <div class="quiz-title">MJ9 - 高級詞彙</div>
+                    <div class="quiz-info">🎯 複雜語法、抽象概念等高級詞彙</div>
+                    <div class="quiz-info">📊 50 個練習題</div>
+                    <a href="MJ9.html" class="quiz-button">開始練習</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="difficulty-section">
+            <div class="difficulty-title expert">🏆 最高級英語 (Expert)</div>
+            <div class="quiz-grid">
+                <div class="quiz-card expert-card">
+                    <div class="quiz-title">MJ10 - 最高級詞彙</div>
+                    <div class="quiz-info">🌟 複雜語法、抽象概念等最高級詞彙</div>
+                    <div class="quiz-info">📊 24 個練習題</div>
+                    <a href="MJ10.html" class="quiz-button">開始練習</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <h3>📈 練習統計</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">練習模組</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">641</div>
+                    <div class="stat-label">總練習題數</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">難度等級</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">互動式學習</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

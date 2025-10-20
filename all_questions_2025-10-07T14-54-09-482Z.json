@@ -1,0 +1,6109 @@
+{
+  "metadata": {
+    "source": "https://testcloud.joy.com.tw/index.php?option=list_spell_record&usr_seq=139501&score_seq=2247075",
+    "extractedAt": "2025-10-07T14:54:09.482Z",
+    "totalQuestions": 428
+  },
+  "questions": [
+    {
+      "id": "q_1",
+      "question": "Q 1看圖拼字   l_____________n A .  lemon  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2644",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_141.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1f61dcd2375fe54c306beeedb8e1dfee287eedb15dcafcf570eff6f4d3c88de3",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "lemon",
+      "options": []
+    },
+    {
+      "id": "q_2",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_4",
+      "question": "Q 2看圖拼字   c_____________ks A .  chopsticks  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:921",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_047.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a336d140927f0c0f10636e5de4a79047613a112af76844ff59428352ddb45ee7",
+      "blanks": [
+        "_____________",
+        "__________"
+      ],
+      "correctAnswer": "chopsticks",
+      "options": []
+    },
+    {
+      "id": "q_5",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_7",
+      "question": "Q 3看圖拼字   f_____________r A .  farmer  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3745",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_022.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=bf6d0e20c807179ebdf5e178358909195e297955310bfb84fd5f5d111a9726b7",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "farmer",
+      "options": []
+    },
+    {
+      "id": "q_8",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_10",
+      "question": "Q 4看圖拼字   b_____________y A .  butterfly  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3126",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_153.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=86942a8f85a6a309822e36260dcedfb3309d2620dcf343605679fe1c3a9801c8",
+      "blanks": [
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "butterfly",
+      "options": []
+    },
+    {
+      "id": "q_11",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_13",
+      "question": "Q 5看圖拼字   k_____________e A .  kite  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2004",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_101.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=4fe8952483a0cfe2f95aaa8f6e271ed79fe30a61ca75b6813eaf167d028d4654",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "kite",
+      "options": []
+    },
+    {
+      "id": "q_14",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_16",
+      "question": "Q 6看圖拼字   s_____________n A .  seven  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2632",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1e3ea8d845ffb48103ccda54d2e3fbcbaf221f14a543c06eddb47370391f249b",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "seven",
+      "options": []
+    },
+    {
+      "id": "q_17",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_19",
+      "question": "Q 7看圖拼字   r_____________d A .  read  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:934",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_060.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=d4a974610afb9e1c54d2a7c127005e4fca503a50e0ad802c0f8dd041c16dbca4",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "read",
+      "options": []
+    },
+    {
+      "id": "q_20",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_22",
+      "question": "Q 8看圖拼字   d_____________r A .  doctor  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2011",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_108.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=9585bc785f4cd4b3ea27229caf1f8821bf9863ba083a5e5c90aa26f604cc3503",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "doctor",
+      "options": []
+    },
+    {
+      "id": "q_23",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_25",
+      "question": "Q 9看圖拼字   s_____________i A .  sushi  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3750",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_027.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=e4a2a17cc4a4a140f723ac848b45d32d9c6d5485c493a382da37e98fa272049c",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "sushi",
+      "options": []
+    },
+    {
+      "id": "q_26",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_28",
+      "question": "Q 10看圖拼字   s_____________r A .  sticker  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:186",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_015.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1d0aaf2d6928f739759079b628f74410e56c348099e90bbc36ce6332a7ae3416",
+      "blanks": [
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "sticker",
+      "options": []
+    },
+    {
+      "id": "q_29",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_31",
+      "question": "Q 11看圖拼字   u_____________r A .  under  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1304",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_069.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1bd437d78e7954e2cc28468f9bba9e9c92454d9e6568933f8825f3b612734023",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "under",
+      "options": []
+    },
+    {
+      "id": "q_32",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_34",
+      "question": "Q 12看圖拼字   s_____________h A .  sandwich  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:3135",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_162.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=162555deab324261ed79525caf465941a19e287eeef0951949262931c8b1283a",
+      "blanks": [
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "sandwich",
+      "options": []
+    },
+    {
+      "id": "q_35",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_37",
+      "question": "Q 13看圖拼字   w_____________y A .  windy  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2646",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_143.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=dceac90cc0c7f46d182860ebf3025c0af169810a7f39f1b4912cf254b9b503ec",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "windy",
+      "options": []
+    },
+    {
+      "id": "q_38",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_40",
+      "question": "Q 14看圖拼字   T_____________n A .  Taiwan  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2641",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_138.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=35ead3e5915ff279560f7f8101d9cb8283baf0f40f7913e3cf44f7439b6591e9",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "Taiwan",
+      "options": []
+    },
+    {
+      "id": "q_41",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_43",
+      "question": "Q 15看圖拼字   w_____________h A .  watch  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3733",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_010.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=aa67b70b4661e319df4edfb33aeedf16a26ed0aa4ea1ea23cc1deaaa99bf02b9",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "watch",
+      "options": []
+    },
+    {
+      "id": "q_44",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_46",
+      "question": "Q 16看圖拼字   d_____________r A .  door  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:3753",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_030.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=17444ee01ca75a357bc54e765f19a993f5a02dfc4ef216cc9bd819ab4f7b51e6",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "door",
+      "options": []
+    },
+    {
+      "id": "q_47",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_49",
+      "question": "Q 17看圖拼字   f_____________r A .  flower  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2642",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_139.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=f208038fd9c3196faf7bb6ba15530d87e3004816991956b924a08e76cc52b1ff",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "flower",
+      "options": []
+    },
+    {
+      "id": "q_50",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_52",
+      "question": "Q 18看圖拼字   b_____________r A .  bear  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:3148",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_175.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=028584f25597e5515338841ab599131ceb54860f409563d0139eeb17d5833737",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "bear",
+      "options": []
+    },
+    {
+      "id": "q_53",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_55",
+      "question": "Q 19看圖拼字   c_____________n A .  crayon  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3726",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_003.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=e75e4b12132c615d86a479106cc67011a054aecf7829cb4f2d7ee21bc56a8a48",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "crayon",
+      "options": []
+    },
+    {
+      "id": "q_56",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_58",
+      "question": "Q 20看圖拼字   p_____________a A .  papaya  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:930",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_056.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a3782962eccf599e1c39b0d6da21fc597aa1768a7c678273dd96e384eefb0b00",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "papaya",
+      "options": []
+    },
+    {
+      "id": "q_59",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_61",
+      "question": "Q 21看圖拼字   d_____________k A .  desk  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2010",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_107.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=c3ce4905b7f5e77d0a93909a80dda315f16c6b79085d27d1916c3f3772b99ec5",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "desk",
+      "options": []
+    },
+    {
+      "id": "q_62",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_64",
+      "question": "Q 22看圖拼字   j_____________e A .  juice  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1321",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_086.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=9ff355fc1bf031b5643a0242065ea4469093fd9ac0c4008138c3bcdd4d31f684",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "juice",
+      "options": []
+    },
+    {
+      "id": "q_65",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_67",
+      "question": "Q 23看圖拼字   s_____________r A .  sugar  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:929",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_055.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=afb579e44a3f77f8e5d441c575e1542fc28278fe2806fcc37177ff2eeac72773",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "sugar",
+      "options": []
+    },
+    {
+      "id": "q_68",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_70",
+      "question": "Q 24看圖拼字   m_____________y A .  monkey  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:1999",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_096.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=c994ce325d38f07371c4c2449bb7a356d9b724ab322a8019ad5ac2f9b734d1df",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "monkey",
+      "options": []
+    },
+    {
+      "id": "q_71",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_73",
+      "question": "Q 25看圖拼字   f_____________t A .  feet  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:188",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_017.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=b2764e038ec09409d45fc0e7b80256bee04cd13828724c920b9bca1e22cf6c58",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "feet",
+      "options": []
+    },
+    {
+      "id": "q_74",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_76",
+      "question": "Q 26看圖拼字   c_____________p A .  cap  \n\t\t\t\t\t\t\t\t\t\t\t___\n\t\t\t\t\t\t\t\t\t\t ID:2633",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_130.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=498f6c37d5a86abe900fcfb96db0f8dedeabbeea428cf6e975c4799ee79bc5f9",
+      "blanks": [
+        "_____________",
+        "___"
+      ],
+      "correctAnswer": "cap",
+      "options": []
+    },
+    {
+      "id": "q_77",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_79",
+      "question": "Q 27看圖拼字   m_____________n A .  magician  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:1315",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_080.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1148e21df4872337ab2e9ee8a977dd1320fc6d219a941641c6d38128b56c100c",
+      "blanks": [
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "magician",
+      "options": []
+    },
+    {
+      "id": "q_80",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_82",
+      "question": "Q 28看圖拼字   s_____________k A .  sick  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:1317",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_082.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=76434261f103bd7f8847435fb2378dbb3f66b0c8886ce4875818a3e71edfcf2e",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "sick",
+      "options": []
+    },
+    {
+      "id": "q_83",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_85",
+      "question": "Q 29看圖拼字   tape r_____________r A .  recorder  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:928",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_054.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=30c57bf34471a8db63744f3cec42ddc5aa2c1d5f789222e5b518e1478fe957ca",
+      "blanks": [
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "recorder",
+      "options": []
+    },
+    {
+      "id": "q_86",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_88",
+      "question": "Q 30看圖拼字   j_____________t A .  jacket  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3152",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_179.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a0fb3d278f001830f72f27a36dc901931d5cf3a05b4645707454e6d8b8239af4",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "jacket",
+      "options": []
+    },
+    {
+      "id": "q_89",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_91",
+      "question": "Q 31文意字彙 I want two h_____ers and three hot dogs.  h_____________ers A .  hamburgers  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:3183",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "__________"
+      ],
+      "correctAnswer": "hamburgers",
+      "options": []
+    },
+    {
+      "id": "q_92",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_95",
+      "question": "Q 32文意字彙 Amy is riding a s_____d at the park.  s_____________d A .  skateboard  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:2679",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "__________"
+      ],
+      "correctAnswer": "skateboard",
+      "options": []
+    },
+    {
+      "id": "q_96",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_99",
+      "question": "Q 33文意字彙 I'm hungry. I want a h_____r.  h_____________r A .  hamburger  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3790",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "hamburger",
+      "options": []
+    },
+    {
+      "id": "q_100",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_103",
+      "question": "Q 34文意字彙 There are two pencils and one e_____r in my bag.  e_____________r A .  eraser  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:947",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "eraser",
+      "options": []
+    },
+    {
+      "id": "q_104",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_107",
+      "question": "Q 35文意字彙 Meggie has a fruit s_____d and an ice cream for dinner (晚餐).  s_____________d A .  salad  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3791",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "salad",
+      "options": []
+    },
+    {
+      "id": "q_108",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_111",
+      "question": "Q 36文意字彙 Peter is riding a s_____r to school.  s_____________r A .  scooter  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:2684",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "scooter",
+      "options": []
+    },
+    {
+      "id": "q_112",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_115",
+      "question": "Q 37文意字彙 S_____ks are sea (海洋) animals.  S_____________ks A .  Sharks  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:1349",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "Sharks",
+      "options": []
+    },
+    {
+      "id": "q_116",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_119",
+      "question": "Q 38文意字彙 My brother is 7 years old.  He is a cute b_____y.  b_____________y A .  boy  \n\t\t\t\t\t\t\t\t\t\t\t___\n\t\t\t\t\t\t\t\t\t\t ID:2025",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "___"
+      ],
+      "correctAnswer": "boy",
+      "options": []
+    },
+    {
+      "id": "q_120",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_123",
+      "question": "Q 39文意字彙 Billy is my c_____n. His father and my father are brothers.  c_____________n A .  cousin  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3155",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "cousin",
+      "options": []
+    },
+    {
+      "id": "q_124",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_127",
+      "question": "Q 40文意字彙 Kenny has five pets: a dog, two cats, and two r_____its.  r_____________its A .  rabbits  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:1347",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "rabbits",
+      "options": []
+    },
+    {
+      "id": "q_128",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_131",
+      "question": "Q 41文意字彙 The pig is fat. It's not t_____n.  t_____________n A .  thin  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:23",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "thin",
+      "options": []
+    },
+    {
+      "id": "q_132",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_135",
+      "question": "Q 42文意字彙 I'm b_____ed. Can you play games with me?  b_____________ed A .  bored  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:231",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "bored",
+      "options": []
+    },
+    {
+      "id": "q_136",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_139",
+      "question": "Q 43文意字彙 Andy is tired. He is sl_____y.  sl_____________y A .  sleepy  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3192",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "sleepy",
+      "options": []
+    },
+    {
+      "id": "q_140",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_143",
+      "question": "Q 44文意字彙 Good morning! Let's go to s_____l.  s_____________l A .  school  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2050",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "school",
+      "options": []
+    },
+    {
+      "id": "q_144",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_147",
+      "question": "Q 45文意字彙 Those boxes are full. They're h_____y.  h_____________y A .  heavy  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2036",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "heavy",
+      "options": []
+    },
+    {
+      "id": "q_148",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_151",
+      "question": "Q 46文意字彙 Mom is t_____ed. She is sleepy.  t_____________ed A .  tired  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3792",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "tired",
+      "options": []
+    },
+    {
+      "id": "q_152",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_155",
+      "question": "Q 47文意字彙 Put some cookies in the p_____e, not in the bowl.  p_____________e A .  plate  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2687",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "plate",
+      "options": []
+    },
+    {
+      "id": "q_156",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_159",
+      "question": "Q 48文意字彙 The boy is weak. He's not s_____g.  s_____________g A .  strong  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:203",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "strong",
+      "options": []
+    },
+    {
+      "id": "q_160",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_163",
+      "question": "Q 49文意字彙 There are many b_____lies and bees at the park.  b_____________lies A .  butterflies  \n\t\t\t\t\t\t\t\t\t\t\t___________\n\t\t\t\t\t\t\t\t\t\t ID:2683",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "___________"
+      ],
+      "correctAnswer": "butterflies",
+      "options": []
+    },
+    {
+      "id": "q_164",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_167",
+      "question": "Q 50文意字彙 We can see many famous (有名的) pictures in this m_____m.  m_____________m A .  museum  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3182",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "museum",
+      "options": []
+    },
+    {
+      "id": "q_168",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_171",
+      "question": "Q 51文意字彙 It is not sunny. It's r_____y.  r_____________y A .  rainy  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:215",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "rainy",
+      "options": []
+    },
+    {
+      "id": "q_172",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_175",
+      "question": "Q 52文意字彙 They don't like cookies. They like c_____e bars.  c_____________e A .  chocolate  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:1343",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "chocolate",
+      "options": []
+    },
+    {
+      "id": "q_176",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_179",
+      "question": "Q 53文意字彙 I have a lunchbox and a banana in my b_____k.  b_____________k A .  backpack  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:2062",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "backpack",
+      "options": []
+    },
+    {
+      "id": "q_180",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_183",
+      "question": "Q 54文意字彙 It's raining(下雨) now. Take an u_____a.  u_____________a A .  umbrella  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:936",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "umbrella",
+      "options": []
+    },
+    {
+      "id": "q_184",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_187",
+      "question": "Q 55文意字彙 Eric likes g_____es, but he doesn’t like lemons.  g_____________es A .  grapes  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2059",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "grapes",
+      "options": []
+    },
+    {
+      "id": "q_188",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_191",
+      "question": "Q 56文意字彙 Sam has a cool r_____ot. It can talk and walk.  r_____________ot A .  robot  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3191",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "robot",
+      "options": []
+    },
+    {
+      "id": "q_192",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_195",
+      "question": "Q 57文意字彙 Meg likes s_____ries. They are red and sweet (甜的).  s_____________ries A .  strawberries  \n\t\t\t\t\t\t\t\t\t\t\t___________\n\t\t\t\t\t\t\t\t\t\t ID:2682",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "___________"
+      ],
+      "correctAnswer": "strawberries",
+      "options": []
+    },
+    {
+      "id": "q_196",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_199",
+      "question": "Q 58文意字彙 I want l_____ps and chocolate bars. They are sweet (甜的).  l_____________ps A .  lollipops  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3196",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "lollipops",
+      "options": []
+    },
+    {
+      "id": "q_200",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_203",
+      "question": "Q 59文意字彙 Don't talk with your m_____h full.  m_____________h A .  mouth  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1330",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "mouth",
+      "options": []
+    },
+    {
+      "id": "q_204",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_207",
+      "question": "Q 60文意字彙 The cat is in f_____t of the door.  f_____________t A .  front  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:204",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "front",
+      "options": []
+    },
+    {
+      "id": "q_208",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_211",
+      "question": "Q 61文意字彙 Twelve is b_____n eleven and thirteen.  b_____________n A .  between  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:2658",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "between",
+      "options": []
+    },
+    {
+      "id": "q_212",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_215",
+      "question": "Q 62文意字彙 There are some bees and bugs around the f_____rs.  f_____________rs A .  flowers  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:3181",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "flowers",
+      "options": []
+    },
+    {
+      "id": "q_216",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_219",
+      "question": "Q 63文意字彙 John can speak English(說英語). He is from E_____d.  E_____________d A .  England  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:973",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "England",
+      "options": []
+    },
+    {
+      "id": "q_220",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_223",
+      "question": "Q 64文意字彙 There are many p_____e at the park.  Why?  p_____________e A .  people  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:1358",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "people",
+      "options": []
+    },
+    {
+      "id": "q_224",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_227",
+      "question": "Q 65文意字彙 Kevin has three pens in his p_____l case.  p_____________l A .  pencil  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3763",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "pencil",
+      "options": []
+    },
+    {
+      "id": "q_228",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_231",
+      "question": "Q 66文意字彙 Gary is not from England. He is from F_____e.   F_____________e A .  France  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3781",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "France",
+      "options": []
+    },
+    {
+      "id": "q_232",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_235",
+      "question": "Q 67文意字彙 The box is e_____y. There is nothing(沒有東西) in it.  e_____________y A .  empty  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:967",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "empty",
+      "options": []
+    },
+    {
+      "id": "q_236",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_239",
+      "question": "Q 68文意字彙 David is eating with a knife and f_____k.  f_____________k A .  fork  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2690",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "fork",
+      "options": []
+    },
+    {
+      "id": "q_240",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_243",
+      "question": "Q 69文意字彙 I have a fork, but I don't have a k_____e.  Can you pass it to me?  k_____________e A .  knife  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2052",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "knife",
+      "options": []
+    },
+    {
+      "id": "q_244",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_247",
+      "question": "Q 70文意字彙 Tina is a s_____r. She can sing very well.  s_____________r A .  singer  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3180",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "singer",
+      "options": []
+    },
+    {
+      "id": "q_248",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_251",
+      "question": "Q 71文意字彙 There is a dog b_____d the door.  b_____________d A .  behind  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2676",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "behind",
+      "options": []
+    },
+    {
+      "id": "q_252",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_255",
+      "question": "Q 72文意字彙 Let's sing and d_____e together.  d_____________e A .  dance  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:225",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "dance",
+      "options": []
+    },
+    {
+      "id": "q_256",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_259",
+      "question": "Q 73文意字彙 The jump rope is two h_____d dollars.  h_____________d A .  hundred  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:3793",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "hundred",
+      "options": []
+    },
+    {
+      "id": "q_260",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_263",
+      "question": "Q 74文意字彙 Sam is hungry.  He wants some sushi r_____ls.  r_____________ls A .  rolls  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1351",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "rolls",
+      "options": []
+    },
+    {
+      "id": "q_264",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_267",
+      "question": "Q 75文意字彙 The puzzle is one t_____d dollars.  t_____________d A .  thousand  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:2664",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "thousand",
+      "options": []
+    },
+    {
+      "id": "q_268",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_271",
+      "question": "Q 76對話填空 A: What's your t______ne number?B: 2701-6769.  t_____________ne A .  telephone  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:983",
+      "image": null,
+      "blanks": [
+        "______",
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "telephone",
+      "options": []
+    },
+    {
+      "id": "q_272",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_275",
+      "question": "Q 77對話填空 A: Are there any b_____gs at the park?B: Yes, there are. There are some bees.  b_____________gs A .  bugs  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:28",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "bugs",
+      "options": []
+    },
+    {
+      "id": "q_276",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_279",
+      "question": "Q 78對話填空 A: Look! There are some birthday c_____ds on the desk.B: They are for Andy. It's his birthday.  c_____________ds A .  cards  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:248",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "cards",
+      "options": []
+    },
+    {
+      "id": "q_280",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_283",
+      "question": "Q 79對話填空 A: Where is the playground?.B: It's n_____r the park  n_____________r A .  near  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:1384",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "near",
+      "options": []
+    },
+    {
+      "id": "q_284",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_287",
+      "question": "Q 80對話填空 A: What does Iris want?B: She wants a c_____er. She can play games on it.  c_____________er A .  computer  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:3817",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "computer",
+      "options": []
+    },
+    {
+      "id": "q_288",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_291",
+      "question": "Q 81對話填空 A: Is your sister t_____l?B: Yes. She is 185 centimeters.  t_____________l A .  tall  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:1004",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "tall",
+      "options": []
+    },
+    {
+      "id": "q_292",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_295",
+      "question": "Q 82對話填空 A: Do you want some pizza?B: No, I don't. I am not h_____y.  h_____________y A .  hungry  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:987",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "hungry",
+      "options": []
+    },
+    {
+      "id": "q_296",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_299",
+      "question": "Q 83對話填空 A: How much are the p_____rs?B: They are eighty dollars, and the oranges are fifty dollars.  p_____________rs A .  pears  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3209",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "pears",
+      "options": []
+    },
+    {
+      "id": "q_300",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_303",
+      "question": "Q 84對話填空 A: Where's Billy?B: He's e_____ting in the dining room.  e_____________ting A .  eating  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:1388",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "eating",
+      "options": []
+    },
+    {
+      "id": "q_304",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_307",
+      "question": "Q 85對話填空 A: How is the w_____r?B: It is sunny.  w_____________r A .  weather  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:998",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "weather",
+      "options": []
+    },
+    {
+      "id": "q_308",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_311",
+      "question": "Q 86對話填空 A: What t_____e is it?B: It's ten o'clock.  t_____________e A .  time  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:1373",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "time",
+      "options": []
+    },
+    {
+      "id": "q_312",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_315",
+      "question": "Q 87對話填空 A: What is your c_____e number?B: It's 0952-606-111.  c_____________e A .  cellphone  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3218",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "cellphone",
+      "options": []
+    },
+    {
+      "id": "q_316",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_319",
+      "question": "Q 88對話填空 A: Where is Anna?B: She is at the o_____e. She is working.  o_____________e A .  office  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3212",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "office",
+      "options": []
+    },
+    {
+      "id": "q_320",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_323",
+      "question": "Q 89對話填空 A: Oh, no. We're lost(迷路).B: Let's look at(看) the m_____p.  m_____________p A .  map  \n\t\t\t\t\t\t\t\t\t\t\t___\n\t\t\t\t\t\t\t\t\t\t ID:990",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "___"
+      ],
+      "correctAnswer": "map",
+      "options": []
+    },
+    {
+      "id": "q_324",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_327",
+      "question": "Q 90對話填空 A: What color is your helmet?B: It's g____n and blue.  g_____________n A .  green  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1378",
+      "image": null,
+      "blanks": [
+        "____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "green",
+      "options": []
+    },
+    {
+      "id": "q_328",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_331",
+      "question": "Q 91對話填空 A: Do you have a c_____a?B: Yes. We can take a picture.  c_____________a A .  camera  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:993",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "camera",
+      "options": []
+    },
+    {
+      "id": "q_332",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_335",
+      "question": "Q 92對話填空 A: Are they going to school?B: No, they're not. They're going to the p_____d.  p_____________d A .  playground  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:1395",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "__________"
+      ],
+      "correctAnswer": "playground",
+      "options": []
+    },
+    {
+      "id": "q_336",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_339",
+      "question": "Q 93對話填空 A: I don't know this word (字). Do you have a d_____y?B: Yes. Here it is.  d_____________y A .  dictionary  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:3215",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "__________"
+      ],
+      "correctAnswer": "dictionary",
+      "options": []
+    },
+    {
+      "id": "q_340",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_343",
+      "question": "Q 94對話填空 A: How much is the pen?B: It is five d_____rs.  d_____________rs A .  dollars  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:985",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "dollars",
+      "options": []
+    },
+    {
+      "id": "q_344",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_347",
+      "question": "Q 95對話填空 A: Do you want sugar in your c_____ee?B: Yes, please.  c_____________ee A .  coffee  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3220",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "coffee",
+      "options": []
+    },
+    {
+      "id": "q_348",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_351",
+      "question": "Q 96對話填空 A: What c_____r is the chair?B: It's red.  c_____________r A .  color  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2700",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "color",
+      "options": []
+    },
+    {
+      "id": "q_352",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_355",
+      "question": "Q 97對話填空 A: How m_____y balls are there?B: Let's count. One, two, three…  m_____________y A .  many  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:980",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "many",
+      "options": []
+    },
+    {
+      "id": "q_356",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_359",
+      "question": "Q 98對話填空 A: Can they sing?B: Of course. They are s_____rs.  s_____________rs A .  singers  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:245",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "singers",
+      "options": []
+    },
+    {
+      "id": "q_360",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_363",
+      "question": "Q 99對話填空 A: Gina and Gillian study and play together.B: Yes. They are good f______ds.  f_____________ds A .  friends  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:3801",
+      "image": null,
+      "blanks": [
+        "______",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "friends",
+      "options": []
+    },
+    {
+      "id": "q_364",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_367",
+      "question": "Q 100對話填空 A: What do you want?B: It's hot. I want ice c_____m.  c_____________m A .  cream  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:994",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "cream",
+      "options": []
+    },
+    {
+      "id": "q_368",
+      "question": "Q",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_371",
+      "question": "首頁\n                            \n                        \n                        \n                            \n                                \n                                最新消息\n                            \n                        \n                        \n                            \n                                \n                                分析報告\n                            \n                        \n                                                    \n                                \n ",
+      "image": "https://testcloud.joy.com.tw/images/2021/joyschool_logo.svg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_372",
+      "question": "首頁\n                            \n                        \n                        \n                            \n                                \n                                最新消息\n                            \n                        \n                        \n                            \n                                \n                                分析報告\n                            \n                        \n                                                    \n                                \n ",
+      "image": "https://testcloud.joy.com.tw/images/2021/icons/nav/icon_home.svg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_381",
+      "question": "FAQ",
+      "image": "https://testcloud.joy.com.tw/images/2021/icons/nav/icon_faq.svg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_382",
+      "question": "FAQ",
+      "image": "https://testcloud.joy.com.tw/images/2021/icons/nav/icon_faq.svg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_402",
+      "question": "聽力練習\n                                    \n                                \n                                \n                                    音檔上雲端\n                                    選擇想預習或複習的單元\n                                    打開英語耳朵，跨越時空輕鬆學習\n                                    開開心心學英語！",
+      "image": "https://testcloud.joy.com.tw/images/2021/nav-hover-cover/hover-cover_listen.jpg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_404",
+      "question": "互動遊戲\n                                    \n                                \n                                \n                                    當英語融入闖關挑戰\n                                    用玩遊戲的精神創造活潑的情境\n                                    在遊戲過程中，加深對題目的記憶\n                                    還有金幣獎勵等你來拿唷！",
+      "image": "https://testcloud.joy.com.tw/images/2021/nav-hover-cover/hover-cover_game.jpg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_412",
+      "question": "Q 1看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_413",
+      "question": "Q 2看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_414",
+      "question": "Q 3看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_415",
+      "question": "Q 4看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_416",
+      "question": "Q 5看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_417",
+      "question": "Q 6看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_418",
+      "question": "Q 7看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_419",
+      "question": "Q 8看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_420",
+      "question": "Q 9看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_421",
+      "question": "Q 10看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_422",
+      "question": "Q 11看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_423",
+      "question": "Q 12看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_424",
+      "question": "Q 13看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_425",
+      "question": "Q 14看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_426",
+      "question": "Q 15看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_427",
+      "question": "Q 16看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_428",
+      "question": "Q 17看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_429",
+      "question": "Q 18看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_430",
+      "question": "Q 19看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_431",
+      "question": "Q 20看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_432",
+      "question": "Q 21看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_433",
+      "question": "Q 22看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_434",
+      "question": "Q 23看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_435",
+      "question": "Q 24看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_436",
+      "question": "Q 25看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_437",
+      "question": "Q 26看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_438",
+      "question": "Q 27看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_439",
+      "question": "Q 28看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_440",
+      "question": "Q 29看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_441",
+      "question": "Q 30看圖拼字",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_442",
+      "question": "Q 31文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_443",
+      "question": "Q 32文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_444",
+      "question": "Q 33文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_445",
+      "question": "Q 34文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_446",
+      "question": "Q 35文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_447",
+      "question": "Q 36文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_448",
+      "question": "Q 37文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_449",
+      "question": "Q 38文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_450",
+      "question": "Q 39文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_451",
+      "question": "Q 40文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_452",
+      "question": "Q 41文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_453",
+      "question": "Q 42文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_454",
+      "question": "Q 43文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_455",
+      "question": "Q 44文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_456",
+      "question": "Q 45文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_457",
+      "question": "Q 46文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_458",
+      "question": "Q 47文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_459",
+      "question": "Q 48文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_460",
+      "question": "Q 49文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_461",
+      "question": "Q 50文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_462",
+      "question": "Q 51文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_463",
+      "question": "Q 52文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_464",
+      "question": "Q 53文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_465",
+      "question": "Q 54文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_466",
+      "question": "Q 55文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_467",
+      "question": "Q 56文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_468",
+      "question": "Q 57文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_469",
+      "question": "Q 58文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_470",
+      "question": "Q 59文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_471",
+      "question": "Q 60文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_472",
+      "question": "Q 61文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_473",
+      "question": "Q 62文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_474",
+      "question": "Q 63文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_475",
+      "question": "Q 64文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_476",
+      "question": "Q 65文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_477",
+      "question": "Q 66文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_478",
+      "question": "Q 67文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_479",
+      "question": "Q 68文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_480",
+      "question": "Q 69文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_481",
+      "question": "Q 70文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_482",
+      "question": "Q 71文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_483",
+      "question": "Q 72文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_484",
+      "question": "Q 73文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_485",
+      "question": "Q 74文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_486",
+      "question": "Q 75文意字彙",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_487",
+      "question": "Q 76對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_488",
+      "question": "Q 77對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_489",
+      "question": "Q 78對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_490",
+      "question": "Q 79對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_491",
+      "question": "Q 80對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_492",
+      "question": "Q 81對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_493",
+      "question": "Q 82對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_494",
+      "question": "Q 83對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_495",
+      "question": "Q 84對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_496",
+      "question": "Q 85對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_497",
+      "question": "Q 86對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_498",
+      "question": "Q 87對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_499",
+      "question": "Q 88對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_500",
+      "question": "Q 89對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_501",
+      "question": "Q 90對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_502",
+      "question": "Q 91對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_503",
+      "question": "Q 92對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_504",
+      "question": "Q 93對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_505",
+      "question": "Q 94對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_506",
+      "question": "Q 95對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_507",
+      "question": "Q 96對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_508",
+      "question": "Q 97對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_509",
+      "question": "Q 98對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_510",
+      "question": "Q 99對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_511",
+      "question": "Q 100對話填空",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_512",
+      "question": "首頁\n                            \n                        \n                        \n                            \n                                \n                                最新消息\n                            \n                        \n                        \n                            \n                                \n                                分析報告\n                            \n                        \n                                                    \n                                \n ",
+      "image": "https://testcloud.joy.com.tw/images/2021/joyschool_logo.svg",
+      "blanks": [
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_____________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____________",
+        "______",
+        "_____________",
+        "_________",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____________",
+        "_____",
+        "_____________",
+        "________",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "___",
+        "_____________",
+        "________",
+        "_____________",
+        "____",
+        "_____________",
+        "________",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "________",
+        "______",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_______",
+        "______",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "lemon",
+      "options": []
+    },
+    {
+      "id": "q_513",
+      "question": "首頁\n                            \n                        \n                        \n                            \n                                \n                                最新消息\n                            \n                        \n                        \n                            \n                                \n                                分析報告\n                            \n                        \n                                                    \n                                \n ",
+      "image": "https://testcloud.joy.com.tw/images/2021/joyschool_logo.svg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_514",
+      "question": "首頁\n                            \n                        \n                        \n                            \n                                \n                                最新消息\n                            \n                        \n                        \n                            \n                                \n                                分析報告\n                            \n                        \n                                                    \n                                \n ",
+      "image": "https://testcloud.joy.com.tw/images/2021/icons/nav/icon_home.svg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_517",
+      "question": "聽力練習\n                                    \n                                \n                                \n                                    音檔上雲端\n                                    選擇想預習或複習的單元\n                                    打開英語耳朵，跨越時空輕鬆學習\n                                    開開心心學英語！\n                                \n                            \n                        \n                    \n                    \n                    \n                        \n                    \n         ",
+      "image": "https://testcloud.joy.com.tw/images/2021/nav-hover-cover/hover-cover_listen.jpg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_518",
+      "question": "聽力練習\n                                    \n                                \n                                \n                                    音檔上雲端\n                                    選擇想預習或複習的單元\n                                    打開英語耳朵，跨越時空輕鬆學習\n                                    開開心心學英語！\n                                \n                            \n                        \n                    \n                    \n                    \n                        \n                    \n         ",
+      "image": "https://testcloud.joy.com.tw/images/2021/nav-hover-cover/hover-cover_listen.jpg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_520",
+      "question": "聽力練習\n                                    \n                                \n                                \n                                    音檔上雲端\n                                    選擇想預習或複習的單元\n                                    打開英語耳朵，跨越時空輕鬆學習\n                                    開開心心學英語！\n                                \n                            \n                        \n                    \n                    \n                    \n                        \n                    \n         ",
+      "image": "https://testcloud.joy.com.tw/images/2021/nav-hover-cover/hover-cover_listen.jpg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_521",
+      "question": "聽力練習\n                                    \n                                \n                                \n                                    音檔上雲端\n                                    選擇想預習或複習的單元\n                                    打開英語耳朵，跨越時空輕鬆學習\n                                    開開心心學英語！",
+      "image": "https://testcloud.joy.com.tw/images/2021/nav-hover-cover/hover-cover_listen.jpg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_522",
+      "question": "聽力練習\n                                    \n                                \n                                \n                                    音檔上雲端\n                                    選擇想預習或複習的單元\n                                    打開英語耳朵，跨越時空輕鬆學習\n                                    開開心心學英語！",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_523",
+      "question": "聽力練習\n                                    \n                                \n                                \n                                    音檔上雲端\n                                    選擇想預習或複習的單元\n                                    打開英語耳朵，跨越時空輕鬆學習\n                                    開開心心學英語！",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_524",
+      "question": "聽力練習\n                                    \n                                \n                                \n                                    音檔上雲端\n                                    選擇想預習或複習的單元\n                                    打開英語耳朵，跨越時空輕鬆學習\n                                    開開心心學英語！",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_525",
+      "question": "音檔上雲端\n                                    選擇想預習或複習的單元\n                                    打開英語耳朵，跨越時空輕鬆學習\n                                    開開心心學英語！",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_533",
+      "question": "互動遊戲\n                                    \n                                \n                                \n                                    當英語融入闖關挑戰\n                                    用玩遊戲的精神創造活潑的情境\n                                    在遊戲過程中，加深對題目的記憶\n                                    還有金幣獎勵等你來拿唷！",
+      "image": "https://testcloud.joy.com.tw/images/2021/nav-hover-cover/hover-cover_game.jpg",
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_534",
+      "question": "互動遊戲\n                                    \n                                \n                                \n                                    當英語融入闖關挑戰\n                                    用玩遊戲的精神創造活潑的情境\n                                    在遊戲過程中，加深對題目的記憶\n                                    還有金幣獎勵等你來拿唷！",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_535",
+      "question": "互動遊戲\n                                    \n                                \n                                \n                                    當英語融入闖關挑戰\n                                    用玩遊戲的精神創造活潑的情境\n                                    在遊戲過程中，加深對題目的記憶\n                                    還有金幣獎勵等你來拿唷！",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_536",
+      "question": "互動遊戲\n                                    \n                                \n                                \n                                    當英語融入闖關挑戰\n                                    用玩遊戲的精神創造活潑的情境\n                                    在遊戲過程中，加深對題目的記憶\n                                    還有金幣獎勵等你來拿唷！",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_537",
+      "question": "當英語融入闖關挑戰\n                                    用玩遊戲的精神創造活潑的情境\n                                    在遊戲過程中，加深對題目的記憶\n                                    還有金幣獎勵等你來拿唷！",
+      "image": null,
+      "blanks": [],
+      "correctAnswer": "",
+      "options": []
+    },
+    {
+      "id": "q_579",
+      "question": "Q 1看圖拼字   l_____________n A .  lemon  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2644Q 2看圖拼字   c_____________ks A .  chopsticks  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:921Q 3看圖拼字   f_____________r A .  farmer  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3745Q 4看圖拼字   b_____________y A .  butterfly  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3126Q 5看圖拼字   k_____________e A .  kite  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2004Q 6看圖拼字   s_____________n A .  seven  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2632Q 7看圖拼字   r_____________d A .  read  \n",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_141.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1f61dcd2375fe54c306beeedb8e1dfee287eedb15dcafcf570eff6f4d3c88de3",
+      "blanks": [
+        "_____________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____________",
+        "______",
+        "_____________",
+        "_________",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____________",
+        "_____",
+        "_____________",
+        "________",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "___",
+        "_____________",
+        "________",
+        "_____________",
+        "____",
+        "_____________",
+        "________",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "________",
+        "______",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_______",
+        "______",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "lemon",
+      "options": []
+    },
+    {
+      "id": "q_580",
+      "question": "Q 1看圖拼字   l_____________n A .  lemon  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2644Q 2看圖拼字   c_____________ks A .  chopsticks  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:921Q 3看圖拼字   f_____________r A .  farmer  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3745Q 4看圖拼字   b_____________y A .  butterfly  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3126Q 5看圖拼字   k_____________e A .  kite  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2004Q 6看圖拼字   s_____________n A .  seven  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2632Q 7看圖拼字   r_____________d A .  read  \n",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_141.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1f61dcd2375fe54c306beeedb8e1dfee287eedb15dcafcf570eff6f4d3c88de3",
+      "blanks": [
+        "_____________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____________",
+        "______",
+        "_____________",
+        "_________",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____________",
+        "_____",
+        "_____________",
+        "________",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "___",
+        "_____________",
+        "________",
+        "_____________",
+        "____",
+        "_____________",
+        "________",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "________",
+        "______",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_______",
+        "______",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "lemon",
+      "options": []
+    },
+    {
+      "id": "q_581",
+      "question": "Q 1看圖拼字   l_____________n A .  lemon  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2644Q 2看圖拼字   c_____________ks A .  chopsticks  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:921Q 3看圖拼字   f_____________r A .  farmer  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3745Q 4看圖拼字   b_____________y A .  butterfly  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3126Q 5看圖拼字   k_____________e A .  kite  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2004Q 6看圖拼字   s_____________n A .  seven  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2632Q 7看圖拼字   r_____________d A .  read  \n",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_141.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1f61dcd2375fe54c306beeedb8e1dfee287eedb15dcafcf570eff6f4d3c88de3",
+      "blanks": [
+        "_____________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____________",
+        "______",
+        "_____________",
+        "_________",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____________",
+        "_____",
+        "_____________",
+        "________",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "___",
+        "_____________",
+        "________",
+        "_____________",
+        "____",
+        "_____________",
+        "________",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "________",
+        "______",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_______",
+        "______",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "lemon",
+      "options": []
+    },
+    {
+      "id": "q_582",
+      "question": "Q 1看圖拼字   l_____________n A .  lemon  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2644Q 2看圖拼字   c_____________ks A .  chopsticks  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:921Q 3看圖拼字   f_____________r A .  farmer  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3745Q 4看圖拼字   b_____________y A .  butterfly  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3126Q 5看圖拼字   k_____________e A .  kite  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2004Q 6看圖拼字   s_____________n A .  seven  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2632Q 7看圖拼字   r_____________d A .  read  \n",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_141.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1f61dcd2375fe54c306beeedb8e1dfee287eedb15dcafcf570eff6f4d3c88de3",
+      "blanks": [
+        "_____________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____________",
+        "______",
+        "_____________",
+        "_________",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____________",
+        "_____",
+        "_____________",
+        "________",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "___",
+        "_____________",
+        "________",
+        "_____________",
+        "____",
+        "_____________",
+        "________",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "________",
+        "______",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_______",
+        "______",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "lemon",
+      "options": []
+    },
+    {
+      "id": "q_583",
+      "question": "Q 1看圖拼字   l_____________n A .  lemon  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2644Q 2看圖拼字   c_____________ks A .  chopsticks  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:921Q 3看圖拼字   f_____________r A .  farmer  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3745Q 4看圖拼字   b_____________y A .  butterfly  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3126Q 5看圖拼字   k_____________e A .  kite  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2004Q 6看圖拼字   s_____________n A .  seven  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2632Q 7看圖拼字   r_____________d A .  read  \n",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_141.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1f61dcd2375fe54c306beeedb8e1dfee287eedb15dcafcf570eff6f4d3c88de3",
+      "blanks": [
+        "_____________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____________",
+        "______",
+        "_____________",
+        "_________",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____________",
+        "_____",
+        "_____________",
+        "________",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "___",
+        "_____________",
+        "________",
+        "_____________",
+        "____",
+        "_____________",
+        "________",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "________",
+        "______",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_______",
+        "______",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "lemon",
+      "options": []
+    },
+    {
+      "id": "q_584",
+      "question": "Q 1看圖拼字   l_____________n A .  lemon  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2644",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_141.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1f61dcd2375fe54c306beeedb8e1dfee287eedb15dcafcf570eff6f4d3c88de3",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "lemon",
+      "options": []
+    },
+    {
+      "id": "q_593",
+      "question": "Q 2看圖拼字   c_____________ks A .  chopsticks  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:921",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_047.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a336d140927f0c0f10636e5de4a79047613a112af76844ff59428352ddb45ee7",
+      "blanks": [
+        "_____________",
+        "__________"
+      ],
+      "correctAnswer": "chopsticks",
+      "options": []
+    },
+    {
+      "id": "q_602",
+      "question": "Q 3看圖拼字   f_____________r A .  farmer  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3745",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_022.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=bf6d0e20c807179ebdf5e178358909195e297955310bfb84fd5f5d111a9726b7",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "farmer",
+      "options": []
+    },
+    {
+      "id": "q_611",
+      "question": "Q 4看圖拼字   b_____________y A .  butterfly  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3126",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_153.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=86942a8f85a6a309822e36260dcedfb3309d2620dcf343605679fe1c3a9801c8",
+      "blanks": [
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "butterfly",
+      "options": []
+    },
+    {
+      "id": "q_620",
+      "question": "Q 5看圖拼字   k_____________e A .  kite  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2004",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_101.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=4fe8952483a0cfe2f95aaa8f6e271ed79fe30a61ca75b6813eaf167d028d4654",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "kite",
+      "options": []
+    },
+    {
+      "id": "q_629",
+      "question": "Q 6看圖拼字   s_____________n A .  seven  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2632",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1e3ea8d845ffb48103ccda54d2e3fbcbaf221f14a543c06eddb47370391f249b",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "seven",
+      "options": []
+    },
+    {
+      "id": "q_638",
+      "question": "Q 7看圖拼字   r_____________d A .  read  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:934",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_060.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=d4a974610afb9e1c54d2a7c127005e4fca503a50e0ad802c0f8dd041c16dbca4",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "read",
+      "options": []
+    },
+    {
+      "id": "q_647",
+      "question": "Q 8看圖拼字   d_____________r A .  doctor  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2011",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_108.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=9585bc785f4cd4b3ea27229caf1f8821bf9863ba083a5e5c90aa26f604cc3503",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "doctor",
+      "options": []
+    },
+    {
+      "id": "q_656",
+      "question": "Q 9看圖拼字   s_____________i A .  sushi  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3750",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_027.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=e4a2a17cc4a4a140f723ac848b45d32d9c6d5485c493a382da37e98fa272049c",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "sushi",
+      "options": []
+    },
+    {
+      "id": "q_665",
+      "question": "Q 10看圖拼字   s_____________r A .  sticker  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:186",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_015.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1d0aaf2d6928f739759079b628f74410e56c348099e90bbc36ce6332a7ae3416",
+      "blanks": [
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "sticker",
+      "options": []
+    },
+    {
+      "id": "q_674",
+      "question": "Q 11看圖拼字   u_____________r A .  under  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1304",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_069.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1bd437d78e7954e2cc28468f9bba9e9c92454d9e6568933f8825f3b612734023",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "under",
+      "options": []
+    },
+    {
+      "id": "q_683",
+      "question": "Q 12看圖拼字   s_____________h A .  sandwich  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:3135",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_162.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=162555deab324261ed79525caf465941a19e287eeef0951949262931c8b1283a",
+      "blanks": [
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "sandwich",
+      "options": []
+    },
+    {
+      "id": "q_692",
+      "question": "Q 13看圖拼字   w_____________y A .  windy  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2646",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_143.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=dceac90cc0c7f46d182860ebf3025c0af169810a7f39f1b4912cf254b9b503ec",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "windy",
+      "options": []
+    },
+    {
+      "id": "q_701",
+      "question": "Q 14看圖拼字   T_____________n A .  Taiwan  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2641",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_138.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=35ead3e5915ff279560f7f8101d9cb8283baf0f40f7913e3cf44f7439b6591e9",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "Taiwan",
+      "options": []
+    },
+    {
+      "id": "q_710",
+      "question": "Q 15看圖拼字   w_____________h A .  watch  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3733",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_010.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=aa67b70b4661e319df4edfb33aeedf16a26ed0aa4ea1ea23cc1deaaa99bf02b9",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "watch",
+      "options": []
+    },
+    {
+      "id": "q_719",
+      "question": "Q 16看圖拼字   d_____________r A .  door  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:3753",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_030.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=17444ee01ca75a357bc54e765f19a993f5a02dfc4ef216cc9bd819ab4f7b51e6",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "door",
+      "options": []
+    },
+    {
+      "id": "q_728",
+      "question": "Q 17看圖拼字   f_____________r A .  flower  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2642",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_139.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=f208038fd9c3196faf7bb6ba15530d87e3004816991956b924a08e76cc52b1ff",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "flower",
+      "options": []
+    },
+    {
+      "id": "q_737",
+      "question": "Q 18看圖拼字   b_____________r A .  bear  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:3148",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_175.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=028584f25597e5515338841ab599131ceb54860f409563d0139eeb17d5833737",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "bear",
+      "options": []
+    },
+    {
+      "id": "q_746",
+      "question": "Q 19看圖拼字   c_____________n A .  crayon  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3726",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/2023/MJA/mja_003.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=e75e4b12132c615d86a479106cc67011a054aecf7829cb4f2d7ee21bc56a8a48",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "crayon",
+      "options": []
+    },
+    {
+      "id": "q_755",
+      "question": "Q 20看圖拼字   p_____________a A .  papaya  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:930",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_056.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a3782962eccf599e1c39b0d6da21fc597aa1768a7c678273dd96e384eefb0b00",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "papaya",
+      "options": []
+    },
+    {
+      "id": "q_764",
+      "question": "Q 21看圖拼字   d_____________k A .  desk  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2010",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_107.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=c3ce4905b7f5e77d0a93909a80dda315f16c6b79085d27d1916c3f3772b99ec5",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "desk",
+      "options": []
+    },
+    {
+      "id": "q_773",
+      "question": "Q 22看圖拼字   j_____________e A .  juice  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1321",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_086.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=9ff355fc1bf031b5643a0242065ea4469093fd9ac0c4008138c3bcdd4d31f684",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "juice",
+      "options": []
+    },
+    {
+      "id": "q_782",
+      "question": "Q 23看圖拼字   s_____________r A .  sugar  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:929",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_055.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=afb579e44a3f77f8e5d441c575e1542fc28278fe2806fcc37177ff2eeac72773",
+      "blanks": [
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "sugar",
+      "options": []
+    },
+    {
+      "id": "q_791",
+      "question": "Q 24看圖拼字   m_____________y A .  monkey  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:1999",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_096.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=c994ce325d38f07371c4c2449bb7a356d9b724ab322a8019ad5ac2f9b734d1df",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "monkey",
+      "options": []
+    },
+    {
+      "id": "q_800",
+      "question": "Q 25看圖拼字   f_____________t A .  feet  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:188",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_017.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=b2764e038ec09409d45fc0e7b80256bee04cd13828724c920b9bca1e22cf6c58",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "feet",
+      "options": []
+    },
+    {
+      "id": "q_809",
+      "question": "Q 26看圖拼字   c_____________p A .  cap  \n\t\t\t\t\t\t\t\t\t\t\t___\n\t\t\t\t\t\t\t\t\t\t ID:2633",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_130.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=498f6c37d5a86abe900fcfb96db0f8dedeabbeea428cf6e975c4799ee79bc5f9",
+      "blanks": [
+        "_____________",
+        "___"
+      ],
+      "correctAnswer": "cap",
+      "options": []
+    },
+    {
+      "id": "q_818",
+      "question": "Q 27看圖拼字   m_____________n A .  magician  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:1315",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_080.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1148e21df4872337ab2e9ee8a977dd1320fc6d219a941641c6d38128b56c100c",
+      "blanks": [
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "magician",
+      "options": []
+    },
+    {
+      "id": "q_827",
+      "question": "Q 28看圖拼字   s_____________k A .  sick  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:1317",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_082.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=76434261f103bd7f8847435fb2378dbb3f66b0c8886ce4875818a3e71edfcf2e",
+      "blanks": [
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "sick",
+      "options": []
+    },
+    {
+      "id": "q_836",
+      "question": "Q 29看圖拼字   tape r_____________r A .  recorder  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:928",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_054.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=30c57bf34471a8db63744f3cec42ddc5aa2c1d5f789222e5b518e1478fe957ca",
+      "blanks": [
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "recorder",
+      "options": []
+    },
+    {
+      "id": "q_845",
+      "question": "Q 30看圖拼字   j_____________t A .  jacket  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3152",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_179.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=a0fb3d278f001830f72f27a36dc901931d5cf3a05b4645707454e6d8b8239af4",
+      "blanks": [
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "jacket",
+      "options": []
+    },
+    {
+      "id": "q_854",
+      "question": "Q 31文意字彙 I want two h_____ers and three hot dogs.  h_____________ers A .  hamburgers  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:3183",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "__________"
+      ],
+      "correctAnswer": "hamburgers",
+      "options": []
+    },
+    {
+      "id": "q_863",
+      "question": "Q 32文意字彙 Amy is riding a s_____d at the park.  s_____________d A .  skateboard  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:2679",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "__________"
+      ],
+      "correctAnswer": "skateboard",
+      "options": []
+    },
+    {
+      "id": "q_872",
+      "question": "Q 33文意字彙 I'm hungry. I want a h_____r.  h_____________r A .  hamburger  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3790",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "hamburger",
+      "options": []
+    },
+    {
+      "id": "q_881",
+      "question": "Q 34文意字彙 There are two pencils and one e_____r in my bag.  e_____________r A .  eraser  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:947",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "eraser",
+      "options": []
+    },
+    {
+      "id": "q_890",
+      "question": "Q 35文意字彙 Meggie has a fruit s_____d and an ice cream for dinner (晚餐).  s_____________d A .  salad  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3791",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "salad",
+      "options": []
+    },
+    {
+      "id": "q_899",
+      "question": "Q 36文意字彙 Peter is riding a s_____r to school.  s_____________r A .  scooter  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:2684",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "scooter",
+      "options": []
+    },
+    {
+      "id": "q_908",
+      "question": "Q 37文意字彙 S_____ks are sea (海洋) animals.  S_____________ks A .  Sharks  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:1349",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "Sharks",
+      "options": []
+    },
+    {
+      "id": "q_917",
+      "question": "Q 38文意字彙 My brother is 7 years old.  He is a cute b_____y.  b_____________y A .  boy  \n\t\t\t\t\t\t\t\t\t\t\t___\n\t\t\t\t\t\t\t\t\t\t ID:2025",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "___"
+      ],
+      "correctAnswer": "boy",
+      "options": []
+    },
+    {
+      "id": "q_926",
+      "question": "Q 39文意字彙 Billy is my c_____n. His father and my father are brothers.  c_____________n A .  cousin  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3155",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "cousin",
+      "options": []
+    },
+    {
+      "id": "q_935",
+      "question": "Q 40文意字彙 Kenny has five pets: a dog, two cats, and two r_____its.  r_____________its A .  rabbits  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:1347",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "rabbits",
+      "options": []
+    },
+    {
+      "id": "q_944",
+      "question": "Q 41文意字彙 The pig is fat. It's not t_____n.  t_____________n A .  thin  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:23",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "thin",
+      "options": []
+    },
+    {
+      "id": "q_953",
+      "question": "Q 42文意字彙 I'm b_____ed. Can you play games with me?  b_____________ed A .  bored  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:231",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "bored",
+      "options": []
+    },
+    {
+      "id": "q_962",
+      "question": "Q 43文意字彙 Andy is tired. He is sl_____y.  sl_____________y A .  sleepy  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3192",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "sleepy",
+      "options": []
+    },
+    {
+      "id": "q_971",
+      "question": "Q 44文意字彙 Good morning! Let's go to s_____l.  s_____________l A .  school  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2050",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "school",
+      "options": []
+    },
+    {
+      "id": "q_980",
+      "question": "Q 45文意字彙 Those boxes are full. They're h_____y.  h_____________y A .  heavy  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2036",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "heavy",
+      "options": []
+    },
+    {
+      "id": "q_989",
+      "question": "Q 46文意字彙 Mom is t_____ed. She is sleepy.  t_____________ed A .  tired  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3792",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "tired",
+      "options": []
+    },
+    {
+      "id": "q_998",
+      "question": "Q 47文意字彙 Put some cookies in the p_____e, not in the bowl.  p_____________e A .  plate  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2687",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "plate",
+      "options": []
+    },
+    {
+      "id": "q_1007",
+      "question": "Q 48文意字彙 The boy is weak. He's not s_____g.  s_____________g A .  strong  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:203",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "strong",
+      "options": []
+    },
+    {
+      "id": "q_1016",
+      "question": "Q 49文意字彙 There are many b_____lies and bees at the park.  b_____________lies A .  butterflies  \n\t\t\t\t\t\t\t\t\t\t\t___________\n\t\t\t\t\t\t\t\t\t\t ID:2683",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "___________"
+      ],
+      "correctAnswer": "butterflies",
+      "options": []
+    },
+    {
+      "id": "q_1025",
+      "question": "Q 50文意字彙 We can see many famous (有名的) pictures in this m_____m.  m_____________m A .  museum  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3182",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "museum",
+      "options": []
+    },
+    {
+      "id": "q_1034",
+      "question": "Q 51文意字彙 It is not sunny. It's r_____y.  r_____________y A .  rainy  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:215",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "rainy",
+      "options": []
+    },
+    {
+      "id": "q_1043",
+      "question": "Q 52文意字彙 They don't like cookies. They like c_____e bars.  c_____________e A .  chocolate  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:1343",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "chocolate",
+      "options": []
+    },
+    {
+      "id": "q_1052",
+      "question": "Q 53文意字彙 I have a lunchbox and a banana in my b_____k.  b_____________k A .  backpack  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:2062",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "backpack",
+      "options": []
+    },
+    {
+      "id": "q_1061",
+      "question": "Q 54文意字彙 It's raining(下雨) now. Take an u_____a.  u_____________a A .  umbrella  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:936",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "umbrella",
+      "options": []
+    },
+    {
+      "id": "q_1070",
+      "question": "Q 55文意字彙 Eric likes g_____es, but he doesn’t like lemons.  g_____________es A .  grapes  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2059",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "grapes",
+      "options": []
+    },
+    {
+      "id": "q_1079",
+      "question": "Q 56文意字彙 Sam has a cool r_____ot. It can talk and walk.  r_____________ot A .  robot  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3191",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "robot",
+      "options": []
+    },
+    {
+      "id": "q_1088",
+      "question": "Q 57文意字彙 Meg likes s_____ries. They are red and sweet (甜的).  s_____________ries A .  strawberries  \n\t\t\t\t\t\t\t\t\t\t\t___________\n\t\t\t\t\t\t\t\t\t\t ID:2682",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "___________"
+      ],
+      "correctAnswer": "strawberries",
+      "options": []
+    },
+    {
+      "id": "q_1097",
+      "question": "Q 58文意字彙 I want l_____ps and chocolate bars. They are sweet (甜的).  l_____________ps A .  lollipops  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3196",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "lollipops",
+      "options": []
+    },
+    {
+      "id": "q_1106",
+      "question": "Q 59文意字彙 Don't talk with your m_____h full.  m_____________h A .  mouth  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1330",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "mouth",
+      "options": []
+    },
+    {
+      "id": "q_1115",
+      "question": "Q 60文意字彙 The cat is in f_____t of the door.  f_____________t A .  front  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:204",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "front",
+      "options": []
+    },
+    {
+      "id": "q_1124",
+      "question": "Q 61文意字彙 Twelve is b_____n eleven and thirteen.  b_____________n A .  between  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:2658",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "between",
+      "options": []
+    },
+    {
+      "id": "q_1133",
+      "question": "Q 62文意字彙 There are some bees and bugs around the f_____rs.  f_____________rs A .  flowers  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:3181",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "flowers",
+      "options": []
+    },
+    {
+      "id": "q_1142",
+      "question": "Q 63文意字彙 John can speak English(說英語). He is from E_____d.  E_____________d A .  England  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:973",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "England",
+      "options": []
+    },
+    {
+      "id": "q_1151",
+      "question": "Q 64文意字彙 There are many p_____e at the park.  Why?  p_____________e A .  people  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:1358",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "people",
+      "options": []
+    },
+    {
+      "id": "q_1160",
+      "question": "Q 65文意字彙 Kevin has three pens in his p_____l case.  p_____________l A .  pencil  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3763",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "pencil",
+      "options": []
+    },
+    {
+      "id": "q_1169",
+      "question": "Q 66文意字彙 Gary is not from England. He is from F_____e.   F_____________e A .  France  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3781",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "France",
+      "options": []
+    },
+    {
+      "id": "q_1178",
+      "question": "Q 67文意字彙 The box is e_____y. There is nothing(沒有東西) in it.  e_____________y A .  empty  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:967",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "empty",
+      "options": []
+    },
+    {
+      "id": "q_1187",
+      "question": "Q 68文意字彙 David is eating with a knife and f_____k.  f_____________k A .  fork  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2690",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "fork",
+      "options": []
+    },
+    {
+      "id": "q_1196",
+      "question": "Q 69文意字彙 I have a fork, but I don't have a k_____e.  Can you pass it to me?  k_____________e A .  knife  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2052",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "knife",
+      "options": []
+    },
+    {
+      "id": "q_1205",
+      "question": "Q 70文意字彙 Tina is a s_____r. She can sing very well.  s_____________r A .  singer  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3180",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "singer",
+      "options": []
+    },
+    {
+      "id": "q_1214",
+      "question": "Q 71文意字彙 There is a dog b_____d the door.  b_____________d A .  behind  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:2676",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "behind",
+      "options": []
+    },
+    {
+      "id": "q_1223",
+      "question": "Q 72文意字彙 Let's sing and d_____e together.  d_____________e A .  dance  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:225",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "dance",
+      "options": []
+    },
+    {
+      "id": "q_1232",
+      "question": "Q 73文意字彙 The jump rope is two h_____d dollars.  h_____________d A .  hundred  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:3793",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "hundred",
+      "options": []
+    },
+    {
+      "id": "q_1241",
+      "question": "Q 74文意字彙 Sam is hungry.  He wants some sushi r_____ls.  r_____________ls A .  rolls  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1351",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "rolls",
+      "options": []
+    },
+    {
+      "id": "q_1250",
+      "question": "Q 75文意字彙 The puzzle is one t_____d dollars.  t_____________d A .  thousand  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:2664",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "thousand",
+      "options": []
+    },
+    {
+      "id": "q_1259",
+      "question": "Q 76對話填空 A: What's your t______ne number?B: 2701-6769.  t_____________ne A .  telephone  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:983",
+      "image": null,
+      "blanks": [
+        "______",
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "telephone",
+      "options": []
+    },
+    {
+      "id": "q_1268",
+      "question": "Q 77對話填空 A: Are there any b_____gs at the park?B: Yes, there are. There are some bees.  b_____________gs A .  bugs  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:28",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "bugs",
+      "options": []
+    },
+    {
+      "id": "q_1277",
+      "question": "Q 78對話填空 A: Look! There are some birthday c_____ds on the desk.B: They are for Andy. It's his birthday.  c_____________ds A .  cards  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:248",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "cards",
+      "options": []
+    },
+    {
+      "id": "q_1286",
+      "question": "Q 79對話填空 A: Where is the playground?.B: It's n_____r the park  n_____________r A .  near  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:1384",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "near",
+      "options": []
+    },
+    {
+      "id": "q_1295",
+      "question": "Q 80對話填空 A: What does Iris want?B: She wants a c_____er. She can play games on it.  c_____________er A .  computer  \n\t\t\t\t\t\t\t\t\t\t\t________\n\t\t\t\t\t\t\t\t\t\t ID:3817",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "________"
+      ],
+      "correctAnswer": "computer",
+      "options": []
+    },
+    {
+      "id": "q_1304",
+      "question": "Q 81對話填空 A: Is your sister t_____l?B: Yes. She is 185 centimeters.  t_____________l A .  tall  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:1004",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "tall",
+      "options": []
+    },
+    {
+      "id": "q_1313",
+      "question": "Q 82對話填空 A: Do you want some pizza?B: No, I don't. I am not h_____y.  h_____________y A .  hungry  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:987",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "hungry",
+      "options": []
+    },
+    {
+      "id": "q_1322",
+      "question": "Q 83對話填空 A: How much are the p_____rs?B: They are eighty dollars, and the oranges are fifty dollars.  p_____________rs A .  pears  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:3209",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "pears",
+      "options": []
+    },
+    {
+      "id": "q_1331",
+      "question": "Q 84對話填空 A: Where's Billy?B: He's e_____ting in the dining room.  e_____________ting A .  eating  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:1388",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "eating",
+      "options": []
+    },
+    {
+      "id": "q_1340",
+      "question": "Q 85對話填空 A: How is the w_____r?B: It is sunny.  w_____________r A .  weather  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:998",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "weather",
+      "options": []
+    },
+    {
+      "id": "q_1349",
+      "question": "Q 86對話填空 A: What t_____e is it?B: It's ten o'clock.  t_____________e A .  time  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:1373",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "time",
+      "options": []
+    },
+    {
+      "id": "q_1358",
+      "question": "Q 87對話填空 A: What is your c_____e number?B: It's 0952-606-111.  c_____________e A .  cellphone  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3218",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_________"
+      ],
+      "correctAnswer": "cellphone",
+      "options": []
+    },
+    {
+      "id": "q_1367",
+      "question": "Q 88對話填空 A: Where is Anna?B: She is at the o_____e. She is working.  o_____________e A .  office  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3212",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "office",
+      "options": []
+    },
+    {
+      "id": "q_1376",
+      "question": "Q 89對話填空 A: Oh, no. We're lost(迷路).B: Let's look at(看) the m_____p.  m_____________p A .  map  \n\t\t\t\t\t\t\t\t\t\t\t___\n\t\t\t\t\t\t\t\t\t\t ID:990",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "___"
+      ],
+      "correctAnswer": "map",
+      "options": []
+    },
+    {
+      "id": "q_1385",
+      "question": "Q 90對話填空 A: What color is your helmet?B: It's g____n and blue.  g_____________n A .  green  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:1378",
+      "image": null,
+      "blanks": [
+        "____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "green",
+      "options": []
+    },
+    {
+      "id": "q_1394",
+      "question": "Q 91對話填空 A: Do you have a c_____a?B: Yes. We can take a picture.  c_____________a A .  camera  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:993",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "camera",
+      "options": []
+    },
+    {
+      "id": "q_1403",
+      "question": "Q 92對話填空 A: Are they going to school?B: No, they're not. They're going to the p_____d.  p_____________d A .  playground  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:1395",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "__________"
+      ],
+      "correctAnswer": "playground",
+      "options": []
+    },
+    {
+      "id": "q_1412",
+      "question": "Q 93對話填空 A: I don't know this word (字). Do you have a d_____y?B: Yes. Here it is.  d_____________y A .  dictionary  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:3215",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "__________"
+      ],
+      "correctAnswer": "dictionary",
+      "options": []
+    },
+    {
+      "id": "q_1421",
+      "question": "Q 94對話填空 A: How much is the pen?B: It is five d_____rs.  d_____________rs A .  dollars  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:985",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "dollars",
+      "options": []
+    },
+    {
+      "id": "q_1430",
+      "question": "Q 95對話填空 A: Do you want sugar in your c_____ee?B: Yes, please.  c_____________ee A .  coffee  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3220",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "______"
+      ],
+      "correctAnswer": "coffee",
+      "options": []
+    },
+    {
+      "id": "q_1439",
+      "question": "Q 96對話填空 A: What c_____r is the chair?B: It's red.  c_____________r A .  color  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2700",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "color",
+      "options": []
+    },
+    {
+      "id": "q_1448",
+      "question": "Q 97對話填空 A: How m_____y balls are there?B: Let's count. One, two, three…  m_____________y A .  many  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:980",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "____"
+      ],
+      "correctAnswer": "many",
+      "options": []
+    },
+    {
+      "id": "q_1457",
+      "question": "Q 98對話填空 A: Can they sing?B: Of course. They are s_____rs.  s_____________rs A .  singers  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:245",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "singers",
+      "options": []
+    },
+    {
+      "id": "q_1466",
+      "question": "Q 99對話填空 A: Gina and Gillian study and play together.B: Yes. They are good f______ds.  f_____________ds A .  friends  \n\t\t\t\t\t\t\t\t\t\t\t_______\n\t\t\t\t\t\t\t\t\t\t ID:3801",
+      "image": null,
+      "blanks": [
+        "______",
+        "_____________",
+        "_______"
+      ],
+      "correctAnswer": "friends",
+      "options": []
+    },
+    {
+      "id": "q_1475",
+      "question": "Q 100對話填空 A: What do you want?B: It's hot. I want ice c_____m.  c_____________m A .  cream  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:994",
+      "image": null,
+      "blanks": [
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "cream",
+      "options": []
+    },
+    {
+      "id": "q_1501",
+      "question": "Q 1看圖拼字   l_____________n A .  lemon  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2644Q 2看圖拼字   c_____________ks A .  chopsticks  \n\t\t\t\t\t\t\t\t\t\t\t__________\n\t\t\t\t\t\t\t\t\t\t ID:921Q 3看圖拼字   f_____________r A .  farmer  \n\t\t\t\t\t\t\t\t\t\t\t______\n\t\t\t\t\t\t\t\t\t\t ID:3745Q 4看圖拼字   b_____________y A .  butterfly  \n\t\t\t\t\t\t\t\t\t\t\t_________\n\t\t\t\t\t\t\t\t\t\t ID:3126Q 5看圖拼字   k_____________e A .  kite  \n\t\t\t\t\t\t\t\t\t\t\t____\n\t\t\t\t\t\t\t\t\t\t ID:2004Q 6看圖拼字   s_____________n A .  seven  \n\t\t\t\t\t\t\t\t\t\t\t_____\n\t\t\t\t\t\t\t\t\t\t ID:2632Q 7看圖拼字   r_____________d A .  read  \n",
+      "image": "https://joytscloud.s3.ap-northeast-1.amazonaws.com/files/albums/spell/MJA/mja_141.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUHZXP3JBXL2C4CT5%2F20251007%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20251007T143539Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=1f61dcd2375fe54c306beeedb8e1dfee287eedb15dcafcf570eff6f4d3c88de3",
+      "blanks": [
+        "_____________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____________",
+        "______",
+        "_____________",
+        "_________",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____________",
+        "_____",
+        "_____________",
+        "________",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "_____",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "______",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____________",
+        "______",
+        "_____________",
+        "____",
+        "_____________",
+        "___",
+        "_____________",
+        "________",
+        "_____________",
+        "____",
+        "_____________",
+        "________",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "___________",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "________",
+        "______",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "________",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_________",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "___",
+        "____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "__________",
+        "_____",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "______",
+        "_____",
+        "_____________",
+        "_____",
+        "_____",
+        "_____________",
+        "____",
+        "_____",
+        "_____________",
+        "_______",
+        "______",
+        "_____________",
+        "_______",
+        "_____",
+        "_____________",
+        "_____"
+      ],
+      "correctAnswer": "lemon",
+      "options": []
+    }
+  ]
+}

@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MJ5 - 初級英語練習題</title>
+        <style>
+                body {
+                        font-family: Arial, sans-serif;
+                        background: #ffffff;
+                        padding: 30px;
+                        text-align: center;
+                }
+
+                .quiz-box {
+                        background: white;
+                        padding: 30px;
+                        border-radius: 16px;
+                        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+                        display: inline-block;
+                        min-width: 600px;
+                        position: relative;
+                }
+
+                .question-header {
+                        text-align: left;
+                        font-size: 20px;
+                        color: #4CAF50;
+                        font-weight: bold;
+                        position: absolute;
+                        top: 20px;
+                        left: 30px;
+                }
+
+                .difficulty-badge {
+                        position: absolute;
+                        top: 20px;
+                        right: 30px;
+                        background: #4CAF50;
+                        color: white;
+                        padding: 5px 15px;
+                        border-radius: 20px;
+                        font-size: 14px;
+                        font-weight: bold;
+                }
+
+                .question-content {
+                        margin-top: 40px;
+                        font-size: 24px;
+                }
+
+                input[type="text"] {
+                        padding: 10px;
+                        width: 250px;
+                        font-size: 20px;
+                        text-align: center;
+                        margin-top: 10px;
+                }
+
+                button {
+                        padding: 10px 20px;
+                        font-size: 16px;
+                        margin: 15px 5px;
+                        border: none;
+                        border-radius: 8px;
+                        background-color: #4CAF50;
+                        color: white;
+                        cursor: pointer;
+                }
+
+                .feedback {
+                        margin-top: 15px;
+                        font-weight: bold;
+                        font-size: 18px;
+                }
+
+                .scoreboard {
+                        margin-top: 10px;
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: #333;
+                }
+
+                .answers {
+                        margin-top: 20px;
+                        text-align: left;
+                        font-size: 18px;
+                }
+
+                .nav-panel {
+                        margin-top: 20px;
+                }
+
+                select {
+                        font-size: 16px;
+                        padding: 5px 10px;
+                }
+
+                .back-button {
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        background-color: #ff6b81;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 8px 16px;
+                        font-size: 16px;
+                        cursor: pointer;
+                        z-index: 999;
+                }
+
+                .back-button:hover {
+                        background-color: #ff4757;
+                }
+        </style>
+</head>
+
+<body>
+        <button onclick="goToPage('../index.html')" class="back-button">← 回上一頁</button>
+
+        <div class="quiz-box">
+                <div class="question-header" id="question-number"></div>
+                <div class="difficulty-badge">初級英語</div>
+                <div class="question-content" id="question-text"></div>
+                <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+                <br />
+                <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+                <div class="feedback" id="feedback"></div>
+                <div class="scoreboard" id="scoreboard"></div>
+                <div class="answers" id="answers" style="display: none;"></div>
+                <div class="nav-panel">
+                        <label for="questionSelect">跳題：</label>
+                        <select id="questionSelect" onchange="jumpToQuestion()"></select>
+                </div>
+        </div>
+
+        <script>
+                const questions = [
+                        {
+                                "clue": "What does your father like to drink? He likes to drink b___k t___a?",
+                                "answer": "black tea"
+                        },
+                        {
+                                "clue": "Why don't you like g___n t___a? Because it's too bitter.",
+                                "answer": "green tea"
+                        },
+                        {
+                                "clue": "What do you eat for breakfast? I only drink a cup of m___k for breakfast.",
+                                "answer": "milk"
+                        },
+                        {
+                                "clue": "Where does the m___k come from? It comes from the cows.",
+                                "answer": "milk",
+                        },
+                        {
+                                "clue": "Shan likes to drink m___o j___e after he eats dinner.",
+                                "answer": "mango juice",
+                        },
+                        {
+                                "clue": "The food is yummy! Who c___k it ?",
+                                "answer": "cook",
+                        },
+                        {
+                                "clue": "Would you like to d___k a cup of coffee? No, thank you.",
+                                "answer": "drink",
+                        },
+                        {
+                                "clue": "The Chinese New Year is in J___y.",
+                                "answer": "January",
+                        },
+                        {
+                                "clue": "Which place do you like the most in the USA? I like N___ Y___k the most.",
+                                "answer": "New York",
+                        },
+                        {
+                                "clue": "T___o is a city in Japan.",
+                                "answer": "Tokyo",
+                        },
+                        {
+                                "clue": "S___y is a city in Australia.",
+                                "answer": "Sydney"
+                        },
+                        {
+                                "clue": "Where do you go for a trip? I go to L___n in England.",
+                                "answer": "London"
+                        },
+                        {
+                                "clue": "It's c___d outside. Remember to put on your sweater.",
+                                "answer": "cold"
+                        },
+                        {
+                                "clue": "It's so h___t here. Can we turn on the fan?",
+                                "answer": "hot",
+                        },
+                        {
+                                "clue": "I like to wear a sweater in winter because it's w___m.",
+                                "answer": "warm",
+                        },
+                        {
+                                "clue": "It's c___l outside. We can go out for a walk.",
+                                "answer": "cool"
+                        },
+                        {
+                                "clue": "What do you do before you go to school? I e___t breakfast at home before I go to school.",
+                                "answer": "eat"
+                        },
+                        {
+                                "clue": "Andy g___s a gift from his mom for his birthday.",
+                                "answer": "gets"
+                        },
+                        {
+                                "clue": "Christmas is in D___r.",
+                                "answer": "December"
+                        },
+                        {
+                                "clue": "In T___g, people will eat turkey with their family.",
+                                "answer": "Thanksgiving",
+                        },
+                        {
+                                "clue": "How old are you? I am ten y___s old.",
+                                "answer": "years",
+                        },
+                        {
+                                "clue": "We s___p the floor with a broom.",
+                                "answer": "sweep",
+                        },
+                        {
+                                "clue": "N___r is the eleventh month of the year.",
+                                "answer": "November",
+                        },
+                        {
+                                "clue": "S___r is  the ninth month of the year .",
+                                "answer": "September",
+                        },
+                        {
+                                "clue": "O___r is the tenth month of the year.",
+                                "answer": "Octobor",
+                        },
+                        {
+                                "clue": "We have summer vacations in July and A___t.",
+                                "answer": "August",
+                        },
+                        {
+                                "clue": "M___h is the third month of the year.",
+                                "answer": "March",
+                        },
+                        {
+                                "clue": "F___y is the second month of the year.",
+                                "answer": "February",
+                        },
+                        {
+                                "clue": "Candy likes to s___f on the Net in her free time.",
+                                "answer": "surf",
+                        },
+                        {
+                                "clue": "I l___e to eat hamburger for lunch.",
+                                "answer": "like",
+                        },
+                        {
+                                "clue": "Sam l___s to play video game at home.",
+                                "answer": "likes",
+                        },
+                        {
+                                "clue": "Our teacher tells us to s___f on the Net on the computer class.",
+                                "answer": "surf"
+                        },
+                        {
+                                "clue": "My mom can't take me to school today. I have to w___k to school.",
+                                "answer": "walk"
+                        },
+                        {
+                                "clue": "Shawn doesn't have a bike. He w___s to school every day.",
+                                "answer": "walks"
+                        },
+                        {
+                                "clue": "What do you w___t for dinner? A bowl of fried rice, please.",
+                                "answer": "want",
+                        },
+                        {
+                                "clue": "Karl studies very hard. He w___s to get good grades on the test.",
+                                "answer": "wants",
+                        },
+                        {
+                                "clue": "After dinner, we should w___e the table to keep it clean.",
+                                "answer": "wipe",
+                        },
+                        {
+                                "clue": "What does Debbie do this afternoon? She w___s the window this afternoon.",
+                                "answer": "wipes",
+                        },
+                        {
+                                "clue": "What is the d___e today? It is January fifteen.",
+                                "answer": "date",
+                        },
+                        {
+                                "clue": "What is the date t___y? It's February second.",
+                                "answer": "today"
+                        },
+                        {
+                                "clue": "15th= f___h",
+                                "answer": "fifteenth"
+                        },
+                        {
+                                "clue": "10th=t___h",
+                                "answer": "tenth"
+                        },
+                        {
+                                "clue": "4th=f___h",
+                                "answer": "fourth"
+                        },
+                        {
+                                "clue": "16th=s___h",
+                                "answer": "sixteenth"
+                        },
+                        {
+                                "clue": "18th=e___h",
+                                "answer": "eighteenth"
+                        },
+                        {
+                                "clue": "20th=t___h",
+                                "answer": "twentieth"
+                        },
+                        {
+                                "clue": "My birthday is on 1/3. It's the t___d day in January.",
+                                "answer": "third"
+                        },
+                        {
+                                "clue": "The Moon Festival is on 9/6. It is the s___h day in September.",
+                                "answer": "sixth",
+                        },
+                        {
+                                "clue": "My mom's birthday is 2/12. It is the t___h day in February.",
+                                "answer": "twelfth",
+                        },
+                        {
+                                "clue": "Alan's birthday is on 6/18. It is the eighteenth day in J___e.",
+                                "answer": "June",
+                        },
+                        {
+                                "clue": "Mother's Day is on 5/10. It is the t___h day in May.",
+                                "answer": "tenth",
+                        },
+                        {
+                                "clue": "Father's Day is on 8/8. It's the eighth day in A___t.",
+                                "answer": "August",
+                        },
+                        {
+                                "clue": "My hair is too messy. I need to c___b my hair.",
+                                "answer": "comb",
+                        },
+                        {
+                                "clue": "Sabrina has a long hair. She has to c___b her hair every day.",
+                                "answer": "comb",
+                        },
+                        {
+                                "clue": "I h___g the clothes to make it dry.",
+                                "answer": "hang",
+                        },
+                        {
+                                "clue": "I g___t u___p at 7:30 every morning.",
+                                "answer": "get up",
+                        },
+                        {
+                                "clue": "Greg g___t u___p at 6:00 every morning.",
+                                "answer": "get up",
+                        },
+                        {
+                                "clue": "I e___t b___t in the morning.",
+                                "answer": "eat breakfast",
+                        },
+                        {
+                                "clue": "We e___t l___h at 12:00.",
+                                "answer": "lunch",
+                        },
+                        {
+                                "clue": "We e___t d___r in the evening.",
+                                "answer": "dinner",
+                        },
+                        {
+                                "clue": "I t___e a b___h in the bathroom.",
+                                "answer": "take a bath",
+                        },
+                        {
+                                "clue": "Eason is strong. He exercise e___y day.",
+                                "answer": "every",
+                        },
+                        {
+                                "clue": "My father gives me a c___n to buy candy.",
+                                "answer": "coin",
+                        },
+                        {
+                                "clue": "I found a hundred-dollar b___l on the ground.",
+                                "answer": "bill",
+                        },
+                        {
+                                "clue": "My mom gives me two thousand- dollar b___s to buy the toy truck.",
+                                "answer": "bills",
+                        },
+                        {
+                                "clue": "Fred likes to l___n to music in his free time.",
+                                "answer": "listen",
+                        },
+                        {
+                                "clue": "My favorite singer is Taylor Swift. I like to l___n to her songs.",
+                                "answer": "listen",
+                        },
+                        {
+                                "clue": "Henry is a good boy. He always l___s to the teacher.",
+                                "answer": "listens",
+                        },
+                        {
+                                "clue": "My dog is cute. I p___y with it every day.",
+                                "answer": "play",
+                        },
+                        {
+                                "clue": "I like to p___y videos games in the evening.",
+                                "answer": "play",
+                        },
+                        {
+                                "clue": "Kelly p___s basketball every day. She loves basketball.",
+                                "answer": "plays",
+                        },
+                        {
+                                "clue": "I b___h my t___h every morning.",
+                                "answer": "brush teeth",
+                        },
+                        {
+                                "clue": "Sandy eats too much candy. She has to b___h h___ t___h.",
+                                "answer": "brush her teeth",
+                        },
+                        {
+                                "clue": "The owls usually come out at n___t.",
+                                "answer": "night",
+                        },
+                        {
+                                "clue": "I play with my friend in the a___n.",
+                                "answer": "afternoon",
+                        },
+                        {
+                                "clue": "Frank r___s four books every day. He is a smart student.",
+                                "answer": "reads",
+                        },
+                        {
+                                "clue": "My mom r___s a storybook for me before I sleep.",
+                                "answer": "reads",
+                        },
+                        {
+                                "clue": "I r___e a bike to school every day.",
+                                "answer": "ride",
+                        },
+                        {
+                                "clue": "My father r___s a scooter to work every day.",
+                                "answer": "rides",
+                        },
+                        {
+                                "clue": "I w___r the flowers every morning.",
+                                "answer": "water",
+                        },
+                        {
+                                "clue": "He w___s the flowers every morning.",
+                                "answer": "waters",
+                        },
+                        {
+                                "clue": "I have a test tomorrow. I have to s___y for the test now.",
+                                "answer": "study",
+                        },
+                        {
+                                "clue": "Hank s___s very hard. He always get good grades.",
+                                "answer": "studies",
+                        },
+                        {
+                                "clue": "What is your f___e food? It is hamburgers.",
+                                "answer": "favorite",
+                        },
+                        {
+                                "clue": "What s___t are you good at? I'm good at math.",
+                                "answer": "subject",
+                        },
+                        {
+                                "clue": "What is his favorite s___t? It's PE.",
+                                "answer": "subject",
+                        },
+                        {
+                                "clue": "I like the English c___s. The teacher is very funny.",
+                                "answer": "class",
+                        },
+                        {
+                                "clue": "What is your favorite subject? My favorite subject is C___e.",
+                                "answer": "Chinese"
+                        },
+                        {
+                                "clue": "What will we do on the P___E class? We will play baseball.",
+                                "answer": "PE"
+                        },
+                        {
+                                "clue": "Sammy is good at counting numbers. She is good at m___h.",
+                                "answer": "math"
+                        },
+                        {
+                                "clue": "Vic is good at drawing and painting. He is good at a___t.",
+                                "answer": "art"
+                        },
+                        {
+                                "clue": "What's your favorite subject? My favorite subject is E___h.",
+                                "answer": "English",
+                        },
+                        {
+                                "clue": "What's your favorite subject? My favorite subject is s___e.",
+                                "answer": "science",
+                        },
+                        {
+                                "clue": "What is Betty doing in the library? She is s___g E___h in the library.",
+                                "answer": "studying English",
+                        },
+                        {
+                                "clue": "Myles g___s to the g___m to exercise every evening.",
+                                "answer": "goes gym",
+                        },
+                        {
+                                "clue": "I go to t___ l___y to read comic books.",
+                                "answer": "the library",
+                        },
+                        {
+                                "clue": "Jim goes to the gym on Saturday and Sunday. Jim goes to the gym on w___s.",
+                                "answer": "weekends",
+                        },
+                        {
+                                "clue": "He likes to eat s___k because he likes to eat meat.",
+                                "answer": "steak",
+                        },
+                        {
+                                "clue": "May I have some butter on my b___d?",
+                                "answer": "bread",
+                        },
+                        {
+                                "clue": "Lance doesn't like to eat rice. He likes to eat n___s.",
+                                "answer": "noodles",
+                        },
+                        {
+                                "clue": "The s___p is too hot! I can't eat it now.",
+                                "answer": "soup",
+                        },
+                        {
+                                "clue": "I like to eat f___h for my dinner.",
+                                "answer": "fish",
+                        },
+                        {
+                                "clue": "My mom says I have to w___h the plates after dinner.",
+                                "answer": "wash",
+                        },
+                        {
+                                "clue": "I have a cup of s___k m___k for my breakfast.",
+                                "answer": "soybean milk",
+                        },
+                        {
+                                "clue": "Do you want to w___h a m___e with me on the weekend?",
+                                "answer": "watch movie",
+                        },
+                        {
+                                "clue": "My father g___s t___ w___k every day. He is very busy.",
+                                "answer": "goes to work",
+                        },
+                        {
+                                "clue": "I have c___l and milk for my breakfast.",
+                                "answer": "cereal",
+                        },
+                        {
+                                "clue": "I have a bowl of y___t for my breakfast.",
+                                "answer": "yogurt",
+                        },
+                        {
+                                "clue": "I eat i___t n___s for my dinner.",
+                                "answer": "instant noodles",
+                        },
+                        {
+                                "clue": "He has a p___t-b___r s___h for his lunch.",
+                                "answer": "peanut butter sandwich",
+                        },
+                        {
+                                "clue": "She has s___i for dinner.",
+                                "answer": "spaghetti",
+                        },
+                        {
+                                "clue": "What do you have for your breakfast? I have a bowl of c___n s___p for my breakfast.",
+                                "answer": "corn soup",
+                        },
+                        {
+                                "clue": "Do you h___e a pen? I need to write something on my notebook.",
+                                "answer": "have"
+                        },
+                        {
+                                "clue": "Sam h___s a cute dog. He plays with it every day.",
+                                "answer": "has"
+                        },
+                        {
+                                "clue": "I g___o to the library to study every weekend.",
+                                "answer": "go"
+                        },
+                        {
+                                "clue": "He g___s to the gym every Monday.",
+                                "answer": "goes"
+                        },
+                        {
+                                "clue": "Emma s___m plays video game with us. She doesn't like video games.",
+                                "answer": "seldom"
+                        },
+                        {
+                                "clue": "I n___r litter because it's not good.",
+                                "answer": "never"
+                        },
+                        {
+                                "clue": "I a___s play with my robot. I like it very much.",
+                                "answer": "always",
+                        },
+                        {
+                                "clue": "Hannah u___y go to the library. She likes to read.",
+                                "answer": "usually",
+                        },
+                        {
+                                "clue": "Tim doesn't always wash the clothes. He o___n does it.",
+                                "answer": "often",
+                        },
+                        {
+                                "clue": "My mom always s___s t___ f___r after dinner.",
+                                "answer": "sweeps the floor",
+                        },
+                        {
+                                "clue": "Please w___e t___ t___e after you eat .",
+                                "answer": "wipe the table",
+                        },
+                        {
+                                "clue": "Timmy likes to w___k t___ d___g at the park in the evening.",
+                                "answer": "walk the dog",
+                        },
+                        {
+                                "clue": "My grandpa likes to r___d t___ n___r on his chair in the morning.",
+                                "answer": "read the newspaper",
+                        },
+                        {
+                                "clue": "It is hot outside. Remember to w___r t___ f___r.",
+                                "answer": "water the flower",
+                        },
+                        {
+                                "clue": "What's your favorite activity? My favorite activity is r___g a h___e.",
+                                "answer": "riding a horse",
+                        },
+                        {
+                                "clue": "What are Dad doing now. He is l___g t___ m___c now.",
+                                "answer": "listening to music",
+                        },
+                        {
+                                "clue": "What does Jeremy do after he eat lunch? He w___s t___ d___s after he eat lunch.",
+                                "answer": "washes the dishes",
+                        },
+                        {
+                                "clue": "It's sunny outside. We can h___g t___ c___s after we wash them.",
+                                "answer": "hang the clothes",
+                        },
+                        {
+                                "clue": "Dad is b___y. He works in the office every day.",
+                                "answer": "busy",
+                        },
+                        {
+                                "clue": "My teacher has fifty students in the class. Sher is very b___y.",
+                                "answer": "busy",
+                        },
+                        {
+                                "clue": "Are you f___e this weekend? Let's go and watch movie.",
+                                "answer": "free",
+                        },
+                        {
+                                "clue": "I am f___e this afternoon. I can play video games with you.",
+                                "answer": "free",
+                        },
+                        {
+                                "clue": "Mom is b___y at working. She doesn't have time to cook dinner.",
+                                "answer": "busy",
+                        },
+                        {
+                                "clue": "Tom gets up very e___y . He gets up at 6:30 in the morning.",
+                                "answer": "early",
+                        },
+                        {
+                                "clue": "Mom gets up e___y to make breakfast for us.",
+                                "answer": "early",
+                        },
+                        {
+                                "clue": "The class starts at 7:00. Tim goes to the class at 7:30. Tim is l___e for the class.",
+                                "answer": "late",
+                        },
+                        {
+                                "clue": "Hurry up! We are l___e for school.",
+                                "answer": "late",
+                        },
+                        {
+                                "clue": "Anne wipes the table. The table is c___n now.",
+                                "answer": "clean",
+                        },
+                        {
+                                "clue": "Ray sweeps the floor today. The floor is c___n.",
+                                "answer": "clean",
+                        },
+                        {
+                                "clue": "The clothes are d___y. Please wash it now.",
+                                "answer": "dirty",
+                        },
+                        {
+                                "clue": "Frank doesn't wash the dishes. Now the dishes is very d___y.",
+                                "answer": "dirty",
+                        }
+                ];
+
+                let current = 0;
+                let userAnswers = Array(questions.length).fill("");
+
+                window.onload = () => {
+                        const select = document.getElementById("questionSelect");
+                        questions.forEach((_, i) => {
+                                const option = document.createElement("option");
+                                option.value = i;
+                                option.text = `題目 ${i + 1}`;
+                                select.appendChild(option);
+                        });
+                        loadQuestion();
+                };
+
+                document.addEventListener("keydown", function (event) {
+                        if (event.key === "Enter") {
+                                event.preventDefault();
+                                saveAnswer();
+                                nextQuestion();
+                        }
+                }); function goToPage(url) {
+                        window.location.href = url;
+                }
+
+                function manualSubmit() {
+                        saveAnswer();
+                        nextQuestion();
+                }
+
+                function loadQuestion() {
+                        document.getElementById("question-number").textContent = `${current + 1}. 字義填空`;
+                        document.getElementById("question-text").textContent = questions[current].clue;
+                        document.getElementById("answer").value = userAnswers[current] || "";
+                        document.getElementById("feedback").textContent = "";
+                        document.getElementById("scoreboard").textContent = "";
+                        document.getElementById("answers").style.display = "none";
+                        document.getElementById("questionSelect").value = current;
+                        document.getElementById("answer").style.display = "inline-block";
+                        document.getElementById("submitBtn").style.display = "inline-block";
+                }
+
+                function saveAnswer() {
+                        const input = document.getElementById("answer").value.trim().toLowerCase();
+                        userAnswers[current] = input;
+                }
+
+                function nextQuestion() {
+                        if (current < questions.length - 1) {
+                                current++;
+                                loadQuestion();
+                        } else {
+                                showFinalResult();
+                        }
+                }
+
+                function jumpToQuestion() {
+                        saveAnswer();
+                        current = parseInt(document.getElementById("questionSelect").value);
+                        loadQuestion();
+                }
+
+                function showFinalResult() {
+                        document.getElementById("question-number").textContent = "全部完成！";
+                        document.getElementById("question-text").textContent = "";
+                        document.getElementById("answer").style.display = "none";
+                        document.getElementById("submitBtn").style.display = "none";
+                        document.getElementById("feedback").textContent = "";
+
+                        const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+                        document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}`;
+
+                        const answerBox = document.getElementById("answers");
+                        answerBox.style.display = "block";
+                        answerBox.innerHTML = "<h3>正確答案：</h3><ol>" +
+                                questions.map((q, i) => {
+                                        const ua = userAnswers[i] || "(未作答)";
+                                        const ok = ua === q.answer;
+                                        return `<li><strong>${q.clue}</strong><br>
+                      你的答案：<strong>${ua}</strong> ${ok ? 'correct' : 'wrong'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                                }).join("") + "</ol>";
+                }
+
+                function getGrade(score) {
+                        const pct = (score / questions.length) * 100;
+                        if (pct === 100) return "Perfect! Great job!";
+                        if (pct >= 70) return "Good work!";
+                        return "Keep practicing!";
+                }
+        </script>
+</body>
+
+</html>

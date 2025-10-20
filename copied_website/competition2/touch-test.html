@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>觸碰測試 - 雙鍵盤同時輸入</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .test-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .test-subtitle {
+            font-size: 1.2rem;
+            color: #667eea;
+        }
+
+        .teams-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .team-section {
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            border-radius: 20px;
+            padding: 25px;
+            border: 2px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .team-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .team-display {
+            background: #ffffff;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            word-break: break-all;
+        }
+
+        .keyboard {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .keyboard-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .key {
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            color: #2c3e50;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .key:hover {
+            background: linear-gradient(145deg, #667eea, #5a6fd8);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .key:active {
+            transform: scale(0.95);
+        }
+
+        .special-key {
+            background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+            color: white;
+            font-weight: 700;
+        }
+
+        .key[data-key="space"] {
+            width: 200px;
+        }
+
+        .key[data-key="backspace"] {
+            width: 80px;
+        }
+
+        .key[data-key="shift"] {
+            width: 100px;
+        }
+
+        .test-instructions {
+            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .instructions-title {
+            font-size: 1.3rem;
+            color: #1976d2;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .instructions-text {
+            color: #1565c0;
+            line-height: 1.6;
+        }
+
+        .test-status {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(145deg, #e8f5e8, #c8e6c9);
+            border-radius: 15px;
+            border-left: 4px solid #4caf50;
+        }
+
+        .status-text {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .teams-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .key {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            .key[data-key="space"] {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="test-header">
+            <h1 class="test-title">觸碰測試 - 雙鍵盤同時輸入</h1>
+            <p class="test-subtitle">測試兩個鍵盤是否可以同時觸碰輸入</p>
+        </div>
+
+        <div class="test-instructions">
+            <h3 class="instructions-title">測試說明：</h3>
+            <p class="instructions-text">
+                1. 請同時用兩隻手指觸碰兩個鍵盤的不同按鍵<br>
+                2. 觀察兩個顯示區域是否都能正確顯示輸入的文字<br>
+                3. 如果兩個鍵盤可以同時輸入，說明觸碰事件優化成功<br>
+                4. 建議在平板設備上測試以獲得最佳效果
+            </p>
+        </div>
+
+        <div class="teams-container">
+            <!-- Team A -->
+            <div class="team-section">
+                <h2 class="team-title">Team A</h2>
+                <div class="team-display" id="team1-display">等待輸入...</div>
+                <div class="keyboard" id="keyboard1">
+                    <div class="keyboard-row">
+                        <button class="key" data-key="q">Q</button>
+                        <button class="key" data-key="w">W</button>
+                        <button class="key" data-key="e">E</button>
+                        <button class="key" data-key="r">R</button>
+                        <button class="key" data-key="t">T</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="key" data-key="a">A</button>
+                        <button class="key" data-key="s">S</button>
+                        <button class="key" data-key="d">D</button>
+                        <button class="key" data-key="f">F</button>
+                        <button class="key" data-key="g">G</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="key" data-key="z">Z</button>
+                        <button class="key" data-key="x">X</button>
+                        <button class="key" data-key="c">C</button>
+                        <button class="key" data-key="v">V</button>
+                        <button class="key" data-key="b">B</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="key special-key" data-key="backspace">←</button>
+                        <button class="key special-key" data-key="space">Space</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team B -->
+            <div class="team-section">
+                <h2 class="team-title">Team B</h2>
+                <div class="team-display" id="team2-display">等待輸入...</div>
+                <div class="keyboard" id="keyboard2">
+                    <div class="keyboard-row">
+                        <button class="key" data-key="y">Y</button>
+                        <button class="key" data-key="u">U</button>
+                        <button class="key" data-key="i">I</button>
+                        <button class="key" data-key="o">O</button>
+                        <button class="key" data-key="p">P</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="key" data-key="h">H</button>
+                        <button class="key" data-key="j">J</button>
+                        <button class="key" data-key="k">K</button>
+                        <button class="key" data-key="l">L</button>
+                        <button class="key" data-key="n">N</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="key" data-key="m">M</button>
+                        <button class="key" data-key="1">1</button>
+                        <button class="key" data-key="2">2</button>
+                        <button class="key" data-key="3">3</button>
+                        <button class="key" data-key="4">4</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="key special-key" data-key="backspace">←</button>
+                        <button class="key special-key" data-key="space">Space</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-status">
+            <p class="status-text" id="test-status">準備測試 - 請同時觸碰兩個鍵盤</p>
+        </div>
+    </div>
+
+    <script>
+        let team1Text = '';
+        let team2Text = '';
+        let simultaneousTouchCount = 0;
+
+        const team1Display = document.getElementById('team1-display');
+        const team2Display = document.getElementById('team2-display');
+        const keyboard1 = document.getElementById('keyboard1');
+        const keyboard2 = document.getElementById('keyboard2');
+        const testStatus = document.getElementById('test-status');
+
+        // 更新顯示
+        function updateDisplay(teamNumber) {
+            const display = teamNumber === 1 ? team1Display : team2Display;
+            const text = teamNumber === 1 ? team1Text : team2Text;
+            display.textContent = text || '等待輸入...';
+        }
+
+        // 處理按鍵點擊
+        function handleKeyClick(key, teamNumber) {
+            const text = teamNumber === 1 ? team1Text : team2Text;
+
+            switch (key) {
+                case 'backspace':
+                    if (text.length > 0) {
+                        if (teamNumber === 1) {
+                            team1Text = text.slice(0, -1);
+                        } else {
+                            team2Text = text.slice(0, -1);
+                        }
+                    }
+                    break;
+
+                case 'space':
+                    if (teamNumber === 1) {
+                        team1Text += ' ';
+                    } else {
+                        team2Text += ' ';
+                    }
+                    break;
+
+                default:
+                    if (teamNumber === 1) {
+                        team1Text += key;
+                    } else {
+                        team2Text += key;
+                    }
+                    break;
+            }
+
+            updateDisplay(teamNumber);
+            updateTestStatus();
+        }
+
+        // 更新測試狀態
+        function updateTestStatus() {
+            if (team1Text.length > 0 && team2Text.length > 0) {
+                testStatus.textContent = '✅ 測試成功！兩個鍵盤都可以輸入';
+                testStatus.style.background = 'linear-gradient(145deg, #e8f5e8, #c8e6c9)';
+                testStatus.style.borderLeftColor = '#4caf50';
+            } else if (team1Text.length > 0 || team2Text.length > 0) {
+                testStatus.textContent = '⏳ 繼續測試 - 請嘗試同時觸碰兩個鍵盤';
+                testStatus.style.background = 'linear-gradient(145deg, #fff3e0, #ffe0b2)';
+                testStatus.style.borderLeftColor = '#ff9800';
+            } else {
+                testStatus.textContent = '準備測試 - 請同時觸碰兩個鍵盤';
+                testStatus.style.background = 'linear-gradient(145deg, #e8f5e8, #c8e6c9)';
+                testStatus.style.borderLeftColor = '#4caf50';
+            }
+        }
+
+        // 添加觸碰事件支持
+        function addTouchEventListeners() {
+            const keys1 = keyboard1.querySelectorAll('.key');
+            const keys2 = keyboard2.querySelectorAll('.key');
+
+            // Team A 觸碰事件
+            keys1.forEach(key => {
+                key.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    const keyValue = key.getAttribute('data-key');
+                    handleKeyClick(keyValue, 1);
+
+                    // 觸碰反饋
+                    key.style.transform = 'scale(0.95)';
+                    key.style.opacity = '0.8';
+                }, { passive: false });
+
+                key.addEventListener('touchend', (e) => {
+                    key.style.transform = '';
+                    key.style.opacity = '';
+                }, { passive: true });
+            });
+
+            // Team B 觸碰事件
+            keys2.forEach(key => {
+                key.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    const keyValue = key.getAttribute('data-key');
+                    handleKeyClick(keyValue, 2);
+
+                    // 觸碰反饋
+                    key.style.transform = 'scale(0.95)';
+                    key.style.opacity = '0.8';
+                }, { passive: false });
+
+                key.addEventListener('touchend', (e) => {
+                    key.style.transform = '';
+                    key.style.opacity = '';
+                }, { passive: true });
+            });
+        }
+
+        // 添加點擊事件支持
+        function addClickEventListeners() {
+            keyboard1.addEventListener('click', (e) => {
+                if (e.target.classList.contains('key')) {
+                    const key = e.target.getAttribute('data-key');
+                    handleKeyClick(key, 1);
+                }
+            });
+
+            keyboard2.addEventListener('click', (e) => {
+                if (e.target.classList.contains('key')) {
+                    const key = e.target.getAttribute('data-key');
+                    handleKeyClick(key, 2);
+                }
+            });
+        }
+
+        // 初始化
+        addClickEventListeners();
+        addTouchEventListeners();
+        updateTestStatus();
+
+        // 防止頁面縮放
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // 防止雙擊縮放
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, { passive: false });
+    </script>
+</body>
+
+</html>

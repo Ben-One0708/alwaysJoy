@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MJ8 - 中級英語練習題</title>
+        <style>
+                body {
+                        font-family: Arial, sans-serif;
+                        background: #ffffff;
+                        padding: 30px;
+                        text-align: center;
+                }
+
+                .quiz-box {
+                        background: white;
+                        padding: 30px;
+                        border-radius: 16px;
+                        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+                        display: inline-block;
+                        min-width: 600px;
+                        position: relative;
+                }
+
+                .question-header {
+                        text-align: left;
+                        font-size: 20px;
+                        color: #4CAF50;
+                        font-weight: bold;
+                        position: absolute;
+                        top: 20px;
+                        left: 30px;
+                }
+
+                .difficulty-badge {
+                        position: absolute;
+                        top: 20px;
+                        right: 30px;
+                        background: #4CAF50;
+                        color: white;
+                        padding: 5px 15px;
+                        border-radius: 20px;
+                        font-size: 14px;
+                        font-weight: bold;
+                }
+
+                .question-content {
+                        margin-top: 40px;
+                        font-size: 24px;
+                }
+
+                input[type="text"] {
+                        padding: 10px;
+                        width: 250px;
+                        font-size: 20px;
+                        text-align: center;
+                        margin-top: 10px;
+                }
+
+                button {
+                        padding: 10px 20px;
+                        font-size: 16px;
+                        margin: 15px 5px;
+                        border: none;
+                        border-radius: 8px;
+                        background-color: #4CAF50;
+                        color: white;
+                        cursor: pointer;
+                }
+
+                .feedback {
+                        margin-top: 15px;
+                        font-weight: bold;
+                        font-size: 18px;
+                }
+
+                .scoreboard {
+                        margin-top: 10px;
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: #333;
+                }
+
+                .answers {
+                        margin-top: 20px;
+                        text-align: left;
+                        font-size: 18px;
+                }
+
+                .nav-panel {
+                        margin-top: 20px;
+                }
+
+                select {
+                        font-size: 16px;
+                        padding: 5px 10px;
+                }
+
+                .back-button {
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        background-color: #ff6b81;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 8px 16px;
+                        font-size: 16px;
+                        cursor: pointer;
+                        z-index: 999;
+                }
+
+                .back-button:hover {
+                        background-color: #ff4757;
+                }
+        </style>
+</head>
+
+<body>
+        <button onclick="goToPage('home.html')" class="back-button">← 回上一頁</button>
+
+        <div class="quiz-box">
+                <div class="question-header" id="question-number"></div>
+                <div class="difficulty-badge">中級英語</div>
+                <div class="question-content" id="question-text"></div>
+                <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+                <br />
+                <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+                <div class="feedback" id="feedback"></div>
+                <div class="scoreboard" id="scoreboard"></div>
+                <div class="answers" id="answers" style="display: none;"></div>
+                <div class="nav-panel">
+                        <label for="questionSelect">跳題：</label>
+                        <select id="questionSelect" onchange="jumpToQuestion()"></select>
+                </div>
+        </div>
+
+        <script>
+                const questions = [
+                        {
+                                "clue": "My father usually l___s to the radio in the morning.",
+                                "answer": "listens",
+                        },
+                        {
+                                "clue": "My mother tells me to wash the d___s in the kitchen after dinner.",
+                                "answer": "dishes",
+                        },
+                        {
+                                "clue": "It's not polite to t__k on the phone during a concert.",
+                                "answer": "talk",
+                        },
+                        {
+                                "clue": "When Tim o__s the door, the cat runs out quickly.",
+                                "answer": "opens",
+                        },
+                        {
+                                "clue": "My grandfather likes to go mountain c___g. He likes Mt. Ali very much.",
+                                "answer": "climbing",
+                        },
+                        {
+                                "clue": "John loves to play c___s. He is the best c___s player in our class.",
+                                "answer": "chess",
+                        },
+                        {
+                                "clue": "I like to w___h TV in my free time, but my mother hates it. She says it's bad for my eyes.",
+                                "answer": "watch",
+                        },
+                        {
+                                "clue": "The teacher y___s at the students because no one is listening to him.",
+                                "answer": "yells",
+                        },
+                        {
+                                "clue": "Jane is g___d at sports. She runs fast and plays basketball well.",
+                                "answer": "good",
+                        },
+                        {
+                                "clue": "Tiffany's mother tells her to c___n her room because her room is too messy.",
+                                "answer": "clean",
+                        },
+                        {
+                                "clue": "If you want to visit a f___s lake, Sun Moon Lake is a good place to go.",
+                                "answer": "famous",
+                        },
+                        {
+                                "clue": "The businessman will not a__d the meeting tomorrow because he had a car accident yesterday.",
+                                "answer": "attend",
+                        },
+                        {
+                                "clue": "I p__d a tea pot in the art class today. I think my grandmother will love it because she loves drinking tea.",
+                                "answer": "painted",
+                        },
+                        {
+                                "clue": "The actor didn't a__t in a play because he was sick.",
+                                "answer": "act",
+                        },
+                        {
+                                "clue": "When Eve saw her boyfriend s___e with another girl, she got angry and broke up with him.",
+                                "answer": "skate",
+                        },
+                        {
+                                "clue": "When Jim saw his daughter c___t with a man, he hid behind them and listened to what they were talking about.",
+                                "answer": "chat",
+                        },
+                        {
+                                "clue": "The police officer k___s on the door, but no one answers.",
+                                "answer": "knocks",
+                        },
+                        {
+                                "clue": "There is an empty box on the ground. There is nothing i___e.",
+                                "answer": "inside",
+                        },
+                        {
+                                "clue": "She didn't take out the trash last night, but she took it out the day b___e yesterday, which was two days ago.",
+                                "answer": "before",
+                        },
+                        {
+                                "clue": "S______y, my brother hits me in the back and scared me.",
+                                "answer": "Suddenly",
+                        },
+                        {
+                                "clue": "The clown p__d out of the box and surprised the audience.",
+                                "answer": "popped",
+                        },
+                        {
+                                "clue": "Timmy feels dizzy because the ball hit his h___d.",
+                                "answer": "head",
+                        },
+                        {
+                                "clue": "Yvonne likes to study h____y because she is interested in what happened in the past.",
+                                "answer": "history",
+                        },
+                        {
+                                "clue": "Joanne has to t__y her room, or she will be grounded.",
+                                "answer": "tidy",
+                        },
+                        {
+                                "clue": "It suddenly starts to rain outside, so I have to dry the c____s or there will be nothing to wear.",
+                                "answer": "clothes",
+                        },
+                        {
+                                "clue": "The class starts at 8:00, and it's now 7:50. You better h__y to school or you will be late.",
+                                "answer": "hurry",
+                        },
+                        {
+                                "clue": "Linda forgets to c___y her l___xx this morning and is really hungry now.",
+                                "answer": "lunchbox",
+                        },
+                        {
+                                "clue": "We always try the moon c__s every Moon Festival because there are more and more new flavors.",
+                                "answer": "cakes",
+                        },
+                        {
+                                "clue": "As the saying goes, 'When l__e gives you lemon, make lemonade.'",
+                                "answer": "life",
+                        },
+                        {
+                                "clue": "Please t__y on the clothes before you buy them, or it might be too large or too small.",
+                                "answer": "try",
+                        },
+                        {
+                                "clue": "You have to be q___k, or the cockroach will disappear at any time.",
+                                "answer": "quick",
+                        },
+                        {
+                                "clue": "Michael w___s for the bus for thirty minutes at the bus stop every day to get to work.",
+                                "answer": "waits",
+                        },
+                        {
+                                "clue": "Students are not allowed to use c___s during class. If the teacher sees it, he or she will take it and keep it for you until break time.",
+                                "answer": "cellphones",
+                        },
+                        {
+                                "clue": "You will get points after you raise your hands and a___r the questions.",
+                                "answer": "answer",
+                        },
+                        {
+                                "clue": "Don't forget to thank the d____r before you get off the bus or the taxi.",
+                                "answer": "driver",
+                        },
+                        {
+                                "clue": "The clerk is t___g his report now so that he can get off work on time.",
+                                "answer": "typing",
+                        },
+                        {
+                                "clue": "Philip forgot to l__k the door before he left, so the thief simply got into the house and stole everything.",
+                                "answer": "lock",
+                        },
+                        {
+                                "clue": "Annie is a teacher, and Nina is, t___.",
+                                "answer": "too",
+                        },
+                        {
+                                "clue": "Billy is not a farmer, and Charles isn't, e___r.",
+                                "answer": "either",
+                        },
+                        {
+                                "clue": "There are six t__s in the dragon boat race, but only one of them can win the championship.",
+                                "answer": "teams",
+                        },
+                        {
+                                "clue": "Jason is t___g a trip to Japan tomorrow, so he won't come to work next week.",
+                                "answer": "taking",
+                        },
+                        {
+                                "clue": "A burglar broke i__o my house yesterday. Luckily, no one was hurt, and she got caught in two hours.",
+                                "answer": "into",
+                        },
+                        {
+                                "clue": "In the art class, the teacher asks the students to draw a p____e of a tiger.",
+                                "answer": "picture",
+                        },
+                        {
+                                "clue": "There is a sign by the pond that says, 'Do not f__d the fish. They are too fat now.'",
+                                "answer": "feed",
+                        },
+                        {
+                                "clue": "When I go to the office to see the teacher, she isn't there. So I w___e a n___e and left it on her table.",
+                                "answer": "note",
+                        },
+                        {
+                                "clue": "In the music class, the teacher asks everyone to sing a s__g in front of the class.",
+                                "answer": "song",
+                        },
+                        {
+                                "clue": "My little brother likes to fly a k___e at the park when it is windy.",
+                                "answer": "kite",
+                        },
+                        {
+                                "clue": "I want to take a trip to N____y because I heard that's where the Vikings come from.",
+                                "answer": "Norway",
+                        },
+                        {
+                                "clue": "Iceland is a popular tourist spot because it's famous for the N______n Lights there.",
+                                "answer": "Northern",
+                        },
+                        {
+                                "clue": "My favorite part of going camping is sitting by the c___e and chat with my friends at night.",
+                                "answer": "campfire",
+                        },
+                        {
+                                "clue": "Daniel took a t___n to travel around Taiwan last year.",
+                                "answer": "train",
+                        },
+                        {
+                                "clue": "Jessie took a s___p to Green Island last month.",
+                                "answer": "ship",
+                        },
+                        {
+                                "clue": "Kyle needs to get to the airport now, so he takes a t__i there.",
+                                "answer": "taxi",
+                        },
+                        {
+                                "clue": "If you want to go to Penghu, you can take a p__e there.",
+                                "answer": "plane",
+                        },
+                        {
+                                "clue": "Ray takes a b__s to school every day.",
+                                "answer": "bus",
+                        },
+                        {
+                                "clue": "Patrick rides a b__e to cram school on Wednesdays.",
+                                "answer": "bike",
+                        },
+                        {
+                                "clue": "In New York, you can go almost anywhere by s___y.",
+                                "answer": "subway",
+                        },
+                        {
+                                "clue": "In Taiwan, most people goes everywhere by riding a s____r because they have a car.",
+                                "answer": "scooter",
+                        },
+                        {
+                                "clue": "Last weekend, my father d___e a car and took us to Taichung to go shopping.",
+                                "answer": "drove",
+                        },
+                        {
+                                "clue": "Sandy lives next to the school, so she can w__k to school every day.",
+                                "answer": "walk",
+                        },
+                        {
+                                "clue": "Justin just came back from The USA, so I picked him up at the a____t.",
+                                "answer": "airport",
+                        },
+                        {
+                                "clue": "There are sixty minutes in an h__r.",
+                                "answer": "hour",
+                        },
+                        {
+                                "clue": "Please don't s___e the cola can, or you will have to clean up the mess by yourself.",
+                                "answer": "shake",
+                        },
+                        {
+                                "clue": "There is s___g inside the box, but I don't know what that is.",
+                                "answer": "something",
+                        },
+                        {
+                                "clue": "The child f__s down and hits his arm. Now, he is crying.",
+                                "answer": "falls",
+                        },
+                        {
+                                "clue": "M______s aren't real. They only exist in fairy tales.",
+                                "answer": "Mermaids",
+                        },
+                        {
+                                "clue": "The famous writer, Andersen, is from D_____k.",
+                                "answer": "Denmark",
+                        },
+                        {
+                                "clue": "Jarvis saw the s___r near the house last night, and he was scared.",
+                                "answer": "stranger",
+                        },
+                        {
+                                "clue": "When Diana meets the s___r, she asks him to sign on her bag.",
+                                "answer": "singer",
+                        },
+                        {
+                                "clue": "The house was b___t seventy years ago. No one lives there now.",
+                                "answer": "built",
+                        },
+                        {
+                                "clue": "The farmer goes to the market and tries to s__l the cow, but no one wants to buy it.",
+                                "answer": "sell",
+                        },
+                        {
+                                "clue": "Percy loves turtles, so he asked his mother to b__y one for him.",
+                                "answer": "buy",
+                        },
+                        {
+                                "clue": "In the art class, the teacher asked the students to d__w their favorite animals.",
+                                "answer": "draw",
+                        },
+                        {
+                                "clue": "After sixty m____s of work, the shopkeeper takes a rest and closes the shop.",
+                                "answer": "minutes",
+                        },
+                        {
+                                "clue": "Christine is a fast runner. She can run one hundred meters in twelve s____s.",
+                                "answer": "seconds",
+                        },
+                        {
+                                "clue": "Two days a__o, a thief came to the store and stole a lot of money.",
+                                "answer": "ago",
+                        },
+                        {
+                                "clue": "When Roxy sees his friends on the street, he w__s his hands and smiles at them.",
+                                "answer": "waves",
+                        },
+                        {
+                                "clue": "There are some h___e snakes at the zoo. The kids are scared when they see the snakes.",
+                                "answer": "huge",
+                        },
+                        {
+                                "clue": "Please s__t the door before you go. It is cold outside.",
+                                "answer": "shut",
+                        },
+                        {
+                                "clue": "The teacher s__t the rules for the students to follow.",
+                                "answer": "set",
+                        },
+                        {
+                                "clue": "Aaron h__t the ball so hard that it flew over the field and broke the window.",
+                                "answer": "hit",
+                        },
+                        {
+                                "clue": "The chef takes out the knife and c__t the pie into ten pieces.",
+                                "answer": "cut",
+                        },
+                        {
+                                "clue": "The students are asked to r___d the magazine every morning.",
+                                "answer": "read",
+                        },
+                        {
+                                "clue": "The teacher asks the kids to p___t at the picture that has a circle in it.",
+                                "answer": "point",
+                        },
+                        {
+                                "clue": "Max doesn't like his sister. They often f__t with each other over small things.",
+                                "answer": "fight",
+                        },
+                        {
+                                "clue": "The elephants are g___t animals. They can be taller than a building.",
+                                "answer": "giant",
+                        },
+                        {
+                                "clue": "Don't talk with your mouth full. S_____w the food before you start talking.",
+                                "answer": "Swallow",
+                        },
+                        {
+                                "clue": "After ten hours of flight, the plane finally l__d at the airport.",
+                                "answer": "landed",
+                        },
+                        {
+                                "clue": "In the e__d, the thief got caught by the police and returned everything he took.",
+                                "answer": "end",
+                        },
+                        {
+                                "clue": "If you feel dizzy and your body temperature is high, you might have a f___r.",
+                                "answer": "fever",
+                        },
+                        {
+                                "clue": "The businessman had a h___e. His head hurt badly.",
+                                "answer": "headache",
+                        },
+                        {
+                                "clue": "Peter starts coughing and he can't talk well. He has a s__e throat.",
+                                "answer": "throat",
+                        },
+                        {
+                                "clue": "Roger c___t a cold and didn't come to school yesterday.",
+                                "answer": "caught",
+                        },
+                        {
+                                "clue": "Remember to see a d____r when you don't feel comfortable.",
+                                "answer": "doctor",
+                        },
+                        {
+                                "clue": "The worker looks tired. I think he need some r__t.",
+                                "answer": "rest",
+                        },
+                        {
+                                "clue": "After you see the doctor, make sure you take some m___e to get well sooner.",
+                                "answer": "medicine",
+                        },
+                        {
+                                "clue": "There should be at least seven w___s in a sentence, or you get no points.",
+                                "answer": "words",
+                        },
+                        {
+                                "clue": "Kids shouldn't go to dangerous p___s. They should be with their parents.",
+                                "answer": "places",
+                        },
+                        {
+                                "clue": "Elizabeth and Mason have three k__s. They are all studying in the elementary school now.",
+                                "answer": "kids",
+                        },
+                        {
+                                "clue": "There is a typhoon coming tomorrow, s__o people are preparing food now.",
+                                "answer": "so",
+                        },
+                        {
+                                "clue": "In the p__t, when most people didn't have telephones, they wrote letters to contact each other.",
+                                "answer": "past",
+                        },
+                        {
+                                "clue": "The V_____s were warriors from Norway in the past.",
+                                "answer": "Vikings",
+                        },
+                        {
+                                "clue": "Taipei is in the n___h of Taiwan.",
+                                "answer": "north",
+                        },
+                        {
+                                "clue": "There is a w__r going on between Israel and Iran.",
+                                "answer": "war",
+                        },
+                        {
+                                "clue": "Jonathan is a___d of dark. He thinks there are monsters hiding inside it.",
+                                "answer": "afraid",
+                        },
+                        {
+                                "clue": "I don't have e___h money to buy the toy. I still need five hundred dollars.",
+                                "answer": "enough",
+                        },
+                        {
+                                "clue": "Perry doesn't like to eat v___s. He likes to eat meat.",
+                                "answer": "vegetables",
+                        },
+                        {
+                                "clue": "Thomas' mother only smiles at him when he gets good g___s at school.",
+                                "answer": "grades",
+                        },
+                        {
+                                "clue": "On Lucy's birthday, her father o___s a big meal to celebrate.",
+                                "answer": "orders",
+                        },
+                        {
+                                "clue": "It might rain in the afternoon, so don't forget to bring an u___a.",
+                                "answer": "umbrella",
+                        },
+                        {
+                                "clue": "You have to study h___d to get good grades.",
+                                "answer": "hard",
+                        },
+                        {
+                                "clue": "The food in the restaurant tastes d___s.",
+                                "answer": "delicious",
+                        },
+                        {
+                                "clue": "Seth got hit by the car b____e the driver was drunk-driving.",
+                                "answer": "because",
+                        },
+                        {
+                                "clue": "There is a stranger standing o____e the house. Be careful.",
+                                "answer": "outside",
+                        },
+                        {
+                                "clue": "There are some c___n playing in the park.",
+                                "answer": "children",
+                        },
+                        {
+                                "clue": "Wilson lives in a small v____e with his grandfather.",
+                                "answer": "village",
+                        },
+                        {
+                                "clue": "Remember to bathe the dog in the t__b once every two weeks.",
+                                "answer": "tub",
+                        },
+                        {
+                                "clue": "Aurora didn't t___w away the trash last night, so she got punished by her father.",
+                                "answer": "throw",
+                        },
+                        {
+                                "clue": "You are not allowed to p__k flowers in the park.",
+                                "answer": "pick",
+                        },
+                        {
+                                "clue": "It's cold outside. P__t on the jacket before you go out.",
+                                "answer": "put",
+                        },
+                        {
+                                "clue": "It's dark in here. Please t__n on the lights.",
+                                "answer": "turn",
+                        },
+                        {
+                                "clue": "Don't forget to turn o__f the lights before you go out.",
+                                "answer": "off",
+                        },
+                        {
+                                "clue": "Your clothes are dirty. Please t__e them off.",
+                                "answer": "take",
+                        },
+                        {
+                                "clue": "Put the trash into the trash c__n.",
+                                "answer": "can",
+                        },
+                        {
+                                "clue": "There is too much t__h on the ground. Please pick them up.",
+                                "answer": "trash",
+                        },
+                        {
+                                "clue": "There is a f__n on the ceiling. You can turn it on if it's too hot.",
+                                "answer": "fan",
+                        },
+                        {
+                                "clue": "The room is so d__k. There is no light.",
+                                "answer": "dark",
+                        },
+                        {
+                                "clue": "Don't forget to turn off the l___s before you leave the room.",
+                                "answer": "lights",
+                        },
+                        {
+                                "clue": "There is snow e___e. Let's build a snowman.",
+                                "answer": "everywhere",
+                        },
+                        {
+                                "clue": "Lance puts the scarf around his n__k because it's really cold outside.",
+                                "answer": "neck",
+                        },
+                        {
+                                "clue": "People sometimes give a__y free food to help the poor.",
+                                "answer": "away",
+                        },
+                        {
+                                "clue": "Iris forgets to give b___k the book she borrowed from the library.",
+                                "answer": "back",
+                        },
+                        {
+                                "clue": "When you're taking a test, please w___e down your answers on the paper.",
+                                "answer": "write",
+                        },
+                        {
+                                "clue": "My grandfather forgot to b___w out the candle and nearly caused the fire.",
+                                "answer": "blow",
+                        },
+                        {
+                                "clue": "It's Audrey's eighteenth birthday. There are eighteen c____s on her birthday cake.",
+                                "answer": "candles",
+                        },
+                        {
+                                "clue": "What is your n___e? You can call me Steven.",
+                                "answer": "name",
+                        },
+                        {
+                                "clue": "What is your phone n___r? It's 0987-654-321.",
+                                "answer": "number",
+                        },
+                        {
+                                "clue": "Where do you live? Can you give me your a____s?",
+                                "answer": "address",
+                        },
+                        {
+                                "clue": "Sheldon asks his mother to pick him up b__y evening.",
+                                "answer": "by",
+                        },
+                        {
+                                "clue": "The l___e ducks are following their mother.",
+                                "answer": "little",
+                        },
+                        {
+                                "clue": "Although chickens have w___s, they can't fly.",
+                                "answer": "wings",
+                        },
+                        {
+                                "clue": "Renolds tries to s___e his brother by suddenly yelling, but it doesn't work.",
+                                "answer": "scare",
+                        },
+                        {
+                                "clue": "My grandparents loves to watch Chinese TV p___s at night.",
+                                "answer": "programs",
+                        },
+                        {
+                                "clue": "My mother chats with n___r every day. They talk about everything.",
+                                "answer": "neighbor",
+                        },
+                        {
+                                "clue": "It could be dangerous to chat on the I______t because you may not know who you are really talking to.",
+                                "answer": "Internet",
+                        },
+                        {
+                                "clue": "After the chubby man sat on the s___w, it was broken into half.",
+                                "answer": "seesaw",
+                        },
+                        {
+                                "clue": "Every time Tyrion plays on the s___g, he asks his father to push him higher.",
+                                "answer": "swing",
+                        },
+                        {
+                                "clue": "There are some children r___________g-r____________g in the park. Be careful when you walk near them.",
+                                "answer": "roller-skating",
+                        },
+                        {
+                                "clue": "When you go i_________g-i_________g, don't forget to put on some clothes because it could be cold.",
+                                "answer": "ice-skating",
+                        },
+                        {
+                                "clue": "If Podrick doesn't go to bed n__w, he won't be able to wake up early tomorrow.",
+                                "answer": "now",
+                        },
+                        {
+                                "clue": "Joffrey w___s that he can become the king when he grows up.",
+                                "answer": "wishes",
+                        },
+                        {
+                                "clue": "My mother m__s me do my homework now. I don't want to do it, but I have no choice.",
+                                "answer": "makes",
+                        },
+                        {
+                                "clue": "Every Christmas, Santa Claus rides on the s___d with his reindeers and gives away gifts.",
+                                "answer": "sled",
+                        },
+                        {
+                                "clue": "Wayne likes to play the g__r in his free time, but his brother thinks it's noisy.",
+                                "answer": "guitar",
+                        },
+                        {
+                                "clue": "Every time Galahad p___s playing the trumpet, his neighbor comes knocking on his door to make him stop.",
+                                "answer": "practices",
+                        },
+                        {
+                                "clue": "Diane practices b___n every day because she wants to better at it.",
+                                "answer": "badminton",
+                        },
+                        {
+                                "clue": "Kimberly practices table t___s every day because she wants to be the best in her class.",
+                                "answer": "tennis",
+                        },
+                        {
+                                "clue": "In the USA and Australia, playing f___l is very popular.",
+                                "answer": "football",
+                        },
+                        {
+                                "clue": "Eric really e___s watching movies in his free time.",
+                                "answer": "enjoys",
+                        },
+                        {
+                                "clue": "The teacher asked the students to f___h their homework in thirty minutes.",
+                                "answer": "finish",
+                        },
+                        {
+                                "clue": "Humphrey's father tells him to stop laughing, but he k___s doing it.",
+                                "answer": "keeps",
+                        },
+                        {
+                                "clue": "On Christmas Eve, the adults will dress up as S___a and give the kids presents.",
+                                "answer": "Santa",
+                        },
+                        {
+                                "clue": "The kids are told to put a s___g in front of their bed in Christmas Eve, and their parents will put the gifts inside it.",
+                                "answer": "stocking",
+                        },
+                        {
+                                "clue": "The principle didn't come to school today because she had a car a___t on her way to work.",
+                                "answer": "accident",
+                        },
+                        {
+                                "clue": "Tobey was hit by the b___y in his class today, and his parent were angry about it.",
+                                "answer": "bully",
+                        },
+                        {
+                                "clue": "The police officer are looking for anyone who saw the r____y at the bank this morning.",
+                                "answer": "robbery",
+                        },
+                        {
+                                "clue": "'Call 119! The house is on f__e!' Lupin yelled.",
+                                "answer": "fire",
+                        },
+                        {
+                                "clue": "When Bradford came home from work, he saw a t___f running out his house and called 110.",
+                                "answer": "thief",
+                        },
+                        {
+                                "clue": "Andy goes to the bank to get some m___y.",
+                                "answer": "money",
+                        },
+                        {
+                                "clue": "Ten minutes later, the p___e officers comes and saves the old lady.",
+                                "answer": "police",
+                        },
+                        {
+                                "clue": "The teacher tells the naughty boy if he doesn't say sorry, she will tell his p____s.",
+                                "answer": "parents",
+                        },
+                        {
+                                "clue": "Please don't t___h the stray animals. They could attack you.",
+                                "answer": "touch",
+                        },
+                        {
+                                "clue": "Remember to turn off the fan w__n you leave the room.",
+                                "answer": "when",
+                        },
+                        {
+                                "clue": "Some people say that Michael Jordan is the best basketball player e__r.",
+                                "answer": "ever",
+                        },
+                        {
+                                "clue": "It's m___t. Please go to bed now, or you will be late tomorrow.",
+                                "answer": "midnight",
+                        },
+                        {
+                                "clue": "There are a___t twenty kids on the playground.",
+                                "answer": "about",
+                        },
+                        {
+                                "clue": "The thief steals from a lot of people. He e__n hits an old lady and took her bag.",
+                                "answer": "even",
+                        },
+                        {
+                                "clue": "Every student in the class s___d follow the class rules.",
+                                "answer": "should",
+                        },
+                        {
+                                "clue": "Larry really loves French f___s. He wants to drink it every day.",
+                                "answer": "fries",
+                        },
+                        {
+                                "clue": "Iverson w___d like to have steak for lunch.",
+                                "answer": "would",
+                        },
+                        {
+                                "clue": "Please don't play with the f__d on your plate. It's impolite.",
+                                "answer": "food",
+                        },
+                        {
+                                "clue": "Helen feels hungry, but it's not dinner time yet. So, she eats some s___s.",
+                                "answer": "snacks",
+                        },
+                        {
+                                "clue": "Most of the kids don't want b___s for lunch, but it's healthy for them.",
+                                "answer": "beans",
+                        },
+                        {
+                                "clue": "Jolyne is going to be late, so she only has t___t for breakfast.",
+                                "answer": "toast",
+                        },
+                        {
+                                "clue": "There's a new Italian restaurant. You should try its s___i.",
+                                "answer": "spaghetti",
+                        },
+                        {
+                                "clue": "Benson has a pet mouse. He always feeds it with c___e.",
+                                "answer": "cheese",
+                        },
+                        {
+                                "clue": "Roxanne is mad because her neighbors are making loud n___s again.",
+                                "answer": "noises",
+                        },
+                        {
+                                "clue": "Do you hear it? That is the s___d of a bird.",
+                                "answer": "sound",
+                        },
+                        {
+                                "clue": "How would you like your steak? I would want it r__e.",
+                                "answer": "rare",
+                        },
+                        {
+                                "clue": "My father wants his steak m___m. It's not too raw, but not too hard to bite.",
+                                "answer": "medium",
+                        },
+                        {
+                                "clue": "The customer is mad because he wanted his steak medium, but it is served well-d__e.",
+                                "answer": "done"
+                        }
+                ];
+
+                let current = 0;
+                let userAnswers = Array(questions.length).fill("");
+
+                window.onload = () => {
+                        const select = document.getElementById("questionSelect");
+                        questions.forEach((_, i) => {
+                                const option = document.createElement("option");
+                                option.value = i;
+                                option.text = `題目 ${i + 1}`;
+                                select.appendChild(option);
+                        });
+                        loadQuestion();
+                };
+
+                document.addEventListener("keydown", function (event) {
+                        if (event.key === "Enter") {
+                                event.preventDefault();
+                                saveAnswer();
+                                nextQuestion();
+                        }
+                });
+
+                function goToPage(url) {
+                        window.location.href = url;
+                }
+
+                function manualSubmit() {
+                        saveAnswer();
+                        nextQuestion();
+                }
+
+                function loadQuestion() {
+                        document.getElementById("question-number").textContent = `${current + 1}. 字義填空`;
+                        document.getElementById("question-text").textContent = questions[current].clue;
+                        document.getElementById("answer").value = userAnswers[current] || "";
+                        document.getElementById("feedback").textContent = "";
+                        document.getElementById("scoreboard").textContent = "";
+                        document.getElementById("answers").style.display = "none";
+                        document.getElementById("questionSelect").value = current;
+                        document.getElementById("answer").style.display = "inline-block";
+                        document.getElementById("submitBtn").style.display = "inline-block";
+                }
+
+                function saveAnswer() {
+                        const input = document.getElementById("answer").value.trim().toLowerCase();
+                        userAnswers[current] = input;
+                }
+
+                function nextQuestion() {
+                        if (current < questions.length - 1) {
+                                current++;
+                                loadQuestion();
+                        } else {
+                                showFinalResult();
+                        }
+                }
+
+                function jumpToQuestion() {
+                        saveAnswer();
+                        current = parseInt(document.getElementById("questionSelect").value);
+                        loadQuestion();
+                }
+
+                function showFinalResult() {
+                        document.getElementById("question-number").textContent = "全部完成！";
+                        document.getElementById("question-text").textContent = "";
+                        document.getElementById("answer").style.display = "none";
+                        document.getElementById("submitBtn").style.display = "none";
+                        document.getElementById("feedback").textContent = "";
+
+                        const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+                        document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}`;
+
+                        const answerBox = document.getElementById("answers");
+                        answerBox.style.display = "block";
+                        answerBox.innerHTML = "<h3>正確答案：</h3><ol>" +
+                                questions.map((q, i) => {
+                                        const ua = userAnswers[i] || "(未作答)";
+                                        const ok = ua === q.answer;
+                                        return `<li><strong>${q.clue}</strong><br>
+                      你的答案：<strong>${ua}</strong> ${ok ? 'correct' : 'wrong'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                                }).join("") + "</ol>";
+                }
+
+                function getGrade(score) {
+                        const pct = (score / questions.length) * 100;
+                        if (pct === 100) return "Perfect! Great job!";
+                        if (pct >= 70) return "Good work!";
+                        return "Keep practicing!";
+                }
+        </script>
+</body>
+
+</html>

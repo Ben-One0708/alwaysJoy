@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MJ6 - 中級英語練習題</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .quiz-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            min-width: 600px;
+            position: relative;
+        }
+
+        .question-header {
+            text-align: left;
+            font-size: 20px;
+            color: #4CAF50;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        .difficulty-badge {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .question-content {
+            margin-top: 40px;
+            font-size: 24px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 15px 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .scoreboard {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .answers {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .nav-panel {
+            margin-top: 20px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .back-button:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="goToPage('../index.html')" class="back-button">← 回上一頁</button>
+
+    <div class="quiz-box">
+        <div class="question-header" id="question-number"></div>
+        <div class="difficulty-badge">中級英語</div>
+        <div class="question-content" id="question-text"></div>
+        <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+        <br />
+        <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+        <div class="feedback" id="feedback"></div>
+        <div class="scoreboard" id="scoreboard"></div>
+        <div class="answers" id="answers" style="display: none;"></div>
+        <div class="nav-panel">
+            <label for="questionSelect">跳題：</label>
+            <select id="questionSelect" onchange="jumpToQuestion()"></select>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                "clue": "Our teacher tells us to make a c___e to play games.",
+                "answer": "circle",
+            },
+            {
+                "clue": "The shape of the cookies are c___e.",
+                "answer": "circle",
+            },
+            {
+                "clue": "The shape of a sandwiches is t___e.",
+                "answer": "triangle",
+            },
+            {
+                "clue": "My baby sister can make a t___e with her finger.",
+                "answer": "triangle",
+            },
+            {
+                "clue": "The shape of the erasers are r___e.",
+                "answer": "rectangle",
+            },
+            {
+                "clue": "We use four lines to make a s___e.",
+                "answer": "square",
+            },
+            {
+                "clue": "There are many s___s shining in the sky.",
+                "answer": "stars",
+            },
+            {
+                "clue": "I can't believe I get on hundred on the test. That is c___y!",
+                "answer": "crazy",
+            },
+            {
+                "clue": "Sam believes that s___y he's going to be a good cook.",
+                "answer": "someday",
+            },
+            {
+                "clue": "Lora says that s___y  she is going to be an actress.",
+                "answer": "someday",
+            },
+            {
+                "clue": "The earth is r___d.",
+                "answer": "round",
+            },
+            {
+                "clue": "There are many marbles on the g___d. Can anyone come to pick them up?",
+                "answer": "ground",
+            },
+            {
+                "clue": "Ally is good at b___g. She can make yummy bread.",
+                "answer": "baking",
+            },
+            {
+                "clue": "Mom b___s a cake for me for my birthday.",
+                "answer": "bakes",
+            },
+            {
+                "clue": "Do you b___k the tickets to the zoo? No, I don't.",
+                "answer": "book",
+            },
+            {
+                "clue": "Mary b___s a tickets to watch a movie.",
+                "answer": "books",
+            },
+            {
+                "clue": "I will wash the dishes a___r I eat dinner.",
+                "answer": "after",
+            },
+            {
+                "clue": "Jerry likes to p___y b___l. He wants to play in the NBA when he grows up.",
+                "answer": "play basketball",
+            },
+            {
+                "clue": "Tina p___s s___r after school.",
+                "answer": "play soccer",
+            },
+            {
+                "clue": "Cherry is good at music. She can p___y t___ v___n.",
+                "answer": "play the violin",
+            },
+            {
+                "clue": "What does Tom do in the band? He p___s t___ d___m in the band.",
+                "answer": "plays the drum",
+            },
+            {
+                "clue": "Sharon likes to p___y t___ p___o. She likes music very much.",
+                "answer": "play the piano",
+            }
+        ];
+
+        let current = 0;
+        let userAnswers = Array(questions.length).fill("");
+
+        window.onload = () => {
+            const select = document.getElementById("questionSelect");
+            questions.forEach((_, i) => {
+                const option = document.createElement("option");
+                option.value = i;
+                option.text = `題目 ${i + 1}`;
+                select.appendChild(option);
+            });
+            loadQuestion();
+        };
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                saveAnswer();
+                nextQuestion();
+            }
+        }); function goToPage(url) {
+            window.location.href = url;
+        }
+
+        function manualSubmit() {
+            saveAnswer();
+            nextQuestion();
+        }
+
+        function loadQuestion() {
+            document.getElementById("question-number").textContent = `${current + 1}. 字義填空`;
+            document.getElementById("question-text").textContent = questions[current].clue;
+            document.getElementById("answer").value = userAnswers[current] || "";
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("scoreboard").textContent = "";
+            document.getElementById("answers").style.display = "none";
+            document.getElementById("questionSelect").value = current;
+            document.getElementById("answer").style.display = "inline-block";
+            document.getElementById("submitBtn").style.display = "inline-block";
+        }
+
+        function saveAnswer() {
+            const input = document.getElementById("answer").value.trim().toLowerCase();
+            userAnswers[current] = input;
+        }
+
+        function nextQuestion() {
+            if (current < questions.length - 1) {
+                current++;
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function jumpToQuestion() {
+            saveAnswer();
+            current = parseInt(document.getElementById("questionSelect").value);
+            loadQuestion();
+        }
+
+        function showFinalResult() {
+            document.getElementById("question-number").textContent = "全部完成！";
+            document.getElementById("question-text").textContent = "";
+            document.getElementById("answer").style.display = "none";
+            document.getElementById("submitBtn").style.display = "none";
+            document.getElementById("feedback").textContent = "";
+
+            const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+            document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}`;
+
+            const answerBox = document.getElementById("answers");
+            answerBox.style.display = "block";
+            answerBox.innerHTML = "<h3>正確答案：</h3><ol>" +
+                questions.map((q, i) => {
+                    const ua = userAnswers[i] || "(未作答)";
+                    const ok = ua === q.answer;
+                    return `<li><strong>${q.clue}</strong><br>
+                      你的答案：<strong>${ua}</strong> ${ok ? 'correct' : 'wrong'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                }).join("") + "</ol>";
+        }
+
+        function getGrade(score) {
+            const pct = (score / questions.length) * 100;
+            if (pct === 100) return "Perfect! Great job!";
+            if (pct >= 70) return "Good work!";
+            return "Keep practicing!";
+        }
+    </script>
+</body>
+
+</html>

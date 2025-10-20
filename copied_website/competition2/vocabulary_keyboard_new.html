@@ -1,0 +1,2271 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=3.0, minimum-scale=0.5">
+    <title>詞彙測驗 - 雙組虛擬鍵盤</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            height: auto;
+            min-height: 100vh;
+            padding: 5px;
+            overflow-x: auto;
+            /* 允許水平滾動 */
+            overflow-y: scroll;
+            /* 強制顯示垂直滾動條 */
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+            touch-action: pan-y;
+            /* 允許垂直滾動手勢 */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            max-width: 3000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+        }
+
+        /* 題目區域 */
+        .question-section {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 25px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(102, 126, 234, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .question-header {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .question-title {
+            color: #2c3e50;
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(102, 126, 234, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .question-number-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+        }
+
+        .question-total {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 25px 35px;
+            border-radius: 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            /* 擴展點擊區域 */
+            min-height: 80px;
+        }
+
+        .total-nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            /* 確保整個按鈕都可以點擊 */
+            min-width: 70px;
+            min-height: 70px;
+            /* 移除可能干擾點擊的樣式 */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .total-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .total-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .total-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        /* 導航按鈕觸碰優化 */
+        .total-nav-btn {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            /* 確保整個按鈕區域都可以點擊 */
+            box-sizing: border-box;
+            /* 移除任何可能干擾點擊的邊框 */
+            outline: none;
+            /* 確保按鈕在z軸上層 */
+            z-index: 10;
+        }
+
+        /* 確保按鈕內容居中且不影響點擊 */
+        .total-nav-btn * {
+            pointer-events: none;
+        }
+
+        /* 隨機按鈕特殊樣式 */
+        .random-btn {
+            background: linear-gradient(145deg, #ff6b6b, #ee5a52) !important;
+            animation: randomPulse 2s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            border-radius: 50% !important;
+            width: 70px !important;
+            height: 70px !important;
+            font-size: 1.8rem !important;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative !important;
+            min-width: 70px !important;
+            min-height: 70px !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            box-sizing: border-box !important;
+            outline: none !important;
+            z-index: 10 !important;
+        }
+
+        /* 確保隨機按鈕內容不影響點擊 */
+        .random-btn * {
+            pointer-events: none !important;
+        }
+
+        .random-btn:hover {
+            background: linear-gradient(145deg, #ff5252, #d32f2f) !important;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+            animation: randomShake 0.5s ease-in-out;
+        }
+
+        .random-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+        }
+
+        @keyframes randomPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+            }
+        }
+
+        @keyframes randomShake {
+
+            0%,
+            100% {
+                transform: scale(1.1) rotate(0deg);
+            }
+
+            25% {
+                transform: scale(1.1) rotate(-5deg);
+            }
+
+            75% {
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+
+
+        /* AB組計分版 */
+        .score-board {
+            position: absolute;
+            top: 120px;
+            left: 0;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            color: #2c3e50;
+            padding: 25px 30px;
+            border-radius: 25px;
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            align-items: center;
+            z-index: 10;
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            min-width: 400px;
+        }
+
+        .score-board::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            border-radius: 25px 25px 0 0;
+        }
+
+
+        .score-team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            min-width: 120px;
+        }
+
+
+
+        .team-label {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Team A - 紅色 */
+        .team-a-label {
+            color: #e74c3c;
+            text-shadow: 0 1px 2px rgba(231, 76, 60, 0.3);
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Team B - 藍色 */
+        .team-b-label {
+            color: #3498db;
+            text-shadow: 0 1px 2px rgba(52, 152, 219, 0.3);
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .score-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .score-buttons-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .score-btn {
+            background: linear-gradient(145deg, #667eea, #5a6fd8);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            width: 60px;
+            height: 60px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 6px 20px rgba(102, 126, 234, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            margin: 5px;
+        }
+
+        .score-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        .score-btn:hover {
+            background: linear-gradient(145deg, #5a6fd8, #4a5fc8);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow:
+                0 8px 25px rgba(102, 126, 234, 0.4),
+                0 0 0 1px rgba(102, 126, 234, 0.2);
+        }
+
+        .score-btn:active {
+            transform: translateY(0) scale(0.95);
+            box-shadow:
+                0 2px 8px rgba(102, 126, 234, 0.3),
+                0 0 0 1px rgba(102, 126, 234, 0.1);
+        }
+
+        .score-btn.minus {
+            background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+            box-shadow:
+                0 6px 20px rgba(255, 107, 107, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .score-btn.minus:hover {
+            background: linear-gradient(145deg, #ff5252, #d32f2f);
+            box-shadow:
+                0 8px 25px rgba(255, 107, 107, 0.4),
+                0 0 0 1px rgba(255, 107, 107, 0.2);
+        }
+
+        .score {
+            font-size: 2.5rem;
+            font-weight: 800;
+            min-width: 60px;
+            text-align: center;
+            color: #2c3e50;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Arial Black', sans-serif;
+            padding: 10px 20px;
+            background-color: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        @keyframes slideInScore {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .question-image-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .question-image {
+            width: 700px;
+            height: 470px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            object-fit: contain;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .question-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: translateY(-50%) scale(1);
+        }
+
+        .nav-btn.prev {
+            left: -80px;
+        }
+
+        .nav-btn.next {
+            right: -80px;
+        }
+
+
+
+        /* 雙組鍵盤區域 */
+        .teams-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            margin-bottom: 25px;
+        }
+
+        .team-section {
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            border-radius: 25px;
+            padding: 30px;
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .team-section:hover {
+            border-color: #667eea;
+            box-shadow:
+                0 15px 35px rgba(102, 126, 234, 0.15),
+                0 0 0 1px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .team-header {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .team-title {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .team-display {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 2px solid rgba(102, 126, 234, 0.15);
+            border-radius: 20px;
+            padding: 20px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                inset 0 2px 4px rgba(0, 0, 0, 0.05),
+                0 0 0 1px rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+        }
+
+        .display-text {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 600;
+            min-height: 1.5em;
+            word-break: break-all;
+        }
+
+        .keyboard-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .keyboard {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(102, 126, 234, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .keyboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .keyboard-row {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+        }
+
+        .key {
+            width: 110px;
+            height: 110px;
+            border: none;
+            border-radius: 24px;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            color: #2c3e50;
+            font-size: 2.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow:
+                0 8px 16px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(255, 255, 255, 0.8);
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .key::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent);
+            border-radius: 18px;
+            pointer-events: none;
+        }
+
+        .key:hover {
+            background: linear-gradient(145deg, #667eea, #5a6fd8);
+            color: white;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow:
+                0 12px 25px rgba(102, 126, 234, 0.25),
+                0 0 0 1px rgba(102, 126, 234, 0.2);
+        }
+
+        .key:hover::before {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .key:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 觸碰優化樣式 */
+        .key:focus {
+            outline: none;
+        }
+
+        .key:focus-visible {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        /* 觸碰設備優化 */
+        @media (hover: none) and (pointer: coarse) {
+            .key {
+                min-height: 44px;
+                /* 確保觸碰目標足夠大 */
+                touch-action: manipulation;
+                /* 優化觸碰操作 */
+            }
+
+            .keyboard {
+                gap: 8px;
+                /* 在觸碰設備上減少間距 */
+            }
+
+            .keyboard-row {
+                gap: 8px;
+            }
+        }
+
+        .special-key {
+            background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+            color: white;
+            font-weight: 700;
+            box-shadow:
+                0 8px 16px rgba(255, 107, 107, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.8);
+        }
+
+        .special-key:hover {
+            background: linear-gradient(145deg, #ff5252, #d32f2f);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow:
+                0 12px 25px rgba(255, 107, 107, 0.4),
+                0 0 0 1px rgba(255, 107, 107, 0.3);
+        }
+
+        .key[data-key="space"] {
+            width: 400px;
+        }
+
+        .key[data-key="backspace"] {
+            width: 160px;
+        }
+
+        .key[data-key="shift"] {
+            width: 200px;
+        }
+
+        /* 動畫效果 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .team-section {
+            animation: fadeIn 0.8s ease-out, float 6s ease-in-out infinite;
+        }
+
+        .team-section:nth-child(2) {
+            animation-delay: 0.3s, 0.3s;
+        }
+
+        .keyboard {
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+
+
+        /* 答案彈出視窗 */
+        .answer-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .answer-modal-content {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            margin: 15% auto;
+            padding: 40px;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .answer-modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .answer-modal-title {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .answer-modal-subtitle {
+            color: #667eea;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .answer-display {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .answer-close-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto 0;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .answer-close-btn:hover {
+            background: linear-gradient(135deg, #ff5252, #d32f2f);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+
+
+        /* 骰子連結按鈕 */
+        .dice-link-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            font-size: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+            z-index: 100;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .dice-link-button:hover {
+            background: linear-gradient(135deg, #ffb347, #ff8c42);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+
+        .dice-link-button:active {
+            transform: translateY(-1px) scale(1.05);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+            }
+        }
+
+        /* 轉盤連結按鈕 */
+        .spin-link-button {
+            position: fixed;
+            top: 20px;
+            right: 140px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            font-size: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            z-index: 100;
+            animation: pulseSpin 2s ease-in-out infinite;
+        }
+
+        .spin-link-button:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+
+        .spin-link-button:active {
+            transform: translateY(-1px) scale(1.05);
+        }
+
+        @keyframes pulseSpin {
+            0% {
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            }
+        }
+
+        /* 轉盤彈出視窗 */
+        .spinner-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .spinner-modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            animation: slideIn 0.4s ease-out;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .spinner-modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4ecdc4, #45b7d1, #96ceb4);
+            border-radius: 30px 30px 0 0;
+        }
+
+        .spinner-modal-header {
+            margin-bottom: 30px;
+        }
+
+        .spinner-modal-title {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .spinner-container {
+            margin-bottom: 30px;
+        }
+
+        /* 轉盤樣式 */
+        .wheel-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .wheel {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: conic-gradient(#ff6b6b 0deg 30deg,
+                    #4ecdc4 30deg 60deg,
+                    #45b7d1 60deg 90deg,
+                    #96ceb4 90deg 120deg,
+                    #feca57 120deg 150deg,
+                    #ff9ff3 150deg 180deg,
+                    #ff6b6b 180deg 210deg,
+                    #4ecdc4 210deg 240deg,
+                    #45b7d1 240deg 270deg,
+                    #96ceb4 270deg 300deg,
+                    #feca57 300deg 330deg,
+                    #ff9ff3 330deg 360deg);
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid #333;
+            z-index: 10;
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            border: 4px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+
+        .spin-button {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .spin-button:hover {
+            background: linear-gradient(135deg, #45b7d1, #96ceb4);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(78, 205, 196, 0.4);
+        }
+
+        .spin-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .spinner-result {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 25px;
+            border-radius: 25px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
+            text-align: center;
+            animation: resultPop 0.5s ease-out;
+        }
+
+        @keyframes resultPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .team-selection {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+            animation: teamSelectionFadeIn 0.5s ease-out;
+        }
+
+        @keyframes teamSelectionFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .team-select-btn {
+            background: linear-gradient(135deg, #667eea, #5a6fd8);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .team-select-btn:hover {
+            background: linear-gradient(135deg, #5a6fd8, #4a5fc8);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .team-select-btn.team-a {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        }
+
+        .team-select-btn.team-b {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        }
+
+        .spinner-close-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .spinner-close-btn:hover {
+            background: linear-gradient(135deg, #ff5252, #d32f2f);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        /* 題目內容樣式 */
+        .question-content {
+            margin: 15px auto;
+            font-size: 3.5rem;
+            line-height: 1.4;
+            color: #2c3e50;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px 25px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+            max-width: 600px;
+            width: fit-content;
+        }
+
+        .question-content:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            transform: scale(1.02);
+        }
+
+        .question-content:active {
+            transform: scale(0.98);
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 1800px) {
+            .teams-container {
+                gap: 120px;
+            }
+        }
+
+        @media (max-width: 1600px) {
+            .teams-container {
+                gap: 100px;
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .teams-container {
+                gap: 80px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .teams-container {
+                grid-template-columns: 1fr;
+                gap: 70px;
+            }
+
+            .question-image {
+                width: 500px;
+                height: 350px;
+            }
+
+            .nav-btn.prev {
+                left: -80px;
+            }
+
+            .nav-btn.next {
+                right: -80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+
+            .question-title {
+                font-size: 2.5rem;
+            }
+
+            .question-image {
+                width: 400px;
+                height: 300px;
+            }
+
+            .nav-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .nav-btn.prev {
+                left: -70px;
+            }
+
+            .nav-btn.next {
+                right: -70px;
+            }
+
+            .question-content {
+                font-size: 2rem;
+                padding: 20px;
+            }
+
+            .team-section {
+                padding: 25px;
+            }
+
+            .keyboard {
+                padding: 20px;
+            }
+
+            .key {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+
+            .key[data-key="space"] {
+                width: 320px;
+            }
+
+            .key[data-key="backspace"] {
+                width: 130px;
+            }
+
+            .key[data-key="shift"] {
+                width: 160px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 骰子連結按鈕 -->
+    <a href="dice.html" class="dice-link-button">🎲</a>
+
+    <!-- 轉盤連結按鈕 -->
+    <a href="spin_wheel.html" class="spin-link-button">🎡</a>
+
+
+    <div class="container">
+        <!-- 題目區域 -->
+        <div class="question-section">
+            <div class="question-header">
+                <div class="question-total" id="question-total">
+                    <button class="total-nav-btn" id="total-prev-btn" onclick="previousQuestion()">‹</button>
+                    <span id="total-text">1/10</span>
+                    <button class="total-nav-btn" id="total-next-btn" onclick="nextQuestion()">›</button>
+                    <button class="total-nav-btn random-btn" id="random-btn" onclick="randomQuestion()"
+                        title="隨機跳題">🎲</button>
+                </div>
+
+                <!-- AB組計分版 -->
+                <div class="score-board">
+                    <div class="score-team">
+                        <div class="team-label team-a-label">Team A</div>
+                        <div class="score-display">
+                            <div class="score-buttons-row">
+                                <button class="score-btn minus" onclick="updateScore('A', -5)">-5</button>
+                                <button class="score-btn minus" onclick="updateScore('A', -1)">-1</button>
+                            </div>
+                            <span class="score" id="score-a">0</span>
+                            <div class="score-buttons-row">
+                                <button class="score-btn plus" onclick="updateScore('A', 1)">+1</button>
+                                <button class="score-btn plus" onclick="updateScore('A', 5)">+5</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="score-team">
+                        <div class="team-label team-b-label">Team B</div>
+                        <div class="score-display">
+                            <div class="score-buttons-row">
+                                <button class="score-btn minus" onclick="updateScore('B', -5)">-5</button>
+                                <button class="score-btn minus" onclick="updateScore('B', -1)">-1</button>
+                            </div>
+                            <span class="score" id="score-b">0</span>
+                            <div class="score-buttons-row">
+                                <button class="score-btn plus" onclick="updateScore('B', 1)">+1</button>
+                                <button class="score-btn plus" onclick="updateScore('B', 5)">+5</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h1 class="question-title">
+                </h1>
+            </div>
+
+            <div class="question-image-wrapper">
+                <img class="question-image" id="question-image" src="image2/1.png" alt="題目圖片">
+            </div>
+
+            <div class="question-content" id="question-content">
+                請看圖片並輸入正確的英文單字
+            </div>
+        </div>
+
+        <!-- 雙組鍵盤區域 -->
+        <div class="teams-container">
+            <!-- Team A -->
+            <div class="team-section">
+                <div class="team-header">
+                    <h2 class="team-title">Team A</h2>
+                    <div class="team-display">
+                        <span class="display-text" id="team1-display"></span>
+                    </div>
+                </div>
+                <div class="keyboard-container">
+                    <div class="keyboard" id="keyboard1">
+                        <!-- 第一行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="q">Q</button>
+                            <button class="key" data-key="w">W</button>
+                            <button class="key" data-key="e">E</button>
+                            <button class="key" data-key="r">R</button>
+                            <button class="key" data-key="t">T</button>
+                            <button class="key" data-key="y">Y</button>
+                            <button class="key" data-key="u">U</button>
+                            <button class="key" data-key="i">I</button>
+                            <button class="key" data-key="o">O</button>
+                            <button class="key" data-key="p">P</button>
+                        </div>
+                        <!-- 第二行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="a">A</button>
+                            <button class="key" data-key="s">S</button>
+                            <button class="key" data-key="d">D</button>
+                            <button class="key" data-key="f">F</button>
+                            <button class="key" data-key="g">G</button>
+                            <button class="key" data-key="h">H</button>
+                            <button class="key" data-key="j">J</button>
+                            <button class="key" data-key="k">K</button>
+                            <button class="key" data-key="l">L</button>
+                        </div>
+                        <!-- 第三行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="z">Z</button>
+                            <button class="key" data-key="x">X</button>
+                            <button class="key" data-key="c">C</button>
+                            <button class="key" data-key="v">V</button>
+                            <button class="key" data-key="b">B</button>
+                            <button class="key" data-key="n">N</button>
+                            <button class="key" data-key="m">M</button>
+                            <button class="key special-key" data-key="backspace">←</button>
+                        </div>
+                        <!-- 第四行 -->
+                        <div class="keyboard-row">
+                            <button class="key special-key" data-key="shift">Shift</button>
+                            <button class="key special-key" data-key="space">Space</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team B -->
+            <div class="team-section">
+                <div class="team-header">
+                    <h2 class="team-title">Team B</h2>
+                    <div class="team-display">
+                        <span class="display-text" id="team2-display"></span>
+                    </div>
+                </div>
+                <div class="keyboard-container">
+                    <div class="keyboard" id="keyboard2">
+                        <!-- 第一行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="q">Q</button>
+                            <button class="key" data-key="w">W</button>
+                            <button class="key" data-key="e">E</button>
+                            <button class="key" data-key="r">R</button>
+                            <button class="key" data-key="t">T</button>
+                            <button class="key" data-key="y">Y</button>
+                            <button class="key" data-key="u">U</button>
+                            <button class="key" data-key="i">I</button>
+                            <button class="key" data-key="o">O</button>
+                            <button class="key" data-key="p">P</button>
+                        </div>
+                        <!-- 第二行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="a">A</button>
+                            <button class="key" data-key="s">S</button>
+                            <button class="key" data-key="d">D</button>
+                            <button class="key" data-key="f">F</button>
+                            <button class="key" data-key="g">G</button>
+                            <button class="key" data-key="h">H</button>
+                            <button class="key" data-key="j">J</button>
+                            <button class="key" data-key="k">K</button>
+                            <button class="key" data-key="l">L</button>
+                        </div>
+                        <!-- 第三行 -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="z">Z</button>
+                            <button class="key" data-key="x">X</button>
+                            <button class="key" data-key="c">C</button>
+                            <button class="key" data-key="v">V</button>
+                            <button class="key" data-key="b">B</button>
+                            <button class="key" data-key="n">N</button>
+                            <button class="key" data-key="m">M</button>
+                            <button class="key special-key" data-key="backspace">←</button>
+                        </div>
+                        <!-- 第四行 -->
+                        <div class="keyboard-row">
+                            <button class="key special-key" data-key="shift">Shift</button>
+                            <button class="key special-key" data-key="space">Space</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // 題目資料
+        const questions = [
+            { number: 1, image: 'image2/1.png', content: 'i____d', answer: 'island' },
+            { number: 2, image: 'image2/2.png', content: 's____r', answer: 'sailor' },
+            { number: 3, image: 'image2/3.png', content: 'n____h', answer: 'north' },
+            { number: 4, image: 'image2/4.png', content: 'l____t', answer: 'light' },
+            { number: 5, image: 'image2/5.png', content: 'c____e', answer: 'candle' },
+            { number: 6, image: 'image2/6.png', content: 'r____r', answer: 'remember' },
+            { number: 7, image: 'image2/7.png', content: 'f____t', answer: 'forget' },
+            { number: 8, image: 'image2/8.png', content: 'b____g', answer: 'bring' },
+            { number: 9, image: 'image2/9.png', content: 'w____l', answer: 'wonderful' },
+            { number: 10, image: 'image2/10.png', content: 'p__t', answer: 'pet' },
+            { number: 11, image: 'image2/11.png', content: 't__l', answer: 'tool' },
+            { number: 12, image: 'image2/12.png', content: 's____e', answer: 'shape' },
+            { number: 13, image: 'image2/13.png', content: 'p____r', answer: 'popular' },
+            { number: 14, image: 'image2/14.png', content: 'c____d', answer: 'crowded' },
+            { number: 15, image: 'image2/15.png', content: 'f____t', answer: 'forest' },
+            { number: 16, image: 'image2/16.png', content: 't____c', answer: 'traffic' },
+            { number: 17, image: 'image2/17.png', content: 's____d', answer: 'sound' },
+            { number: 18, image: 'image2/18.png', content: 'b____t', answer: 'breakfast' },
+            { number: 19, image: 'image2/19.png', content: 'p____t', answer: 'protect' },
+            { number: 20, image: 'image2/20.png', content: 's____e', answer: 'solve' },
+            { number: 21, image: 'image2/21.png', content: 's__e', answer: 'safe' },
+            { number: 22, image: 'image2/22.png', content: 't____r', answer: 'together' },
+            { number: 23, image: 'image2/23.png', content: 's____t', answer: 'sport' },
+            { number: 24, image: 'image2/24.png', content: 's____t', answer: 'support' },
+            { number: 25, image: 'image2/25.png', content: 'p____e', answer: 'provide' },
+            { number: 26, image: 'image2/26.png', content: 'd____y', answer: 'daily' },
+            { number: 27, image: 'image2/27.png', content: 'm____e', answer: 'move' },
+            { number: 28, image: 'image2/28.png', content: 's____g', answer: 'strong' },
+            { number: 29, image: 'image2/29.png', content: 'l____d', answer: 'loud' },
+            { number: 30, image: 'image2/30.png', content: 'k____r', answer: 'kilometer' },
+            { number: 31, image: 'image2/31.png', content: 'r__w', answer: 'row' },
+            { number: 32, image: 'image2/32.png', content: 'l____f', answer: 'leaf' },
+            { number: 33, image: 'image2/33.png', content: 'b____e', answer: 'become' },
+            { number: 34, image: 'image2/34.png', content: 'c____r', answer: 'calendar' },
+            { number: 35, image: 'image2/35.png', content: 's____e', answer: 'surprise' },
+            { number: 36, image: 'image2/36.png', content: 'b____h', answer: 'brush' },
+            { number: 37, image: 'image2/37.png', content: 't____e', answer: 'temple' },
+            { number: 38, image: 'image2/38.png', content: 's____e', answer: 'shine' },
+            { number: 39, image: 'image2/39.png', content: 'u____e', answer: 'unique' },
+            { number: 40, image: 'image2/40.png', content: 'f____l', answer: 'festival' },
+            { number: 41, image: 'image2/41.png', content: 'w____l', answer: 'wheel' },
+            { number: 42, image: 'image2/42.png', content: 'p__l', answer: 'pull' },
+            { number: 43, image: 'image2/43.png', content: 'o____r', answer: 'offer' },
+            { number: 44, image: 'image2/44.png', content: 'b__w', answer: 'bow' },
+            { number: 45, image: 'image2/45.png', content: 'b____r', answer: 'bitter' },
+            { number: 46, image: 'image2/46.png', content: 's____r', answer: 'shopkeeper' },
+            { number: 47, image: 'image2/47.png', content: 'd____d', answer: 'dead' },
+            { number: 48, image: 'image2/48.png', content: 'g____t', answer: 'ghost' },
+            { number: 49, image: 'image2/49.png', content: 't____r', answer: 'tower' },
+            { number: 50, image: 'image2/50.png', content: 'c____r', answer: 'clear' },
+            { number: 51, image: 'image2/51.png', content: 'k__d', answer: 'kind' },
+            { number: 52, image: 'image2/52.png', content: 'b____d', answer: 'build' },
+            { number: 53, image: 'image2/53.png', content: 'c____e', answer: 'create' },
+            { number: 54, image: 'image2/54.png', content: 'w____d', answer: 'wood' },
+            { number: 55, image: 'image2/55.png', content: 's____d', answer: 'spread' },
+            { number: 56, image: 'image2/56.png', content: 's__t', answer: 'salt' },
+            { number: 57, image: 'image2/57.png', content: 's____e', answer: 'slide' },
+            { number: 58, image: 'image2/58.png', content: 'l____n', answer: 'lesson' },
+            { number: 59, image: 'image2/59.png', content: 'l__e', answer: 'lie' },
+            { number: 60, image: 'image2/60.png', content: 'e____e', answer: 'experience' },
+            { number: 61, image: 'image2/61.png', content: 'l____y', answer: 'lovely' },
+            { number: 62, image: 'image2/62.png', content: 's__d', answer: 'sand' },
+            { number: 63, image: 'image2/63.png', content: 'b____e', answer: 'brave' },
+            { number: 64, image: 'image2/64.png', content: 'm____r', answer: 'meter' },
+            { number: 65, image: 'image2/65.png', content: 's____k', answer: 'shark' },
+            { number: 66, image: 'image2/66.png', content: 's__k', answer: 'sink' },
+            { number: 67, image: 'image2/67.png', content: 'm____y', answer: 'marry' },
+            { number: 68, image: 'image2/68.png', content: 'c____n', answer: 'captain' },
+            { number: 69, image: 'image2/69.png', content: 'r____e', answer: 'refuse' },
+            { number: 70, image: 'image2/70.png', content: 'h____h', answer: 'health' },
+            { number: 71, image: 'image2/71.png', content: 'b____y', answer: 'busy' },
+            { number: 72, image: 'image2/72.png', content: 'p____s', answer: 'parents' },
+            { number: 73, image: 'image2/73.png', content: 'a____a', answer: 'area' },
+            { number: 74, image: 'image2/74.png', content: 'd____t', answer: 'desert' },
+            { number: 75, image: 'image2/75.png', content: 'a____t', answer: 'ancient' },
+            { number: 76, image: 'image2/76.png', content: 's____r', answer: 'stair' },
+            { number: 77, image: 'image2/77.png', content: 'b____e', answer: 'believe' },
+            { number: 78, image: 'image2/78.png', content: 'f____h', answer: 'fresh' },
+            { number: 79, image: 'image2/79.png', content: 'c____h', answer: 'catch' },
+            { number: 80, image: 'image2/80.png', content: 'i____a', answer: 'idea' },
+            { number: 81, image: 'image2/81.png', content: 'r____n', answer: 'return' },
+            { number: 82, image: 'image2/82.png', content: 'f__d', answer: 'find' },
+            { number: 83, image: 'image2/83.png', content: 'h____r', answer: 'hear' },
+            { number: 84, image: 'image2/84.png', content: 's__t', answer: 'soft' },
+            { number: 85, image: 'image2/85.png', content: 'w__d', answer: 'wild' },
+            { number: 86, image: 'image2/86.png', content: 'p____h', answer: 'path' },
+            { number: 87, image: 'image2/87.png', content: 'r____h', answer: 'reach' },
+            { number: 88, image: 'image2/88.png', content: 'w____e', answer: 'wide' },
+            { number: 89, image: 'image2/89.png', content: 'b____h', answer: 'branch' },
+            { number: 90, image: 'image2/90.png', content: 'm____r', answer: 'master' },
+            { number: 91, image: 'image2/91.png', content: 'p____s', answer: 'precious' },
+            { number: 92, image: 'image2/92.png', content: 's__w', answer: 'slow' },
+            { number: 93, image: 'image2/93.png', content: 't____e', answer: 'taste' },
+            { number: 94, image: 'image2/94.png', content: 'n____t', answer: 'next' },
+            { number: 95, image: 'image2/95.png', content: 'a____k', answer: 'attack' },
+            { number: 96, image: 'image2/96.png', content: 'd____m', answer: 'dream' },
+            { number: 97, image: 'image2/97.png', content: 's____p', answer: 'step' },
+            { number: 98, image: 'image2/98.png', content: 'v____y', answer: 'valley' },
+            { number: 99, image: 'image2/99.png', content: 'w____e', answer: 'whale' },
+            { number: 100, image: 'image2/100.png', content: 's____l', answer: 'symbol' },
+            { number: 101, image: 'image2/101.png', content: 'w____e', answer: 'wave' },
+            { number: 102, image: 'image2/102.png', content: 'h____r', answer: 'hammer' },
+            { number: 103, image: 'image2/103.png', content: 's__l', answer: 'sail' },
+            { number: 104, image: 'image2/104.png', content: 's____l', answer: 'special' },
+            { number: 105, image: 'image2/105.png', content: 'm____n', answer: 'mean' },
+            { number: 106, image: 'image2/106.png', content: 'a____t', answer: 'artist' },
+            { number: 107, image: 'image2/107.png', content: 'e____h', answer: 'earth' },
+            { number: 108, image: 'image2/108.png', content: 't____k', answer: 'think' }
+        ];
+
+        let currentQuestionIndex = 0;
+        let team1Text = '';
+        let team2Text = '';
+        let team1ShiftActive = false;
+        let team2ShiftActive = false;
+
+        // DOM 元素
+        const questionTotal = document.getElementById('question-total');
+        const totalText = document.getElementById('total-text');
+        const totalPrevBtn = document.getElementById('total-prev-btn');
+        const totalNextBtn = document.getElementById('total-next-btn');
+        const questionImage = document.getElementById('question-image');
+        const questionContent = document.getElementById('question-content');
+        const team1Display = document.getElementById('team1-display');
+        const team2Display = document.getElementById('team2-display');
+        const keyboard1 = document.getElementById('keyboard1');
+        const keyboard2 = document.getElementById('keyboard2');
+
+        // 載入題目
+        function loadQuestion(index) {
+            const question = questions[index];
+            totalText.textContent = `${question.number}/${questions.length}`;
+            questionImage.src = question.image;
+            questionContent.textContent = question.content;
+
+            // 更新導航按鈕狀態
+            totalPrevBtn.disabled = index === 0;
+            totalNextBtn.disabled = index === questions.length - 1;
+
+            // 清空輸入
+            team1Text = '';
+            team2Text = '';
+            updateDisplay(1);
+            updateDisplay(2);
+        }
+
+        // 上一題
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion(currentQuestionIndex);
+            }
+        }
+
+        // 下一題
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion(currentQuestionIndex);
+            }
+        }
+
+        // 隨機跳題
+        function randomQuestion() {
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * questions.length);
+            } while (randomIndex === currentQuestionIndex && questions.length > 1);
+
+            currentQuestionIndex = randomIndex;
+            loadQuestion(currentQuestionIndex);
+
+            // 添加視覺反饋
+            const randomBtn = document.getElementById('random-btn');
+            if (randomBtn) {
+                randomBtn.style.transform = 'scale(1.2) rotate(360deg)';
+                setTimeout(() => {
+                    randomBtn.style.transform = '';
+                }, 500);
+            }
+        }
+
+        // 簡化的導航按鈕觸碰支持
+        function addNavigationTouchSupport() {
+            // 這個函數現在只是為了保持兼容性，實際使用onclick
+            console.log('Navigation touch support initialized');
+        }
+
+
+        // 更新字母鍵顯示
+        function updateLetterKeys(teamNumber) {
+            const keyboard = teamNumber === 1 ? keyboard1 : keyboard2;
+            const isShiftActive = teamNumber === 1 ? team1ShiftActive : team2ShiftActive;
+
+            const letterKeys = keyboard.querySelectorAll('.key[data-key]');
+            letterKeys.forEach(key => {
+                const keyValue = key.getAttribute('data-key');
+                if (keyValue.length === 1 && /[a-z]/.test(keyValue)) {
+                    key.textContent = isShiftActive ? keyValue.toUpperCase() : keyValue.toLowerCase();
+                }
+            });
+
+            const shiftKey = keyboard.querySelector('.key[data-key="shift"]');
+            if (shiftKey) {
+                if (isShiftActive) {
+                    shiftKey.style.background = 'linear-gradient(145deg, #4CAF50, #45a049)';
+                } else {
+                    shiftKey.style.background = 'linear-gradient(145deg, #ff6b6b, #ee5a52)';
+                }
+            }
+        }
+
+        // 更新顯示內容
+        function updateDisplay(teamNumber) {
+            const display = teamNumber === 1 ? team1Display : team2Display;
+            const text = teamNumber === 1 ? team1Text : team2Text;
+            display.textContent = text;
+        }
+
+        // 處理按鍵點擊
+        function handleKeyClick(key, teamNumber) {
+            const text = teamNumber === 1 ? team1Text : team2Text;
+
+            switch (key) {
+                case 'backspace':
+                    if (text.length > 0) {
+                        if (teamNumber === 1) {
+                            team1Text = text.slice(0, -1);
+                        } else {
+                            team2Text = text.slice(0, -1);
+                        }
+                    }
+                    break;
+
+                case 'space':
+                    if (teamNumber === 1) {
+                        team1Text += ' ';
+                    } else {
+                        team2Text += ' ';
+                    }
+                    break;
+
+                case 'shift':
+                    if (teamNumber === 1) {
+                        team1ShiftActive = !team1ShiftActive;
+                    } else {
+                        team2ShiftActive = !team2ShiftActive;
+                    }
+                    updateLetterKeys(teamNumber);
+                    return;
+
+                default:
+                    let inputChar = key;
+                    if (/[a-z]/.test(key)) {
+                        const isShiftActive = teamNumber === 1 ? team1ShiftActive : team2ShiftActive;
+                        inputChar = isShiftActive ? key.toUpperCase() : key.toLowerCase();
+
+                        if (teamNumber === 1) {
+                            team1ShiftActive = false;
+                        } else {
+                            team2ShiftActive = false;
+                        }
+                        updateLetterKeys(teamNumber);
+                    }
+
+                    if (teamNumber === 1) {
+                        team1Text += inputChar;
+                    } else {
+                        team2Text += inputChar;
+                    }
+                    break;
+            }
+
+            updateDisplay(teamNumber);
+        }
+
+        // 鍵盤事件監聽 - 同時支持點擊和觸碰
+        function addKeyboardEventListeners() {
+            // Team A 鍵盤事件
+            keyboard1.addEventListener('click', (e) => {
+                if (e.target.classList.contains('key')) {
+                    const key = e.target.getAttribute('data-key');
+                    handleKeyClick(key, 1);
+                }
+            });
+
+            // Team B 鍵盤事件
+            keyboard2.addEventListener('click', (e) => {
+                if (e.target.classList.contains('key')) {
+                    const key = e.target.getAttribute('data-key');
+                    handleKeyClick(key, 2);
+                }
+            });
+
+            // 觸碰事件支持
+            const keys1 = keyboard1.querySelectorAll('.key');
+            const keys2 = keyboard2.querySelectorAll('.key');
+
+            // Team A 觸碰事件
+            keys1.forEach(key => {
+                key.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    const keyValue = key.getAttribute('data-key');
+                    handleKeyClick(keyValue, 1);
+
+                    // 觸碰反饋
+                    key.style.transform = 'scale(0.95)';
+                    key.style.opacity = '0.8';
+                }, { passive: false });
+
+                key.addEventListener('touchend', (e) => {
+                    key.style.transform = '';
+                    key.style.opacity = '';
+                }, { passive: true });
+            });
+
+            // Team B 觸碰事件
+            keys2.forEach(key => {
+                key.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    const keyValue = key.getAttribute('data-key');
+                    handleKeyClick(keyValue, 2);
+
+                    // 觸碰反饋
+                    key.style.transform = 'scale(0.95)';
+                    key.style.opacity = '0.8';
+                }, { passive: false });
+
+                key.addEventListener('touchend', (e) => {
+                    key.style.transform = '';
+                    key.style.opacity = '';
+                }, { passive: true });
+            });
+        }
+
+        // 鍵盤事件支持
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                return;
+            }
+
+            if (e.shiftKey && key === 'shift') {
+                if (team1Text.length > team2Text.length) {
+                    handleKeyClick('shift', 1);
+                } else {
+                    handleKeyClick('shift', 2);
+                }
+                return;
+            }
+
+            const isLeftSide = ['q', 'w', 'e', 'r', 't', 'a', 's', 'd', 'f', 'g', 'z', 'x', 'c', 'v', 'b'].includes(key);
+            const isRightSide = ['y', 'u', 'i', 'o', 'p', 'h', 'j', 'k', 'l', 'n', 'm'].includes(key);
+
+            if (isLeftSide) {
+                handleKeyClick(key, 1);
+            } else if (isRightSide) {
+                handleKeyClick(key, 2);
+            } else if (key === 'backspace') {
+                if (team1Text.length > team2Text.length) {
+                    handleKeyClick('backspace', 1);
+                } else {
+                    handleKeyClick('backspace', 2);
+                }
+            } else if (key === ' ') {
+                if (team1Text.length > team2Text.length) {
+                    handleKeyClick('space', 1);
+                } else {
+                    handleKeyClick('space', 2);
+                }
+            }
+
+            e.preventDefault();
+        });
+
+        // 觸碰事件優化
+        function addTouchSupport() {
+            const keys = document.querySelectorAll('.key');
+            keys.forEach(key => {
+                // 移除preventDefault，讓觸碰事件正常工作
+                key.addEventListener('touchstart', (e) => {
+                    // 添加觸碰反饋
+                    key.style.transform = 'scale(0.95)';
+                    key.style.opacity = '0.8';
+                }, { passive: true });
+
+                key.addEventListener('touchend', (e) => {
+                    // 恢復觸碰反饋
+                    key.style.transform = '';
+                    key.style.opacity = '';
+                }, { passive: true });
+
+                // 防止觸碰時的選中文字
+                key.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                }, { passive: false });
+            });
+
+        }
+
+        // 計分功能
+        let teamAScore = 0;
+        let teamBScore = 0;
+
+        // 從 localStorage 恢復分數
+        function loadScores() {
+            const savedScores = localStorage.getItem('vocabularyGameScores');
+            if (savedScores) {
+                const scores = JSON.parse(savedScores);
+                teamAScore = scores.teamA || 0;
+                teamBScore = scores.teamB || 0;
+                document.getElementById('score-a').textContent = teamAScore;
+                document.getElementById('score-b').textContent = teamBScore;
+            }
+        }
+
+        // 保存分數到 localStorage
+        function saveScores() {
+            const scores = {
+                teamA: teamAScore,
+                teamB: teamBScore,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('vocabularyGameScores', JSON.stringify(scores));
+        }
+
+        function updateScore(team, change) {
+            if (team === 'A') {
+                teamAScore = teamAScore + change;
+                document.getElementById('score-a').textContent = teamAScore;
+            } else if (team === 'B') {
+                teamBScore = teamBScore + change;
+                document.getElementById('score-b').textContent = teamBScore;
+            }
+            // 每次更新分數後都保存
+            saveScores();
+        }
+
+        // 重置分數功能
+
+        // 圖釘功能 - 只固定滾動位置，保持內容可點擊
+
+        function pinCurrentPosition() {
+            // 記錄當前滾動位置
+            pinnedPosition = {
+                x: window.scrollX || window.pageXOffset,
+                y: window.scrollY || window.pageYOffset
+            };
+
+            // 只固定滾動，不影響內容點擊
+            document.body.classList.add('pinned');
+            document.body.style.top = `-${pinnedPosition.y}px`;
+            document.body.style.left = `-${pinnedPosition.x}px`;
+        }
+
+        function unpinPosition() {
+            // 解除固定
+            document.body.classList.remove('pinned');
+            document.body.style.top = '';
+            document.body.style.left = '';
+            document.body.style.width = '';
+            document.body.style.height = '';
+            document.body.style.position = '';
+            document.body.style.overflow = '';
+
+            // 恢復滾動位置
+            window.scrollTo(pinnedPosition.x, pinnedPosition.y);
+
+            // 確保滾動功能完全恢復
+            setTimeout(() => {
+                document.body.style.overflowY = 'scroll';
+                document.body.style.overflowX = 'auto';
+                document.body.style.position = 'relative';
+            }, 100);
+        }
+
+        function loadPinnedState() {
+            const savedPinned = localStorage.getItem('isPinned');
+            const savedPosition = localStorage.getItem('pinnedPosition');
+
+            if (savedPinned === 'true' && savedPosition) {
+                isPinned = true;
+                pinnedPosition = JSON.parse(savedPosition);
+
+                const pinButton = document.getElementById('pinButton');
+                const pinStatus = document.getElementById('pinStatus');
+
+                pinButton.classList.add('pinned');
+                pinStatus.textContent = '已固定位置';
+
+                // 應用固定位置
+                pinCurrentPosition();
+            }
+        }
+
+        function showPinNotification(message, type = 'info') {
+            // 創建通知元素
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+                color: white;
+                padding: 12px 24px;
+                border-radius: 25px;
+                font-weight: 600;
+                font-size: 14px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                z-index: 10000;
+                opacity: 0;
+                transition: all 0.3s ease;
+            `;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            // 顯示動畫
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(-50%) translateY(10px)';
+            }, 100);
+
+            // 自動隱藏
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(-50%) translateY(-10px)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 2000);
+        }
+
+        // 初始化
+        loadScores(); // 載入保存的分數
+        loadQuestion(0);
+        updateDisplay(1);
+        updateDisplay(2);
+        updateLetterKeys(1);
+        updateLetterKeys(2);
+        addTouchSupport();
+        addKeyboardEventListeners();
+        addNavigationTouchSupport();
+
+        // 防止頁面縮放 - 強化版本
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, { passive: false });
+
+        // 防止手勢縮放
+        document.addEventListener('gesturestart', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+
+        // 強制固定縮放比例和防止滾動
+        function preventZoom() {
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) {
+                viewport.setAttribute('content',
+                    'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover'
+                );
+            }
+
+            // 強制設定 body 樣式
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            document.body.style.height = '100%';
+            document.body.style.touchAction = 'none';
+        }
+
+        // 頁面載入時執行
+        preventZoom();
+
+        // 監聽視窗大小變化
+        window.addEventListener('resize', preventZoom);
+
+        // 監聽方向變化
+        window.addEventListener('orientationchange', () => {
+            setTimeout(preventZoom, 100);
+        });
+
+        // 定期檢查並防止縮放
+        setInterval(preventZoom, 1000);
+
+        // 防止右鍵選單
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+
+        // 答案彈出視窗功能
+        function showAnswer() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('answerQuestionNumber').textContent = currentQuestion.number;
+            document.getElementById('answerDisplay').textContent = currentQuestion.answer;
+            document.getElementById('answerModal').style.display = 'block';
+        }
+
+        function closeAnswerModal() {
+            document.getElementById('answerModal').style.display = 'none';
+        }
+
+        // 點擊題目內容顯示答案
+        document.getElementById('question-content').addEventListener('click', showAnswer);
+
+        // 點擊彈出視窗背景關閉
+        document.getElementById('answerModal').addEventListener('click', (e) => {
+            if (e.target.id === 'answerModal') {
+                closeAnswerModal();
+            }
+        });
+
+        // ESC 鍵關閉彈出視窗
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeAnswerModal();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+    <!-- 轉盤彈出視窗 -->
+    <div id="spinnerModal" class="spinner-modal">
+        <div class="spinner-modal-content">
+            <div class="spinner-modal-header">
+                <h2 class="spinner-modal-title">🎡 轉盤遊戲</h2>
+            </div>
+
+            <div class="spinner-container">
+                <div class="wheel-container">
+                    <div class="wheel" id="spinnerWheel">
+                        <div class="wheel-pointer"></div>
+                        <div class="wheel-center" id="spinnerResult">?</div>
+                    </div>
+                </div>
+                <button class="spin-button" id="spinButton" onclick="spinWheel()">開始轉動</button>
+                <button class="spin-button" onclick="testSpinner()"
+                    style="background: #ff6b6b; margin-left: 10px;">測試轉盤</button>
+                <div class="spinner-result" id="spinnerResultDisplay">
+                    準備轉動轉盤！
+                </div>
+            </div>
+
+            <div class="team-selection" id="spinnerTeamSelection" style="display: none;">
+                <button class="team-select-btn team-a" onclick="addSpinnerScoreToTeam('A')">Team A +<span
+                        id="spinnerScoreA">0</span></button>
+                <button class="team-select-btn team-b" onclick="addSpinnerScoreToTeam('B')">Team B +<span
+                        id="spinnerScoreB">0</span></button>
+            </div>
+
+            <button class="spinner-close-btn" onclick="closeSpinnerModal()">關閉</button>
+        </div>
+    </div>
+
+
+    <!-- 答案彈出視窗 -->
+    <div id="answerModal" class="answer-modal">
+        <div class="answer-modal-content">
+            <div class="answer-modal-header">
+                <h2 class="answer-modal-title">答案</h2>
+                <p class="answer-modal-subtitle">第 <span id="answerQuestionNumber">1</span> 題</p>
+            </div>
+            <div class="answer-display" id="answerDisplay">
+                island
+            </div>
+            <button class="answer-close-btn" onclick="closeAnswerModal()">關閉</button>
+        </div>
+    </div>
+</body>
+
+</html>

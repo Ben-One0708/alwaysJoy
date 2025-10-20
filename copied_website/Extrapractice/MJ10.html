@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MJ10 - 高級英語練習題</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .quiz-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            min-width: 600px;
+            position: relative;
+        }
+
+        .question-header {
+            text-align: left;
+            font-size: 20px;
+            color: #E91E63;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        .difficulty-badge {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: #E91E63;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .question-content {
+            margin-top: 40px;
+            font-size: 22px;
+            white-space: pre-wrap;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 15px 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: #E91E63;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #C2185B;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .scoreboard {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .answers {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .nav-panel {
+            margin-top: 20px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .back-button:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="goToPage('../index.html')" class="back-button">← 回上一頁</button>
+
+    <div class="quiz-box">
+        <div class="question-header" id="question-number"></div>
+        <div class="difficulty-badge">高級英語</div>
+        <div class="question-content" id="question-text"></div>
+        <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+        <br />
+        <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+        <div class="feedback" id="feedback"></div>
+        <div class="scoreboard" id="scoreboard"></div>
+        <div class="answers" id="answers" style="display: none;"></div>
+        <div class="nav-panel">
+            <label for="questionSelect">跳題：</label>
+            <select id="questionSelect" onchange="jumpToQuestion()"></select>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { "clue": "When I was driving in Australia, I saw some kangaroos h___g by the road.", "answer": "hopping" },
+            { "clue": "The teachers went to the restroom to c__k why the children were shouting.", "answer": "check" },
+            { "clue": "Please drive faster. I'm in a h___y because I can't be late for my important meeting.", "answer": "hurry" },
+            { "clue": "It's raining heavily now. We are so lucky that we found a c__e to hide from the rain.", "answer": "cave" },
+            { "clue": "We are going to visit a famous t__n next month. There is a river passing through it and three small gardens in it.", "answer": "town" },
+            { "clue": "Our new teacher looks very s__m and short. I think even my sister's uniform may be big enough for her.", "answer": "slim" },
+            { "clue": "The boy was scaring the other kids by wearing a g___t mask.", "answer": "ghost" },
+            { "clue": "My little brother showed me the picture he drew. It was a m___r with three eyes and long teeth shouting in a cave.", "answer": "monster" },
+            { "clue": "My little sister drank a lot of water and needed to use the r___m in math class. She did not want to go by herself because she read a story about a monster at school.", "answer": "restroom" },
+            { "clue": "My backpack is empty. There is n___g in it.", "answer": "nothing" },
+            { "clue": "Emily is very famous in our town because she looks l___e the famous actress, Amelia Smith.", "answer": "like" },
+            { "clue": "I checked my report S_____l times before I handed it to the teacher.", "answer": "Several" },
+            { "clue": "Did you go a___e during the vacation?", "answer": "anywhere" },
+            { "clue": "Oh my! The basketball player is a__tall as a tree. No one can pass him!", "answer": "as" },
+            { "clue": "Did you see the robber? No. It all happened very s___y.", "answer": "suddenly" },
+            { "clue": "The weather is weird. It was sunny a minute ago. Then, It turned dark s___y and started raining.", "answer": "suddenly" },
+            { "clue": "There is a lot of s__w in the yard. Can we go out and play?", "answer": "snow" },
+            { "clue": "There are many animals living in the w___s. We have to protect the place when we camp here.", "answer": "woods" },
+            { "clue": "Excuse me. May I use the restroom? Sorry! It is full of toilet p___r, and the toilet needs to be fixed. If you're in a hurry, you can find one in the gas station on the corner.", "answer": "paper" },
+            { "clue": "Miss Smith, may I have a piece of p___r? Kevin and I want to play bingo.", "answer": "paper" },
+            { "clue": "What will you do this weekend? I'll clean the balcony and the t___t.", "answer": "toilet" },
+            { "clue": "Someone who is able to think quickly and have good ideas (s___t)", "answer": "smart" },
+            { "clue": "Someone who works very hard and does their work well (h___g)", "answer": "hard-working" },
+            { "clue": "Someone who is kind to people and loves to help everyone (f___y)", "answer": "friendly" },
+            { "clue": "Liked or enjoyed by a lot of people (p___r)", "answer": "popular" },
+            { "clue": "We are lucky to have such f___y neighbors. They help us look after our dog when we are not home and usually share yummy food with us.", "answer": "friendly" },
+            { "clue": "This song was very p___r when my parents were students. Many people who are my parents' age know how to sing this song.", "answer": "popular" },
+            { "clue": "Ivy is a h___g student. She always reviews all the subjects and finishes her homework after she gets home.", "answer": "hard-working" },
+            { "clue": "Brian is very s___t. He always knows the answers in class.", "answer": "smart" },
+            { "clue": "I am laughing because my little brother made a funny f___e at me.", "answer": "face" },
+            { "clue": "I think the flowers are very p___y. They have different colors and shapes.", "answer": "pretty" },
+            { "clue": "I h__t my arm when I was riding a bike.", "answer": "hurt" },
+            { "clue": "I like ice cream v___y much. It's so delicious.", "answer": "very" },
+            { "clue": "Can I a__k you a question about the homework?", "answer": "ask" },
+            { "clue": "Who will l__d the students to the park? I don't think they know how to get there.", "answer": "lead" },
+            { "clue": "Who is that p___n standing near the door? He is my cousin.", "answer": "person" },
+            { "clue": "Do you and your friend have the s__e favorite color? Yes, we do. We both like blue.", "answer": "same" },
+            { "clue": "We went to the h__l for our picnic. It had a great view!", "answer": "hill" },
+            { "clue": "The weather was n__e today. It was sunny and warm.", "answer": "nice" },
+            { "clue": "What do you c__l your cat? My cat's name is 'Kitty.' It's a cute name.", "answer": "call" },
+            { "clue": "How do you keep your room so n__t? I put things back after I use them. And I tidy up my room every day.", "answer": "neat" },
+            { "clue": "Did you know that my sister was b__n last night?", "answer": "born" },
+            { "clue": "Oh, that's great! How is she now? She's just a l___e baby, but she's healthy and cute.", "answer": "little" },
+            { "clue": "I have a great idea for a game we can play today. Oh yeah? I'm c___s! What game are you thinking of?", "answer": "curious" },
+            { "clue": "Let's play h__e a__d-s__k!", "answer": "hide-and-seek" },
+            { "clue": "Hey. I saw something interesting at the park today. Really? I'm c___s. Tell me about it.", "answer": "curious" },
+            { "clue": "Well, there was a l___e kitten. How cute! How did it look? It looked a bit scared. I tried to let it know I am a kind person, and f___y, it played with me.", "answer": "little" },
+            { "clue": "Well, there was a little kitten. How cute! How did it look? It looked a bit scared. I tried to let it know I am a kind person, and f___y, it played with me.", "answer": "finally" },
+            { "clue": "We put one more light in our bedroom because it was too d__k.", "answer": "dark" },
+            { "clue": "At night, I enjoy watching the l___t stars shining in the sky.", "answer": "light" },
+            { "clue": "The lights in this room are too b___t. I can't open my eyes.", "answer": "bright" },
+            { "clue": "Last weekend, Troy went fishing and brought many f___h fish home for dinner.", "answer": "fresh" },
+            { "clue": "The short trees in this part of the forest are still very y___g because there was a fire here five years ago.", "answer": "young" },
+            { "clue": "It's getting d__k. We should go home now, or our parents will be worried.", "answer": "dark" },
+            { "clue": "My mom is getting o__d. I can tell from her gray hair. I must do more housework for her.", "answer": "old" },
+            { "clue": "Nick looks like a high school student, but he is actually a teacher. He looks y___g for his age.", "answer": "young" },
+            { "clue": "The bread smells so great. It is f___h out of the oven.", "answer": "fresh" },
+            { "clue": "My sister is a two-year-old girl. She is too y___g, so she doesn't go to school.", "answer": "young" },
+            { "clue": "The kitchen is d___r t__n the living room.", "answer": "darker than" },
+            { "clue": "The woman is s___r t__n Dennis.", "answer": "stronger than" },
+            { "clue": "The ring is c___r t__n the necklace.", "answer": "cheaper than" },
+            { "clue": "The plane is f___r t__n the ship.", "answer": "faster than" },
+            { "clue": "Maria is y___r t__n Elvin.", "answer": "younger than" },
+            { "clue": "The classroom 101 is n___r t__n the classroom 103.", "answer": "neater than" },
+            { "clue": "James is t___r t__n Ben right now.", "answer": "taller than" }
+        ];
+
+        let current = 0;
+        let userAnswers = Array(questions.length).fill("");
+
+        window.onload = () => {
+            const select = document.getElementById("questionSelect");
+            questions.forEach((_, i) => {
+                const option = document.createElement("option");
+                option.value = i;
+                option.text = `題目 ${i + 1}`;
+                select.appendChild(option);
+            });
+            loadQuestion();
+        };
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                saveAnswer();
+                nextQuestion();
+            }
+        });
+
+        function goToPage(url) {
+            window.location.href = url;
+        }
+
+        function manualSubmit() {
+            saveAnswer();
+            nextQuestion();
+        }
+
+        function loadQuestion() {
+            document.getElementById("question-number").textContent = `${current + 1}. 字義填空`;
+            document.getElementById("question-text").textContent = questions[current].clue;
+            document.getElementById("answer").value = userAnswers[current] || "";
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("scoreboard").textContent = "";
+            document.getElementById("answers").style.display = "none";
+            document.getElementById("questionSelect").value = current;
+            document.getElementById("answer").style.display = "inline-block";
+            document.getElementById("submitBtn").style.display = "inline-block";
+        }
+
+        function saveAnswer() {
+            const input = document.getElementById("answer").value.trim().toLowerCase();
+            userAnswers[current] = input;
+        }
+
+        function nextQuestion() {
+            if (current < questions.length - 1) {
+                current++;
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function jumpToQuestion() {
+            saveAnswer();
+            current = parseInt(document.getElementById("questionSelect").value);
+            loadQuestion();
+        }
+
+        function showFinalResult() {
+            document.getElementById("question-number").textContent = "全部完成！";
+            document.getElementById("question-text").textContent = "";
+            document.getElementById("answer").style.display = "none";
+            document.getElementById("submitBtn").style.display = "none";
+            document.getElementById("feedback").textContent = "";
+
+            const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+            document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}`;
+
+            const answerBox = document.getElementById("answers");
+            answerBox.style.display = "block";
+            answerBox.innerHTML = "<h3>正確答案：</h3><ol>" +
+                questions.map((q, i) => {
+                    const ua = userAnswers[i] || "(未作答)";
+                    const ok = ua === q.answer;
+                    return `<li><strong>${q.clue}</strong><br>
+                      你的答案：<strong>${ua}</strong> ${ok ? '✓ correct' : '✗ wrong'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                }).join("") + "</ol>";
+        }
+
+        function getGrade(score) {
+            const pct = (score / questions.length) * 100;
+            if (pct === 100) return "Perfect! Great job!";
+            if (pct >= 70) return "Good work!";
+            return "Keep practicing!";
+        }
+    </script>
+</body>
+
+</html>

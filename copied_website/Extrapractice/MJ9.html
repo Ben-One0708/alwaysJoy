@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MJ9 - 高級英語練習題</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .quiz-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            min-width: 600px;
+            position: relative;
+        }
+
+        .question-header {
+            text-align: left;
+            font-size: 20px;
+            color: #9B59B6;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        .difficulty-badge {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: #9B59B6;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .question-content {
+            margin-top: 40px;
+            font-size: 22px;
+            white-space: pre-wrap;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 15px 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: #9B59B6;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #8E44AD;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .scoreboard {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .answers {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .nav-panel {
+            margin-top: 20px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .back-button:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="goToPage('../index.html')" class="back-button">← 回上一頁</button>
+
+    <div class="quiz-box">
+        <div class="question-header" id="question-number"></div>
+        <div class="difficulty-badge">高級英語</div>
+        <div class="question-content" id="question-text"></div>
+        <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+        <br />
+        <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+        <div class="feedback" id="feedback"></div>
+        <div class="scoreboard" id="scoreboard"></div>
+        <div class="answers" id="answers" style="display: none;"></div>
+        <div class="nav-panel">
+            <label for="questionSelect">跳題：</label>
+            <select id="questionSelect" onchange="jumpToQuestion()"></select>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { "clue": "w____d made the flowers grow with magic.", "answer": "wizard" },
+            { "clue": "The superhero used his p___r to save the city.", "answer": "power" },
+            { "clue": "Oscar loves science. He wants to be a s______t when he grows up.", "answer": "scientist" },
+            { "clue": "She works as a c__k in a restaurant.", "answer": "cook" },
+            { "clue": "The w____r wrote an interesting book. It sold very well.", "answer": "writer" },
+            { "clue": "It's time to g__w u__p. You're not a kid anymore.", "answer": "grow up" },
+            { "clue": "He had a g___t time at the party with his friends, and he enjoyed the nice music and delicious food.", "answer": "great" },
+            { "clue": "We'll l___n to play the guitar tomorrow.", "answer": "learn" },
+            { "clue": "She is not h__e right now, but she will be back soon.", "answer": "here" },
+            { "clue": "If you eat bad food, you'll b__e sick.", "answer": "be" },
+            { "clue": "Something h______d this morning, so Oscar was late for school.", "answer": "happened" },
+            { "clue": "Oscar was l__e for school because he got on the wrong bus.", "answer": "late" },
+            { "clue": "Because Oscar g__t o__n the wrong bus, he was late for school this morning.", "answer": "got on" },
+            { "clue": "Oscar got on the wrong bus because he had to l__k a___r his owl's baby.", "answer": "look after" },
+            { "clue": "Oscar said that Yolanda was s___y because she thought that Oscar has a baby.", "answer": "silly" },
+            { "clue": "Paragraph: Something h______d this morning, so Oscar was _____ for school. (Fill in: happened)", "answer": "happened" },
+            { "clue": "Paragraph: Something happened this morning, so Oscar was l__e for school. (Fill in: late)", "answer": "late" },
+            { "clue": "Paragraph: He g__t o__n the wrong bus because he had to look after his owl's baby. (Fill in: got on)", "answer": "got on" },
+            { "clue": "Paragraph: He got on the wrong bus because he had to l__k a___r his owl's baby. (Fill in: look after)", "answer": "look after" },
+            { "clue": "Paragraph: Oscar told Yolanda not to be s___y because she thought that Oscar has a baby. (Fill in: silly)", "answer": "silly" },
+            { "clue": "Hey g__s! Please be quiet when the teacher is talking.", "answer": "guys" },
+            { "clue": "My brother and I enjoy watching magic shows. We talk about the magic t____s after watching them.", "answer": "tricks" },
+            { "clue": "Tell a teacher or call the police when you see anything that look like a b__b.", "answer": "bomb" },
+            { "clue": "That tall g__y standing over there is my cousin. He is 190 centimeters tall.", "answer": "guy" },
+            { "clue": "Paragraph: There was a spelling c_____t in our school last Sunday. (Fill in: contest)", "answer": "contest" },
+            { "clue": "Paragraph: My friend, Cathy, and I studied very hard for it. We practiced spelling all the words with e__h o___r during the break time. (Fill in: each other)", "answer": "each other" },
+            { "clue": "Paragraph: On the test day, I was so nervous that I forgot some words. I didn't know what to do so I just g____d. (Fill in: guessed)", "answer": "guessed" },
+            { "clue": "Paragraph: After the test, I l____d a__t my report card and felt a little upset. I will study harder next time! (Fill in: looked at)", "answer": "looked at" },
+            { "clue": "Dialog: Alex: Why are you standing by the w__l? (Fill in: wall)", "answer": "wall" },
+            { "clue": "Dialog: Ben: I'm l_____g a__t the cats over there. (Fill in: looking at)", "answer": "looking at" },
+            { "clue": "Dialog: Ben: They are running after e__h o___r and trying to catch a butterfly. (Fill in: each other)", "answer": "each other" },
+            { "clue": "Dialog: Alex: Haha! That's f___y! (Fill in: funny)", "answer": "funny" },
+            { "clue": "I have three bananas. One is yellow, and the o___rs are green.", "answer": "others" },
+            { "clue": "I have two apples. One is green, and the other is g___n.", "answer": "golden" },
+            { "clue": "Time to s___p. Sweet dreams.", "answer": "sleep" },
+            { "clue": "It's time to go to bed. Sweet d___ms.", "answer": "dreams" },
+            { "clue": "There are two cats. One likes to play with a ball, but the o___r doesn't.", "answer": "other" },
+            { "clue": "The princess wore a beautiful g___n crown on her head.", "answer": "golden" },
+            { "clue": "After a long day of playing, the tired boy went to s___p.", "answer": "sleep" },
+            { "clue": "I had a wonderful d___m about flying in the sky like a bird.", "answer": "dream" },
+            { "clue": "Last night, a lot of people g_____d at the department store because there was a big sale.", "answer": "gathered" },
+            { "clue": "Mary: I can't find my umbrella. Where did you put it? John: Do you see a box on the shelf? I put it in t___e.", "answer": "there" },
+            { "clue": "Why not g____r at John's house and have a barbecue tomorrow?", "answer": "gather" },
+            { "clue": "The bakery closed early today, so I couldn't buy any bread. I will go t___e again tomorrow.", "answer": "there" },
+            { "clue": "We have walked for such a long time. Can we find a place to s__t and rest?", "answer": "sit" },
+            { "clue": "Get a chair and s__t down. Let's enjoy some cake and milk tea together.", "answer": "sit" },
+            { "clue": "Patty: Don't forget that we will have lunch with May at 11:30 tomorrow. John: Sure. I will see you t__n.", "answer": "then" },
+            { "clue": "I need more time to think about the questions. Can you call me next Monday? I will have the answers t__n.", "answer": "then" },
+            { "clue": "The n___e is too loud. I can't hear you.", "answer": "noise" },
+            { "clue": "Stop making n___e. My ears hurt.", "answer": "noise" },
+            { "clue": "It is r____y hot in the room. Can you turn on the fan, please?", "answer": "really" },
+            { "clue": "The question is over my head. I don't k__w the answer.", "answer": "know" },
+            { "clue": "After Sara got on the train, she turned a____d and waved goodbye to us.", "answer": "around" },
+            { "clue": "Art teacher: Do you want this artwork back or can I k__p it? Lisa: I want to bring it home to my sister as her birthday gift.", "answer": "keep" },
+            { "clue": "Uncle Ken l__t his left leg in a car accident two years ago.", "answer": "lost" },
+            { "clue": "There were so many people on the bus. We couldn't find any seats to sit on, so we had to s___d.", "answer": "stand" },
+            { "clue": "That TV program is r____y funny. I want to watch it again.", "answer": "really" },
+            { "clue": "Granny says her feet hurt because she s____s for a long time. We should take her to the doctor.", "answer": "stands" },
+            { "clue": "The washing machine made a loud noise, I k__w something was wrong. We need to call someone to fix it.", "answer": "knew" },
+            { "clue": "Mom: How much is the skirt? The Clerk: It is 489 dollars. Mom: Here's 500, and you can k__p the change.", "answer": "keep" },
+            { "clue": "I can't find my keys. I think I l__t them on the train. What should I do?", "answer": "lost" },
+            { "clue": "The whole family was sitting a____d grandpa singing 'Happy Birthday'. Each of us brought a gift for him.", "answer": "around" },
+            { "clue": "I f____t to buy milk at the store this morning, so I'll go there again later.", "answer": "forgot" },
+            { "clue": "I heard a s_____e sound coming from under my bed at night.", "answer": "strange" },
+            { "clue": "I felt so scared that I r__n out of my room.", "answer": "ran" },
+            { "clue": "I r__d the novel once, and now I'm reading it again.", "answer": "read" },
+            { "clue": "The lights are still on i____e the office.", "answer": "inside" },
+            { "clue": "Maybe s_____e is there. Let's see who it is.", "answer": "someone" },
+            { "clue": "Yesterday was the Balloon Festival. When we lay down on the g____d.", "answer": "ground" },
+            { "clue": "We watched the hot air balloons fly into the a__r.", "answer": "air" },
+            { "clue": "When I opened the window this morning, it was snowy. e________g was cold and white.", "answer": "everything" },
+            { "clue": "A bird flew down and l____d on my hand. I held the bird and kept it warm.", "answer": "landed" },
+            { "clue": "When the e_____e hit yesterday, Samuel was practicing his magic.", "answer": "earthquake" },
+            { "clue": "Samuel was practicing his magic when the earthquake hit and he made a h__e in the wall.", "answer": "hole" },
+            { "clue": "Jolly was cooking in the school kitchen when the earthquake h__t.", "answer": "hit" },
+            { "clue": "When Samuel asked Yolanda about the earthquake news on the newspaper, Yolanda asked him not to r__h her.", "answer": "rush" },
+            { "clue": "The news about the earthquake in the newspaper s__s: Fire Dragon and Forest Witches Are up to Something.", "answer": "says" },
+            { "clue": "It's important to f____w the steps in the recipe when cooking.", "answer": "follow" },
+            { "clue": "You did a great job sharing your toys with your friend. That's the r___t way to be kind.", "answer": "right" },
+            { "clue": "The music at the party was too l__d for my ears.", "answer": "loud" },
+            { "clue": "When we visit the library, we need to be q___t so that others can read their books.", "answer": "quiet" },
+            { "clue": "Can you m__e the chair to the other side of the room, please? We need more space.", "answer": "move" },
+            { "clue": "Marvin: How f__r does the sports car drive? Peter: Very f__r on the highway! (first blank)", "answer": "far" },
+            { "clue": "Frank: How do we get from one classroom to another? Maggie: Easy! Just walk down the h_____y.", "answer": "hallway" },
+            { "clue": "Dad: We should look left and right before crossing the road. Nick: Okay, Daddy! Dad: Good boy! Remember, we must always p_____t ourselves.", "answer": "protect" },
+            { "clue": "Some monkeys are very smart. They can finish some t___s with practice. For example, they can open a box and take out food, jump through hoops or stand on a ball.", "answer": "tasks" },
+            { "clue": "Molly: Hurry up, o__r we will be late for the train. Cathy: Okay! Let's run!", "answer": "or" },
+            { "clue": "Eric: I'm having t_____e with this science report. Iris: Really? I thought it was a piece of cake! Eric: Can you please help me? Iris: Sure! Let's go to the library!", "answer": "trouble" },
+            { "clue": "Grandma: The sky is getting dark. Maybe you s____d take an umbrella. Lisa: Okay. I'll be back before dinner. Goodbye!", "answer": "should" }
+        ];
+
+        let current = 0;
+        let userAnswers = Array(questions.length).fill("");
+
+        window.onload = () => {
+            const select = document.getElementById("questionSelect");
+            questions.forEach((_, i) => {
+                const option = document.createElement("option");
+                option.value = i;
+                option.text = `題目 ${i + 1}`;
+                select.appendChild(option);
+            });
+            loadQuestion();
+        };
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                saveAnswer();
+                nextQuestion();
+            }
+        });
+
+        function goToPage(url) {
+            window.location.href = url;
+        }
+
+        function manualSubmit() {
+            saveAnswer();
+            nextQuestion();
+        }
+
+        function loadQuestion() {
+            document.getElementById("question-number").textContent = `${current + 1}. 字義填空`;
+            document.getElementById("question-text").textContent = questions[current].clue;
+            document.getElementById("answer").value = userAnswers[current] || "";
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("scoreboard").textContent = "";
+            document.getElementById("answers").style.display = "none";
+            document.getElementById("questionSelect").value = current;
+            document.getElementById("answer").style.display = "inline-block";
+            document.getElementById("submitBtn").style.display = "inline-block";
+        }
+
+        function saveAnswer() {
+            const input = document.getElementById("answer").value.trim().toLowerCase();
+            userAnswers[current] = input;
+        }
+
+        function nextQuestion() {
+            if (current < questions.length - 1) {
+                current++;
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function jumpToQuestion() {
+            saveAnswer();
+            current = parseInt(document.getElementById("questionSelect").value);
+            loadQuestion();
+        }
+
+        function showFinalResult() {
+            document.getElementById("question-number").textContent = "全部完成！";
+            document.getElementById("question-text").textContent = "";
+            document.getElementById("answer").style.display = "none";
+            document.getElementById("submitBtn").style.display = "none";
+            document.getElementById("feedback").textContent = "";
+
+            const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+            document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}`;
+
+            const answerBox = document.getElementById("answers");
+            answerBox.style.display = "block";
+            answerBox.innerHTML = "<h3>正確答案：</h3><ol>" +
+                questions.map((q, i) => {
+                    const ua = userAnswers[i] || "(未作答)";
+                    const ok = ua === q.answer;
+                    return `<li><strong>${q.clue}</strong><br>
+                      你的答案：<strong>${ua}</strong> ${ok ? '✓ correct' : '✗ wrong'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                }).join("") + "</ol>";
+        }
+
+        function getGrade(score) {
+            const pct = (score / questions.length) * 100;
+            if (pct === 100) return "Perfect! Great job!";
+            if (pct >= 70) return "Good work!";
+            return "Keep practicing!";
+        }
+    </script>
+</body>
+
+</html>

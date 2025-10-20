@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin the Wheel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            min-height: 100vh;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 30px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .wheel-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 40px;
+            padding: 50px;
+            text-align: center;
+            box-shadow:
+                0 30px 60px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 0 0 3px rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* 卡通風格的裝飾邊框 */
+        .wheel-container::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3);
+            border-radius: 55px;
+            z-index: -1;
+            animation: rainbowBorder 3s ease-in-out infinite;
+        }
+
+        @keyframes rainbowBorder {
+
+            0%,
+            100% {
+                background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3);
+            }
+
+            50% {
+                background: linear-gradient(45deg, #ff9ff3, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            }
+        }
+
+        .wheel-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            border-radius: 30px 30px 0 0;
+        }
+
+        .wheel-controls {
+            margin-bottom: 20px;
+        }
+
+        .team-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .team-option {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .team-option:hover {
+            background: linear-gradient(135deg, #764ba2, #f093fb);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .team-option.active {
+            background: linear-gradient(135deg, #f093fb, #667eea);
+            color: white;
+            box-shadow: 0 6px 20px rgba(240, 147, 251, 0.4);
+        }
+
+        .spin-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 30px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .spin-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .spin-button:hover {
+            background: linear-gradient(135deg, #764ba2, #f093fb);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+            animation: buttonBounce 0.6s ease-in-out;
+        }
+
+        @keyframes buttonBounce {
+
+            0%,
+            100% {
+                transform: translateY(-3px) scale(1.05);
+            }
+
+            50% {
+                transform: translateY(-8px) scale(1.1);
+            }
+        }
+
+        .spin-button:hover::before {
+            left: 100%;
+        }
+
+        .spin-button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .wheel-display {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .wheel-wrapper {
+            position: relative;
+            width: 700px;
+            height: 700px;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 12px solid #fff;
+            box-shadow:
+                0 0 40px rgba(0, 0, 0, 0.3),
+                0 12px 24px rgba(0, 0, 0, 0.1);
+            transition: transform 4s cubic-bezier(0.23, 1, 0.32, 1);
+            background: conic-gradient(#ff6b6b 0deg 30deg,
+                    #ff8c42 30deg 60deg,
+                    #ffd93d 60deg 90deg,
+                    #6bcf7f 90deg 120deg,
+                    #4ecdc4 120deg 150deg,
+                    #45b7d1 150deg 180deg,
+                    #96ceb4 180deg 210deg,
+                    #a8e6cf 210deg 240deg,
+                    #feca57 240deg 270deg,
+                    #ff9ff3 270deg 300deg,
+                    #c44569 300deg 330deg,
+                    #ff6b6b 330deg 360deg);
+        }
+
+        .wheel-segment {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 2.6rem;
+            color: white;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .wheel-segment:nth-child(1) {
+            transform: rotate(0deg) skewY(-30deg);
+        }
+
+        .wheel-segment:nth-child(2) {
+            transform: rotate(30deg) skewY(-30deg);
+        }
+
+        .wheel-segment:nth-child(3) {
+            transform: rotate(60deg) skewY(-30deg);
+        }
+
+        .wheel-segment:nth-child(4) {
+            transform: rotate(90deg) skewY(-30deg);
+        }
+
+        .wheel-segment:nth-child(5) {
+            transform: rotate(120deg) skewY(-30deg);
+        }
+
+        .wheel-segment:nth-child(6) {
+            transform: rotate(150deg) skewY(-30deg);
+        }
+
+        .wheel-segment:nth-child(7) {
+            transform: rotate(180deg) skewY(-30deg);
+        }
+
+        .wheel-segment:nth-child(8) {
+            transform: rotate(210deg) skewY(-30deg);
+        }
+
+        .wheel-segment:nth-child(9) {
+            transform: rotate(240deg) skewY(-30deg);
+        }
+
+        .wheel-segment:nth-child(10) {
+            transform: rotate(270deg) skewY(-30deg);
+        }
+
+        .wheel-segment:nth-child(11) {
+            transform: rotate(300deg) skewY(-30deg);
+        }
+
+        .wheel-segment:nth-child(12) {
+            transform: rotate(330deg) skewY(-30deg);
+        }
+
+        .wheel.spinning {
+            animation: spin 4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 50px solid #fff;
+            z-index: 10;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            border-radius: 50%;
+            border: 8px solid #fff;
+            z-index: 5;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-display {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 25px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+
+        .home-button {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .home-button:hover {
+            background: linear-gradient(135deg, #667eea, #f093fb);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.15;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .floating-element:hover {
+            opacity: 0.3;
+            transform: scale(1.2);
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            font-size: 1.5rem;
+            animation-delay: 1s;
+        }
+
+        .floating-element:nth-child(3) {
+            top: 30%;
+            left: 5%;
+            font-size: 2.2rem;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(4) {
+            top: 40%;
+            right: 5%;
+            font-size: 1.8rem;
+            animation-delay: 3s;
+        }
+
+        .floating-element:nth-child(5) {
+            top: 50%;
+            left: 15%;
+            font-size: 2.5rem;
+            animation-delay: 4s;
+        }
+
+        .floating-element:nth-child(6) {
+            top: 60%;
+            right: 15%;
+            font-size: 1.6rem;
+            animation-delay: 5s;
+        }
+
+        .floating-element:nth-child(7) {
+            top: 70%;
+            left: 8%;
+            font-size: 2rem;
+            animation-delay: 6s;
+        }
+
+        .floating-element:nth-child(8) {
+            top: 80%;
+            right: 8%;
+            font-size: 1.9rem;
+            animation-delay: 7s;
+        }
+
+        .floating-element:nth-child(9) {
+            top: 15%;
+            left: 50%;
+            font-size: 2.3rem;
+            animation-delay: 8s;
+        }
+
+        .floating-element:nth-child(10) {
+            top: 85%;
+            left: 50%;
+            font-size: 1.7rem;
+            animation-delay: 9s;
+        }
+
+        .floating-element:nth-child(11) {
+            top: 25%;
+            left: 75%;
+            font-size: 2.1rem;
+            animation-delay: 10s;
+        }
+
+        .floating-element:nth-child(12) {
+            top: 75%;
+            left: 25%;
+            font-size: 1.9rem;
+            animation-delay: 11s;
+        }
+
+        .floating-element:nth-child(13) {
+            top: 45%;
+            left: 85%;
+            font-size: 2.3rem;
+            animation-delay: 12s;
+        }
+
+        .floating-element:nth-child(14) {
+            top: 65%;
+            left: 15%;
+            font-size: 1.8rem;
+            animation-delay: 13s;
+        }
+
+        .floating-element:nth-child(15) {
+            top: 35%;
+            left: 5%;
+            font-size: 2.2rem;
+            animation-delay: 14s;
+        }
+
+        .floating-element:nth-child(16) {
+            top: 55%;
+            left: 95%;
+            font-size: 1.6rem;
+            animation-delay: 15s;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: translateY(-15px) rotate(90deg) scale(1.1);
+            }
+
+            50% {
+                transform: translateY(-25px) rotate(180deg) scale(1);
+            }
+
+            75% {
+                transform: translateY(-15px) rotate(270deg) scale(1.1);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(360deg) scale(1);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scorePop {
+            0% {
+                transform: scale(0.5) rotate(-10deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.2) rotate(5deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes scoreFloat {
+            0% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-10px) scale(1.05);
+            }
+
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+        }
+
+        .score-animation {
+            animation: scorePop 0.8s ease-out, scoreFloat 2s ease-in-out 0.8s infinite;
+        }
+
+        .score-display.updated {
+            animation: scorePop 0.8s ease-out;
+        }
+
+        .score-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .score-popup-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px 60px;
+            border-radius: 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.5);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .score-popup-team {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .score-popup-value {
+            font-size: 4rem;
+            font-weight: 900;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .score-popup.positive .score-popup-value {
+            color: #4ecdc4;
+        }
+
+        .score-popup.negative .score-popup-value {
+            color: #ff6b6b;
+        }
+
+        .score-popup.neutral .score-popup-value {
+            color: #feca57;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .wheel-container {
+                padding: 40px;
+            }
+
+            .wheel-wrapper {
+                width: 400px;
+                height: 400px;
+            }
+
+            .wheel-segment {
+                font-size: 1.8rem;
+            }
+
+            .center {
+                width: 60px;
+                height: 60px;
+                border: 4px solid #fff;
+            }
+
+            .pointer {
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+                border-top: 30px solid #fff;
+                top: -10px;
+            }
+
+            .team-selector {
+                gap: 10px;
+            }
+
+            .team-option {
+                padding: 12px 24px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wheel-wrapper {
+                width: 320px;
+                height: 320px;
+            }
+
+            .wheel-segment {
+                font-size: 1.4rem;
+            }
+
+            .center {
+                width: 50px;
+                height: 50px;
+                border: 3px solid #fff;
+            }
+
+            .pointer {
+                border-left: 12px solid transparent;
+                border-right: 12px solid transparent;
+                border-top: 24px solid #fff;
+                top: -8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="floating-elements">
+        <div class="floating-element">🎡</div>
+        <div class="floating-element">🎯</div>
+        <div class="floating-element">🎪</div>
+        <div class="floating-element">🎨</div>
+        <div class="floating-element">🎭</div>
+        <div class="floating-element">🎪</div>
+        <div class="floating-element">🎡</div>
+        <div class="floating-element">🎯</div>
+        <div class="floating-element">🎨</div>
+        <div class="floating-element">🎭</div>
+        <div class="floating-element">🎪</div>
+        <div class="floating-element">🎡</div>
+        <div class="floating-element">🎯</div>
+        <div class="floating-element">🎨</div>
+        <div class="floating-element">🎭</div>
+        <div class="floating-element">🎪</div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">Spin the Wheel</h1>
+        </div>
+
+        <div class="wheel-container">
+            <div class="wheel-controls">
+                <div class="team-selector">
+                    <button class="team-option active" data-team="A">Team A</button>
+                    <button class="team-option" data-team="B">Team B</button>
+                </div>
+                <button class="spin-button" id="spinButton">Spin the Wheel</button>
+            </div>
+
+            <div class="wheel-display">
+                <div class="wheel-wrapper">
+                    <div class="pointer"></div>
+                    <div class="wheel" id="wheel">
+                        <div class="wheel-segment">-50</div>
+                        <div class="wheel-segment">-20</div>
+                        <div class="wheel-segment">-10</div>
+                        <div class="wheel-segment">-5</div>
+                        <div class="wheel-segment">-1</div>
+                        <div class="wheel-segment">0</div>
+                        <div class="wheel-segment">+1</div>
+                        <div class="wheel-segment">+5</div>
+                        <div class="wheel-segment">+10</div>
+                        <div class="wheel-segment">+20</div>
+                        <div class="wheel-segment">+50</div>
+                        <div class="wheel-segment">+100</div>
+                    </div>
+                    <div class="center"></div>
+                </div>
+            </div>
+
+            <div class="result-display" id="resultDisplay">
+                Ready to spin!
+            </div>
+
+            <div class="score-popup" id="scorePopup" style="display: none;">
+                <div class="score-popup-content" id="scorePopupContent">
+                    <div class="score-popup-team" id="scorePopupTeam">Team A</div>
+                    <div class="score-popup-value" id="scorePopupValue">+10</div>
+                </div>
+            </div>
+
+        </div>
+
+        <a href="vocabulary_keyboard_new.html" class="home-button">Back to Vocabulary Quiz</a>
+    </div>
+
+    <script>
+        let currentTeam = 'A';
+        let isSpinning = false;
+
+        const wheelScores = [-50, -20, -10, -5, -1, 0, +1, +5, +10, +20, +50, +100];
+
+        // Team selector
+        document.querySelectorAll('.team-option').forEach(button => {
+            button.addEventListener('click', function () {
+                document.querySelectorAll('.team-option').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                currentTeam = this.dataset.team;
+            });
+        });
+
+        // Spin button
+        document.getElementById('spinButton').addEventListener('click', spinWheel);
+
+        // Keyboard support
+        document.addEventListener('keydown', function (e) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                spinWheel();
+            }
+        });
+
+        function spinWheel() {
+            if (isSpinning) return;
+
+            isSpinning = true;
+            const spinButton = document.getElementById('spinButton');
+            const wheel = document.getElementById('wheel');
+            const resultDisplay = document.getElementById('resultDisplay');
+
+            spinButton.disabled = true;
+            spinButton.textContent = 'Spinning...';
+
+            // Add spinning animation
+            wheel.classList.add('spinning');
+
+            // Random rotation (multiple full rotations + random segment)
+            const randomRotations = Math.floor(Math.random() * 5) + 3; // 3-7 full rotations
+            const randomSegment = Math.floor(Math.random() * 12); // 0-11 segments
+            const totalRotation = (randomRotations * 360) + (randomSegment * 30);
+
+            wheel.style.transform = `rotate(${totalRotation}deg)`;
+
+            // Determine result based on final position
+            const finalSegment = (12 - (randomSegment % 12)) % 12;
+            const result = wheelScores[finalSegment];
+
+            setTimeout(() => {
+                wheel.classList.remove('spinning');
+
+                // Show score popup animation
+                showScorePopup(currentTeam, result);
+
+                // Display result with team info
+                const sign = result >= 0 ? '+' : '';
+                resultDisplay.textContent = `Team ${currentTeam}: ${sign}${result} points`;
+                resultDisplay.classList.add('updated');
+
+
+                // Reset button
+                spinButton.disabled = false;
+                spinButton.textContent = 'Spin the Wheel';
+                isSpinning = false;
+
+                // Remove animation class after animation completes
+                setTimeout(() => {
+                    resultDisplay.classList.remove('updated');
+                }, 800);
+            }, 4000);
+        }
+
+        function showScorePopup(team, score) {
+            const popup = document.getElementById('scorePopup');
+            const popupTeam = document.getElementById('scorePopupTeam');
+            const popupValue = document.getElementById('scorePopupValue');
+
+            // Set content
+            popupTeam.textContent = `Team ${team}`;
+            const sign = score >= 0 ? '+' : '';
+            popupValue.textContent = `${sign}${score}`;
+
+            // Set color class based on score
+            popup.className = 'score-popup';
+            if (score > 0) {
+                popup.classList.add('positive');
+            } else if (score < 0) {
+                popup.classList.add('negative');
+            } else {
+                popup.classList.add('neutral');
+            }
+
+            // Show popup with animation
+            popup.style.display = 'block';
+            popup.classList.add('score-animation');
+
+            // Hide popup after 3 seconds
+            setTimeout(() => {
+                popup.style.display = 'none';
+                popup.classList.remove('score-animation');
+            }, 3000);
+        }
+
+
+        // Initialize
+    </script>
+</body>
+
+</html>
