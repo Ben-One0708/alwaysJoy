@@ -428,6 +428,41 @@ function openPDFModal(date, type) {
                     </div>
                 </div>
             `;
+        } else if (date === '10/22') {
+            // 處理 10/22 的線上課程 PDF
+            content.innerHTML = `
+                <div class="pdf-container responsive-pdf-container">
+                    <div class="pdf-header">
+                        <h3 class="pdf-title">
+                            <i class="fas fa-laptop pdf-icon"></i>線上課程資料 PDF
+                        </h3>
+                        <div class="pdf-info">
+                            <span class="pdf-date"><strong>日期：</strong>${date}</span>
+                            <span class="pdf-type"><strong>類型：</strong>線上課程</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pdf-viewer-container">
+                        <div class="pdf-loading">
+                            <i class="fas fa-spinner fa-spin loading-icon"></i>
+                            <span>載入中...</span>
+                        </div>
+                        <iframe src="補10_18拼字練習線上課.pdf" 
+                                class="pdf-iframe"
+                                onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                        </iframe>
+                    </div>
+                    
+                    <div class="pdf-actions">
+                        <button onclick="downloadPDF('${date}', '${type}')" class="pdf-btn download-btn">
+                            <i class="fas fa-download"></i>下載 PDF
+                        </button>
+                        <a href="補10_18拼字練習線上課.pdf" target="_blank" class="pdf-btn open-btn">
+                            <i class="fas fa-external-link-alt"></i>在新視窗開啟
+                        </a>
+                    </div>
+                </div>
+            `;
         } else {
             // 其他線上課程日期顯示準備中訊息
             content.innerHTML = `
@@ -659,6 +694,41 @@ function openPDFModal(date, type) {
                 </div>
             </div>
         `;
+        } else if (date === '11/1') {
+            // 顯示 11/1 的 PDF 文件
+            content.innerHTML = `
+            <div class="pdf-container responsive-pdf-container">
+                <div class="pdf-header">
+                    <h3 class="pdf-title">
+                        <i class="fas fa-file-pdf pdf-icon"></i>課程資料 PDF
+                    </h3>
+                    <div class="pdf-info">
+                        <span class="pdf-date"><strong>日期：</strong>${date}</span>
+                        <span class="pdf-type"><strong>類型：</strong>課程總覽</span>
+                    </div>
+                </div>
+                
+                <div class="pdf-viewer-container">
+                    <div class="pdf-loading">
+                        <i class="fas fa-spinner fa-spin loading-icon"></i>
+                        <span>載入中...</span>
+                    </div>
+                    <iframe src="2025拼字練習7.pdf" 
+                            class="pdf-iframe"
+                            onload="this.parentElement.querySelector('.pdf-loading').style.display='none';">
+                    </iframe>
+                </div>
+                
+                <div class="pdf-actions">
+                    <button onclick="downloadPDF('${date}', '${type}')" class="pdf-btn download-btn">
+                        <i class="fas fa-download"></i>下載 PDF
+                    </button>
+                    <a href="2025拼字練習7.pdf" target="_blank" class="pdf-btn open-btn">
+                        <i class="fas fa-external-link-alt"></i>在新視窗開啟
+                    </a>
+                </div>
+            </div>
+        `;
         } else if (date === '訂正在電腦') {
             // 顯示 訂正在電腦 的 PDF 文件
             content.innerHTML = `
@@ -729,6 +799,14 @@ function downloadPDF(date, type) {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        } else if (date === '10/22') {
+            // 創建下載連結
+            const link = document.createElement('a');
+            link.href = '補10_18拼字練習線上課.pdf';
+            link.download = `${date}_線上課程.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         } else {
             alert(`線上課程 ${date} 的資料正在準備中，請稍後再試。`);
         }
@@ -781,6 +859,14 @@ function downloadPDF(date, type) {
         const link = document.createElement('a');
         link.href = '2025拼字練習6.pdf';
         link.download = `10-18_課程總覽.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else if (date === '11/1') {
+        // 創建下載連結
+        const link = document.createElement('a');
+        link.href = '2025拼字練習7.pdf';
+        link.download = `11-1_課程總覽.pdf`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
