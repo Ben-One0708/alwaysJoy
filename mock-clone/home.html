@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模擬考的熱身練習題</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+        }
+
+        .menu-header-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: clamp(24px, 5vw, 36px);
+        }
+
+        .menu-action-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border-radius: 999px;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            box-shadow: 0 12px 22px rgba(26, 35, 126, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-action-button:hover,
+        .menu-action-button:focus-visible {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 32px rgba(26, 35, 126, 0.35);
+        }
+
+        .menu-action-button:focus-visible {
+            outline: 3px solid rgba(63, 81, 181, 0.6);
+            outline-offset: 4px;
+        }
+
+        .menu-action-button.back-home {
+            background: linear-gradient(135deg, #5c6bc0, #1a237e);
+        }
+
+        .menu-action-button.score-register {
+            background: linear-gradient(135deg, #ff7043, #d84315);
+            box-shadow: 0 12px 22px rgba(216, 67, 21, 0.25);
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8fbff, #e3f2fd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a237e;
+        }
+
+        .menu-container {
+            width: min(90%, 960px);
+            background: #ffffffef;
+            border-radius: 24px;
+            box-shadow: 0 24px 48px rgba(30, 64, 175, 0.15);
+            padding: 48px clamp(24px, 6vw, 64px);
+        }
+
+        .menu-header {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: clamp(32px, 6vw, 48px);
+            text-align: center;
+        }
+
+        .menu-header h1 {
+            font-size: clamp(28px, 6vw, 40px);
+            font-weight: 700;
+            letter-spacing: 0.06em;
+        }
+
+        .menu-header p {
+            font-size: clamp(16px, 2.8vw, 20px);
+            color: #3f51b5;
+        }
+
+        .group-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: clamp(16px, 4vw, 28px);
+        }
+
+        .group-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: clamp(20px, 4vw, 28px);
+            background: linear-gradient(145deg, #fff, #f5f9ff);
+            border-radius: 20px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 12px 24px rgba(63, 81, 181, 0.12);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .group-card:hover,
+        .group-card:focus-visible {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 32px rgba(63, 81, 181, 0.2);
+        }
+
+        .group-card:focus-visible {
+            outline: 3px solid rgba(63, 81, 181, 0.6);
+            outline-offset: 4px;
+        }
+
+        .preview-section {
+            margin-bottom: clamp(32px, 6vw, 48px);
+        }
+
+        .preview-card {
+            display: block;
+            text-decoration: none;
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border-radius: 22px;
+            padding: clamp(28px, 6vw, 36px);
+            color: #b71c1c;
+            box-shadow: 0 18px 32px rgba(244, 67, 54, 0.2);
+            border: 2px solid rgba(183, 28, 28, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+            text-align: center;
+        }
+
+        .preview-card:hover,
+        .preview-card:focus-visible {
+            transform: translateY(-6px);
+            box-shadow: 0 26px 38px rgba(211, 47, 47, 0.28);
+            border-color: rgba(183, 28, 28, 0.45);
+        }
+
+        .preview-card:focus-visible {
+            outline: 3px solid rgba(183, 28, 28, 0.6);
+            outline-offset: 4px;
+        }
+
+        .preview-title {
+            display: block;
+            font-size: clamp(24px, 5vw, 30px);
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+
+        .preview-meta {
+            display: block;
+            font-size: clamp(16px, 3vw, 18px);
+            font-weight: 600;
+            color: #d32f2f;
+            margin-bottom: 6px;
+        }
+
+        .preview-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: clamp(15px, 3vw, 17px);
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(183, 28, 28, 0.12);
+            border: 1px solid rgba(183, 28, 28, 0.28);
+            color: #b71c1c;
+            font-weight: 700;
+        }
+
+        .group-label {
+            font-size: clamp(22px, 4.5vw, 28px);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .question-count {
+            font-size: clamp(16px, 3vw, 18px);
+            color: #3949ab;
+        }
+
+        .next-step {
+            margin-top: clamp(32px, 6vw, 48px);
+            text-align: center;
+            font-size: clamp(14px, 2.5vw, 16px);
+            color: #5c6bc0;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="menu-container">
+        <header class="menu-header">
+            <h1>模擬考的熱身練習題</h1>
+            <p style="color: #d32f2f;">點選自己的組別作答，作答沒有次數限制，做完請到成績登記Excel去登記成績</p>
+        </header>
+
+        <div class="menu-header-actions">
+            <a class="menu-action-button back-home" href="../index.html">← 返回主畫面</a>
+            <a class="menu-action-button score-register"
+                href="https://docs.google.com/spreadsheets/d/1dVtlnLWCdgloPTiD15FkqcF-MjYbZUu1sMOQX15LjbQ/edit?gid=0#gid=0"
+                target="_blank" rel="noopener noreferrer">✍️ 線上成績登記</a>
+        </div>
+
+        <section class="preview-section">
+            <a class="preview-card" href="magazine.html">
+                <span class="preview-title">雜誌單字預習工具</span>
+                <span class="preview-meta">144 個雜誌單字 · 佔評量 5%～10%</span>
+                <span class="preview-action">⚠️ 請先完成預習，再進入測驗題組</span>
+            </a>
+        </section>
+
+        <section class="group-grid">
+            <a class="group-card" href="B%20copy.html">
+                <span class="group-label">B 組</span>
+                <span class="question-count">共 244 題 · 時間限制 70 分鐘</span>
+            </a>
+            <a class="group-card" href="C%20copy.html">
+                <span class="group-label">C 組</span>
+                <span class="question-count">共 244 題 · 時間限制 70 分鐘</span>
+            </a>
+            <a class="group-card" href="D%20copy.html">
+                <span class="group-label">D 組</span>
+                <span class="question-count">共 244 題 · 時間限制 65 分鐘</span>
+            </a>
+            <a class="group-card" href="E%20copy.html">
+                <span class="group-label">E 組</span>
+                <span class="question-count">共 244 題 · 時間限制 60 分鐘</span>
+            </a>
+            <a class="group-card" href="F%20copy.html">
+                <span class="group-label">F 組</span>
+                <span class="question-count">共 244 題 · 時間限制 60 分鐘</span>
+            </a>
+        </section>
+
+        <p class="next-step">準備好就點選題組，進入測驗畫面開始作答吧！</p>
+    </main>
+</body>
+
+</html>

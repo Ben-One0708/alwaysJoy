@@ -1088,6 +1088,17 @@ function openGamePlatform() {
     }
 }
 
+// 進入課堂模擬考（同分頁）
+function goToMockExam() {
+    const examUrl = 'mock-clone/home.html';
+    try {
+        window.location.href = examUrl;
+    } catch (error) {
+        console.error('導向課堂模擬考時發生錯誤:', error);
+        alert(`導向課堂模擬考時發生錯誤。\n\n請手動前往：\n\n${examUrl}`);
+    }
+}
+
 // 複製遊戲連結
 function copyGameLink() {
     const gameLinkInput = document.querySelector('.game-link-info .link-input');
