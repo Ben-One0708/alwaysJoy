@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字義填空遊戲</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .quiz-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            min-width: 600px;
+            position: relative;
+        }
+
+        .question-header {
+            text-align: left;
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        .question-content {
+            margin-top: 40px;
+            font-size: 24px;
+        }
+
+        .question-image {
+            margin: 20px auto;
+            width: 500px;
+            max-width: 90%;
+            height: auto;
+            min-height: 350px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            font-size: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background-size: cover;
+            background-position: center;
+            padding: 10px;
+        }
+
+        .question-image img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 15px 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .scoreboard {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .answers {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .nav-panel {
+            margin-top: 20px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .back-button:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="goToPage('../index.html')" class="back-button">← 回上一頁</button>
+
+    <div class="quiz-box">
+        <div class="question-header" id="question-number"></div>
+        <div id="question-image" class="question-image"></div>
+        <div class="question-content" id="question-text"></div>
+        <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+        <br />
+        <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+        <div class="feedback" id="feedback"></div>
+        <div class="scoreboard" id="scoreboard"></div>
+        <div class="answers" id="answers" style="display: none;"></div>
+        <div class="nav-panel">
+            <label for="questionSelect">跳題：</label>
+            <select id="questionSelect" onchange="jumpToQuestion()"></select>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { type: "字義填空", clue: "p___n: a fat gray and white bird with short legs", definition: "a fat gray and white bird with short legs", answer: "pigeon" },
+            { type: "字義填空", clue: "w_____r: to speak softly", definition: "to speak softly", answer: "whisper" },
+            { type: "字義填空", clue: "c___r: something that is used to surf the Net", definition: "something that is used to surf the Net", answer: "computer" },
+            { type: "字義填空", clue: "l___y: a place where people can borrow books", definition: "a place where people can borrow books", answer: "library" },
+            { type: "字義填空", clue: "r___t: a place where you can buy and eat some food", definition: "a place where you can buy and eat some food", answer: "restaurant" },
+            { type: "字義填空", clue: "c_____y: not skinny", definition: "not skinny", answer: "chubby" },
+            { type: "字義填空", clue: "d___t: a land that has very little water and is covered by sand", definition: "a land that has very little water and is covered by sand", answer: "desert" },
+            { type: "字義填空", clue: "a_____e: to reach a place", definition: "to reach a place", answer: "arrive" },
+            { type: "字義填空", clue: "k___n: a baby cat", definition: "a baby cat", answer: "kitten" },
+            { type: "字義填空", clue: "c_____ded: full of people", definition: "full of people", answer: "crowded" },
+            { type: "文意字彙", clue: "When I am away, my son will be r___e for watering the flowers and taking care of the dog.", definition: "When I am away, my son will be responsible for watering the flowers and taking care of the dog.", answer: "responsible" },
+            { type: "文意字彙", clue: "Mr. Hill asked me a question. I was s___t for a few seconds because I didn't know what to say.", definition: "Mr. Hill asked me a question. I was silent for a few seconds because I didn't know what to say.", answer: "silent" },
+            { type: "文意字彙", clue: "The boy p___ces the piano every day.", definition: "The boy practices the piano every day.", answer: "practices" },
+            { type: "文意字彙", clue: "The teacher had Susan write some words on the w___d.", definition: "The teacher had Susan write some words on the whiteboard.", answer: "whiteboard" },
+            { type: "文意字彙", clue: "W___y comes after Tuesday.", definition: "Wednesday comes after Tuesday.", answer: "Wednesday" },
+            { type: "文意字彙", clue: "My uncle makes a living by working at a candy f___y.", definition: "My uncle makes a living by working at a candy factory.", answer: "factory" },
+            { type: "文意字彙", clue: "The man is very s___g; he can carry three big bags of rice at the same time.", definition: "The man is very strong; he can carry three big bags of rice at the same time.", answer: "strong" },
+            { type: "文意字彙", clue: "The girl can't talk, so she uses body language to e___s herself.", definition: "The girl can't talk, so she uses body language to express herself.", answer: "express" },
+            { type: "文意字彙", clue: "There is a fan on the c___g of my grandfather's living room.", definition: "There is a fan on the ceiling of my grandfather's living room.", answer: "ceiling" },
+            { type: "文意字彙", clue: "Go down this road and turn left at the next t___c light; you'll see the bank on your left.", definition: "Go down this road and turn left at the next traffic light; you'll see the bank on your left.", answer: "traffic" },
+            { type: "文意字彙", clue: "The picture looks very va___e. It costs a lot of money, doesn't it?", definition: "The picture looks very valuable. It costs a lot of money, doesn't it?", answer: "valuable" },
+            { type: "文意字彙", clue: "Ladies and gentlemen, we just landed at Taipei Songshan Airport. W___e to Taiwan.", definition: "Ladies and gentlemen, we just landed at Taipei Songshan Airport. Welcome to Taiwan.", answer: "Welcome" },
+            { type: "文意字彙", clue: "I p___sed you I will take you out for dinner tomorrow.", definition: "I promised you I will take you out for dinner tomorrow.", answer: "promised" },
+            { type: "文意字彙", clue: "The j_____ge will decide whether the man should be sent to jail or not.", definition: "The judge will decide whether the man should be sent to jail or not.", answer: "judge" },
+            { type: "文意字彙", clue: "You can heat up (加熱) your food in the m___e oven.", definition: "You can heat up (加熱) your food in the microwave oven.", answer: "microwave" },
+            { type: "文意字彙", clue: "The diamond ring and n_____ce were given to my mother by my grandmother. They are very valuable.", definition: "The diamond ring and necklace were given to my mother by my grandmother. They are very valuable.", answer: "necklace" },
+            { type: "文意字彙", clue: "Please use the clean t___l to dry yourself.", definition: "Please use the clean towel to dry yourself.", answer: "towel" },
+            { type: "文意字彙", clue: "You must work hard to be a s___ul businessman.", definition: "You must work hard to be a successful businessman.", answer: "successful" },
+            { type: "文意字彙", clue: "It is getting cold. Please put on your j___t.", definition: "It is getting cold. Please put on your jacket.", answer: "jacket" },
+            { type: "文意字彙", clue: "It's d___s to cross the road without looking at the traffic lights(紅綠燈).", definition: "It's dangerous to cross the road without looking at the traffic lights(紅綠燈).", answer: "dangerous" },
+            { type: "文意字彙", clue: "The woman who was hurt badly was sent to the h___l.", definition: "The woman who was hurt badly was sent to the hospital.", answer: "hospital" },
+            { type: "文意字彙", clue: "Ian is an i___t boy. He got accepted to Harvard(哈佛大學) when he was ten.", definition: "Ian is an intelligent boy. He got accepted to Harvard(哈佛大學) when he was ten.", answer: "intelligent" },
+            { type: "文意字彙", clue: "That was not an o___y meeting; it was a special meeting with the president.", definition: "That was not an ordinary meeting; it was a special meeting with the president.", answer: "ordinary" },
+            { type: "文意字彙", clue: "Be careful with the knife; it is s___p. You may get hurt.", definition: "Be careful with the knife; it is sharp. You may get hurt.", answer: "sharp" },
+            { type: "文意字彙", clue: "I've never seen the man who is talking to our boss before. I w___r who he is.", definition: "I've never seen the man who is talking to our boss before. I wonder who he is.", answer: "wonder" },
+            { type: "文意字彙", clue: "The students are busy practicing the piano and the tr___t for the music show.", definition: "The students are busy practicing the piano and the trumpet for the music show.", answer: "trumpet" },
+            { type: "文意字彙", clue: "You need to write your friend's address on the front of the e_____e before you send the letter to him.", definition: "You need to write your friend's address on the front of the envelope before you send the letter to him.", answer: "envelope" },
+            { type: "文意字彙", clue: "There was an e___e last night. The house shook for a long time.", definition: "There was an earthquake last night. The house shook for a long time.", answer: "earthquake" },
+            { type: "文意字彙", clue: "The p___l told the students not to run in the hallway.", definition: "The principal told the students not to run in the hallway.", answer: "principal" },
+            { type: "文意字彙", clue: "The man showed great c_____ge when he fought against the bad guys. He wasn't afraid at all.", definition: "The man showed great courage when he fought against the bad guys. He wasn't afraid at all.", answer: "courage" },
+            { type: "文意字彙", clue: "Today's math test was d___t. I couldn't solve most of the problems.", definition: "Today's math test was difficult. I couldn't solve most of the problems.", answer: "difficult" },
+            { type: "文意字彙", clue: "Mr. Collins earns a good i___e as a lawyer.", definition: "Mr. Collins earns a good income as a lawyer.", answer: "income" },
+            { type: "文意字彙", clue: "The boss's flight is at two o'clock. He will take a taxi to the a___t.", definition: "The boss's flight is at two o'clock. He will take a taxi to the airport.", answer: "airport" },
+            { type: "文意字彙", clue: "It was Helen's trip to China that i_____red Helen to write her latest book.", definition: "It was Helen's trip to China that inspired Helen to write her latest book.", answer: "inspired" },
+            { type: "文意字彙", clue: "I just bought a new c___n for the bedroom window. I want it to cover the whole window when the sun is too bright.", definition: "I just bought a new curtain for the bedroom window. I want it to cover the whole window when the sun is too bright.", answer: "curtain" },
+            { type: "文意字彙", clue: "It will rain this evening. Take an u___a with you when you go out.", definition: "It will rain this evening. Take an umbrella with you when you go out.", answer: "umbrella" },
+            { type: "文意字彙", clue: "Don't throw those batteries away; they can be r___ed. Please put them in a box.", definition: "Don't throw those batteries away; they can be recycled. Please put them in a box.", answer: "recycled" },
+            { type: "文意字彙", clue: "My c___n Amy is my uncle's only child.", definition: "My cousin Amy is my uncle's only child.", answer: "cousin" },
+            { type: "文意字彙", clue: "My leg is so i___y because I was bitten by a bug.", definition: "My leg is so itchy because I was bitten by a bug.", answer: "itchy" },
+            { type: "文意字彙", clue: "There are a lot of trees and many kinds of plants in a f___t.", definition: "There are a lot of trees and many kinds of plants in a forest.", answer: "forest" },
+            { type: "文意字彙", clue: "This street is too n___w for the bus to pass through.", definition: "This street is too narrow for the bus to pass through.", answer: "narrow" },
+            { type: "文意字彙", clue: "The girl quickly left the room when the clock s___ck twelve.", definition: "The girl quickly left the room when the clock struck twelve.", answer: "struck" },
+            { type: "文意字彙", clue: "People usually go to church or a t_____e to pray to their god.", definition: "People usually go to church or a temple to pray to their god.", answer: "temple" },
+            { type: "文意字彙", clue: "Hey, John. Don't talk in class. You should pay a___n to the teacher.", definition: "Hey, John. Don't talk in class. You should pay attention to the teacher.", answer: "attention" },
+            { type: "文意字彙", clue: "I made one m___e on my math test, so I didn't get 100.", definition: "I made one mistake on my math test, so I didn't get 100.", answer: "mistake" },
+            { type: "文意字彙", clue: "No one came to work last Saturday, so I was a___e in the office.", definition: "No one came to work last Saturday, so I was alone in the office.", answer: "alone" },
+            { type: "文意字彙", clue: "I agree with Mr. Collins about the im___e of exercise. We must exercise often in order to keep healthy.", definition: "I agree with Mr. Collins about the importance of exercise. We must exercise often in order to keep healthy.", answer: "importance" },
+            { type: "文意字彙", clue: "Students, put your textbooks into your d___r. Let's begin the test.", definition: "Students, put your textbooks into your drawer. Let's begin the test.", answer: "drawer" },
+            { type: "文意字彙", clue: "I don't like winter, spring, or summer. A___n is my favorite season.", definition: "I don't like winter, spring, or summer. Autumn is my favorite season.", answer: "Autumn" },
+            { type: "文意字彙", clue: "He doesn't like vegetables, so he takes out the l___e and tomatoes in the hamburger.", definition: "He doesn't like vegetables, so he takes out the lettuce and tomatoes in the hamburger.", answer: "lettuce" },
+            { type: "對話填空", clue: "A: What did the nurse ask you to do? B: She asked me to m___e my weight.", definition: "A: What did the nurse ask you to do? B: She asked me to measure my weight.", answer: "measure" },
+            { type: "對話填空", clue: "A: You s___m take a walk at the park, do you? B: You're right. There are too many people there. I don't like crowded places.", definition: "A: You seldom take a walk at the park, do you? B: You're right. There are too many people there. I don't like crowded places.", answer: "seldom" },
+            { type: "對話填空", clue: "A: What would you do if you won a m___n dollars? B: I would travel around the world.", definition: "A: What would you do if you won a million dollars? B: I would travel around the world.", answer: "million" },
+            { type: "對話填空", clue: "A: Liz sings so well. No one else has the same beautiful voice. B: You're right. Her voice is u_____ue. Her fans (粉絲) are crazy about her.", definition: "A: Liz sings so well. No one else has the same beautiful voice. B: You're right. Her voice is unique. Her fans (粉絲) are crazy about her.", answer: "unique" },
+            { type: "對話填空", clue: "A: What time do you usually get up in the morning? B: At a q___r past six.", definition: "A: What time do you usually get up in the morning? B: At a quarter past six.", answer: "quarter" },
+            { type: "對話填空", clue: "A: What's wrong? B: I forgot to zip up my pants; I feel so e___sed.", definition: "A: What's wrong? B: I forgot to zip up my pants; I feel so embarrassed.", answer: "embarrassed" },
+            { type: "對話填空", clue: "A: Do you know the a___s of Joy Movie Theater? B: It's No. 88, ABC Street, Joy City.", definition: "A: Do you know the address of Joy Movie Theater? B: It's No. 88, ABC Street, Joy City.", answer: "address" },
+            { type: "對話填空", clue: "A: Did you have any d___y in finding the new bookstore? B: No, it's not hard at all. It's just two blocks from my house.", definition: "A: Did you have any difficulty in finding the new bookstore? B: No, it's not hard at all. It's just two blocks from my house.", answer: "difficulty" },
+            { type: "對話填空", clue: "A: What time do you usually go to bed? B: I usually go to bed around m___t.", definition: "A: What time do you usually go to bed? B: I usually go to bed around midnight.", answer: "midnight" },
+            { type: "對話填空", clue: "A: Where are you going to have lunch? B: At the school c___a.", definition: "A: Where are you going to have lunch? B: At the school cafeteria.", answer: "cafeteria" },
+            { type: "對話填空", clue: "A: Where are you going? B: I'm going to see the d___t. My teeth hurt.", definition: "A: Where are you going? B: I'm going to see the dentist. My teeth hurt.", answer: "dentist" },
+            { type: "對話填空", clue: "A: Let's watch a movie. What kind of movie do you p___r? B: I like adventure movies.", definition: "A: Let's watch a movie. What kind of movie do you prefer? B: I like adventure movies.", answer: "prefer" },
+            { type: "對話填空", clue: "A: Do you know that woman with the purple s___f and gloves? B: Yeah, she's my aunt.", definition: "A: Do you know that woman with the purple scarf and gloves? B: Yeah, she's my aunt.", answer: "scarf" },
+            { type: "對話填空", clue: "A: Do you have a pet? B: Yes, I have a pet bird. It's a p___t; it has colorful feathers(羽毛).", definition: "A: Do you have a pet? B: Yes, I have a pet bird. It's a parrot; it has colorful feathers(羽毛).", answer: "parrot" },
+            { type: "對話填空", clue: "A: We've jogged for an hour. Let's sit on the b___h over there and rest. B: You can't sit there. There's a sign (告示牌) which says \"Wet Paint.\"", definition: "A: We've jogged for an hour. Let's sit on the bench over there and rest. B: You can't sit there. There's a sign (告示牌) which says \"Wet Paint.\"", answer: "bench" },
+            { type: "對話填空", clue: "A: What would you like for breakfast? B: An egg and ham s___h and a glass of orange juice, please.", definition: "A: What would you like for breakfast? B: An egg and ham sandwich and a glass of orange juice, please.", answer: "sandwich" },
+            { type: "對話填空", clue: "A: What happened to Danny's hand? B: He broke his right w_____t during the volleyball game. He can hardly move his right hand now.", definition: "A: What happened to Danny's hand? B: He broke his right wrist during the volleyball game. He can hardly move his right hand now.", answer: "wrist" },
+            { type: "對話填空", clue: "A: What kind of movies do you like? B: I like c___dies. They always make me laugh.", definition: "A: What kind of movies do you like? B: I like comedies. They always make me laugh.", answer: "comedies" },
+            { type: "對話填空", clue: "A: Can you make a s___e with the word \"obey\"? B: We must obey the school rules.", definition: "A: Can you make a sentence with the word \"obey\"? B: We must obey the school rules.", answer: "sentence" },
+            { type: "對話填空", clue: "A: Who is Anne? B: She is my n___e—my brother's second daughter.", definition: "A: Who is Anne? B: She is my niece—my brother's second daughter.", answer: "niece" },
+            { type: "段落填空", clue: "f_____________t", definition: "A place with many trees and plants.", answer: "forest", imagePath: "F-image/81-83.jpg" },
+            { type: "段落填空", clue: "s_____________p", definition: "Having a fine edge or point; not blunt.", answer: "sharp", imagePath: "F-image/81-83.jpg" },
+            { type: "段落填空", clue: "b_____________m", definition: "A room used for sleeping.", answer: "bedroom", imagePath: "F-image/81-83.jpg" },
+            { type: "段落填空", clue: "p_____________ct", definition: "To keep safe from harm or danger.", answer: "protect", imagePath: "F-image/84-86.jpg" },
+            { type: "段落填空", clue: "e_____________r", definition: "To come or go into a place.", answer: "enter", imagePath: "F-image/84-86.jpg" },
+            { type: "段落填空", clue: "d_____________ce", definition: "The amount of space between two points or places.", answer: "distance", imagePath: "F-image/84-86.jpg" },
+            { type: "段落填空", clue: "i_____________t", definition: "Having great meaning or value.", answer: "important", imagePath: "F-image/87-89.jpg" },
+            { type: "段落填空", clue: "g_____________es", definition: "Marks or scores given for academic work.", answer: "grades", imagePath: "F-image/87-89.jpg" },
+            { type: "段落填空", clue: "u_____________d", definition: "To comprehend or grasp the meaning of something.", answer: "understand", imagePath: "F-image/87-89.jpg" },
+            { type: "段落填空", clue: "e_____________nt", definition: "The surroundings or conditions in which something operates.", answer: "environment", imagePath: "F-image/90-92.jpg" },
+            { type: "段落填空", clue: "m_____________le", definition: "A two-wheeled motor vehicle.", answer: "motorcycle", imagePath: "F-image/90-92.jpg" },
+            { type: "段落填空", clue: "e_____________gy", definition: "The strength and vitality required for physical or mental activity.", answer: "energy", imagePath: "F-image/90-92.jpg" },
+            { type: "段落填空", clue: "b_____________h", definition: "A part of a tree that grows out from the trunk.", answer: "branch", imagePath: "F-image/93-96.jpg" },
+            { type: "段落填空", clue: "pi_____________e", definition: "A portion of an object or of material.", answer: "piece", imagePath: "F-image/93-96.jpg" },
+            { type: "段落填空", clue: "v_____________e", definition: "The sound produced by speaking or singing.", answer: "voice", imagePath: "F-image/93-96.jpg" },
+            { type: "段落填空", clue: "g_____________bbed", definition: "Past tense of grab; took hold of something quickly.", answer: "grabbed", imagePath: "F-image/93-96.jpg" },
+            { type: "段落填空", clue: "a_____________t", definition: "To have an influence on or make a difference to.", answer: "affect", imagePath: "F-image/97-100.jpg" },
+            { type: "段落填空", clue: "r_____________rly", definition: "At regular intervals or frequently.", answer: "regularly", imagePath: "F-image/97-100.jpg" },
+            { type: "段落填空", clue: "e_____________h", definition: "As much or as many as required.", answer: "enough", imagePath: "F-image/97-100.jpg" },
+            { type: "段落填空", clue: "a_____________ies", definition: "Things that people do for enjoyment or as part of their daily routine.", answer: "activities", imagePath: "F-image/97-100.jpg" }
+        ];
+
+
+        let current = 0;
+        let userAnswers = Array(questions.length).fill("");
+
+        window.onload = () => {
+            const select = document.getElementById("questionSelect");
+            questions.forEach((_, i) => {
+                const option = document.createElement("option");
+                option.value = i;
+                option.text = `題目 ${i + 1}`;
+                select.appendChild(option);
+            });
+            loadQuestion();
+        };
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                saveAnswer();
+                nextQuestion();
+            }
+        });
+
+        function goToPage(url) {
+            window.location.href = url;
+        }
+
+        function manualSubmit() {
+            saveAnswer();
+            nextQuestion();
+        }
+
+        function loadQuestion() {
+            document.getElementById("question-number").textContent = `${current + 1}. ${questions[current].type}`;
+            const currentQuestion = questions[current];
+
+            // 顯示相關圖片
+            const imageElement = document.getElementById("question-image");
+            const questionTextElement = document.getElementById("question-text");
+
+            // 優先使用實際圖片文件（如果有的話）
+            if (currentQuestion.imagePath) {
+                imageElement.innerHTML = `<img src="${currentQuestion.imagePath}" alt="Question image" />`;
+                imageElement.style.display = "flex";
+                imageElement.style.background = "transparent";
+                imageElement.style.justifyContent = "center";
+                imageElement.style.alignItems = "center";
+                // 對於段落填空，先顯示圖片，後顯示填空題目
+                if (currentQuestion.type === "段落填空") {
+                    questionTextElement.textContent = currentQuestion.clue;
+                    questionTextElement.style.marginTop = "20px";
+                } else {
+                    questionTextElement.textContent = currentQuestion.clue;
+                }
+            } else {
+                // 否則使用emoji
+                const imageData = getImagePath(currentQuestion.clue);
+                if (imageData) {
+                    imageElement.innerHTML = "";
+                    imageElement.textContent = imageData.emoji;
+                    imageElement.style.background = imageData.bg;
+                    imageElement.style.display = "flex";
+                    questionTextElement.textContent = currentQuestion.clue;
+                } else {
+                    imageElement.style.display = "none";
+                    questionTextElement.textContent = currentQuestion.clue;
+                }
+            }
+
+            document.getElementById("answer").value = userAnswers[current] || "";
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("scoreboard").textContent = "";
+            document.getElementById("answers").style.display = "none";
+            document.getElementById("questionSelect").value = current;
+            document.getElementById("answer").style.display = "inline-block";
+            document.getElementById("submitBtn").style.display = "inline-block";
+        }
+
+        function getImagePath(clue) {
+            // 根據題目內容匹配圖片和emoji
+            const imageMap = {
+                'pigeon': { emoji: '🕊️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'whisper': { emoji: '🤫', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'computer': { emoji: '💻', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'library': { emoji: '📚', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'restaurant': { emoji: '🍽️', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'chubby': { emoji: '😊', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'desert': { emoji: '🏜️', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'arrive': { emoji: '✈️', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'kitten': { emoji: '🐱', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'crowded': { emoji: '👥', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'responsible': { emoji: '✅', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'silent': { emoji: '🤐', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'practices': { emoji: '🎹', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'whiteboard': { emoji: '📋', bg: 'linear-gradient(45deg, #FFFFFF, #E0E0E0)' },
+                'wednesday': { emoji: '📅', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'factory': { emoji: '🏭', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'strong': { emoji: '💪', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'express': { emoji: '💬', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'ceiling': { emoji: '🏠', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'traffic': { emoji: '🚦', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'valuable': { emoji: '💎', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'welcome': { emoji: '👋', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'promised': { emoji: '🤝', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'judge': { emoji: '⚖️', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'microwave': { emoji: '🔥', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'necklace': { emoji: '💍', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'towel': { emoji: '🧺', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'successful': { emoji: '🎯', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'jacket': { emoji: '🧥', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'dangerous': { emoji: '⚠️', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'hospital': { emoji: '🏥', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'intelligent': { emoji: '🧠', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'ordinary': { emoji: '📝', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'sharp': { emoji: '🔪', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'wonder': { emoji: '🤔', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'trumpet': { emoji: '🎺', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'envelope': { emoji: '✉️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'earthquake': { emoji: '🌍', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'principal': { emoji: '👨‍🏫', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'courage': { emoji: '🦁', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'difficult': { emoji: '😓', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'income': { emoji: '💰', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'airport': { emoji: '✈️', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'inspired': { emoji: '💡', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'curtain': { emoji: '🪟', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'umbrella': { emoji: '☂️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'recycled': { emoji: '♻️', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'cousin': { emoji: '👨‍👩‍👧‍👦', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'itchy': { emoji: '🦟', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'forest': { emoji: '🌲', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'narrow': { emoji: '🛤️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'struck': { emoji: '⏰', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'temple': { emoji: '🛕', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'attention': { emoji: '👀', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'mistake': { emoji: '❌', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'alone': { emoji: '👤', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'importance': { emoji: '⭐', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'drawer': { emoji: '🗄️', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'autumn': { emoji: '🍂', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'lettuce': { emoji: '🥬', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'measure': { emoji: '⚖️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'seldom': { emoji: '🚶', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'million': { emoji: '💵', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'unique': { emoji: '🎤', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'quarter': { emoji: '🕐', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'embarrassed': { emoji: '😳', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'address': { emoji: '📍', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'difficulty': { emoji: '😕', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'midnight': { emoji: '🌙', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'cafeteria': { emoji: '🍽️', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'dentist': { emoji: '🦷', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'prefer': { emoji: '🎬', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'scarf': { emoji: '🧣', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'parrot': { emoji: '🦜', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'bench': { emoji: '🪑', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'sandwich': { emoji: '🥪', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'wrist': { emoji: '🤲', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'comedies': { emoji: '😂', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'sentence': { emoji: '📝', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'niece': { emoji: '👧', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' }
+            };
+
+            const clueLower = clue.toLowerCase();
+            for (const [keyword, data] of Object.entries(imageMap)) {
+                if (clueLower.includes(keyword)) {
+                    return data;
+                }
+            }
+            return null;
+        }
+
+        function saveAnswer() {
+            const input = document.getElementById("answer").value.trim();
+            userAnswers[current] = input;
+        }
+
+        function nextQuestion() {
+            if (current < questions.length - 1) {
+                current++;
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function jumpToQuestion() {
+            saveAnswer();
+            current = parseInt(document.getElementById("questionSelect").value);
+            loadQuestion();
+        }
+
+        function showFinalResult() {
+            document.getElementById("question-number").textContent = "🎉 全部完成！";
+            document.getElementById("question-text").textContent = "";
+            document.getElementById("answer").style.display = "none";
+            document.getElementById("submitBtn").style.display = "none";
+            document.getElementById("feedback").textContent = "";
+
+            const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+            document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}`;
+
+            const answerBox = document.getElementById("answers");
+            answerBox.style.display = "block";
+            answerBox.innerHTML = "<h3>🧠 正確答案：</h3><ol>" +
+                questions.map((q, i) => {
+                    const ua = userAnswers[i] || "(未作答)";
+                    const ok = (userAnswers[i] || "") === q.answer;
+                    return `<li><strong>${q.clue}</strong>: ${q.definition}<br>
+                      你的答案：<strong>${ua}</strong> ${ok ? '✅' : '❌'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                }).join("") + "</ol>";
+        }
+
+        function getGrade(score) {
+            const pct = (score / questions.length) * 100;
+            if (pct === 100) return "🎓 Perfect! Great job!";
+            if (pct >= 70) return "👍 Good work!";
+            return "📝 Keep practicing!";
+        }
+    </script>
+</body>
+
+</html>

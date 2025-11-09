@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>雜誌單字預習工具（144 字 / 佔 5%～10%）</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --primary: #1a237e;
+            --secondary: #3f51b5;
+            --light-bg: #eef1ff;
+            --accent: #ff8a65;
+            --card-bg: #ffffff;
+            --border-radius: 14px;
+            --transition: 0.25s ease;
+            font-size: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 32px 24px 48px;
+            background: linear-gradient(180deg, #f6f7ff 0%, #ffffff 40%, #f3f5ff 100%);
+            font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+            color: #1a1a1a;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #3949ab, #5c6bc0);
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            box-shadow: 0 16px 28px rgba(63, 81, 181, 0.28);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            margin: 0 0 28px;
+        }
+
+        .back-link::before {
+            content: "←";
+            font-size: 18px;
+        }
+
+        .back-link:hover,
+        .back-link:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 36px rgba(63, 81, 181, 0.33);
+        }
+
+        .back-link:focus-visible {
+            outline: 3px solid rgba(92, 107, 192, 0.6);
+            outline-offset: 5px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(28px, 3vw, 36px);
+            color: var(--primary);
+        }
+
+        .sub-heading {
+            margin: 0 0 24px;
+            font-size: 16px;
+            color: #4c4f70;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .toolbar>* {
+            flex: 1 1 220px;
+        }
+
+        .toolbar .stats {
+            background: rgba(63, 81, 181, 0.08);
+            border: 1px solid rgba(63, 81, 181, 0.2);
+            border-radius: var(--border-radius);
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 240px;
+        }
+
+        .stats strong {
+            font-size: 18px;
+            color: var(--primary);
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 16px 14px 44px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(26, 35, 126, 0.2);
+            background: #fff;
+            font-size: 16px;
+            box-shadow: 0 6px 14px rgba(26, 35, 126, 0.08);
+            outline: none;
+            transition: border var(--transition), box-shadow var(--transition);
+        }
+
+        .search-box input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 10px 20px rgba(63, 81, 181, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: rgba(26, 35, 126, 0.6);
+        }
+
+        .filter-panel {
+            background: rgba(26, 35, 126, 0.06);
+            border-radius: var(--border-radius);
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .filter-panel h2 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--primary);
+        }
+
+        .chip-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chip {
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #fff;
+            border: 1px solid rgba(26, 35, 126, 0.2);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .chip.active {
+            background: var(--secondary);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 6px 16px rgba(63, 81, 181, 0.25);
+        }
+
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .quick-actions button {
+            flex: 1 1 180px;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #fff;
+            background: linear-gradient(135deg, #3949ab, #5c6bc0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+        }
+
+        .quick-actions button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(63, 81, 181, 0.25);
+        }
+
+        .quick-actions button.secondary {
+            background: linear-gradient(135deg, #ff7043, #ff8a65);
+        }
+
+        .quick-actions button.outline {
+            background: #fff;
+            color: var(--secondary);
+            border: 1px solid rgba(63, 81, 181, 0.3);
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .word-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 18px 20px 22px;
+            box-shadow: 0 10px 22px rgba(26, 35, 126, 0.12);
+            border: 1px solid rgba(26, 35, 126, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform var(--transition), box-shadow var(--transition), border var(--transition);
+        }
+
+        .word-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 30px rgba(26, 35, 126, 0.16);
+            border-color: rgba(26, 35, 126, 0.22);
+        }
+
+        .word-card.learned {
+            border: 1px solid rgba(46, 125, 50, 0.6);
+            box-shadow: 0 12px 26px rgba(76, 175, 80, 0.22);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .word-index {
+            font-size: 14px;
+            color: rgba(26, 35, 126, 0.6);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .mark-btn {
+            background: rgba(63, 81, 181, 0.1);
+            border: none;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--secondary);
+            transition: all var(--transition);
+        }
+
+        .mark-btn.learned {
+            background: rgba(76, 175, 80, 0.18);
+            color: #2e7d32;
+        }
+
+        .word-card h2 {
+            margin: 0;
+            font-size: 26px;
+            color: var(--primary);
+        }
+
+        .pos-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(63, 81, 181, 0.12);
+            color: var(--secondary);
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .meaning {
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #2c2c2c;
+        }
+
+        .meaning.hidden {
+            color: rgba(44, 44, 44, 0.3);
+            font-style: italic;
+        }
+
+        .sentence {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.55;
+            color: #424564;
+            border-left: 4px solid rgba(63, 81, 181, 0.25);
+            padding-left: 12px;
+        }
+
+        mark.fill {
+            background: rgba(255, 138, 101, 0.3);
+            color: #d84315;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        .empty-state {
+            margin-top: 40px;
+            text-align: center;
+            padding: 36px 24px;
+            border-radius: 18px;
+            background: rgba(63, 81, 181, 0.08);
+            border: 1px dashed rgba(26, 35, 126, 0.2);
+            color: rgba(26, 35, 126, 0.7);
+            font-size: 16px;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 24px 18px 36px;
+            }
+
+            .toolbar>* {
+                flex: 1 1 100%;
+            }
+
+            .quick-actions button {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="back-link" href="home.html">← 回到首頁</a>
+    <header>
+        <h1>雜誌單字預習工具</h1>
+        <p class="sub-heading">快速預習 144 個雜誌重點單字，掌握占 5%～10% 的評量分數；善用搜尋、篩選與例句練習，加深記憶。</p>
+    </header>
+
+    <section class="toolbar">
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input id="searchInput" type="search" placeholder="搜尋英文、中文或例句關鍵字（例如：snow、雪、mountain）" />
+        </div>
+
+        <div class="stats" id="statsPanel">
+            <div><strong>總字數：</strong><span id="totalWords">0</span> 字</div>
+            <div><strong>目前顯示：</strong><span id="visibleWords">0</span> 字</div>
+            <div><strong>已標記熟悉：</strong><span id="learnedWords">0</span> 字</div>
+            <div><strong>評量占比：</strong>5%～10%</div>
+        </div>
+
+        <div class="filter-panel">
+            <h2>詞性篩選</h2>
+            <div class="chip-group" id="posChips"></div>
+        </div>
+    </section>
+
+    <section class="quick-actions">
+        <button id="toggleChineseBtn" class="outline" type="button">👀 切換中文顯示</button>
+        <button id="toggleBlankBtn" class="outline" type="button">📝 切換例句（填空／完整）</button>
+        <button id="shuffleBtn" class="secondary" type="button">🔀 隨機排序</button>
+        <button id="resetBtn" type="button">🧽 重設篩選與標記</button>
+    </section>
+
+    <main id="wordGrid" class="word-grid"></main>
+
+    <template id="wordCardTemplate">
+        <article class="word-card">
+            <div class="card-header">
+                <span class="word-index"></span>
+                <button class="mark-btn" type="button"></button>
+            </div>
+            <h2 class="word-text"></h2>
+            <span class="pos-tag"></span>
+            <p class="meaning"></p>
+            <p class="sentence"></p>
+        </article>
+    </template>
+
+    <script>
+        const rawWords = [
+            { word: "snow", clue: "In winter, there is a lot of s_____w in the mountains.", definition: "snow (n.) 雪" },
+            { word: "giant", clue: "This g_____t tree is about five hundred years old.", definition: "giant (adj.) 巨大的" },
+            { word: "round", clue: "The little girl has a cute r_____d face.", definition: "round (adj.) 圓形的" },
+            { word: "witch", clue: "The w_____h wears a big black hat.", definition: "witch (n.) 巫婆" },
+            { word: "salty", clue: "The soup is too s_____y; you need to add some water.", definition: "salty (adj.) 鹹的" },
+            { word: "walks", clue: "The man w_____ks his dog in the park every morning.", definition: "walk (v.) 遛(動物)" },
+            { word: "pour", clue: "Please p_____r some hot water into my cup.", definition: "pour (v.) 倒" },
+            { word: "secret", clue: "I share my s_____t with my best friend.", definition: "secret (n.) 祕密" },
+            { word: "life", clue: "Mary enjoys her l_____e on the farm very much.", definition: "life (n.) 生活" },
+            { word: "trip", clue: "I want to go on a t_____p with my family.", definition: "trip (n.) 旅行" },
+            { word: "ice", clue: "My brother likes to drink milk tea with i_____e.", definition: "ice (n.) 冰" },
+            { word: "break", clue: "Be careful not to b_____k the glass bowl.", definition: "break (v.) 打破" },
+            { word: "river", clue: "Let's row a boat down the r_____r.", definition: "river (n.) 河流" },
+            { word: "rises", clue: "The sun r_____s behind the mountains.", definition: "rise (v.) 聳立；升起" },
+            { word: "covers", clue: "In winter, white snow c_____s the roofs of the houses.", definition: "cover (v.) 覆蓋" },
+            { word: "skin", clue: "After you peel the mango, put the s_____n in the trash bag.", definition: "skin (n.) 皮" },
+            { word: "tiny", clue: "Can you see the t_____y ants in the tree?", definition: "tiny (adj.) 細小的" },
+            { word: "seeds", clue: "The s_____d grow fast with water and sun.", definition: "seed (n.) 種子" },
+            { word: "sour", clue: "Lemon juice is very s_____r, so I always add water and sugar to it.", definition: "sour (adj.) 酸的" },
+            { word: "corn", clue: "The c_____n soup tastes nice and sweet.", definition: "corn (n.) 玉米" },
+            { word: "burns", clue: "A wildfire b_____s down the forest and village.", definition: "burn (v.) 燒" },
+            { word: "war", clue: "Many soldiers die in the w_____r.", definition: "war (n.) 戰爭" },
+            { word: "stay", clue: "We will s_____y in the town for three days.", definition: "stay (v.) 停留；留下" },
+            { word: "wins", clue: "The blue team beats the red team and w_____s the game.", definition: "win (v.) 獲勝；贏" },
+            { word: "attract", clue: "Music shows at the Kaohsiung Music Center a_____t visitors from other cities.", definition: "attract (v.) 吸引" },
+            { word: "relax", clue: "We can r_____x at the café in the Pier-2 Art Center.", definition: "relax (v.) 放鬆；休息" },
+            { word: "land", clue: "Dave's family owns a large piece of l_____d in the country.", definition: "land (n.) 土地；陸地" },
+            { word: "type", clue: "I don't like this t_____e of movie.", definition: "type (n.) 種類" },
+            { word: "bark", clue: "The muntjacs b_____k when they sense danger.", definition: "bark (v.) 吠叫" },
+            { word: "mark", clue: "Please use a red pen to m_____k the wrong answers on your test.", definition: "mark (v.) 標記" },
+            { word: "hang", clue: "The boy helps his mother h_____g the millet to dry.", definition: "hang (v.) 吊掛" },
+            { word: "study", clue: "Students at Padan Asang School s_____y many interesting things.", definition: "study (v.) 研讀" },
+            { word: "recording", clue: "Jess is r_____ing her new song in the studio.", definition: "record (v.) 錄音" },
+            { word: "dessert", clue: "The chef is good at making d_____t.", definition: "dessert (n.) 甜點" },
+            { word: "dishes", clue: "We usually have three or four d_____s for dinner.", definition: "dish (n.) 菜餚" },
+            { word: "proud", clue: "The boy is p_____d of his hometown, Kaohsiung.", definition: "proud (adj.) 自豪的" },
+            { word: "island", clue: "We can take a boat to the i_____d.", definition: "island (n.) 島嶼" },
+            { word: "sailor", clue: "My father is a s_____r; he works on a ship.", definition: "sailor (n.) 水手" },
+            { word: "north", clue: "The forest is in the n_____h of the city.", definition: "north (n.) 北方" },
+            { word: "light", clue: "The stars l_____t up the night sky.", definition: "light (v.) 點亮" },
+            { word: "candles", clue: "C_____s give us light when it is dark.", definition: "candle (n.) 蠟燭" },
+            { word: "remember", clue: "All Saints' Day is a day to r_____r loved ones.", definition: "remember (v.) 記得" },
+            { word: "forget", clue: "Don't f_____t to turn off the lights before you leave.", definition: "forget (v.) 忘記" },
+            { word: "bring", clue: "Can you b_____g me a glass of orange juice?", definition: "bring (v.) 帶來" },
+            { word: "wonderful", clue: "The sunset looks w_____l with its colorful clouds.", definition: "wonderful (adj.) 奇妙的" },
+            { word: "pets", clue: "Jane has two p_____s: a cat and a turtle.", definition: "pet (n.) 寵物" },
+            { word: "tools", clue: "We need t_____s to fix the bike.", definition: "tool (n.) 工具" },
+            { word: "shape", clue: "The cookie is in the s_____e of a star.", definition: "shape (n.) 形狀" },
+            { word: "popular", clue: "Pizza is very p_____r with children.", definition: "popular (adj.) 受歡迎的" },
+            { word: "crowded", clue: "The bus is c_____d with people.", definition: "crowded (adj.) 擁擠的" },
+            { word: "forest", clue: "The f_____t is full of trees and animals.", definition: "forest (n.) 森林" },
+            { word: "traffic", clue: "There is a lot of t_____c in the city.", definition: "traffic (n.) 交通" },
+            { word: "sound", clue: "The s_____d of birds wakes me up in the morning.", definition: "sound (n.) 聲音" },
+            { word: "breakfast", clue: "I have sandwiches with milk for b_____t.", definition: "breakfast (n.) 早餐" },
+            { word: "protect", clue: "An umbrella can p_____t you from the sun.", definition: "protect (v.) 保護" },
+            { word: "solve", clue: "Can you help me s_____e this math problem?", definition: "solve (v.) 解決" },
+            { word: "safe", clue: "It is not s_____e to go out alone at night.", definition: "safe (adj.) 平安的" },
+            { word: "together", clue: "Let's go to school t_____r.", definition: "together (adv.) 一起" },
+            { word: "sport", clue: "Soccer is my favorite s_____t; I like to play it with my friends.", definition: "sport (n.) 運動" },
+            { word: "support", clue: "My parents s_____t me when I try new things.", definition: "support (v.) 幫助 ; 支持" },
+            { word: "provide", clue: "Amy will p_____e some food for the party.", definition: "provide (v.) 提供" },
+            { word: "daily", clue: "I read the d_____y news online.", definition: "daily (adj.) 每日的" },
+            { word: "move", clue: "Can you m_____e the chairs to the living room?", definition: "move (v.) 移動" },
+            { word: "strong", clue: "Jordan is s_____g enough to push a car.", definition: "strong (adj.) 強壯的" },
+            { word: "loud", clue: "Please do not make l_____d noises in the library.", definition: "loud (adj.) 響亮的 ; 大聲的" },
+            { word: "kilometer", clue: "The park is about one k_____r from my house.", definition: "kilometer (n.) 公里" },
+            { word: "row", clue: "It's fun to r_____w a boat on a lake.", definition: "row (v.) 划 (船)" },
+            { word: "leaves", clue: "L_____s change color in autumn.", definition: "leaf (n.) 葉子（複數形為 leaves）" },
+            { word: "become", clue: "Jane wants to b_____e a doctor in the future.", definition: "become (v.) 變成" },
+            { word: "calendar", clue: "A c_____r shows the days of the month.", definition: "calendar (n.) 月曆 ; 日曆" },
+            { word: "surprises", clue: "Sandra loves the s_____s from her friends on her birthday.", definition: "surprise (n.) 驚喜" },
+            { word: "brush", clue: "I use a b_____h to paint a picture.", definition: "brush (n.) 畫筆" },
+            { word: "temple", clue: "Many people visit this t_____e to pray for good luck.", definition: "temple (n.) 寺廟" },
+            { word: "shines", clue: "The sun s_____s brightly in the sky.", definition: "shine (v.) 閃耀" },
+            { word: "unique", clue: "The artist is famous for his u_____e style.", definition: "unique (adj.) 獨特的" },
+            { word: "festival", clue: "The music f_____l begins on July 10 this year.", definition: "festival (n.) 節慶" },
+            { word: "wheels", clue: "The box moves fast on two w_____s.", definition: "wheel (n.) 輪子" },
+            { word: "pull", clue: "P_____l the door to open it; don't push it.", definition: "pull (v.) 拉" },
+            { word: "offering", clue: "The company is o_____g Bess a good job.", definition: "offer (v.) 給予" },
+            { word: "bow", clue: "In Japan, people b_____w to show respect.", definition: "bow (v.) 鞠躬" },
+            { word: "bitter", clue: "The medicine is b_____r, so I don't want to take it.", definition: "bitter (adj.) 苦的" },
+            { word: "shopkeeper", clue: "The s_____r of the bookstore is an old man.", definition: "shopkeeper (n.) 老闆 ; 店主" },
+            { word: "dead", clue: "The boy is sad because his dog is d_____d.", definition: "dead (adj.) 去世的 ; 死亡的" },
+            { word: "ghost", clue: "The g_____t in the movie is very scary.", definition: "ghost (n.) 幽靈 ; 鬼" },
+            { word: "tower", clue: "People go up the tall t_____r to see the city.", definition: "tower (n.) 塔" },
+            { word: "clear", clue: "The sky is c_____r and sunny today.", definition: "clear (adj.) 晴朗的" },
+            { word: "kinds", clue: "There are many k_____s of vegetables at the market.", definition: "kind (n.) 種類" },
+            { word: "build", clue: "People will b_____d a new library in this city.", definition: "build (v.) 建造" },
+            { word: "create", clue: "Students can c_____e fun stories with their own ideas.", definition: "create (v.) 創造" },
+            { word: "wood", clue: "We use w_____d to make tables and chairs.", definition: "wood (n.) 木頭" },
+            { word: "spread", clue: "The farmer is using a machine to s_____d seeds.", definition: "spread (v.) 撒 ; 散布" },
+            { word: "salt", clue: "Add some s_____t, and the soup will taste better.", definition: "salt (n.) 鹽" },
+            { word: "slide", clue: "I like to s_____e down the hill on my sled.", definition: "slide (v.) 滑" },
+            { word: "lesson", clue: "Today's l_____n is about dinosaurs.", definition: "lesson (n.) 課 ; 教訓" },
+            { word: "lie", clue: "You should not l_____e to your parents or friends.", definition: "lie (v.) 說謊" },
+            { word: "experience", clue: "The trip to the zoo is a great e_____e for children.", definition: "experience (n.) 經驗" },
+            { word: "lovely", clue: "The girl has a l_____y smile, and everyone likes her.", definition: "lovely (adj.) 漂亮的 ; 可愛的" },
+            { word: "sand", clue: "The s_____d on the beach is hot, so we wear sandals.", definition: "sand (n.) 沙子" },
+            { word: "brave", clue: "The b_____e prince saves the girl from the monster.", definition: "brave (adj.) 勇敢的" },
+            { word: "meters", clue: "The big snake is three m_____s long.", definition: "meter (n.) 公尺" },
+            { word: "shark", clue: "Watch out! A s_____k is swimming toward you.", definition: "shark (n.) 鯊魚" },
+            { word: "sink", clue: "Coins s_____k in water.", definition: "sink (v.) 沉" },
+            { word: "marry", clue: "John is going to m_____y Jane next month.", definition: "marry (v.) 和...結婚" },
+            { word: "captain", clue: "My father is the c_____n of the ship.", definition: "captain (n.) 船長" },
+            { word: "refuses", clue: "Mary r_____s to lend me her comic books.", definition: "refuse (v.) 拒絕" },
+            { word: "health", clue: "Eating vegetables is good for h_____h.", definition: "health (n.) 健康" },
+            { word: "busy", clue: "Tom is b_____y with his science report, so he can't go to the party.", definition: "busy (adj.) 忙碌的" },
+            { word: "parents", clue: "Betty's p_____s love her and take good care of her.", definition: "parents (n.) 父母 ; 爸爸媽媽" },
+            { word: "area", clue: "This a_____a of the city is very busy.", definition: "area (n.) 區域" },
+            { word: "desert", clue: "Camels can walk for days in the d_____t without water.", definition: "desert (n.) 沙漠" },
+            { word: "ancient", clue: "The a_____t castle is over a thousand years old.", definition: "ancient (adj.) 古代的" },
+            { word: "stairs", clue: "People climb lots of s_____s to reach the palace.", definition: "stair (n.) 階梯" },
+            { word: "believe", clue: "They b_____e the story about the lost treasure.", definition: "believe (v.) 相信" },
+            { word: "fresh", clue: "The dates are f_____h and sweet.", definition: "fresh (adj.) 新鮮的" },
+            { word: "catch", clue: "The man uses a net to c_____h fish.", definition: "catch (v.) 抓住" },
+            { word: "idea", clue: "Billy has a great i_____a for the school party.", definition: "idea (n.) 點子 ; 想法" },
+            { word: "return", clue: "Every winter, the birds r_____n to the warm south.", definition: "return (v.) 返回" },
+            { word: "find", clue: "Mom can't f_____d her cellphone. Do you see it anywhere?", definition: "find (v.) 找到" },
+            { word: "hear", clue: "I can't h_____r you. Can you speak up, please?", definition: "hear (v.) 聽見" },
+            { word: "soft", clue: "The sand is s_____t.", definition: "soft (adj.) 柔軟的" },
+            { word: "wild", clue: "There are many w_____d animals in the forest.", definition: "wild (adj.) 野生的" },
+            { word: "paths", clue: "We enjoy walking on the p_____s in the garden.", definition: "path (n.) 小徑" },
+            { word: "reach", clue: "You can r_____h the station by bike in ten minutes.", definition: "reach (v.) 到達" },
+            { word: "wide", clue: "The road is very w_____e, so cars can drive fast.", definition: "wide (adj.) 寬的" },
+            { word: "branch", clue: "A monkey is sitting on the b_____h.", definition: "branch (n.) 樹枝" },
+            { word: "master", clue: "The old m_____r teaches the young boy to paint.", definition: "master (n.) 大師" },
+            { word: "precious", clue: "This ring is very p_____s to my grandmother.", definition: "precious (adj.) 珍貴的" },
+            { word: "slow", clue: "Typing 20 words in a minute is s_____w.", definition: "slow (adj.) 慢的" },
+            { word: "tastes", clue: "The fish soup t_____s good.", definition: "taste (v.) 品嚐" },
+            { word: "next", clue: "The class is English. The n_____t class is math.", definition: "next (adj.) 下一個的" },
+            { word: "attacking", clue: "The soldiers are a_____g the castle.", definition: "attach (v.) 攻擊" },
+            { word: "dream", clue: "I sometimes have a d_____m about flying.", definition: "dream (n.) 夢境" },
+            { word: "step", clue: "Please don't s_____p on the grass.", definition: "step (v.) 踏" },
+            { word: "valley", clue: "We plan to camp in the v_____y and watch the sunrise.", definition: "valley (n.) 山谷" },
+            { word: "whale", clue: "The w_____e is the largest animal in the world.", definition: "whale (n.) 鯨魚" },
+            { word: "symbol", clue: "The heart is a s_____l of love.", definition: "symbol (n.) 象徵" },
+            { word: "waves", clue: "The w_____s today are too strong for swimming.", definition: "wave (n.) 波浪" },
+            { word: "hammer", clue: "We need a h_____r to hit the nail into the wall.", definition: "hammer (n.) 槌子" },
+            { word: "sail", clue: "Let's s_____l across the lake on my boat.", definition: "sail (v.) 航行" },
+            { word: "special", clue: "Today is a s_____l day because it's my twentieth birthday.", definition: "special (adj.) 特別的" },
+            { word: "means", clue: "Marujo m_____s 'sailor' in Portuguese.", definition: "mean (v.) 意思是" },
+            { word: "artist", clue: "Mary could be a great a_____t because she paints very well.", definition: "artist (n.) 藝術家" },
+            { word: "earth", clue: "We must take care of the e_____h.", definition: "earth (n.) 地球" },
+            { word: "think", clue: "I t_____k about my grandpa when I feel sad.", definition: "think (v.) 想" }
+        ];
+
+        const posMapping = {
+            "n": "名詞",
+            "v": "動詞",
+            "adj": "形容詞",
+            "adv": "副詞",
+            "pron": "代名詞",
+            "prep": "介系詞",
+            "conj": "連接詞",
+            "int": "感嘆詞",
+            "n/v": "名詞／動詞",
+            "phr": "片語",
+            "v./n": "動詞／名詞"
+        };
+
+        const escapeHtml = (unsafe) =>
+            unsafe.replace(/[&<>"']/g, (char) => {
+                const maps = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" };
+                return maps[char] || char;
+            });
+
+        const parseDefinition = (definition) => {
+            const match = definition.match(/^(.*?)\s*\((.*?)\)\s*(.+)$/);
+            if (!match) {
+                return {
+                    englishMeaning: definition.trim(),
+                    partOfSpeechRaw: "",
+                    chineseMeaning: ""
+                };
+            }
+            const [, eng, pos, zh] = match;
+            const posKey = pos.replace(/\.+$/, "").trim().toLowerCase();
+            return {
+                englishMeaning: eng.trim(),
+                partOfSpeechRaw: pos.trim(),
+                partOfSpeech: posMapping[posKey] || pos.replace(/\.$/, ""),
+                posKey,
+                chineseMeaning: zh.trim()
+            };
+        };
+
+        const enrichWords = () =>
+            rawWords.map((item, index) => {
+                const parsed = parseDefinition(item.definition);
+                return {
+                    index: index + 1,
+                    word: item.word,
+                    clue: item.clue,
+                    definition: item.definition,
+                    ...parsed
+                };
+            });
+
+        const state = {
+            words: enrichWords(),
+            filteredWords: [],
+            learnedSet: new Set(),
+            hiddenChinese: false,
+            showBlankSentence: false,
+            activePosFilters: new Set(),
+            searchKeyword: "",
+            wordOrder: []
+        };
+
+        const elements = {
+            wordGrid: document.getElementById("wordGrid"),
+            template: document.getElementById("wordCardTemplate"),
+            totalWords: document.getElementById("totalWords"),
+            visibleWords: document.getElementById("visibleWords"),
+            learnedWords: document.getElementById("learnedWords"),
+            posChips: document.getElementById("posChips"),
+            searchInput: document.getElementById("searchInput"),
+            toggleChineseBtn: document.getElementById("toggleChineseBtn"),
+            toggleBlankBtn: document.getElementById("toggleBlankBtn"),
+            shuffleBtn: document.getElementById("shuffleBtn"),
+            resetBtn: document.getElementById("resetBtn")
+        };
+
+        const buildPosFilters = () => {
+            const uniquePos = Array.from(
+                new Set(state.words.map((word) => word.partOfSpeech || word.partOfSpeechRaw || "其他"))
+            ).sort((a, b) => a.localeCompare(b, "zh-Hant"));
+
+            elements.posChips.innerHTML = uniquePos
+                .map((label) => `<button class="chip" data-pos="${label}">${label}</button>`)
+                .join("");
+        };
+
+        const applyFilters = () => {
+            const keyword = state.searchKeyword.trim().toLowerCase();
+            const hasKeyword = keyword.length > 0;
+            const activePos = state.activePosFilters;
+
+            const filtered = state.wordOrder.map((idx) => state.words[idx]).filter((word) => {
+                const matchPos = activePos.size === 0 || activePos.has(word.partOfSpeech || word.partOfSpeechRaw || "其他");
+                if (!matchPos) return false;
+
+                if (!hasKeyword) return true;
+
+                const sentenceFilled = word.clue.replace(/_+/g, word.word);
+                return (
+                    word.word.toLowerCase().includes(keyword) ||
+                    word.chineseMeaning.toLowerCase().includes(keyword) ||
+                    word.definition.toLowerCase().includes(keyword) ||
+                    sentenceFilled.toLowerCase().includes(keyword)
+                );
+            });
+
+            state.filteredWords = filtered;
+            renderWords();
+        };
+
+        const renderWords = () => {
+            if (state.filteredWords.length === 0) {
+                elements.wordGrid.innerHTML =
+                    `<div class="empty-state">找不到符合條件的單字，試試其他關鍵字或篩選條件。</div>`;
+                updateStats();
+                return;
+            }
+
+            const fragment = document.createDocumentFragment();
+
+            state.filteredWords.forEach((item, idx) => {
+                const node = elements.template.content.cloneNode(true);
+                const card = node.querySelector(".word-card");
+                const indexEl = node.querySelector(".word-index");
+                const markBtn = node.querySelector(".mark-btn");
+                const wordTitle = node.querySelector(".word-text");
+                const posTag = node.querySelector(".pos-tag");
+                const meaning = node.querySelector(".meaning");
+                const sentence = node.querySelector(".sentence");
+
+                if (state.learnedSet.has(item.word)) {
+                    card.classList.add("learned");
+                    markBtn.classList.add("learned");
+                    markBtn.textContent = "✅ 已熟悉";
+                } else {
+                    markBtn.textContent = "☆ 標記熟悉";
+                }
+
+                indexEl.textContent = `#${String(item.index).padStart(3, "0")}`;
+                markBtn.dataset.word = item.word;
+                wordTitle.textContent = item.word;
+                posTag.textContent = item.partOfSpeech || item.partOfSpeechRaw || "其他";
+
+                if (state.hiddenChinese) {
+                    meaning.classList.add("hidden");
+                    meaning.textContent = "中文已隱藏，點選上方按鈕顯示";
+                } else {
+                    meaning.classList.remove("hidden");
+                    meaning.textContent = item.chineseMeaning || item.definition;
+                }
+
+                const escapedClue = escapeHtml(item.clue);
+                const sentenceHtml = state.showBlankSentence
+                    ? escapedClue
+                    : escapedClue.replace(/_+/g, `<mark class="fill">${escapeHtml(item.word)}</mark>`);
+
+                sentence.innerHTML = sentenceHtml;
+
+                fragment.appendChild(node);
+            });
+
+            elements.wordGrid.innerHTML = "";
+            elements.wordGrid.appendChild(fragment);
+            updateStats();
+        };
+
+        const updateStats = () => {
+            elements.totalWords.textContent = state.words.length;
+            elements.visibleWords.textContent = state.filteredWords.length;
+            elements.learnedWords.textContent = state.learnedSet.size;
+        };
+
+        const shuffleOrder = () => {
+            for (let i = state.wordOrder.length - 1; i > 0; i -= 1) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [state.wordOrder[i], state.wordOrder[j]] = [state.wordOrder[j], state.wordOrder[i]];
+            }
+        };
+
+        const resetAll = () => {
+            state.learnedSet.clear();
+            state.activePosFilters.clear();
+            elements.searchInput.value = "";
+            state.searchKeyword = "";
+            state.hiddenChinese = false;
+            state.showBlankSentence = false;
+
+            elements.toggleChineseBtn.classList.remove("active");
+            elements.toggleBlankBtn.classList.remove("active");
+
+            Array.from(elements.posChips.querySelectorAll(".chip")).forEach((chip) =>
+                chip.classList.remove("active")
+            );
+
+            state.wordOrder = state.words.map((_, idx) => idx);
+            applyFilters();
+        };
+
+        const init = () => {
+            buildPosFilters();
+            state.wordOrder = state.words.map((_, idx) => idx);
+            applyFilters();
+
+            elements.searchInput.addEventListener("input", (event) => {
+                state.searchKeyword = event.target.value;
+                applyFilters();
+            });
+
+            elements.posChips.addEventListener("click", (event) => {
+                const chip = event.target.closest(".chip");
+                if (!chip) return;
+                const label = chip.dataset.pos;
+                if (chip.classList.contains("active")) {
+                    chip.classList.remove("active");
+                    state.activePosFilters.delete(label);
+                } else {
+                    chip.classList.add("active");
+                    state.activePosFilters.add(label);
+                }
+                applyFilters();
+            });
+
+            elements.wordGrid.addEventListener("click", (event) => {
+                const button = event.target.closest(".mark-btn");
+                if (!button) return;
+                const word = button.dataset.word;
+                if (state.learnedSet.has(word)) {
+                    state.learnedSet.delete(word);
+                } else {
+                    state.learnedSet.add(word);
+                }
+                renderWords();
+            });
+
+            elements.toggleChineseBtn.addEventListener("click", () => {
+                state.hiddenChinese = !state.hiddenChinese;
+                elements.toggleChineseBtn.classList.toggle("active", state.hiddenChinese);
+                renderWords();
+            });
+
+            elements.toggleBlankBtn.addEventListener("click", () => {
+                state.showBlankSentence = !state.showBlankSentence;
+                elements.toggleBlankBtn.classList.toggle("active", state.showBlankSentence);
+                renderWords();
+            });
+
+            elements.shuffleBtn.addEventListener("click", () => {
+                shuffleOrder();
+                applyFilters();
+            });
+
+            elements.resetBtn.addEventListener("click", () => resetAll());
+        };
+
+        init();
+    </script>
+</body>
+
+</html>

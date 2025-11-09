@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字義填空遊戲</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .quiz-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            min-width: 600px;
+            position: relative;
+        }
+
+        .question-header {
+            text-align: left;
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        .timer {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+
+        .question-content {
+            margin-top: 40px;
+            font-size: 24px;
+        }
+
+        .question-image {
+            margin: 20px auto;
+            width: 500px;
+            max-width: 90%;
+            height: auto;
+            min-height: 350px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            font-size: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background-size: cover;
+            background-position: center;
+            padding: 10px;
+        }
+
+        .question-image img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 15px 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .scoreboard {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .correction-section {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .correction-section h3 {
+            margin-bottom: 10px;
+            color: #1a237e;
+        }
+
+        .correction-item {
+            margin-bottom: 18px;
+            padding: 14px;
+            border-radius: 10px;
+            background: #f5f7ff;
+            border: 1px solid #d0d7ff;
+            display: grid;
+            gap: 12px;
+        }
+
+        .correction-item label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .correction-item .hint {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .correction-item .answer {
+            font-size: 16px;
+            color: #1a237e;
+            font-weight: bold;
+        }
+
+        .correction-inputs {
+            display: grid;
+            gap: 8px;
+        }
+
+        .correction-inputs input[type="text"] {
+            width: 100%;
+            max-width: 320px;
+            padding: 8px;
+            font-size: 18px;
+            text-transform: lowercase;
+        }
+
+        .correction-image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .correction-image img {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .correction-section button[type="submit"] {
+            margin-top: 12px;
+            align-self: flex-start;
+        }
+
+        .correction-section .note {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 12px;
+        }
+
+        .correction-warning {
+            display: inline-block;
+            margin-left: 12px;
+            color: #d32f2f;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .tab-tip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 12px 0;
+            padding: 12px 16px;
+            color: #1a237e;
+            background: rgba(232, 234, 246, 0.65);
+            border: 1px dashed #3f51b5;
+            border-radius: 12px;
+            flex-wrap: wrap;
+        }
+
+        .key-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border: 2px solid #1a237e;
+            border-radius: 8px;
+            font-weight: bold;
+            background: #ffffff;
+            font-size: 15px;
+            box-shadow: 0 3px 0 rgba(26, 35, 126, 0.2), 0 3px 6px rgba(26, 35, 126, 0.25);
+            min-width: 64px;
+        }
+
+        .key-badge .icon {
+            font-size: 14px;
+            opacity: 0.75;
+        }
+
+        .tab-tip strong {
+            color: #1a237e;
+        }
+
+        .plus-sign {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+
+        .tab-example {
+            margin: 6px 0 14px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .answers {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .nav-panel {
+            margin-top: 20px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .back-button:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="goToPage('home.html')" class="back-button">← 回上一頁</button>
+
+    <div class="quiz-box">
+        <div class="question-header" id="question-number"></div>
+        <div class="timer" id="timer">剩餘時間 70:00</div>
+        <div id="question-image" class="question-image"></div>
+        <div class="question-content" id="question-text"></div>
+        <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+        <br />
+        <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+        <div class="feedback" id="feedback"></div>
+        <div class="scoreboard" id="scoreboard"></div>
+        <div id="correctionSection" class="correction-section"></div>
+        <div class="answers" id="answers" style="display: none;"></div>
+        <div class="nav-panel">
+            <label for="questionSelect">跳題：</label>
+            <select id="questionSelect" onchange="jumpToQuestion()"></select>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { type: "看圖拼字", clue: "s_____________k", definition: "shark", answer: "shark", imagePath: "C-image/C1.jpg" },
+            { type: "看圖拼字", clue: "p_____________t", definition: "parrot", answer: "parrot", imagePath: "C-image/C2.jpg" },
+            { type: "看圖拼字", clue: "p_____________e", definition: "puzzle", answer: "puzzle", imagePath: "C-image/C3.jpg" },
+            { type: "看圖拼字", clue: "r_____________t", definition: "raincoat", answer: "raincoat", imagePath: "C-image/C4.jpg" },
+            { type: "看圖拼字", clue: "m_____________y", definition: "monkey", answer: "monkey", imagePath: "C-image/C5.jpg" },
+            { type: "看圖拼字", clue: "f_____________e", definition: "frisbee", answer: "frisbee", imagePath: "C-image/C6.jpg" },
+            { type: "看圖拼字", clue: "t_____________r", definition: "tiger", answer: "tiger", imagePath: "C-image/C7.jpg" },
+            { type: "看圖拼字", clue: "g_____________es", definition: "glasses", answer: "glasses", imagePath: "C-image/C8.jpg" },
+            { type: "看圖拼字", clue: "p_____________r", definition: "pear", answer: "pear", imagePath: "C-image/C9.jpg" },
+            { type: "看圖拼字", clue: "d_____________gs", definition: "dumplings", answer: "dumplings", imagePath: "C-image/C10.jpg" },
+            { type: "看圖拼字", clue: "s_____________d", definition: "skateboard", answer: "skateboard", imagePath: "C-image/C11.jpg" },
+            { type: "看圖拼字", clue: "pray at the t_____________e", definition: "temple", answer: "temple", imagePath: "C-image/C12.jpg" },
+            { type: "看圖拼字", clue: "K_____________a", definition: "Korea", answer: "Korea", imagePath: "C-image/C13.jpg" },
+            { type: "看圖拼字", clue: "have a p_____________c", definition: "picnic", answer: "picnic", imagePath: "C-image/C14.jpg" },
+            { type: "看圖拼字", clue: "h_____________et", definition: "helmet", answer: "helmet", imagePath: "C-image/C15.jpg" },
+            { type: "看圖拼字", clue: "s_____________r", definition: "scooter", answer: "scooter", imagePath: "C-image/C16.jpg" },
+            { type: "看圖拼字", clue: "b_____________n", definition: "balloon", answer: "balloon", imagePath: "C-image/C17.jpg" },
+            { type: "看圖拼字", clue: "go c_____________ping", definition: "camping", answer: "camping", imagePath: "C-image/C18.jpg" },
+            { type: "看圖拼字", clue: "s_____________g", definition: "swing", answer: "swing", imagePath: "C-image/C19.jpg" },
+            { type: "看圖拼字", clue: "t_____________i", definition: "taxi", answer: "taxi", imagePath: "C-image/C20.jpg" },
+            { type: "看圖拼字", clue: "s_____________t", definition: "supermarket", answer: "supermarket", imagePath: "C-image/C21.jpg" },
+            { type: "看圖拼字", clue: "play c_____________s", definition: "chess", answer: "chess", imagePath: "C-image/C22.jpg" },
+            { type: "看圖拼字", clue: "k_____________n", definition: "kitchen", answer: "kitchen", imagePath: "C-image/C23.jpg" },
+            { type: "看圖拼字", clue: "w_____________y", definition: "windy", answer: "windy", imagePath: "C-image/C24.jpg" },
+            { type: "看圖拼字", clue: "p_____________n", definition: "popcorn", answer: "popcorn", imagePath: "C-image/C25.jpg" },
+            { type: "看圖拼字", clue: "p_____________ns", definition: "penguins", answer: "penguins", imagePath: "C-image/C26.jpg" },
+            { type: "看圖拼字", clue: "go s_____________g", definition: "sailing", answer: "sailing", imagePath: "C-image/C27.jpg" },
+            { type: "看圖拼字", clue: "n_____________r", definition: "newspaper", answer: "newspaper", imagePath: "C-image/C28.jpg" },
+            { type: "看圖拼字", clue: "o_____________e", definition: "office", answer: "office", imagePath: "C-image/C29.jpg" },
+            { type: "看圖拼字", clue: "m_____________se", definition: "mouse", answer: "mouse", imagePath: "C-image/C30.jpg" },
+            { type: "文意字彙", clue: "You wash the clothes, and I h_____g the clothes. We can work together.", definition: "hang", answer: "hang" },
+            { type: "文意字彙", clue: "Emily doesn't have friends at school. She often feels l_____y.", definition: "lonely", answer: "lonely" },
+            { type: "文意字彙", clue: "I can't open the box. Can you h_____p me?", definition: "help", answer: "help" },
+            { type: "文意字彙", clue: "I like t_____oes very much. I often eat them with salad or cook them in beef soup.", definition: "tomatoes", answer: "tomatoes" },
+            { type: "文意字彙", clue: "Nick likes to buy books at the b_____e near his home.", definition: "bookstore", answer: "bookstore" },
+            { type: "文意字彙", clue: "My sister s_____ps and mops the floor on weekends.", definition: "sweeps", answer: "sweeps" },
+            { type: "文意字彙", clue: "March t_____y-first is the last day of the month.", definition: "thirty", answer: "thirty" },
+            { type: "文意字彙", clue: "Tina has a new c_____a. She will take some photos.", definition: "camera", answer: "camera" },
+            { type: "文意字彙", clue: "I want to collect some sea s_____ls. Let's go to the beach.", definition: "shells", answer: "shells" },
+            { type: "文意字彙", clue: "I need some s_____r for my coffee. I like sweet (甜的) coffee.", definition: "sugar", answer: "sugar" },
+            { type: "文意字彙", clue: "I live in the city, but my parents live in the c_____y. They like to live in a quiet place.", definition: "country", answer: "country" },
+            { type: "文意字彙", clue: "Mia sometimes washes the d_____hes.", definition: "dishes", answer: "dishes" },
+            { type: "文意字彙", clue: "He's taking a n_____p at his desk; he's very tired.", definition: "nap", answer: "nap" },
+            { type: "文意字彙", clue: "Mia goes to the h_____l to see the doctor.", definition: "hospital", answer: "hospital" },
+            { type: "文意字彙", clue: "Steven loves to read books. He will go to the l_____y this afternoon.", definition: "library", answer: "library" },
+            { type: "文意字彙", clue: "Mike usually goes to work by m_____e.", definition: "motorcycle", answer: "motorcycle" },
+            { type: "文意字彙", clue: "Ted will take a v_____n next week. He will go to Korea.", definition: "vacation", answer: "vacation" },
+            { type: "文意字彙", clue: "Dave is e_____ted about the field trip tomorrow.", definition: "excited", answer: "excited" },
+            { type: "文意字彙", clue: "S_____r is the ninth month of the year.", definition: "September", answer: "September" },
+            { type: "文意字彙", clue: "Kevin's cat is orange and w_____e.", definition: "white", answer: "white" },
+            { type: "文意字彙", clue: "The dog is hungry. Please f_____d the dog.", definition: "feed", answer: "feed" },
+            { type: "文意字彙", clue: "You are dirty. Please take a b_____h before dinner.", definition: "bath", answer: "bath" },
+            { type: "文意字彙", clue: "We write new words(字) in our n_____k and read them every day.", definition: "notebook", answer: "notebook" },
+            { type: "文意字彙", clue: "Lina is a s_____r. She sings well (很好地).", definition: "singer", answer: "singer" },
+            { type: "文意字彙", clue: "Ben usually has some s_____n milk for breakfast.", definition: "soybean", answer: "soybean" },
+            { type: "文意字彙", clue: "Daniel usually has a sandwich and milk for b_____t in the morning.", definition: "breakfast", answer: "breakfast" },
+            { type: "文意字彙", clue: "Henry is eating lunch in the d_____g room.", definition: "dining", answer: "dining" },
+            { type: "文意字彙", clue: "Your hands are cold. Put on (戴上) your g_____es.", definition: "gloves", answer: "gloves" },
+            { type: "文意字彙", clue: "I s_____m go to the farm. I only go there twice a year.", definition: "seldom", answer: "seldom" },
+            { type: "文意字彙", clue: "Leo n_____r washes his clothes. His mom always does it for him.", definition: "never", answer: "never" },
+            { type: "文意字彙", clue: "I see many shapes on the card. They are r_____es, circles, and triangles.", definition: "rectangles", answer: "rectangles" },
+            { type: "文意字彙", clue: "My father will eat a s_____h for dinner tonight.", definition: "sandwich", answer: "sandwich" },
+            { type: "文意字彙", clue: "Mr. Yamaji likes to see maple l_____ves in fall.", definition: "leaves", answer: "leaves" },
+            { type: "文意字彙", clue: "Rick always wears a T-shirt and blue j_____ns.", definition: "jeans", answer: "jeans" },
+            { type: "文意字彙", clue: "Mr. Smith doesn't cook. He always eats at a r_____t.", definition: "restaurant", answer: "restaurant" },
+            { type: "文意字彙", clue: "Gina will have a f_____d trip with her classmates(同班同學) next week. She is very happy.", definition: "field", answer: "field" },
+            { type: "文意字彙", clue: "We will go m_____n climbing this Saturday.", definition: "mountain", answer: "mountain" },
+            { type: "文意字彙", clue: "My favorite a_____l is the shark. It looks strong.", definition: "animal", answer: "animal" },
+            { type: "文意字彙", clue: "I want b_____f noodles for dinner.", definition: "beef", answer: "beef" },
+            { type: "文意字彙", clue: "His f_____e season (季節) is summer. He likes hot weather.", definition: "favorite", answer: "favorite" },
+            { type: "對話填空", clue: "A: This Friday is December 30. What will be the date next Friday? B: It'll be J_____y 6.", definition: "January", answer: "January" },
+            { type: "對話填空", clue: "A: Where are you, Ben? B: I'm on the c_____r of Joy Street and ABC Road.", definition: "corner", answer: "corner" },
+            { type: "對話填空", clue: "A: How is the weather over there? Is it sunny? B: No, it isn't. It's c_____y.", definition: "cloudy", answer: "cloudy" },
+            { type: "對話填空", clue: "A: When do you u_____y eat breakfast? B: At seven o'clock.", definition: "usually", answer: "usually" },
+            { type: "對話填空", clue: "A: Is Mike reading? B: No, he isn't. He's w_____ing a note.", definition: "writing", answer: "writing" },
+            { type: "對話填空", clue: "A: That's a pretty sweater. B: Thank you. It's a p_____t from my sister.", definition: "present", answer: "present" },
+            { type: "對話填空", clue: "A: Can you hear the song? B: Yes. It sounds w_____l.", definition: "wonderful", answer: "wonderful" },
+            { type: "對話填空", clue: "A: What is your t_____e number? B: It's 2701-1234.", definition: "telephone", answer: "telephone" },
+            { type: "對話填空", clue: "A: How often does he go shopping? B: He goes shopping o_____e a month.", definition: "once", answer: "once" },
+            { type: "對話填空", clue: "A: Can Helen play the piano? B: No, she can't. But she can play the v_____n.", definition: "violin", answer: "violin" },
+            { type: "對話填空", clue: "A: What do you want? B: I want a g_____s of water, please.", definition: "glass", answer: "glass" },
+            { type: "對話填空", clue: "A: Are your hands c_____n? B: No, they're not. They're dirty.", definition: "clean", answer: "clean" },
+            { type: "對話填空", clue: "A: What's your favorite s_____t at school? B: It is math.", definition: "subject", answer: "subject" },
+            { type: "對話填空", clue: "A: Does Steven like to play c_____r games at home in his free time? B: No. He likes to read.", definition: "computer", answer: "computer" },
+            { type: "對話填空", clue: "A: W_____e pencil is this? B: It's Rita's.", definition: "Whose", answer: "Whose" },
+            { type: "對話填空", clue: "A: You look u_____y. Are you OK? B: I can't find my dog. I'm sad.", definition: "unhappy", answer: "unhappy" },
+            { type: "對話填空", clue: "A: Why do you go to the gym every day? B: I like to e_____e.", definition: "exercise", answer: "exercise" },
+            { type: "對話填空", clue: "A: Which do you want to put on your egg, pepper or k_____p? B: I want pepper, please.", definition: "ketchup", answer: "ketchup" },
+            { type: "對話填空", clue: "A: Will you go to Japan by ship next week? B: No. That's too slow. I'll go by a_____e.", definition: "airplane", answer: "airplane" },
+            { type: "對話填空", clue: "A: What do you want? B: I want three b_____les of water.", definition: "bottles", answer: "bottles" },
+            { type: "對話填空", clue: "A: What kind of water sports do you like? B: I like to go s_____fing.", definition: "surfing", answer: "surfing" },
+            { type: "對話填空", clue: "A: What do you usually have for breakfast? B: I usually have a bagel and a b_____le of milk for breakfast.", definition: "bottle", answer: "bottle" },
+            { type: "對話填空", clue: "A: Where's my c_____e? I can't find it. B: Let me dial your number now. Listen! It's ringing (響) nearby. A: Oh my! It's under my bag. Thanks for your help.", definition: "cellphone", answer: "cellphone" },
+            { type: "對話填空", clue: "A: Are you okay? You look wo_____ied. B: I am going to have a math test this afternoon.", definition: "worried", answer: "worried" },
+            { type: "對話填空", clue: "A: The cat is standing b_____d the door. Why? B: It wants to hide from the dog. It is scared (害怕) of the dog.", definition: "behind", answer: "behind" },
+            { type: "對話填空", clue: "A: What do you want for lunch? B: I want two h_____rs and a pizza.", definition: "hamburgers", answer: "hamburgers" },
+            { type: "對話填空", clue: "A: What do you usually do at the beach? B: I c_____ct beautiful shells. See! I have 100 shells in this box.", definition: "collect", answer: "collect" },
+            { type: "對話填空", clue: "A: Do you want some s_____t and pepper on your fried eggs? B: Yes, please.", definition: "salt", answer: "salt" },
+            { type: "對話填空", clue: "A: Which do you like, rice or n_____es? B: I like rice.", definition: "noodles", answer: "noodles" },
+            { type: "對話填空", clue: "A: What will John do tomorrow? B: He will go mountain c_____bing.", definition: "climbing", answer: "climbing" },
+            { type: "文意字彙", clue: "In winter, there is a lot of s_____w in the mountains.", definition: "snow (n.) 雪", answer: "snow" },
+            { type: "文意字彙", clue: "This g_____t tree is about five hundred years old.", definition: "giant (adj.) 巨大的", answer: "giant" },
+            { type: "文意字彙", clue: "The little girl has a cute r_____d face.", definition: "round (adj.) 圓形的", answer: "round" },
+            { type: "文意字彙", clue: "The w_____h wears a big black hat.", definition: "witch (n.) 巫婆", answer: "witch" },
+            { type: "文意字彙", clue: "The soup is too s_____y; you need to add some water.", definition: "salty (adj.) 鹹的", answer: "salty" },
+            { type: "文意字彙", clue: "The man w_____ks his dog in the park every morning.", definition: "walk (v.) 遛(動物)", answer: "walks" },
+            { type: "文意字彙", clue: "Please p_____r some hot water into my cup.", definition: "pour (v.) 倒", answer: "pour" },
+            { type: "文意字彙", clue: "I share my s_____t with my best friend.", definition: "secret (n.) 祕密", answer: "secret" },
+            { type: "文意字彙", clue: "Mary enjoys her l_____e on the farm very much.", definition: "life (n.) 生活", answer: "life" },
+            { type: "文意字彙", clue: "I want to go on a t_____p with my family.", definition: "trip (n.) 旅行", answer: "trip" },
+            { type: "文意字彙", clue: "My brother likes to drink milk tea with i_____e.", definition: "ice (n.) 冰", answer: "ice" },
+            { type: "文意字彙", clue: "Be careful not to b_____k the glass bowl.", definition: "break (v.) 打破", answer: "break" },
+            { type: "文意字彙", clue: "Let's row a boat down the r_____r.", definition: "river (n.) 河流", answer: "river" },
+            { type: "文意字彙", clue: "The sun r_____s behind the mountains.", definition: "rise (v.) 聳立；升起", answer: "rises" },
+            { type: "文意字彙", clue: "In winter, white snow c_____s the roofs of the houses.", definition: "cover (v.) 覆蓋", answer: "covers" },
+            { type: "文意字彙", clue: "After you peel the mango, put the s_____n in the trash bag.", definition: "skin (n.) 皮", answer: "skin" },
+            { type: "文意字彙", clue: "Can you see the t_____y ants in the tree?", definition: "tiny (adj.) 細小的", answer: "tiny" },
+            { type: "文意字彙", clue: "The s_____d grow fast with water and sun.", definition: "seed (n.) 種子", answer: "seeds" },
+            { type: "文意字彙", clue: "Lemon juice is very s_____r, so I always add water and sugar to it.", definition: "sour (adj.) 酸的", answer: "sour" },
+            { type: "文意字彙", clue: "The c_____n soup tastes nice and sweet.", definition: "corn (n.) 玉米", answer: "corn" },
+            { type: "文意字彙", clue: "A wildfire b_____s down the forest and village.", definition: "burn (v.) 燒", answer: "burns" },
+            { type: "文意字彙", clue: "Many soldiers die in the w_____r.", definition: "war (n.) 戰爭", answer: "war" },
+            { type: "文意字彙", clue: "We will s_____y in the town for three days.", definition: "stay (v.) 停留；留下", answer: "stay" },
+            { type: "文意字彙", clue: "The blue team beats the red team and w_____s the game.", definition: "win (v.) 獲勝；贏", answer: "wins" },
+            { type: "文意字彙", clue: "Music shows at the Kaohsiung Music Center a_____t visitors from other cities.", definition: "attract (v.) 吸引", answer: "attract" },
+            { type: "文意字彙", clue: "We can r_____x at the café in the Pier-2 Art Center.", definition: "relax (v.) 放鬆；休息", answer: "relax" },
+            { type: "文意字彙", clue: "Dave's family owns a large piece of l_____d in the country.", definition: "land (n.) 土地；陸地", answer: "land" },
+            { type: "文意字彙", clue: "I don't like this t_____e of movie.", definition: "type (n.) 種類", answer: "type" },
+            { type: "文意字彙", clue: "The muntjacs b_____k when they sense danger.", definition: "bark (v.) 吠叫", answer: "bark" },
+            { type: "文意字彙", clue: "Please use a red pen to m_____k the wrong answers on your test.", definition: "mark (v.) 標記", answer: "mark" },
+            { type: "文意字彙", clue: "The boy helps his mother h_____g the millet to dry.", definition: "hang (v.) 吊掛", answer: "hang" },
+            { type: "文意字彙", clue: "Students at Padan Asang School s_____y many interesting things.", definition: "study (v.) 研讀", answer: "study" },
+            { type: "文意字彙", clue: "Jess is r_____ing her new song in the studio.", definition: "record (v.) 錄音", answer: "recording" },
+            { type: "文意字彙", clue: "The chef is good at making d_____t.", definition: "dessert (n.) 甜點", answer: "dessert" },
+            { type: "文意字彙", clue: "We usually have three or four d_____s for dinner.", definition: "dish (n.) 菜餚", answer: "dishes" },
+            { type: "文意字彙", clue: "The boy is p_____d of his hometown, Kaohsiung.", definition: "proud (adj.) 自豪的", answer: "proud" },
+            { type: "文意字彙", clue: "We can take a boat to the i_____d.", definition: "island (n.) 島嶼", answer: "island" },
+            { type: "文意字彙", clue: "My father is a s_____r; he works on a ship.", definition: "sailor (n.) 水手", answer: "sailor" },
+            { type: "文意字彙", clue: "The forest is in the n_____h of the city.", definition: "north (n.) 北方", answer: "north" },
+            { type: "文意字彙", clue: "The stars l_____t up the night sky.", definition: "light (v.) 點亮", answer: "light" },
+            { type: "文意字彙", clue: "C_____s give us light when it is dark.", definition: "candle (n.) 蠟燭", answer: "candles" },
+            { type: "文意字彙", clue: "All Saints' Day is a day to r_____r loved ones.", definition: "remember (v.) 記得", answer: "remember" },
+            { type: "文意字彙", clue: "Don't f_____t to turn off the lights before you leave.", definition: "forget (v.) 忘記", answer: "forget" },
+            { type: "文意字彙", clue: "Can you b_____g me a glass of orange juice?", definition: "bring (v.) 帶來", answer: "bring" },
+            { type: "文意字彙", clue: "The sunset looks w_____l with its colorful clouds.", definition: "wonderful (adj.) 奇妙的", answer: "wonderful" },
+            { type: "文意字彙", clue: "Jane has two p_____s: a cat and a turtle.", definition: "pet (n.) 寵物", answer: "pets" },
+            { type: "文意字彙", clue: "We need t_____s to fix the bike.", definition: "tool (n.) 工具", answer: "tools" },
+            { type: "文意字彙", clue: "The cookie is in the s_____e of a star.", definition: "shape (n.) 形狀", answer: "shape" },
+            { type: "文意字彙", clue: "Pizza is very p_____r with children.", definition: "popular (adj.) 受歡迎的", answer: "popular" },
+            { type: "文意字彙", clue: "The bus is c_____d with people.", definition: "crowded (adj.) 擁擠的", answer: "crowded" },
+            { type: "文意字彙", clue: "The f_____t is full of trees and animals.", definition: "forest (n.) 森林", answer: "forest" },
+            { type: "文意字彙", clue: "There is a lot of t_____c in the city.", definition: "traffic (n.) 交通", answer: "traffic" },
+            { type: "文意字彙", clue: "The s_____d of birds wakes me up in the morning.", definition: "sound (n.) 聲音", answer: "sound" },
+            { type: "文意字彙", clue: "I have sandwiches with milk for b_____t.", definition: "breakfast (n.) 早餐", answer: "breakfast" },
+            { type: "文意字彙", clue: "An umbrella can p_____t you from the sun.", definition: "protect (v.) 保護", answer: "protect" },
+            { type: "文意字彙", clue: "Can you help me s_____e this math problem?", definition: "solve (v.) 解決", answer: "solve" },
+            { type: "文意字彙", clue: "It is not s_____e to go out alone at night.", definition: "safe (adj.) 平安的", answer: "safe" },
+            { type: "文意字彙", clue: "Let's go to school t_____r.", definition: "together (adv.) 一起", answer: "together" },
+            { type: "文意字彙", clue: "Soccer is my favorite s_____t; I like to play it with my friends.", definition: "sport (n.) 運動", answer: "sport" },
+            { type: "文意字彙", clue: "My parents s_____t me when I try new things.", definition: "support (v.) 幫助 ; 支持", answer: "support" },
+            { type: "文意字彙", clue: "Amy will p_____e some food for the party.", definition: "provide (v.) 提供", answer: "provide" },
+            { type: "文意字彙", clue: "I read the d_____y news online.", definition: "daily (adj.) 每日的", answer: "daily" },
+            { type: "文意字彙", clue: "Can you m_____e the chairs to the living room?", definition: "move (v.) 移動", answer: "move" },
+            { type: "文意字彙", clue: "Jordan is s_____g enough to push a car.", definition: "strong (adj.) 強壯的", answer: "strong" },
+            { type: "文意字彙", clue: "Please do not make l_____d noises in the library.", definition: "loud (adj.) 響亮的 ; 大聲的", answer: "loud" },
+            { type: "文意字彙", clue: "The park is about one k_____r from my house.", definition: "kilometer (n.) 公里", answer: "kilometer" },
+            { type: "文意字彙", clue: "It's fun to r_____w a boat on a lake.", definition: "row (v.) 划 (船)", answer: "row" },
+            { type: "文意字彙", clue: "L_____s change color in autumn.", definition: "leaf (n.) 葉子（複數形為 leaves）", answer: "leaves" },
+            { type: "文意字彙", clue: "Jane wants to b_____e a doctor in the future.", definition: "become (v.) 變成", answer: "become" },
+            { type: "文意字彙", clue: "A c_____r shows the days of the month.", definition: "calendar (n.) 月曆 ; 日曆", answer: "calendar" },
+            { type: "文意字彙", clue: "Sandra loves the s_____s from her friends on her birthday.", definition: "surprise (n.) 驚喜", answer: "surprises" },
+            { type: "文意字彙", clue: "I use a b_____h to paint a picture.", definition: "brush (n.) 畫筆", answer: "brush" },
+            { type: "文意字彙", clue: "Many people visit this t_____e to pray for good luck.", definition: "temple (n.) 寺廟", answer: "temple" },
+            { type: "文意字彙", clue: "The sun s_____s brightly in the sky.", definition: "shine (v.) 閃耀", answer: "shines" },
+            { type: "文意字彙", clue: "The artist is famous for his u_____e style.", definition: "unique (adj.) 獨特的", answer: "unique" },
+            { type: "文意字彙", clue: "The music f_____l begins on July 10 this year.", definition: "festival (n.) 節慶", answer: "festival" },
+            { type: "文意字彙", clue: "The box moves fast on two w_____s.", definition: "wheel (n.) 輪子", answer: "wheels" },
+            { type: "文意字彙", clue: "P_____l the door to open it; don't push it.", definition: "pull (v.) 拉", answer: "pull" },
+            { type: "文意字彙", clue: "The company is o_____g Bess a good job.", definition: "offer (v.) 給予", answer: "offering" },
+            { type: "文意字彙", clue: "In Japan, people b_____w to show respect.", definition: "bow (v.) 鞠躬", answer: "bow" },
+            { type: "文意字彙", clue: "The medicine is b_____r, so I don't want to take it.", definition: "bitter (adj.) 苦的", answer: "bitter" },
+            { type: "文意字彙", clue: "The s_____r of the bookstore is an old man.", definition: "shopkeeper (n.) 老闆 ; 店主", answer: "shopkeeper" },
+            { type: "文意字彙", clue: "The boy is sad because his dog is d_____d.", definition: "dead (adj.) 去世的 ; 死亡的", answer: "dead" },
+            { type: "文意字彙", clue: "The g_____t in the movie is very scary.", definition: "ghost (n.) 幽靈 ; 鬼", answer: "ghost" },
+            { type: "文意字彙", clue: "People go up the tall t_____r to see the city.", definition: "tower (n.) 塔", answer: "tower" },
+            { type: "文意字彙", clue: "The sky is c_____r and sunny today.", definition: "clear (adj.) 晴朗的", answer: "clear" },
+            { type: "文意字彙", clue: "There are many k_____s of vegetables at the market.", definition: "kind (n.) 種類", answer: "kinds" },
+            { type: "文意字彙", clue: "People will b_____d a new library in this city.", definition: "build (v.) 建造", answer: "build" },
+            { type: "文意字彙", clue: "Students can c_____e fun stories with their own ideas.", definition: "create (v.) 創造", answer: "create" },
+            { type: "文意字彙", clue: "We use w_____d to make tables and chairs.", definition: "wood (n.) 木頭", answer: "wood" },
+            { type: "文意字彙", clue: "The farmer is using a machine to s_____d seeds.", definition: "spread (v.) 撒 ; 散布", answer: "spread" },
+            { type: "文意字彙", clue: "Add some s_____t, and the soup will taste better.", definition: "salt (n.) 鹽", answer: "salt" },
+            { type: "文意字彙", clue: "I like to s_____e down the hill on my sled.", definition: "slide (v.) 滑", answer: "slide" },
+            { type: "文意字彙", clue: "Today's l_____n is about dinosaurs.", definition: "lesson (n.) 課 ; 教訓", answer: "lesson" },
+            { type: "文意字彙", clue: "You should not l_____e to your parents or friends.", definition: "lie (v.) 說謊", answer: "lie" },
+            { type: "文意字彙", clue: "The trip to the zoo is a great e_____e for children.", definition: "experience (n.) 經驗", answer: "experience" },
+            { type: "文意字彙", clue: "The girl has a l_____y smile, and everyone likes her.", definition: "lovely (adj.) 漂亮的 ; 可愛的", answer: "lovely" },
+            { type: "文意字彙", clue: "The s_____d on the beach is hot, so we wear sandals.", definition: "sand (n.) 沙子", answer: "sand" },
+            { type: "文意字彙", clue: "The b_____e prince saves the girl from the monster.", definition: "brave (adj.) 勇敢的", answer: "brave" },
+            { type: "文意字彙", clue: "The big snake is three m_____s long.", definition: "meter (n.) 公尺", answer: "meters" },
+            { type: "文意字彙", clue: "Watch out! A s_____k is swimming toward you.", definition: "shark (n.) 鯊魚", answer: "shark" },
+            { type: "文意字彙", clue: "Coins s_____k in water.", definition: "sink (v.) 沉", answer: "sink" },
+            { type: "文意字彙", clue: "John is going to m_____y Jane next month.", definition: "marry (v.) 和...結婚", answer: "marry" },
+            { type: "文意字彙", clue: "My father is the c_____n of the ship.", definition: "captain (n.) 船長", answer: "captain" },
+            { type: "文意字彙", clue: "Mary r_____s to lend me her comic books.", definition: "refuse (v.) 拒絕", answer: "refuses" },
+            { type: "文意字彙", clue: "Eating vegetables is good for h_____h.", definition: "health (n.) 健康", answer: "health" },
+            { type: "文意字彙", clue: "Tom is b_____y with his science report, so he can't go to the party.", definition: "busy (adj.) 忙碌的", answer: "busy" },
+            { type: "文意字彙", clue: "Betty's p_____s love her and take good care of her.", definition: "parents (n.) 父母 ; 爸爸媽媽", answer: "parents" },
+            { type: "文意字彙", clue: "This a_____a of the city is very busy.", definition: "area (n.) 區域", answer: "area" },
+            { type: "文意字彙", clue: "Camels can walk for days in the d_____t without water.", definition: "desert (n.) 沙漠", answer: "desert" },
+            { type: "文意字彙", clue: "The a_____t castle is over a thousand years old.", definition: "ancient (adj.) 古代的", answer: "ancient" },
+            { type: "文意字彙", clue: "People climb lots of s_____s to reach the palace.", definition: "stair (n.) 階梯", answer: "stairs" },
+            { type: "文意字彙", clue: "They b_____e the story about the lost treasure.", definition: "believe (v.) 相信", answer: "believe" },
+            { type: "文意字彙", clue: "The dates are f_____h and sweet.", definition: "fresh (adj.) 新鮮的", answer: "fresh" },
+            { type: "文意字彙", clue: "The man uses a net to c_____h fish.", definition: "catch (v.) 抓住", answer: "catch" },
+            { type: "文意字彙", clue: "Billy has a great i_____a for the school party.", definition: "idea (n.) 點子 ; 想法", answer: "idea" },
+            { type: "文意字彙", clue: "Every winter, the birds r_____n to the warm south.", definition: "return (v.) 返回", answer: "return" },
+            { type: "文意字彙", clue: "Mom can't f_____d her cellphone. Do you see it anywhere?", definition: "find (v.) 找到", answer: "find" },
+            { type: "文意字彙", clue: "I can't h_____r you. Can you speak up, please?", definition: "hear (v.) 聽見", answer: "hear" },
+            { type: "文意字彙", clue: "The sand is s_____t.", definition: "soft (adj.) 柔軟的", answer: "soft" },
+            { type: "文意字彙", clue: "There are many w_____d animals in the forest.", definition: "wild (adj.) 野生的", answer: "wild" },
+            { type: "文意字彙", clue: "We enjoy walking on the p_____s in the garden.", definition: "path (n.) 小徑", answer: "paths" },
+            { type: "文意字彙", clue: "You can r_____h the station by bike in ten minutes.", definition: "reach (v.) 到達", answer: "reach" },
+            { type: "文意字彙", clue: "The road is very w_____e, so cars can drive fast.", definition: "wide (adj.) 寬的", answer: "wide" },
+            { type: "文意字彙", clue: "A monkey is sitting on the b_____h.", definition: "branch (n.) 樹枝", answer: "branch" },
+            { type: "文意字彙", clue: "The old m_____r teaches the young boy to paint.", definition: "master (n.) 大師", answer: "master" },
+            { type: "文意字彙", clue: "This ring is very p_____s to my grandmother.", definition: "precious (adj.) 珍貴的", answer: "precious" },
+            { type: "文意字彙", clue: "Typing 20 words in a minute is s_____w.", definition: "slow (adj.) 慢的", answer: "slow" },
+            { type: "文意字彙", clue: "The fish soup t_____s good.", definition: "taste (v.) 品嚐", answer: "tastes" },
+            { type: "文意字彙", clue: "The class is English. The n_____t class is math.", definition: "next (adj.) 下一個的", answer: "next" },
+            { type: "文意字彙", clue: "The soldiers are a_____g the castle.", definition: "attach (v.) 攻擊", answer: "attacking" },
+            { type: "文意字彙", clue: "I sometimes have a d_____m about flying.", definition: "dream (n.) 夢境", answer: "dream" },
+            { type: "文意字彙", clue: "Please don't s_____p on the grass.", definition: "step (v.) 踏", answer: "step" },
+            { type: "文意字彙", clue: "We plan to camp in the v_____y and watch the sunrise.", definition: "valley (n.) 山谷", answer: "valley" },
+            { type: "文意字彙", clue: "The w_____e is the largest animal in the world.", definition: "whale (n.) 鯨魚", answer: "whale" },
+            { type: "文意字彙", clue: "The heart is a s_____l of love.", definition: "symbol (n.) 象徵", answer: "symbol" },
+            { type: "文意字彙", clue: "The w_____s today are too strong for swimming.", definition: "wave (n.) 波浪", answer: "waves" },
+            { type: "文意字彙", clue: "We need a h_____r to hit the nail into the wall.", definition: "hammer (n.) 槌子", answer: "hammer" },
+            { type: "文意字彙", clue: "Let's s_____l across the lake on my boat.", definition: "sail (v.) 航行", answer: "sail" },
+            { type: "文意字彙", clue: "Today is a s_____l day because it's my twentieth birthday.", definition: "special (adj.) 特別的", answer: "special" },
+            { type: "文意字彙", clue: "Marujo m_____s 'sailor' in Portuguese.", definition: "mean (v.) 意思是", answer: "means" },
+            { type: "文意字彙", clue: "Mary could be a great a_____t because she paints very well.", definition: "artist (n.) 藝術家", answer: "artist" },
+            { type: "文意字彙", clue: "We must take care of the e_____h.", definition: "earth (n.) 地球", answer: "earth" },
+            { type: "文意字彙", clue: "I t_____k about my grandpa when I feel sad.", definition: "think (v.) 想", answer: "think" }
+        ];
+
+
+        let current = 0;
+        let userAnswers = Array(questions.length).fill("");
+        const TOTAL_TIME_SECONDS = 70 * 60;
+        let remainingSeconds = TOTAL_TIME_SECONDS;
+        let timerInterval = null;
+        let startTime = null;
+        let timeUp = false;
+        const REQUIRED_REWRITES = 3;
+        let correctionEntries = {};
+
+        window.onload = () => {
+            const select = document.getElementById("questionSelect");
+            questions.forEach((_, i) => {
+                const option = document.createElement("option");
+                option.value = i;
+                option.text = `題目 ${i + 1}`;
+                select.appendChild(option);
+            });
+            loadQuestion();
+            startTime = Date.now();
+            startTimer();
+        };
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                saveAnswer();
+                nextQuestion();
+            }
+        });
+
+        function goToPage(url) {
+            window.location.href = url;
+        }
+
+        function manualSubmit() {
+            saveAnswer();
+            nextQuestion();
+        }
+
+        function loadQuestion() {
+            document.getElementById("question-number").textContent = `${current + 1}. ${questions[current].type}`;
+            const currentQuestion = questions[current];
+
+            // 顯示相關圖片
+            const imageElement = document.getElementById("question-image");
+            const questionTextElement = document.getElementById("question-text");
+
+            // 優先使用實際圖片文件（如果有的話，例如看圖拼字和段落填空題目）
+            if (currentQuestion.imagePath) {
+                imageElement.innerHTML = `<img src="${currentQuestion.imagePath}" alt="Question image" />`;
+                imageElement.style.display = "flex";
+                imageElement.style.background = "transparent";
+                imageElement.style.justifyContent = "center";
+                imageElement.style.alignItems = "center";
+                // 對於段落填空和看圖拼字，先顯示圖片，後顯示填空題目
+                if (currentQuestion.type === "段落填空" || currentQuestion.type === "看圖拼字") {
+                    questionTextElement.textContent = currentQuestion.clue;
+                    questionTextElement.style.marginTop = "20px";
+                } else {
+                    questionTextElement.textContent = currentQuestion.clue;
+                }
+            } else {
+                // 沒有圖片時隱藏圖片元素
+                imageElement.style.display = "none";
+                questionTextElement.textContent = currentQuestion.clue;
+            }
+
+            document.getElementById("answer").value = userAnswers[current] || "";
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("scoreboard").textContent = "";
+            document.getElementById("answers").style.display = "none";
+            document.getElementById("questionSelect").value = current;
+            document.getElementById("answer").style.display = "inline-block";
+            document.getElementById("submitBtn").style.display = "inline-block";
+        }
+
+        function getImagePath(clue) {
+            // 根據題目內容匹配圖片和emoji
+            const imageMap = {
+                'pigeon': { emoji: '🕊️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'whisper': { emoji: '🤫', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'computer': { emoji: '💻', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'library': { emoji: '📚', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'restaurant': { emoji: '🍽️', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'chubby': { emoji: '😊', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'desert': { emoji: '🏜️', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'arrive': { emoji: '✈️', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'kitten': { emoji: '🐱', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'crowded': { emoji: '👥', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'responsible': { emoji: '✅', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'silent': { emoji: '🤐', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'practices': { emoji: '🎹', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'whiteboard': { emoji: '📋', bg: 'linear-gradient(45deg, #FFFFFF, #E0E0E0)' },
+                'wednesday': { emoji: '📅', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'factory': { emoji: '🏭', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'strong': { emoji: '💪', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'express': { emoji: '💬', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'ceiling': { emoji: '🏠', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'traffic': { emoji: '🚦', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'valuable': { emoji: '💎', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'welcome': { emoji: '👋', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'promised': { emoji: '🤝', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'judge': { emoji: '⚖️', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'microwave': { emoji: '🔥', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'necklace': { emoji: '💍', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'towel': { emoji: '🧺', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'successful': { emoji: '🎯', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'jacket': { emoji: '🧥', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'dangerous': { emoji: '⚠️', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'hospital': { emoji: '🏥', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'intelligent': { emoji: '🧠', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'ordinary': { emoji: '📝', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'sharp': { emoji: '🔪', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'wonder': { emoji: '🤔', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'trumpet': { emoji: '🎺', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'envelope': { emoji: '✉️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'earthquake': { emoji: '🌍', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'principal': { emoji: '👨‍🏫', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'courage': { emoji: '🦁', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'difficult': { emoji: '😓', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'income': { emoji: '💰', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'airport': { emoji: '✈️', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'inspired': { emoji: '💡', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'curtain': { emoji: '🪟', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'umbrella': { emoji: '☂️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'recycled': { emoji: '♻️', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'cousin': { emoji: '👨‍👩‍👧‍👦', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'itchy': { emoji: '🦟', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'forest': { emoji: '🌲', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'narrow': { emoji: '🛤️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'struck': { emoji: '⏰', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'temple': { emoji: '🛕', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'attention': { emoji: '👀', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'mistake': { emoji: '❌', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'alone': { emoji: '👤', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'importance': { emoji: '⭐', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'drawer': { emoji: '🗄️', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'autumn': { emoji: '🍂', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'lettuce': { emoji: '🥬', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'measure': { emoji: '⚖️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'seldom': { emoji: '🚶', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'million': { emoji: '💵', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'unique': { emoji: '🎤', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'quarter': { emoji: '🕐', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'embarrassed': { emoji: '😳', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'address': { emoji: '📍', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'difficulty': { emoji: '😕', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'midnight': { emoji: '🌙', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'cafeteria': { emoji: '🍽️', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'dentist': { emoji: '🦷', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'prefer': { emoji: '🎬', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'scarf': { emoji: '🧣', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'parrot': { emoji: '🦜', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'bench': { emoji: '🪑', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'sandwich': { emoji: '🥪', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'wrist': { emoji: '🤲', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'comedies': { emoji: '😂', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'sentence': { emoji: '📝', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'niece': { emoji: '👧', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'snow': { emoji: '❄️', bg: 'linear-gradient(45deg, #E3F2FD, #BBDEFB)' },
+                'giant': { emoji: '👹', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'round': { emoji: '⭕', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'witch': { emoji: '🧙', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'salty': { emoji: '🧂', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'walk': { emoji: '🚶', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'walks': { emoji: '🚶', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'pour': { emoji: '💧', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'secret': { emoji: '🤐', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'life': { emoji: '🌱', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'trip': { emoji: '✈️', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'ice': { emoji: '🧊', bg: 'linear-gradient(45deg, #E3F2FD, #BBDEFB)' },
+                'break': { emoji: '💔', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'river': { emoji: '🌊', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'rise': { emoji: '🌅', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'rises': { emoji: '🌅', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'cover': { emoji: '🛡️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'covers': { emoji: '🛡️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'skin': { emoji: '👤', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'tiny': { emoji: '🔬', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'seed': { emoji: '🌱', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'seeds': { emoji: '🌱', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'sour': { emoji: '🍋', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'corn': { emoji: '🌽', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'burn': { emoji: '🔥', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'burns': { emoji: '🔥', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'war': { emoji: '⚔️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'stay': { emoji: '🏠', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'win': { emoji: '🏆', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'wins': { emoji: '🏆', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'attract': { emoji: '🧲', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'relax': { emoji: '🧘', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'land': { emoji: '🌍', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'type': { emoji: '📝', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'bark': { emoji: '🐕', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'mark': { emoji: '✏️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'hang': { emoji: '🪝', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'study': { emoji: '📚', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'record': { emoji: '🎤', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'recording': { emoji: '🎤', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'dessert': { emoji: '🍰', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'dish': { emoji: '🍽️', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'dishes': { emoji: '🍽️', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'proud': { emoji: '😊', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'island': { emoji: '🏝️', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'sailor': { emoji: '⚓', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'north': { emoji: '🧭', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'light': { emoji: '💡', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'candle': { emoji: '🕯️', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'candles': { emoji: '🕯️', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'remember': { emoji: '🧠', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'forget': { emoji: '❌', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'bring': { emoji: '📦', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'wonderful': { emoji: '✨', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'pet': { emoji: '🐾', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'pets': { emoji: '🐾', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'tool': { emoji: '🔧', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'tools': { emoji: '🔧', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'shape': { emoji: '⭐', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'popular': { emoji: '👥', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'sound': { emoji: '🔊', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'breakfast': { emoji: '🍳', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'protect': { emoji: '🛡️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'solve': { emoji: '✅', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'safe': { emoji: '🔒', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'together': { emoji: '🤝', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'sport': { emoji: '⚽', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'support': { emoji: '💪', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'provide': { emoji: '📦', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'daily': { emoji: '📅', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'move': { emoji: '🚚', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'loud': { emoji: '📢', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'kilometer': { emoji: '📏', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'row': { emoji: '🚣', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'leaf': { emoji: '🍃', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'leaves': { emoji: '🍃', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'become': { emoji: '🔄', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'calendar': { emoji: '📅', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'surprise': { emoji: '🎉', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'surprises': { emoji: '🎉', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'brush': { emoji: '🖌️', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'shine': { emoji: '✨', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'shines': { emoji: '✨', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'festival': { emoji: '🎪', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'wheel': { emoji: '🛞', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'wheels': { emoji: '🛞', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'pull': { emoji: '⬅️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'offer': { emoji: '🤲', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'offering': { emoji: '🤲', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'bow': { emoji: '🙇', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'bitter': { emoji: '😖', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'shopkeeper': { emoji: '👨‍💼', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'dead': { emoji: '💀', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'ghost': { emoji: '👻', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'tower': { emoji: '🗼', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'clear': { emoji: '☀️', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'kind': { emoji: '💝', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'kinds': { emoji: '💝', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'build': { emoji: '🏗️', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'create': { emoji: '✨', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'wood': { emoji: '🪵', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'spread': { emoji: '🌾', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'salt': { emoji: '🧂', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'slide': { emoji: '🛝', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'lesson': { emoji: '📖', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'lie': { emoji: '🤥', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'experience': { emoji: '🎓', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'lovely': { emoji: '💕', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'sand': { emoji: '🏖️', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'brave': { emoji: '🦁', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'meter': { emoji: '📏', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'meters': { emoji: '📏', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'shark': { emoji: '🦈', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'sink': { emoji: '🚰', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'marry': { emoji: '💍', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'captain': { emoji: '👨‍✈️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'refuse': { emoji: '❌', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'refuses': { emoji: '❌', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'health': { emoji: '💚', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'busy': { emoji: '📅', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'parent': { emoji: '👨‍👩‍👧', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'parents': { emoji: '👨‍👩‍👧', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'area': { emoji: '📍', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'ancient': { emoji: '🏛️', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'stair': { emoji: '🪜', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'stairs': { emoji: '🪜', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'believe': { emoji: '🙏', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'fresh': { emoji: '🥬', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'catch': { emoji: '🎣', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'idea': { emoji: '💡', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'return': { emoji: '↩️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'find': { emoji: '🔍', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'hear': { emoji: '👂', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'soft': { emoji: '🪶', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'wild': { emoji: '🐺', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'path': { emoji: '🛤️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'paths': { emoji: '🛤️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'reach': { emoji: '✋', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'wide': { emoji: '🛣️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'master': { emoji: '👨‍🎓', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'precious': { emoji: '💎', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'slow': { emoji: '🐌', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'taste': { emoji: '👅', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'tastes': { emoji: '👅', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'next': { emoji: '➡️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'attack': { emoji: '⚔️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'attacking': { emoji: '⚔️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'dream': { emoji: '💭', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'step': { emoji: '👣', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'valley': { emoji: '🏔️', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'whale': { emoji: '🐋', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'symbol': { emoji: '❤️', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'wave': { emoji: '🌊', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'waves': { emoji: '🌊', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'hammer': { emoji: '🔨', bg: 'linear-gradient(45deg, #9E9E9E, #757575)' },
+                'sail': { emoji: '⛵', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'special': { emoji: '🎂', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'mean': { emoji: '📝', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'means': { emoji: '📝', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'artist': { emoji: '🎨', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'earth': { emoji: '🌍', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'think': { emoji: '🤔', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' }
+            };
+
+            const clueLower = clue.toLowerCase();
+            for (const [keyword, data] of Object.entries(imageMap)) {
+                if (clueLower.includes(keyword)) {
+                    return data;
+                }
+            }
+            return null;
+        }
+
+        function saveAnswer() {
+            const input = document.getElementById("answer").value.trim();
+            userAnswers[current] = input;
+        }
+
+        function nextQuestion() {
+            if (current < questions.length - 1) {
+                current++;
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function jumpToQuestion() {
+            saveAnswer();
+            current = parseInt(document.getElementById("questionSelect").value);
+            loadQuestion();
+        }
+
+        function showFinalResult() {
+            const submitButton = document.getElementById("submitBtn");
+            if (submitButton.style.display === "none") {
+                return;
+            }
+
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            remainingSeconds = Math.max(0, remainingSeconds);
+            updateTimerDisplay();
+
+            document.getElementById("question-number").textContent = timeUp ? "⏰ 時間到！" : "🎉 全部完成！";
+            document.getElementById("question-text").textContent = "";
+            document.getElementById("answer").style.display = "none";
+            submitButton.style.display = "none";
+            const feedbackEl = document.getElementById("feedback");
+            if (timeUp) {
+                feedbackEl.textContent = "時間到！";
+            }
+
+            const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+            const elapsedSeconds = startTime ? Math.min(TOTAL_TIME_SECONDS, Math.floor((Date.now() - startTime) / 1000)) : 0;
+            const timeSuffix = timeUp ? "（時間到）" : "";
+            document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}<br>花費時間：${formatElapsedTime(elapsedSeconds)}${timeSuffix}`;
+
+            const incorrectIndices = getIncorrectIndices();
+            renderCorrectionSection(incorrectIndices);
+
+            const answerBox = document.getElementById("answers");
+            answerBox.style.display = "block";
+            answerBox.innerHTML = "<h3>🧠 正確答案：</h3><ol>" +
+                questions.map((q, i) => {
+                    const ua = userAnswers[i] || "(未作答)";
+                    const ok = (userAnswers[i] || "") === q.answer;
+                    return `<li><strong>${q.clue}</strong>: ${q.definition}<br>
+                      你的答案：<strong>${ua}</strong> ${ok ? '✅' : '❌'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                }).join("") + "</ol>";
+        }
+
+        function getGrade(score) {
+            const pct = (score / questions.length) * 100;
+            if (pct === 100) return "🎓 Perfect! Great job!";
+            if (pct >= 70) return "👍 Good work!";
+            return "📝 Keep practicing!";
+        }
+
+        function getIncorrectIndices() {
+            const incorrect = [];
+            userAnswers.forEach((ans, i) => {
+                if ((ans || "") !== questions[i].answer) {
+                    incorrect.push(i);
+                }
+            });
+            return incorrect;
+        }
+
+        function renderCorrectionSection(incorrectIndices) {
+            const section = document.getElementById("correctionSection");
+            if (!section) return;
+
+            if (incorrectIndices.length === 0) {
+                section.innerHTML = "<p>🎉 全部答對或已全部訂正完成，恭喜！</p>";
+                document.getElementById("feedback").textContent = "訂正已完成，將於 1.5 秒後回到主畫面。";
+                setTimeout(() => {
+                    goToPage('home.html');
+                }, 1500);
+                return;
+            }
+
+            const fields = incorrectIndices.map((index) => {
+                const question = questions[index];
+                const currentEntries = correctionEntries[index] || Array(REQUIRED_REWRITES).fill("");
+                const imageMarkup = question.imagePath
+                    ? `<div class="correction-image"><img src="${question.imagePath}" alt="Question ${index + 1} image" /></div>`
+                    : "";
+                const inputs = currentEntries.map((value, rewriteIdx) => `
+                    <input type="text" id="correction-${index}-${rewriteIdx}" name="correction-${index}-${rewriteIdx}" value="${value}" autocomplete="off" />
+                `).join("");
+
+                return `
+                    <div class="correction-item">
+                        <label>${index + 1}. ${question.clue}</label>
+                        ${imageMarkup}
+                        <div class="hint">提示：${question.definition}</div>
+                        <div class="answer">正確答案：${question.answer}</div>
+                        <div class="correction-inputs">
+                            ${inputs}
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
+            const shortcutTips = `
+                <div class="tab-tip">
+                    <span class="key-badge">Tab<span class="icon">↹</span></span>
+                    <span>輸入完成後按下 <strong>鍵盤上的 Tab</strong>，可快速跳到下一個訂正欄位。</span>
+                </div>
+                <div class="tab-tip">
+                    <span class="key-badge">Shift<span class="icon">⇧</span></span>
+                    <span class="plus-sign">+</span>
+                    <span class="key-badge">Tab<span class="icon">↹</span></span>
+                    <span>按下 <strong>鍵盤上的 Shift + Tab</strong> 回上一格，迅速返回前一個訂正欄位。</span>
+                </div>
+                <div class="tab-example">例：在第一格輸入答案 → 按 Tab → 立刻切換到第二格。</div>
+            `;
+
+            section.innerHTML = `
+                <h3>訂正區</h3>
+                <p class="note">請將每一題的正確答案在空格中抄寫 ${REQUIRED_REWRITES} 次。全部訂正完成後按下「送出訂正」，才會回到主畫面。</p>
+                ${shortcutTips}
+                <form id="correctionForm">
+                    ${fields}
+                    <button type="submit">送出訂正</button>
+                    <span class="correction-warning">※ 全部訂正完才可以送出訂正</span>
+                </form>
+            `;
+
+            document.getElementById("feedback").textContent = "請完成訂正後再送出。";
+
+            const correctionForm = document.getElementById("correctionForm");
+            correctionForm.addEventListener("submit", handleCorrectionSubmit);
+        }
+
+        function handleCorrectionSubmit(event) {
+            event.preventDefault();
+            const feedbackEl = document.getElementById("feedback");
+
+            const incorrectIndices = getIncorrectIndices();
+            if (incorrectIndices.length === 0) {
+                feedbackEl.textContent = "訂正已完成，將於 1.5 秒後回到主畫面。";
+                setTimeout(() => {
+                    goToPage('home.html');
+                }, 1500);
+                return;
+            }
+
+            let allCorrected = true;
+
+            incorrectIndices.forEach((index) => {
+                const answer = questions[index].answer.trim().toLowerCase();
+                const entries = [];
+                for (let rewriteIdx = 0; rewriteIdx < REQUIRED_REWRITES; rewriteIdx++) {
+                    const fieldName = `correction-${index}-${rewriteIdx}`;
+                    const value = (event.target[fieldName]?.value || "").trim();
+                    entries.push(value);
+                }
+                correctionEntries[index] = entries;
+
+                const hasEmpty = entries.some((value) => value === "");
+                const allMatch = entries.every((value) => value.toLowerCase() === answer);
+
+                if (hasEmpty || !allMatch) {
+                    allCorrected = false;
+                } else {
+                    userAnswers[index] = questions[index].answer;
+                }
+            });
+
+            if (allCorrected) {
+                feedbackEl.textContent = "訂正已完成，將於 1.5 秒後回到主畫面。";
+                renderCorrectionSection(getIncorrectIndices());
+            } else {
+                feedbackEl.textContent = "請確認每一題都已正確抄寫三次後再送出。";
+                renderCorrectionSection(getIncorrectIndices());
+            }
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                remainingSeconds--;
+                if (remainingSeconds <= 0) {
+                    remainingSeconds = 0;
+                    updateTimerDisplay();
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    timeUp = true;
+                    saveAnswer();
+                    showFinalResult();
+                    return;
+                }
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const timerElement = document.getElementById("timer");
+            if (!timerElement) return;
+            timerElement.textContent = `剩餘時間 ${formatCountdown(remainingSeconds)}`;
+        }
+
+        function formatCountdown(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+        }
+
+        function formatElapsedTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}分${String(secs).padStart(2, "0")}秒`;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字義填空遊戲</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .quiz-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            min-width: 600px;
+            position: relative;
+        }
+
+        .question-header {
+            text-align: left;
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        .question-content {
+            margin-top: 40px;
+            font-size: 24px;
+        }
+
+        .question-image {
+            margin: 20px auto;
+            width: 400px;
+            height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            font-size: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 15px 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .scoreboard {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .answers {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .nav-panel {
+            margin-top: 20px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .back-button:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="goToPage('../index.html')" class="back-button">← 回上一頁</button>
+
+    <div class="quiz-box">
+        <div class="question-header" id="question-number"></div>
+        <div class="question-content" id="question-text"></div>
+        <div id="question-image" class="question-image"></div>
+        <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+        <br />
+        <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+        <div class="feedback" id="feedback"></div>
+        <div class="scoreboard" id="scoreboard"></div>
+        <div class="answers" id="answers" style="display: none;"></div>
+        <div class="nav-panel">
+            <label for="questionSelect">跳題：</label>
+            <select id="questionSelect" onchange="jumpToQuestion()"></select>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { clue: "He always r___s books before bed.", definition: "He always reads books before bed.", answer: "reads" },
+            { clue: "My mom likes to go for a walk at the p_____.", definition: "My mom likes to go for a walk at the park after dinner.", answer: "park" },
+            { clue: "I usually walk my dog at the p______ in the evening.", definition: "I usually walk my dog at the park in the evening.", answer: "park" },
+            { clue: "Tom enjoys playing with his friends at the p__________.", definition: "Tom enjoys playing with his friends at the playground.", answer: "playground" },
+            { clue: "My favorite activity is playing seesaw at the p__________.", definition: "My favorite activity is playing seesaw at the playground.", answer: "playground" },
+            { clue: "He is working at the o_______ this afternoon.", definition: "He is working at the office this afternoon.", answer: "office" },
+            { clue: "You should go to the teacher’s o _______.", definition: "You should go to the teacher’s office.", answer: "office" },
+            { clue: "There are so many animals in the z ______.", definition: "There are so many animals in the zoo.", answer: "zoo" },
+            { clue: "You can see a lion in the z ______.", definition: "You can see a lion in the zoo.", answer: "zoo" },
+            { clue: "She’s angry because her brother broke her d______.", definition: "She’s angry because her brother broke her doll.", answer: "doll" },
+            { clue: "My sister likes to play with her d______ at her free time.", definition: "My sister likes to play with her doll at her free time.", answer: "doll" },
+            { clue: "Sam’s hobby is collecting c______.", definition: "Sam’s hobby is collecting cards.", answer: "cards" },
+            { clue: "The magician is showing his tricks with a pair of c___s.", definition: "The magician is showing his tricks with a pair of cards.", answer: "cards" },
+            { clue: "Hank needs someone to fix his r_________.", definition: "Hank needs someone to fix his robot.", answer: "robot" },
+            { clue: "The movie “Transformers” is a story about _________.", definition: "The movie “Transformers” is a story about robots.", answer: "robots" },
+            { clue: "Now I can play v_______ g_______ at home.", definition: "Now I can play video games at home.", answer: "video games" },
+            { clue: "Bobby can not play v_______ g_______ before homework.", definition: "Bobby can not play video games before he finishes his homework.", answer: "video games" },
+            { clue: "Matt likes to fly a k_______ at the park.", definition: "Matt likes to fly a kite at the park.", answer: "kite" },
+            { clue: "My favorite activity is flying a k_______.", definition: "My favorite activity is flying a kite.", answer: "kite" },
+            { clue: "There are s___________ people in the classroom.", definition: "There are sixteen people in the classroom.", answer: "sixteen" },
+            { clue: "Ten plus seven is s____________.", definition: "Ten plus seven is seventeen.", answer: "seventeen" },
+            { clue: "There are t_________ p_________ on the stage.", definition: "There are twenty people on the stage.", answer: "twenty people" },
+            { clue: "Stinky tofu is a famous food from T__________.", definition: "Stinky tofu is a famous food from Taiwan.", answer: "Taiwan" },
+            { clue: "You have to go to t______ U______.", definition: "You have to go to the USA.", answer: "the USA" },
+            { clue: "London is a city in E__________.", definition: "London is a city in England.", answer: "England" },
+            { clue: "The Great Wall is a famous place in C________.", definition: "The Great Wall is a famous place in China.", answer: "China" },
+            { clue: "Paris is a city in F_________.", definition: "Paris is a city in France.", answer: "France" },
+            { clue: "How is the w__________ today?", definition: "How is the weather today? It is snowy.", answer: "weather" },
+            { clue: "It’s s________ outside.", definition: "It’s snowy outside. Let’s build a snowman!", answer: "snowy" },
+            { clue: "Tomorrow will be r________.", definition: "Tomorrow will be rainy. Remember to bring an umbrella.", answer: "rainy" },
+            { clue: "It’s s________ and it’s very hot outside.", definition: "It’s sunny and it’s very hot outside.", answer: "sunny" },
+            { clue: "It’s w________ outside.", definition: "It’s windy outside. We should not hang the clothes outside.", answer: "windy" },
+            { clue: "We can build a s__________ at the yard.", definition: "We can build a snowman at the yard.", answer: "snowman" },
+            { clue: "Betty has a pretty f______.", definition: "Betty has a pretty face.", answer: "face" },
+            { clue: "People listen to others with their e______.", definition: "People listen to others with their ears.", answer: "ears" },
+            { clue: "People see everything with their e______.", definition: "People see everything with their eyes.", answer: "eyes" },
+            { clue: "There’s something wrong with my n_______.", definition: "There’s something wrong with my nose.", answer: "nose" },
+            { clue: "Don’t talk with food in your m_______.", definition: "Don’t talk with food in your mouth.", answer: "mouth" },
+            { clue: "Monkeys have l_______ arms and s______ legs.", definition: "Monkeys have long arms and short legs.", answer: "long, short" },
+            { clue: "It is important to wash our h_______ before we eat.", definition: "It is important to wash our hands before we eat.", answer: "hands" },
+            { clue: "Henry just hurt his l_____.", definition: "Henry just hurt his leg.", answer: "leg" },
+            { clue: "I usually go to school on f______.", definition: "I usually go to school on foot.", answer: "foot" },
+            { clue: "Three times ten is t_________.", definition: "Three times ten is thirty.", answer: "thirty" },
+            { clue: "The m__________ just made the bird disappear.", definition: "The magician just made the bird disappear.", answer: "magician" },
+            { clue: "The s_________ is singing my favorite song!", definition: "The singer is singing my favorite song!", answer: "singer" },
+            { clue: "Her dream is to become a s________.", definition: "Her dream is to become a singer.", answer: "singer" },
+            { clue: "My grandfather is a f_______, he works under the sun.", definition: "My grandfather is a farmer, he works under the sun.", answer: "farmer" },
+            { clue: "When I am sick, I go to see a d_________.", definition: "When I am sick, I go to see a doctor.", answer: "doctor" },
+            { clue: "I want to be a n_________ to help the doctor.", definition: "I want to be a nurse to help the doctor.", answer: "nurse" },
+            { clue: "There are many f__________ in the yard.", definition: "There are many flowers in the yard.", answer: "flowers" },
+            { clue: "Don’t let the b______ come inside.", definition: "Don’t let the bugs come inside.", answer: "bugs" },
+            { clue: "Ally is scared of b_______.", definition: "Ally is scared of bugs.", answer: "bugs" },
+            { clue: "There are f_______ around the garbage.", definition: "There are flies around the garbage.", answer: "flies" },
+            { clue: "Be careful when you see a b______.", definition: "Be careful when you see a bee.", answer: "bee" },
+            { clue: "You can see beautiful b___________ near flowers.", definition: "You can see beautiful butterflies near flowers.", answer: "butterflies" },
+            { clue: "Our school took us to the m__________.", definition: "Our school took us to the museum.", answer: "museum" },
+            { clue: "Is there any m______ on the table?", definition: "Is there any mugs on the table?", answer: "mugs" },
+            { clue: "I need a m_____ to help me find it.", definition: "I need a map to help me find it.", answer: "map" },
+            { clue: "m _______ is a useful thing to find direction.", definition: "Map is a useful thing to find direction.", answer: "map" },
+            { clue: "I want to write a c_______ to my mom.", definition: "I want to write a card to my mom.", answer: "card" },
+            { clue: "My uncle sent me a p__________ from Japan.", definition: "My uncle sent me a postcard from Japan.", answer: "postcard" },
+            { clue: "I used a b___________ to mark my page.", definition: "I used a bookmark to mark my page.", answer: "bookmark" },
+            { clue: "Bella put some s_________ on her pencil case.", definition: "Bella put some stickers on her pencil case.", answer: "stickers" },
+            { clue: "I need a n_____________ to take notes.", definition: "I need a notebook to take notes.", answer: "notebook" },
+            { clue: "Let me get a r________ to check the length.", definition: "Let me get a ruler to check the length.", answer: "ruler" },
+            { clue: "I need a red c________ to color it.", definition: "I need a red crayon to color it.", answer: "crayon" },
+            { clue: "Get a p_________ c_______ to store your pens.", definition: "Get a pencil case to store your pens.", answer: "pencil case" },
+            { clue: "David is good at art. He can d_______ almost everything.", definition: "David is good at art. He can draw almost everything.", answer: "draw" },
+            { clue: "The homework is to d________ an apple.", definition: "The homework is to draw an apple.", answer: "draw" },
+            { clue: "Maybe we can get some markers to p________ it.", definition: "Maybe we can get some markers to paint it.", answer: "paint" },
+            { clue: "John s_______ hard to get good grades on the exam.", definition: "John studies hard to get good grades on the exam.", answer: "studies" },
+            { clue: "I just s_________ history for two hours.", definition: "I just studied history for two hours.", answer: "studied" },
+            { clue: "My dad w_________ every day.", definition: "My dad works every day.", answer: "works" },
+            { clue: "After Mom finish her w_______, she can take us out.", definition: "After Mom finishes her work, she can take us out.", answer: "work" },
+            { clue: "You have to d ________ more warm water.", definition: "You have to drink more warm water.", answer: "drink" },
+            { clue: "I want to d________ some ice water.", definition: "I want to drink some ice water.", answer: "drink" },
+            { clue: "The baby is c_________. He might be hungry.", definition: "The baby is crying. He might be hungry.", answer: "crying" },
+            { clue: "Eddy c ________ because he doesn’t do well on the test.", definition: "Eddy cries because he doesn’t do well on the test.", answer: "cries" },
+            { clue: "Be polite when you t______ to your teacher.", definition: "Be polite when you talk to your teacher.", answer: "talk" },
+            { clue: "We should not t______ to each other in class.", definition: "We should not talk to each other in class.", answer: "talk" },
+            { clue: "May I w________ T______ after I finish my homework?", definition: "May I watch TV after I finish my homework?", answer: "watch TV" },
+            { clue: "My dad likes to w______ T___ when he goes home.", definition: "My dad likes to watch TV when he goes home.", answer: "watch TV" },
+            { clue: "Who c_______ this chicken? It tasted very yummy.", definition: "Who cooked this chicken? It tasted very yummy.", answer: "cooked" },
+            { clue: "My mom always c_______ a lot of food for me.", definition: "My mom always cooks a lot of food for me.", answer: "cooks" },
+            { clue: "Everybody please l____ ____ and wait for the teacher.", definition: "Everybody please line up and wait for the teacher.", answer: "line up" },
+            { clue: "There are many people ______ ____ in front of the restaurant.", definition: "There are many people line up in front of the restaurant.", answer: "line up" },
+            { clue: "I want to t_______ p__________ with him.", definition: "I want to take pictures with him.", answer: "take pictures" },
+            { clue: "We use a camera to t_______ p__________.", definition: "We use a camera to take pictures.", answer: "take pictures" },
+            { clue: "I r_____ ___ b______ to school.", definition: "I ride a bike to school.", answer: "ride a bike" },
+            { clue: "I w______ ___ n_____ when I was in class.", definition: "I wrote a note when I was in class.", answer: "write a note" },
+            { clue: "I like to r____.", definition: "I like to run.", answer: "run" },
+            { clue: "Don’t r_____ in the classroom.", definition: "Don’t run in the classroom.", answer: "run" },
+            { clue: "Before PE class, teacher tells us to j____.", definition: "Before PE class, teacher tells us to jog.", answer: "jog" },
+            { clue: "It likes to s______ in the pool.", definition: "It likes to swim in the pool.", answer: "swim" },
+            { clue: "On Mother’s Day, I h____ my mom to thank her.", definition: "On Mother’s Day, I hug my mom to thank her.", answer: "hug" },
+            { clue: "At the end of the magic show, we c______ for the magician.", definition: "At the end of the magic show, we clap for the magician.", answer: "clap" },
+            { clue: "What a beautiful song! Please c______ for the singer.", definition: "What a beautiful song! Please clap for the singer.", answer: "clap" }
+        ];
+
+
+
+
+        let current = 0;
+        let userAnswers = Array(questions.length).fill("");
+
+        window.onload = () => {
+            const select = document.getElementById("questionSelect");
+            questions.forEach((_, i) => {
+                const option = document.createElement("option");
+                option.value = i;
+                option.text = `題目 ${i + 1}`;
+                select.appendChild(option);
+            });
+            loadQuestion();
+        };
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                saveAnswer();
+                nextQuestion();
+            }
+        });
+
+        function goToPage(url) {
+            window.location.href = url;
+        }
+
+        function manualSubmit() {
+            saveAnswer();
+            nextQuestion();
+        }
+
+        function loadQuestion() {
+            document.getElementById("question-number").textContent = `${current + 1}. 字義填空`;
+            document.getElementById("question-text").textContent = questions[current].clue;
+
+            // 顯示相關圖片
+            const imageElement = document.getElementById("question-image");
+            const imageData = getImagePath(questions[current].clue);
+            if (imageData) {
+                imageElement.textContent = imageData.emoji;
+                imageElement.style.background = imageData.bg;
+                imageElement.style.display = "flex";
+            } else {
+                imageElement.style.display = "none";
+            }
+
+            document.getElementById("answer").value = userAnswers[current] || "";
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("scoreboard").textContent = "";
+            document.getElementById("answers").style.display = "none";
+            document.getElementById("questionSelect").value = current;
+            document.getElementById("answer").style.display = "inline-block";
+            document.getElementById("submitBtn").style.display = "inline-block";
+        }
+
+        function getImagePath(clue) {
+            // 根據題目內容匹配圖片和emoji
+            const imageMap = {
+                'park': { emoji: '🏞️', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'playground': { emoji: '🎠', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'office': { emoji: '🏢', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'zoo': { emoji: '🦁', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'doll': { emoji: '🎎', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'cards': { emoji: '🃏', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'robot': { emoji: '🤖', bg: 'linear-gradient(45deg, #607D8B, #455A64)' },
+                'video games': { emoji: '🎮', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'kite': { emoji: '🪁', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'taiwan': { emoji: '🇹🇼', bg: 'linear-gradient(45deg, #FF5722, #D84315)' },
+                'weather': { emoji: '🌤️', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'face': { emoji: '😊', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'hands': { emoji: '👐', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' },
+                'magician': { emoji: '🎩', bg: 'linear-gradient(45deg, #9C27B0, #7B1FA2)' },
+                'doctor': { emoji: '👨‍⚕️', bg: 'linear-gradient(45deg, #2196F3, #1976D2)' },
+                'flowers': { emoji: '🌸', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'museum': { emoji: '🏛️', bg: 'linear-gradient(45deg, #795548, #5D4037)' },
+                'camera': { emoji: '📷', bg: 'linear-gradient(45deg, #FFC107, #FF8F00)' },
+                'bike': { emoji: '🚴', bg: 'linear-gradient(45deg, #3F51B5, #303F9F)' },
+                'run': { emoji: '🏃', bg: 'linear-gradient(45deg, #4CAF50, #45a049)' },
+                'swim': { emoji: '🏊', bg: 'linear-gradient(45deg, #00BCD4, #0097A7)' },
+                'hug': { emoji: '🤗', bg: 'linear-gradient(45deg, #E91E63, #C2185B)' },
+                'clap': { emoji: '👏', bg: 'linear-gradient(45deg, #FF9800, #F57C00)' }
+            };
+
+            const clueLower = clue.toLowerCase();
+            for (const [keyword, data] of Object.entries(imageMap)) {
+                if (clueLower.includes(keyword)) {
+                    return data;
+                }
+            }
+            return null;
+        }
+
+        function saveAnswer() {
+            const input = document.getElementById("answer").value.trim();
+            userAnswers[current] = input;
+        }
+
+        function nextQuestion() {
+            if (current < questions.length - 1) {
+                current++;
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function jumpToQuestion() {
+            saveAnswer();
+            current = parseInt(document.getElementById("questionSelect").value);
+            loadQuestion();
+        }
+
+        function showFinalResult() {
+            document.getElementById("question-number").textContent = "🎉 全部完成！";
+            document.getElementById("question-text").textContent = "";
+            document.getElementById("answer").style.display = "none";
+            document.getElementById("submitBtn").style.display = "none";
+            document.getElementById("feedback").textContent = "";
+
+            const score = userAnswers.reduce((sum, ans, i) => sum + (ans === questions[i].answer ? 1 : 0), 0);
+            document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${questions.length}<br>${getGrade(score)}`;
+
+            const answerBox = document.getElementById("answers");
+            answerBox.style.display = "block";
+            answerBox.innerHTML = "<h3>🧠 正確答案：</h3><ol>" +
+                questions.map((q, i) => {
+                    const ua = userAnswers[i] || "(未作答)";
+                    const ok = (userAnswers[i] || "") === q.answer;
+                    return `<li><strong>${q.clue}</strong>: ${q.definition}<br>
+                      你的答案：<strong>${ua}</strong> ${ok ? '✅' : '❌'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                }).join("") + "</ol>";
+        }
+
+        function getGrade(score) {
+            const pct = (score / questions.length) * 100;
+            if (pct === 100) return "🎓 Perfect! Great job!";
+            if (pct >= 70) return "👍 Good work!";
+            return "📝 Keep practicing!";
+        }
+    </script>
+</body>
+
+</html>
