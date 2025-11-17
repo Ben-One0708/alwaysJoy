@@ -98,11 +98,8 @@
                     </div>
                     <div class="whiteboard-text">
                         <p class="whiteboard-main-text">
-                            課堂模擬考 244 題熱身題目已經開放，包含 <strong>100 題一般練習</strong> ＋ <strong>144 題雜誌練習</strong>。雜誌練習在區賽中佔
-                            <strong>5%～10%</strong>，請務必先複習。
-                        </p>
-                        <p class="whiteboard-sub-text">
-                            請先點擊課堂模擬考內的「雜誌單字預習工具」複習、再開始作答；完成後請到線上成績登記表自行登記成績。
+                            11/17: 各組別必讀單字已經更新到 <strong>課堂模擬考</strong> 裡面，請點選<strong>課堂模擬考</strong>
+                            再點選<strong>各級別單字必讀複習區自己的組別</strong>去複習每一個單字！
                         </p>
                     </div>
                 </div>
@@ -119,7 +116,7 @@
                 <button class="tab" data-tab="score">
                     <i class="fas fa-chart-line"></i> 成績登記
                 </button>
-                <button class="tab" data-tab="game">
+                <button class="tab" data-tab="game" style="display: none;">
                     <i class="fas fa-gamepad"></i> 課堂遊戲
                 </button>
                 <button class="tab" data-tab="exam">
@@ -133,11 +130,26 @@
                 <div id="overview" class="content-section active">
                     <!-- 班級照片區塊 -->
                     <div class="classphoto-section">
+                        <!-- 漂浮的卡通星球背景 -->
+                        <div class="floating-planets">
+                            <div class="planet planet-1">🪐</div>
+                            <div class="planet planet-2">🌍</div>
+                            <div class="planet planet-3">🌙</div>
+                            <div class="planet planet-4">⭐</div>
+                            <div class="planet planet-5">🌟</div>
+                            <div class="planet planet-6">✨</div>
+                            <div class="planet planet-7">🪐</div>
+                            <div class="planet planet-8">🌍</div>
+                            <div class="planet planet-9">⭐</div>
+                            <div class="planet planet-10">🌟</div>
+                            <div class="planet planet-11">🌙</div>
+                            <div class="planet planet-12">✨</div>
+                        </div>
                         <h2><i class="fas fa-camera"></i> 班級照片</h2>
-                        <p>看看我們可愛的同學們！</p>
+                        <p>再堅持一下，快到終點了！</p>
                         <div class="photo-container">
                             <div class="photo-frame">
-                                <img src="classphoto.png" alt="班級照片" class="class-photo"
+                                <img src="Class2.png" alt="班級照片" class="class-photo"
                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                                 <div class="photo-placeholder" style="display: none;">
                                     <i class="fas fa-image"></i>
@@ -654,7 +666,7 @@
                 </div>
 
                 <!-- 課堂遊戲 -->
-                <div id="game" class="content-section">
+                <div id="game" class="content-section" style="display: none;">
                     <h2><i class="fas fa-gamepad"></i> 課堂遊戲</h2>
                     <p>點擊下方按鈕進入課堂遊戲：</p>
 

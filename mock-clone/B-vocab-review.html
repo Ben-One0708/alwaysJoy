@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>B組必讀單字複習</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --light-bg: #f6f7ff;
+            --accent: #f093fb;
+            --card-bg: #ffffff;
+            --border-radius: 14px;
+            --transition: 0.25s ease;
+            font-size: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 32px 24px 48px;
+            background: linear-gradient(180deg, #f6f7ff 0%, #ffffff 40%, #f3f5ff 100%);
+            font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+            color: #1a1a1a;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            box-shadow: 0 16px 28px rgba(102, 126, 234, 0.28);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            margin: 0 0 28px;
+        }
+
+        .back-link::before {
+            content: "←";
+            font-size: 18px;
+        }
+
+        .back-link:hover,
+        .back-link:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 36px rgba(102, 126, 234, 0.33);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(28px, 3vw, 36px);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .sub-heading {
+            margin: 0 0 24px;
+            font-size: 16px;
+            color: #4c4f70;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .toolbar>* {
+            flex: 1 1 220px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 16px 14px 44px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            background: #fff;
+            font-size: 16px;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.08);
+            outline: none;
+            transition: border var(--transition), box-shadow var(--transition);
+        }
+
+        .search-box input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 10px 20px rgba(118, 75, 162, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: rgba(102, 126, 234, 0.6);
+        }
+
+        .stats {
+            background: rgba(102, 126, 234, 0.08);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: var(--border-radius);
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 240px;
+        }
+
+        .stats strong {
+            font-size: 18px;
+            color: var(--primary);
+        }
+
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .quick-actions button {
+            flex: 1 1 180px;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #fff;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .quick-actions button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(102, 126, 234, 0.25);
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .word-card {
+            background: #fff;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+            border: 2px solid transparent;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .word-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            transform: scaleX(0);
+            transition: transform var(--transition);
+        }
+
+        .word-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .word-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .word-card.hidden {
+            display: none;
+        }
+
+        .word-card.learned {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.12) 0%, rgba(56, 142, 60, 0.15) 100%);
+            border-color: rgba(76, 175, 80, 0.4);
+            position: relative;
+        }
+
+        .word-card.learned::after {
+            content: '✓';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #4caf50, #388e3c);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+        }
+
+        .word-card.learned::before {
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 50%, #66bb6a 100%);
+            transform: scaleX(1);
+        }
+
+        .word-card {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .word-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        .word-english {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.3;
+        }
+
+        .word-module {
+            font-size: 12px;
+            padding: 4px 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border-radius: 6px;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .word-meaning {
+            font-size: 16px;
+            color: #4c4f70;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .word-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 48px 24px;
+            color: #999;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <a class="back-link" href="home.html">← 回到首頁</a>
+    <header>
+        <h1>B組必讀單字複習</h1>
+        <p class="sub-heading">1~4冊必背應用字彙 · 掌握核心單字</p>
+    </header>
+
+    <section class="toolbar">
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input id="searchInput" type="search" placeholder="搜尋英文或中文（例如：apple、蘋果）" />
+        </div>
+        <div class="stats" id="statsPanel">
+            <div><strong>總字數：</strong><span id="totalWords">0</span> 字</div>
+            <div><strong>目前顯示：</strong><span id="visibleWords">0</span> 字</div>
+            <div><strong>已看過：</strong><span id="learnedWords">0</span> 字</div>
+        </div>
+    </section>
+
+    <section class="quick-actions">
+        <button id="toggleChineseBtn" type="button">👀 切換中文顯示</button>
+        <button id="sortAZBtn" type="button">🔤 A~Z 排序</button>
+        <button id="shuffleBtn" type="button">🔀 隨機排序</button>
+        <button id="resetBtn" type="button">🔄 重設篩選</button>
+        <button id="clearLearnedBtn" type="button">🗑️ 清除已看過標記</button>
+    </section>
+
+    <main id="wordGrid" class="word-grid"></main>
+
+    <script>
+        const words = [
+            { english: "bedroom", meaning: "臥室", module: "M4-19" },
+            { english: "a", meaning: "一（個）", module: "M1-6" },
+            { english: "bee", meaning: "蜜蜂", module: "M3-12" },
+            { english: "am", meaning: "是", module: "M1-11" },
+            { english: "behind", meaning: "在… 後面", module: "M2-18" },
+            { english: "an", meaning: "一（個）", module: "M1-7" },
+            { english: "between", meaning: "在… 之間", module: "M2-12" },
+            { english: "and", meaning: "和", module: "M2-12" },
+            { english: "bicycle", meaning: "腳踏車", module: "M4-9" },
+            { english: "any", meaning: "任何（的）", module: "M3-2" },
+            { english: "big", meaning: "大的", module: "M1-11" },
+            { english: "apple", meaning: "蘋果", module: "M1-7" },
+            { english: "bike", meaning: "單車", module: "M3-18" },
+            { english: "are", meaning: "是", module: "M1-11" },
+            { english: "bird", meaning: "鳥", module: "M1-9" },
+            { english: "arm", meaning: "手臂", module: "M3-8" },
+            { english: "black", meaning: "黑色（的）", module: "M2-17" },
+            { english: "at", meaning: "在…", module: "M3-1" },
+            { english: "blue", meaning: "藍色（的）", module: "M1-8" },
+            { english: "aunt", meaning: "阿姨；姑姑；嬸嬸", module: "M2-1" },
+            { english: "book", meaning: "書", module: "M2-12" },
+            { english: "bookmark", meaning: "書籤", module: "M3-13" },
+            { english: "baby", meaning: "嬰兒；寶貝", module: "M1-17" },
+            { english: "bored", meaning: "感到無聊的", module: "M2-6" },
+            { english: "bowl", meaning: "碗", module: "M4-12" },
+            { english: "backpack", meaning: "背包", module: "M4-9" },
+            { english: "box", meaning: "箱子；盒子", module: "M1-18" },
+            { english: "bad", meaning: "壞的", module: "M1-12" },
+            { english: "boy", meaning: "男孩", module: "M1-17" },
+            { english: "bag", meaning: "袋子", module: "M1-6" },
+            { english: "broom", meaning: "掃把", module: "M4-14" },
+            { english: "brother", meaning: "哥哥；弟弟", module: "M1-19" },
+            { english: "ball", meaning: "球", module: "M2-18" },
+            { english: "balloon", meaning: "氣球", module: "M4-3" },
+            { english: "bug", meaning: "蟲", module: "M3-12" },
+            { english: "banana", meaning: "香蕉", module: "M4-4" },
+            { english: "but", meaning: "但是", module: "M3-11" },
+            { english: "bar", meaning: "條狀物", module: "M4-1" },
+            { english: "butter", meaning: "奶油", module: "M4-7" },
+            { english: "baseball", meaning: "棒球", module: "M4-17" },
+            { english: "butterfly", meaning: "蝴蝶", module: "M3-12" },
+            { english: "basket", meaning: "籃子", module: "M4-11" },
+            { english: "camera", meaning: "照相機", module: "M4-8" },
+            { english: "bear", meaning: "熊", module: "M2-2" },
+            { english: "can", meaning: "會；可以", module: "M2-8" },
+            { english: "bed", meaning: "床", module: "M2-19" },
+            { english: "cap", meaning: "（前有遮簷的）帽子", module: "M2-18" },
+            { english: "car", meaning: "汽車", module: "M4-3" },
+            { english: "card", meaning: "卡牌；卡片", module: "M3-2" },
+            { english: "case", meaning: "盒子", module: "M3-14" },
+            { english: "cat", meaning: "貓", module: "M1-9" },
+            { english: "cellphone", meaning: "手機", module: "M4-8" },
+            { english: "centimeter", meaning: "公分（＝ cm）", module: "M3-9" },
+            { english: "chair", meaning: "椅子", module: "M2-11" },
+            { english: "China", meaning: "中國", module: "M3-4" },
+            { english: "chocolate", meaning: "巧克力", module: "M4-1" },
+            { english: "chopsticks", meaning: "筷子", module: "M4-12" },
+            { english: "clap", meaning: "拍（手）", module: "M3-19" },
+            { english: "cloudy", meaning: "多雲的", module: "M3-6" },
+            { english: "coffee", meaning: "咖啡", module: "M4-16" },
+            { english: "cola", meaning: "可樂", module: "M4-16" },
+            { english: "color", meaning: "顏色", module: "M2-17" },
+            { english: "comic book", meaning: "漫畫書", module: "M4-3" },
+            { english: "computer", meaning: "電腦", module: "M4-8" },
+            { english: "cook", meaning: "烹飪", module: "M3-17" },
+            { english: "cookie", meaning: "餅乾", module: "M4-1" },
+            { english: "cool", meaning: "酷的", module: "M1-12" },
+            { english: "cousin", meaning: "堂、表兄弟姊妹", module: "M2-1" },
+            { english: "crayon", meaning: "蠟筆", module: "M3-14" },
+            { english: "cry", meaning: "哭", module: "M3-17" },
+            { english: "cupcake", meaning: "杯子蛋糕", module: "M4-1" },
+            { english: "cute", meaning: "可愛的", module: "M1-12" },
+            { english: "dad", meaning: "爸爸（＝ father、daddy）", module: "M4-19" },
+            { english: "dance", meaning: "跳舞", module: "M2-8" },
+            { english: "day", meaning: "天；日", module: "M4-18" },
+            { english: "desk", meaning: "書桌", module: "M2-11" },
+            { english: "dictionary", meaning: "字典", module: "M4-13" },
+            { english: "dining room", meaning: "飯廳", module: "M4-19" },
+            { english: "do", meaning: "做", module: "M3-17" },
+            { english: "do", meaning: "（助動詞）", module: "M4-1" },
+            { english: "doctor", meaning: "醫生", module: "M3-11" },
+            { english: "does", meaning: "（助動詞）", module: "M4-2" },
+            { english: "dog", meaning: "狗", module: "M1-9" },
+            { english: "doll", meaning: "洋娃娃", module: "M3-2" },
+            { english: "dollar", meaning: "元", module: "M4-16" },
+            { english: "door", meaning: "門", module: "M2-11" },
+            { english: "draw", meaning: "畫", module: "M3-16" },
+            { english: "drink", meaning: "喝", module: "M3-16" },
+            { english: "ear", meaning: "耳朵", module: "M3-7" },
+            { english: "eat", meaning: "吃", module: "M2-9" },
+            { english: "egg", meaning: "蛋", module: "M1-7" },
+            { english: "eight", meaning: "八", module: "M2-14" },
+            { english: "eighteen", meaning: "十八", module: "M3-3" },
+            { english: "eighty", meaning: "八十", module: "M3-9" },
+            { english: "elephant", meaning: "大象", module: "M4-2" },
+            { english: "eleven", meaning: "十一", module: "M2-16" },
+            { english: "empty", meaning: "空的", module: "M2-4" },
+            { english: "England", meaning: "英國", module: "M3-4" },
+            { english: "eraser", meaning: "橡皮擦", module: "M2-12" },
+            { english: "eye", meaning: "眼睛", module: "M3-7" },
+            { english: "face", meaning: "臉", module: "M3-7" },
+            { english: "farmer", meaning: "農夫", module: "M2-7" },
+            { english: "fat", meaning: "肥胖的", module: "M1-13" },
+            { english: "father", meaning: "父親", module: "M1-19" },
+            { english: "fifteen", meaning: "十五", module: "M2-16" },
+            { english: "fifty", meaning: "五十", module: "M3-9" },
+            { english: "five", meaning: "五", module: "M2-13" },
+            { english: "flower", meaning: "花", module: "M3-12" },
+            { english: "fly", meaning: "蒼蠅", module: "M3-12" },
+            { english: "foot", meaning: "腳（複數為feet）", module: "M3-8" },
+            { english: "fork", meaning: "叉子", module: "M4-12" },
+            { english: "forty", meaning: "四十", module: "M3-9" },
+            { english: "four", meaning: "四", module: "M2-13" },
+            { english: "fourteen", meaning: "十四", module: "M2-16" },
+            { english: "France", meaning: "法國", module: "M3-4" },
+            { english: "Friday", meaning: "星期五", module: "M4-18" },
+            { english: "friend", meaning: "朋友", module: "M2-1" },
+            { english: "frisbee", meaning: "飛盤", module: "M4-17" },
+            { english: "frog", meaning: "青蛙", module: "M4-2" },
+            { english: "from", meaning: "從", module: "M3-4" },
+            { english: "fruit", meaning: "水果", module: "M4-6" },
+            { english: "full", meaning: "滿的", module: "M2-4" },
+            { english: "game", meaning: "遊戲；比賽", module: "M3-2" },
+            { english: "girl", meaning: "女孩", module: "M1-17" },
+            { english: "go", meaning: "去", module: "M2-19" },
+            { english: "good", meaning: "好的", module: "M1-12" },
+            { english: "grape", meaning: "葡萄", module: "M4-4" },
+            { english: "green", meaning: "綠色（的）", module: "M1-8" },
+            { english: "gun", meaning: "槍", module: "M4-3" },
+            { english: "hamburger", meaning: "漢堡", module: "M4-6" },
+            { english: "hand", meaning: "手", module: "M3-8" },
+            { english: "happy", meaning: "開心的", module: "M1-14" },
+            { english: "has", meaning: "擁有（have的第三人稱單數形）", module: "M4-11" },
+            { english: "hat", meaning: "帽子", module: "M1-6" },
+            { english: "have", meaning: "擁有", module: "M4-11" },
+            { english: "he", meaning: "他", module: "M1-12" },
+            { english: "hear", meaning: "聽見", module: "M2-9" },
+            { english: "heavy", meaning: "重的", module: "M2-4" },
+            { english: "helmet", meaning: "安全帽", module: "M4-9" },
+            { english: "her", meaning: "她的", module: "M3-7" },
+            { english: "his", meaning: "他的", module: "M3-7" },
+            { english: "home", meaning: "家", module: "M2-19" },
+            { english: "horse", meaning: "馬", module: "M4-2" },
+            { english: "hot dog", meaning: "熱狗", module: "M4-6" },
+            { english: "How many...?", meaning: "有多少…？", module: "M3-3" },
+            { english: "How much...?", meaning: "… 多少錢？", module: "M4-16" },
+            { english: "How old...?", meaning: "… 幾歲？", module: "M2-16" },
+            { english: "How tall...?", meaning: "… 多高？", module: "M3-9" },
+            { english: "hug", meaning: "擁抱", module: "M3-19" },
+            { english: "hundred", meaning: "百", module: "M3-9" },
+            { english: "hungry", meaning: "飢餓的", module: "M2-6" },
+            { english: "I", meaning: "我", module: "M1-11" },
+            { english: "ice cream", meaning: "冰淇淋", module: "M4-16" },
+            { english: "in", meaning: "在… 裡面", module: "M1-18" },
+            { english: "in front of", meaning: "在… 前面", module: "M2-18" },
+            { english: "is", meaning: "是", module: "M1-6" },
+            { english: "it", meaning: "牠；它", module: "M1-6" },
+            { english: "jacket", meaning: "夾克", module: "M4-13" },
+            { english: "jog", meaning: "慢跑", module: "M3-19" },
+            { english: "juice", meaning: "果汁", module: "M4-16" },
+            { english: "jump", meaning: "跳躍", module: "M4-9" },
+            { english: "jump rope", meaning: "跳繩", module: "M4-9" },
+            { english: "ketchup", meaning: "番茄醬", module: "M4-7" },
+            { english: "kitchen", meaning: "廚房", module: "M4-19" },
+            { english: "kite", meaning: "風箏", module: "M3-2" },
+            { english: "knife", meaning: "刀子", module: "M4-12" },
+            { english: "leg", meaning: "腿", module: "M3-8" },
+            { english: "lemon", meaning: "檸檬", module: "M4-4" },
+            { english: "Let's...", meaning: "讓我們…。", module: "M2-19" },
+            { english: "light", meaning: "輕的", module: "M2-4" },
+            { english: "like", meaning: "喜歡", module: "M4-1" },
+            { english: "line up", meaning: "排隊", module: "M3-18" },
+            { english: "lion", meaning: "獅子", module: "M2-2" },
+            { english: "living room", meaning: "客廳", module: "M4-19" },
+            { english: "lollipop", meaning: "棒棒糖", module: "M4-1" },
+            { english: "long", meaning: "長的", module: "M3-8" },
+            { english: "lunchbox", meaning: "午餐盒；飯盒", module: "M4-11" },
+            { english: "mad", meaning: "生氣的；瘋的", module: "M1-14" },
+            { english: "magician", meaning: "魔術師", module: "M3-11" },
+            { english: "many", meaning: "許多（的）", module: "M3-1" },
+            { english: "map", meaning: "地圖", module: "M3-13" },
+            { english: "marble", meaning: "彈珠", module: "M4-17" },
+            { english: "marker", meaning: "彩色筆；麥克筆", module: "M2-12" },
+            { english: "mat", meaning: "地墊", module: "M4-11" },
+            { english: "mom", meaning: "媽媽（＝ mother、mommy）", module: "M4-19" },
+            { english: "Monday", meaning: "星期一", module: "M4-18" },
+            { english: "monkey", meaning: "猴子", module: "M2-3" },
+            { english: "mother", meaning: "母親", module: "M1-19" },
+            { english: "mouth", meaning: "嘴巴", module: "M3-7" },
+            { english: "mug", meaning: "馬克杯", module: "M3-13" },
+            { english: "museum", meaning: "博物館", module: "M3-13" },
+            { english: "my", meaning: "我的", module: "M1-19" },
+            { english: "near", meaning: "在… 附近", module: "M2-11" },
+            { english: "net", meaning: "網子", module: "M1-6" },
+            { english: "nine", meaning: "九", module: "M2-14" },
+            { english: "nineteen", meaning: "十九", module: "M3-3" },
+            { english: "ninety", meaning: "九十", module: "M3-9" },
+            { english: "no", meaning: "不；不是", module: "M1-9" },
+            { english: "nose", meaning: "鼻子", module: "M3-7" },
+            { english: "not", meaning: "不", module: "M1-9" },
+            { english: "note", meaning: "便條", module: "M3-18" },
+            { english: "notebook", meaning: "筆記本", module: "M3-14" },
+            { english: "nurse", meaning: "護理師", module: "M3-1" },
+            { english: "o'clock", meaning: "… 點鐘", module: "M2-19" },
+            { english: "office", meaning: "辦公室", module: "M3-1" },
+            { english: "oil", meaning: "油", module: "M4-7" },
+            { english: "okay", meaning: "尚可的（＝ OK）", module: "M1-16" },
+            { english: "on", meaning: "在… 上面", module: "M1-18" },
+            { english: "one", meaning: "一", module: "M2-13" },
+            { english: "orange", meaning: "柳橙", module: "M1-7" },
+            { english: "our", meaning: "我們的", module: "M3-8" },
+            { english: "paint", meaning: "繪畫；刷油漆", module: "M3-16" },
+            { english: "papaya", meaning: "木瓜", module: "M4-4" },
+            { english: "park", meaning: "公園", module: "M3-1" },
+            { english: "parrot", meaning: "鸚鵡", module: "M2-3" },
+            { english: "pear", meaning: "西洋梨", module: "M4-4" },
+            { english: "pen", meaning: "筆", module: "M4-17" },
+            { english: "pencil", meaning: "鉛筆", module: "M2-12" },
+            { english: "people", meaning: "人（複數）", module: "M3-3" },
+            { english: "pepper", meaning: "胡椒", module: "M4-7" },
+            { english: "picnic", meaning: "野餐", module: "M4-11" },
+            { english: "pig", meaning: "豬", module: "M2-3" },
+            { english: "pink", meaning: "粉紅色（的）", module: "M2-17" },
+            { english: "pizza", meaning: "披薩", module: "M4-6" },
+            { english: "plate", meaning: "盤", module: "M4-12" },
+            { english: "play", meaning: "玩", module: "M3-17" },
+            { english: "playground", meaning: "遊樂場", module: "M3-1" },
+            { english: "postcard", meaning: "明信片", module: "M3-13" },
+            { english: "puzzle", meaning: "拼圖", module: "M4-3" },
+            { english: "rabbit", meaning: "兔子", module: "M4-2" },
+            { english: "radio", meaning: "收音機；廣播", module: "M4-14" },
+            { english: "raincoat", meaning: "雨衣", module: "M4-13" },
+            { english: "rainy", meaning: "有雨的", module: "M3-6" },
+            { english: "rat", meaning: "老鼠", module: "M4-2" },
+            { english: "read", meaning: "閱讀", module: "M2-8" },
+            { english: "red", meaning: "紅色（的）", module: "M1-8" },
+            { english: "ride", meaning: "騎乘", module: "M3-18" },
+            { english: "robot", meaning: "機器人", module: "M3-2" },
+            { english: "roll", meaning: "卷狀物", module: "M4-11" },
+            { english: "rope", meaning: "繩子", module: "M4-9" },
+            { english: "ruler", meaning: "尺", module: "M3-14" },
+            { english: "run", meaning: "跑", module: "M3-19" },
+            { english: "sad", meaning: "傷心的", module: "M1-14" },
+            { english: "salad", meaning: "沙拉", module: "M4-6" },
+            { english: "salt", meaning: "鹽", module: "M4-7" },
+            { english: "sandwich", meaning: "三明治", module: "M4-6" },
+            { english: "Saturday", meaning: "星期六", module: "M4-18" },
+            { english: "school", meaning: "學校", module: "M2-19" },
+            { english: "scooter", meaning: "滑板車", module: "M4-8" },
+            { english: "see", meaning: "看見", module: "M2-9" },
+            { english: "seven", meaning: "七", module: "M2-14" },
+            { english: "seventeen", meaning: "十七", module: "M3-3" },
+            { english: "seventy", meaning: "七十", module: "M3-9" },
+            { english: "shark", meaning: "鯊魚", module: "M4-2" },
+            { english: "she", meaning: "她", module: "M1-12" },
+            { english: "short", meaning: "矮的", module: "M1-11" },
+            { english: "short", meaning: "短的", module: "M3-8" },
+            { english: "shy", meaning: "害羞的", module: "M1-14" },
+            { english: "sick", meaning: "生病的", module: "M1-16" },
+            { english: "sing", meaning: "唱（歌）", module: "M2-8" },
+            { english: "singer", meaning: "歌手", module: "M3-11" },
+            { english: "sister", meaning: "姐姐；妹妹", module: "M1-19" },
+            { english: "six", meaning: "六", module: "M2-14" },
+            { english: "sixteen", meaning: "十六", module: "M3-3" },
+            { english: "sixty", meaning: "六十", module: "M3-9" },
+            { english: "skateboard", meaning: "滑板", module: "M4-9" },
+            { english: "sleepy", meaning: "想睡的", module: "M2-6" },
+            { english: "small", meaning: "小的", module: "M1-11" },
+            { english: "smell", meaning: "聞", module: "M2-9" },
+            { english: "snake", meaning: "蛇", module: "M2-3" },
+            { english: "snowman", meaning: "雪人（複數為snowmen）", module: "M3-7" },
+            { english: "snowy", meaning: "有雪的", module: "M3-6" },
+            { english: "some", meaning: "一些（的）", module: "M3-2" },
+            { english: "spoon", meaning: "湯匙", module: "M4-12" },
+            { english: "sticker", meaning: "貼紙", module: "M3-14" },
+            { english: "storybook", meaning: "故事書", module: "M4-17" },
+            { english: "strawberry", meaning: "草莓", module: "M4-4" },
+            { english: "strong", meaning: "強壯的", module: "M1-13" },
+            { english: "student", meaning: "學生", module: "M2-7" },
+            { english: "study", meaning: "研讀", module: "M3-16" },
+            { english: "sugar", meaning: "糖", module: "M4-7" },
+            { english: "Sunday", meaning: "星期日", module: "M4-18" },
+            { english: "sunny", meaning: "晴朗的", module: "M3-6" },
+            { english: "sushi", meaning: "壽司", module: "M4-11" },
+            { english: "swim", meaning: "游泳", module: "M3-19" },
+            { english: "Taiwan", meaning: "臺灣", module: "M3-4" },
+            { english: "take pictures", meaning: "拍照", module: "M3-18" },
+            { english: "talk", meaning: "說話", module: "M3-17" },
+            { english: "tall", meaning: "高的", module: "M1-11" },
+            { english: "teacher", meaning: "教師", module: "M2-7" },
+            { english: "telephone", meaning: "電話（＝ phone）", module: "M4-14" },
+            { english: "television", meaning: "電視（＝ TV）", module: "M4-14" },
+            { english: "ten", meaning: "十", module: "M2-14" },
+            { english: "that", meaning: "那個", module: "M1-7" },
+            { english: "the", meaning: "這", module: "M1-18" },
+            { english: "the USA", meaning: "美國", module: "M3-4" },
+            { english: "their", meaning: "他們的；它們的", module: "M3-8" },
+            { english: "there", meaning: "（表存在）", module: "M2-13" },
+            { english: "these", meaning: "這些", module: "M3-12" },
+            { english: "they", meaning: "他們；牠們；它們", module: "M2-2" },
+            { english: "thin", meaning: "瘦的", module: "M1-13" },
+            { english: "thirsty", meaning: "口渴的", module: "M2-6" },
+            { english: "thirteen", meaning: "十三", module: "M2-16" },
+            { english: "thirty", meaning: "三十", module: "M3-9" },
+            { english: "this", meaning: "這個", module: "M1-8" },
+            { english: "those", meaning: "那些", module: "M3-12" },
+            { english: "thousand", meaning: "千", module: "M4-16" },
+            { english: "three", meaning: "三", module: "M2-13" },
+            { english: "Thursday", meaning: "星期四", module: "M4-18" },
+            { english: "ticket", meaning: "票", module: "M4-13" },
+            { english: "tiger", meaning: "老虎", module: "M2-2" },
+            { english: "time", meaning: "時間", module: "M2-16" },
+            { english: "tired", meaning: "疲倦的", module: "M1-16" },
+            { english: "to", meaning: "朝；向", module: "M2-19" },
+            { english: "toy", meaning: "玩具", module: "M4-3" },
+            { english: "tree", meaning: "樹", module: "M2-18" },
+            { english: "Tuesday", meaning: "星期二", module: "M4-18" },
+            { english: "TV", meaning: "電視", module: "M3-17" },
+            { english: "twelve", meaning: "十二", module: "M2-16" },
+            { english: "twenty", meaning: "二十", module: "M3-3" },
+            { english: "two", meaning: "二", module: "M2-13" },
+            { english: "umbrella", meaning: "雨傘", module: "M4-11" },
+            { english: "uncle", meaning: "叔叔；伯伯；舅舅", module: "M2-1" },
+            { english: "under", meaning: "在… 下面", module: "M1-18" },
+            { english: "video", meaning: "錄影", module: "M3-2" },
+            { english: "want", meaning: "想要", module: "M4-6" },
+            { english: "watch", meaning: "觀看", module: "M3-17" },
+            { english: "watch", meaning: "手錶", module: "M4-13" },
+            { english: "water", meaning: "水", module: "M4-3" },
+            { english: "we", meaning: "我們", module: "M2-7" },
+            { english: "weak", meaning: "虛弱的", module: "M1-13" },
+            { english: "weather", meaning: "天氣", module: "M3-6" },
+            { english: "Wednesday", meaning: "星期三", module: "M4-18" },
+            { english: "what", meaning: "什麼", module: "M1-6" },
+            { english: "where", meaning: "哪裡", module: "M1-18" },
+            { english: "white", meaning: "白色（的）", module: "M2-17" },
+            { english: "who", meaning: "誰", module: "M1-19" },
+            { english: "window", meaning: "窗戶", module: "M2-11" },
+            { english: "windy", meaning: "風大的", module: "M3-6" },
+            { english: "work", meaning: "工作", module: "M3-16" },
+            { english: "write", meaning: "寫", module: "M2-8" },
+            { english: "year(s) old", meaning: "… 歲", module: "M2-16" },
+            { english: "yellow", meaning: "黃色（的）", module: "M2-17" },
+            { english: "yes", meaning: "好的；是的", module: "M1-9" },
+            { english: "you", meaning: "你；你們", module: "M1-11" },
+            { english: "your", meaning: "你的；你們的", module: "M2-3" },
+            { english: "yo-yo", meaning: "溜溜球", module: "M4-17" },
+            { english: "zebra", meaning: "斑馬", module: "M2-2" },
+            { english: "zoo", meaning: "動物園", module: "M3-1" }
+        ];
+
+        const STORAGE_KEY = 'B_vocab_learned';
+        
+        let showChinese = true;
+        let currentWords = [...words];
+        let learnedWords = new Set();
+
+        // 從 localStorage 讀取已看過的單字
+        function loadLearnedWords() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    learnedWords = new Set(JSON.parse(saved));
+                }
+            } catch (e) {
+                console.error('讀取已看過單字失敗:', e);
+            }
+        }
+
+        // 儲存已看過的單字到 localStorage
+        function saveLearnedWords() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify([...learnedWords]));
+            } catch (e) {
+                console.error('儲存已看過單字失敗:', e);
+            }
+        }
+
+        // 檢查單字是否已看過
+        function isLearned(word) {
+            return learnedWords.has(word.english);
+        }
+
+        // 切換單字的已看過狀態
+        function toggleLearned(word) {
+            if (learnedWords.has(word.english)) {
+                learnedWords.delete(word.english);
+            } else {
+                learnedWords.add(word.english);
+            }
+            saveLearnedWords();
+            updateStats();
+        }
+
+        function renderWords() {
+            const grid = document.getElementById('wordGrid');
+            grid.innerHTML = '';
+
+            if (currentWords.length === 0) {
+                grid.innerHTML = '<div class="no-results">找不到符合的單字</div>';
+                updateStats();
+                return;
+            }
+
+            currentWords.forEach(word => {
+                const card = document.createElement('div');
+                const isLearnedWord = isLearned(word);
+                card.className = isLearnedWord ? 'word-card learned' : 'word-card';
+                card.dataset.word = word.english;
+                card.innerHTML = `
+                    <div class="word-header">
+                        <div class="word-english">${word.english}</div>
+                        <div class="word-module">${word.module}</div>
+                    </div>
+                    <div class="word-meaning" style="display: ${showChinese ? 'block' : 'none'}">${word.meaning}</div>
+                `;
+                
+                // 添加點擊事件
+                card.addEventListener('click', () => {
+                    toggleLearned(word);
+                    // 更新卡片樣式
+                    if (isLearned(word)) {
+                        card.classList.add('learned');
+                    } else {
+                        card.classList.remove('learned');
+                    }
+                });
+                
+                grid.appendChild(card);
+            });
+
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('totalWords').textContent = words.length;
+            document.getElementById('visibleWords').textContent = currentWords.length;
+            document.getElementById('learnedWords').textContent = learnedWords.size;
+        }
+
+        function filterWords(query) {
+            if (!query.trim()) {
+                currentWords = [...words];
+            } else {
+                const lowerQuery = query.toLowerCase();
+                currentWords = words.filter(word =>
+                    word.english.toLowerCase().includes(lowerQuery) ||
+                    word.meaning.includes(query)
+                );
+            }
+            renderWords();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            filterWords(e.target.value);
+        });
+
+        document.getElementById('toggleChineseBtn').addEventListener('click', () => {
+            showChinese = !showChinese;
+            const meanings = document.querySelectorAll('.word-meaning');
+            meanings.forEach(meaning => {
+                meaning.style.display = showChinese ? 'block' : 'none';
+            });
+            document.getElementById('toggleChineseBtn').textContent = showChinese ? '👀 切換中文顯示' : '👀 顯示中文';
+        });
+
+        let sortOrder = 'none'; // 'none', 'az', 'za'
+
+        document.getElementById('sortAZBtn').addEventListener('click', () => {
+            if (sortOrder === 'none' || sortOrder === 'za') {
+                // A~Z 排序
+                currentWords = [...currentWords].sort((a, b) => {
+                    return a.english.toLowerCase().localeCompare(b.english.toLowerCase(), 'en');
+                });
+                sortOrder = 'az';
+                document.getElementById('sortAZBtn').textContent = '🔤 A~Z 排序';
+            } else {
+                // Z~A 排序
+                currentWords = [...currentWords].sort((a, b) => {
+                    return b.english.toLowerCase().localeCompare(a.english.toLowerCase(), 'en');
+                });
+                sortOrder = 'za';
+                document.getElementById('sortAZBtn').textContent = '🔤 Z~A 排序';
+            }
+            renderWords();
+        });
+
+        document.getElementById('shuffleBtn').addEventListener('click', () => {
+            currentWords = [...currentWords].sort(() => Math.random() - 0.5);
+            sortOrder = 'none';
+            document.getElementById('sortAZBtn').textContent = '🔤 A~Z 排序';
+            renderWords();
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            currentWords = [...words];
+            document.getElementById('searchInput').value = '';
+            sortOrder = 'none';
+            document.getElementById('sortAZBtn').textContent = '🔤 A~Z 排序';
+            renderWords();
+        });
+
+        document.getElementById('clearLearnedBtn').addEventListener('click', () => {
+            if (confirm('確定要清除所有已看過的標記嗎？')) {
+                learnedWords.clear();
+                saveLearnedWords();
+                renderWords();
+            }
+        });
+
+        // 初始化
+        loadLearnedWords();
+        renderWords();
+    </script>
+</body>
+
+</html>
+
