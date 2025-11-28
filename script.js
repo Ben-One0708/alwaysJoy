@@ -799,6 +799,22 @@ function openPDFModal(date, type) {
                 </div>
             </div>
         `;
+        } else if (date === '11/29') {
+            // 顯示 11/29 的課程訊息
+            content.innerHTML = `
+            <div style="text-align: center; padding: 60px 20px;">
+                <div style="font-size: 4rem; color: #28a745; margin-bottom: 20px;">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <h3 style="color: #333; margin-bottom: 15px; font-size: 1.5rem;">今天課堂會完成課堂模擬考之最後的任務</h3>
+                <p style="color: #666; font-size: 1.1rem; margin-bottom: 20px;">日期：${date}</p>
+                <div style="margin-top: 30px;">
+                    <button onclick="closeModal('pdfModal')" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        <i class="fas fa-times"></i> 關閉
+                    </button>
+                </div>
+            </div>
+        `;
         } else if (date === '訂正在電腦') {
             // 顯示 訂正在電腦 的 PDF 文件
             content.innerHTML = `
