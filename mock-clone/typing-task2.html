@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>任務二：英文段落打字練習</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(173, 216, 230, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 224, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #fef9e7 0%, #fff8dc 30%, #f5f5dc 60%, #fef9e7 100%);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffc3a0 100%);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 1000;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.5);
+        }
+
+        .quest-container {
+            background:
+                url("data:image/svg+xml,%3Csvg width='150' height='150' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='75' cy='75' r='60' fill='%23ffd700' opacity='0.08'/%3E%3Ccircle cx='75' cy='75' r='40' fill='%23ff6b9d' opacity='0.06'/%3E%3Ccircle cx='75' cy='75' r='20' fill='%234ecdc4' opacity='0.05'/%3E%3C/svg%3E"),
+                linear-gradient(135deg, #fef9e7 0%, #fff8dc 50%, #f5f5dc 100%);
+            background-size: 200px 200px, 100% 100%;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.2),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8);
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            border: 3px solid rgba(139, 69, 19, 0.2);
+        }
+
+        .quest-title {
+            font-size: clamp(28px, 4vw, 36px);
+            font-weight: 900;
+            color: #8b4513;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer-display {
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 900;
+            color: #1a237e;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 12px 30px;
+            border-radius: 18px;
+            display: inline-block;
+            border: 3px solid #2196F3;
+            box-shadow: 0 8px 20px rgba(33, 150, 243, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .timer-display.warning {
+            color: #f39c12;
+            border-color: #f39c12;
+            background: linear-gradient(135deg, #fff4e5 0%, #ffe0b3 100%);
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .paragraph-display {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 3px solid rgba(139, 69, 19, 0.2);
+            text-align: left;
+            font-size: clamp(18px, 2.5vw, 24px);
+            line-height: 1.8;
+            color: #333;
+            min-height: 150px;
+        }
+
+        .typing-area {
+            margin-top: 30px;
+        }
+
+        .typing-label {
+            font-size: clamp(18px, 2.5vw, 22px);
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 15px;
+        }
+
+        .typing-input {
+            width: 100%;
+            padding: 20px;
+            font-size: clamp(16px, 2vw, 20px);
+            border: 3px solid rgba(139, 69, 19, 0.3);
+            border-radius: 15px;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            min-height: 200px;
+            resize: vertical;
+            background: #fff;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .typing-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2), inset 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .typing-input.correct {
+            border-color: #4CAF50;
+            background: #f1f8f4;
+        }
+
+        .typing-input.incorrect {
+            border-color: #f44336;
+            background: #fff5f5;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #fff8dc 0%, #fef9e7 100%);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(139, 69, 19, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            min-width: 150px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 900;
+            color: #8b4513;
+        }
+
+        .stat-value.accuracy {
+            color: #4CAF50;
+        }
+
+        .stat-value.wpm {
+            color: #2196F3;
+        }
+
+        .complete-button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: clamp(18px, 2.5vw, 22px);
+            font-weight: 700;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .complete-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .complete-button:active {
+            transform: translateY(-1px);
+        }
+
+        .result-message {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: clamp(18px, 2.5vw, 22px);
+            font-weight: 700;
+            display: none;
+        }
+
+        .result-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .result-message.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 2px solid #bee5eb;
+        }
+
+        @media (max-width: 768px) {
+            .quest-container {
+                padding: 25px;
+            }
+
+            .paragraph-display {
+                padding: 20px;
+                font-size: 16px;
+            }
+
+            .typing-input {
+                min-height: 150px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#" class="back-button" id="backButton">← 回任務書</a>
+
+    <div class="quest-container">
+        <h1 class="quest-title">任務二：英文段落打字練習</h1>
+        <div class="timer-display" id="timer">時間：05:00</div>
+
+        <div class="paragraph-display" id="paragraph">
+            <!-- 段落内容将通过JavaScript填充 -->
+        </div>
+
+        <div class="typing-area">
+            <div class="typing-label">請在下方輸入框中完整輸入上面的英文段落：</div>
+            <textarea class="typing-input" id="typingInput" placeholder="開始打字..." autofocus></textarea>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-label">正確率</div>
+                <div class="stat-value accuracy" id="accuracy">0%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">打字速度 (WPM)</div>
+                <div class="stat-value wpm" id="wpm">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">已輸入字數</div>
+                <div class="stat-value" id="typedChars">0</div>
+            </div>
+        </div>
+
+        <div class="result-message" id="resultMessage"></div>
+        <button class="complete-button" id="completeButton" onclick="completeTask()">完成任務</button>
+    </div>
+
+    <script>
+        // 根据组别设置不同的英文段落（B组最简单，CDEF组逐渐变难，字数递增）
+        // B组约150字，C组约200字，D组约250字，E组约300字，F组约350字
+        const paragraphs = {
+            'B': "A recent study highlights the importance of sleep for teenagers. Researchers found that adolescents who get at least eight hours of sleep perform better academically and have improved mental health. The study suggests that schools should consider later start times to accommodate students' sleep needs. Many parents and educators support this idea, believing it will help students succeed in their studies.",
+            'C': "Climate change continues to impact global weather patterns. In recent years, there has been an increase in the frequency and intensity of hurricanes and wildfires. Scientists attribute these changes to rising global temperatures caused by human activities. They emphasize the need for immediate action to reduce carbon emissions and invest in renewable energy sources to mitigate future climate-related disasters. Governments worldwide are implementing policies to address these environmental challenges.",
+            'D': "Advancements in artificial intelligence are transforming various industries. In healthcare, AI algorithms assist in diagnosing diseases with high accuracy, sometimes surpassing human doctors. In the automotive sector, self-driving cars are being tested and are expected to reduce traffic accidents significantly. However, these developments raise ethical questions about job displacement and privacy concerns. Experts argue that while AI offers numerous benefits, it is crucial to establish regulations to ensure its responsible use and protect individual rights.",
+            'E': "The global economy is experiencing significant shifts due to technological innovations and geopolitical tensions. The rise of e-commerce has disrupted traditional retail, leading to store closures and changes in consumer behavior. Additionally, trade disputes between major economies have introduced uncertainties in global markets, affecting supply chains and investment decisions. Economists suggest that businesses need to adapt by embracing digital transformation and diversifying their markets to navigate these challenges successfully. The transition requires strategic planning and investment in new technologies.",
+            'F': "Recent breakthroughs in renewable energy technologies are paving the way for a sustainable future. Solar and wind energy have become more efficient and cost-effective, leading to increased adoption worldwide. Countries are setting ambitious targets to reduce reliance on fossil fuels and decrease greenhouse gas emissions. For instance, several nations have committed to achieving net-zero emissions by mid-century. These efforts are not only driven by environmental concerns but also by the economic benefits of green energy, such as job creation and energy security. However, challenges remain, including the need for improved energy storage solutions and upgrading existing infrastructure to accommodate renewable sources. Experts emphasize that continued investment in research and international cooperation are essential to overcome these obstacles and achieve global sustainability goals."
+        };
+
+        // 从URL获取组别参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const group = urlParams.get('group') || 'B';
+        const targetParagraph = paragraphs[group] || paragraphs['B'];
+
+        // 设置段落内容
+        document.getElementById('paragraph').textContent = targetParagraph;
+
+        // 计时器设置
+        const TOTAL_TIME_SECONDS = 5 * 60; // 5分钟
+        let remainingSeconds = TOTAL_TIME_SECONDS;
+        let timerInterval = null;
+        let startTime = null;
+        let isCompleted = false;
+
+        // 统计数据
+        let typedText = '';
+        let correctChars = 0;
+        let totalChars = 0;
+
+        // 初始化
+        function init() {
+            const typingInput = document.getElementById('typingInput');
+            const backButton = document.getElementById('backButton');
+            
+            // 设置返回按钮链接
+            backButton.href = group + '-quest-book.html';
+            
+            typingInput.addEventListener('input', handleInput);
+            typingInput.addEventListener('keydown', handleKeyDown);
+            
+            startTimer();
+        }
+
+        // 处理输入
+        function handleInput(e) {
+            if (isCompleted) return;
+
+            if (!startTime) {
+                startTime = Date.now();
+            }
+
+            typedText = e.target.value;
+            const targetText = targetParagraph;
+            
+            // 计算正确字符数
+            correctChars = 0;
+            totalChars = typedText.length;
+            
+            for (let i = 0; i < Math.min(typedText.length, targetText.length); i++) {
+                if (typedText[i] === targetText[i]) {
+                    correctChars++;
+                }
+            }
+
+            // 更新统计
+            updateStats();
+
+            // 检查是否完成
+            if (typedText === targetParagraph) {
+                completeTyping();
+            }
+
+            // 更新输入框样式
+            if (typedText === targetParagraph.substring(0, typedText.length)) {
+                e.target.classList.remove('incorrect');
+                e.target.classList.add('correct');
+            } else {
+                e.target.classList.remove('correct');
+                e.target.classList.add('incorrect');
+            }
+        }
+
+        // 处理按键
+        function handleKeyDown(e) {
+            // 防止Tab键切换焦点
+            if (e.key === 'Tab') {
+                e.preventDefault();
+            }
+        }
+
+        // 更新统计
+        function updateStats() {
+            const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 0;
+            document.getElementById('accuracy').textContent = accuracy + '%';
+
+            // 计算WPM (Words Per Minute)
+            if (startTime && totalChars > 0) {
+                const elapsedMinutes = (Date.now() - startTime) / 60000;
+                const words = typedText.trim().split(/\s+/).length;
+                const wpm = Math.round(words / elapsedMinutes);
+                document.getElementById('wpm').textContent = wpm;
+            }
+
+            document.getElementById('typedChars').textContent = totalChars;
+        }
+
+        // 完成打字
+        function completeTyping() {
+            if (isCompleted) return;
+            
+            isCompleted = true;
+            clearInterval(timerInterval);
+            
+            const resultMessage = document.getElementById('resultMessage');
+            const completeButton = document.getElementById('completeButton');
+            
+            resultMessage.textContent = '恭喜！你已經完成打字練習！';
+            resultMessage.classList.add('success');
+            resultMessage.style.display = 'block';
+            
+            completeButton.style.display = 'inline-block';
+            
+            // 保存完成状态
+            const progressKey = group.toLowerCase() + 'QuestProgress';
+            const progress = JSON.parse(localStorage.getItem(progressKey) || '{}');
+            progress.quest2 = true;
+            localStorage.setItem(progressKey, JSON.stringify(progress));
+        }
+
+        // 开始计时
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                remainingSeconds--;
+                
+                const minutes = Math.floor(remainingSeconds / 60);
+                const seconds = remainingSeconds % 60;
+                const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                document.getElementById('timer').textContent = `時間：${timeString}`;
+                
+                // 时间警告
+                if (remainingSeconds <= 60) { // 最后1分钟
+                    document.getElementById('timer').classList.add('warning');
+                }
+                
+                // 时间到
+                if (remainingSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    timeUp();
+                }
+            }, 1000);
+        }
+
+        // 时间到
+        function timeUp() {
+            if (isCompleted) return;
+            
+            const resultMessage = document.getElementById('resultMessage');
+            const completeButton = document.getElementById('completeButton');
+            
+            resultMessage.textContent = '時間到了！請檢查你的輸入是否完整。';
+            resultMessage.classList.add('info');
+            resultMessage.style.display = 'block';
+            
+            completeButton.style.display = 'inline-block';
+            
+            document.getElementById('typingInput').disabled = true;
+        }
+
+        // 完成任务
+        function completeTask() {
+            // 返回任务书页面
+            const questBookPage = group + '-quest-book.html?completed=2';
+            window.location.href = questBookPage;
+        }
+
+        // 页面加载时初始化
+        window.onload = init;
+    </script>
+</body>
+
+</html>
+

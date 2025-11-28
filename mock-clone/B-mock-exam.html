@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>B組魔王級模擬考</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .quiz-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            min-width: 600px;
+            position: relative;
+        }
+
+        .question-header {
+            text-align: left;
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        .timer {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+
+        .question-content {
+            margin-top: 40px;
+            font-size: 24px;
+        }
+
+        .question-image {
+            margin: 20px auto;
+            width: 500px;
+            max-width: 90%;
+            height: auto;
+            min-height: 350px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            font-size: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background-size: cover;
+            background-position: center;
+            padding: 10px;
+        }
+
+        .question-image img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 15px 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .scoreboard {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .correction-section {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .correction-section h3 {
+            margin-bottom: 10px;
+            color: #1a237e;
+        }
+
+        .correction-item {
+            margin-bottom: 18px;
+            padding: 14px;
+            border-radius: 10px;
+            background: #f5f7ff;
+            border: 1px solid #d0d7ff;
+            display: grid;
+            gap: 12px;
+        }
+
+        .correction-item label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .correction-item .hint {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .correction-item .answer {
+            font-size: 16px;
+            color: #1a237e;
+            font-weight: bold;
+        }
+
+        .correction-item .answer {
+            font-size: 16px;
+            color: #1a237e;
+            font-weight: bold;
+        }
+
+        .correction-inputs {
+            display: grid;
+            gap: 8px;
+        }
+
+        .correction-inputs input[type="text"] {
+            width: 100%;
+            max-width: 320px;
+            padding: 8px;
+            font-size: 18px;
+            text-transform: lowercase;
+        }
+
+        .correction-image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .correction-image img {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .correction-section button[type="submit"] {
+            margin-top: 12px;
+            align-self: flex-start;
+        }
+
+        .correction-section .note {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 12px;
+        }
+
+        .correction-warning {
+            display: inline-block;
+            margin-left: 12px;
+            color: #d32f2f;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .tab-tip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 12px 0;
+            padding: 12px 16px;
+            color: #1a237e;
+            background: rgba(232, 234, 246, 0.65);
+            border: 1px dashed #3f51b5;
+            border-radius: 12px;
+            flex-wrap: wrap;
+        }
+
+        .key-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border: 2px solid #1a237e;
+            border-radius: 8px;
+            font-weight: bold;
+            background: #ffffff;
+            font-size: 15px;
+            box-shadow: 0 3px 0 rgba(26, 35, 126, 0.2), 0 3px 6px rgba(26, 35, 126, 0.25);
+            min-width: 64px;
+        }
+
+        .key-badge .icon {
+            font-size: 14px;
+            opacity: 0.75;
+        }
+
+        .tab-tip strong {
+            color: #1a237e;
+        }
+
+        .plus-sign {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+
+        .tab-example {
+            margin: 6px 0 14px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .answers {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .nav-panel {
+            margin-top: 20px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .back-button:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="goToPage('home.html')" class="back-button">← 回上一頁</button>
+
+    <div class="quiz-box">
+        <div class="question-header" id="question-number"></div>
+        <div class="timer" id="timer">剩餘時間 70:00</div>
+        <div id="question-image" class="question-image"></div>
+        <div class="question-content" id="question-text"></div>
+        <input type="text" id="answer" placeholder="Your answer here" autocomplete="off" />
+        <br />
+        <button id="submitBtn" onclick="manualSubmit()">Submit</button>
+        <div class="feedback" id="feedback"></div>
+        <div class="scoreboard" id="scoreboard"></div>
+        <div id="correctionSection" class="correction-section"></div>
+        <div class="answers" id="answers" style="display: none;"></div>
+        <div class="nav-panel">
+            <label for="questionSelect">跳題：</label>
+            <select id="questionSelect" onchange="jumpToQuestion()"></select>
+        </div>
+    </div>
+
+    <script>
+        // B組魔王級模擬考 1~100題
+        const questions = [
+            // 1-30: 看圖拼字
+            { type: "看圖拼字", clue: "s_____________r", definition: "sticker", answer: "sticker", imagePath: "B-image2/1.jpg" },
+            { type: "看圖拼字", clue: "e_____________t", definition: "elephant", answer: "elephant", imagePath: "B-image2/2.jpg" },
+            { type: "看圖拼字", clue: "c_____________e", definition: "cupcake", answer: "cupcake", imagePath: "B-image2/3.jpg" },
+            { type: "看圖拼字", clue: "s_____________y", definition: "sleepy", answer: "sleepy", imagePath: "B-image2/4.jpg" },
+            { type: "看圖拼字", clue: "s_____________y", definition: "snowy", answer: "snowy", imagePath: "B-image2/5.jpg" },
+            { type: "看圖拼字", clue: "b_____________k", definition: "bookmark", answer: "bookmark", imagePath: "B-image2/6.jpg" },
+            { type: "看圖拼字", clue: "k_____________e", definition: "kite", answer: "kite", imagePath: "B-image2/7.jpg" },
+            { type: "看圖拼字", clue: "h_____________t", definition: "helmet", answer: "helmet", imagePath: "B-image2/8.jpg" },
+            { type: "看圖拼字", clue: "c_____________p", definition: "clap", answer: "clap", imagePath: "B-image2/9.jpg" },
+            { type: "看圖拼字", clue: "h_____________t", definition: "hat", answer: "hat", imagePath: "B-image2/10.jpg" },
+            { type: "看圖拼字", clue: "s_____________e", definition: "snake", answer: "snake", imagePath: "B-image2/11.jpg" },
+            { type: "看圖拼字", clue: "z_____________a", definition: "zebra", answer: "zebra", imagePath: "B-image2/12.jpg" },
+            { type: "看圖拼字", clue: "b_____________r", definition: "bear", answer: "bear", imagePath: "B-image2/13.jpg" },
+            { type: "看圖拼字", clue: "b_____________m", definition: "broom", answer: "broom", imagePath: "B-image2/14.jpg" },
+            { type: "看圖拼字", clue: "s_____________h", definition: "sandwich", answer: "sandwich", imagePath: "B-image2/15.jpg" },
+            { type: "看圖拼字", clue: "f_____________n", definition: "fifteen", answer: "fifteen", imagePath: "B-image2/16.jpg" },
+            { type: "看圖拼字", clue: "b_____________n", definition: "balloon", answer: "balloon", imagePath: "B-image2/17.jpg" },
+            { type: "看圖拼字", clue: "l_____________n", definition: "lion", answer: "lion", imagePath: "B-image2/18.jpg" },
+            { type: "看圖拼字", clue: "s_____________m", definition: "swim", answer: "swim", imagePath: "B-image2/19.jpg" },
+            { type: "看圖拼字", clue: "h_____________d", definition: "hand", answer: "hand", imagePath: "B-image2/20.jpg" },
+            { type: "看圖拼字", clue: "c_____________ks", definition: "chopsticks", answer: "chopsticks", imagePath: "B-image2/21.jpg" },
+            { type: "看圖拼字", clue: "w_____________w", definition: "window", answer: "window", imagePath: "B-image2/22.jpg" },
+            { type: "看圖拼字", clue: "r_____________d", definition: "read", answer: "read", imagePath: "B-image2/23.jpg" },
+            { type: "看圖拼字", clue: "l_____________n", definition: "lemon", answer: "lemon", imagePath: "B-image2/24.jpg" },
+            { type: "看圖拼字", clue: "m_____________n", definition: "magician", answer: "magician", imagePath: "B-image2/25.jpg" },
+            { type: "看圖拼字", clue: "f_____________y", definition: "fly", answer: "fly", imagePath: "B-image2/26.jpg" },
+            { type: "看圖拼字", clue: "n_____________e", definition: "nurse", answer: "nurse", imagePath: "B-image2/27.jpg" },
+            { type: "看圖拼字", clue: "b_____________y", definition: "butterfly", answer: "butterfly", imagePath: "B-image2/28.jpg" },
+            { type: "看圖拼字", clue: "j_____________t", definition: "jacket", answer: "jacket", imagePath: "B-image2/29.jpg" },
+            { type: "看圖拼字", clue: "u_____________a", definition: "umbrella", answer: "umbrella", imagePath: "B-image2/30.jpg" },
+            // 31-75: 文意字彙
+            { type: "文意字彙", clue: "Anna is not crying, but there are tears(眼淚) in her e_____es.", definition: "eyes", answer: "eyes" },
+            { type: "文意字彙", clue: "Kenny has five pets: a dog, two cats, and two r_____its.", definition: "rabbits", answer: "rabbits" },
+            { type: "文意字彙", clue: "My sister is a cute g_____l.", definition: "girl", answer: "girl" },
+            { type: "文意字彙", clue: "My hat is blue, and your hat is y_____w.", definition: "yellow", answer: "yellow" },
+            { type: "文意字彙", clue: "We're not happy. We're s_____d.", definition: "sad", answer: "sad" },
+            { type: "文意字彙", clue: "Ann and Amy are good f_____ds. They study and play together.", definition: "friends", answer: "friends" },
+            { type: "文意字彙", clue: "There are many fl_____rs in the park.", definition: "flowers", answer: "flowers" },
+            { type: "文意字彙", clue: "I want l_____ps and chocolate bars. They are sweet (甜的).", definition: "lollipops", answer: "lollipops" },
+            { type: "文意字彙", clue: "The toy car is one t_____d dollars.", definition: "thousand", answer: "thousand" },
+            { type: "文意字彙", clue: "You are t_____d. Please go to bed.", definition: "tired", answer: "tired" },
+            { type: "文意字彙", clue: "Mom is cooking in the k_____n.", definition: "kitchen", answer: "kitchen" },
+            { type: "文意字彙", clue: "Peter is riding a s_____r to school.", definition: "scooter", answer: "scooter" },
+            { type: "文意字彙", clue: "Let's sing and d_____e together.", definition: "dance", answer: "dance" },
+            { type: "文意字彙", clue: "There are many b_____lies and bees at the park.", definition: "butterflies", answer: "butterflies" },
+            { type: "文意字彙", clue: "I like cakes, especially (特別是) c_____te cake.", definition: "chocolate", answer: "chocolate" },
+            { type: "文意字彙", clue: "At the amusement park, many kids have b_____ns.", definition: "balloons", answer: "balloons" },
+            { type: "文意字彙", clue: "There are some boys b_____d the tree. They are playing.", definition: "behind", answer: "behind" },
+            { type: "文意字彙", clue: "An elephant has a long trunk (象鼻) and two big e_____rs.", definition: "ears", answer: "ears" },
+            { type: "文意字彙", clue: "Jack has a f_____g. It is small and green.", definition: "frog", answer: "frog" },
+            { type: "文意字彙", clue: "Our dog is not weak. It is s_____g.", definition: "strong", answer: "strong" },
+            { type: "文意字彙", clue: "Meg likes s_____ries. They are red and sweet (甜的).", definition: "strawberries", answer: "strawberries" },
+            { type: "文意字彙", clue: "Mika is 120 c_____rs tall.", definition: "centimeters", answer: "centimeters" },
+            { type: "文意字彙", clue: "There are some kids playing at the p_____k.", definition: "park", answer: "park" },
+            { type: "文意字彙", clue: "There are twenty m_____ys at the zoo.", definition: "monkeys", answer: "monkeys" },
+            { type: "文意字彙", clue: "Let's put some f_____ts in the basket. Do you want an apple?", definition: "fruits", answer: "fruits" },
+            { type: "文意字彙", clue: "We can eat ice cream with (用) a s_____n.", definition: "spoon", answer: "spoon" },
+            { type: "文意字彙", clue: "Please take out your books, and put them on your d_____k.", definition: "desk", answer: "desk" },
+            { type: "文意字彙", clue: "It's ten o'_____k. Let's go to bed.", definition: "o'clock", answer: "o'clock" },
+            { type: "文意字彙", clue: "There are many animals(動物) in the z_____o.", definition: "zoo", answer: "zoo" },
+            { type: "文意字彙", clue: "Paul has many c_____c books. He is reading now.", definition: "comic", answer: "comic" },
+            { type: "文意字彙", clue: "I have a lunchbox and a banana in my b_____k.", definition: "backpack", answer: "backpack" },
+            { type: "文意字彙", clue: "Don't sit on the desk. Sit on the c_____r, please.", definition: "chair", answer: "chair" },
+            { type: "文意字彙", clue: "Alex has a new b_____le. He can ride it to school.", definition: "bicycle", answer: "bicycle" },
+            { type: "文意字彙", clue: "My f_____r is a farmer. My mother is a teacher.", definition: "father", answer: "father" },
+            { type: "文意字彙", clue: "Kelly has a pen and an e_____r in her pencil case.", definition: "eraser", answer: "eraser" },
+            { type: "文意字彙", clue: "My father doesn't work on S_____ys and Sundays.", definition: "Saturdays", answer: "Saturdays" },
+            { type: "文意字彙", clue: "My uncle has many pigs and h_____es on his farm (農場).", definition: "horses", answer: "horses" },
+            { type: "文意字彙", clue: "I have five pencils in my pencil c_____e.", definition: "case", answer: "case" },
+            { type: "文意字彙", clue: "My bag is not red. It is p_____k.", definition: "pink", answer: "pink" },
+            { type: "文意字彙", clue: "Diana is t_____l. She's 180 centimeters.", definition: "tall", answer: "tall" },
+            { type: "文意字彙", clue: "Sara has a p_____ot. It is green, and it can talk.", definition: "parrot", answer: "parrot" },
+            { type: "文意字彙", clue: "These boxes are e_____y. They're light.", definition: "empty", answer: "empty" },
+            { type: "文意字彙", clue: "They have cu_____es and chocolate bars on the desk.", definition: "cupcakes", answer: "cupcakes" },
+            { type: "文意字彙", clue: "Simon doesn't want a toy car. He wants a p_____le.", definition: "puzzle", answer: "puzzle" },
+            { type: "文意字彙", clue: "Can you h_____r that? Someone (有人) is crying.", definition: "hear", answer: "hear" },
+            // 76-100: 對話填空
+            { type: "對話填空", clue: "A: What c____r do you like? B: I like red.", definition: "color", answer: "color" },
+            { type: "對話填空", clue: "A: I don't want pepper. Please pass the s_____t. B: Sure. Here you are.", definition: "salt", answer: "salt" },
+            { type: "對話填空", clue: "A: Who's that? B: That's my c_____n. Her name is Zoey.", definition: "cousin", answer: "cousin" },
+            { type: "對話填空", clue: "A: What time is it? B: It's n_____e o'clock.", definition: "nine", answer: "nine" },
+            { type: "對話填空", clue: "A: How old is James? B: He is el_____n years old.", definition: "eleven", answer: "eleven" },
+            { type: "對話填空", clue: "A: What day is it? B: It's Th_____y.", definition: "Thursday", answer: "Thursday" },
+            { type: "對話填空", clue: "A: I want a c_____r. B: Why? A: I can play games on it.", definition: "computer", answer: "computer" },
+            { type: "對話填空", clue: "A: Do you have a c_____a? B: Yes. We can take a picture.", definition: "camera", answer: "camera" },
+            { type: "對話填空", clue: "A: Can I have your c_____e number? B: Sure. It's 0987-654-321.", definition: "cellphone", answer: "cellphone" },
+            { type: "對話填空", clue: "A: How many p_____e are there? B: Twelve. There are six girls and six boys.", definition: "people", answer: "people" },
+            { type: "對話填空", clue: "A: Where is your teacher from? B: He's from E_____d.", definition: "England", answer: "England" },
+            { type: "對話填空", clue: "A: Can we eat in the m_____m? B: No, we can't.", definition: "museum", answer: "museum" },
+            { type: "對話填空", clue: "A: Are they going to school? B: No, they're not. They're going to the p_____d.", definition: "playground", answer: "playground" },
+            { type: "對話填空", clue: "A: What are you drinking? B: I'm drinking g_____e juice.", definition: "grape", answer: "grape" },
+            { type: "對話填空", clue: "A: Where are we? B: I don't know. Let's check (查看) the m_____p.", definition: "map", answer: "map" },
+            { type: "對話填空", clue: "A: How old is your brother? B: He's e______t years old.", definition: "eight", answer: "eight" },
+            { type: "對話填空", clue: "A: It's hot (熱的). I want some ice c_____m. B: I want some, too.", definition: "cream", answer: "cream" },
+            { type: "對話填空", clue: "A: What are those? B: They're c_____ns. Let's draw a bear.", definition: "crayons", answer: "crayons" },
+            { type: "對話填空", clue: "A: How old is Betty? B: She's tw_____e years old.", definition: "twelve", answer: "twelve" },
+            { type: "對話填空", clue: "A: Do you have a pet(寵物)? B: Yes. I have a d_____g.", definition: "dog", answer: "dog" },
+            { type: "對話填空", clue: "A: Do you like p_____as or apples? B: I like apples.", definition: "papayas", answer: "papayas" },
+            { type: "對話填空", clue: "A: Where is the chair? B: It's in front of the d_____r.", definition: "door", answer: "door" },
+            { type: "對話填空", clue: "A: How old is your sister? B: She is n_____n.", definition: "nineteen", answer: "nineteen" },
+            { type: "對話填空", clue: "A: Where is my book? B: It's u_____r the bed.", definition: "under", answer: "under" },
+            { type: "對話填空", clue: "A: How's the w_____r? B: It's rainy.", definition: "weather", answer: "weather" }
+        ];
+
+        let current = 0;
+        let userAnswers = Array(questions.length).fill("");
+        // 检查是否是任务二模式（20分钟）
+        const urlParams = new URLSearchParams(window.location.search);
+        const isQuest2 = urlParams.get('quest') === '2';
+        const TOTAL_TIME_SECONDS = isQuest2 ? 20 * 60 : 70 * 60;
+        let remainingSeconds = TOTAL_TIME_SECONDS;
+        let timerInterval = null;
+        let startTime = null;
+        let timeUp = false;
+        const REQUIRED_REWRITES = 3;
+        let correctionEntries = {};
+        let levelStart = 0;
+        let levelEnd = 100;
+        let currentLevel = null;
+
+        window.onload = () => {
+            // 检查URL参数，确定关卡范围
+            const urlParams = new URLSearchParams(window.location.search);
+            const start = parseInt(urlParams.get('start')) || 0;
+            const level = parseInt(urlParams.get('level')) || null;
+
+            if (level && start >= 0) {
+                // 关卡模式
+                levelStart = start;
+                levelEnd = start + 25; // 每个关卡25题
+                currentLevel = level;
+                current = levelStart;
+                // 只显示当前关卡的题目
+                const select = document.getElementById("questionSelect");
+                for (let i = levelStart; i < levelEnd && i < questions.length; i++) {
+                    const option = document.createElement("option");
+                    option.value = i;
+                    option.text = `題目 ${i + 1}`;
+                    select.appendChild(option);
+                }
+            } else {
+                // 完整模式
+                const select = document.getElementById("questionSelect");
+                questions.forEach((_, i) => {
+                    const option = document.createElement("option");
+                    option.value = i;
+                    option.text = `題目 ${i + 1}`;
+                    select.appendChild(option);
+                });
+            }
+
+            loadQuestion();
+            startTime = Date.now();
+            startTimer();
+        };
+
+        function goToPage(url) {
+            window.location.href = url;
+        }
+
+        function manualSubmit() {
+            saveAnswer();
+            nextQuestion();
+        }
+
+        function loadQuestion() {
+            const questionNum = current + 1;
+            const levelInfo = currentLevel ? ` [關卡 ${currentLevel}]` : '';
+            document.getElementById("question-number").textContent = `${questionNum}. ${questions[current].type}${levelInfo}`;
+            const currentQuestion = questions[current];
+
+            // 顯示相關圖片
+            const imageElement = document.getElementById("question-image");
+            const questionTextElement = document.getElementById("question-text");
+
+            // 優先使用實際圖片文件（如果有的話，例如段落填空題目）
+            if (currentQuestion.imagePath) {
+                imageElement.innerHTML = `<img src="${currentQuestion.imagePath}" alt="Question image" onerror="this.style.display='none'; this.parentElement.style.display='none';" />`;
+                imageElement.style.display = "flex";
+                imageElement.style.background = "transparent";
+                imageElement.style.justifyContent = "center";
+                imageElement.style.alignItems = "center";
+                // 對於段落填空，先顯示圖片，後顯示填空題目
+                if (currentQuestion.type === "段落填空") {
+                    questionTextElement.textContent = currentQuestion.clue;
+                    questionTextElement.style.marginTop = "20px";
+                } else {
+                    questionTextElement.textContent = currentQuestion.clue;
+                }
+            } else {
+                // 沒有圖片時隱藏圖片元素
+                imageElement.style.display = "none";
+                questionTextElement.textContent = currentQuestion.clue;
+            }
+
+            document.getElementById("answer").value = userAnswers[current] || "";
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("scoreboard").textContent = "";
+            document.getElementById("answers").style.display = "none";
+            document.getElementById("questionSelect").value = current;
+            document.getElementById("answer").style.display = "inline-block";
+            document.getElementById("submitBtn").style.display = "inline-block";
+        }
+
+        function saveAnswer() {
+            const input = document.getElementById("answer").value.trim();
+            userAnswers[current] = input;
+        }
+
+        function nextQuestion() {
+            const maxIndex = currentLevel ? Math.min(levelEnd - 1, questions.length - 1) : questions.length - 1;
+            if (current < maxIndex) {
+                current++;
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function jumpToQuestion() {
+            saveAnswer();
+            current = parseInt(document.getElementById("questionSelect").value);
+            loadQuestion();
+        }
+
+        function showFinalResult() {
+            const submitButton = document.getElementById("submitBtn");
+            if (submitButton.style.display === "none") {
+                return;
+            }
+
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            remainingSeconds = Math.max(0, remainingSeconds);
+            updateTimerDisplay();
+
+            document.getElementById("question-number").textContent = timeUp ? "⏰ 時間到！" : "🎉 全部完成！";
+            document.getElementById("question-text").textContent = "";
+            document.getElementById("answer").style.display = "none";
+            submitButton.style.display = "none";
+            const feedbackEl = document.getElementById("feedback");
+            feedbackEl.textContent = timeUp ? "時間到！" : "";
+
+            // 计算分数（只计算当前关卡范围内的题目）
+            const scoreStartIdx = currentLevel ? levelStart : 0;
+            const scoreEndIdx = currentLevel ? Math.min(levelEnd, questions.length) : questions.length;
+            const scoreLevelQuestions = questions.slice(scoreStartIdx, scoreEndIdx);
+            const scoreLevelAnswers = userAnswers.slice(scoreStartIdx, scoreEndIdx);
+            const score = scoreLevelAnswers.reduce((sum, ans, i) => sum + (ans === scoreLevelQuestions[i].answer ? 1 : 0), 0);
+            const totalQuestions = scoreEndIdx - scoreStartIdx;
+
+            const elapsedSeconds = startTime ? Math.min(TOTAL_TIME_SECONDS, Math.floor((Date.now() - startTime) / 1000)) : 0;
+            const timeSuffix = timeUp ? "（時間到）" : "";
+            const levelInfo = currentLevel ? ` [關卡 ${currentLevel}]` : '';
+            document.getElementById("scoreboard").innerHTML = `Your Score: ${score} / ${totalQuestions}${levelInfo}<br>${getGrade(score, totalQuestions)}<br>花費時間：${formatElapsedTime(elapsedSeconds)}${timeSuffix}`;
+
+            const incorrectIndices = getIncorrectIndices();
+
+            // 如果是任务二模式，保存错误记录供任务三使用
+            const urlParams = new URLSearchParams(window.location.search);
+            const isQuest2 = urlParams.get('quest') === '2';
+            if (isQuest2 && incorrectIndices.length > 0) {
+                const errors = incorrectIndices.map(idx => ({
+                    questionNum: idx + 1,
+                    clue: questions[idx].clue,
+                    correctAnswer: questions[idx].answer,
+                    userAnswer: userAnswers[idx] || '',
+                    definition: questions[idx].definition
+                }));
+                localStorage.setItem('bQuest2Errors', JSON.stringify(errors));
+            } else if (isQuest2 && incorrectIndices.length === 0) {
+                // 如果没有错误，保存空数组
+                localStorage.setItem('bQuest2Errors', JSON.stringify([]));
+            }
+
+            renderCorrectionSection(incorrectIndices);
+
+            const answerBox = document.getElementById("answers");
+            answerBox.style.display = "block";
+            const answerStartIdx = currentLevel ? levelStart : 0;
+            const answerEndIdx = currentLevel ? Math.min(levelEnd, questions.length) : questions.length;
+            const answerLevelQuestions = questions.slice(answerStartIdx, answerEndIdx);
+            const answerLevelAnswers = userAnswers.slice(answerStartIdx, answerEndIdx);
+
+            answerBox.innerHTML = "<h3>🧠 正確答案：</h3><ol>" +
+                answerLevelQuestions.map((q, i) => {
+                    const actualIdx = answerStartIdx + i;
+                    const ua = answerLevelAnswers[i] || "(未作答)";
+                    const ok = (answerLevelAnswers[i] || "") === q.answer;
+                    return `<li><strong>題目 ${actualIdx + 1}: ${q.clue}</strong>: ${q.definition}<br>
+                      你的答案：<strong>${ua}</strong> ${ok ? '✅' : '❌'}<br>
+                      正確答案：<strong>${q.answer}</strong></li><br>`;
+                }).join("") + "</ol>";
+        }
+
+        function getGrade(score, total = questions.length) {
+            const pct = (score / total) * 100;
+            if (pct === 100) return "🎓 Perfect! Great job!";
+            if (pct >= 70) return "👍 Good work!";
+            return "📝 Keep practicing!";
+        }
+
+        function getIncorrectIndices() {
+            const incorrect = [];
+            const startIdx = currentLevel ? levelStart : 0;
+            const endIdx = currentLevel ? Math.min(levelEnd, questions.length) : questions.length;
+
+            for (let i = startIdx; i < endIdx; i++) {
+                if ((userAnswers[i] || "") !== questions[i].answer) {
+                    incorrect.push(i);
+                }
+            }
+            return incorrect;
+        }
+
+        function renderCorrectionSection(incorrectIndices) {
+            const section = document.getElementById("correctionSection");
+            if (!section) return;
+
+            if (incorrectIndices.length === 0) {
+                section.innerHTML = "<p>🎉 全部答對或已全部訂正完成，恭喜！</p>";
+                return;
+            }
+
+            const fields = incorrectIndices.map((index) => {
+                const question = questions[index];
+                const currentEntries = correctionEntries[index] || Array(REQUIRED_REWRITES).fill("");
+                const imageMarkup = question.imagePath
+                    ? `<div class="correction-image"><img src="${question.imagePath}" alt="Question ${index + 1} image" onerror="this.style.display='none';" /></div>`
+                    : "";
+                const inputs = currentEntries.map((value, rewriteIdx) => `
+                    <input type="text" id="correction-${index}-${rewriteIdx}" name="correction-${index}-${rewriteIdx}" value="${value}" autocomplete="off" />
+                `).join("");
+
+                return `
+                    <div class="correction-item">
+                        <label>${index + 1}. ${question.clue}</label>
+                        ${imageMarkup}
+                        <div class="hint">提示：${question.definition}</div>
+                        <div class="answer">正確答案：${question.answer}</div>
+                        <div class="correction-inputs">
+                            ${inputs}
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
+            const shortcutTips = `
+                <div class="tab-tip">
+                    <span class="key-badge">Tab<span class="icon">↹</span></span>
+                    <span>輸入完成後按下 <strong>鍵盤上的 Tab</strong>，可快速跳到下一個訂正欄位。</span>
+                </div>
+                <div class="tab-tip">
+                    <span class="key-badge">Shift<span class="icon">⇧</span></span>
+                    <span class="plus-sign">+</span>
+                    <span class="key-badge">Tab<span class="icon">↹</span></span>
+                    <span>按下 <strong>鍵盤上的 Shift + Tab</strong> 回上一格，迅速返回前一個訂正欄位。</span>
+                </div>
+                <div class="tab-example">例：在第一格輸入答案 → 按 Tab → 立刻切換到第二格。</div>
+            `;
+
+            section.innerHTML = `
+                <h3>訂正區</h3>
+                <p class="note">請將每一題的正確答案在空格中抄寫 ${REQUIRED_REWRITES} 次。全部訂正完成後按下「送出訂正」，才會回到主畫面。</p>
+                ${shortcutTips}
+                <form id="correctionForm">
+                    ${fields}
+                    <button type="submit">送出訂正</button>
+                    <span class="correction-warning">※ 全部訂正完才可以送出訂正</span>
+                </form>
+            `;
+
+            document.getElementById("feedback").textContent = "請完成訂正後再送出。";
+
+            const correctionForm = document.getElementById("correctionForm");
+            correctionForm.addEventListener("submit", handleCorrectionSubmit);
+        }
+
+        function handleCorrectionSubmit(event) {
+            event.preventDefault();
+            const feedbackEl = document.getElementById("feedback");
+
+            const incorrectIndices = getIncorrectIndices();
+            if (incorrectIndices.length === 0) {
+                feedbackEl.textContent = "訂正已完成，將於 1.5 秒後回到任務書。";
+
+                // 检查是否是任务二模式
+                const urlParams = new URLSearchParams(window.location.search);
+                const isQuest2 = urlParams.get('quest') === '2';
+
+                if (isQuest2) {
+                    // 标记任务二完成
+                    const progress = JSON.parse(localStorage.getItem('bQuestProgress') || '{}');
+                    progress.quest2 = true;
+                    localStorage.setItem('bQuestProgress', JSON.stringify(progress));
+                    setTimeout(() => {
+                        goToPage('B-quest-book.html?completed=2');
+                    }, 1500);
+                } else if (currentLevel) {
+                    // 如果是关卡模式，标记关卡完成
+                    const saved = localStorage.getItem('bMapProgress');
+                    const progress = saved ? JSON.parse(saved) : {};
+                    progress[currentLevel] = true;
+                    localStorage.setItem('bMapProgress', JSON.stringify(progress));
+                    setTimeout(() => {
+                        goToPage(`B-map.html?completed=${currentLevel}`);
+                    }, 1500);
+                } else {
+                    setTimeout(() => {
+                        goToPage('home.html');
+                    }, 1500);
+                }
+                return;
+            }
+
+            let allCorrected = true;
+
+            incorrectIndices.forEach((index) => {
+                const answer = questions[index].answer.trim().toLowerCase();
+                const entries = [];
+                for (let rewriteIdx = 0; rewriteIdx < REQUIRED_REWRITES; rewriteIdx++) {
+                    const fieldName = `correction-${index}-${rewriteIdx}`;
+                    const value = (event.target[fieldName]?.value || "").trim();
+                    entries.push(value);
+                }
+                correctionEntries[index] = entries;
+
+                const hasEmpty = entries.some((value) => value === "");
+                const allMatch = entries.every((value) => value.toLowerCase() === answer);
+
+                if (hasEmpty || !allMatch) {
+                    allCorrected = false;
+                } else {
+                    userAnswers[index] = questions[index].answer;
+                }
+            });
+
+            if (allCorrected) {
+                feedbackEl.textContent = "訂正已完成，將於 1.5 秒後回到地圖。";
+                renderCorrectionSection(getIncorrectIndices());
+
+                // 检查是否是任务二模式
+                const urlParams = new URLSearchParams(window.location.search);
+                const isQuest2 = urlParams.get('quest') === '2';
+
+                if (isQuest2) {
+                    // 标记任务二完成
+                    const progress = JSON.parse(localStorage.getItem('bQuestProgress') || '{}');
+                    progress.quest2 = true;
+                    localStorage.setItem('bQuestProgress', JSON.stringify(progress));
+                    setTimeout(() => {
+                        goToPage('B-quest-book.html?completed=2');
+                    }, 1500);
+                } else if (currentLevel) {
+                    // 如果是关卡模式，标记关卡完成
+                    const saved = localStorage.getItem('bMapProgress');
+                    const progress = saved ? JSON.parse(saved) : {};
+                    progress[currentLevel] = true;
+                    localStorage.setItem('bMapProgress', JSON.stringify(progress));
+                    setTimeout(() => {
+                        goToPage(`B-map.html?completed=${currentLevel}`);
+                    }, 1500);
+                } else {
+                    setTimeout(() => {
+                        goToPage('home.html');
+                    }, 1500);
+                }
+            } else {
+                feedbackEl.textContent = "請確認每一題都已正確抄寫三次後再送出。";
+                renderCorrectionSection(getIncorrectIndices());
+            }
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                remainingSeconds--;
+                if (remainingSeconds <= 0) {
+                    remainingSeconds = 0;
+                    updateTimerDisplay();
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    timeUp = true;
+                    saveAnswer();
+                    showFinalResult();
+                    return;
+                }
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const timerElement = document.getElementById("timer");
+            if (!timerElement) return;
+            timerElement.textContent = `剩餘時間 ${formatCountdown(remainingSeconds)}`;
+        }
+
+        function formatCountdown(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+        }
+
+        function formatElapsedTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}分${String(secs).padStart(2, "0")}秒`;
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                saveAnswer();
+                nextQuestion();
+            }
+        });
+    </script>
+</body>
+
+</html>

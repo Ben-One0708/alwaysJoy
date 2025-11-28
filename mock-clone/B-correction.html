@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>任務三：訂正挑戰</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1000;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #ff4757;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 129, 0.4);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .title {
+            text-align: center;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 900;
+            color: #2d3436;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            text-align: center;
+            font-size: clamp(18px, 3vw, 24px);
+            color: #636e72;
+            margin-bottom: 40px;
+        }
+
+        .correction-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .correction-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .correction-table th,
+        .correction-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .correction-table th {
+            font-weight: 700;
+            font-size: clamp(16px, 2.5vw, 20px);
+        }
+
+        .correction-table td {
+            font-size: clamp(14px, 2vw, 18px);
+        }
+
+        .correction-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .correction-table tbody tr.completed {
+            background: #d5f4e6;
+        }
+
+        .correction-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .correction-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .correction-input.correct {
+            border-color: #27ae60;
+            background: #d5f4e6;
+        }
+
+        .correction-input.wrong {
+            border-color: #e74c3c;
+            background: #fadbd8;
+        }
+
+        .submit-button {
+            display: block;
+            margin: 30px auto;
+            padding: 20px 50px;
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(39, 174, 96, 0.3);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(39, 174, 96, 0.4);
+        }
+
+        .submit-button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-message {
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 20px;
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .result-message.success {
+            background: linear-gradient(135deg, #d5f4e6 0%, #a8e6cf 100%);
+            color: #155724;
+            border: 3px solid #27ae60;
+        }
+
+        .progress-info {
+            text-align: center;
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: 700;
+            color: #2d3436;
+            margin: 20px 0;
+        }
+
+        .no-errors {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: clamp(24px, 4vw, 32px);
+            color: #27ae60;
+        }
+
+        .no-errors-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#" class="back-button" id="backButton">← 回任務書</a>
+
+    <div class="container">
+        <h1 class="title">任務三：訂正挑戰</h1>
+        <p class="description">訂正你在任務二中的錯誤，完成所有訂正即可完成任務！</p>
+
+        <div id="correctionContent"></div>
+    </div>
+
+    <script>
+        // 从URL获取组别参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const group = urlParams.get('group') || 'B';
+        
+        // 设置返回按钮链接
+        document.getElementById('backButton').href = group + '-quest-book.html';
+        
+        // 从localStorage获取任务二的错误记录
+        function loadCorrectionData() {
+            const savedData = localStorage.getItem(group.toLowerCase() + 'Quest2Errors');
+            if (!savedData) {
+                document.getElementById('correctionContent').innerHTML = `
+                    <div class="no-errors">
+                        <div class="no-errors-icon">✅</div>
+                        <p>你還沒有完成任務二，或者任務二中沒有錯誤需要訂正！</p>
+                        <p style="margin-top: 20px; font-size: 0.8em; color: #636e72;">請先完成任務二：百題挑戰</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const errors = JSON.parse(savedData);
+            if (errors.length === 0) {
+                document.getElementById('correctionContent').innerHTML = `
+                    <div class="no-errors">
+                        <div class="no-errors-icon">🎉</div>
+                        <p>太棒了！你在任務二中沒有錯誤！</p>
+                        <p style="margin-top: 20px; font-size: 0.8em; color: #636e72;">任務三自動完成</p>
+                    </div>
+                `;
+
+                // 自动标记任务三完成
+                const progressKey = group.toLowerCase() + 'QuestProgress';
+                const progress = JSON.parse(localStorage.getItem(progressKey) || '{}');
+                progress.quest3 = true;
+                localStorage.setItem(progressKey, JSON.stringify(progress));
+
+                setTimeout(() => {
+                    window.location.href = group + '-quest-book.html?completed=3';
+                }, 3000);
+                return;
+            }
+
+            renderCorrectionTable(errors);
+        }
+
+        function renderCorrectionTable(errors) {
+            let html = `
+                <div class="progress-info">
+                    需要訂正：<span id="progressCount">0</span> / ${errors.length}
+                </div>
+                <table class="correction-table">
+                    <thead>
+                        <tr>
+                            <th>題號</th>
+                            <th>題目</th>
+                            <th>正確答案</th>
+                            <th>你的答案</th>
+                            <th>訂正</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            errors.forEach((error, index) => {
+                html += `
+                    <tr id="row-${index}" data-index="${index}">
+                        <td>${error.questionNum}</td>
+                        <td>${error.clue}</td>
+                        <td><strong>${error.correctAnswer}</strong></td>
+                        <td>${error.userAnswer || '(未作答)'}</td>
+                        <td>
+                            <input 
+                                type="text" 
+                                class="correction-input" 
+                                data-index="${index}"
+                                data-correct="${error.correctAnswer.toLowerCase()}"
+                                placeholder="輸入正確答案"
+                                autocomplete="off"
+                            />
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+                <button class="submit-button" id="submitButton" onclick="submitCorrections()">提交訂正</button>
+                <div id="resultMessage"></div>
+            `;
+
+            document.getElementById('correctionContent').innerHTML = html;
+
+            // 添加输入监听
+            document.querySelectorAll('.correction-input').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    checkInput(e.target);
+                    updateProgress();
+                });
+            });
+
+            updateProgress();
+        }
+
+        function checkInput(input) {
+            const userAnswer = input.value.trim().toLowerCase();
+            const correctAnswer = input.dataset.correct.toLowerCase();
+
+            input.classList.remove('correct', 'wrong');
+
+            if (userAnswer === correctAnswer) {
+                input.classList.add('correct');
+                const row = input.closest('tr');
+                row.classList.add('completed');
+            } else if (userAnswer.length > 0) {
+                input.classList.add('wrong');
+                const row = input.closest('tr');
+                row.classList.remove('completed');
+            } else {
+                const row = input.closest('tr');
+                row.classList.remove('completed');
+            }
+        }
+
+        function updateProgress() {
+            const inputs = document.querySelectorAll('.correction-input');
+            const completed = Array.from(inputs).filter(input =>
+                input.value.trim().toLowerCase() === input.dataset.correct.toLowerCase()
+            ).length;
+
+            document.getElementById('progressCount').textContent = completed;
+        }
+
+        function submitCorrections() {
+            const inputs = document.querySelectorAll('.correction-input');
+            let allCorrect = true;
+
+            inputs.forEach(input => {
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = input.dataset.correct.toLowerCase();
+
+                if (userAnswer !== correctAnswer) {
+                    allCorrect = false;
+                    input.classList.add('wrong');
+                }
+            });
+
+            const resultMessage = document.getElementById('resultMessage');
+
+            if (allCorrect) {
+                resultMessage.innerHTML = `
+                    <div class="result-message success">
+                        🎉 恭喜！你已完成所有訂正！任務三完成！
+                    </div>
+                `;
+
+                // 标记任务三完成
+                const progressKey = group.toLowerCase() + 'QuestProgress';
+                const progress = JSON.parse(localStorage.getItem(progressKey) || '{}');
+                progress.quest3 = true;
+                localStorage.setItem(progressKey, JSON.stringify(progress));
+
+                // 3秒后返回任务书
+                setTimeout(() => {
+                    window.location.href = group + '-quest-book.html?completed=3';
+                }, 3000);
+            } else {
+                resultMessage.innerHTML = `
+                    <div class="result-message" style="background: #fff3cd; color: #856404; border: 3px solid #ffc107;">
+                        ⚠️ 請確認所有訂正都正確後再提交！
+                    </div>
+                `;
+            }
+        }
+
+        window.onload = () => {
+            loadCorrectionData();
+        };
+    </script>
+</body>
+
+</html>

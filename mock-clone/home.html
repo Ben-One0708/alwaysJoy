@@ -67,19 +67,25 @@
         }
 
         @keyframes bounceButton {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-8px);
             }
         }
 
         @keyframes pulseGlow {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 opacity: 0.6;
             }
+
             50% {
                 transform: scale(1.1);
                 opacity: 0.3;
@@ -170,6 +176,22 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: 0.08em;
+        }
+
+        .final-task-title {
+            font-size: clamp(32px, 6.5vw, 44px);
+            font-weight: 800;
+            text-align: center;
+            margin-top: clamp(15px, 3vw, 25px);
+            margin-bottom: clamp(28px, 5vw, 40px);
+            letter-spacing: 0.08em;
+        }
+
+        .final-task-title .title-text {
+            background: linear-gradient(135deg, #3f51b5 0%, #5c6bc0 50%, #7986cb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .group-grid {
@@ -532,6 +554,1087 @@
             transform: translate(-50%, -50%);
         }
 
+        /* 英文小助手 - 活潑風格設計 */
+        .helper-section {
+            margin: clamp(60px, 10vw, 80px) 0;
+            padding: clamp(30px, 5vw, 50px);
+            background:
+                url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='100' r='80' fill='%23ff6b9d' opacity='0.05'/%3E%3Ccircle cx='100' cy='100' r='50' fill='%234ecdc4' opacity='0.05'/%3E%3C/svg%3E"),
+                linear-gradient(135deg, #fff5f5 0%, #f0f9ff 50%, #f5f0ff 100%);
+            background-size: 300px 300px, 100% 100%;
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .helper-section::before {
+            content: '🎵🎶🎼🎹🎸🎺🎷';
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            right: -30px;
+            bottom: -30px;
+            font-size: 60px;
+            opacity: 0.08;
+            animation: musicNotesFloat 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .keyboard-title {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-bottom: clamp(30px, 5vw, 50px);
+            padding: clamp(20px, 3vw, 35px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(8px, 1.2vw, 15px);
+            flex-wrap: wrap;
+        }
+
+        .keyboard-title-key {
+            position: relative;
+            padding: clamp(12px, 2vw, 20px) clamp(18px, 3vw, 30px);
+            background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 30%, #95a5a6 60%, #7f8c8d 100%);
+            border-radius: clamp(8px, 1.2vw, 12px);
+            box-shadow:
+                0 6px 12px rgba(0, 0, 0, 0.4),
+                0 3px 6px rgba(0, 0, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.7),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                0 0 0 2px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            transform: perspective(500px) rotateX(5deg);
+            transition: all 0.3s ease;
+            animation: titleKeyFloat 3s ease-in-out infinite;
+        }
+
+        .keyboard-title-key::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            height: 40%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, transparent 100%);
+            border-radius: clamp(6px, 1vw, 10px) clamp(6px, 1vw, 10px) 0 0;
+            pointer-events: none;
+        }
+
+        .keyboard-title-key::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0 0 50% 50%;
+            filter: blur(3px);
+        }
+
+        @keyframes titleKeyFloat {
+
+            0%,
+            100% {
+                transform: perspective(500px) rotateX(5deg) translateY(0);
+            }
+
+            50% {
+                transform: perspective(500px) rotateX(5deg) translateY(-4px);
+            }
+        }
+
+        .keyboard-title-key:hover {
+            transform: perspective(500px) rotateX(5deg) translateY(-2px);
+            box-shadow:
+                0 8px 16px rgba(0, 0, 0, 0.5),
+                0 4px 8px rgba(0, 0, 0, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.7),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                0 0 0 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .keyboard-title-key-text {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 900;
+            color: #2c3e50;
+            text-shadow:
+                1px 1px 0px rgba(255, 255, 255, 0.6),
+                0 -1px 0px rgba(0, 0, 0, 0.3),
+                -1px -1px 0px rgba(0, 0, 0, 0.2);
+            font-family: 'Microsoft JhengHei', 'Microsoft YaHei', 'Arial Black', Arial, sans-serif;
+            letter-spacing: 0.05em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .keyboard-title-key:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .keyboard-title-key:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .keyboard-title-key:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .keyboard-title-key:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .keyboardking-speech {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: clamp(15px, 2.5vw, 30px);
+            margin-bottom: clamp(50px, 8vw, 80px);
+            padding: clamp(20px, 3vw, 40px);
+            flex-wrap: nowrap;
+        }
+
+        .keyboardking-container {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(5px, 0.8vw, 10px);
+        }
+
+        .keyboardking-image {
+            width: clamp(240px, 28vw, 380px);
+            height: clamp(240px, 28vw, 380px);
+            background-image: url('mappleteacher/keyboardking.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: keyboardKingFloat 4s ease-in-out infinite;
+            filter: drop-shadow(0 12px 24px rgba(255, 107, 157, 0.3)) drop-shadow(0 6px 12px rgba(78, 205, 196, 0.2));
+            position: relative;
+        }
+
+        .keyboardking-nameplate {
+            position: relative;
+            display: flex;
+            gap: clamp(4px, 0.8vw, 8px);
+            padding: clamp(8px, 1.2vw, 12px);
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+            border-radius: clamp(8px, 1.2vw, 12px);
+            box-shadow:
+                0 6px 15px rgba(0, 0, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 0, 0, 0.4);
+            animation: nameplateFloat 3s ease-in-out infinite;
+        }
+
+        .keyboardking-nameplate::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.2) 0%, rgba(78, 205, 196, 0.15) 100%);
+            border-radius: clamp(10px, 1.5vw, 14px);
+            z-index: -1;
+            filter: blur(6px);
+        }
+
+        @keyframes nameplateGradient {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes nameplateFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        .keyboard-key {
+            position: relative;
+            padding: clamp(8px, 1.2vw, 14px) clamp(12px, 2vw, 20px);
+            border-radius: clamp(6px, 1vw, 10px);
+            border: 2px solid rgba(0, 0, 0, 0.4);
+            transition: all 0.2s ease;
+            animation: keyPress 2s ease-in-out infinite;
+            transform: perspective(500px) rotateX(8deg);
+            box-shadow:
+                0 6px 12px rgba(0, 0, 0, 0.5),
+                0 3px 6px rgba(0, 0, 0, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.7),
+                inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .keyboard-key::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            height: 45%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, transparent 100%);
+            border-radius: clamp(4px, 0.8vw, 8px) clamp(4px, 0.8vw, 8px) 0 0;
+            pointer-events: none;
+        }
+
+        .keyboard-key::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 8%;
+            right: 8%;
+            height: 5px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 0 0 50% 50%;
+            filter: blur(4px);
+        }
+
+        .keyboard-key:nth-child(1) {
+            animation-delay: 0s;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8cc8 30%, #ff6b9d 60%, #ff4d7a 100%);
+        }
+
+        .keyboard-key:nth-child(2) {
+            animation-delay: 0.1s;
+            background: linear-gradient(135deg, #4ecdc4 0%, #6ee7d4 30%, #4ecdc4 60%, #2eb8a8 100%);
+        }
+
+        .keyboard-key:nth-child(3) {
+            animation-delay: 0.2s;
+            background: linear-gradient(135deg, #ffe66d 0%, #fff4a3 30%, #ffe66d 60%, #ffd93d 100%);
+        }
+
+        .keyboard-key:nth-child(4) {
+            animation-delay: 0.3s;
+            background: linear-gradient(135deg, #a8e6cf 0%, #c4f0d8 30%, #a8e6cf 60%, #7dd3a0 100%);
+        }
+
+        @keyframes keyPress {
+
+            0%,
+            100% {
+                transform: perspective(500px) rotateX(8deg) translateY(0);
+                box-shadow:
+                    0 6px 12px rgba(0, 0, 0, 0.5),
+                    0 3px 6px rgba(0, 0, 0, 0.4),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.7),
+                    inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+                    0 0 0 1px rgba(0, 0, 0, 0.2);
+            }
+
+            50% {
+                transform: perspective(500px) rotateX(8deg) translateY(3px);
+                box-shadow:
+                    0 2px 6px rgba(0, 0, 0, 0.4),
+                    inset 0 3px 5px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        .keyboard-key-text {
+            font-size: clamp(18px, 2.5vw, 26px);
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow:
+                2px 2px 0px rgba(0, 0, 0, 0.4),
+                1px 1px 0px rgba(0, 0, 0, 0.3),
+                0 -1px 0px rgba(255, 255, 255, 0.3),
+                0 0 8px rgba(0, 0, 0, 0.2);
+            font-family: 'Microsoft JhengHei', 'Microsoft YaHei', 'Arial Black', Arial, sans-serif;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .keyboardking-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.15) 0%, rgba(78, 205, 196, 0.1) 40%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: glowPulse 3s ease-in-out infinite;
+            filter: blur(20px);
+        }
+
+        @keyframes keyboardKingFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-2deg) scale(1);
+            }
+
+            25% {
+                transform: translateY(-10px) rotate(2deg) scale(1.02);
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(3deg) scale(1.05);
+            }
+
+            75% {
+                transform: translateY(-10px) rotate(-1deg) scale(1.02);
+            }
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        .speech-bubble {
+            position: relative;
+            flex: 1;
+            min-width: clamp(300px, 40vw, 500px);
+            max-width: 600px;
+            margin-right: clamp(15px, 3vw, 40px);
+            padding: clamp(25px, 4vw, 40px);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border-radius: 30px;
+            box-shadow:
+                0 15px 40px rgba(255, 107, 157, 0.2),
+                0 8px 20px rgba(78, 205, 196, 0.15),
+                inset 0 2px 10px rgba(255, 255, 255, 0.8);
+            border: 4px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            animation: bubbleFloat 3s ease-in-out infinite;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 18px 20px 18px 0;
+            border-color: transparent #ffffff transparent transparent;
+            filter: drop-shadow(-2px 2px 4px rgba(0, 0, 0, 0.1));
+            z-index: 1;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.2) 0%, rgba(78, 205, 196, 0.15) 50%, rgba(255, 230, 109, 0.1) 100%);
+            border-radius: 35px;
+            z-index: -1;
+            filter: blur(12px);
+        }
+
+        @keyframes bubbleFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .speech-text {
+            font-size: clamp(18px, 3vw, 24px);
+            line-height: 1.8;
+            color: #333;
+            font-weight: 500;
+            font-family: 'Microsoft JhengHei', 'Microsoft YaHei', Arial, sans-serif;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+
+        .speech-text::first-letter {
+            font-size: 1.3em;
+            color: #ff6b9d;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .keyboard-title {
+                gap: clamp(6px, 1vw, 12px);
+                padding: clamp(15px, 2.5vw, 30px);
+            }
+
+            .keyboard-title-key {
+                padding: clamp(10px, 1.5vw, 16px) clamp(15px, 2.5vw, 25px);
+            }
+
+            .keyboard-title-key-text {
+                font-size: clamp(20px, 3.5vw, 30px);
+            }
+
+            .keyboardking-speech {
+                flex-direction: column;
+                gap: clamp(20px, 4vw, 35px);
+            }
+
+            .keyboardking-image {
+                width: clamp(200px, 24vw, 320px);
+                height: clamp(200px, 24vw, 320px);
+            }
+
+            .keyboard-key {
+                padding: clamp(6px, 1vw, 12px) clamp(10px, 1.5vw, 18px);
+            }
+
+            .keyboard-key-text {
+                font-size: clamp(16px, 2.2vw, 22px);
+            }
+
+            .speech-bubble {
+                min-width: 90%;
+                padding: clamp(20px, 3.5vw, 35px);
+            }
+
+            .speech-bubble::before {
+                left: 50%;
+                top: -25px;
+                transform: translateX(-50%) rotate(90deg);
+                border-width: 20px 0 30px 20px;
+                border-color: transparent transparent #ffffff transparent;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .keyboard-title {
+                gap: clamp(5px, 0.8vw, 10px);
+                padding: clamp(12px, 2vw, 25px);
+            }
+
+            .keyboard-title-key {
+                padding: clamp(8px, 1.2vw, 14px) clamp(12px, 2vw, 20px);
+            }
+
+            .keyboard-title-key-text {
+                font-size: clamp(18px, 3vw, 26px);
+            }
+
+            .keyboardking-speech {
+                padding: clamp(20px, 3vw, 30px);
+            }
+
+            .keyboardking-image {
+                width: clamp(160px, 20vw, 260px);
+                height: clamp(160px, 20vw, 260px);
+            }
+
+            .keyboardking-nameplate {
+                padding: clamp(6px, 0.8vw, 10px);
+                gap: clamp(3px, 0.6vw, 6px);
+            }
+
+            .keyboard-key {
+                padding: clamp(5px, 0.8vw, 10px) clamp(8px, 1.2vw, 15px);
+            }
+
+            .keyboard-key-text {
+                font-size: clamp(14px, 2vw, 18px);
+            }
+
+            .speech-bubble {
+                min-width: 95%;
+                padding: clamp(18px, 3vw, 28px);
+                border-radius: 25px;
+            }
+
+            .speech-text {
+                font-size: clamp(16px, 2.5vw, 20px);
+                line-height: 1.6;
+            }
+        }
+
+        @keyframes titleFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes letterFloat {
+
+            0%,
+            100% {
+                transform: translateY(-50%) rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: translateY(-60%) rotate(-15deg) scale(1.15);
+            }
+
+            75% {
+                transform: translateY(-60%) rotate(15deg) scale(1.15);
+            }
+        }
+
+        .helper-grid {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(20px, 4vw, 30px);
+        }
+
+        .helper-card {
+            position: relative;
+            border-radius: 30px;
+            padding: clamp(24px, 4vw, 32px);
+            text-decoration: none;
+            color: #333;
+            overflow: hidden;
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                0 0 0 4px rgba(255, 255, 255, 0.8),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: clamp(20px, 4vw, 30px);
+            border: 4px solid rgba(255, 255, 255, 0.9);
+            transform-style: preserve-3d;
+            animation: cardFloat 4s ease-in-out infinite;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+        }
+
+        @media (max-width: 768px) {
+            .helper-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .helper-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: transform 0.6s ease;
+            animation: shineRotate 8s linear infinite;
+        }
+
+        .helper-card::after {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            opacity: 0.6;
+            animation: sparkle 2s ease-in-out infinite;
+            z-index: 3;
+        }
+
+        .helper-card:hover {
+            transform: translateY(-12px) scale(1.05);
+            box-shadow:
+                0 30px 60px rgba(0, 0, 0, 0.2),
+                0 0 0 5px rgba(255, 255, 255, 0.9),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5);
+        }
+
+        .helper-card:hover::before {
+            transform: rotate(45deg) translate(30px, 30px);
+        }
+
+        .helper-card:hover::after {
+            animation: sparkleFast 0.5s ease-in-out infinite;
+        }
+
+        .helper-teacher-image {
+            flex-shrink: 0;
+            width: clamp(180px, 20vw, 250px);
+            height: clamp(180px, 20vw, 250px);
+            border-radius: 25px;
+            object-fit: contain;
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.12),
+                0 0 0 4px rgba(255, 255, 255, 0.9),
+                inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+        }
+
+        .helper-card:hover .helper-teacher-image {
+            transform: scale(1.05);
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.18),
+                0 0 0 5px rgba(255, 255, 255, 1),
+                inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .helper-card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .helper-card.B {
+            border-color: rgba(255, 107, 157, 0.4);
+            background: linear-gradient(135deg, #fff5f8 0%, #ffeef5 100%);
+        }
+
+        .helper-card.B::before {
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.1) 0%, transparent 70%);
+        }
+
+        .helper-card.B .helper-teacher-image {
+            width: clamp(160px, 18vw, 220px);
+            height: clamp(160px, 18vw, 220px);
+        }
+
+        .helper-card.C {
+            border-color: rgba(78, 205, 196, 0.4);
+            background: linear-gradient(135deg, #f0fffe 0%, #e8faf8 100%);
+        }
+
+        .helper-card.C::before {
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+        }
+
+        .helper-card.D {
+            border-color: rgba(255, 230, 109, 0.4);
+            background: linear-gradient(135deg, #fffef5 0%, #fffce8 100%);
+        }
+
+        .helper-card.D::before {
+            background: radial-gradient(circle, rgba(255, 230, 109, 0.1) 0%, transparent 70%);
+        }
+
+        .helper-card.E {
+            border-color: rgba(255, 179, 71, 0.4);
+            background: linear-gradient(135deg, #fff8f0 0%, #fff5e8 100%);
+        }
+
+        .helper-card.E::before {
+            background: radial-gradient(circle, rgba(255, 179, 71, 0.1) 0%, transparent 70%);
+        }
+
+        .helper-card.F {
+            border-color: rgba(167, 139, 250, 0.4);
+            background: linear-gradient(135deg, #f8f7ff 0%, #f3f0ff 100%);
+        }
+
+        .helper-card.F::before {
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 70%);
+        }
+
+        .helper-header {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .helper-group-label {
+            font-size: clamp(22px, 3.5vw, 28px);
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .helper-card.B .helper-group-label {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8cc8 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
+        }
+
+        .helper-card.C .helper-group-label {
+            background: linear-gradient(135deg, #4ecdc4 0%, #6ee7d4 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(78, 205, 196, 0.4);
+        }
+
+        .helper-card.D .helper-group-label {
+            background: linear-gradient(135deg, #ffe66d 0%, #ffed4e 100%);
+            color: #333;
+            box-shadow: 0 4px 12px rgba(255, 230, 109, 0.4);
+        }
+
+        .helper-card.E .helper-group-label {
+            background: linear-gradient(135deg, #ffb347 0%, #ffc966 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 179, 71, 0.4);
+        }
+
+        .helper-card.F .helper-group-label {
+            background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(167, 139, 250, 0.4);
+        }
+
+        .helper-icon {
+            display: none;
+        }
+
+        .helper-title {
+            position: relative;
+            z-index: 3;
+            font-size: clamp(18px, 3.2vw, 24px);
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .helper-header .helper-title {
+            margin-bottom: 0;
+            font-size: clamp(20px, 3.5vw, 26px);
+        }
+
+        .helper-description {
+            position: relative;
+            z-index: 3;
+            font-size: clamp(14px, 2.2vw, 18px);
+            font-weight: 500;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .helper-card.B .helper-title {
+            color: #ff6b9d;
+        }
+
+        .helper-card.C .helper-title {
+            color: #4ecdc4;
+        }
+
+        .helper-card.D .helper-title {
+            color: #d4a017;
+        }
+
+        .helper-card.E .helper-title {
+            color: #ff8c00;
+        }
+
+        .helper-card.F .helper-title {
+            color: #8b5cf6;
+        }
+
+        .helper-action {
+            position: relative;
+            z-index: 3;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: clamp(14px, 2.5vw, 18px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            align-self: flex-start;
+        }
+
+        .helper-card.B .helper-action {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8cc8 100%);
+            color: white;
+            border: 2px solid rgba(255, 107, 157, 0.3);
+        }
+
+        .helper-card.C .helper-action {
+            background: linear-gradient(135deg, #4ecdc4 0%, #6ee7d4 100%);
+            color: white;
+            border: 2px solid rgba(78, 205, 196, 0.3);
+        }
+
+        .helper-card.D .helper-action {
+            background: linear-gradient(135deg, #ffe66d 0%, #ffed4e 100%);
+            color: #333;
+            border: 2px solid rgba(255, 230, 109, 0.3);
+        }
+
+        .helper-card.E .helper-action {
+            background: linear-gradient(135deg, #ffb347 0%, #ffc966 100%);
+            color: white;
+            border: 2px solid rgba(255, 179, 71, 0.3);
+        }
+
+        .helper-card.F .helper-action {
+            background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+            color: white;
+            border: 2px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .helper-card:hover .helper-action {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .helper-decoration {
+            display: none;
+        }
+
+        @keyframes titleShimmer {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes musicNotesFloat {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-50px) translateX(50px);
+            }
+
+            50% {
+                transform: translateY(-100px) translateX(0);
+            }
+
+            75% {
+                transform: translateY(-50px) translateX(-50px);
+            }
+
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+        }
+
+        @keyframes cardFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes cardBounce {
+
+            0%,
+            100% {
+                transform: translateY(-15px) scale(1.08) rotateY(5deg);
+            }
+
+            50% {
+                transform: translateY(-20px) scale(1.1) rotateY(0deg);
+            }
+        }
+
+        @keyframes shineRotate {
+            0% {
+                transform: rotate(45deg);
+            }
+
+            100% {
+                transform: rotate(405deg);
+            }
+        }
+
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2) rotate(180deg);
+            }
+        }
+
+        @keyframes sparkleFast {
+
+            0%,
+            100% {
+                opacity: 0.8;
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.3) rotate(180deg);
+            }
+        }
+
+        @keyframes helperPulseB {
+
+            0%,
+            100% {
+                background-position: 0% 0%, 0% 0%;
+                box-shadow: 0 20px 40px rgba(255, 107, 157, 0.4);
+            }
+
+            50% {
+                background-position: 0% 0%, 100% 100%;
+                box-shadow: 0 25px 50px rgba(255, 107, 157, 0.6);
+            }
+        }
+
+        @keyframes helperPulseC {
+
+            0%,
+            100% {
+                background-position: 0% 0%, 0% 0%;
+                box-shadow: 0 20px 40px rgba(78, 205, 196, 0.4);
+            }
+
+            50% {
+                background-position: 0% 0%, 100% 100%;
+                box-shadow: 0 25px 50px rgba(78, 205, 196, 0.6);
+            }
+        }
+
+        @keyframes helperPulseD {
+
+            0%,
+            100% {
+                background-position: 0% 0%, 0% 0%;
+                box-shadow: 0 20px 40px rgba(255, 230, 109, 0.4);
+            }
+
+            50% {
+                background-position: 0% 0%, 100% 100%;
+                box-shadow: 0 25px 50px rgba(255, 230, 109, 0.6);
+            }
+        }
+
+        @keyframes helperPulseE {
+
+            0%,
+            100% {
+                background-position: 0% 0%, 0% 0%;
+                box-shadow: 0 20px 40px rgba(255, 179, 71, 0.4);
+            }
+
+            50% {
+                background-position: 0% 0%, 100% 100%;
+                box-shadow: 0 25px 50px rgba(255, 179, 71, 0.6);
+            }
+        }
+
+        @keyframes helperPulseF {
+
+            0%,
+            100% {
+                background-position: 0% 0%, 0% 0%;
+                box-shadow: 0 20px 40px rgba(167, 139, 250, 0.4);
+            }
+
+            50% {
+                background-position: 0% 0%, 100% 100%;
+                box-shadow: 0 25px 50px rgba(167, 139, 250, 0.6);
+            }
+        }
+
+        @keyframes labelShine {
+
+            0%,
+            100% {
+                filter: brightness(1);
+            }
+
+            50% {
+                filter: brightness(1.2);
+            }
+        }
+
+        @keyframes iconBounce {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            25% {
+                transform: translateY(-8px) scale(1.1);
+            }
+
+            75% {
+                transform: translateY(-8px) scale(1.1);
+            }
+        }
+
+        @keyframes decorationSpin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) scale(1);
+            }
+        }
+
         .boss-section {
             margin: clamp(48px, 8vw, 64px) 0;
             padding: clamp(32px, 5vw, 48px);
@@ -730,6 +1833,109 @@
         .boss-card.B:hover {
             box-shadow: 0 20px 40px rgba(255, 69, 0, 0.6), 0 0 30px rgba(255, 140, 0, 0.5);
             animation: firePulse 1s ease-in-out infinite;
+        }
+
+        /* 時鐘之王特殊樣式 */
+        .boss-card.clock-king {
+            background:
+                radial-gradient(circle at center, rgba(255, 215, 0, 0.3) 0%, transparent 50%),
+                linear-gradient(135deg, #ffd700 0%, #ffed4e 25%, #ffd700 50%, #ffb347 75%, #ffd700 100%);
+            background-size: 100% 100%, 200% 200%;
+            background-position: center, 0% 0%;
+            box-shadow:
+                0 12px 28px rgba(255, 215, 0, 0.6),
+                0 0 30px rgba(255, 215, 0, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 215, 0, 0.8);
+            animation: clockGlow 3s ease-in-out infinite;
+        }
+
+        .boss-card.clock-king::before {
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.5) 0%, transparent 70%);
+            animation: clockRotate 8s linear infinite;
+        }
+
+        .boss-card.clock-king:hover {
+            box-shadow:
+                0 20px 40px rgba(255, 215, 0, 0.8),
+                0 0 50px rgba(255, 215, 0, 0.6),
+                inset 0 0 30px rgba(255, 255, 255, 0.3);
+            animation: clockPulse 1s ease-in-out infinite;
+        }
+
+        .boss-card.clock-king .boss-icon {
+            animation: clockTick 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));
+        }
+
+        .boss-card.clock-king .boss-group-label {
+            text-shadow:
+                0 0 15px rgba(255, 215, 0, 1),
+                0 0 30px rgba(255, 215, 0, 0.8),
+                2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .boss-card.clock-king .star {
+            color: #ffd700;
+            text-shadow:
+                0 0 10px rgba(255, 215, 0, 1),
+                0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes clockGlow {
+
+            0%,
+            100% {
+                background-position: center, 0% 0%;
+                filter: brightness(1);
+            }
+
+            50% {
+                background-position: center, 100% 100%;
+                filter: brightness(1.2);
+            }
+        }
+
+        @keyframes clockRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes clockPulse {
+
+            0%,
+            100% {
+                filter: brightness(1) scale(1);
+            }
+
+            50% {
+                filter: brightness(1.3) scale(1.02);
+            }
+        }
+
+        @keyframes clockTick {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            25% {
+                transform: scale(1.1) rotate(-5deg);
+            }
+
+            50% {
+                transform: scale(1.15) rotate(0deg);
+            }
+
+            75% {
+                transform: scale(1.1) rotate(5deg);
+            }
         }
 
         .boss-card.C {
@@ -974,6 +2180,10 @@
 
         .boss-card.B .boss-icon {
             animation: fireFlame 1.5s ease-in-out infinite;
+        }
+
+        .boss-card.clock-king .boss-icon {
+            animation: clockTick 2s ease-in-out infinite;
         }
 
         .boss-card.C .boss-icon {
@@ -1556,12 +2766,14 @@
             .boss-notice-text::before {
                 left: -30px;
             }
+
             .boss-notice-text::after {
                 right: -30px;
             }
         }
 
         @media (max-width: 480px) {
+
             .boss-notice-text::before,
             .boss-notice-text::after {
                 display: none;
@@ -1569,12 +2781,15 @@
         }
 
         @keyframes noticePulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow:
                     0 0 30px rgba(255, 215, 0, 0.4),
                     inset 0 0 20px rgba(255, 215, 0, 0.1);
                 border-color: rgba(255, 215, 0, 0.5);
             }
+
             50% {
                 box-shadow:
                     0 0 50px rgba(255, 215, 0, 0.7),
@@ -1584,19 +2799,25 @@
         }
 
         @keyframes textShimmer {
-            0%, 100% {
+
+            0%,
+            100% {
                 filter: brightness(1) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
             }
+
             50% {
                 filter: brightness(1.3) drop-shadow(0 0 20px rgba(255, 215, 0, 1));
             }
         }
 
         @keyframes sparkle {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 0.5;
                 transform: translateY(-50%) scale(1) rotate(0deg);
             }
+
             50% {
                 opacity: 1;
                 transform: translateY(-50%) scale(1.3) rotate(180deg);
@@ -1686,17 +2907,21 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
         }
 
         @keyframes modalPulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow:
                     0 0 60px rgba(255, 215, 0, 0.6),
                     inset 0 0 40px rgba(255, 215, 0, 0.1);
             }
+
             50% {
                 box-shadow:
                     0 0 80px rgba(255, 215, 0, 0.9),
@@ -1705,21 +2930,27 @@
         }
 
         @keyframes borderGlow {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 0.5;
             }
+
             50% {
                 opacity: 0.8;
             }
         }
 
         @keyframes textGlow {
-            0%, 100% {
+
+            0%,
+            100% {
                 text-shadow:
                     0 0 20px rgba(255, 215, 0, 1),
                     0 0 40px rgba(255, 140, 0, 0.8),
                     2px 2px 8px rgba(0, 0, 0, 0.8);
             }
+
             50% {
                 text-shadow:
                     0 0 30px rgba(255, 215, 0, 1.2),
@@ -1833,112 +3064,89 @@
             </div>
         </section>
 
-        <section class="boss-section">
-            <h2 class="boss-section-title">🔥 魔王級模擬考挑戰 🔥</h2>
-            <div class="boss-notice">
-                <div class="boss-notice-text">敬請期待 請先準備</div>
+        <h2 class="final-task-title"><span class="title-emoji">✉️</span> <span class="title-text">最後的任務</span></h2>
+        <section class="helper-section">
+            <div class="keyboardking-speech">
+                <div class="keyboardking-container">
+                    <div class="keyboardking-image"></div>
+                    <div class="keyboardking-nameplate">
+                        <div class="keyboard-key">
+                            <div class="keyboard-key-text">鍵</div>
+                        </div>
+                        <div class="keyboard-key">
+                            <div class="keyboard-key-text">盤</div>
+                        </div>
+                        <div class="keyboard-key">
+                            <div class="keyboard-key-text">之</div>
+                        </div>
+                        <div class="keyboard-key">
+                            <div class="keyboard-key-text">神</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="speech-bubble">
+                    <div class="speech-text">你們11位學生已經跟我練習好幾個月了，接下來要交給你們一些任務去完成，請點選自己的組別去幫助老師吧</div>
+                </div>
             </div>
-            <div class="boss-grid">
-                <a class="boss-card B" href="#" onclick="showBossModal(event);">
-                    <span class="boss-decoration">B</span>
-                    <div class="boss-header">
-                        <span class="boss-group-label">B 組</span>
-                        <span class="boss-icon">🔥</span>
+            <div class="helper-grid">
+                <a class="helper-card B" href="B-quest-book.html">
+                    <img src="mappleteacher/mappleteacher77.png" alt="Teacher Angry" class="helper-teacher-image">
+                    <div class="helper-card-content">
+                        <div class="helper-header">
+                            <span class="helper-group-label">B 組</span>
+                            <div class="helper-title">Angry老師</div>
+                        </div>
+                        <div class="helper-description">Angry老師不是很開心同學要訂正很多英文考卷，考卷改到手很酸，請同學點選開始任務看看有什麼可以幫忙吧！</div>
+                        <span class="helper-action">開始任務 →</span>
                     </div>
-                    <div class="boss-title">烈焰魔王</div>
-                    <div class="boss-difficulty">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <span class="boss-action">挑戰 →</span>
                 </a>
 
-                <a class="boss-card C" href="#" onclick="showBossModal(event);">
-                    <span class="boss-decoration">C</span>
-                    <div class="boss-header">
-                        <span class="boss-group-label">C 組</span>
-                        <span class="boss-icon">⚡</span>
+                <a class="helper-card C" href="C-quest-book.html">
+                    <img src="mappleteacher/mappleteacher2-noback.png" alt="Teacher Ben" class="helper-teacher-image">
+                    <div class="helper-card-content">
+                        <div class="helper-header">
+                            <span class="helper-group-label">C 組</span>
+                            <div class="helper-title">Ben老師</div>
+                        </div>
+                        <div class="helper-description">Ben老師真的是很麻煩，又出了一堆作業要同學做，點擊開始任務看看有什麼事情要做！</div>
+                        <span class="helper-action">開始任務 →</span>
                     </div>
-                    <div class="boss-title">雷電魔王</div>
-                    <div class="boss-difficulty">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <span class="boss-action">挑戰 →</span>
                 </a>
 
-                <a class="boss-card D" href="#" onclick="showBossModal(event);">
-                    <span class="boss-decoration">D</span>
-                    <div class="boss-header">
-                        <span class="boss-group-label">D 組</span>
-                        <span class="boss-icon">👹</span>
+                <a class="helper-card D" href="D-quest-book.html">
+                    <img src="mappleteacher/mappleteacher3.png" alt="Teacher Kelly" class="helper-teacher-image">
+                    <div class="helper-card-content">
+                        <div class="helper-header">
+                            <span class="helper-group-label">D 組</span>
+                            <div class="helper-title">Kelly老師</div>
+                        </div>
+                        <div class="helper-description">Kelly老師希望可以找到一位打字正確率高、打字速度快的學生來幫忙，趕快點擊開始任務看看！</div>
+                        <span class="helper-action">開始任務 →</span>
                     </div>
-                    <div class="boss-title">暗黑魔王</div>
-                    <div class="boss-difficulty">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <span class="boss-action">挑戰 →</span>
                 </a>
 
-                <a class="boss-card E" href="#" onclick="showBossModal(event);">
-                    <span class="boss-decoration">E</span>
-                    <div class="boss-header">
-                        <span class="boss-group-label">E 組</span>
-                        <span class="boss-icon">❄️</span>
+                <a class="helper-card E" href="E-quest-book.html">
+                    <img src="mappleteacher/mappleteacher4.png" alt="Teacher Nina" class="helper-teacher-image">
+                    <div class="helper-card-content">
+                        <div class="helper-header">
+                            <span class="helper-group-label">E 組</span>
+                            <div class="helper-title">Nina老師</div>
+                        </div>
+                        <div class="helper-description">Nina老師要開始準備英檢班的課程了，應該有很多文書作業要準備，請同學盡快提供協助。</div>
+                        <span class="helper-action">開始任務 →</span>
                     </div>
-                    <div class="boss-title">冰霜魔王</div>
-                    <div class="boss-difficulty">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <span class="boss-action">挑戰 →</span>
                 </a>
 
-                <a class="boss-card F" href="#" onclick="showBossModal(event);">
-                    <span class="boss-decoration">F</span>
-                    <div class="boss-header">
-                        <span class="boss-group-label">F 組</span>
-                        <span class="boss-icon">☠️</span>
+                <a class="helper-card F" href="F-quest-book.html">
+                    <img src="mappleteacher/mappleteacher6-noback.png" alt="晨光媽媽" class="helper-teacher-image">
+                    <div class="helper-card-content">
+                        <div class="helper-header">
+                            <span class="helper-group-label">F 組</span>
+                            <div class="helper-title">晨光媽媽</div>
+                        </div>
+                        <div class="helper-description">晨光媽媽不太會用手機也不太會用電腦，但今天要打一些英文的東西，希望大朋友可以幫忙她一下，請點擊開始任務吧~~</div>
+                        <span class="helper-action">開始任務 →</span>
                     </div>
-                    <div class="boss-title">劇毒魔王</div>
-                    <div class="boss-difficulty">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <span class="boss-action">挑戰 →</span>
-                </a>
-
-                <a class="boss-card ultimate-annie" href="#" onclick="showBossModal(event);">
-                    <span class="boss-decoration">A</span>
-                    <div class="boss-header">
-                        <span class="boss-group-label">終極Annie</span>
-                        <span class="boss-icon">👑</span>
-                    </div>
-                    <div class="boss-title">終極挑戰</div>
-                    <div class="boss-difficulty">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <span class="boss-action">挑戰 →</span>
                 </a>
             </div>
         </section>
@@ -1967,14 +3175,14 @@
         }
 
         // 点击模态框外部区域也可以关闭
-        document.getElementById('bossModal').addEventListener('click', function(e) {
+        document.getElementById('bossModal').addEventListener('click', function (e) {
             if (e.target === this) {
                 closeBossModal();
             }
         });
 
         // 按ESC键关闭模态框
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 closeBossModal();
             }

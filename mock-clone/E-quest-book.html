@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E組小夥伴的緊急任務</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(173, 216, 230, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 224, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 50%, #e17055 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 卡通背景装饰 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23ffd700' opacity='0.1'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40,20 Q60,40 40,60 Q20,40 40,20' fill='%23ff6b9d' opacity='0.08'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='25' fill='none' stroke='%234ecdc4' stroke-width='3' opacity='0.1'/%3E%3C/svg%3E");
+            background-size: 200px 200px, 150px 150px, 120px 120px;
+            background-position: 0 0, 100px 100px, 200px 200px;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1000;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #ff4757;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 129, 0.4);
+        }
+
+        .book-container {
+            width: 85%;
+            max-width: 1200px;
+            min-height: 600px;
+            position: relative;
+            z-index: 1;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bookOpen 1s ease-out;
+        }
+
+        @keyframes bookOpen {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* 书本封面（在后面） */
+        .book-cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            min-height: 600px;
+            max-height: 700px;
+            background: linear-gradient(135deg, #581c87 0%, #9333ea 30%, #c084fc 50%, #9333ea 70%, #581c87 100%);
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            z-index: -1;
+            border: 4px solid rgba(88, 28, 135, 0.8);
+        }
+
+        .book-cover::before {
+            content: '⏰';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            opacity: 0.3;
+            color: rgba(255, 215, 0, 0.5);
+        }
+
+        .book-cover::after {
+            content: '時鐘之王';
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            font-weight: 900;
+            color: rgba(255, 215, 0, 0.6);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.2em;
+        }
+
+        .book-page {
+            position: relative;
+            width: calc(50% - 20px);
+            height: auto;
+            min-height: 600px;
+            max-height: 700px;
+            background:
+                /* 更活泼的卡通图案背景 */
+                url("data:image/svg+xml,%3Csvg width='150' height='150' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='75' cy='75' r='60' fill='%23ffd700' opacity='0.08'/%3E%3Ccircle cx='75' cy='75' r='40' fill='%23ff6b9d' opacity='0.06'/%3E%3Ccircle cx='75' cy='75' r='20' fill='%234ecdc4' opacity='0.05'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60,15 L70,45 L100,45 L75,65 L85,95 L60,80 L35,95 L45,65 L20,45 L50,45 Z' fill='%23ffd700' opacity='0.1'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50,20 Q70,40 50,60 Q30,40 50,20' fill='%23ff6b9d' opacity='0.08'/%3E%3C/svg%3E"),
+                linear-gradient(135deg, #fef9e7 0%, #fff8dc 50%, #f5f5dc 100%);
+            background-size: 200px 200px, 150px 150px, 120px 120px, 100% 100%;
+            background-position: 10% 10%, 80% 20%, 30% 70%, center;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 25px 30px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .book-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                /* 更活泼的点状图案 */
+                radial-gradient(circle at 15% 25%, rgba(255, 182, 193, 0.2) 3px, transparent 3px),
+                radial-gradient(circle at 85% 75%, rgba(173, 216, 230, 0.2) 3px, transparent 3px),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 224, 0.15) 2px, transparent 2px),
+                radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 30% 80%, rgba(255, 105, 180, 0.12) 2px, transparent 2px);
+            background-size: 60px 60px, 70px 70px, 50px 50px, 45px 45px, 55px 55px;
+            pointer-events: none;
+            z-index: 0;
+            animation: dotFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes dotFloat {
+
+            0%,
+            100% {
+                background-position: 15% 25%, 85% 75%, 50% 50%, 70% 30%, 30% 80%;
+            }
+
+            50% {
+                background-position: 20% 30%, 80% 70%, 55% 55%, 75% 35%, 25% 75%;
+            }
+        }
+
+        .book-page>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .book-page.left {
+            border-right: 3px solid rgba(88, 28, 135, 0.25);
+            border-radius: 25px 0 0 25px;
+        }
+
+        .book-page.right {
+            border-left: 3px solid rgba(88, 28, 135, 0.25);
+            border-radius: 0 25px 25px 0;
+        }
+
+        .book-page:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .book-spine {
+            position: absolute;
+            left: calc(50% - 20px);
+            top: 0;
+            width: 40px;
+            height: 100%;
+            min-height: 600px;
+            max-height: 700px;
+            background: linear-gradient(90deg, #581c87 0%, #9333ea 30%, #c084fc 50%, #9333ea 70%, #581c87 100%);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            border-left: 2px solid rgba(88, 28, 135, 0.5);
+            border-right: 2px solid rgba(88, 28, 135, 0.5);
+        }
+
+        .book-spine::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 85%;
+            background: linear-gradient(180deg, rgba(88, 28, 135, 0.4) 0%, transparent 20%, transparent 80%, rgba(88, 28, 135, 0.4) 100%);
+            border-radius: 15px;
+        }
+
+        .book-spine::after {
+            content: '';
+        }
+
+        .book-title {
+            text-align: center;
+            font-size: clamp(24px, 3.5vw, 36px);
+            font-weight: 900;
+            color: #581c87;
+            margin-bottom: 12px;
+            text-shadow:
+                2px 2px 4px rgba(0, 0, 0, 0.2),
+                0 0 20px rgba(255, 215, 0, 0.3);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .book-title::before,
+        .book-title::after {
+            content: '✨';
+            font-size: 0.6em;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .book-title::after {
+            animation-delay: 1s;
+        }
+
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.3) rotate(180deg);
+            }
+        }
+
+        .book-title .title-underline {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #581c87, transparent);
+        }
+
+        .book-subtitle {
+            text-align: center;
+            font-size: clamp(12px, 1.6vw, 16px);
+            color: #5a4a3a;
+            margin-bottom: 20px;
+            font-family: 'Comic Sans MS', 'Microsoft JhengHei', 'Arial', sans-serif;
+            line-height: 1.8;
+            padding: 0 15px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.3px;
+        }
+
+        .quest-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .quest-item {
+            background:
+                /* 更活泼的卡通图案 */
+                url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23ffd700' opacity='0.12'/%3E%3Ccircle cx='50' cy='50' r='25' fill='%23ff6b9d' opacity='0.08'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40,10 L50,30 L70,30 L55,45 L65,65 L40,55 L15,65 L25,45 L10,30 L30,30 Z' fill='%234ecdc4' opacity='0.1'/%3E%3C/svg%3E"),
+                linear-gradient(135deg, #fff8dc 0%, #fef9e7 50%, #fff8dc 100%);
+            background-size: 120px 120px, 100px 100px, 100% 100%;
+            background-position: top right, bottom left, center;
+            border: 3px solid #d8b4fe;
+            border-radius: 20px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow:
+                0 8px 16px rgba(0, 0, 0, 0.12),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+        }
+
+        .quest-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .quest-item:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                0 12px 24px rgba(0, 0, 0, 0.2),
+                0 0 20px rgba(255, 215, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.6);
+            border-color: #7c3aed;
+        }
+
+        .quest-item:hover::before {
+            opacity: 1;
+        }
+
+        .quest-item.completed {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-color: #28a745;
+        }
+
+        .quest-number {
+            display: inline-block;
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border: 3px solid #581c87;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-size: 18px;
+            font-weight: 900;
+            color: #581c87;
+            margin-right: 12px;
+            vertical-align: top;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .quest-item.completed .quest-number {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border-color: #155724;
+            color: white;
+        }
+
+        .quest-content {
+            display: inline-block;
+            width: calc(100% - 60px);
+            vertical-align: top;
+        }
+
+        .quest-title {
+            font-size: clamp(16px, 2vw, 20px);
+            font-weight: 800;
+            color: #581c87;
+            margin-bottom: 6px;
+        }
+
+        .quest-item.completed .quest-title {
+            color: #155724;
+        }
+
+        .quest-description {
+            font-size: clamp(13px, 1.8vw, 16px);
+            color: #6b21a8;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .quest-item.completed .quest-description {
+            color: #155724;
+        }
+
+        .quest-requirement {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(88, 28, 135, 0.1);
+            border-radius: 15px;
+            font-size: clamp(12px, 1.6vw, 15px);
+            color: #581c87;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .quest-item.completed .quest-requirement {
+            background: rgba(40, 167, 69, 0.2);
+            color: #155724;
+        }
+
+        .quest-check {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 32px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .quest-item.completed .quest-check {
+            opacity: 1;
+        }
+
+        .book-decoration {
+            position: absolute;
+            font-size: 240px;
+            opacity: 0.08;
+            color: #581c87;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: gentleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) rotate(5deg);
+            }
+        }
+
+        /* 卡通装饰元素 */
+        .cartoon-decoration {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .cartoon-clock {
+            position: absolute;
+            top: 8%;
+            right: 8%;
+            font-size: 80px;
+            opacity: 0.2;
+            animation: clockSwing 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.3));
+        }
+
+        .cartoon-star {
+            position: absolute;
+            top: 15%;
+            left: 8%;
+            font-size: 65px;
+            opacity: 0.18;
+            animation: starTwinkle 2s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(255, 182, 193, 0.3));
+        }
+
+        .cartoon-heart {
+            position: absolute;
+            bottom: 12%;
+            right: 10%;
+            font-size: 75px;
+            opacity: 0.15;
+            animation: heartBeat 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(255, 105, 180, 0.3));
+        }
+
+        /* 添加更多卡通装饰 */
+        .cartoon-emoji {
+            position: absolute;
+            font-size: 50px;
+            opacity: 0.12;
+            animation: emojiFloat 4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .cartoon-emoji.emoji1 {
+            top: 25%;
+            right: 15%;
+            animation-delay: 0s;
+        }
+
+        .cartoon-emoji.emoji2 {
+            bottom: 25%;
+            left: 12%;
+            animation-delay: 1s;
+        }
+
+        .cartoon-emoji.emoji3 {
+            top: 60%;
+            right: 12%;
+            animation-delay: 2s;
+        }
+
+        @keyframes emojiFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(10deg);
+            }
+        }
+
+        @keyframes clockSwing {
+
+            0%,
+            100% {
+                transform: rotate(-10deg);
+            }
+
+            50% {
+                transform: rotate(10deg);
+            }
+        }
+
+        @keyframes starTwinkle {
+
+            0%,
+            100% {
+                opacity: 0.12;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.2;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes heartBeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        /* 饮料装饰 */
+        .cartoon-drink {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.25;
+            animation: drinkBounce 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+        }
+
+        .cartoon-drink.drink1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .cartoon-drink.drink2 {
+            top: 20%;
+            right: 8%;
+            animation-delay: 0.5s;
+        }
+
+        .cartoon-drink.drink3 {
+            bottom: 25%;
+            left: 8%;
+            animation-delay: 1s;
+        }
+
+        .cartoon-drink.drink4 {
+            bottom: 15%;
+            right: 5%;
+            animation-delay: 1.5s;
+        }
+
+        .cartoon-drink.drink5 {
+            top: 50%;
+            left: 3%;
+            animation-delay: 2s;
+        }
+
+        @keyframes drinkBounce {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: translateY(-10px) rotate(-5deg) scale(1.1);
+            }
+
+            50% {
+                transform: translateY(-5px) rotate(5deg) scale(1.05);
+            }
+
+            75% {
+                transform: translateY(-8px) rotate(-3deg) scale(1.08);
+            }
+        }
+
+        /* Name Tag 样式 - MapleStory 彩色音符风格 */
+        .name-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background:
+                /* 彩色音符背景图案 */
+                url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='30' y='30' font-size='40' fill='%23ff6b9d' opacity='0.15' text-anchor='middle'%3E🎵%3C/text%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='50' height='50' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='25' y='25' font-size='35' fill='%234ecdc4' opacity='0.12' text-anchor='middle'%3E🎶%3C/text%3E%3C/svg%3E"),
+                /* 多彩渐变背景 */
+                linear-gradient(135deg,
+                    #ff6b9d 0%,
+                    #4ecdc4 25%,
+                    #ffe66d 50%,
+                    #a8e6cf 75%,
+                    #ff6b9d 100%);
+            background-size: 40px 40px, 35px 35px, 100% 100%;
+            background-position: 0% 0%, 100% 100%, center;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.6),
+                0 0 15px rgba(255, 107, 157, 0.3);
+            position: relative;
+            animation: nameTagFloat 3s ease-in-out infinite;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        .name-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent);
+            animation: nameTagShine 3s ease-in-out infinite;
+        }
+
+        .name-tag::after {
+            content: '🎼';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 20px;
+            opacity: 0.6;
+            animation: noteFloat 2s ease-in-out infinite;
+        }
+
+        .name-tag-icon {
+            font-size: 22px;
+            animation: iconBounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .name-tag-text {
+            font-size: clamp(22px, 3.5vw, 32px);
+            font-weight: 700;
+            font-family: 'Comic Sans MS', 'Microsoft JhengHei', 'Arial', sans-serif;
+            color: #ffffff;
+            text-shadow:
+                2px 2px 4px rgba(0, 0, 0, 0.3),
+                0 0 8px rgba(255, 255, 255, 0.5),
+                1px 1px 2px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .name-tag-sparkle {
+            font-size: 16px;
+            animation: sparkleRotate 2s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.6));
+        }
+
+        /* 音符装饰元素 */
+        .name-tag-note {
+            position: absolute;
+            font-size: 18px;
+            opacity: 0.4;
+            animation: noteFloat 2.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .name-tag-note.note1 {
+            top: -8px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .name-tag-note.note2 {
+            bottom: -8px;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        @keyframes nameTagFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-3px) scale(1.01);
+            }
+        }
+
+        @keyframes nameTagShine {
+            0% {
+                left: -100%;
+            }
+
+            50% {
+                left: 100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes iconBounce {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                transform: scale(1.15) rotate(8deg);
+            }
+        }
+
+        @keyframes sparkleRotate {
+
+            0%,
+            100% {
+                transform: rotate(0deg) scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        @keyframes noteFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(15deg);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes trophyGlow {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+            }
+
+            50% {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+            }
+        }
+
+        /* 添加更多卡通装饰 */
+        .quest-item::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 60px;
+            height: 60px;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='25' fill='%23ffd700' opacity='0.2'/%3E%3Cpath d='M30,15 L35,25 L45,25 L37,32 L40,42 L30,35 L20,42 L23,32 L15,25 L25,25 Z' fill='%23ff6b9d' opacity='0.3'/%3E%3C/svg%3E");
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .quest-item:hover::after {
+            opacity: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .book-container {
+                max-width: 1000px;
+                height: 85vh;
+                min-height: 550px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .book-container {
+                height: auto;
+                min-height: auto;
+                width: 100%;
+            }
+
+            .book-page {
+                position: relative;
+                width: 100%;
+                height: auto;
+                min-height: 400px;
+                border-radius: 20px;
+                margin-bottom: 20px;
+            }
+
+            .book-spine {
+                display: none;
+            }
+
+            .quest-content {
+                width: 100%;
+            }
+
+            .quest-number {
+                display: block;
+                margin: 0 auto 15px;
+            }
+
+            .cartoon-clock,
+            .cartoon-star,
+            .cartoon-heart {
+                display: none;
+            }
+        }
+
+        /* 笔的装饰 */
+    </style>
+</head>
+
+<body>
+    <a href="home.html" class="back-button">← 回上一頁</a>
+
+    <div class="book-container">
+        <div class="book">
+            <div class="book-cover"></div>
+            <div class="book-spine"></div>
+            <!-- 左頁 -->
+            <div class="book-page left">
+                <div class="book-decoration">⭐</div>
+                <div class="cartoon-clock">✨</div>
+                <div class="cartoon-star">🌟</div>
+                <div class="cartoon-emoji emoji1">🌺</div>
+                <div class="cartoon-emoji emoji2">🌸</div>
+                <h1 class="book-title"><span>E組小夥伴的緊急任務</span></h1>
+                <p class="book-subtitle">Nina老師希望同學可以幫忙她完成以下兩項任務，兩項任務都有時間限制，完成後請舉手告訴Ben老師。</p>
+
+                <div class="quest-list">
+                    <div class="quest-item" id="quest1" onclick="startQuest(1)">
+                        <span class="quest-number">1</span>
+                        <div class="quest-content">
+                            <h2 class="quest-title">任務一：字母挑戰</h2>
+                            <p class="quest-description">在10秒內依序輸入A到Z的所有字母，測試你的打字速度！</p>
+                            <span class="quest-requirement">⏱️ 時間限制：10秒</span>
+                        </div>
+                        <span class="quest-check">✅</span>
+                    </div>
+
+                    <div class="quest-item" id="quest2" onclick="startQuest(2)">
+                        <span class="quest-number">2</span>
+                        <div class="quest-content">
+                            <h2 class="quest-title">任務二：英文段落打字練習</h2>
+                            <p class="quest-description">閱讀上方英文段落，在下方輸入框中完整輸入該段落，測試你的打字速度和準確度！</p>
+                            <span class="quest-requirement">⏱️ 時間限制：5分鐘</span>
+                        </div>
+                        <span class="quest-check">✅</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 右頁 -->
+            <div class="book-page right">
+                <div class="book-decoration">✨</div>
+                <div class="cartoon-heart">⭐</div>
+                <div class="cartoon-star" style="top: 12%; right: 8%; left: auto;">🌟</div>
+                <div class="cartoon-emoji emoji3">🌼</div>
+                <div class="cartoon-emoji" style="top: 40%; left: 10%; animation-delay: 1.5s;">🌻</div>
+
+                <!-- 星星花朵装饰 -->
+                <div class="cartoon-drink drink1">⭐</div>
+                <div class="cartoon-drink drink2">✨</div>
+                <div class="cartoon-drink drink3">🌺</div>
+                <div class="cartoon-drink drink4">🌸</div>
+                <div class="cartoon-drink drink5">🌼</div>
+
+                <div
+                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 20px; position: relative; z-index: 2;">
+                    <img src="mappleteacher/mappleteacher4.png" alt="Maple Teacher"
+                        style="max-width: 70%; max-height: 50%; object-fit: contain; filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2)); margin-bottom: 15px;" />
+                    <div class="name-tag">
+                        <span class="name-tag-note note1">🎵</span>
+                        <span class="name-tag-note note2">🎶</span>
+                        <span class="name-tag-icon">🎵</span>
+                        <span class="name-tag-text">Teacher Nina</span>
+                        <span class="name-tag-sparkle">✨</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 加载任务完成状态
+        function loadQuestProgress() {
+            const saved = localStorage.getItem('eQuestProgress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                if (progress.quest1) {
+                    document.getElementById('quest1').classList.add('completed');
+                }
+                if (progress.quest2) {
+                    document.getElementById('quest2').classList.add('completed');
+                }
+            }
+        }
+
+        // 开始任务
+        function startQuest(questNum) {
+            switch (questNum) {
+                case 1:
+                    // 任务一：10秒打A~Z
+                    window.location.href = 'B-quest-az.html?group=E';
+                    break;
+                case 2:
+                    // 任务二：英文段落打字练习
+                    window.location.href = 'typing-task2.html?group=E';
+                    break;
+            }
+        }
+
+        // 检查URL参数，看是否有任务完成的通知
+        function checkQuestCompletion() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const completed = urlParams.get('completed');
+            if (completed) {
+                const progress = JSON.parse(localStorage.getItem('eQuestProgress') || '{}');
+                progress[`quest${completed}`] = true;
+                localStorage.setItem('eQuestProgress', JSON.stringify(progress));
+
+                loadQuestProgress();
+
+                // 移除URL参数
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        }
+
+        // 初始化
+        window.onload = () => {
+            loadQuestProgress();
+            checkQuestCompletion();
+        };
+    </script>
+</body>
+
+</html>

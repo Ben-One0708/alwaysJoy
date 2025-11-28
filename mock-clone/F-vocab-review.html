@@ -323,7 +323,7 @@
     <main id="wordGrid" class="word-grid"></main>
 
     <script>
-        const words = [
+const words = [
             { english: "a", meaning: "一（ 個）", module: "M1-6" },
             { english: "a.m.", meaning: "上午", module: "M12-9" },
             { english: "a few", meaning: "一些（ 的）", module: "M7-13" },
@@ -2412,7 +2412,7 @@
 
 
         const STORAGE_KEY = 'F_vocab_learned';
-
+        
         let showChinese = true;
         let currentWords = [...words];
         let learnedWords = new Set();
@@ -2476,7 +2476,7 @@
                     </div>
                     <div class="word-meaning" style="display: ${showChinese ? 'block' : 'none'}">${word.meaning}</div>
                 `;
-
+                
                 // 添加點擊事件
                 card.addEventListener('click', () => {
                     toggleLearned(word);
@@ -2487,7 +2487,7 @@
                         card.classList.remove('learned');
                     }
                 });
-
+                
                 grid.appendChild(card);
             });
 
