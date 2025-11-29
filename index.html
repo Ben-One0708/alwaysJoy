@@ -101,12 +101,57 @@
                             11/29:
                             今天上課會上<strong>課堂模擬考</strong>裡面的「最後的任務」。另外，老師希望同學做完要確實訂正，並且要求自己打字要越打越快，這樣來這裡學習才更有意義，請加油！
                         </p>
-                        <p class="whiteboard-main-text"
+                        <p class="whiteboard-main-text notice-pin"
                             style="margin-top: 15px; padding-top: 15px; border-top: 2px solid rgba(139, 69, 19, 0.2);">
-                            <strong style="color: #dc3545; font-size: 1.1em;">📌 重要補充：</strong>如果你想要在區賽取得<strong
-                                style="color: #dc3545;">95分以上</strong>的成績，那你必須在<strong>課堂模擬考 > 一般模擬考熱身</strong>的<strong
-                                style="color: #dc3545;">244題都是全部正確</strong>，可以一直重做做到滿分！
+                            <i class="fas fa-thumbtack" style="color: #ff6b6b; margin-right: 8px;"></i>
+                            <span
+                                style="color: #ff6b6b; font-weight: 600;">學生反應網頁回應較慢，已經增加作答時間，請有空再練習一次11/29號「課堂模擬考」裡面的「最後的任務」，裡面有三個任務要做完。</span>
                         </p>
+                        <div class="goals-section"
+                            style="margin-top: 15px; padding-top: 15px; border-top: 2px solid rgba(139, 69, 19, 0.2);">
+                            <button class="goals-toggle-btn" onclick="toggleGoals()">
+                                <i class="fas fa-chevron-down" id="goalsToggleIcon"></i>
+                                <span>查看目標所需條件</span>
+                            </button>
+                            <div class="goals-content" id="goalsContent" style="display: none;">
+                                <div class="goal-item goal-95">
+                                    <div class="goal-header">
+                                        <strong style="color: #dc3545; font-size: 1.1em;">📌 95分以上：</strong>
+                                        <a href="#" onclick="switchTab('exam'); return false;" class="goal-link-btn"
+                                            style="background: #dc3545;">
+                                            <i class="fas fa-external-link-alt"></i> 前往課堂模擬考
+                                        </a>
+                                    </div>
+                                    <div class="goal-details">
+                                        <p>點選下方紅色按鈕<strong>「課堂模擬考」</strong>的<strong>「一般模擬考熱身」</strong>，挑選自己組別，<strong
+                                                style="color: #dc3545;">244題一直做到244分</strong>，可以重做，平時還要反覆練習雲端學院，這樣最後會有至少95分。
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="goal-item goal-100">
+                                    <div class="goal-header">
+                                        <strong style="color: #28a745; font-size: 1.1em;">⭐ 99~100分：</strong>
+                                        <a href="#" onclick="switchTab('exam'); return false;" class="goal-link-btn"
+                                            style="background: #28a745;">
+                                            <i class="fas fa-external-link-alt"></i> 前往課堂模擬考
+                                        </a>
+                                    </div>
+                                    <div class="goal-details">
+                                        <p>點選下方紅色按鈕<strong>「課堂模擬考」</strong>的：</p>
+                                        <ol class="goal-steps">
+                                            <li><strong>「雜誌單字預習工具」</strong>，熟讀<strong
+                                                    style="color: #28a745;">144個單字</strong>。</li>
+                                            <li>點選<strong>「各級別單字必讀複習區」</strong>自己的組別，熟讀每一個單字，讀過就點選單字標記並且確認都會拼。</li>
+                                            <li>完成<strong>「一般模擬考熱身」</strong>自己組別的<strong
+                                                    style="color: #28a745;">244個單字並且要是滿分244分</strong>，如果沒有滿分可以一直重做到滿分。
+                                            </li>
+                                            <li>完成<strong>「最後的任務」</strong>裡面三項任務，確認自己已經熟悉鍵盤位置並且可以盲打、立即切換大小寫字母或中英輸入法。
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

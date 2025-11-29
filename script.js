@@ -5067,3 +5067,26 @@ function startGroupExam(examName) {
     closeModal('groupExamModal');
 }
 
+// 切換目標說明展開/收起
+function toggleGoals() {
+    const content = document.getElementById('goalsContent');
+    const icon = document.getElementById('goalsToggleIcon');
+    
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+    } else {
+        content.style.display = 'none';
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+    }
+}
+
+// 從通知白板切換到指定標籤頁
+function switchTab(tabName) {
+    showTab(tabName);
+    // 滾動到頂部
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
