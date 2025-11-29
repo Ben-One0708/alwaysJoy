@@ -923,7 +923,7 @@
                 <div class="cartoon-emoji emoji1">🎀</div>
                 <div class="cartoon-emoji emoji2">💐</div>
                 <h1 class="book-title"><span>F組小夥伴的緊急任務</span></h1>
-                <p class="book-subtitle">晨光媽媽希望大朋友可以幫忙她完成以下兩項任務，兩項任務都有時間限制，完成後請舉手告訴Ben老師。</p>
+                <p class="book-subtitle">晨光媽媽希望大朋友可以幫忙她完成以下三個任務，三個任務都有時間限制，完成後請舉手告訴Ben老師。</p>
 
                 <div class="quest-list">
                     <div class="quest-item" id="quest1" onclick="startQuest(1)">
@@ -942,6 +942,16 @@
                             <h2 class="quest-title">任務二：英文段落打字練習</h2>
                             <p class="quest-description">閱讀上方英文段落，在下方輸入框中完整輸入該段落，測試你的打字速度和準確度！</p>
                             <span class="quest-requirement">⏱️ 時間限制：5分鐘</span>
+                        </div>
+                        <span class="quest-check">✅</span>
+                    </div>
+
+                    <div class="quest-item" id="quest3" onclick="startQuest(3)">
+                        <span class="quest-number">3</span>
+                        <div class="quest-content">
+                            <h2 class="quest-title">任務三：字母挑戰（反向）</h2>
+                            <p class="quest-description">在21秒內依序輸入Z到A的所有字母，測試你的反向打字速度！</p>
+                            <span class="quest-requirement">⏱️ 時間限制：21秒</span>
                         </div>
                         <span class="quest-check">✅</span>
                     </div>
@@ -992,6 +1002,9 @@
                 if (progress.quest2) {
                     document.getElementById('quest2').classList.add('completed');
                 }
+                if (progress.quest3) {
+                    document.getElementById('quest3').classList.add('completed');
+                }
             }
         }
 
@@ -1005,6 +1018,10 @@
                 case 2:
                     // 任务二：英文段落打字练习
                     window.location.href = 'typing-task2.html?group=F';
+                    break;
+                case 3:
+                    // 任务三：10秒打Z~A
+                    window.location.href = 'F-quest-za.html?group=F';
                     break;
             }
         }
