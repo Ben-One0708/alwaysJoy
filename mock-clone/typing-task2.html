@@ -58,15 +58,16 @@
                 linear-gradient(135deg, #fef9e7 0%, #fff8dc 50%, #f5f5dc 100%);
             background-size: 200px 200px, 100% 100%;
             border-radius: 25px;
-            padding: 40px;
+            padding: 40px 50px;
             box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.2),
                 inset 0 1px 2px rgba(255, 255, 255, 0.8);
-            max-width: 1000px;
-            width: 100%;
+            max-width: 1400px;
+            width: 95%;
             text-align: center;
             position: relative;
             border: 3px solid rgba(139, 69, 19, 0.2);
+            margin: 0 auto;
         }
 
         .quest-title {
@@ -104,16 +105,45 @@
 
         .paragraph-display {
             background: white;
-            padding: 30px;
+            padding: 35px 40px;
             border-radius: 20px;
             margin-bottom: 30px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             border: 3px solid rgba(139, 69, 19, 0.2);
             text-align: left;
-            font-size: clamp(18px, 2.5vw, 24px);
+            font-size: clamp(18px, 2.2vw, 26px);
             line-height: 1.8;
             color: #333;
             min-height: 150px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .paragraph-display .typed-correct {
+            background-color: #d4edda;
+            border-bottom: 3px solid #28a745;
+            padding: 2px 0;
+            font-weight: 600;
+        }
+
+        .paragraph-display .typed-incorrect {
+            background-color: #f8d7da;
+            border-bottom: 3px solid #dc3545;
+            padding: 2px 0;
+            font-weight: 600;
+        }
+
+        .paragraph-display .current-char {
+            background-color: #fff3cd;
+            border-bottom: 3px solid #ffc107;
+            padding: 2px 0;
+            font-weight: 700;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .typing-area {
@@ -129,8 +159,8 @@
 
         .typing-input {
             width: 100%;
-            padding: 20px;
-            font-size: clamp(16px, 2vw, 20px);
+            padding: 25px 30px;
+            font-size: clamp(16px, 2vw, 22px);
             border: 3px solid rgba(139, 69, 19, 0.3);
             border-radius: 15px;
             font-family: 'Courier New', monospace;
@@ -140,6 +170,8 @@
             background: #fff;
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .typing-input:focus {
@@ -242,17 +274,20 @@
 
         @media (max-width: 768px) {
             .quest-container {
-                padding: 25px;
+                padding: 25px 30px;
+                width: 98%;
+                max-width: 100%;
             }
 
             .paragraph-display {
-                padding: 20px;
+                padding: 25px 30px;
                 font-size: 16px;
             }
 
             .typing-input {
                 min-height: 150px;
                 font-size: 16px;
+                padding: 20px 25px;
             }
         }
     </style>
@@ -263,7 +298,7 @@
 
     <div class="quest-container">
         <h1 class="quest-title">任務二：英文段落打字練習</h1>
-        <div class="timer-display" id="timer">時間：05:00</div>
+        <div class="timer-display" id="timer">時間：08:00</div>
 
         <div class="paragraph-display" id="paragraph">
             <!-- 段落内容将通过JavaScript填充 -->
@@ -309,11 +344,11 @@
         const group = urlParams.get('group') || 'B';
         const targetParagraph = paragraphs[group] || paragraphs['B'];
 
-        // 设置段落内容
-        document.getElementById('paragraph').textContent = targetParagraph;
+        // 设置段落内容（初始显示，不带下划线）
+        updateParagraphDisplay('');
 
         // 计时器设置
-        const TOTAL_TIME_SECONDS = 5 * 60; // 5分钟
+        const TOTAL_TIME_SECONDS = 8 * 60; // 8分钟
         let remainingSeconds = TOTAL_TIME_SECONDS;
         let timerInterval = null;
         let startTime = null;
@@ -338,6 +373,43 @@
             startTimer();
         }
 
+        // 更新段落显示（添加下划线标记）
+        function updateParagraphDisplay(typedText) {
+            const paragraphElement = document.getElementById('paragraph');
+            const targetText = targetParagraph;
+            let html = '';
+            
+            for (let i = 0; i < targetText.length; i++) {
+                const char = targetText[i];
+                // 转义HTML特殊字符
+                const escapedChar = char === ' ' ? ' ' : char
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+                
+                if (i < typedText.length) {
+                    // 已输入的字符
+                    if (typedText[i] === targetText[i]) {
+                        // 正确的字符 - 绿色下划线
+                        html += `<span class="typed-correct">${escapedChar}</span>`;
+                    } else {
+                        // 错误的字符 - 红色下划线
+                        html += `<span class="typed-incorrect">${escapedChar}</span>`;
+                    }
+                } else if (i === typedText.length) {
+                    // 当前要输入的字符 - 黄色下划线（闪烁效果）
+                    html += `<span class="current-char">${escapedChar}</span>`;
+                } else {
+                    // 未输入的字符 - 正常显示
+                    html += escapedChar;
+                }
+            }
+            
+            paragraphElement.innerHTML = html;
+        }
+
         // 处理输入
         function handleInput(e) {
             if (isCompleted) return;
@@ -348,6 +420,9 @@
 
             typedText = e.target.value;
             const targetText = targetParagraph;
+            
+            // 更新段落显示（添加下划线）
+            updateParagraphDisplay(typedText);
             
             // 计算正确字符数
             correctChars = 0;

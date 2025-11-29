@@ -608,7 +608,7 @@
 
     <div class="quest-container">
         <h1 class="quest-title">任務三：字母挑戰（反向）</h1>
-        <p class="quest-description">在13秒內依序輸入Z到A的所有字母<br><span
+        <p class="quest-description">在30秒內依序輸入Z到A的所有字母<br><span
                 style="font-size: 0.85em; color: #8b4513; opacity: 0.8;">💡 按空白鍵即可開始挑戰</span></p>
 
         <div class="main-display-area">
@@ -644,8 +644,8 @@
         const urlParams = new URLSearchParams(window.location.search);
         const group = urlParams.get('group') || 'B';
         
-        // 任务三统一时间限制：21秒
-        const timeLimit = 21;
+        // 任务三统一时间限制：30秒
+        const timeLimit = 30;
         
         // 设置返回按钮链接
         document.getElementById('backButton').href = group + '-quest-book.html';

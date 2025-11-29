@@ -608,7 +608,7 @@
 
     <div class="quest-container">
         <h1 class="quest-title">任務一：字母挑戰</h1>
-        <p class="quest-description">在10秒內依序輸入A到Z的所有字母<br><span
+        <p class="quest-description">在30秒內依序輸入A到Z的所有字母<br><span
                 style="font-size: 0.85em; color: #8b4513; opacity: 0.8;">💡 按空白鍵即可開始挑戰</span></p>
 
         <div class="main-display-area">
@@ -643,23 +643,23 @@
         // 从URL获取组别参数
         const urlParams = new URLSearchParams(window.location.search);
         const group = urlParams.get('group') || 'B';
-        
-        // 根据组别设置时间限制：B和C组13秒，D、E、F组10秒
-        const timeLimit = (group === 'B' || group === 'C') ? 13 : 10;
-        
+
+        // 根据组别设置时间限制：所有组统一30秒
+        const timeLimit = 30;
+
         // 设置返回按钮链接
         document.getElementById('backButton').href = group + '-quest-book.html';
-        
+
         // 更新描述文字中的时间
         const descriptionElement = document.querySelector('.quest-description');
         if (descriptionElement) {
             descriptionElement.innerHTML = `在${timeLimit}秒內依序輸入A到Z的所有字母<br><span style="font-size: 0.85em; color: #8b4513; opacity: 0.8;">💡 按空白鍵即可開始挑戰</span>`;
         }
-        
+
         // 设置计时器初始显示
         const timerDisplay = document.getElementById('timer');
         timerDisplay.textContent = timeLimit;
-        
+
         const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         let currentIndex = 0;
         let timeLeft = timeLimit;
